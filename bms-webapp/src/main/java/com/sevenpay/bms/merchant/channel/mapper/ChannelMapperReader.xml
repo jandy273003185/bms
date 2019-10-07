@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sevenpay.bms.merchant.channel.mapper.ChannelMapperReader">
+
+	<!-- Result Map -->
+	<resultMap id="channel" type="com.sevenpay.bms.merchant.channel.bean.ChannelBean">
+		<result column="CHANNEL_CODE" property="channelName" typeHandler="org.apache.ibatis.type.ChannelMerRegistTypeHandler" />
+		<result column="MER_CUST_ID" property="custId" />
+		<result column="MER_NO" property="merchantChannelId" />
+		<result column="CREATE_TIME" property="createTime" javaType="date" />
+		<result column="MODIFY_TIME" property="modifyTime" javaType="date" />
+		<result column="STATUS" property="status" typeHandler="org.apache.ibatis.type.ChannelStatusTypeHandler" />
+		<result column="COMMENT" property="comment" />
+	</resultMap>
+
+	<resultMap id="channelDetail" type="com.sevenpay.bms.merchant.channel.bean.ChannelDetailBean">
+		<result column="MER_NO" property="merchantChannelId" />
+		<result column="MER_CUST_ID" property="custId" />
+		<result column="PAY_TYPE" property="channelCode" typeHandler="org.apache.ibatis.type.PayTypeTypeHandler" />
+		<result column="SUB_PAY_TYPE" property="subCode" typeHandler="org.apache.ibatis.type.SubPayTypeTypeHandler" />
+		<result column="CREATE_TIME" property="createTime" />
+		<result column="MODIFY_TIME" property="modifyTime" />
+		<result column="STATUS" property="status" typeHandler="org.apache.ibatis.type.ChannelStatusTypeHandler" />
+		<result column="COMMENT" property="comment" />
+		<result column="APPID" property="wxAppId" />
+		<result column="APPID_KEY" property="wxAppsecret" />
+		<result column="MER_KEY" property="merchantChannelKey" />
+	</resultMap>
+
+	<select id="selectChannels" resultMap="channel" parameterType="com.sevenpay.bms.merchant.channel.bean.ChannelBean">
+		select * from td_channel_agent_mer_info
+		<where>
+			<if test="channelName !=null and channelName !=''">
+				CHANNEL_CODE=#{channelName, typeHandler=org.apache.ibatis.type.ChannelMerRegistTypeHandler}
+			</if>
+			<if test="custId !=null and custId !=''">
+				and mer_cust_id=#{custId}
+			</if>
+			<if test="merchantChannelId !=null and merchantChannelId !=''">
+				and mer_no=#{merchantChannelId}
+			</if>
+		</where>
+
+		order by modify_time desc
+	</select>
+
+	<select id="selectChannelDetails" resultMap="channelDetail" parameterType="com.sevenpay.bms.merchant.channel.bean.ChannelDetailBean">
+		select T.* from td_channel_agent_mer_detail T
+		where 1=1
+		<if test="custId !=null and custId !=''">
+			and t.mer_cust_id=#{custId}
+		</if>
+		order by modify_time desc
+	</select>
+
+
+	<select id="selectChannel" resultMap="channel">
+		select T.* from td_channel_agent_mer_info T where T.mer_cust_id=#{custId} and t.channel_code=#{channelCode} and
+		t.MER_NO=#{merNo}
+	</select>
+
+	<select id="selectChannelDetail" resultMap="channelDetail">
+		select T.* from td_channel_agent_mer_detail T where T.mer_cust_id=#{custId} and t.MER_NO=#{merNo}
+	</select>
+
+
+
+
+</mapper>
