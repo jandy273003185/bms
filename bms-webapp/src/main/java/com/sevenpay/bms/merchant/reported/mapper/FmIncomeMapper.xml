@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sevenpay.bms.merchant.reported.mapper.FmIncomeMapper">
+	
+	<select id="selMerchantDetailInfoList" parameterType="com.sevenpay.bms.merchant.reported.bean.TdMerchantDetailInfo" resultType="com.sevenpay.bms.merchant.reported.bean.TdMerchantDetailInfo">
+    	SELECT
+			t.patch_no,
+			t.merchant_code,
+			t.out_merchant_code,
+			t.file_status,
+			t.remark,
+			t.report_status,
+			t.bestMerchantType,
+			t.result_msg,
+			f.cust_name,
+			r.channel_no,
+			DATE_FORMAT(t.modify_time,'%Y-%m-%d %H:%i:%s') modify_time,
+			DATE_FORMAT(t.create_time,'%Y-%m-%d %H:%i:%s') reportTime
+		FROM
+			td_merchant_detail_info t
+		LEFT JOIN td_cust_info f ON t.merchant_code = f.merchant_code
+		LEFT JOIN td_merchant_report r on r.patch_no = t.patch_no
+		<where>
+			<if test="merchantCode != null and merchantCode != '' ">
+			 and t.merchant_code= #{merchantCode,jdbcType=VARCHAR}
+			</if>
+			<if test="patchNo != null and patchNo != '' ">
+			 and t.patch_no = #{patchNo,jdbcType=VARCHAR}
+			</if>
+			<if test="channelNo != null and channelNo != '' ">
+			 and r.channel_no = #{channelNo,jdbcType=VARCHAR}
+			</if>
+			<if test="channelCode != null and channelCode != '' ">
+			 and r.channel_no = #{channelCode,jdbcType=VARCHAR}
+			</if>
+		</where>
+		ORDER BY t.create_time DESC
+    </select>
+    
+    
+    <select id="selProvinceList"  resultType="com.sevenpay.bms.merchant.reported.bean.Province">
+    	select * from tb_fm_province
+    </select>
+    
+    <select id="selBankList"  resultType="com.sevenpay.bms.merchant.reported.bean.Bank">
+    	select * from tb_fm_bankcode
+    </select>
+    
+    <select id="selPowerIdList"  resultType="com.sevenpay.bms.merchant.reported.bean.TbFmTradeInfo">
+    	select * from tb_fm_trade_info
+    </select>
+    
+    
+    
+    <select id="selCityList" parameterType="String" resultType="com.sevenpay.bms.merchant.reported.bean.City">
+		SELECT
+			*
+		FROM
+			tb_fm_city t
+		WHERE
+			t.province_id = #{province,jdbcType = VARCHAR}
+	</select>
+    
+    <select id="selAreaList" parameterType="String" resultType="com.sevenpay.bms.merchant.reported.bean.Area">
+		SELECT
+			*
+		FROM
+			tb_fm_area t
+		WHERE
+			t.city_id = #{city,jdbcType = VARCHAR}
+	</select>
+	
+	<select id="selInterBankList" parameterType="String" resultType="com.sevenpay.bms.merchant.reported.bean.BankBranch">
+		SELECT
+			*
+		FROM
+			tb_fm_bank_branch t
+		WHERE
+			t.bank_branch_name LIKE CONCAT('%',#{interBank,jdbcType = VARCHAR},'%') 
+	</select>
+	
+	<select id="selAlipayList" parameterType="String" resultType="com.sevenpay.bms.merchant.reported.bean.FmWxCategory">
+		select t.id,t.category_name from fm_alipay_category t
+	</select>
+	
+	<select id="selWxList" parameterType="String" resultType="com.sevenpay.bms.merchant.reported.bean.FmWxCategory">
+		select t.id,t.first_type,t.second_type,t.third_type from fm_wx_category t GROUP BY first_type 
+	</select>
+	
+	<select id="selWxSecondTypeList" parameterType="com.sevenpay.bms.merchant.reported.bean.FmWxCategory" resultType="com.sevenpay.bms.merchant.reported.bean.FmWxCategory">
+		select t.id,t.first_type,t.second_type,t.third_type from fm_wx_category t where first_type = #{firstType,jdbcType = VARCHAR} GROUP BY second_type
+	</select>
+	
+	<select id="selWxThirdTypeList" parameterType="com.sevenpay.bms.merchant.reported.bean.FmWxCategory" resultType="com.sevenpay.bms.merchant.reported.bean.FmWxCategory">
+		select t.id,t.first_type,t.second_type,t.third_type from fm_wx_category t where second_type = #{secondType,jdbcType = VARCHAR} and first_type=#{firstType,jdbcType = VARCHAR}
+	</select>
+	
+	<select id="selJdList" parameterType="String" resultType="com.sevenpay.bms.merchant.reported.bean.FmWxCategory">
+		select t.id,t.second_type,t.third_type from fm_jd_category t GROUP BY second_type
+	</select>
+	
+	<select id="selJdThirdTypeList" parameterType="String" resultType="com.sevenpay.bms.merchant.reported.bean.FmWxCategory">
+		select t.id,t.second_type,t.third_type from fm_jd_category t where second_type = #{secondType,jdbcType = VARCHAR}
+	</select>
+	
+	<select id="selTdMerchantReport" parameterType="com.sevenpay.bms.merchant.reported.bean.CrInComeBean" resultType="com.sevenpay.bms.merchant.reported.bean.TdMerchantDetailInfo">
+		SELECT
+			t1.*,t2.report_status as detailStatus
+		FROM
+			td_merchant_report t1
+		INNER JOIN td_merchant_detail_info t2 ON t1.patch_no = t2.patch_no
+		WHERE
+			t1.merchant_code = #{merchantCode,jdbcType = VARCHAR} AND t1.channel_no = #{channelNo,jdbcType = VARCHAR}
+	</select>
+	
+	<select id="selInComeInfo" parameterType="String"  resultType="com.sevenpay.bms.basemanager.custInfo.bean.TdCustInfo">
+		SELECT
+			c.*, 
+  			t.*
+		FROM
+			td_cust_info c
+		INNER JOIN td_login_user_info t ON c.cust_id = t.cust_id
+		WHERE
+			c.MERCHANT_CODE = #{merchantCode,jdbcType = VARCHAR} AND c.STATE = '00' AND t.STATE = '00'
+	</select>
+	
+	
+	<!-- 写入商户报备表 -->
+	<insert id="insertTdMerchantReport" parameterType="com.sevenpay.bms.merchant.reported.bean.TdMerchantDetailInfo">
+		INSERT INTO `stcdb`.`td_merchant_report` (
+			`id`,
+			`merchant_code`,
+			`patch_no`,
+			`channel_no`,
+			`report_status`,
+			`report_time`
+		)
+		VALUES
+			(
+				#{id,jdbcType = VARCHAR},
+				#{merchantCode,jdbcType = VARCHAR},
+				#{patchNo,jdbcType = VARCHAR},
+				#{channelNo,jdbcType = VARCHAR},
+				#{reportStatus,jdbcType = VARCHAR},
+				now()
+			)
+	</insert>
+	
+	<!-- 写入商户报备详情表 -->
+	<insert id="inserTdMerchantDetailInfo" parameterType="com.sevenpay.bms.merchant.reported.bean.TdMerchantDetailInfo">
+		INSERT INTO `stcdb`.`td_merchant_detail_info` (
+			`patch_no`,
+			`merchant_code`,
+			`report_status`,
+			`file_status`,
+			`out_merchant_code`,
+			`remark`,
+			`create_time`,
+			`modify_time`,
+			`prov_code`,
+			`city_code`,
+			`contry_code`,
+			`bank_code`,
+			`branch_bank_code`,
+			`branch_bank_name`,
+			`mobile_no`,
+			`customer_Phone`,
+			`qq`,
+			`power_id`,
+			`app_id`,
+			`category`,
+			`loginNo`,
+			`bestMerchantType`,
+			`bestpayMctNo`
+		)
+		VALUES
+			(
+				#{patchNo,jdbcType = VARCHAR},
+				#{merchantCode,jdbcType = VARCHAR},
+				#{reportStatus,jdbcType = VARCHAR},
+				#{fileStatus,jdbcType = VARCHAR},
+				#{outMerchantCode,jdbcType = VARCHAR},
+				#{remark,jdbcType = VARCHAR},
+				now(),
+				now(),
+				#{provCode,jdbcType = VARCHAR},
+				#{cityCode,jdbcType = VARCHAR},
+				#{contryCode,jdbcType = VARCHAR},
+				#{bankCode,jdbcType = VARCHAR},
+				#{branchBankCode,jdbcType = VARCHAR},
+				#{branchBankName,jdbcType = VARCHAR},
+				#{mobileNo,jdbcType = VARCHAR},
+				#{customerPhone,jdbcType = VARCHAR},
+				#{qq,jdbcType = VARCHAR},
+				#{powerId,jdbcType = VARCHAR},
+				#{appId,jdbcType = VARCHAR},
+				#{category,jdbcType = VARCHAR},
+				#{loginNo,jdbcType = VARCHAR},
+				#{bestMerchantType,jdbcType = VARCHAR},
+				#{bestpayMctNo,jdbcType = VARCHAR}
+			)
+	</insert>
+	
+	<update id="updateTdMerchantReport"  parameterType="com.sevenpay.bms.merchant.reported.bean.TdMerchantDetailInfo" >
+    	 UPDATE `stcdb`.`td_merchant_report`
+			SET 
+			<if test="reportStatus != null and reportStatus !='' ">
+		 	`report_status` = #{reportStatus,jdbcType = VARCHAR}
+		 	</if>
+		 WHERE `merchant_code` = #{merchantCode,jdbcType = VARCHAR} and channel_no = #{channelNo,jdbcType = VARCHAR}
+    </update>
+    
+    <update id="updateTdMerchantDetailInfo"  parameterType="com.sevenpay.bms.merchant.reported.bean.TdMerchantDetailInfo" >
+    	 UPDATE `stcdb`.`td_merchant_detail_info`
+		 SET 
+		 	<if test="reportStatus != null and reportStatus !='' ">
+		 	`report_status` = #{reportStatus,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="fileStatus != null and fileStatus !='' ">
+		 	`file_status` = #{fileStatus,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="outMerchantCode != null and outMerchantCode !='' ">
+		 	`out_merchant_code` = #{outMerchantCode,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="remark != null and remark !='' ">
+		 	`remark` = #{remark,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="bestMerchantType != null and bestMerchantType !='' ">
+		 	`bestMerchantType` = #{bestMerchantType,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="loginNo != null and loginNo !='' ">
+		 	`loginNo` = #{loginNo,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="bestpayMctNo != null and bestpayMctNo !='' ">
+		 	`bestpayMctNo` = #{bestpayMctNo,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="resultMsg != null and resultMsg !='' ">
+		 	`result_msg` = #{resultMsg,jdbcType = VARCHAR},
+		 	</if>
+			 `modify_time` = now()
+		 WHERE
+			`patch_no` = #{patchNo,jdbcType = VARCHAR}
+    </update>
+	
+	<update id="updateInComeInfo"  parameterType="String" >
+    	 	update td_cust_info  t
+			SET
+				t.filing_status = '01'
+			WHERE
+				t.MERCHANT_CODE =  #{merchantCode}
+    </update>
+	<select id="selTdMerchantDetailInfo" parameterType="com.sevenpay.bms.merchant.reported.bean.TdMerchantDetailInfo"  resultType="com.sevenpay.bms.merchant.reported.bean.TdMerchantDetailInfo">
+		SELECT
+			*
+		FROM
+			td_merchant_report t1
+		WHERE
+			t1.`merchant_code` = #{merchantCode,jdbcType = VARCHAR} and t1.channel_no = #{channelNo,jdbcType = VARCHAR}
+	</select>
+	
+		<select id="selMerchantDetailInfo" parameterType="com.sevenpay.bms.merchant.reported.bean.TdMerchantDetailInfo" resultType="com.sevenpay.bms.merchant.reported.bean.TdMerchantDetailInfo">
+    	SELECT
+			t.*,
+			f.cust_name,
+			r.channel_no,
+			DATE_FORMAT(t.modify_time,'%Y-%m-%d %H:%i:%s') modify_time,
+			DATE_FORMAT(t.create_time,'%Y-%m-%d %H:%i:%s') reportTime
+		FROM
+			td_merchant_detail_info t
+		LEFT JOIN td_cust_info f ON t.merchant_code = f.merchant_code
+		LEFT JOIN td_merchant_report r on r.patch_no = t.patch_no
+		<where>
+			<if test="merchantCode != null and merchantCode != '' ">
+			 and t.merchant_code= #{merchantCode,jdbcType=VARCHAR}
+			</if>
+			<if test="patchNo != null and patchNo != '' ">
+			 and t.patch_no = #{patchNo,jdbcType=VARCHAR}
+			</if>
+			<if test="channelNo != null and channelNo != '' ">
+			 and r.channel_no = #{channelNo,jdbcType=VARCHAR}
+			</if>
+		</where>
+		ORDER BY t.create_time DESC
+		
+    </select>
+    
+    
+     <select id="selIndustryList"  resultType="com.sevenpay.bms.merchant.reported.bean.Industry">
+    	select * from td_merchant_industry_info
+    </select>
+    
+    <select id="selSuiXingIndustryList"  resultType="com.sevenpay.bms.merchant.reported.bean.Industry">
+    	select 
+    		t.industry_code,
+    		t.industry_name
+    	from td_suixing_mcc_info t
+    </select>
+	
+	<select id="selSuiXingProvinceList"  resultType="com.sevenpay.bms.merchant.reported.bean.Province">
+    	SELECT DISTINCT 
+			b.province_id,
+			b.province_name
+		FROM 
+			td_suixing_bank_city_info b
+		ORDER BY b.province_id 
+    </select>
+    
+    <select id="selSuiXingCityList" parameterType="String" resultType="com.sevenpay.bms.merchant.reported.bean.City">
+		SELECT
+			t.city_id,
+			t.city_name
+		FROM
+			td_suixing_bank_city_info t
+		WHERE
+			t.province_id = #{province,jdbcType = VARCHAR}
+	</select>
+    
+    <select id="selSuiXingAreaList" parameterType="String" resultType="com.sevenpay.bms.merchant.reported.bean.MerchantCity">
+		SELECT
+			t.*
+		FROM
+			td_suixing_merchant_city_info t
+		WHERE
+			t.superior_area_code = #{superiorAreaCode,jdbcType = VARCHAR}
+	</select>
+	
+	<select id="selSuiXingMerchantCityList" parameterType="String" resultType="com.sevenpay.bms.merchant.reported.bean.MerchantCity">
+		SELECT
+			t.*
+		FROM
+			td_suixing_merchant_city_info t
+		WHERE
+			t.area_type = #{areaType,jdbcType = VARCHAR}
+	</select>
+	
+	<select id="selSumPayBankList"  resultType="com.sevenpay.bms.merchant.reported.bean.Bank">
+    	select 
+    		*
+    	from 
+    		td_sumpay_bank_info s
+    </select>
+    
+      <select id="selSumPayProvinceList"  parameterType="String"  resultType="com.sevenpay.bms.merchant.reported.bean.SumPayArea">
+    	select 
+    		t.* 
+    	from 
+    		td_sumpay_merchant_city_info t
+    	where t.superior_area_code = #{superiorAreaCode,jdbcType = VARCHAR}
+    </select>
+    
+    <select id="selSumpayMccList"  resultType="com.sevenpay.bms.merchant.reported.bean.SumpayMcc">
+    	SELECT DISTINCT
+			z.level_one 
+		FROM 
+			td_sumpay_zfb_mcc_info z
+    </select>
+    
+          <select id="selSumPayMccTwoList"  parameterType="String"  resultType="com.sevenpay.bms.merchant.reported.bean.SumpayMcc">
+    	SELECT DISTINCT
+			z.level_two 
+		FROM 
+			td_sumpay_zfb_mcc_info z
+    	where z.level_one = #{one,jdbcType = VARCHAR}
+    </select>
+    
+     <select id="selSumPayMccThreeList"  parameterType="com.sevenpay.bms.merchant.reported.bean.SumpayMcc"  resultType="com.sevenpay.bms.merchant.reported.bean.SumpayMcc">
+    	SELECT 
+			z.*
+		FROM 
+			td_sumpay_zfb_mcc_info z
+    	<where>
+	    	<if test="levelOne != null and levelOne != '' ">
+	    	and	z.level_one = #{levelOne,jdbcType = VARCHAR}
+	    	</if>
+	    	<if test="levelTwo != null and levelTwo != '' ">
+	    	and  z.level_two = #{levelTwo,jdbcType = VARCHAR}
+	    	</if>
+	    	<if test="levelThree != null and levelThree != '' ">
+	    	and z.level_three = #{levelThree,jdbcType = VARCHAR}
+	    	</if>
+	    	<if test="AlipayMchntType != null and AlipayMchntType != '' ">
+	    	and z.Alipay_mchnt_type = #{AlipayMchntType,jdbcType = VARCHAR}
+	    	</if>
+	    	<if test="mcc != null and mcc != '' ">
+	    	and z.mcc = #{mcc,jdbcType = VARCHAR}
+	    	</if>
+    	</where> 
+    	
+    </select>
+    
+    <select id="selSumpayMccWXList"  resultType="com.sevenpay.bms.merchant.reported.bean.SumpayMcc">
+    	SELECT DISTINCT
+			z.level_one 
+		FROM 
+			td_sumpay_wx_mcc_info z
+    </select>
+    
+    <select id="selSumPayMccTwoWXList"  parameterType="String"  resultType="com.sevenpay.bms.merchant.reported.bean.SumpayMcc">
+    	SELECT DISTINCT
+			z.level_two 
+		FROM 
+			td_sumpay_wx_mcc_info z
+    	where z.level_one = #{one,jdbcType = VARCHAR}
+    </select>
+    
+     <select id="selSumPayMccThreeWXList"  parameterType="com.sevenpay.bms.merchant.reported.bean.SumpayMcc"  resultType="com.sevenpay.bms.merchant.reported.bean.SumpayMcc">
+    	SELECT 
+			z.*
+		FROM 
+			td_sumpay_wx_mcc_info z
+    	where z.level_one = #{levelOne,jdbcType = VARCHAR}
+    	and  z.level_two = #{levelTwo,jdbcType = VARCHAR}
+    </select>
+    
+    <select id="selSumpayMccZFBList"  resultType="com.sevenpay.bms.merchant.reported.bean.SumpayMcc">
+    	SELECT DISTINCT
+			z.* 
+		FROM 
+			td_sumpay_zfb_info z
+    </select>
+    
+     <select id="selYQBProvinceList"  resultType="com.sevenpay.bms.merchant.reported.bean.YQBArea">
+    	SELECT DISTINCT
+    		c.province_name,
+    		c.area_code
+		FROM 
+			td_yqb_city_info c
+		where c.city_name =''
+		and c.area_name = ''
+    </select>
+    
+    <select id="selYQBCityList" parameterType="com.sevenpay.bms.merchant.reported.bean.YQBArea"  resultType="com.sevenpay.bms.merchant.reported.bean.YQBArea">
+    	SELECT DISTINCT
+    		c.city_name,
+    		c.area_code
+		FROM 
+			td_yqb_city_info c
+		where
+			c.area_name = ''
+		and c.city_name !=''
+		and	c.province_name = 
+		(SELECT
+			d.province_name
+		 FROM td_yqb_city_info d
+		 WHERE 
+		 d.area_code =#{areaCode,jdbcType = VARCHAR} )
+		
+
+    </select>
+    
+    <select id="selYQBAreaList" parameterType="com.sevenpay.bms.merchant.reported.bean.YQBArea"  resultType="com.sevenpay.bms.merchant.reported.bean.YQBArea">
+    	SELECT DISTINCT
+    		c.area_name,
+    		c.area_code
+		FROM 
+			td_yqb_city_info c
+		where
+			c.area_name !=''
+		and	c.city_name = 
+		(SELECT
+			d.city_name
+		 FROM td_yqb_city_info d
+		 WHERE 
+		 d.area_code =#{areaCode,jdbcType = VARCHAR} )
+		
+
+    </select>
+    
+    <select id="selYQBIndustryList"  resultType="com.sevenpay.bms.merchant.reported.bean.YQBIndustry">
+    	SELECT DISTINCT
+			m.level_one
+		FROM 
+			td_yqb_mcc_info m
+    </select>
+    
+    <select id="selYQBIndustryCodeList"  parameterType="com.sevenpay.bms.merchant.reported.bean.YQBIndustry" resultType="com.sevenpay.bms.merchant.reported.bean.YQBIndustry">
+    	SELECT DISTINCT
+    		m.level_two,
+			m.level_code
+		FROM 
+			td_yqb_mcc_info m
+		<where>
+			<if test="levelOne != null and levelOne != '' ">
+	    	and	 m.level_one = #{levelOne,jdbcType = VARCHAR}
+	    	</if>
+	    	<if test="levelTwo != null and levelTwo != '' ">
+	    	and  m.level_two = #{levelTwo,jdbcType = VARCHAR}
+	    	</if>
+	    	<if test="levelFour != null and levelFour != '' ">
+	    	and  m.level_four = #{levelFour,jdbcType = VARCHAR}
+	    	</if>
+	    	<if test="levelCode != null and levelCode != '' ">
+	    	and  m.level_code = #{levelCode,jdbcType = VARCHAR}
+	    	</if>
+		</where>
+		
+    </select>
+    
+    <select id="selYQBBankList"  parameterType="com.sevenpay.bms.merchant.reported.bean.Bank" resultType="com.sevenpay.bms.merchant.reported.bean.Bank">
+    	SELECT 
+			b.bank_id,
+			b.bank_name
+		FROM 
+			td_yqb_bank_info b
+		<where>
+			<if test="bankId != null and bankId !='' ">
+			and	 b.bank_id = #{bankId,jdbcType = VARCHAR}
+			</if>
+			<if test="bankName != null and bankName !='' ">
+			and	 b.bank_name = #{bankName,jdbcType = VARCHAR}
+			</if>
+		</where>
+    </select>
+</mapper>
