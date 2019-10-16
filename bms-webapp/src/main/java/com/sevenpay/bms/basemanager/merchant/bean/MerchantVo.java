@@ -12,6 +12,11 @@ public class MerchantVo implements Serializable {
 	private static final long serialVersionUID = -1977088279003048575L;
 
 	/**
+	 * 客户账号， main9
+	 */
+	private String merchantAccount;
+
+	/**
 	 * 客户编号，与登录表的客户编号一样.
 	 */
 	private String custId;
@@ -24,6 +29,42 @@ public class MerchantVo implements Serializable {
 	 * 客户名称.
 	 */
 	private String custName;
+
+	/**
+	 * 客户简称. mian9
+	 */
+	private String shortName;
+
+	/**
+	 * 商户邮箱，1mian9
+	 */
+	private String merchantEmail;
+
+	/**
+	 * 所属业务人员 客户经理 mian9
+	 */
+	private String custManager;
+
+	/**
+	 * 联系人姓名 1 mian 9
+	 */
+	private String contactName;
+
+	/**
+	 *联系人电话 1 mian9 新加字段
+	 */
+	private String contactMobile;
+
+	/**
+	 * 网点号
+	 */
+	private String cnaps;
+
+
+	/**
+	 * 结算类型 mian 新加字段
+	 */
+	private String compMainAcctType;
 
 	/**
 	 * 交易密码.
@@ -293,8 +334,7 @@ public class MerchantVo implements Serializable {
 
 	/**
 	 * 登陆状态
-	 * 
-	 * @return
+	 *
 	 */
 
 	private String loginState;
@@ -335,8 +375,7 @@ public class MerchantVo implements Serializable {
 	private String bankCardName;
 	
 	private String bankCardNo;
-	
-	private String custManager;
+
 	
 	private String agentRate;
 	
