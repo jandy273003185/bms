@@ -20,6 +20,7 @@ import com.sevenpay.bms.basemanager.bank.bean.Bank;
 import com.sevenpay.bms.basemanager.bank.mapper.BankMapper;
 import com.sevenpay.bms.basemanager.city.service.CityService;
 import com.sevenpay.bms.basemanager.merchant.bean.MerchantVo;
+import com.sevenpay.bms.basemanager.merchant.service.MerchantService;
 import com.sevenpay.bms.basemanager.merchant.service.MerchantWorkFlowAuditService;
 import com.sevenpay.bms.basemanager.rule.bean.Rule;
 import com.sevenpay.bms.basemanager.rule.mapper.RuleMapper;
@@ -31,6 +32,8 @@ public class MerchantEnterController {
 	
 	private Logger logger = LoggerFactory.getLogger(MerchantEnterController.class);
 	
+	@Autowired
+	private MerchantService merchantService;
 	@Autowired
 	private MerchantWorkFlowAuditService merchantWorkFlowAuditService;
 	@Autowired
@@ -51,14 +54,14 @@ public class MerchantEnterController {
 	public ModelAndView list(MerchantVo merchantVo) {
 		Bank bank = new Bank();
 //		Rule rule = new Rule();
-		ModelAndView mv = new ModelAndView(MerchantEnterPath.BASE + MerchantEnterPath.LIST);
+		ModelAndView mv = new ModelAndView();
 		
 		/**
 		 * 校验权限
 		 */
-		merchantWorkFlowAuditService.verifyPermission(mv);
+//		merchantWorkFlowAuditService.verifyPermission(mv);
 		
-//		List<MerchantVo> list = merchantService.selectMerchants(merchantVo);
+		List<MerchantVo> list = merchantService.selectMerchants(merchantVo);
 		
 		/**
 		 * 装载工作流审核状态
@@ -66,7 +69,7 @@ public class MerchantEnterController {
 //		merchantWorkFlowAuditService.loadAuditStatus(list);
 		
 //		mv.addObject("banklist", bankMapper.selectBanks(bank));
-//		mv.addObject("merchantList", JSONObject.toJSON(list));
+		mv.addObject("merchantList", JSONObject.toJSON(list));
 ////		mv.addObject("rulelist", ruleMapper.selectRules02(rule));
 //		mv.addObject("provincelist", cityService.selectAllProvince());
 //		mv.addObject("queryBean", merchantVo);
