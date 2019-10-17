@@ -280,4 +280,22 @@ public class TdCustInfoService {
 			return true;
 		}
 	}
+
+	/**
+	 * 是否有权限新增商户信息
+	 * @param userId
+	 * @return
+	 */
+	public boolean isAddMerchant(String userId) {
+		String result = custInfoDao.isAddMerchant(userId);
+		if(result == null){
+			return false;
+		}else{
+			return true;
+		}
+	}
+
+	public TdCustInfo selectByMerchantCode(String merchantCode) {
+		return custInfoDao.selectByMerchantCode(merchantCode);
+	}
 }

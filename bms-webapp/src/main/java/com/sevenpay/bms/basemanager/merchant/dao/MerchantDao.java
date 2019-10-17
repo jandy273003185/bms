@@ -66,4 +66,10 @@ public class MerchantDao {
 	public List<MerchantVo> newMerchantList(MerchantVo merchantVo){
 		return mapper.newMerchantList(merchantVo);
 	}
+
+	@Page
+	public List<MerchantVo> auditList2(MerchantVo merchantVo) {
+		List<MerchantVo> list = mapper.auditList2(merchantVo);
+		return list;
+	}
 }

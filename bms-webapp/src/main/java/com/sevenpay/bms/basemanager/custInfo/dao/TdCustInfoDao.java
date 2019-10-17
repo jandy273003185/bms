@@ -39,6 +39,14 @@ public class TdCustInfoDao{
 	public String isAllList(String userId){
 		return custInfoMapper.isAllList(userId);
 	}
+
+	public String isAddMerchant(String userId) {
+		return custInfoMapper.isAddMerchant(userId);
+	}
+
+	public TdCustInfo selectByMerchantCode(String merchantCode) {
+		return custInfoMapper.selectByMerchantCode(merchantCode);
+	}
 }
 
 

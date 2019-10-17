@@ -76,4 +76,8 @@ public interface TdCustInfoMapper {
 	public String isAllList(@Param("userId")String userId);
 	
 	public int updateTdCustInfo(TdCustInfo tdCustInfo);
+
+	String isAddMerchant(@Param("userId")String userId);
+
+	TdCustInfo selectByMerchantCode(@Param("merchantCode")String merchantCode);
 }
