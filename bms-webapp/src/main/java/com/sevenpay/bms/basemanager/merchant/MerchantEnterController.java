@@ -148,7 +148,7 @@ public class MerchantEnterController {
 	 *
 	 * @return
 	 */
-	@RequestMapping(MerchantEnterPath.ADD)
+	@RequestMapping(MerchantEnterPath.ADDPAGE)
 	@ResponseBody
 	public String regist(HttpServletRequest request, Merchant merchant) {
 
