@@ -509,12 +509,12 @@ function productMerchantEntry(obj){
 														<button type="submit" class="btn btn-purple btn-sm">预览</button>
 													</a>
 												</gyzbadmin:function>
-												<gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.UPDATE %>">
+												<gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.UPDATEPAGE %>">
 													<a href="#" class="" onclick="upadteMerchantEntry(this)" data-rel="tooltip" title="Query" data-toggle='modal'>
 														<button type="submit" class="btn btn-purple btn-sm">商户更新</button>
 													</a>
 												</gyzbadmin:function>
-												<gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.AUDIT %>">
+												<gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.AUDITPAGE%>">
 													<a href="#" class="" onclick="aduitMerchantEntry(this)" data-rel="tooltip" title="Query" data-toggle='modal'>
 														<button type="submit" class="btn btn-purple btn-sm">商户审核</button>
 													</a>

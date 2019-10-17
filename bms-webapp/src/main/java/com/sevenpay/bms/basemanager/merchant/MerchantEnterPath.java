@@ -35,6 +35,10 @@ public final class MerchantEnterPath {
 	 */
 	public final static String AUDIT ="/audit";
 	/**
+	 * 审核商户页面
+	 */
+	public final static String AUDITPAGE ="/auditPage";
+	/**
 	 * 产品查看
 	 */
 	public final static String PRODUCT = "/product";

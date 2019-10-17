@@ -49,11 +49,28 @@ public class MerchantEnterController {
 	 */
 	@RequestMapping(MerchantEnterPath.LIST)
 	public ModelAndView list(MerchantVo merchantVo) {
+		Bank bank = new Bank();
+//		Rule rule = new Rule();
 		ModelAndView mv = new ModelAndView(MerchantEnterPath.BASE + MerchantEnterPath.LIST);
+		
 		/**
 		 * 校验权限
 		 */
 		merchantWorkFlowAuditService.verifyPermission(mv);
+		
+//		List<MerchantVo> list = merchantService.selectMerchants(merchantVo);
+		
+		/**
+		 * 装载工作流审核状态
+		 */
+//		merchantWorkFlowAuditService.loadAuditStatus(list);
+		
+//		mv.addObject("banklist", bankMapper.selectBanks(bank));
+//		mv.addObject("merchantList", JSONObject.toJSON(list));
+////		mv.addObject("rulelist", ruleMapper.selectRules02(rule));
+//		mv.addObject("provincelist", cityService.selectAllProvince());
+//		mv.addObject("queryBean", merchantVo);
+		
 		return mv;
 	}
 	
