@@ -4,14 +4,9 @@ package com.sevenpay.bms.basemanager.merchant.mapper;
 import java.util.List;
 import java.util.Map;
 
+import com.sevenpay.bms.basemanager.merchant.bean.*;
 import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.annotation.MapperScan;
-
-import com.sevenpay.bms.basemanager.merchant.bean.CustScan;
-import com.sevenpay.bms.basemanager.merchant.bean.Merchant;
-import com.sevenpay.bms.basemanager.merchant.bean.MerchantExport;
-import com.sevenpay.bms.basemanager.merchant.bean.MerchantVo;
-import com.sevenpay.bms.basemanager.merchant.bean.TinyMerchantExport;
 
 @MapperScan
 public interface MerchantMapper {
@@ -20,6 +15,11 @@ public interface MerchantMapper {
 	 * 保存商户信息
 	 */
 	public void saveMerchant(Merchant merchant);
+
+	/**
+	 * 保存商户信息v2
+	 */
+	public void saveMerchant2(Merchant merchant);
 
 	
 	/**
@@ -148,6 +148,8 @@ public interface MerchantMapper {
 
 
 	public void updateLoginInfo(MerchantVo merchantVo);
+
+	void updateByPrimaryKeySelective(MerchantVo merchantVo);
 	
 	/**
 	 * 新版商户信息展现
@@ -170,4 +172,13 @@ public interface MerchantMapper {
 	 * @return
 	 */
 	public List<MerchantExport> newExportlist(MerchantVo merchantVo);
+
+	/**
+	 * 商户信息展现v2
+	 * @param merchantVo
+	 * @return
+	 */
+	List<MerchantVo> auditList2(MerchantVo merchantVo);
+
+
 }
