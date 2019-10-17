@@ -3,7 +3,7 @@ package com.sevenpay.bms.basemanager.merchant;
 public final class MerchantEnterPath {
 	
 	/** 商户录入*/
-	public final static String BASE = "/merchant/enter";
+	public final static String BASE = "/merchant/merchantEnter";
 
 	/**
 	 * 列表
