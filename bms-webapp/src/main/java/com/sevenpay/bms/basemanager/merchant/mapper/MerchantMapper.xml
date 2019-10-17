@@ -62,7 +62,15 @@
 			province,
 			city,
 			country,
-			SHORT_NAME
+			SHORT_NAME,
+			merchant_email,
+			custManager,
+			contact_name,
+			contact_mobile,
+			cnaps,
+			COMP_MAIN_ACCT_TYPE,
+			bank_province_name,
+			bank_city_name
 		) VALUES(
 			#{custId, 			jdbcType=VARCHAR},
 			#{custName, 		jdbcType=VARCHAR},
@@ -122,9 +130,508 @@
 			#{province, 	jdbcType=VARCHAR},
 			#{city, 	jdbcType=VARCHAR},
 			#{country, 	jdbcType=VARCHAR},
-			#{shortName, 	jdbcType=VARCHAR}
+			#{shortName, 	jdbcType=VARCHAR},
+			#{merchantEmail, 	jdbcType=VARCHAR},
+			#{custManager, 	jdbcType=VARCHAR},
+			#{contactName, 	jdbcType=VARCHAR},
+			#{contactMobile, 	jdbcType=VARCHAR},
+			#{cnaps, 	jdbcType=VARCHAR},
+			#{compMainAcctType, 	jdbcType=VARCHAR},
+			#{bankProvinceName, 	jdbcType=VARCHAR},
+			#{bankCityName, 	jdbcType=VARCHAR}
 		)
 	</insert>
+
+    <insert id="saveMerchant2" parameterType="com.sevenpay.bms.basemanager.merchant.bean.Merchant" >
+        insert into td_cust_info
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="custType != null" >
+                CUST_TYPE,
+            </if>
+            <if test="custName != null" >
+                CUST_NAME,
+            </if>
+            <if test="shortName != null" >
+                SHORT_NAME,
+            </if>
+            <if test="merchantEmail != null" >
+                merchant_email,
+            </if>
+            <if test="contactPhone != null" >
+                CONTACT_PHONE,
+            </if>
+            <if test="province != null" >
+                province,
+            </if>
+            <if test="city != null" >
+                city,
+            </if>
+            <if test="country != null" >
+                country,
+            </if>
+            <if test="custAdd != null" >
+                CUST_ADD,
+            </if>
+            <if test="businessLicense != null" >
+                BUSINESS_LICENSE,
+            </if>
+            <if test="businessTerm != null" >
+                BUSINESS_TERM,
+            </if>
+            <if test="custmanager != null" >
+                custManager,
+            </if>
+            <if test="agentName != null" >
+                AGENT_NAME,
+            </if>
+            <if test="representativeName != null" >
+                REPRESENTATIVE_NAME,
+            </if>
+            <if test="representativeCertNo != null" >
+                REPRESENTATIVE_CERT_NO,
+            </if>
+            <if test="contactName != null" >
+                contact_name,
+            </if>
+            <if test="contactMobile != null" >
+                contact_mobile,
+            </if>
+            <if test="compMainAcct != null" >
+                COMP_MAIN_ACCT,
+            </if>
+            <if test="compAcctBank != null" >
+                COMP_ACCT_BANK,
+            </if>
+            <if test="cnaps != null" >
+                CNAPS,
+            </if>
+            <if test="branchBank != null" >
+                Branch_BANK,
+            </if>
+            <if test="bankAcctName != null" >
+                Bank_acct_name,
+            </if>
+            <if test="compMainAcctType != null" >
+                COMP_MAIN_ACCT_TYPE,
+            </if>
+            <if test="provinceName != null" >
+                province_name,
+            </if>
+            <if test="cityName != null" >
+                city_name,
+            </if>
+
+
+
+
+
+
+
+
+
+
+
+            <if test="custId != null" >
+                CUST_ID,
+            </if>
+
+
+
+            <if test="certifyType != null" >
+                CERTIFY_TYPE,
+            </if>
+
+
+            <if test="merchantFlag != null" >
+                MERCHANT_FLAG,
+            </if>
+            <if test="custScore != null" >
+                CUST_SCORE,
+            </if>
+            <if test="custLvl != null" >
+                CUST_LVL,
+            </if>
+            <if test="trustCertifyLvl != null" >
+                TRUST_CERTIFY_LVL,
+            </if>
+            <if test="trustCertifyAuditState != null" >
+                TRUST_CERTIFY_AUDIT_STATE,
+            </if>
+            <if test="custInfoLvl != null" >
+                CUST_INFO_LVL,
+            </if>
+
+            <if test="custPostCode != null" >
+                CUST_POST_CODE,
+            </if>
+
+            <if test="taxRegCert != null" >
+                TAX_REG_CERT,
+            </if>
+            <if test="representativeCertType != null" >
+                REPRESENTATIVE_CERT_TYPE,
+            </if>
+
+
+            <if test="regCapital != null" >
+                REG_CAPITAL,
+            </if>
+            <if test="entType != null" >
+                ENT_TYPE,
+            </if>
+
+
+
+            <if test="state != null" >
+                STATE,
+            </if>
+            <if test="isUseCertification != null" >
+                IS_USE_CERTIFICATION,
+            </if>
+            <if test="isUseMsg != null" >
+                IS_USE_MSG,
+            </if>
+            <if test="qfqAccId != null" >
+                QFQ_ACC_ID,
+            </if>
+            <if test="qfbAccId != null" >
+                QFB_ACC_ID,
+            </if>
+
+            <if test="createId != null" >
+                CREATE_ID,
+            </if>
+            <if test="createTime != null" >
+                CREATE_TIME,
+            </if>
+            <if test="modifyId != null" >
+                MODIFY_ID,
+            </if>
+            <if test="modifyTime != null" >
+                MODIFY_TIME,
+            </if>
+
+            <if test="businessRegAddr != null" >
+                BUSINESS_REG_ADDR,
+            </if>
+
+            <if test="orgInstCode != null" >
+                ORG_INST_CODE,
+            </if>
+            <if test="representativeAddr != null" >
+                REPRESENTATIVE_ADDR,
+            </if>
+            <if test="representativeMobile != null" >
+                REPRESENTATIVE_MOBILE,
+            </if>
+
+            <if test="agentCertType != null" >
+                AGENT_CERT_TYPE,
+            </if>
+            <if test="agentCertCode != null" >
+                AGENT_CERT_CODE,
+            </if>
+            <if test="agentMobile != null" >
+                AGENT_MOBILE,
+            </if>
+
+
+            <if test="compVerifyAmt != null" >
+                COMP_VERIFY_AMT,
+            </if>
+
+
+            <if test="comment != null" >
+                COMMENT,
+            </if>
+            <if test="merchantCode != null" >
+                MERCHANT_CODE,
+            </if>
+            <if test="authId != null" >
+                AUTH_ID,
+            </if>
+            <if test="fcontactunitNumber != null" >
+                FCONTACTUNIT_NUMBER,
+            </if>
+            <if test="agentFlag != null" >
+                agent_flag,
+            </if>
+
+
+            <if test="businessTermStart != null" >
+                BUSINESS_TERM_START,
+            </if>
+            <if test="businessTermEnd != null" >
+                BUSINESS_TERM_END,
+            </if>
+
+
+
+            <if test="filingStatus != null" >
+                filing_status,
+            </if>
+            <if test="filingAuditStatus != null" >
+                filing_audit_status,
+            </if>
+
+            <if test="businessScope != null" >
+                business_scope,
+            </if>
+
+            <if test="merchantMobile != null" >
+                merchant_mobile,
+            </if>
+
+            <if test="registerWay != null" >
+                register_way,
+            </if>
+
+
+
+
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="custId != null" >
+                #{custId,jdbcType=VARCHAR},
+            </if>
+            <if test="custName != null" >
+                #{custName,jdbcType=VARCHAR},
+            </if>
+
+            <if test="attachStr != null" >
+                #{attachStr,jdbcType=VARCHAR},
+            </if>
+
+            <if test="certifyType != null" >
+                #{certifyType,jdbcType=VARCHAR},
+            </if>
+            <if test="certifyNo != null" >
+                #{certifyNo,jdbcType=VARCHAR},
+            </if>
+            <if test="custType != null" >
+                #{custType,jdbcType=CHAR},
+            </if>
+            <if test="merchantFlag != null" >
+                #{merchantFlag,jdbcType=CHAR},
+            </if>
+            <if test="custScore != null" >
+                #{custScore,jdbcType=DECIMAL},
+            </if>
+            <if test="custLvl != null" >
+                #{custLvl,jdbcType=VARCHAR},
+            </if>
+            <if test="trustCertifyLvl != null" >
+                #{trustCertifyLvl,jdbcType=SMALLINT},
+            </if>
+            <if test="trustCertifyAuditState != null" >
+                #{trustCertifyAuditState,jdbcType=VARCHAR},
+            </if>
+            <if test="custInfoLvl != null" >
+                #{custInfoLvl,jdbcType=CHAR},
+            </if>
+            <if test="custAdd != null" >
+                #{custAdd,jdbcType=VARCHAR},
+            </if>
+
+            <if test="businessLicense != null" >
+                #{businessLicense,jdbcType=VARCHAR},
+            </if>
+            <if test="taxRegCert != null" >
+                #{taxRegCert,jdbcType=VARCHAR},
+            </if>
+            <if test="representativeCertType != null" >
+                #{representativeCertType,jdbcType=VARCHAR},
+            </if>
+            <if test="representativeCertNo != null" >
+                #{representativeCertNo,jdbcType=VARCHAR},
+            </if>
+            <if test="representativeName != null" >
+                #{representativeName,jdbcType=VARCHAR},
+            </if>
+            <if test="regCapital != null" >
+                #{regCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="entType != null" >
+                #{entType,jdbcType=VARCHAR},
+            </if>
+            <if test="industryBelong != null" >
+                #{industryBelong,jdbcType=VARCHAR},
+            </if>
+            <if test="yearTurnover != null" >
+                #{yearTurnover,jdbcType=DECIMAL},
+            </if>
+            <if test="merchantWebSite != null" >
+                #{merchantWebSite,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null" >
+                #{state,jdbcType=CHAR},
+            </if>
+            <if test="isUseCertification != null" >
+                #{isUseCertification,jdbcType=CHAR},
+            </if>
+            <if test="isUseMsg != null" >
+                #{isUseMsg,jdbcType=CHAR},
+            </if>
+            <if test="qfqAccId != null" >
+                #{qfqAccId,jdbcType=VARCHAR},
+            </if>
+            <if test="qfbAccId != null" >
+                #{qfbAccId,jdbcType=VARCHAR},
+            </if>
+            <if test="dfAccId != null" >
+                #{dfAccId,jdbcType=VARCHAR},
+            </if>
+            <if test="createId != null" >
+                #{createId,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyId != null" >
+                #{modifyId,jdbcType=VARCHAR},
+            </if>
+            <if test="modifyTime != null" >
+                #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="businessTerm != null" >
+                #{businessTerm,jdbcType=DATE},
+            </if>
+            <if test="businessRegAddr != null" >
+                #{businessRegAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="contactPhone != null" >
+                #{contactPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="orgInstCode != null" >
+                #{orgInstCode,jdbcType=VARCHAR},
+            </if>
+            <if test="representativeAddr != null" >
+                #{representativeAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="representativeMobile != null" >
+                #{representativeMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="agentName != null" >
+                #{agentName,jdbcType=VARCHAR},
+            </if>
+            <if test="agentCertType != null" >
+                #{agentCertType,jdbcType=VARCHAR},
+            </if>
+            <if test="agentCertCode != null" >
+                #{agentCertCode,jdbcType=VARCHAR},
+            </if>
+            <if test="agentMobile != null" >
+                #{agentMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="compMainAcct != null" >
+                #{compMainAcct,jdbcType=VARCHAR},
+            </if>
+            <if test="compAcctBank != null" >
+                #{compAcctBank,jdbcType=VARCHAR},
+            </if>
+            <if test="pwdFreezeTime != null" >
+                #{pwdFreezeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="compVerifyAmt != null" >
+                #{compVerifyAmt,jdbcType=DECIMAL},
+            </if>
+            <if test="branchBank != null" >
+                #{branchBank,jdbcType=VARCHAR},
+            </if>
+            <if test="bankAcctName != null" >
+                #{bankAcctName,jdbcType=VARCHAR},
+            </if>
+            <if test="comment != null" >
+                #{comment,jdbcType=VARCHAR},
+            </if>
+            <if test="merchantCode != null" >
+                #{merchantCode,jdbcType=VARCHAR},
+            </if>
+            <if test="authId != null" >
+                #{authId,jdbcType=INTEGER},
+            </if>
+            <if test="fcontactunitNumber != null" >
+                #{fcontactunitNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="agentFlag != null" >
+                #{agentFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="cnaps != null" >
+                #{cnaps,jdbcType=VARCHAR},
+            </if>
+            <!--<if test="openaddressrec != null" >
+                #{openaddressrec,jdbcType=VARCHAR},
+            </if>-->
+            <if test="businessTermStart != null" >
+                #{businessTermStart,jdbcType=VARCHAR},
+            </if>
+            <if test="businessTermEnd != null" >
+                #{businessTermEnd,jdbcType=VARCHAR},
+            </if>
+
+            <!--<if test="categorytype != null" >
+                #{categorytype,jdbcType=VARCHAR},
+            </if>-->
+            <!--<if test="mchrole != null" >
+                #{mchrole,jdbcType=VARCHAR},
+            </if>-->
+            <if test="province != null" >
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null" >
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="country != null" >
+                #{country,jdbcType=VARCHAR},
+            </if>
+            <if test="filingStatus != null" >
+                #{filingStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="filingAuditStatus != null" >
+                #{filingAuditStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="dfCreateTime != null" >
+                #{dfCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isClear != null" >
+                #{isClear,jdbcType=VARCHAR},
+            </if>
+            <if test="shortName != null" >
+                #{shortName,jdbcType=VARCHAR},
+            </if>
+            <if test="businessScope != null" >
+                #{businessScope,jdbcType=VARCHAR},
+            </if>
+            <if test="compMainAcctType != null" >
+                #{compMainAcctType,jdbcType=VARCHAR},
+            </if>
+            <if test="merchantMobile != null" >
+                #{merchantMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="merchantEmail != null" >
+                #{merchantEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="registerWay != null" >
+                #{registerWay,jdbcType=VARCHAR},
+            </if>
+            <if test="custmanager != null" >
+                #{custmanager,jdbcType=VARCHAR},
+            </if>
+            <if test="contactName != null" >
+                #{contactName,jdbcType=VARCHAR},
+            </if>
+            <if test="contactMobile != null" >
+                #{contactMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceName != null" >
+                #{provinceName,jdbcType=VARCHAR},
+            </if>
+            <if test="cityName != null" >
+                #{cityName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+  </insert>
 
 	<select id="validateLicense" resultType="com.sevenpay.bms.basemanager.merchant.bean.Merchant" parameterType="string">
 		select t.BUSINESS_LICENSE from td_cust_info t 
@@ -316,7 +823,118 @@
 		</where>
 		ORDER BY C.CREATE_TIME    DESC	    		
 	</select>
- 	
+
+	<select id="auditList2" resultType="merchantVo" parameterType="merchantVo">
+		SELECT
+		C.AUTH_ID,
+		C.CUST_ID,
+		C.CUST_NAME,
+		C.TRADE_PWD,
+		C.ATTACH_STR,
+		C.CERTIFY_TYPE,
+		C.CERTIFY_NO,
+		C.CUST_TYPE,
+		C.MERCHANT_FLAG,
+		C.CUST_SCORE,
+		C.CUST_LVL,
+		C.TRUST_CERTIFY_LVL,
+		C.TRUST_CERTIFY_AUDIT_STATE,
+		C.CUST_INFO_LVL,
+		C.CUST_ADD,
+		C.CUST_POST_CODE,
+		C.BUSINESS_LICENSE,
+		C.TAX_REG_CERT,
+		C.REPRESENTATIVE_CERT_TYPE,
+		C.REPRESENTATIVE_CERT_NO,
+		C.REPRESENTATIVE_NAME,
+		C.REG_CAPITAL,
+		C.ENT_TYPE,
+		C.INDUSTRY_BELONG,
+		C.YEAR_TURNOVER,
+		C.MERCHANT_WEB_SITE,
+		C.STATE,
+		C.IS_USE_CERTIFICATION,
+		C.IS_USE_MSG,
+		C.QFQ_ACC_ID,
+		C.QFB_ACC_ID,
+		C.CREATE_ID,
+		C.CREATE_TIME,
+		C.MODIFY_ID,
+		C.MODIFY_TIME,
+		C.BUSINESS_TERM,
+		C.BUSINESS_REG_ADDR,
+		C.CONTACT_PHONE,
+		C.ORG_INST_CODE,
+		C.REPRESENTATIVE_ADDR,
+		C.REPRESENTATIVE_MOBILE,
+		C.AGENT_NAME,
+		C.AGENT_CERT_TYPE,
+		C.AGENT_CERT_CODE,
+		C.AGENT_MOBILE,
+		C.COMP_MAIN_ACCT,
+		C.COMP_ACCT_BANK,
+		C.COMP_VERIFY_AMT,
+		C.BRANCH_BANK,
+		C.BANK_ACCT_NAME,
+		C.FCONTACTUNIT_NUMBER,
+		C.MERCHANT_CODE,
+		C.categoryType,
+		C.mchRole,
+		C.province,
+		C.city,
+		C.country,
+		C.filing_status,
+		C.filing_audit_status,
+		DATE_FORMAT(C.CREATE_TIME,'%Y-%m-%d %H:%i:%s') createTime,
+		U.EMAIL,
+		U.STATE merchantState,
+		T.CERTIFICATE_STATE auditState,
+		T.AUTH_RESULT_DESC aduitMessage,
+		S.USER_NAME aduitUserName
+		FROM TD_CUST_INFO C
+		INNER JOIN TD_LOGIN_USER_INFO U
+		ON C.CUST_ID = U.CUST_ID
+		JOIN TD_CERTIFICATE_AUTH T
+		ON C.AUTH_ID = T.AUTH_ID
+		left JOIN SYS_USER S
+		ON S.USER_ID = T.CERTIFY_USER
+		<where>
+			C.CUST_TYPE = '1' AND C.MERCHANT_FLAG = '0' AND  C.TRUST_CERTIFY_AUDIT_STATE in('01','30','34','35')
+			<if test="startCreateTime != null and '' != startCreateTime">
+				<![CDATA[
+	              AND DATE_FORMAT(C.CREATE_TIME   ,'%Y-%m-%d')>= #{startCreateTime}
+	            ]]>
+			</if>
+			<if test="endCreateTime!= null and '' !=endCreateTime">
+				<![CDATA[
+	              AND DATE_FORMAT(C.CREATE_TIME  ,'%Y-%m-%d')<= #{endCreateTime}
+	            ]]>
+			</if>
+			<if test="auditState != null and auditState != '' ">
+				AND T.CERTIFICATE_STATE = #{auditState, jdbcType=VARCHAR}
+			</if>
+			<if test="merchantState != null and merchantState != '' ">
+				AND U.STATE = #{merchantState, jdbcType=VARCHAR}
+			</if>
+			<if test="filingStatus != null">
+                AND C.filing_status = #{filingStatus, jdbcType=VARCHAR}
+            </if>
+            <if test="filingAuditStatus != null">
+                AND C.filing_audit_status = #{filingAuditStatus, jdbcType=VARCHAR}
+            </if>
+			<if test="custName != null and custName != '' ">
+				AND C.CUST_NAME LIKE CONCAT('%',#{custName},'%')
+			</if>
+			<if test="email != null and email != '' ">
+				AND U.EMAIL LIKE CONCAT('%',#{email},'%')
+			</if>
+			<if test="merchantCode != null and merchantCode != '' ">
+				AND C.MERCHANT_CODE LIKE CONCAT('%',#{merchantCode},'%')
+			</if>
+		</where>
+		ORDER BY C.CREATE_TIME    DESC
+	</select>
+
 	<select id="myAuditList" resultType="merchantVo" parameterType="merchantVo">
 		SELECT
 			C.AUTH_ID,
@@ -1295,6 +1913,67 @@
 		</set>
 		where
 			t.CUST_ID = #{custId,jdbcType = VARCHAR}
+	</update>
+
+	<update id="updateByPrimaryKeySelective" parameterType="merchantVo" >
+		update td_login_user_info
+		<set >
+			<if test="roleId != null" >
+				ROLE_ID = #{roleId,jdbcType=VARCHAR},
+			</if>
+			<if test="loginPwd != null" >
+				LOGIN_PWD = #{loginPwd,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null" >
+				MOBILE = #{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null" >
+				EMAIL = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null" >
+				STATE = #{state,jdbcType=CHAR},
+			</if>
+			<if test="wrongPwdCount != null" >
+				WRONG_PWD_COUNT = #{wrongPwdCount,jdbcType=SMALLINT},
+			</if>
+			<if test="isBandMobileForLogin != null" >
+				IS_BAND_MOBILE_FOR_LOGIN = #{isBandMobileForLogin,jdbcType=CHAR},
+			</if>
+			<if test="onlineState != null" >
+				ONLINE_STATE = #{onlineState,jdbcType=SMALLINT},
+			</if>
+			<if test="lastLoginTime != null" >
+				LAST_LOGIN_TIME = #{lastLoginTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="attachStr != null" >
+				ATTACH_STR = #{attachStr,jdbcType=VARCHAR},
+			</if>
+			<if test="registerType != null" >
+				REGISTER_TYPE = #{registerType,jdbcType=VARCHAR},
+			</if>
+			<if test="registerStr != null" >
+				REGISTER_STR = #{registerStr,jdbcType=VARCHAR},
+			</if>
+			<if test="createId != null" >
+				CREATE_ID = #{createId,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null" >
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyId != null" >
+				MODIFY_ID = #{modifyId,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyTime != null" >
+				MODIFY_TIME = #{modifyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="freezeTime != null" >
+				FREEZE_TIME = #{freezeTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="imgheadinfoid != null" >
+				imgHeadInfoId = #{imgheadinfoid,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where CUST_ID = #{custId,jdbcType=VARCHAR}
 	</update>
 	
 	<!-- 新商户列表查询 -->
