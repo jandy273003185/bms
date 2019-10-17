@@ -1,0 +1,378 @@
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- taglib -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- basic styles -->
+
+<link rel="stylesheet" href='/assets/css/bootstrap.min.css?v=v1.0.0' />
+<link rel="stylesheet" href='/assets/css/font-awesome.min.css?v=v1.0.0' />
+<!-- page specific plugin styles -->
+<link rel="stylesheet" href='/assets/css/dropzone.css?v=v1.0.0' />
+
+<link rel="stylesheet" href='/assets/css/ace.min.css?v=v1.0.0' />
+<link rel="stylesheet" href='/assets/css/ace-rtl.min.css?v=v1.0.0' />
+<link rel="stylesheet" href='/assets/css/ace-skins.min.css?v=v1.0.0' />
+<link rel="stylesheet" href='/static/css/gyzb-admin.css?v=v1.0.0' />
+<link rel="stylesheet" href='/static/css/bootstrap-datetimepicker.min.css?v=v1.0.0' />
+
+<!-- 使用服务端的调用生成一些前端需要的信息,模拟JS文件引入 -->
+<script type="text/javascript">
+	
+	// 定义JS端的常量等信息
+	window.Constants = {};
+	
+	// 上下文路径
+	window.Constants.ContextPath = '';
+
+	// 正则定义
+	var kong = /^\s*$/;
+	
+</script>
+
+<script src='/assets/js/ace-extra.min.js?v=v1.0.0'></script>
+<script src='/assets/js/jquery-2.0.3.min.js?v=v1.0.0'/></script>
+<script src='/static/js/jquery.blockUI.js?v=v1.0.0'/></script>
+<script src='/static/js/jquery.pagination.js?v=v1.0.0'></script>
+<script src='/assets/js/bootstrap.min.js?v=v1.0.0'></script>
+<!-- page specific plugin scripts -->
+<script src='/assets/js/typeahead-bs2.min.js?v=v1.0.0'></script>
+<script src='/assets/js/dropzone.min.js?v=v1.0.0'></script>
+		
+<script src='/assets/js/ace-elements.min.js?v=v1.0.0'></script>
+<script src='/assets/js/ace.min.js?v=v1.0.0'></script>
+<script src='/static/js/gyzb-admin.js?v=v1.0.0'></script>
+<script src='/static/js/checkRule_source.js?v=v1.0.0'></script>
+<script src='/static/js/service.js?v=v1.0.0'></script>
+<script src='/static/js/bootstrap-datetimepicker.min.js?v=v1.0.0'></script>
+<script src='/static/My97DatePicker/WdatePicker.js?v=v1.0.0'></script>
+<script src='/static/My97DatePicker/AutoDatePicker.js?v=v1.0.0'></script>
+
+
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>登陆后主页</title>
+	<meta name="keywords" content="七分钱后台管理系统" />
+	<meta name="description" content="七分钱后台管理" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<script type="text/javascript">
+		$(function(){
+			$('.back-link').click(function(){
+				window.history.back();
+			});
+		});
+	</script>
+</head>
+<body>
+	<!-- 用户信息 -->
+	
+
+
+
+
+
+<style type="text/css">
+	.logout:hover{text-decoration: none}
+	.updatePwd:hover{text-decoration: none}
+</style>
+
+<script type="text/javascript">
+	
+	jQuery(function($) {
+		$('.logout').click(function(){
+			$.post(window.Constants.ContextPath + '/logout', {
+				}, function(data) {
+					if(data.result == 'SUCCESS'){
+						window.location.href = window.Constants.ContextPath + '/';
+					} else {
+						alert('登出失败:' + data.message);
+					}
+				}, 'json'
+			);
+		});
+		
+		$('.updatePwd').click(function(){
+			window.location.href = window.Constants.ContextPath + '/toUpdatPwd';
+		});
+	});
+
+</script>
+
+<!-- 公共弹出层 -->
+
+
+<!-- 失败 -->
+<div class="modal fade" id="modal-container-common-alert-danger" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="position:fixed;z-index: 9999; margin-top: 100px;">
+	<div class="modal-dialog" style="width: 400px;" align="center">
+		<div class="alert alert-danger" align="center">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<br/>
+			<strong>
+				<i class="icon-remove"></i>
+			</strong>
+			<font id="alertMessage"></font>
+			<br/><br/>
+		</div>
+	</div>
+</div>
+<!-- 成功 -->
+<div class="modal fade" id="modal-container-common-alert-success" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="position:fixed;z-index: 9999;margin-top: 100px;">
+	<div class="modal-dialog" style="width: 400px;" align="center">
+		<div class="alert alert-block alert-success" align="center">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<br/>
+			<strong>
+				<i class="icon-ok"></i>	
+			</strong>
+			<font id="alertMessage"></font>
+			<br/><br/>
+		</div>
+	</div>
+</div>
+
+<div class="navbar navbar-default" id="navbar" style="height:47px;">
+	<script type="text/javascript">
+		try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+	</script>
+
+	<div class="navbar-container" id="navbar-container">
+		<div class="navbar-header pull-left">
+			<a href="#" class="navbar-brand">
+				<small>
+					<i class="icon-leaf"></i>
+					七分钱后台管理系统
+				</small>
+			</a><!-- /.brand -->
+		</div><!-- /.navbar-header -->
+
+		<div class="navbar-header pull-right" role="navigation">
+			<ul class="nav ace-nav">
+
+				<li class="light-blue">
+					 
+				</li>
+			</ul><!-- /.ace-nav -->
+		</div><!-- /.navbar-header -->
+	</div><!-- /.container -->
+</div>
+
+		
+
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+		</script>
+
+		<div class="main-container-inner">
+			<!-- 菜单 -->
+			
+
+<a class="menu-toggler" id="menu-toggler" href="#">
+	<span class="menu-text"></span>
+</a>
+				
+<div class="sidebar" id="sidebar">
+	<script type="text/javascript">
+		try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+	</script>
+
+	<ul class="nav nav-list">
+		 
+		
+	</ul><!-- /.nav-list -->
+
+	<div class="sidebar-collapse" id="sidebar-collapse">
+		<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+	</div>
+
+	<script type="text/javascript">
+		try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+	</script>
+</div>
+			
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+						<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+						<ul class="breadcrumb">
+							<li class="active">
+								<i class="icon-home home-icon"></i>
+								404 错误
+							</li>
+						</ul><!-- .breadcrumb -->
+
+						<div class="nav-search" id="nav-search">
+							<form class="form-search">
+								<span class="input-icon">
+									<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+									<i class="icon-search nav-search-icon"></i>
+								</span>
+							</form>
+						</div><!-- #nav-search -->
+					</div>
+
+					<div class="page-content">
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+
+								<div class="error-container">
+									<div class="well">
+										<h1 class="grey lighter smaller">
+											<span class="blue bigger-125">
+												<i class="icon-sitemap"></i>
+												404
+											</span>
+											Page Not Found
+										</h1>
+
+										<hr />
+										<h3 class="lighter smaller">We looked everywhere but we couldn't find it!</h3>
+
+										<div>
+											<form class="form-search">
+												<span class="input-icon align-middle">
+													<i class="icon-search"></i>
+
+													<input type="text" class="search-query" placeholder="Give it a search..." />
+												</span>
+												<button class="btn btn-sm" onclick="return false;">Go!</button>
+											</form>
+
+											<div class="space"></div>
+											<h4 class="smaller">Try one of the following:</h4>
+
+											<ul class="list-unstyled spaced inline bigger-110 margin-15">
+												<li>
+													<i class="icon-hand-right blue"></i>
+													Re-check the url for typos
+												</li>
+
+												<li>
+													<i class="icon-hand-right blue"></i>
+													Read the faq
+												</li>
+
+												<li>
+													<i class="icon-hand-right blue"></i>
+													Tell us about it
+												</li>
+											</ul>
+										</div>
+
+										<hr />
+										<div class="space"></div>
+
+										<div class="center">
+											<button class="btn btn-grey back-link">
+												<i class="icon-arrow-left"></i>
+												Go Back
+											</button>
+
+											<a href="#" class="btn btn-primary">
+												<i class="icon-dashboard"></i>
+												Dashboard
+											</a>
+										</div>
+									</div>
+								</div><!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+
+				
+				<!-- 底部-->
+				
+
+<div style="font-size: 12px; font-family:arial;text-align: center; width:100%; height:30px; line-height:30px; background-color: rgb(242,242,242);">
+	Copyright© 2018 | 深圳市国银证保信息技术有限公司
+</div>
+			</div><!-- /.main-content -->
+			
+			<!-- 设置 -->
+			
+
+<div class="ace-settings-container" id="ace-settings-container">
+	<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
+		<i class="icon-cog bigger-150"></i>
+	</div>
+
+	<div class="ace-settings-box" id="ace-settings-box">
+		<div>
+			<div class="pull-left">
+				<select id="skin-colorpicker" class="hide">
+					<option data-skin="default" value="#438EB9">#438EB9</option>
+					<option data-skin="skin-1" value="#222A2D">#222A2D</option>
+					<option data-skin="skin-2" value="#C6487E">#C6487E</option>
+					<option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
+				</select>
+			</div>
+			<span>&nbsp; 选择皮肤</span>
+		</div>
+
+		<div>
+			<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-navbar" />
+			<label class="lbl" for="ace-settings-navbar"> 固定导航条</label>
+		</div>
+
+		<div>
+			<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-sidebar" />
+			<label class="lbl" for="ace-settings-sidebar"> 固定滑动条</label>
+		</div>
+
+		<div>
+			<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-breadcrumbs" />
+			<label class="lbl" for="ace-settings-breadcrumbs">固定面包屑</label>
+		</div>
+
+		<div>
+			<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" />
+			<label class="lbl" for="ace-settings-rtl">切换到左边</label>
+		</div>
+
+		<div>
+			<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-add-container" />
+			<label class="lbl" for="ace-settings-add-container">
+				切换窄屏
+				<b></b>
+			</label>
+		</div>
+	</div>
+</div><!-- /#ace-settings-container -->
+		</div><!-- /.main-container-inner -->
+		
+		<!-- 向上置顶 -->
+		
+
+<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+	<i class="icon-double-angle-up icon-only bigger-110"></i>
+</a>
+	</div><!-- /.main-container -->
+</body>
+</html>
+
