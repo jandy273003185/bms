@@ -410,6 +410,11 @@ function productMerchantEntry(obj){
                                <button type="button"  class="btn btn-primary" disabled="disabled">批量录入</button>
                                <button type="button"  class="btn btn-primary">导出</button>
                                <button type="button"  class="btn btn-primary">打印二维码</button>
+                               <gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.PREVIEW %>">
+									<a href="#" class="" onclick="previewMerchantEntry(this)" data-rel="tooltip" title="Query" data-toggle='modal'>
+										<button type="submit" class="btn btn-purple btn-sm">预览</button>
+									</a>
+								</gyzbadmin:function>
                             </div>
                             
 							<div class="list-table-header">商户列表</div>

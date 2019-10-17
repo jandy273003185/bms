@@ -14,7 +14,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>商户注册</title>
+	<title>商户录入添加</title>
 	<meta name="keywords" content="七分钱后台管理系统" />
 	<meta name="description" content="七分钱后台管理" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
