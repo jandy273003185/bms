@@ -59,6 +59,15 @@ public class Merchant implements Serializable
      */
     private String contactMobile;
 
+	/**
+	 * 开户省 1 mian 9
+	 */
+	private String bankProvinceName;
+
+	/**
+	 *开户市 1 mian9 新加字段
+	 */
+	private String bankCityName;
     /**
      * 网点号
      */
@@ -360,7 +369,155 @@ public class Merchant implements Serializable
 	 * 身份证有效日期
 	 */
 	private String certNoValidDate;
+	private String filingStatus;
+	private String filingAuditStatus;
 
+	private Short wrongPwdCount;
+
+
+	private String dfAccId;
+
+
+	private Date pwdFreezeTime;
+
+
+	private String comment;
+
+	private Integer authId;
+
+	private String agentFlag;
+
+	private Date dfCreateTime;
+
+	private String isClear;
+
+	private String businessScope;
+
+	private String merchantMobile;
+
+	private String registerWay;
+
+	public String getBankProvinceName() {
+		return bankProvinceName;
+	}
+
+	public void setBankProvinceName(String bankProvinceName) {
+		this.bankProvinceName = bankProvinceName;
+	}
+
+	public String getBankCityName() {
+		return bankCityName;
+	}
+
+	public void setBankCityName(String bankCityName) {
+		this.bankCityName = bankCityName;
+	}
+
+	public Short getWrongPwdCount() {
+		return wrongPwdCount;
+	}
+
+	public void setWrongPwdCount(Short wrongPwdCount) {
+		this.wrongPwdCount = wrongPwdCount;
+	}
+
+	public String getDfAccId() {
+		return dfAccId;
+	}
+
+	public void setDfAccId(String dfAccId) {
+		this.dfAccId = dfAccId;
+	}
+
+	public Date getPwdFreezeTime() {
+		return pwdFreezeTime;
+	}
+
+	public void setPwdFreezeTime(Date pwdFreezeTime) {
+		this.pwdFreezeTime = pwdFreezeTime;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public Integer getAuthId() {
+		return authId;
+	}
+
+	public void setAuthId(Integer authId) {
+		this.authId = authId;
+	}
+
+	public String getAgentFlag() {
+		return agentFlag;
+	}
+
+	public void setAgentFlag(String agentFlag) {
+		this.agentFlag = agentFlag;
+	}
+
+	public Date getDfCreateTime() {
+		return dfCreateTime;
+	}
+
+	public void setDfCreateTime(Date dfCreateTime) {
+		this.dfCreateTime = dfCreateTime;
+	}
+
+	public String getIsClear() {
+		return isClear;
+	}
+
+	public void setIsClear(String isClear) {
+		this.isClear = isClear;
+	}
+
+	public String getBusinessScope() {
+		return businessScope;
+	}
+
+	public void setBusinessScope(String businessScope) {
+		this.businessScope = businessScope;
+	}
+
+	public String getMerchantMobile() {
+		return merchantMobile;
+	}
+
+	public void setMerchantMobile(String merchantMobile) {
+		this.merchantMobile = merchantMobile;
+	}
+
+	public String getRegisterWay() {
+		return registerWay;
+	}
+
+	public void setRegisterWay(String registerWay) {
+		this.registerWay = registerWay;
+	}
+
+
+
+	public String getFilingStatus() {
+		return filingStatus;
+	}
+
+	public void setFilingStatus(String filingStatus) {
+		this.filingStatus = filingStatus;
+	}
+
+	public String getFilingAuditStatus() {
+		return filingAuditStatus;
+	}
+
+	public void setFilingAuditStatus(String filingAuditStatus) {
+		this.filingAuditStatus = filingAuditStatus;
+	}
 
 	public String getShortName() {
 		return shortName;
@@ -525,79 +682,6 @@ public class Merchant implements Serializable
         this.compMainAcctType = compMainAcctType;
     }
 
-    public Merchant(String merchantAccount, String custId, String merchantCode, String custName, String shortName, String merchantEmail, String custManager, String contactName, String contactMobile, String cnaps, String compMainAcctType, String tradePwd, String certifyType, String certifyNo, String custType, String merchantFlag, Long custScore, String custLvl, Short trustCertifyLvl, String trustCertifyAuditState, String custInfoLvl, String custAdd, String custPostCode, String businessLicense, String businessRegAddr, String businessTerm, String contactPhone, String orgInstCode, String taxRegCert, String representativeCertType, String representativeCertNo, String representativeName, String representativeMobile, String representativeAddr, String agentName, String agentCertType, String agentCertCode, String agentMobile, String compMainAcct, String compAcctBank, String compVerifyAmt, BigDecimal regCapital, String entType, String industryBelong, BigDecimal yearTurnover, String merchantWebSite, String state, String isUseCertification, String isUseMsg, String createId, Date createTime, String modifyId, Date modifyTime, String attachStr, String qfqAccId, String qfbAccId, String feeCode, String branchBank, String bankAcctName, String fcontactunitNumber, String openAddressRec, String mobile, String businessTermStart, String businessTermEnd, String roleId, String categoryType, String mchRole, String province, String city, String country, String certNoValidDate) {
-        this.merchantAccount = merchantAccount;
-        this.custId = custId;
-        this.merchantCode = merchantCode;
-        this.custName = custName;
-        this.shortName = shortName;
-        this.merchantEmail = merchantEmail;
-        this.custManager = custManager;
-        this.contactName = contactName;
-        this.contactMobile = contactMobile;
-        this.cnaps = cnaps;
-        this.compMainAcctType = compMainAcctType;
-        this.tradePwd = tradePwd;
-        this.certifyType = certifyType;
-        this.certifyNo = certifyNo;
-        this.custType = custType;
-        this.merchantFlag = merchantFlag;
-        this.custScore = custScore;
-        this.custLvl = custLvl;
-        this.trustCertifyLvl = trustCertifyLvl;
-        this.trustCertifyAuditState = trustCertifyAuditState;
-        this.custInfoLvl = custInfoLvl;
-        this.custAdd = custAdd;
-        this.custPostCode = custPostCode;
-        this.businessLicense = businessLicense;
-        this.businessRegAddr = businessRegAddr;
-        this.businessTerm = businessTerm;
-        this.contactPhone = contactPhone;
-        this.orgInstCode = orgInstCode;
-        this.taxRegCert = taxRegCert;
-        this.representativeCertType = representativeCertType;
-        this.representativeCertNo = representativeCertNo;
-        this.representativeName = representativeName;
-        this.representativeMobile = representativeMobile;
-        this.representativeAddr = representativeAddr;
-        this.agentName = agentName;
-        this.agentCertType = agentCertType;
-        this.agentCertCode = agentCertCode;
-        this.agentMobile = agentMobile;
-        this.compMainAcct = compMainAcct;
-        this.compAcctBank = compAcctBank;
-        this.compVerifyAmt = compVerifyAmt;
-        this.regCapital = regCapital;
-        this.entType = entType;
-        this.industryBelong = industryBelong;
-        this.yearTurnover = yearTurnover;
-        this.merchantWebSite = merchantWebSite;
-        this.state = state;
-        this.isUseCertification = isUseCertification;
-        this.isUseMsg = isUseMsg;
-        this.createId = createId;
-        this.createTime = createTime;
-        this.modifyId = modifyId;
-        this.modifyTime = modifyTime;
-        this.attachStr = attachStr;
-        this.qfqAccId = qfqAccId;
-        this.qfbAccId = qfbAccId;
-        this.feeCode = feeCode;
-        this.branchBank = branchBank;
-        this.bankAcctName = bankAcctName;
-        this.fcontactunitNumber = fcontactunitNumber;
-        this.openAddressRec = openAddressRec;
-        this.mobile = mobile;
-        this.businessTermStart = businessTermStart;
-        this.businessTermEnd = businessTermEnd;
-        this.roleId = roleId;
-        this.categoryType = categoryType;
-        this.mchRole = mchRole;
-        this.province = province;
-        this.city = city;
-        this.country = country;
-        this.certNoValidDate = certNoValidDate;
-    }
 
     public String getMerchantCode() {
 		return merchantCode;
@@ -1072,81 +1156,180 @@ public class Merchant implements Serializable
 		this.fcontactunitNumber = fcontactunitNumber;
 	}
 
+	public Merchant(String merchantAccount, String custId, String merchantCode, String custName, String shortName, String merchantEmail, String custManager, String contactName, String contactMobile, String provinceName, String cityName, String cnaps, String compMainAcctType, String tradePwd, String certifyType, String certifyNo, String custType, String merchantFlag, Long custScore, String custLvl, Short trustCertifyLvl, String trustCertifyAuditState, String custInfoLvl, String custAdd, String custPostCode, String businessLicense, String businessRegAddr, String businessTerm, String contactPhone, String orgInstCode, String taxRegCert, String representativeCertType, String representativeCertNo, String representativeName, String representativeMobile, String representativeAddr, String agentName, String agentCertType, String agentCertCode, String agentMobile, String compMainAcct, String compAcctBank, String compVerifyAmt, BigDecimal regCapital, String entType, String industryBelong, BigDecimal yearTurnover, String merchantWebSite, String state, String isUseCertification, String isUseMsg, String createId, Date createTime, String modifyId, Date modifyTime, String attachStr, String qfqAccId, String qfbAccId, String feeCode, String branchBank, String bankAcctName, String fcontactunitNumber, String openAddressRec, String mobile, String businessTermStart, String businessTermEnd, String roleId, String categoryType, String mchRole, String province, String city, String country, String certNoValidDate, String filingStatus, String filingAuditStatus, Short wrongPwdCount, String dfAccId, Date pwdFreezeTime, String comment, Integer authId, String agentFlag, Date dfCreateTime, String isClear, String businessScope, String merchantMobile, String registerWay) {
+		this.merchantAccount = merchantAccount;
+		this.custId = custId;
+		this.merchantCode = merchantCode;
+		this.custName = custName;
+		this.shortName = shortName;
+		this.merchantEmail = merchantEmail;
+		this.custManager = custManager;
+		this.contactName = contactName;
+		this.contactMobile = contactMobile;
+		this.cnaps = cnaps;
+		this.compMainAcctType = compMainAcctType;
+		this.tradePwd = tradePwd;
+		this.certifyType = certifyType;
+		this.certifyNo = certifyNo;
+		this.custType = custType;
+		this.merchantFlag = merchantFlag;
+		this.custScore = custScore;
+		this.custLvl = custLvl;
+		this.trustCertifyLvl = trustCertifyLvl;
+		this.trustCertifyAuditState = trustCertifyAuditState;
+		this.custInfoLvl = custInfoLvl;
+		this.custAdd = custAdd;
+		this.custPostCode = custPostCode;
+		this.businessLicense = businessLicense;
+		this.businessRegAddr = businessRegAddr;
+		this.businessTerm = businessTerm;
+		this.contactPhone = contactPhone;
+		this.orgInstCode = orgInstCode;
+		this.taxRegCert = taxRegCert;
+		this.representativeCertType = representativeCertType;
+		this.representativeCertNo = representativeCertNo;
+		this.representativeName = representativeName;
+		this.representativeMobile = representativeMobile;
+		this.representativeAddr = representativeAddr;
+		this.agentName = agentName;
+		this.agentCertType = agentCertType;
+		this.agentCertCode = agentCertCode;
+		this.agentMobile = agentMobile;
+		this.compMainAcct = compMainAcct;
+		this.compAcctBank = compAcctBank;
+		this.compVerifyAmt = compVerifyAmt;
+		this.regCapital = regCapital;
+		this.entType = entType;
+		this.industryBelong = industryBelong;
+		this.yearTurnover = yearTurnover;
+		this.merchantWebSite = merchantWebSite;
+		this.state = state;
+		this.isUseCertification = isUseCertification;
+		this.isUseMsg = isUseMsg;
+		this.createId = createId;
+		this.createTime = createTime;
+		this.modifyId = modifyId;
+		this.modifyTime = modifyTime;
+		this.attachStr = attachStr;
+		this.qfqAccId = qfqAccId;
+		this.qfbAccId = qfbAccId;
+		this.feeCode = feeCode;
+		this.branchBank = branchBank;
+		this.bankAcctName = bankAcctName;
+		this.fcontactunitNumber = fcontactunitNumber;
+		this.openAddressRec = openAddressRec;
+		this.mobile = mobile;
+		this.businessTermStart = businessTermStart;
+		this.businessTermEnd = businessTermEnd;
+		this.roleId = roleId;
+		this.categoryType = categoryType;
+		this.mchRole = mchRole;
+		this.province = province;
+		this.city = city;
+		this.country = country;
+		this.certNoValidDate = certNoValidDate;
+		this.filingStatus = filingStatus;
+		this.filingAuditStatus = filingAuditStatus;
+		this.wrongPwdCount = wrongPwdCount;
+		this.dfAccId = dfAccId;
+		this.pwdFreezeTime = pwdFreezeTime;
+		this.comment = comment;
+		this.authId = authId;
+		this.agentFlag = agentFlag;
+		this.dfCreateTime = dfCreateTime;
+		this.isClear = isClear;
+		this.businessScope = businessScope;
+		this.merchantMobile = merchantMobile;
+		this.registerWay = registerWay;
+	}
 
-    @Override
-    public String toString() {
-        return "Merchant{" +
-                "merchantAccount='" + merchantAccount + '\'' +
-                ", custId='" + custId + '\'' +
-                ", merchantCode='" + merchantCode + '\'' +
-                ", custName='" + custName + '\'' +
-                ", shortName='" + shortName + '\'' +
-                ", merchantEmail='" + merchantEmail + '\'' +
-                ", custManager='" + custManager + '\'' +
-                ", contactName='" + contactName + '\'' +
-                ", contactMobile='" + contactMobile + '\'' +
-                ", cnaps='" + cnaps + '\'' +
-                ", compMainAcctType='" + compMainAcctType + '\'' +
-                ", tradePwd='" + tradePwd + '\'' +
-                ", certifyType='" + certifyType + '\'' +
-                ", certifyNo='" + certifyNo + '\'' +
-                ", custType='" + custType + '\'' +
-                ", merchantFlag='" + merchantFlag + '\'' +
-                ", custScore=" + custScore +
-                ", custLvl='" + custLvl + '\'' +
-                ", trustCertifyLvl=" + trustCertifyLvl +
-                ", trustCertifyAuditState='" + trustCertifyAuditState + '\'' +
-                ", custInfoLvl='" + custInfoLvl + '\'' +
-                ", custAdd='" + custAdd + '\'' +
-                ", custPostCode='" + custPostCode + '\'' +
-                ", businessLicense='" + businessLicense + '\'' +
-                ", businessRegAddr='" + businessRegAddr + '\'' +
-                ", businessTerm='" + businessTerm + '\'' +
-                ", contactPhone='" + contactPhone + '\'' +
-                ", orgInstCode='" + orgInstCode + '\'' +
-                ", taxRegCert='" + taxRegCert + '\'' +
-                ", representativeCertType='" + representativeCertType + '\'' +
-                ", representativeCertNo='" + representativeCertNo + '\'' +
-                ", representativeName='" + representativeName + '\'' +
-                ", representativeMobile='" + representativeMobile + '\'' +
-                ", representativeAddr='" + representativeAddr + '\'' +
-                ", agentName='" + agentName + '\'' +
-                ", agentCertType='" + agentCertType + '\'' +
-                ", agentCertCode='" + agentCertCode + '\'' +
-                ", agentMobile='" + agentMobile + '\'' +
-                ", compMainAcct='" + compMainAcct + '\'' +
-                ", compAcctBank='" + compAcctBank + '\'' +
-                ", compVerifyAmt='" + compVerifyAmt + '\'' +
-                ", regCapital=" + regCapital +
-                ", entType='" + entType + '\'' +
-                ", industryBelong='" + industryBelong + '\'' +
-                ", yearTurnover=" + yearTurnover +
-                ", merchantWebSite='" + merchantWebSite + '\'' +
-                ", state='" + state + '\'' +
-                ", isUseCertification='" + isUseCertification + '\'' +
-                ", isUseMsg='" + isUseMsg + '\'' +
-                ", createId='" + createId + '\'' +
-                ", createTime=" + createTime +
-                ", modifyId='" + modifyId + '\'' +
-                ", modifyTime=" + modifyTime +
-                ", attachStr='" + attachStr + '\'' +
-                ", qfqAccId='" + qfqAccId + '\'' +
-                ", qfbAccId='" + qfbAccId + '\'' +
-                ", feeCode='" + feeCode + '\'' +
-                ", branchBank='" + branchBank + '\'' +
-                ", bankAcctName='" + bankAcctName + '\'' +
-                ", fcontactunitNumber='" + fcontactunitNumber + '\'' +
-                ", openAddressRec='" + openAddressRec + '\'' +
-                ", mobile='" + mobile + '\'' +
-                ", businessTermStart='" + businessTermStart + '\'' +
-                ", businessTermEnd='" + businessTermEnd + '\'' +
-                ", roleId='" + roleId + '\'' +
-                ", categoryType='" + categoryType + '\'' +
-                ", mchRole='" + mchRole + '\'' +
-                ", province='" + province + '\'' +
-                ", city='" + city + '\'' +
-                ", country='" + country + '\'' +
-                ", certNoValidDate='" + certNoValidDate + '\'' +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "Merchant{" +
+				"merchantAccount='" + merchantAccount + '\'' +
+				", custId='" + custId + '\'' +
+				", merchantCode='" + merchantCode + '\'' +
+				", custName='" + custName + '\'' +
+				", shortName='" + shortName + '\'' +
+				", merchantEmail='" + merchantEmail + '\'' +
+				", custManager='" + custManager + '\'' +
+				", contactName='" + contactName + '\'' +
+				", contactMobile='" + contactMobile + '\'' +
+				", cnaps='" + cnaps + '\'' +
+				", compMainAcctType='" + compMainAcctType + '\'' +
+				", tradePwd='" + tradePwd + '\'' +
+				", certifyType='" + certifyType + '\'' +
+				", certifyNo='" + certifyNo + '\'' +
+				", custType='" + custType + '\'' +
+				", merchantFlag='" + merchantFlag + '\'' +
+				", custScore=" + custScore +
+				", custLvl='" + custLvl + '\'' +
+				", trustCertifyLvl=" + trustCertifyLvl +
+				", trustCertifyAuditState='" + trustCertifyAuditState + '\'' +
+				", custInfoLvl='" + custInfoLvl + '\'' +
+				", custAdd='" + custAdd + '\'' +
+				", custPostCode='" + custPostCode + '\'' +
+				", businessLicense='" + businessLicense + '\'' +
+				", businessRegAddr='" + businessRegAddr + '\'' +
+				", businessTerm='" + businessTerm + '\'' +
+				", contactPhone='" + contactPhone + '\'' +
+				", orgInstCode='" + orgInstCode + '\'' +
+				", taxRegCert='" + taxRegCert + '\'' +
+				", representativeCertType='" + representativeCertType + '\'' +
+				", representativeCertNo='" + representativeCertNo + '\'' +
+				", representativeName='" + representativeName + '\'' +
+				", representativeMobile='" + representativeMobile + '\'' +
+				", representativeAddr='" + representativeAddr + '\'' +
+				", agentName='" + agentName + '\'' +
+				", agentCertType='" + agentCertType + '\'' +
+				", agentCertCode='" + agentCertCode + '\'' +
+				", agentMobile='" + agentMobile + '\'' +
+				", compMainAcct='" + compMainAcct + '\'' +
+				", compAcctBank='" + compAcctBank + '\'' +
+				", compVerifyAmt='" + compVerifyAmt + '\'' +
+				", regCapital=" + regCapital +
+				", entType='" + entType + '\'' +
+				", industryBelong='" + industryBelong + '\'' +
+				", yearTurnover=" + yearTurnover +
+				", merchantWebSite='" + merchantWebSite + '\'' +
+				", state='" + state + '\'' +
+				", isUseCertification='" + isUseCertification + '\'' +
+				", isUseMsg='" + isUseMsg + '\'' +
+				", createId='" + createId + '\'' +
+				", createTime=" + createTime +
+				", modifyId='" + modifyId + '\'' +
+				", modifyTime=" + modifyTime +
+				", attachStr='" + attachStr + '\'' +
+				", qfqAccId='" + qfqAccId + '\'' +
+				", qfbAccId='" + qfbAccId + '\'' +
+				", feeCode='" + feeCode + '\'' +
+				", branchBank='" + branchBank + '\'' +
+				", bankAcctName='" + bankAcctName + '\'' +
+				", fcontactunitNumber='" + fcontactunitNumber + '\'' +
+				", openAddressRec='" + openAddressRec + '\'' +
+				", mobile='" + mobile + '\'' +
+				", businessTermStart='" + businessTermStart + '\'' +
+				", businessTermEnd='" + businessTermEnd + '\'' +
+				", roleId='" + roleId + '\'' +
+				", categoryType='" + categoryType + '\'' +
+				", mchRole='" + mchRole + '\'' +
+				", province='" + province + '\'' +
+				", city='" + city + '\'' +
+				", country='" + country + '\'' +
+				", certNoValidDate='" + certNoValidDate + '\'' +
+				", filingStatus='" + filingStatus + '\'' +
+				", filingAuditStatus='" + filingAuditStatus + '\'' +
+				", wrongPwdCount=" + wrongPwdCount +
+				", dfAccId='" + dfAccId + '\'' +
+				", pwdFreezeTime=" + pwdFreezeTime +
+				", comment='" + comment + '\'' +
+				", authId=" + authId +
+				", agentFlag='" + agentFlag + '\'' +
+				", dfCreateTime=" + dfCreateTime +
+				", isClear='" + isClear + '\'' +
+				", businessScope='" + businessScope + '\'' +
+				", merchantMobile='" + merchantMobile + '\'' +
+				", registerWay='" + registerWay + '\'' +
+				'}';
+	}
 }

@@ -355,12 +355,12 @@ public class MerchantVo implements Serializable {
 	private String workFlowStatus;
 	
 	/**
-	 * 审核信息
+	 * 审核信息 1
 	 */
 	private String aduitMessage;
 	
 	/**
-	 * 审核人
+	 * 审核人  1
 	 */
 	private String aduitUserName;
 	

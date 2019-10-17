@@ -15,6 +15,10 @@ public final class MerchantEnterPath {
 	 */
 	public final static String ADD ="/add";
 	/**
+	 * 添加商户页面
+	 */
+	public final static String ADDPAGE ="/addPage";
+	/**
 	 * 预览
 	 */
 	public final static String PREVIEW = "/preview";
@@ -23,9 +27,17 @@ public final class MerchantEnterPath {
 	 */
 	public final static String UPDATE = "/update";
 	/**
+	 * 更新商户页面
+	 */
+	public final static String UPDATEPAGE = "/updatePage";
+	/**
 	 * 审核
 	 */
 	public final static String AUDIT ="/audit";
+	/**
+	 * 审核商户页面
+	 */
+	public final static String AUDITPAGE ="/auditPage";
 	/**
 	 * 产品查看
 	 */
