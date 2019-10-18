@@ -32,9 +32,28 @@
 </head>
 <script type="text/javascript">
 $(function() {
+	
+	if($("#custType").val() =='0' ||$("#custType").val() =='2' ){
+		//个人
+		$("#bankCardPhoto_").attr("style","display:");
+		$("#openAccount_").attr("style","display:none");
+	}
+	if($("#custType").val() =='1'){
+		//企业
+		$("#bankCardPhoto_").attr("style","display:none");
+		$("#openAccount_").attr("style","display:");
+	}
+	
 	var custId = $("custId").val().trim();
 	var authId = $("authId").val().trim();
-	$("#updateMerchant #businessPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=02&authId="+authId);
+
+	$("#updateMerchant #businessPhotoImageDiv").show();
+	$("#updateMerchant #bankCardPhotoImageDiv").show();
+	$("#updateMerchant #certAttribute1ImageDiv").show();
+	$("#updateMerchant #certAttribute2ImageDiv").show();
+	$("#updateMerchant #openAccountImageDiv").show();
+	$("#updateMerchant #businessPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=07&authId="+authId);
+	$("#updateMerchant #bankCardPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=08&authId="+authId);
 	$("#updateMerchant #certAttribute1ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=0&authId="+authId);
 	$("#updateMerchant #certAttribute2ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=1&authId="+authId);
 	$("#updateMerchant #openAccountImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=03&authId="+authId);

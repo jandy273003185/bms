@@ -32,14 +32,32 @@
 </head>
 <script type="text/javascript">
 $(function() {
+	
+	if($("#custType").val() =='0' ||$("#custType").val() =='2' ){
+		//个人
+		$("#bankCardPhoto_").attr("style","display:");
+		$("#openAccount_").attr("style","display:none");
+	}
+	if($("#custType").val() =='1'){
+		//企业
+		$("#bankCardPhoto_").attr("style","display:none");
+		$("#openAccount_").attr("style","display:");
+	}
+	
 	var custId = $("custId").val().trim();
 	var authId = $("authId").val().trim();
-	$("#updateMerchant #businessPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=02&authId="+authId);
+
+	$("#updateMerchant #businessPhotoImageDiv").show();
+	$("#updateMerchant #bankCardPhotoImageDiv").show();
+	$("#updateMerchant #certAttribute1ImageDiv").show();
+	$("#updateMerchant #certAttribute2ImageDiv").show();
+	$("#updateMerchant #openAccountImageDiv").show();
+	$("#updateMerchant #businessPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=07&authId="+authId);
+	$("#updateMerchant #bankCardPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=08&authId="+authId);
 	$("#updateMerchant #certAttribute1ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=0&authId="+authId);
 	$("#updateMerchant #certAttribute2ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=1&authId="+authId);
 	$("#updateMerchant #openAccountImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=03&authId="+authId);
 
-	
 });
 
 /** 点击预览大图 **/
@@ -345,7 +363,7 @@ function exit() {
 								<td class="td-left">结算类型：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.compMainAcctType }</td>
 							</tr>
-                            <tr>
+                            <tr id="openAccount_" style="display: none">
 								<td class="td-left" >开户许可证：</td>
 								<td class="td-right" colspan="3"> 
 									<a data-toggle='modal' class="tooltip-success openAccountClick"  data-target="#previewImageModal" >
@@ -359,6 +377,21 @@ function exit() {
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
 																			
+								</td>
+							</tr>
+							<tr id="bankCardPhoto_">
+								<td class="td-left" >银行卡照<span style="color:red"></span></td>
+								<td class="td-right" > 
+									<a data-toggle='modal' class="tooltip-success bankCardPhotoClick"  data-target="#previewImageModal" >
+										<label id="bankCardPhotoDiv" class="uploadImage">  
+										        <img  id="bankCardPhotoImageDiv" style="width:100%;height:100%;display:none"/>
+										</label>
+									</a>
+									<div style="float:left;margin-top:75" >
+									<input type="file" name="bankCardPhoto" id="bankCardPhoto" onChange="showBankCardPhotoImage(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div>
+									
+									<label class="label-tips" id="bankCardPhotoLabel" style="float:left;margin-top:88"></label>
 								</td>
 							</tr>
                            <tr>

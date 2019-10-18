@@ -927,7 +927,7 @@ $('.bankCardPhotoClick').click(function(){
 																		
 							</td>
 						</tr> -->
-						<tr id="openAccount_" style="display: none">
+							<tr id="openAccount_" style="display: none">
 								<td class="td-left" >开户许可证</td>
 								<td class="td-right" > 
 									<a data-toggle='modal' class="tooltip-success openAccountClick"  data-target="#previewImageModal" >
