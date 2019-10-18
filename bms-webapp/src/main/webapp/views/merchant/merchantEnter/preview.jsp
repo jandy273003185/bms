@@ -84,7 +84,15 @@ function showCertAttribute2Image(obj){
 	 var imageObj = document.getElementById("certAttribute2ImageDiv");  
 	 return previewImage(divObj,imageObj,obj);  
 }
-
+function exit() {
+	if (confirm("您确定要关闭吗？")) {
+		window.opener=null;
+	
+		window.open("","_self");
+	
+		window.close();
+	}
+};
 </script>
 <body>
 	<%@ include file="/include/top.jsp"%>
@@ -329,10 +337,12 @@ function showCertAttribute2Image(obj){
 						    <tr></tr>
 								
 						</tbody></table>
-                        <div style="margin:50px 0 0 0;text-align:center"><button type="button"  class="btn btn-primary addMerchantBtn">保存</button> <button type="button"  class="btn btn-default">关闭</button> </div>
-							</div>
-						</div>
+                        <div style="margin:50px 0 0 0;text-align:center">
+                        	<button type="button"  class="btn btn-primary" onclick="exit()">关闭</button> 
+                        </div>
 					</div>
+				</div>
+			</div>
 					<!-- 图片预览 -->
 					<div class="modal fade" id="previewImageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					    <div class="modal-dialog showDiv" >

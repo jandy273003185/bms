@@ -3,6 +3,7 @@ package com.sevenpay.bms.basemanager.merchant.service;
 import com.sevenpay.bms.basemanager.acctsevenbuss.mapper.AcctSevenBussMapper;
 import com.sevenpay.bms.basemanager.bank.service.BankService;
 import com.sevenpay.bms.basemanager.custInfo.mapper.TdCustInfoMapper;
+import com.sevenpay.bms.basemanager.merchant.bean.MerchantExport;
 import com.sevenpay.bms.basemanager.merchant.bean.MerchantVo;
 import com.sevenpay.bms.basemanager.merchant.dao.MerchantDao;
 import com.sevenpay.bms.basemanager.merchant.mapper.*;
@@ -40,7 +41,8 @@ public class MerchantEnterService {
 
     @Autowired
     private MerchantMapper merchantMapper;
-
+    @Autowired
+    private MerchantEnterMapper merchantEnterMapper;
     @Autowired
     private CustScanMapper custScanMapper;
 
@@ -88,5 +90,15 @@ public class MerchantEnterService {
     public List<MerchantVo> selectAuditMerchants(MerchantVo merchantVo) {
         List<MerchantVo> list = dao.auditList2(merchantVo);
         return list;
+    }
+    
+    /**
+     * 导出商户信息
+     * 
+     * @param merchantVo
+     * @return
+     */
+    public List<MerchantExport> proExportMerchantInfo(MerchantVo merchantVo) {
+      return merchantEnterMapper.newExportlist(merchantVo);
     }
 }

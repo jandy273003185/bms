@@ -42,4 +42,8 @@ public final class MerchantEnterPath {
 	 * 产品查看
 	 */
 	public final static String PRODUCT = "/product";
+	/**
+	 * 导出报表
+	 */
+	public final static String PROEXPORTMERCHANTINFO ="/proExportMerchantInfo";
 }

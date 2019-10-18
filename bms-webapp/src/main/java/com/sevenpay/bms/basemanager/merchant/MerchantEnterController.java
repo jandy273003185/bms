@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.gyzb.platform.web.admin.user.bean.User;
 import org.gyzb.platform.web.admin.user.service.UserService;
 import org.gyzb.platform.web.admin.utils.WebUtils;
@@ -25,6 +27,7 @@ import com.sevenpay.bms.basemanager.custInfo.service.TdCustInfoService;
 import com.sevenpay.bms.basemanager.merchant.bean.BmsProtocolContent;
 import com.sevenpay.bms.basemanager.merchant.bean.CustScan;
 import com.sevenpay.bms.basemanager.merchant.bean.Merchant;
+import com.sevenpay.bms.basemanager.merchant.bean.MerchantExport;
 import com.sevenpay.bms.basemanager.merchant.bean.MerchantVo;
 import com.sevenpay.bms.basemanager.merchant.mapper.CustScanMapper;
 import com.sevenpay.bms.basemanager.merchant.mapper.MerchantMapper;
@@ -33,6 +36,9 @@ import com.sevenpay.bms.basemanager.merchant.service.MerchantService;
 import com.sevenpay.bms.basemanager.merchant.service.MerchantWorkFlowAuditService;
 import com.sevenpay.bms.basemanager.rule.bean.Rule;
 import com.sevenpay.bms.basemanager.rule.mapper.RuleMapper;
+import com.sevenpay.bms.basemanager.trade.service.DownLoadUtil;
+import com.sevenpay.bms.basemanager.trade.service.TradeBillService;
+import com.sevenpay.bms.basemanager.utils.DatetimeUtils;
 import com.sevenpay.bms.basemanager.utils.GenSN;
 import com.sevenpay.invoke.common.message.response.ResponseMessage;
 import com.sevenpay.invoke.common.type.RequestColumnValues;
@@ -68,7 +74,8 @@ public class MerchantEnterController {
 	private CustScanMapper custScanMapper;
 	@Autowired
 	private TdCustInfoMapper tdCustInfoMapper;
-
+	@Autowired
+	private TradeBillService tradeBillService;
 	/**
 	 * 显示商户列表
 	 * @param merchantVo
@@ -445,5 +452,38 @@ public class MerchantEnterController {
 		merchantService.addMerchant(custId, merchant, paths);
 	}
 
+	/**
+	 * 导出商户列表信息
+	 * 
+	 * @param requestBean
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping(MerchantPath.PROEXPORTMERCHANTINFO)
+	public void proExportExcel(MerchantVo merchantVo, HttpServletRequest request, HttpServletResponse response) {
+		logger.info("导出商户列表信息");
+
+		try {
+			List<MerchantExport> excels = merchantEnterService.proExportMerchantInfo(merchantVo);
+			/*
+			 * "证件类型，00身份证", "证件号",
+			 */
+
+			String[] headers = { "商户编号", "商户名称", "交易密码", "附加串", "错误密码次数",
+			"客户类型：0 个人1 企业", "商户状态", "账号", "商户标志：0 商户，1 非商户", "客户积分", "客户等级", "实名认证等级", "实名认证审核状态", "客户信息完整度，分几级：0、1",
+					"地址", "邮编", "营业执照编号（企业专用）", "税务登记证号（企业专用）", "法人证件类型（企业专用）", "法人证件号码（企业专用）", "法人名称（企业专用）",
+					"注册资本（企业专用）", "企业类型", "所属行业", "年营业额", "商户网站地址", "客户状态", "是否证书认证", "是否短信认证", "七分钱账户ID", "创建人",
+					"创建时间", "修改人", "修改时间", "营业期限", "营业执照注册所在地", "企业联系电话", "来往单位编号", "组织机构代码", "法人代表归属地", "法人手机",
+					"代理人真实姓名", "代理人身份证类型", "代理人身份证号码", "代理人手机号码", "公司对公账号", "公司对公账号所属行", "支付密码冻结时间", "公司汇款校验金额",
+					"支行信息", "银行开户名", "备注" };
+			String fileName = DatetimeUtils.dateSecond() + "_商户列表信息.xls";
+			Map<String, String> fileInfo = tradeBillService.exportExcel(excels, headers, fileName, "商户列表", request);
+			DownLoadUtil.downLoadFile(fileInfo.get("filePath"), response, fileInfo.get("fileName"), "xls");
+			logger.info("导出excel商户列表成功");
+		} catch (Exception e) {
+			logger.error("导出excel商户列表异常", e);
+			throw new RuntimeException(e);
+		}
+	}
 
 }

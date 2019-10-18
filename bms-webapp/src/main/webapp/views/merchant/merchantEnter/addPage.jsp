@@ -206,8 +206,8 @@ function selCustType(){
 	}
 	
 }
-$(".addMerchantBtn").click(function(){
-	hideLabel();
+function addMerchantBtn(){
+/* $(".addMerchantBtn").click(function(){ */
 	var businessTermEnd = "forever";
 	/*账号校验*/
 	if(isNull($("#merchantAccount")[0])){
@@ -513,7 +513,7 @@ $(".addMerchantBtn").click(function(){
 		}
 	});   
 	
-});
+}
 
 
 /********************图片预览***********************/
@@ -784,7 +784,7 @@ $('.bankCardPhotoClick').click(function(){
 								</label>
 								</a>
 								<div style="float:left;margin-top:75" >
-									<input type="file" name="certAttribute1" id="certAttribute1"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									<input type="file" name="certAttribute1" id="certAttribute1" onChange="showCertAttribute1Image(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 								</div>
 								<label class="label-tips" id="certAttribute1Label" style="float:left;margin-top:88"></label>
 							</td>
@@ -798,7 +798,7 @@ $('.bankCardPhotoClick').click(function(){
 									</label>
 								</a>
 								<div style="float:left;margin-top:75" >
-								<input type="file" name="certAttribute2" id="certAttribute2"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+								<input type="file" name="certAttribute2" id="certAttribute2" onChange="showCertAttribute2Image(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 								</div>
 								<label class="label-tips" id="certAttribute2Label" style="float:left;margin-top:88"></label>
 							</td>
@@ -916,7 +916,7 @@ $('.bankCardPhotoClick').click(function(){
 										</label>
 									</a>
 									<div style="float:left;margin-top:75" >
-									<input type="file" name="openAccount" id="openAccount"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									<input type="file" name="openAccount" id="openAccount" onChange="showOpenAccountImage(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
 									
 									<label class="label-tips" id="openAccountLabel" style="float:left;margin-top:88"></label>
@@ -931,14 +931,18 @@ $('.bankCardPhotoClick').click(function(){
 										</label>
 									</a>
 									<div style="float:left;margin-top:75" >
-									<input type="file" name="bankCardPhoto" id="bankCardPhoto"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									<input type="file" name="bankCardPhoto" id="bankCardPhoto" onChange="showBankCardPhotoImage(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
 									
 									<label class="label-tips" id="bankCardPhotoLabel" style="float:left;margin-top:88"></label>
 								</td>
 							</tr>
 						</tbody></table>
-                        <div style="margin:50px 0 0 0;text-align:center"><button type="button"  class="btn btn-primary addMerchantBtn">保存</button> <button type="button"  class="btn btn-default">关闭</button> </div>
+                        <div style="margin:50px 0 0 0;text-align:center">
+                        	<button type="button"  class="btn btn-primary addMerchantBtn" onclick="addMerchantBtn()">保存</button> 
+                        	<a href="<%=request.getContextPath()+MerchantEnterPath.BASE + MerchantEnterPath.LIST%>"  class="btn btn-default" >关闭</a>
+                        	<!-- <button type="button"  class="btn btn-default">关闭</button> --> 
+                        </div>
 							</div>
 						</div>
 					</div>

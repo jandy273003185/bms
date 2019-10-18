@@ -72,7 +72,7 @@ $(function(){
 		var email = $('.search-table #email').val();
 		var merchantState = $('.search-table #merchantState').val();
 		
-		var src ="<%= request.getContextPath()+ MerchantPath.BASE+MerchantPath.PROEXPORTMERCHANTINFO%>?merchantCode="+
+		var src ="<%= request.getContextPath()+ MerchantEnterPath.BASE+MerchantEnterPath.PROEXPORTMERCHANTINFO%>?merchantCode="+
 		merchantCode+
 		"&startCreateTime="+
 		startCreateTime+
@@ -90,31 +90,6 @@ $(function(){
 		
 	});
 	
-	$("#merchantDiv").draggable({ addClasses: false}); 
-	$("#showImageDiv").draggable({ addClasses: false});  
-	$("#updateMerchantClose").click(function(){
-		$("#merchantDiv").css({"left":"0px","top":"0px"});
-	});
-	$("#previewImageModal").click(function(){
-		$("#showImageDiv").css({"left":"0px","top":"0px"});
-	})
-	
-	$(".firstAuditNotPassBtn").click(function(){
-		$(".modal-backdrop").css("z-index","1042");
-		
-	})
-	$(".messageDefault").click(function(){
-		$(".modal-backdrop").css("z-index","1030");
-	})
-	$("#firstAuditMessageModel .close").click(function(){
-		$(".modal-backdrop").css("z-index","1030");
-	})
-	$(".secondAuditNotPassBtn").click(function(){
-		$(".modal-backdrop").css("z-index","1042");
-	})
-	$("#secondAuditMessageModel .close").click(function(){
-		$(".modal-backdrop").css("z-index","1030");
-	})	
 	
 	$("input[type=file]").each(
 	function() {
@@ -218,6 +193,20 @@ $(document).ready(function(){
 
 var winChild;
 /** 跳转预览页面 **/
+function addMerchantEntry(){
+	var url=window.Constants.ContextPath+"<%=MerchantEnterPath.BASE + MerchantEnterPath.ADD%>"; 
+    var name="newwindow";                        
+    var iWidth=1500;                          
+    var iHeight=600;                      
+    var iTop = (window.screen.availHeight-30-iHeight)/2;
+    var iLeft = (window.screen.availWidth-10-iWidth)/2;
+    var params='width='+iWidth
+           +',height='+iHeight
+           +',top='+iTop
+           +',left='+iLeft;
+  	winChild = window.open(url, name,params);
+}
+/** 跳转预览页面 **/
 function previewMerchantEntry(obj){
 	var merchantCode = $(obj).parent().find('input[name="merchantCode"]').val();
 	var custId = $(obj).parent().find('input[name="custId"]').val();
@@ -236,7 +225,7 @@ function previewMerchantEntry(obj){
 /** 跳转修改页面 **/
 function upadteMerchantEntry(obj){
 	var merchantCode = $(obj).parent().find('input[name="merchantCode"]').val();
-	var url=window.Constants.ContextPath+"<%=MerchantEnterPath.BASE + MerchantEnterPath.UPDATE%>?merchantCode="+merchantCode; 
+	var url=window.Constants.ContextPath+"<%=MerchantEnterPath.BASE + MerchantEnterPath.UPDATEPAGE%>?merchantCode="+merchantCode; 
     var name="newwindow";                        
     var iWidth=1500;                          
     var iHeight=600;                      
@@ -251,7 +240,7 @@ function upadteMerchantEntry(obj){
 /** 跳转审核页面  **/
 function aduitMerchantEntry(obj){
 	var merchantCode = $(obj).parent().find('input[name="merchantCode"]').val();
-	var url=window.Constants.ContextPath+"<%=MerchantEnterPath.BASE + MerchantEnterPath.AUDIT%>?merchantCode="+merchantCode; 
+	var url=window.Constants.ContextPath+"<%=MerchantEnterPath.BASE + MerchantEnterPath.AUDITPAGE%>?merchantCode="+merchantCode; 
     var name="newwindow";                        
     var iWidth=1500;                          
     var iHeight=600;                      
@@ -401,14 +390,13 @@ function productMerchantEntry(obj){
 						</form>
 							
 							<div style="margin:30px 0 10px 0">
-								<a href="<%=request.getContextPath()+MerchantEnterPath.BASE + MerchantEnterPath.ADDPAGE%>"  class="tooltip-success transactionLink" >
-									<button type="submit" class="btn btn-primary">新增</button>
-								</a>
-                               <!-- <button type="button"  class="btn btn-primary">新增</button> -->
+							   <a href="<%=request.getContextPath()+MerchantEnterPath.BASE + MerchantEnterPath.ADDPAGE%>"  class="btn btn-primary" >新增</a>
+							   <!-- <a href="#" class="btn btn-primary" onclick="addMerchantEntry()" data-rel="tooltip" data-toggle='modal'>新增</a> -->
                                <button type="button"  class="btn btn-primary">重置密码</button>
                                <button type="button"  class="btn btn-primary" disabled="disabled">批量审核资料</button>
                                <button type="button"  class="btn btn-primary" disabled="disabled">批量录入</button>
-                               <button type="button"  class="btn btn-primary">导出</button>
+                               <!-- <button type="button"  class="btn btn-primary exportBut">导出</button> -->
+							   <a class="btn btn-primary exportBut">导出</a> 
                                <button type="button"  class="btn btn-primary">打印二维码</button>
                             </div>
                             
@@ -503,8 +491,8 @@ function productMerchantEntry(obj){
 											</td> --%>
 											<td>${merchant.aduitUserName }</td>
 											<td>
-												<input type="hidden" name="merchant" value="${merchant.merchantCode }" />
-												<input type="hidden" name="custId"  id= "custId"value="${merchant.custId }" />
+												<input type="hidden" name="merchant" id = "merchantCode" value="${merchant.merchantCode }" />
+												<input type="hidden" name="custId"  id= "custId" value="${merchant.custId }" />
 												<gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.PREVIEW %>">
 													<a href="#" class="" onclick="previewMerchantEntry(this)" data-rel="tooltip" title="Query" data-toggle='modal'>
 														<button type="submit" class="btn btn-purple btn-sm">预览</button>
