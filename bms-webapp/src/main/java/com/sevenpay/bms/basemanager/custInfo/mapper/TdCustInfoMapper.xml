@@ -403,4 +403,28 @@
 		WHERE
 			t.role_code = 'DataQueryAuthority'
 	</select>
+
+	<select id="isAddMerchant" parameterType="string" resultType="string">
+		SELECT
+			*
+		FROM
+			(
+				SELECT
+					s.role_code
+				FROM
+					stcdb.sys_user_role ur
+				LEFT JOIN stcdb.sys_role s ON ur.role_id = s.role_id
+				WHERE
+					ur.user_id = #{userId,jdbcType=VARCHAR}
+			) t
+		WHERE
+			t.role_code = 'MarketPresident' or t.role_code = 'MarketVicePresident'
+	</select>
+
+	<select id="selectByMerchantCode" resultType="com.sevenpay.bms.basemanager.custInfo.bean.TdCustInfo" parameterType="java.lang.String" >
+		select
+		*
+		from td_cust_info
+		where MERCHANT_CODE = #{merchantCode,jdbcType=VARCHAR}
+	</select>
 </mapper>

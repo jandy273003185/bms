@@ -111,6 +111,9 @@ function showCertAttribute2Image(obj){
 						<input type="hidden" id="certAttribute2temp">
 						<input type="hidden" id="openAccounttemp" />
 						<input type="hidden" id="bankCardPhototemp" />
+						<input type="hidden" name="custId" id="custId" value="${merchantVo.custId}">
+						<input type="hidden" name="merchantCode" id="merchantCode" value="${merchantVo.merchantCode}">
+						<input type="hidden" name="authId" id="authId" value="${merchantVo.authId}">
                     <table id="merchant_table" class="list-table">
 						<tbody>
                          <tr>
@@ -119,9 +122,9 @@ function showCertAttribute2Image(obj){
 							</tr>
                             <tr>
 								<td class="td-left">商户账号：</td>
-								<td type="hidden" class="td-right" style="color:#666;padding:10px 8px" id="custId">${merchantVo.custId }</td>
+								<%-- <td type="hidden" class="td-right" style="color:#666;padding:10px 8px" id="custId"></td>
 								<td type="hidden" class="td-right" style="color:#666;padding:10px 8px" id="merchantCode">${merchantVo.merchantCode }</td>
-								<td type="hidden" class="td-right" style="color:#666;padding:10px 8px" id="authId">${merchantVo.authId }</td>
+								<td type="hidden" class="td-right" style="color:#666;padding:10px 8px" id="authId">${merchantVo.authId }</td> --%>
 								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.merchantCode }</td>
 							</tr>
                         <tr>
@@ -129,19 +132,30 @@ function showCertAttribute2Image(obj){
 						</tr>
 						<tr>
 							<td class="td-left">商户类型：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">企业</td>
+							<c:choose>   
+		                        <c:when test="${merchantVo.custType =='0'}">  									  
+		                            <td>个人</td>  								  
+		                        </c:when>  
+		  						<c:when test="${merchantVo.custType =='1'}">  									  
+		                            <td>企业</td>  								  
+		                        </c:when> 
+		                        <c:when test="${merchantVo.custType =='2'}">  									  
+		                            <td>个体户</td>  								  
+		                        </c:when>
+                             </c:choose>
+							<%-- <td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.custType }</td> --%>
 						</tr>
                         <tr>
-							    <td class="td-left"  width="18%">商户名称：</td>
-								<td class="td-right"  width="32%" style="color:#666;padding:10px 8px">${merchantVo.custName }</td>
-								<td class="td-left"  width="18%">商户简称：</td>
-								<td class="td-right"  width="32%" style="color:#666;padding:10px 8px">${merchantVo.shortName }</td>
+						    <td class="td-left"  width="18%">商户名称：</td>
+							<td class="td-right"  width="32%" style="color:#666;padding:10px 8px">${merchantVo.custName }</td>
+							<td class="td-left"  width="18%">商户简称：</td>
+							<td class="td-right"  width="32%" style="color:#666;padding:10px 8px">${merchantVo.shortName }</td>
 						</tr>
 						<tr>
-								<td class="td-left">商户邮箱：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.merchantEmail }</td>
-								<td class="td-left">客服号码：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.contactPhone }</td>
+							<td class="td-left">商户邮箱：</td>
+							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.merchantEmail }</td>
+							<td class="td-left">客服号码：</td>
+							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.contactPhone }</td>
 						 </tr>
 						     <tr>
 								<td class="td-left">商户地址：</td>
@@ -153,7 +167,15 @@ function showCertAttribute2Image(obj){
 								<td class="td-left">营业执照有限期：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
 									${merchantVo.businessTermStart } -
-                                    ${merchantVo.businessTermEnd } <input name="" type="radio" value=""> 长期
+									<c:choose>   
+				                        <c:when test="${merchantVo.businessTermEnd =='forever'}">  									  
+				                            	长期  								  
+				                        </c:when>  
+				  						<c:otherwise>  								  
+				                            ${merchantVo.businessTermEnd }  									  
+				                        </c:otherwise>
+		                             </c:choose>
+                                    <!--  <input name="" type="radio" value=""> 长期 -->
 								</td>
 							</tr>
 							<tr>

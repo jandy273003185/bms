@@ -17,6 +17,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
+import com.sevenpay.bms.basemanager.merchant.bean.*;
 import org.activiti.engine.IdentityService;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
@@ -45,14 +47,6 @@ import com.sevenpay.bms.basemanager.bank.bean.Bank;
 import com.sevenpay.bms.basemanager.bank.service.BankService;
 import com.sevenpay.bms.basemanager.custInfo.bean.TdCustInfo;
 import com.sevenpay.bms.basemanager.custInfo.mapper.TdCustInfoMapper;
-import com.sevenpay.bms.basemanager.merchant.bean.BmsProtocolContent;
-import com.sevenpay.bms.basemanager.merchant.bean.CustScan;
-import com.sevenpay.bms.basemanager.merchant.bean.Merchant;
-import com.sevenpay.bms.basemanager.merchant.bean.MerchantExport;
-import com.sevenpay.bms.basemanager.merchant.bean.MerchantVo;
-import com.sevenpay.bms.basemanager.merchant.bean.StoreManage;
-import com.sevenpay.bms.basemanager.merchant.bean.TdLoginUserInfo;
-import com.sevenpay.bms.basemanager.merchant.bean.TinyMerchantExport;
 import com.sevenpay.bms.basemanager.merchant.dao.MerchantDao;
 import com.sevenpay.bms.basemanager.merchant.mapper.BmsProtocolContentMapper;
 import com.sevenpay.bms.basemanager.merchant.mapper.CustScanMapper;
@@ -290,6 +284,48 @@ public class MerchantService {
 
   }
 
+  /**
+   * 保存商户登陆信息v2
+   */
+  public void saveLoginMerchant2(String custId, Merchant merchant) {
+
+    if (StringUtils.isEmpty(merchant.getMerchantAccount())) {
+      throw new IllegalArgumentException("手机号或邮箱为空");
+    }
+
+    // 设置附加串
+    String attachStr = GenSN.getRandomNum(5);
+
+    // 角色ID
+    String roleId = Constant.ROLE_ENT;
+    // 登陆状态
+    String state = Constant.LOGIN_STATE_AUDITORING;
+
+    User user = WebUtils.getUserInfo();
+    // 创建人ID
+    String createId = String.valueOf(user.getUserId());
+    TdLoginUserInfo userInfo = new TdLoginUserInfo();
+
+    if(merchant.getMerchantAccount().contains("@")){
+        //账号为邮箱
+        userInfo.setEmail(merchant.getMerchantAccount().toLowerCase());
+    }else {
+        userInfo.setMobile(merchant.getMerchantAccount().toLowerCase());
+    }
+    {
+      //userInfo.setEmail(merchant.getEmail().toLowerCase());
+      userInfo.setCustId(custId);
+      userInfo.setAttachStr(attachStr);
+      userInfo.setRoleId(roleId);
+      userInfo.setState(state);
+      userInfo.setCreateId(createId);
+      //userInfo.setMobile(merchant.getMobile());
+    }
+
+    this.saveLoginUserInfo(userInfo);
+
+  }
+
   /** 微商户保存登录信息 */
   public void saveLoginTinyMerchant(String email, String custId, Merchant merchant) {
     if (StringUtils.isBlank(email))
@@ -399,6 +435,56 @@ public class MerchantService {
 
     }
   }
+
+    /**
+     * 保存商户信息
+     */
+    public void saveMerchant2(Merchant merchant) {
+        logger.info("保存商户信息[{}]", JSONObject.toJSONString(merchant));
+
+        MerchantVo merchantVo = new MerchantVo();
+        merchantVo.setCustId(merchant.getCustId());
+        try {
+            /** 附加串，用于生成加密的交易密码 **/
+            String attachStr = GenSN.getRandomNum(5);
+            merchant.setAttachStr(attachStr);
+            /** 创建人 **/
+            String createId = String.valueOf(WebUtils.getUserInfo().getUserId());
+            merchant.setCreateId(createId);
+            /** 实名认证状态:审核中 **/
+            merchant.setTrustCertifyAuditState(Constant.TRUST_AUDIT_PASSING);// 后台注册标识
+            /** 客户类型 :企业 **/
+            //merchant.setCustType(Constant.CUST_TYPE_COMPANY);
+            /** 商户标识:商户 **/
+            merchant.setMerchantFlag(Constant.MERCHANT_FLAG_TRADE);
+            /** 客户状态:待审核 **/
+            merchant.setState(Constant.CUST_STATE_WAITINGVERIFY);
+            /** 等级 **/
+            merchant.setTrustCertifyLvl(Constant.MERCHANT_NO_CERTIFY);
+
+            merchantMapper.saveMerchant(merchant);
+
+            // 开通七分钱 获取七分钱内部Id
+            // ResponseMessage<CreateAccountResponse> response =
+            // this.getQfqId(merchant.getCustId());
+            ResponseMessage<CreateAcctSevenBussResponse> response =
+                    this.getBussQfqId(merchant.getCustId(), merchant.getCustName());
+
+            if (RtnResult.SUCCESS == response.getRtnResult()) {
+                merchantVo.setQfqAccId(response.getResponse().getAccId());
+            } else if (RtnResult.FAILURE == response.getRtnResult()) {
+                merchantVo.setState(Constant.CUST_STATE_LOGOUT);
+            } else {
+                merchantVo.setState(Constant.CUST_STATE_LOGOUT);
+            }
+            merchantMapper.updateMerchant(merchantVo);
+            logger.info("商户信息保存成功");
+        } catch (Exception e) {
+            logger.error("商户信息保存异常", e);
+            throw e;
+
+        }
+    }
 
   /** 保存微商户信息 */
   public void saveTinyMerchant(Merchant merchant) {
@@ -1034,6 +1120,13 @@ public class MerchantService {
     this.saveCertificateAuth(custId);
   }
 
+  @Transactional
+  public void addMerchant(String custId, Merchant merchant, String paths) {
+    this.saveLoginMerchant2(custId, merchant);
+    // ruleService.saveFee(custId, feeCode);
+    this.saveMerchant2(merchant);
+    this.saveCertificateAuth(custId);
+  }
   /** 微商户注册，带事务操作 */
   @Transactional
   public void saveTinyMerchantRegist(String email, String custId, Merchant merchant,
@@ -1430,6 +1523,30 @@ public class MerchantService {
 
   }
 
+  public void updateMerchantEnter(MerchantVo merchantVo) {
+    if (null == merchantVo) {
+      throw new IllegalArgumentException("商户对象为空");
+    }
+
+    try {
+      if (null != merchantVo.getCustName()) {
+        merchantMapper.updateAcctNameByCustName(merchantVo);
+      }
+      if (StringUtils.isEmpty(merchantVo.getMerchantCode())) {
+        merchantVo.setMerchantCode("M" + merchantVo.getBusinessLicense());
+      }
+
+      //merchantMapper.updateMerchantLoginInfo(merchantVo);
+      merchantMapper.updateByPrimaryKeySelective(merchantVo);
+
+      merchantMapper.updateMerchant(merchantVo);
+    } catch (Exception e) {
+      logger.error("修改异常", e);
+      throw e;
+    }
+
+  }
+
   @Transactional
   public void updateMerchantAndFeeRule(MerchantVo merchantVo, Map<String, String> filePath) {
 
@@ -1457,6 +1574,21 @@ public class MerchantService {
       // }
 
       workSpaceService.updateCustScanInfo(merchantVo.getCustId(), merchantVo, filePath);
+
+    } catch (Exception e) {
+      throw e;
+    }
+  }
+
+  @Transactional
+  public void updateMerchantEnterAndFeeRule(MerchantVo merchantVo, Map<String, String> filePath) {
+
+    try {
+      // 更新商户信息
+      //updateMerchant(merchantVo);
+      updateMerchantEnter(merchantVo);
+      workSpaceService.updateCustScanInfo(merchantVo.getCustId(), merchantVo, filePath);
+      workSpaceService.updateEnterCustScanInfo(merchantVo.getCustId(), merchantVo, filePath);
 
     } catch (Exception e) {
       throw e;

@@ -14,7 +14,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>商户录入添加</title>
+	<title>商户注册</title>
 	<meta name="keywords" content="七分钱后台管理系统" />
 	<meta name="description" content="七分钱后台管理" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -349,8 +349,6 @@ $(".addMerchantBtn").click(function(){
 		$("#bankAcctName").focus();
 		return false;
 	}
-	/*开户省份*/
-	/*开户城市*/
 	/*网点号*/
 	if(isNull($("#cnaps")[0])){
 		$("#cnapseLab").text("请填写银联号");
@@ -804,9 +802,9 @@ $('.bankCardPhotoClick').click(function(){
 							<td class="td-left">开户省份：<span style="color:red;">（必填)</span></td>
 							<td class="td-right"> 
 								<select class="width-90" id="bankProvinceName" onchange="getBankCityList();">
-	                                   <c:if test="${not empty provincelist }">
+	                                   <c:if test="${not empty provincelist_ }">
                                         	<option value="">--请选择--</option>
-						               <c:forEach items="${provincelist }" var="prov">
+						               <c:forEach items="${provincelist_ }" var="prov">
 						                   <option value="${prov.provinceId}">${prov.provinceName}</option>
 						               </c:forEach>
 		               				</c:if>

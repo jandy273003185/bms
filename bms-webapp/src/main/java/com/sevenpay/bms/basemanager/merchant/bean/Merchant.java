@@ -14,6 +14,11 @@ public class Merchant implements Serializable
 	 */
 	private static final long serialVersionUID = -2131395679153030392L;
 
+	/**
+	 * 客户账号， 
+	 */
+	private String merchantAccount;
+
 	/** 
 	 * 客户编号，与登录表的客户编号一样.
 	 */
@@ -25,16 +30,56 @@ public class Merchant implements Serializable
 	private String merchantCode;
 
 	/** 
-	 * 客户名称.
+	 * 客户名称. main9
 	 */
 	private String custName;
 	
 	/** 
-	 * 客户简称.
+	 * 客户简称. mian9
 	 */
 	private String shortName;
 
-	/** 
+    /**
+     * 商户邮箱，1mian9
+     */
+    private String merchantEmail;
+
+    /**
+     * 所属业务人员 客户经理 mian9
+     */
+    private String custManager;
+
+    /**
+     * 联系人姓名 1 mian 9
+     */
+    private String contactName;
+
+    /**
+     *联系人电话 1 mian9 新加字段
+     */
+    private String contactMobile;
+
+	/**
+	 * 开户省 1 mian 9
+	 */
+	private String bankProvinceName;
+
+	/**
+	 *开户市 1 mian9 新加字段
+	 */
+	private String bankCityName;
+    /**
+     * 网点号
+     */
+    private String cnaps;
+
+
+    /**
+     * 结算类型 mian 新加字段
+     */
+    private String compMainAcctType;
+
+    /**
 	 * 交易密码.
 	 */
 	private String tradePwd;
@@ -50,7 +95,7 @@ public class Merchant implements Serializable
 	private String certifyNo;
 
 	/** 
-	 * 客户类型：0 个人1 企业.
+	 * 客户类型：0 个人1 企业. mian9
 	 */
 	private String custType;
 
@@ -94,7 +139,7 @@ public class Merchant implements Serializable
 	private String custInfoLvl;
 	
 	/** 
-	 * 地址.
+	 * 地址. mian9
 	 */
 	private String custAdd;
 
@@ -104,7 +149,7 @@ public class Merchant implements Serializable
 	private String custPostCode;
 
 	/** 
-	 * 营业执照编号（企业专用）.
+	 * 营业执照编号（企业专用）. mian9
 	 */
 	private String businessLicense;
 	
@@ -114,12 +159,12 @@ public class Merchant implements Serializable
 	private String businessRegAddr;
 	
 	/**
-	 * 营业期限
+	 * 营业期限 mian9
 	 */
 	private String businessTerm;
 	
 	/**
-	 * 企业联系电话
+	 * 企业联系电话 mian9
 	 */
 	private String contactPhone;
 	
@@ -139,12 +184,12 @@ public class Merchant implements Serializable
 	private String representativeCertType;
 
 	/** 
-	 * 法人证件号码（企业专用）.
+	 * 法人证件号码（企业专用）. mian9
 	 */
 	private String representativeCertNo;
 
 	/** 
-	 * 法人名称（企业专用）.
+	 * 法人名称（企业专用）. mian9
 	 */
 	private String representativeName;
 	
@@ -159,7 +204,7 @@ public class Merchant implements Serializable
 	private String representativeAddr;
 	
 	/**
-	 * 代理人真实姓名
+	 * 代理人真实姓名 mian9所属代理商
 	 */
 	private String agentName;
 	
@@ -179,7 +224,7 @@ public class Merchant implements Serializable
 	private String agentMobile;
 	
 	/**
-	 * 公司对公账号
+	 * 公司对公账号 mian9
 	 */
 	private String compMainAcct;
 	
@@ -272,11 +317,11 @@ public class Merchant implements Serializable
 	private String feeCode;
 
 	/**
-	 * 对公账号支行信息
+	 * 对公账号支行信息 mina9
 	 */
 	private String branchBank;
 	/**
-	 * 银行开户名
+	 * 银行开户名 mian9
 	 */
 	private String bankAcctName;
 	
@@ -306,17 +351,17 @@ public class Merchant implements Serializable
 	private String mchRole;
 	
 	/**
-	 * 省份
+	 * 省份 mian9
 	 */
 	private String province;
 	
 	/**
-	 * 城市
+	 * 城市 mian9
 	 */
 	private String city;
 	
 	/**
-	 * 区县
+	 * 区县 mian9
 	 */
 	private String country;
 	
@@ -324,11 +369,156 @@ public class Merchant implements Serializable
 	 * 身份证有效日期
 	 */
 	private String certNoValidDate;
-	
-	
-	
-	
-	
+	private String filingStatus;
+	private String filingAuditStatus;
+
+	private Short wrongPwdCount;
+
+
+	private String dfAccId;
+
+
+	private Date pwdFreezeTime;
+
+
+	private String comment;
+
+	private Integer authId;
+
+	private String agentFlag;
+
+	private Date dfCreateTime;
+
+	private String isClear;
+
+	private String businessScope;
+
+	private String merchantMobile;
+
+	private String registerWay;
+
+	public String getBankProvinceName() {
+		return bankProvinceName;
+	}
+
+	public void setBankProvinceName(String bankProvinceName) {
+		this.bankProvinceName = bankProvinceName;
+	}
+
+	public String getBankCityName() {
+		return bankCityName;
+	}
+
+	public void setBankCityName(String bankCityName) {
+		this.bankCityName = bankCityName;
+	}
+
+	public Short getWrongPwdCount() {
+		return wrongPwdCount;
+	}
+
+	public void setWrongPwdCount(Short wrongPwdCount) {
+		this.wrongPwdCount = wrongPwdCount;
+	}
+
+	public String getDfAccId() {
+		return dfAccId;
+	}
+
+	public void setDfAccId(String dfAccId) {
+		this.dfAccId = dfAccId;
+	}
+
+	public Date getPwdFreezeTime() {
+		return pwdFreezeTime;
+	}
+
+	public void setPwdFreezeTime(Date pwdFreezeTime) {
+		this.pwdFreezeTime = pwdFreezeTime;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public Integer getAuthId() {
+		return authId;
+	}
+
+	public void setAuthId(Integer authId) {
+		this.authId = authId;
+	}
+
+	public String getAgentFlag() {
+		return agentFlag;
+	}
+
+	public void setAgentFlag(String agentFlag) {
+		this.agentFlag = agentFlag;
+	}
+
+	public Date getDfCreateTime() {
+		return dfCreateTime;
+	}
+
+	public void setDfCreateTime(Date dfCreateTime) {
+		this.dfCreateTime = dfCreateTime;
+	}
+
+	public String getIsClear() {
+		return isClear;
+	}
+
+	public void setIsClear(String isClear) {
+		this.isClear = isClear;
+	}
+
+	public String getBusinessScope() {
+		return businessScope;
+	}
+
+	public void setBusinessScope(String businessScope) {
+		this.businessScope = businessScope;
+	}
+
+	public String getMerchantMobile() {
+		return merchantMobile;
+	}
+
+	public void setMerchantMobile(String merchantMobile) {
+		this.merchantMobile = merchantMobile;
+	}
+
+	public String getRegisterWay() {
+		return registerWay;
+	}
+
+	public void setRegisterWay(String registerWay) {
+		this.registerWay = registerWay;
+	}
+
+
+
+	public String getFilingStatus() {
+		return filingStatus;
+	}
+
+	public void setFilingStatus(String filingStatus) {
+		this.filingStatus = filingStatus;
+	}
+
+	public String getFilingAuditStatus() {
+		return filingAuditStatus;
+	}
+
+	public void setFilingAuditStatus(String filingAuditStatus) {
+		this.filingAuditStatus = filingAuditStatus;
+	}
+
 	public String getShortName() {
 		return shortName;
 	}
@@ -436,48 +626,64 @@ public class Merchant implements Serializable
 		this.modifyTime = modifyTime;
 	}
 
-	public Merchant(String custId, String custName, String tradePwd, String certifyType, String certifyNo, String custType, String merchantFlag, Long custScore, String custLvl,
-			Short trustCertifyLvl, String custAdd, String custPostCode, String businessLicense, String taxRegCert, String representativeCertType, String representativeCertNo,
-			String representativeName, BigDecimal regCapital, String entType, String industryBelong, BigDecimal yearTurnover, String merchantWebSite, String state, String isUseCertification,
-			String isUseMsg, String createId, Date createTime, String modifyId, Date modifyTime, String attachStr, String qfqAccId, String qfbAccId,String feeCode)
-	{
-		this.custId = custId;
-		this.custName = custName;
-		this.tradePwd = tradePwd;
-		this.certifyType = certifyType;
-		this.certifyNo = certifyNo;
-		this.custType = custType;
-		this.merchantFlag = merchantFlag;
-		this.custScore = custScore;
-		this.custLvl = custLvl;
-		this.trustCertifyLvl = trustCertifyLvl;
-		this.custAdd = custAdd;
-		this.custPostCode = custPostCode;
-		this.businessLicense = businessLicense;
-		this.taxRegCert = taxRegCert;
-		this.representativeCertType = representativeCertType;
-		this.representativeCertNo = representativeCertNo;
-		this.representativeName = representativeName;
-		this.regCapital = regCapital;
-		this.entType = entType;
-		this.industryBelong = industryBelong;
-		this.yearTurnover = yearTurnover;
-		this.merchantWebSite = merchantWebSite;
-		this.state = state;
-		this.isUseCertification = isUseCertification;
-		this.isUseMsg = isUseMsg;
-		this.createId = createId;
-		this.createTime = createTime;
-		this.modifyId = modifyId;
-		this.modifyTime = modifyTime;
-		this.attachStr = attachStr;
-		this.qfqAccId = qfqAccId;
-		this.qfbAccId = qfbAccId;
-		this.feeCode=feeCode;
-	}
-	
-	
-	public String getMerchantCode() {
+    public String getMerchantAccount() {
+        return merchantAccount;
+    }
+
+    public void setMerchantAccount(String merchantAccount) {
+        this.merchantAccount = merchantAccount;
+    }
+
+    public String getMerchantEmail() {
+        return merchantEmail;
+    }
+
+    public void setMerchantEmail(String merchantEmail) {
+        this.merchantEmail = merchantEmail;
+    }
+
+    public String getCustManager() {
+        return custManager;
+    }
+
+    public void setCustManager(String custManager) {
+        this.custManager = custManager;
+    }
+
+    public String getContactName() {
+        return contactName;
+    }
+
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
+    }
+
+    public String getContactMobile() {
+        return contactMobile;
+    }
+
+    public void setContactMobile(String contactMobile) {
+        this.contactMobile = contactMobile;
+    }
+
+    public String getCnaps() {
+        return cnaps;
+    }
+
+    public void setCnaps(String cnaps) {
+        this.cnaps = cnaps;
+    }
+
+    public String getCompMainAcctType() {
+        return compMainAcctType;
+    }
+
+    public void setCompMainAcctType(String compMainAcctType) {
+        this.compMainAcctType = compMainAcctType;
+    }
+
+
+    public String getMerchantCode() {
 		return merchantCode;
 	}
 
@@ -949,5 +1155,181 @@ public class Merchant implements Serializable
 	public void setFcontactunitNumber(String fcontactunitNumber) {
 		this.fcontactunitNumber = fcontactunitNumber;
 	}
-	
+
+	public Merchant(String merchantAccount, String custId, String merchantCode, String custName, String shortName, String merchantEmail, String custManager, String contactName, String contactMobile, String provinceName, String cityName, String cnaps, String compMainAcctType, String tradePwd, String certifyType, String certifyNo, String custType, String merchantFlag, Long custScore, String custLvl, Short trustCertifyLvl, String trustCertifyAuditState, String custInfoLvl, String custAdd, String custPostCode, String businessLicense, String businessRegAddr, String businessTerm, String contactPhone, String orgInstCode, String taxRegCert, String representativeCertType, String representativeCertNo, String representativeName, String representativeMobile, String representativeAddr, String agentName, String agentCertType, String agentCertCode, String agentMobile, String compMainAcct, String compAcctBank, String compVerifyAmt, BigDecimal regCapital, String entType, String industryBelong, BigDecimal yearTurnover, String merchantWebSite, String state, String isUseCertification, String isUseMsg, String createId, Date createTime, String modifyId, Date modifyTime, String attachStr, String qfqAccId, String qfbAccId, String feeCode, String branchBank, String bankAcctName, String fcontactunitNumber, String openAddressRec, String mobile, String businessTermStart, String businessTermEnd, String roleId, String categoryType, String mchRole, String province, String city, String country, String certNoValidDate, String filingStatus, String filingAuditStatus, Short wrongPwdCount, String dfAccId, Date pwdFreezeTime, String comment, Integer authId, String agentFlag, Date dfCreateTime, String isClear, String businessScope, String merchantMobile, String registerWay) {
+		this.merchantAccount = merchantAccount;
+		this.custId = custId;
+		this.merchantCode = merchantCode;
+		this.custName = custName;
+		this.shortName = shortName;
+		this.merchantEmail = merchantEmail;
+		this.custManager = custManager;
+		this.contactName = contactName;
+		this.contactMobile = contactMobile;
+		this.cnaps = cnaps;
+		this.compMainAcctType = compMainAcctType;
+		this.tradePwd = tradePwd;
+		this.certifyType = certifyType;
+		this.certifyNo = certifyNo;
+		this.custType = custType;
+		this.merchantFlag = merchantFlag;
+		this.custScore = custScore;
+		this.custLvl = custLvl;
+		this.trustCertifyLvl = trustCertifyLvl;
+		this.trustCertifyAuditState = trustCertifyAuditState;
+		this.custInfoLvl = custInfoLvl;
+		this.custAdd = custAdd;
+		this.custPostCode = custPostCode;
+		this.businessLicense = businessLicense;
+		this.businessRegAddr = businessRegAddr;
+		this.businessTerm = businessTerm;
+		this.contactPhone = contactPhone;
+		this.orgInstCode = orgInstCode;
+		this.taxRegCert = taxRegCert;
+		this.representativeCertType = representativeCertType;
+		this.representativeCertNo = representativeCertNo;
+		this.representativeName = representativeName;
+		this.representativeMobile = representativeMobile;
+		this.representativeAddr = representativeAddr;
+		this.agentName = agentName;
+		this.agentCertType = agentCertType;
+		this.agentCertCode = agentCertCode;
+		this.agentMobile = agentMobile;
+		this.compMainAcct = compMainAcct;
+		this.compAcctBank = compAcctBank;
+		this.compVerifyAmt = compVerifyAmt;
+		this.regCapital = regCapital;
+		this.entType = entType;
+		this.industryBelong = industryBelong;
+		this.yearTurnover = yearTurnover;
+		this.merchantWebSite = merchantWebSite;
+		this.state = state;
+		this.isUseCertification = isUseCertification;
+		this.isUseMsg = isUseMsg;
+		this.createId = createId;
+		this.createTime = createTime;
+		this.modifyId = modifyId;
+		this.modifyTime = modifyTime;
+		this.attachStr = attachStr;
+		this.qfqAccId = qfqAccId;
+		this.qfbAccId = qfbAccId;
+		this.feeCode = feeCode;
+		this.branchBank = branchBank;
+		this.bankAcctName = bankAcctName;
+		this.fcontactunitNumber = fcontactunitNumber;
+		this.openAddressRec = openAddressRec;
+		this.mobile = mobile;
+		this.businessTermStart = businessTermStart;
+		this.businessTermEnd = businessTermEnd;
+		this.roleId = roleId;
+		this.categoryType = categoryType;
+		this.mchRole = mchRole;
+		this.province = province;
+		this.city = city;
+		this.country = country;
+		this.certNoValidDate = certNoValidDate;
+		this.filingStatus = filingStatus;
+		this.filingAuditStatus = filingAuditStatus;
+		this.wrongPwdCount = wrongPwdCount;
+		this.dfAccId = dfAccId;
+		this.pwdFreezeTime = pwdFreezeTime;
+		this.comment = comment;
+		this.authId = authId;
+		this.agentFlag = agentFlag;
+		this.dfCreateTime = dfCreateTime;
+		this.isClear = isClear;
+		this.businessScope = businessScope;
+		this.merchantMobile = merchantMobile;
+		this.registerWay = registerWay;
+	}
+
+	@Override
+	public String toString() {
+		return "Merchant{" +
+				"merchantAccount='" + merchantAccount + '\'' +
+				", custId='" + custId + '\'' +
+				", merchantCode='" + merchantCode + '\'' +
+				", custName='" + custName + '\'' +
+				", shortName='" + shortName + '\'' +
+				", merchantEmail='" + merchantEmail + '\'' +
+				", custManager='" + custManager + '\'' +
+				", contactName='" + contactName + '\'' +
+				", contactMobile='" + contactMobile + '\'' +
+				", cnaps='" + cnaps + '\'' +
+				", compMainAcctType='" + compMainAcctType + '\'' +
+				", tradePwd='" + tradePwd + '\'' +
+				", certifyType='" + certifyType + '\'' +
+				", certifyNo='" + certifyNo + '\'' +
+				", custType='" + custType + '\'' +
+				", merchantFlag='" + merchantFlag + '\'' +
+				", custScore=" + custScore +
+				", custLvl='" + custLvl + '\'' +
+				", trustCertifyLvl=" + trustCertifyLvl +
+				", trustCertifyAuditState='" + trustCertifyAuditState + '\'' +
+				", custInfoLvl='" + custInfoLvl + '\'' +
+				", custAdd='" + custAdd + '\'' +
+				", custPostCode='" + custPostCode + '\'' +
+				", businessLicense='" + businessLicense + '\'' +
+				", businessRegAddr='" + businessRegAddr + '\'' +
+				", businessTerm='" + businessTerm + '\'' +
+				", contactPhone='" + contactPhone + '\'' +
+				", orgInstCode='" + orgInstCode + '\'' +
+				", taxRegCert='" + taxRegCert + '\'' +
+				", representativeCertType='" + representativeCertType + '\'' +
+				", representativeCertNo='" + representativeCertNo + '\'' +
+				", representativeName='" + representativeName + '\'' +
+				", representativeMobile='" + representativeMobile + '\'' +
+				", representativeAddr='" + representativeAddr + '\'' +
+				", agentName='" + agentName + '\'' +
+				", agentCertType='" + agentCertType + '\'' +
+				", agentCertCode='" + agentCertCode + '\'' +
+				", agentMobile='" + agentMobile + '\'' +
+				", compMainAcct='" + compMainAcct + '\'' +
+				", compAcctBank='" + compAcctBank + '\'' +
+				", compVerifyAmt='" + compVerifyAmt + '\'' +
+				", regCapital=" + regCapital +
+				", entType='" + entType + '\'' +
+				", industryBelong='" + industryBelong + '\'' +
+				", yearTurnover=" + yearTurnover +
+				", merchantWebSite='" + merchantWebSite + '\'' +
+				", state='" + state + '\'' +
+				", isUseCertification='" + isUseCertification + '\'' +
+				", isUseMsg='" + isUseMsg + '\'' +
+				", createId='" + createId + '\'' +
+				", createTime=" + createTime +
+				", modifyId='" + modifyId + '\'' +
+				", modifyTime=" + modifyTime +
+				", attachStr='" + attachStr + '\'' +
+				", qfqAccId='" + qfqAccId + '\'' +
+				", qfbAccId='" + qfbAccId + '\'' +
+				", feeCode='" + feeCode + '\'' +
+				", branchBank='" + branchBank + '\'' +
+				", bankAcctName='" + bankAcctName + '\'' +
+				", fcontactunitNumber='" + fcontactunitNumber + '\'' +
+				", openAddressRec='" + openAddressRec + '\'' +
+				", mobile='" + mobile + '\'' +
+				", businessTermStart='" + businessTermStart + '\'' +
+				", businessTermEnd='" + businessTermEnd + '\'' +
+				", roleId='" + roleId + '\'' +
+				", categoryType='" + categoryType + '\'' +
+				", mchRole='" + mchRole + '\'' +
+				", province='" + province + '\'' +
+				", city='" + city + '\'' +
+				", country='" + country + '\'' +
+				", certNoValidDate='" + certNoValidDate + '\'' +
+				", filingStatus='" + filingStatus + '\'' +
+				", filingAuditStatus='" + filingAuditStatus + '\'' +
+				", wrongPwdCount=" + wrongPwdCount +
+				", dfAccId='" + dfAccId + '\'' +
+				", pwdFreezeTime=" + pwdFreezeTime +
+				", comment='" + comment + '\'' +
+				", authId=" + authId +
+				", agentFlag='" + agentFlag + '\'' +
+				", dfCreateTime=" + dfCreateTime +
+				", isClear='" + isClear + '\'' +
+				", businessScope='" + businessScope + '\'' +
+				", merchantMobile='" + merchantMobile + '\'' +
+				", registerWay='" + registerWay + '\'' +
+				'}';
+	}
 }

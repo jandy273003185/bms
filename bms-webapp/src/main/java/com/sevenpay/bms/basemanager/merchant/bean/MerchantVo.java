@@ -12,6 +12,11 @@ public class MerchantVo implements Serializable {
 	private static final long serialVersionUID = -1977088279003048575L;
 
 	/**
+	 * 客户账号， main9
+	 */
+	private String merchantAccount;
+
+	/**
 	 * 客户编号，与登录表的客户编号一样.
 	 */
 	private String custId;
@@ -24,6 +29,44 @@ public class MerchantVo implements Serializable {
 	 * 客户名称.
 	 */
 	private String custName;
+
+	/**
+	 * 客户简称. mian9
+	 */
+	private String shortName;
+
+	
+
+	/**
+	 * 商户邮箱，1mian9
+	 */
+	private String merchantEmail;
+
+	/**
+	 * 所属业务人员 客户经理 mian9
+	 */
+	private String custManager;
+
+	/**
+	 * 联系人姓名 1 mian 9
+	 */
+	private String contactName;
+
+	/**
+	 *联系人电话 1 mian9 新加字段
+	 */
+	private String contactMobile;
+
+	/**
+	 * 网点号
+	 */
+	private String cnaps;
+
+
+	/**
+	 * 结算类型 mian 新加字段
+	 */
+	private String compMainAcctType;
 
 	/**
 	 * 交易密码.
@@ -293,8 +336,7 @@ public class MerchantVo implements Serializable {
 
 	/**
 	 * 登陆状态
-	 * 
-	 * @return
+	 *
 	 */
 
 	private String loginState;
@@ -315,12 +357,12 @@ public class MerchantVo implements Serializable {
 	private String workFlowStatus;
 	
 	/**
-	 * 审核信息
+	 * 审核信息 1
 	 */
 	private String aduitMessage;
 	
 	/**
-	 * 审核人
+	 * 审核人  1
 	 */
 	private String aduitUserName;
 	
@@ -335,8 +377,7 @@ public class MerchantVo implements Serializable {
 	private String bankCardName;
 	
 	private String bankCardNo;
-	
-	private String custManager;
+
 	
 	private String agentRate;
 	
@@ -372,8 +413,84 @@ public class MerchantVo implements Serializable {
 	private String custManagerName;
 	//商户所属服务商名字
 	private String facilitatorName;
+	//开户银行省份
+	private String bankProvinceName;
+	//开户银行城市
+	private String bankCityName;
 	
 	
+	
+	public String getBankProvinceName() {
+		return bankProvinceName;
+	}
+
+	public void setBankProvinceName(String bankProvinceName) {
+		this.bankProvinceName = bankProvinceName;
+	}
+
+	public String getBankCityName() {
+		return bankCityName;
+	}
+
+	public void setBankCityName(String bankCityName) {
+		this.bankCityName = bankCityName;
+	}
+
+	public String getMerchantAccount() {
+		return merchantAccount;
+	}
+
+	public void setMerchantAccount(String merchantAccount) {
+		this.merchantAccount = merchantAccount;
+	}
+
+	public String getShortName() {
+		return shortName;
+	}
+
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
+	}
+
+	public String getMerchantEmail() {
+		return merchantEmail;
+	}
+
+	public void setMerchantEmail(String merchantEmail) {
+		this.merchantEmail = merchantEmail;
+	}
+
+	public String getContactName() {
+		return contactName;
+	}
+
+	public void setContactName(String contactName) {
+		this.contactName = contactName;
+	}
+
+	public String getContactMobile() {
+		return contactMobile;
+	}
+
+	public void setContactMobile(String contactMobile) {
+		this.contactMobile = contactMobile;
+	}
+
+	public String getCnaps() {
+		return cnaps;
+	}
+
+	public void setCnaps(String cnaps) {
+		this.cnaps = cnaps;
+	}
+
+	public String getCompMainAcctType() {
+		return compMainAcctType;
+	}
+
+	public void setCompMainAcctType(String compMainAcctType) {
+		this.compMainAcctType = compMainAcctType;
+	}
 
 	public String getFacilitatorName() {
 		return facilitatorName;

@@ -10,6 +10,7 @@ public class AgentRegisterPath {
 	/** 窄化请求 */ 				public final static String BASE = 						"/basemanager/agency";  
 	/** 注册页面 */					public final static String REGISTPAGE =					"/registPage"; 
 	/** 注册 */					public final static String REGISTER = 					"/register"; 
+	/** 注册 */					public final static String REGISTERENTER = 					"/registerEnter";
 	/** 图片上传 */					public final static String FILEUPLOAD=					"/fileUpload";
 	/** 校验邮件地址是否被占用 */		public final static String VALIDATEEMAIL = 			    "/validateemail"; 
 	/** 预览代理商图片信息 */			public final static String PREVIEWAGENTIMAGE = 	        "/previewAgentImage"; 

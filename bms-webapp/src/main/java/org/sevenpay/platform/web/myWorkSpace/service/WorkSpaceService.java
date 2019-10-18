@@ -128,7 +128,7 @@ public class WorkSpaceService {
 	
 	/**
 	 * 修改证件信息
-	 * @param paths
+	 * @param
 	 * @param custId
 	 */
 	public void updateCustScanInfo(String custId ,MerchantVo merchant,Map<String,String> fileNames){
@@ -190,6 +190,72 @@ public class WorkSpaceService {
 			throw e;
 		}
 		
+	}
+
+	/**
+	 * 修改证件信息
+	 * @param
+	 * @param custId
+	 */
+	public void updateEnterCustScanInfo(String custId ,MerchantVo merchant,Map<String,String> fileNames){
+		if(StringUtils.isEmpty(custId)){
+			throw new IllegalArgumentException("商户ID为空");
+		}
+		logger.info("修改商户证件信息[{}]",JSONObject.toJSONString(merchant));
+		String businessType = fileNames.get("businessType");
+		String doorPhoto = fileNames.get("doorPhoto");
+		String doorFlag = fileNames.get("doorFlag");
+		String certAttributeType1 = fileNames.get("certAttributeType1");
+		String idCardType_1 = fileNames.get("idCardType_1");
+		String idCardType_2 = fileNames.get("idCardType_2");
+
+		Properties p = PropertiesUtil.getProperties();
+		String cf_path = p.getProperty("CF_FILE_SAVE_PATH");
+		try {
+			/**
+			 * 更新营业执照
+			 */
+			if(!StringUtils.isEmpty(businessType)){
+				this.updateScanPath(custId,Constant.CERTIFY_TYPE_BUSINESS,cf_path + File.separator + Constant.CERTIFY_TYPE_BUSINESS+File.separator+custId+File.separator+businessType,merchant.getCustName(),merchant.getBusinessLicense());
+			}
+
+			/**
+			 * 更新门头照
+			 */
+			if("true".equals(doorFlag)){
+				this.updateScanPath(custId,Constant.CERTIFY_TYPE_MERCHANT_DOORID,doorPhoto,merchant.getCustName(),null);
+			}
+
+			/**
+			 * 更新开户证件
+			 */
+			if(!StringUtils.isEmpty(certAttributeType1)){
+				this.updateScanPath(custId,Constant.CERTIFY_TYPE_OPEN,cf_path + File.separator + Constant.CERTIFY_TYPE_OPEN+File.separator+custId+File.separator+certAttributeType1,merchant.getCustName(),merchant.getCompMainAcct());
+			}
+			CustScan custScan = new CustScan();
+			custScan.setCustId(custId);
+			custScan.setCertifyType( Constant.CERTIFY_TYPE_MERCHANT_IDCARD);
+			String idcardPath = custScanMapper.findPathByIdAndType(custScan);
+			String path[] = idcardPath.split(";");
+			String idCard_1= path[0];
+			if(!StringUtils.isEmpty(idCardType_1)){
+				idCard_1=cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_IDCARD+File.separator+custId+File.separator+idCardType_1;
+			}
+			String idCard_2 =path[1];
+			if(!StringUtils.isEmpty(idCardType_2)){
+				idCard_2=cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_IDCARD+File.separator+custId+File.separator+idCardType_2;
+			}
+			idcardPath = idCard_1+";"+idCard_2;
+			/**
+			 * 更新身份证件
+			 */
+			this.updateScanPath(custId,Constant.CERTIFY_TYPE_MERCHANT_IDCARD,idcardPath,merchant.getCustName(),merchant.getRepresentativeCertNo());
+
+		} catch (Exception e) {
+			logger.error("更新证件信息异常",e);
+			throw e;
+		}
+
 	}
 	/**
 	 * 修改商户信息事物

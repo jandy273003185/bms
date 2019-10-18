@@ -172,7 +172,6 @@ $(function(){
 	    	       	  				} 
 	    	       	  				//$("#custAdd").val(json.legalAddress);
 	    	       	  				$("#businessRegAddr").val(json.legalAddress);
-	    	       	  			
 	    	       	  			} 
 	    	   				}
 	    	   			}
@@ -212,7 +211,7 @@ $(document).ready(function(){
 			$.gyzbadmin.alertFailure("结束日期不能小于开始日期");
 			return false;
 		}
-		var form = $('#merchantForm');
+		var form = $('#merchantEnterForm');
 		form.submit();
 	});
 });	
@@ -221,7 +220,8 @@ var winChild;
 /** 跳转预览页面 **/
 function previewMerchantEntry(obj){
 	var merchantCode = $(obj).parent().find('input[name="merchantCode"]').val();
-	var url=window.Constants.ContextPath+"<%=MerchantEnterPath.BASE + MerchantEnterPath.PREVIEW%>?merchantCode="+merchantCode; 
+	var custId = $(obj).parent().find('input[name="custId"]').val();
+	var url=window.Constants.ContextPath+"<%=MerchantEnterPath.BASE + MerchantEnterPath.PREVIEW%>?custId="+custId; 
     var name="newwindow";                        
     var iWidth=1500;                          
     var iHeight=600;                      
@@ -404,17 +404,12 @@ function productMerchantEntry(obj){
 								<a href="<%=request.getContextPath()+MerchantEnterPath.BASE + MerchantEnterPath.ADDPAGE%>"  class="tooltip-success transactionLink" >
 									<button type="submit" class="btn btn-primary">新增</button>
 								</a>
-                               <button type="button"  class="btn btn-primary">新增</button>
+                               <!-- <button type="button"  class="btn btn-primary">新增</button> -->
                                <button type="button"  class="btn btn-primary">重置密码</button>
                                <button type="button"  class="btn btn-primary" disabled="disabled">批量审核资料</button>
                                <button type="button"  class="btn btn-primary" disabled="disabled">批量录入</button>
                                <button type="button"  class="btn btn-primary">导出</button>
                                <button type="button"  class="btn btn-primary">打印二维码</button>
-                               <gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.PREVIEW %>">
-									<a href="#" class="" onclick="previewMerchantEntry(this)" data-rel="tooltip" title="Query" data-toggle='modal'>
-										<button type="submit" class="btn btn-purple btn-sm">预览</button>
-									</a>
-								</gyzbadmin:function>
                             </div>
                             
 							<div class="list-table-header">商户列表</div>
@@ -464,7 +459,7 @@ function productMerchantEntry(obj){
 							                        </c:when>
 	                                            </c:choose>
 											</td>
-											<td>${merchant.auditState }
+											<td>
 												<c:choose>   
 							                        <c:when test="${merchant.auditState =='0'}">  									  
 							                                                                              审核通过  								  
@@ -509,6 +504,7 @@ function productMerchantEntry(obj){
 											<td>${merchant.aduitUserName }</td>
 											<td>
 												<input type="hidden" name="merchant" value="${merchant.merchantCode }" />
+												<input type="hidden" name="custId"  id= "custId"value="${merchant.custId }" />
 												<gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.PREVIEW %>">
 													<a href="#" class="" onclick="previewMerchantEntry(this)" data-rel="tooltip" title="Query" data-toggle='modal'>
 														<button type="submit" class="btn btn-purple btn-sm">预览</button>

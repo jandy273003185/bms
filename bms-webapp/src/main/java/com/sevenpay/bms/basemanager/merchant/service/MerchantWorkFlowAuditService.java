@@ -195,6 +195,77 @@ public class MerchantWorkFlowAuditService {
 		}
 		
 	}
+
+	/**
+	 * 启动工作流并完成任务
+	 * @param custId
+	 */
+	public void startProcessAndCompleteTaskEnter(String custId,String isPass,String message){
+
+		if(StringUtils.isEmpty(custId)){
+			throw new IllegalArgumentException("商户ID为空！");
+		}
+
+		try {
+			/**
+			 * 启动流程
+			 */
+			identityService.setAuthenticatedUserId(String.valueOf(WebUtils.getUserInfo().getUserId()));
+			ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("proMerchantAudit");
+
+			/**
+			 * 获取当前任务
+			 */
+			Task task = taskService.createTaskQuery().processInstanceId(processInstance.getId()).singleResult();
+
+			/**
+			 * 签收任务
+			 */
+			taskService.claim(task.getId(), WebUtils.getUserInfo().getUserCode());
+
+			Map<String, Object> auditVar = new LinkedHashMap<String, Object>();
+
+			if("1".equals(isPass)){
+				auditVar.put("firstPass", "true");
+
+			}else{
+				auditVar.put("firstPass", "false");
+			}
+
+			/**
+			 * 完成任务
+			 */
+			taskService.complete(task.getId(),auditVar);
+
+			/**
+			 * 绑定工作流与业务
+			 */
+
+			ActWorkflowMerchantAudit auditBean = new ActWorkflowMerchantAudit();
+			auditBean.setProcInstId(processInstance.getId());
+			auditBean.setMerchantid(custId);
+			auditBean.setMessage(message);
+			auditBean.setAuditer(String.valueOf(WebUtils.getUserInfo().getUserId()));
+			if("1".equals(isPass)){
+				auditBean.setStatus("01");//01 一级审核通过
+				this.updateCustNumberEnter(custId, null);
+			}else{
+				auditBean.setStatus("03");//03审核不通过
+			}
+			ActWorkflowMerchantAudit audit =  actWorkflowMerchantAuditMapper.selectListByMerchantId(custId);
+			if(audit!= null){
+				actWorkflowMerchantAuditHistoryMapper.insert(audit);
+				actWorkflowMerchantAuditMapper.updateByPrimaryKey(auditBean);
+			}else{
+				actWorkflowMerchantAuditMapper.insert(auditBean);
+			}
+
+		} catch (Exception e) {
+			logger.error("完成任务异常",e);
+			throw e;
+		}
+
+	}
 	
 	/**
 	 * 二级审核
@@ -254,7 +325,26 @@ public class MerchantWorkFlowAuditService {
 		}
 		tdCustInfoMapper.updateInfo(custInfo);
 	}
-	
+
+	/**
+	 * 保存来往编号
+	 * @param custId
+	 */
+	public void updateCustNumberEnter(String custId,String status){
+		if(StringUtils.isEmpty(custId)){
+			throw new IllegalArgumentException("商户ID为空！");
+		}
+		TdCustInfo custInfo = new TdCustInfo();
+
+		custInfo.setModifyId(String.valueOf(WebUtils.getUserInfo().getUserId()));
+		custInfo.setCustId(custId);
+		custInfo.setState(status);
+		//if(null!=isClear && !isClear.equals("")){
+		//	custInfo.setIsClear(isClear);
+		//}
+		tdCustInfoMapper.updateInfo(custInfo);
+	}
+
 	/**
 	 * 保存 费率
 	 * @param number
@@ -411,4 +501,47 @@ public class MerchantWorkFlowAuditService {
 		}
 		
 	}
+
+	/**
+	 * 二级审核
+	 * @param custId
+	 * @param isPass
+	 * @param authId
+	 * @param message
+	 * @param certifiyStatus
+	 * @param auditStatus
+	 */
+	@Transactional
+	public void secondAuditEnter(String custId,
+								 boolean isPass,
+								 String authId,
+								 String message,
+								 String certifiyStatus,
+								 String auditStatus,
+								 String trustCertifyLvl,
+								 String empty){
+		/**
+		 * 完成流程任务
+		 */
+		this.secondTask(custId, isPass,message);
+		/**
+		 * 录入商户认证状态
+		 * @param custId
+		 * @param status
+		 */
+		this.updateCertifiyStatus(custId, certifiyStatus,trustCertifyLvl,empty);
+		/**
+		 * 录入商户审核状态
+		 */
+		this.updateAuditStatus(authId, message, auditStatus);
+
+		if(isPass){
+			this.updateLoginInfo(custId, Constant.LOGIN_STATE_AGREEMENTING);
+			this.updateCustNumberEnter(custId, "00");
+		}else{
+			this.updateCustNumberEnter(custId, "04");
+		}
+
+	}
+
 }

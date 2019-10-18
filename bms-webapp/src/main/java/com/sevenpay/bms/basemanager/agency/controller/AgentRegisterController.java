@@ -136,6 +136,72 @@ public class AgentRegisterController {
 		return object.toJSONString();
 	}
 
+	/** 代理商注册 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(AgentRegisterPath.REGISTERENTER)
+	@ResponseBody
+	public String registerEnter(HttpServletRequest request, Merchant merchant) {
+		logger.info("================= 代理商注册开始 =================");
+		JSONObject object = new JSONObject();
+		try {
+			String email = request.getParameter("email"); 	// 邮箱
+			//判断邮箱是否已被注册
+			TdLoginUserInfo loginInfo = agentRegisterService.selectLoginUserInfoByEmail(email, "","agent");
+			if (null != loginInfo) {
+				object.put("result", "FAIL");
+				object.put("message", "邮箱已被注册，请重新输入");
+				return object.toJSONString();
+			}
+
+			String mobile = merchant.getRepresentativeMobile(); 	// 邮箱
+			//判断手机号是否已被注册
+			TdLoginUserInfo loginInfo1 = agentRegisterService.selectLoginUserInfoByMobile(mobile,"agent");
+			if (null != loginInfo1) {
+				object.put("result", "FAIL");
+				object.put("message", "手机号已被注册，请重新输入");
+				return object.toJSONString();
+			}
+
+			merchant.setRoleId("agent");
+
+		/*	int num = agentRegisterService.selectLoginUserInfoByCardId(merchant.getCertifyNo(), merchant.getRoleId());
+			if (num > 0 ) {
+				object.put("result", "FAIL");
+				object.put("message", "身份证已被注册，请重新输入");
+				return object.toJSONString();
+			} */
+			if(merchant.getBusinessLicense()==null||"".equals(merchant.getBusinessLicense())){
+
+			}else{
+				//判断营业执照是否被注册
+				TdCustInfo cust =  agentRegisterService.selectCustInfoByLicense(merchant.getBusinessLicense(),"agent");
+				if (null != cust ) {
+					object.put("result", "FAIL");
+					object.put("message", "营业执照已被注册，请重新输入");
+					return object.toJSONString();
+				}
+			}
+
+			if("1".equals(merchant.getCustType())){
+				merchant.setMerchantCode(SequenceUtils.getMerchantSeqNo("C"));
+			}else{
+				merchant.setMerchantCode(SequenceUtils.getMerchantSeqNo("P"));
+			}
+			//merchant.setMerchantCode("M"+GenSN.getRandomNum(15));//生成商户编号：M***************
+			Map<String, String> custScanMap = (Map<String, String>) request.getSession().getAttribute("custScanMap");
+			merchant.setFcontactunitNumber("1000073");//往来单位编号
+			agentRegisterService.saveAgentRegist(email, merchant.getCustId(),merchant,custScanMap);
+			object.put("result", "SUCCESS");
+			object.put("message", "注册成功");
+			logger.info("================= 代理商注册成功 =================");
+		} catch (Exception e) {
+			logger.error("注册失败", e);
+			object.put("result", "fail");
+			object.put("message", e.getMessage());
+		}
+		return object.toJSONString();
+	}
+
 	/** 文件上传 */
 	@RequestMapping(AgentRegisterPath.FILEUPLOAD)
 	@ResponseBody
