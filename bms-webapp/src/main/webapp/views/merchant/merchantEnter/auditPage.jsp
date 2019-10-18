@@ -168,6 +168,7 @@ function noPass(){
 						<input type="hidden" id="certAttribute2temp">
 						<input type="hidden" id="openAccounttemp" />
 						<input type="hidden" id="bankCardPhototemp" />
+						<input type="hidden" name="merchant" id = "merchantCode" value="${merchant.merchantCode }" />
 	                    <table id="merchant_table" class="list-table">
 							<tbody>
 	                        
@@ -177,7 +178,7 @@ function noPass(){
 							</tr>
                             <tr>
 								<td class="td-left">商户账号：</td>
-								<td type="hidden" class="td-right" style="color:#666;padding:10px 8px" id="merchantCode">${merchantVo.merchantCode }</td>
+								
 								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.merchantCode }</td>
 							</tr>
                         <tr>
@@ -345,7 +346,6 @@ function noPass(){
 							</tr>
 							</tbody>
 						</table>
-                        <div style="margin:50px 0 0 0;text-align:center">
                         	<button type="button"  class="btn btn-primary" onclick="pass()">审核通过</button> 
                         	<button type="button" class="btn btn-primary auditNotPassBtn" data-toggle='modal'  data-target="#auditMessageModel" >审核不通过</button>
                         	<button type="button"  class="btn btn-default">关闭</button> 

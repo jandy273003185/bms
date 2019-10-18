@@ -268,6 +268,33 @@ public class MerchantEnterController {
 		return object.toJSONString();
 	}
 
+	/**
+     * 审核页面
+      */
+    @RequestMapping(MerchantEnterPath.AUDITPAGE)
+    @ResponseBody
+    public ModelAndView auditPage(MerchantVo merchantVo) {
+        logger.info("查找商户信息");
+        JSONObject jsonObject = new JSONObject();
+		ModelAndView mv = new ModelAndView();
+		MerchantVo merchant = merchantService.findMerchantInfo(merchantVo.getCustId());
+        List<BmsProtocolContent> contents = merchantService.selectContentByCustId(merchantVo.getCustId());
+
+        if (null != contents && contents.size() > 0) {
+
+            jsonObject.put("bmsProtocolContent", contents.get(0));
+        }
+        //查询商户门头照信息
+        //String path = auditorService.findScanPath(merchantVo.getCustId(), "08",merchantVo.getAuthId());
+        //获取二维码
+		String qrCode = getQrCode(merchantVo);
+		mv.addObject("merchantVo", merchant);
+		//预览返回的二维码信息
+		mv.addObject("qrCode", qrCode);
+		//mv.addObject("path", path);
+		return mv;
+    }
+
     /**
      * 一级审核通过
      */
@@ -396,7 +423,7 @@ public class MerchantEnterController {
 		JSONObject object = new JSONObject();
 		Map<String,String> resultMap = new HashMap<String,String>();
 		String last_page = "/agent/merchantSuccess.jsp";
-		String error_msg = "查询代理商信息有误";
+		String error_msg = "查询商户信息有误";
 		try {
 			//获取商户编号
 			TdCustInfo tdCustInfo = tdCustInfoMapper.selectById(merchantVo.getMerchantCode());
@@ -427,8 +454,8 @@ public class MerchantEnterController {
 				}
 
 			}else{
-				error_msg = "查询代理商信息有误：商户编号为空";
-				logger.error("查询代理商信息有误：商户编号为空");
+				error_msg = "查询商户信息有误：商户编号为空";
+				logger.error("查询商户信息有误：商户编号为空");
 			}
 
 

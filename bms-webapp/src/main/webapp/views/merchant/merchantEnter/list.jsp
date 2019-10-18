@@ -240,7 +240,8 @@ function upadteMerchantEntry(obj){
 /** 跳转审核页面  **/
 function aduitMerchantEntry(obj){
 	var merchantCode = $(obj).parent().find('input[name="merchantCode"]').val();
-	var url=window.Constants.ContextPath+"<%=MerchantEnterPath.BASE + MerchantEnterPath.AUDITPAGE%>?merchantCode="+merchantCode; 
+	var custId = $(obj).parent().find('input[name="custId"]').val();
+	var url=window.Constants.ContextPath+"<%=MerchantEnterPath.BASE + MerchantEnterPath.AUDITPAGE%>?custId="+custId; 
     var name="newwindow";                        
     var iWidth=1500;                          
     var iHeight=600;                      
@@ -416,7 +417,7 @@ function productMerchantEntry(obj){
                                             <!-- <th>报备状态</th>
                                             <th>报备审核状态</th> -->
 											<th width="10%">审核人</th>									
-											<th width="23%">操作</th>
+											<th width="28%">操作</th>
 										</tr>
 									</thead>
 									<tbody>
