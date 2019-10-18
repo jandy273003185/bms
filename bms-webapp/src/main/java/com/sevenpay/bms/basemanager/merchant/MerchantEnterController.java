@@ -213,7 +213,7 @@ public class MerchantEnterController {
     public ModelAndView updatePage(MerchantVo merchantVo) {
         logger.info("查找商户信息");
         JSONObject jsonObject = new JSONObject();
-		ModelAndView mv = new ModelAndView(MerchantEnterPath.BASE + MerchantEnterPath.PREVIEW);
+		ModelAndView mv = new ModelAndView(MerchantEnterPath.BASE + MerchantEnterPath.UPDATEPAGE);
 		MerchantVo merchant = merchantService.findMerchantInfo(merchantVo.getCustId());
         List<BmsProtocolContent> contents = merchantService.selectContentByCustId(merchantVo.getCustId());
 
@@ -276,7 +276,7 @@ public class MerchantEnterController {
     public ModelAndView auditPage(MerchantVo merchantVo) {
         logger.info("查找商户信息");
         JSONObject jsonObject = new JSONObject();
-		ModelAndView mv = new ModelAndView();
+		ModelAndView mv = new ModelAndView(MerchantEnterPath.BASE + MerchantEnterPath.AUDITPAGE);
 		MerchantVo merchant = merchantService.findMerchantInfo(merchantVo.getCustId());
         List<BmsProtocolContent> contents = merchantService.selectContentByCustId(merchantVo.getCustId());
 
