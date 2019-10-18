@@ -492,7 +492,7 @@ function productMerchantEntry(obj){
 											</td> --%>
 											<td>${merchant.aduitUserName }</td>
 											<td>
-												<input type="hidden" name="merchant" id = "merchantCode" value="${merchant.merchantCode }" />
+												<input type="hidden" name="merchantCode" id = "merchantCode" value="${merchant.merchantCode }" />
 												<input type="hidden" name="custId"  id= "custId" value="${merchant.custId }" />
 												<gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.PREVIEW %>">
 													<a href="#" class="" onclick="previewMerchantEntry(this)" data-rel="tooltip" title="Query" data-toggle='modal'>
