@@ -30,7 +30,68 @@
 	</style>
 </head>
 <script type="text/javascript">
-
+$(function(){
+	
+	$("input[type=file]").each(
+			function() {
+				var _this = $(this);
+				_this.localResizeIMG({
+					quality : 0.8,
+					success : function(result,file) {
+						
+						var att = pre.substr(pre.lastIndexOf("."));
+						//压缩后图片的base64字符串
+						var base64_string = result.clearBase64;
+						
+						$('#'+_this.attr('id')+'temp').val(att+","+base64_string);
+						//图片预览
+			             var imgObj = $('#'+_this.attr('id')+'ImageDiv');
+			             imgObj.attr("src", "data:image/jpeg;base64," + base64_string).show(); 
+			             var width = result.width;
+			             var height = result.height;
+			             var scale =  width/height;
+			             if(width >800){
+			             width = 800;
+			             height = width / scale;
+			             }
+			             $(".showDiv").width(width+"px");
+			             $(".showDiv").height(height+"px");
+			             
+			             
+			           //优图
+			             var param = "{str:\""+base64_string+"\",flag:\""+_this.attr('id')+"\"}"
+			    		 $.ajax({
+			    	   			async:false,
+			    	   			type:"POST",
+			    	   			contentType:"application/json;charset=utf-8",
+			    	   			dataType:"text",
+			    	   			url:window.Constants.ContextPath +'<%=AgentRegisterPath.BASE + AgentRegisterPath.YOUTU%>',
+			    	   	        data:param,
+			    	   	        success:function(data){
+			    	   	      		var json = eval('(' + data + ')');
+			    	   	        	if(json.result=="SUCCESS"){
+			    	   	        		 if(_this.attr('id')=="certAttribute1"){//身份證
+			    	       	  				$("#representativeName").val(json.cardName);
+			    	       	  				$("#representativeCertNo").val(json.cardId);
+			    	       	  			}else if(_this.attr('id')=="businessPhoto"){//营业执照
+			    	       	  				$("#businessLicense").val(json.businessLicense);
+			    	       	  				$("#businessTerm").val(json.businessTermStart);
+			    	       	  				if("长期"==json.businessTermEnd){
+			    	       	  					$("input[value='forever']").click();
+			    	       	  				}else{
+			    	       	  					$("#businessTermEnd").val(json.businessTermEnd);
+			    	       	  				}
+			    	       	  				/* $("#businessRegAddr").val(json.legalAddress); */
+			    	       	  				$("#custAdd").val(json.legalAddress);
+			    	       	  				
+			    	       	  			} 
+			    	   				}
+			    	   			}
+			    	   		});
+					}
+				});
+			});
+});
 function getBankCityList()
 {
 	var provVal = $("#province").val().trim();
