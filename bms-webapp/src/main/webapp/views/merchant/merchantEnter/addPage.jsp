@@ -517,6 +517,26 @@ function addMerchantBtn(){
 
 
 /********************图片预览***********************/
+ 
+ 
+/** 点击预览大图 **/
+function bigImg(obj){
+    /* $('#showImageDiv #showImage').attr("src",obj.src); */
+    var realWidth;
+	var realHeight
+	$('#showImageDiv #showImage').attr("src",obj.src).load(function(){
+		realWidth = this.width;
+		realHeight = this.height;
+		var scale =  realWidth/realHeight;
+		if(realWidth >800){
+			realWidth = 800;
+			realHeight = realWidth / scale;
+		}
+		$("#imageDiv").css("width",realWidth+"px").css("height",realHeight+"px");
+	});
+}
+
+
 /** 营业执照预览 **/
 function showBusinessPhotoImage(obj){  
 	 var divObj = document.getElementById("businessPhotoDiv");  

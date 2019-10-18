@@ -218,7 +218,14 @@ function exit() {
 								<td class="td-left">营业执照有限期：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
 									${merchantVo.businessTermStart } -
-                                    ${merchantVo.businessTermEnd } <input name="" type="radio" value=""> 长期
+                                    <c:choose>   
+				                        <c:when test="${merchantVo.businessTermEnd =='forever'}">  									  
+				                            	长期  								  
+				                        </c:when>  
+				  						<c:otherwise>  								  
+				                            ${merchantVo.businessTermEnd }  									  
+				                        </c:otherwise>
+		                             </c:choose>
 								</td>
 							</tr>
 							<tr>
@@ -357,7 +364,7 @@ function exit() {
                         <div style="margin:50px 0 0 0;text-align:center">
                         	<button type="button"  class="btn btn-primary" onclick="pass()">审核通过</button> 
                         	<button type="button" class="btn btn-primary auditNotPassBtn" data-toggle='modal'  data-target="#auditMessageModel" >审核不通过</button>
-                        	<button type="button"  class="btn btn-primary" onclick="exit()">关闭</button> 
+                        	<button type="button"  class="btn btn-default" onclick="exit()">关闭</button> 
 						</div>
 					</div>
 				</div>

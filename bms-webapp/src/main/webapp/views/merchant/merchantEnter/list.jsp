@@ -225,7 +225,8 @@ function previewMerchantEntry(obj){
 /** 跳转修改页面 **/
 function upadteMerchantEntry(obj){
 	var merchantCode = $(obj).parent().find('input[name="merchantCode"]').val();
-	var url=window.Constants.ContextPath+"<%=MerchantEnterPath.BASE + MerchantEnterPath.UPDATEPAGE%>?merchantCode="+merchantCode; 
+	var custId = $(obj).parent().find('input[name="custId"]').val();
+	var url=window.Constants.ContextPath+"<%=MerchantEnterPath.BASE + MerchantEnterPath.UPDATEPAGE%>?custId="+custId; 
     var name="newwindow";                        
     var iWidth=1500;                          
     var iHeight=600;                      
@@ -256,6 +257,7 @@ function aduitMerchantEntry(obj){
 /** 跳转产品页面  **/
 function productMerchantEntry(obj){
 	var merchantCode = $(obj).parent().find('input[name="merchantCode"]').val();
+	var custId = $(obj).parent().find('input[name="custId"]').val();
 	var url=window.Constants.ContextPath+"<%=MerchantEnterPath.BASE + MerchantEnterPath.PRODUCT%>?merchantCode="+merchantCode; 
     var name="newwindow";                        
     var iWidth=1500;                          

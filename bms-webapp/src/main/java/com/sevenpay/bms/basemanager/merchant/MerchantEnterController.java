@@ -194,6 +194,15 @@ public class MerchantEnterController {
 
             jsonObject.put("bmsProtocolContent", contents.get(0));
         }
+        Bank bank = new Bank();
+		Rule rule = new Rule();
+		User user = new User();
+		rule.setStatus("VALID");
+		mv.addObject("banklist", bankMapper.selectBanks(bank));
+		mv.addObject("rulelist", ruleMapper.selectRules(rule));
+		mv.addObject("userlist", userService.getUserList(user));
+		mv.addObject("provincelist", cityService.selectAllProvince());
+		mv.addObject("provincelist_", cityService.selAllProvince());
         //查询商户门头照信息
         //String path = auditorService.findScanPath(merchantVo.getCustId(), "08",merchantVo.getAuthId());
         //获取二维码
@@ -221,13 +230,22 @@ public class MerchantEnterController {
 
             jsonObject.put("bmsProtocolContent", contents.get(0));
         }
+        Bank bank = new Bank();
+		Rule rule = new Rule();
+		User user = new User();
+		rule.setStatus("VALID");
+		mv.addObject("banklist", bankMapper.selectBanks(bank));
+		mv.addObject("rulelist", ruleMapper.selectRules(rule));
+		mv.addObject("userlist", userService.getUserList(user));
+		mv.addObject("provincelist", cityService.selectAllProvince());
+		mv.addObject("provincelist_", cityService.selAllProvince());
         //查询商户门头照信息
         //String path = auditorService.findScanPath(merchantVo.getCustId(), "08",merchantVo.getAuthId());
         //获取二维码
-		String qrCode = getQrCode(merchantVo);
+//		String qrCode = getQrCode(merchantVo);
 		mv.addObject("merchantVo", merchant);
 		//预览返回的二维码信息
-		mv.addObject("qrCode", qrCode);
+//		mv.addObject("qrCode", qrCode);
 		//mv.addObject("path", path);
 		return mv;
     }
@@ -462,7 +480,7 @@ public class MerchantEnterController {
 		} catch (Exception e) {
 			resultMap.put("last_page", last_page);
 			resultMap.put("errMag",error_msg );
-			logger.error("查询代理商信息有误==========="+e);
+			logger.error("查询商户信息有误==========="+e);
 			e.printStackTrace();
 		}
 

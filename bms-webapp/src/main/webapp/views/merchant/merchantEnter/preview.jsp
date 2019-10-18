@@ -59,31 +59,81 @@ function bigImg(obj){
 	});
 }
 
-
-//图片预览
+/********************图片预览***********************/
+/** 营业执照预览 **/
 function showBusinessPhotoImage(obj){  
 	 var divObj = document.getElementById("businessPhotoDiv");  
-	 var imageObj = document.getElementById("businessPhotoImageDiv");  
-	 return previewImage(divObj,imageObj,obj);  
+	 var imageObj = document.getElementById("businessPhotoImage"); 
+	 var result1 = previewImage(divObj,imageObj,obj);
+	 return result1;
 }
-
-function showopenAccountImage(obj){  
-	 var divObj = document.getElementById("openAccountDiv");  
-	 var imageObj = document.getElementById("openAccountImageDiv");  
-	 return previewImage(divObj,imageObj,obj);  
-}
-
+/** 营业执照点击预览 **/
+$('.businessPhotoClick').click(function(){
+	var divObj = document.getElementById("showImageDiv");
+	var imageObj = document.getElementById("showImage");
+	var obj = document.getElementById("businessPhoto"); 
+	return previewImage(divObj,imageObj,obj); 
+});  
+/** 身份证正面预览 **/
 function showCertAttribute1Image(obj){  
 	 var divObj = document.getElementById("certAttribute1Div");  
-	 var imageObj = document.getElementById("certAttribute1ImageDiv");  
-	 return previewImage(divObj,imageObj,obj);  
+	 var imageObj = document.getElementById("certAttribute1Image");
+	 var result1 = previewImage(divObj,imageObj,obj);
+	 return result1;  
 }
-
+/** 身份证正面点击预览 **/
+$('.certAttribute1Click').click(function(){
+	var divObj = document.getElementById("showImageDiv");
+	var imageObj = document.getElementById("showImage");
+	var obj = document.getElementById("certAttribute1");
+	return previewImage(divObj,imageObj,obj); 
+});
+/** 身份证背面预览 **/
 function showCertAttribute2Image(obj){  
 	 var divObj = document.getElementById("certAttribute2Div");  
-	 var imageObj = document.getElementById("certAttribute2ImageDiv");  
-	 return previewImage(divObj,imageObj,obj);  
+	 var imageObj = document.getElementById("certAttribute2Image");  
+	 var result1 = previewImage(divObj,imageObj,obj);
+	 return result1;  
 }
+/** 身份证背面点击预览 **/
+$('.certAttribute2Click').click(function(){
+	var divObj = document.getElementById("showImageDiv");
+	var imageObj = document.getElementById("showImage");
+	var obj = document.getElementById("certAttribute2");
+	return previewImage(divObj,imageObj,obj); 
+});
+
+/** 开户许可证预览 **/
+function showOpenAccountImage(obj){  
+	 var divObj = document.getElementById("openAccountDiv");  
+	 var imageObj = document.getElementById("openAccountImage");  
+	 var result1 = previewImage(divObj,imageObj,obj);
+	 return result1;  
+}
+/** 开户许可证背面点击预览 **/
+$('.openAccountClick').click(function(){
+	var divObj = document.getElementById("showImageDiv");
+	var imageObj = document.getElementById("showImage");
+	var obj = document.getElementById("openAccount");
+	return previewImage(divObj,imageObj,obj); 
+});
+
+/** 银行卡预览 **/
+function showBankCardPhotoImage(obj){  
+	 var divObj = document.getElementById("bankCardPhotoDiv");  
+	 var imageObj = document.getElementById("bankCardPhotoImage");  
+	 var result1 = previewImage(divObj,imageObj,obj);
+	 return result1;  
+}
+/** 银行卡点击预览 **/
+$('.bankCardPhotoClick').click(function(){
+	var divObj = document.getElementById("showImageDiv");
+	var imageObj = document.getElementById("showImage");
+	var obj = document.getElementById("bankCardPhoto");
+	return previewImage(divObj,imageObj,obj); 
+});
+
+
 function exit() {
 	if (confirm("您确定要关闭吗？")) {
 		window.opener=null;
