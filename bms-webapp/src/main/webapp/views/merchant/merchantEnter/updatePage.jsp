@@ -95,8 +95,7 @@ function getBankCityList()
 }
 
 function addMerchantBtn(){
-/* $(".updateMerchantBtn").click(function(){
-	hideLabel(); */
+
 	var businessTermEnd = "forever";
 	/*账号校验*/
 	if(isNull($("#merchantAccount")[0])){
