@@ -102,6 +102,21 @@ function showCertAttribute2Image(obj){
 	 return previewImage(divObj,imageObj,obj);  
 }
 
+/** 银行卡预览 **/
+function showBankCardPhotoImage(obj){  
+	 var divObj = document.getElementById("bankCardPhotoDiv");  
+	 var imageObj = document.getElementById("bankCardPhotoImage");  
+	 var result1 = previewImage(divObj,imageObj,obj);
+	 return result1;  
+}
+/** 银行卡点击预览 **/
+$('.bankCardPhotoClick').click(function(){
+	var divObj = document.getElementById("showImageDiv");
+	var imageObj = document.getElementById("showImage");
+	var obj = document.getElementById("bankCardPhoto");
+	return previewImage(divObj,imageObj,obj); 
+});
+
 
 function pass(){
 	
@@ -345,7 +360,7 @@ function exit() {
 							<td class="td-left">结算类型：</td>
 							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.compMainAcctType }</td>
 						 </tr>
-                         <tr>
+                         <tr id="openAccount_" style="display: none">
 							<td class="td-left" >开户许可证：</td>
 							<td class="td-right" colspan="3"> 
 								<a data-toggle='modal' class="tooltip-success openAccountClick"  data-target="#previewImageModal" >
@@ -359,6 +374,21 @@ function exit() {
 									<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 								</div>
 																		
+							</td>
+						 </tr>
+						 <tr id="bankCardPhoto_">
+							<td class="td-left" >银行卡照<span style="color:red"></span></td>
+							<td class="td-right" > 
+								<a data-toggle='modal' class="tooltip-success bankCardPhotoClick"  data-target="#previewImageModal" >
+									<label id="bankCardPhotoDiv" class="uploadImage">  
+									        <img  id="bankCardPhotoImageDiv" style="width:100%;height:100%;display:none"/>
+									</label>
+								</a>
+								<div style="float:left;margin-top:75" >
+								<input type="file" name="bankCardPhoto" id="bankCardPhoto" onChange="showBankCardPhotoImage(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+								</div>
+								
+								<label class="label-tips" id="bankCardPhotoLabel" style="float:left;margin-top:88"></label>
 							</td>
 						 </tr>
                          <tr>

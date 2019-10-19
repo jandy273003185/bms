@@ -505,6 +505,7 @@ function exit() {
 						<input type="hidden" name="custId" id="custId" value="${merchantVo.custId}">
 						<input type="hidden" name="merchantCode" id="merchantCode" value="${merchantVo.merchantCode}">
 						<input type="hidden" name="authId" id="authId" value="${merchantVo.authId}">
+						<input type="hidden" name="custType" id="custType" value="${merchantVo.custType}">
                     <table id="merchant_table" class="list-table">
 						<tbody>
                          <tr>
@@ -740,7 +741,7 @@ function exit() {
 								
 								</td>
 							</tr>
-                            <tr>
+                            <tr id="openAccount_" style="display: none">
 								<td class="td-left" >开户许可证：</td>
 								<td class="td-right" colspan="3"> 
 									<a data-toggle='modal' class="tooltip-success openAccountClick"  data-target="#previewImageModal" >
@@ -756,6 +757,21 @@ function exit() {
 																			
 								</td>
 							</tr>
+							<tr id="bankCardPhoto_">
+							<td class="td-left" >银行卡照<span style="color:red"></span></td>
+							<td class="td-right" > 
+								<a data-toggle='modal' class="tooltip-success bankCardPhotoClick"  data-target="#previewImageModal" >
+									<label id="bankCardPhotoDiv" class="uploadImage">  
+									        <img  id="bankCardPhotoImageDiv" style="width:100%;height:100%;display:none"/>
+									</label>
+								</a>
+								<div style="float:left;margin-top:75" >
+								<input type="file" name="bankCardPhoto" id="bankCardPhoto" onChange="showBankCardPhotoImage(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+								</div>
+								
+								<label class="label-tips" id="bankCardPhotoLabel" style="float:left;margin-top:88"></label>
+							</td>
+						 </tr>
 							 <%-- 
                            <tr>
 							<td colspan="4" class="headlerPreview" style="background:#7ebde1;">操作记录</td></tr>

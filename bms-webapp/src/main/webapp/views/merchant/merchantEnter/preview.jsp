@@ -333,7 +333,9 @@ $(function() {
 							<td class="td-left">审核人：</td>
 							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.aduitUserName }</td>
 							<td class="td-left">录入时间：</td>
-							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.modifyTime }</td>
+							<td class="td-right" style="color:#666;padding:10px 8px">
+								<fmt:formatDate value="${merchantVo.modifyTime }" pattern="yyyy-MM-dd HH:mm"/>
+							</td>
 						 </tr>
                          <tr>
 							<td class="td-left">审核记录：</td>
