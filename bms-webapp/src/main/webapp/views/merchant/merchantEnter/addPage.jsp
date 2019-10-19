@@ -201,12 +201,12 @@ function addMerchantBtn(){
 		$("#merchantAccount").focus();
 		return false;
 	}
-	
-	if(!verifyEmailAddress($("#merchantAccount")[0]) ||!isMobilePhone($("#merchantAccount")[0])){
+	/* 
+	if(!verifyEmailAddress($("#merchantAccount")[0]) || !isMobilePhone($("#merchantAccount")[0])){
 		$("#merchantAccountLab").text("账号需用邮箱或者手机号 ");
 		$("#merchantAccount").focus();
 		return false;
-	}
+	}  */
 	
 	/*邮箱校验*/
 	if(isNull($("#merchantEmail")[0])){
@@ -269,6 +269,7 @@ function addMerchantBtn(){
 		return false;
 	}
 	
+	var custType =$("#custType").val();
 	/*个人*/
 	if(custType=='0'){
 	}
@@ -412,11 +413,11 @@ function addMerchantBtn(){
 		return false;
 	}
 	
-	if(!checkBankCardFormat($("#compMainAcct")[0])){
+	/* if(!checkBankCardFormat($("#compMainAcct")[0])){
 		$("#compMainAcctLab").text("银行卡号格式不正确  ");
 		$("#compMainAcct").focus();
 		return false;
-	}
+	} */
 	
 	/*开户银行*/
 	var compAcctBank = $("#compAcctBank").val().trim();
@@ -454,7 +455,7 @@ function addMerchantBtn(){
 	}
 	
 	// 提交前清空所有错误提示栏
-	Register.clearAllErrorMsgLabel();
+	// Register.clearAllErrorMsgLabel();
 	
 	var merchantAccount = $("#merchantAccount").val().trim();
 	var custType = $("#custType").val().trim();
@@ -502,7 +503,7 @@ function addMerchantBtn(){
         			"merchantAccount":       merchantAccount, 					// 商户账号
         			"custType":              custType,							// 商户类型
         			"custName":              custName, 							// 客户姓名
-        			"shortName":             custShopName,                      // 客户简称
+        			"shortName":             shortName,                         // 客户简称
         			"merchantEmail":         merchantEmail,						// 邮箱
         			"contactPhone":          contactPhone,						// 客服电话
         			"province":              province,							// 省份
