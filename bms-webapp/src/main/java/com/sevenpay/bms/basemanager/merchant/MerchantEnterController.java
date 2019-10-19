@@ -444,10 +444,11 @@ public class MerchantEnterController {
 		String error_msg = "查询商户信息有误";
 		try {
 			//获取商户编号
-			TdCustInfo tdCustInfo = tdCustInfoMapper.selectById(merchantVo.getMerchantCode());
+			MerchantVo merchant = merchantService.findMerchantInfo(merchantVo.getCustId());
+			TdCustInfo tdCustInfo = tdCustInfoMapper.selectById(merchantVo.getCustId());
 
-			if(null!=merchantVo.getMerchantCode()&&!("".equals(merchantVo.getMerchantCode()))){
-				String url = "https://combinedpay.qifenqian.com/pub/merchantqr.do?mid=" +merchantVo.getMerchantCode() +"&sn=" + merchantVo.getMerchantCode();
+			if(null!=merchant.getMerchantCode()&&!("".equals(merchant.getMerchantCode()))){
+				String url = "https://combinedpay.qifenqian.com/pub/merchantqr.do?mid=" +merchant.getMerchantCode() +"&sn=" + merchant.getMerchantCode();
 
 				object.put("url", url);
 				object.put("custId", merchantVo.getCustId());
