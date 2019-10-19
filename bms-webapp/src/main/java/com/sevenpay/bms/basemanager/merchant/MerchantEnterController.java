@@ -305,10 +305,10 @@ public class MerchantEnterController {
         //查询商户门头照信息
         //String path = auditorService.findScanPath(merchantVo.getCustId(), "08",merchantVo.getAuthId());
         //获取二维码
-		String qrCode = getQrCode(merchantVo);
+//		String qrCode = getQrCode(merchantVo);
 		mv.addObject("merchantVo", merchant);
 		//预览返回的二维码信息
-		mv.addObject("qrCode", qrCode);
+//		mv.addObject("qrCode", qrCode);
 		//mv.addObject("path", path);
 		return mv;
     }

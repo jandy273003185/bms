@@ -63,7 +63,7 @@ $(function() {
 
 function getBankCityList()
 {
-	var provVal = $("#province").val().trim();
+	var provVal = $("#bankProvinceName").val().trim();
 	
 	$("#cityDef").siblings().remove();
 

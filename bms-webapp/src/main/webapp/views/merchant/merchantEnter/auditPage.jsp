@@ -210,6 +210,8 @@ function exit() {
 						<input type="hidden" id="bankCardPhototemp" />
 						<input type="hidden" name="custId" id="custId" value="${merchantVo.custId}">
 						<input type="hidden" name="merchantCode" id="merchantCode" value="${merchantVo.merchantCode}">
+                    	<input type="hidden" name="authId" id="authId" value="${merchantVo.authId}">
+						<input type="hidden" name="custType" id="custType" value="${merchantVo.custType}">
                     <table id="merchant_table" class="list-table">
 					<tbody>
                         <tr>
