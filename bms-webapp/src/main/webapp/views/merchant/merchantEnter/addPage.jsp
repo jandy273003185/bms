@@ -4,8 +4,6 @@
 <%@page import="com.sevenpay.bms.basemanager.merchant.MerchantEnterPath" %>
 <%@page import="com.sevenpay.bms.basemanager.merchant.TinyMerchantPath" %>
 <%@page import="com.sevenpay.bms.basemanager.agency.controller.AgentRegisterPath" %>
-<%-- <script src='<c:url value="/static/js/checkRule_source.js"/>'></script>
-<script src='<c:url value="/static/My97DatePicker/WdatePicker.js"/>'></script> --%>
 <script src='<c:url value="/static/js/ajaxfileupload.js"/>'></script>
 <script src='<c:url value="/static/js/comm.js"/>'></script>
 <script src='<c:url value="/static/js/upload.js"/>'></script>
@@ -14,7 +12,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>商户注册</title>
+	<title>商户注册新增</title>
 	<meta name="keywords" content="七分钱后台管理系统" />
 	<meta name="description" content="七分钱后台管理" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -33,75 +31,71 @@
 $(function(){
 	
 	$("input[type=file]").each(
-			function() {
-				var _this = $(this);
-				_this.localResizeIMG({
-					quality : 0.8,
-					success : function(result,file) {
-						
-						var att = pre.substr(pre.lastIndexOf("."));
-						//压缩后图片的base64字符串
-						var base64_string = result.clearBase64;
-						
-						$('#'+_this.attr('id')+'temp').val(att+","+base64_string);
-						//图片预览
-			             var imgObj = $('#'+_this.attr('id')+'ImageDiv');
-			             imgObj.attr("src", "data:image/jpeg;base64," + base64_string).show(); 
-			             var width = result.width;
-			             var height = result.height;
-			             var scale =  width/height;
-			             if(width >800){
-			             width = 800;
-			             height = width / scale;
-			             }
-			             $(".showDiv").width(width+"px");
-			             $(".showDiv").height(height+"px");
-			             
-			             
-			           //优图
-			             var param = "{str:\""+base64_string+"\",flag:\""+_this.attr('id')+"\"}"
-			    		 $.ajax({
-			    	   			async:false,
-			    	   			type:"POST",
-			    	   			contentType:"application/json;charset=utf-8",
-			    	   			dataType:"text",
-			    	   			url:window.Constants.ContextPath +'<%=AgentRegisterPath.BASE + AgentRegisterPath.YOUTU%>',
-			    	   	        data:param,
-			    	   	        success:function(data){
-			    	   	      		var json = eval('(' + data + ')');
-			    	   	        	if(json.result=="SUCCESS"){
-			    	   	        		 if(_this.attr('id')=="certAttribute1"){//身份證
-			    	       	  				$("#representativeName").val(json.cardName);
-			    	       	  				$("#representativeCertNo").val(json.cardId);
-			    	       	  			}else if(_this.attr('id')=="businessPhoto"){//营业执照
-			    	       	  				$("#businessLicense").val(json.businessLicense);
-			    	       	  				$("#businessTerm").val(json.businessTermStart);
-			    	       	  				if("长期"==json.businessTermEnd){
-			    	       	  					$("input[value='forever']").click();
-			    	       	  				}else{
-			    	       	  					$("#businessTermEnd").val(json.businessTermEnd);
-			    	       	  				}
-			    	       	  				/* $("#businessRegAddr").val(json.legalAddress); */
-			    	       	  				$("#custAdd").val(json.legalAddress);
-			    	       	  				
-			    	       	  			} 
-			    	   				}
-			    	   			}
-			    	   		});
-					}
-				});
+		function() {
+			var _this = $(this);
+			_this.localResizeIMG({
+				quality : 0.8,
+				success : function(result,file) {
+					
+					var att = pre.substr(pre.lastIndexOf("."));
+					//压缩后图片的base64字符串
+					var base64_string = result.clearBase64;
+					
+					$('#'+_this.attr('id')+'temp').val(att+","+base64_string);
+					//图片预览
+		            var imgObj = $('#'+_this.attr('id')+'ImageDiv');
+		            imgObj.attr("src", "data:image/jpeg;base64," + base64_string).show(); 
+		            var width = result.width;
+		            var height = result.height;
+		            var scale =  width/height;
+		            if(width >800){
+		            width = 800;
+		            height = width / scale;
+		            }
+		            $(".showDiv").width(width+"px");
+		            $(".showDiv").height(height+"px");
+		             
+		            //优图
+		            var param = "{str:\""+base64_string+"\",flag:\""+_this.attr('id')+"\"}"
+		    		$.ajax({
+	    	   			async:false,
+	    	   			type:"POST",
+	    	   			contentType:"application/json;charset=utf-8",
+	    	   			dataType:"text",
+	    	   			url:window.Constants.ContextPath +'<%=AgentRegisterPath.BASE + AgentRegisterPath.YOUTU%>',
+	    	   	        data:param,
+	    	   	        success:function(data){
+	    	   	      		var json = eval('(' + data + ')');
+	    	   	        	if(json.result=="SUCCESS"){
+	    	   	        		 if(_this.attr('id')=="certAttribute1"){                    //身份证
+	    	       	  				$("#representativeName").val(json.cardName);
+	    	       	  				$("#representativeCertNo").val(json.cardId);
+	    	       	  			}else if(_this.attr('id')=="businessPhoto"){                //营业执照
+	    	       	  				$("#businessLicense").val(json.businessLicense);
+	    	       	  				$("#businessTerm").val(json.businessTermStart);
+	    	       	  				if("长期"==json.businessTermEnd){
+	    	       	  					$("input[value='forever']").click();
+	    	       	  				}else{
+	    	       	  					$("#businessTermEnd").val(json.businessTermEnd);
+	    	       	  				}
+	    	       	  				$("#custAdd").val(json.legalAddress);
+	    	       	  			} 
+	    	   				}
+	    	   			}
+		    	   	});
+				}
 			});
+		}
+	);
 });
-function getBankCityList()
-{
-	var provVal = $("#province").val().trim();
+/**开户行城市 **/
+function getBankCityList(){
 	
+	var provVal = $("#province").val().trim();
 	$("#cityDef").siblings().remove();
-
 	if ("" == provVal || provVal.length == 0) {
 		return false;
 	}
-
 	$.ajax({
 		type:"POST",
 		dataType:"json",
@@ -116,8 +110,7 @@ function getBankCityList()
 				var cityList = data.cityList;
 				for ( var city in cityList) {
 					$("#bankCityName").append(
-							"<option value='"+ cityList[city].cityId +"'>"
-									+ cityList[city].cityName + "</option>");
+						"<option value='"+ cityList[city].cityId +"'>" + cityList[city].cityName + "</option>");
 				}
 			}else{
 			}
@@ -125,17 +118,14 @@ function getBankCityList()
 	})
 }
 
-function getCityList()
-{
-	var provVal = $("#province").val().trim();
+function getCityList(){
 	
+	var provVal = $("#province").val().trim();
 	$("#cityDef").siblings().remove();
 	$("#areaDef").siblings().remove();
-
 	if ("" == provVal || provVal.length == 0) {
 		return false;
 	}
-
 	$.ajax({
 		type:"POST",
 		dataType:"json",
@@ -150,8 +140,7 @@ function getCityList()
 				var cityList = data.cityList;
 				for ( var city in cityList) {
 					$("#city").append(
-							"<option value='"+ cityList[city].cityId +"'>"
-									+ cityList[city].cityName + "</option>");
+						"<option value='"+ cityList[city].cityId +"'>" + cityList[city].cityName + "</option>");
 				}
 			}else{
 			}
@@ -159,12 +148,10 @@ function getCityList()
 	})
 }
 
-function getAreaList()
-{
-	var city = $("#city").val().trim();
+function getAreaList(){
 	
+	var city = $("#city").val().trim();
 	$("#areaDef").siblings().remove();
-
 	if ("" == city || city.length == 0) {
 		return false;
 	}
@@ -183,8 +170,7 @@ function getAreaList()
 				var areaList = data.areaList;
 				for ( var area in areaList) {
 					$("#country").append(
-							"<option value='"+ areaList[area].areaId +"'>"
-									+ areaList[area].areaName + "</option>");
+						"<option value='"+ areaList[area].areaId +"'>" + areaList[area].areaName + "</option>");
 				}
 			}else{
 			}
@@ -194,20 +180,20 @@ function getAreaList()
 
 
 function selCustType(){
+	/**商户类型 **/
+	//个人
 	if($("#custType").val() =='0' ||$("#custType").val() =='2' ){
-		//个人
 		$("#bankCardPhoto_").attr("style","display:");
 		$("#openAccount_").attr("style","display:none");
 	}
+	//企业
 	if($("#custType").val() =='1'){
-		//企业
 		$("#bankCardPhoto_").attr("style","display:none");
 		$("#openAccount_").attr("style","display:");
 	}
-	
 }
 function addMerchantBtn(){
-/* $(".addMerchantBtn").click(function(){ */
+	
 	var businessTermEnd = "forever";
 	/*账号校验*/
 	if(isNull($("#merchantAccount")[0])){
@@ -247,12 +233,14 @@ function addMerchantBtn(){
 		$("#contactPhone").focus();
 		return false;
 	}
+	
 	/*商户地址*/
 	if(isNull($("#custAdd")[0])){
 		$("#custAddLab").text("请填写地址");
 		$("#custAdd").focus();
 		return false;
 	}
+	
 	/*营业执照号*/
 	if(isNull($("#businessLicense")[0])){
 		$("#businessLicenseLab").text("请填写营业执照注册号");
@@ -260,8 +248,8 @@ function addMerchantBtn(){
 		return false;
 	}
 	
-	var businessLicense =$("#businessLicense").val();
 	//校验营业执照注册号唯一性
+	var businessLicense =$("#businessLicense").val();
 	var validateLicense =true ;
 	
 	$.ajax({
@@ -281,41 +269,48 @@ function addMerchantBtn(){
 		return false;
 	}
 	
-	/*营业执照有限期 */
-	if(isNull($("businessTermStart")[0])){
-		$("businessTermStartLab").text("请选择日期");
-		$("businessTermStart").focus();
-		return false;
-	}
-	if(isNull($("businessTermEnd")[0])){
-		$("businessTermEndLab").text("请选择日期");
-		$("businessTermEnd").focus();
-		return false;
-	}
-	
-	/*起始日期判断 */
-	var startDate = $("#businessTermStart").val();
-	var endDate= $("#businessTermEnd").val();
-	if("" != startDate && "" != endDate && startDate > endDate) 
-	{
-		$.gyzbadmin.alertFailure("结束日期不能小于开始日期");
-		return false;
-	}
 	/*个人*/
 	if(custType=='0'){
 	}
 	/*企业*/
 	if(custType=='1'){
+		
+		/*营业执照有限期 */
+		if(isNull($("businessTermStart")[0])){
+			$("businessTermStartLab").text("请选择日期");
+			$("businessTermStart").focus();
+			return false;
+		}
+		
+		if(isNull($("businessTermEnd")[0])){
+			$("businessTermEndLab").text("请选择日期");
+			$("businessTermEnd").focus();
+			return false;
+		}
+		
+		/*起始日期判断 */
+		var startDate = $("#businessTermStart").val();
+		var endDate= $("#businessTermEnd").val();
+		if("" != startDate && "" != endDate && startDate > endDate) 
+		{
+			$.gyzbadmin.alertFailure("结束日期不能小于开始日期");
+			return false;
+		}
+		
 		// 校验营业时间
 		if(!Register.validateBusinessTerm($("#businessTermStart").val().trim(),$("#businessTermStartLabel"))){return false;}
+		
 		if($("input:radio[name='end']:checked").val()=='sel'){
 			if(!Register.validateBusinessTerm($("#businessTermEnd").val().trim(),$("#businessTermStartLabel"))){return false;}
 			businessTermEnd = $("#businessTermEnd").val();
 		}
+		
 		//营业执照号
 		var flag = Register.validateBusinessLicense($("#businessLicense").val().trim(),$("#businessLicenseLab"));
 
-		if(!flag){return false;}
+		if(!flag){
+			return false;
+		}
 
 		if(!checkAttach($("#businessPhoto")[0])){
 			$.gyzbadmin.alertFailure("必须提交营业执照扫描件");
@@ -329,19 +324,48 @@ function addMerchantBtn(){
 	}
 	/*个体户*/
 	if(custType=='2'){
+		
+		/*营业执照有限期 */
+		if(isNull($("businessTermStart")[0])){
+			$("businessTermStartLab").text("请选择日期");
+			$("businessTermStart").focus();
+			return false;
+		}
+		
+		if(isNull($("businessTermEnd")[0])){
+			$("businessTermEndLab").text("请选择日期");
+			$("businessTermEnd").focus();
+			return false;
+		}
+		
+		/*起始日期判断 */
+		var startDate = $("#businessTermStart").val();
+		var endDate= $("#businessTermEnd").val();
+		if("" != startDate && "" != endDate && startDate > endDate) 
+		{
+			$.gyzbadmin.alertFailure("结束日期不能小于开始日期");
+			return false;
+		}
+		
 		if(checkAttach($("#businessPhoto")[0])){
 			if(isNull($("#businessLicense")[0])){
 				$("#businessLicenseLab").text("必须填写营业执照注册号");
 				return false;
 			}
+			
 			// 校验营业时间
 			if(!Register.validateBusinessTerm($("#businessTermStart").val().trim(),$("#businessTermStartLabel"))){return false;}
+			
 			if($("input:radio[name='end']:checked").val()=='sel'){
 				if(!Register.validateBusinessTerm($("#businessTermEnd").val().trim(),$("#businessTermStartLabel"))){return false;}
 				businessTermEnd = $("#businessTermEnd").val();
 			}
+			
 			var flag = Register.validateBusinessLicense($("#businessLicense").val(),$("#businessLicenseLab"));
-			if(!flag){return false;}
+			
+			if(!flag){
+				return false;
+			}
 		}
 		if(!kong.test($("#businessLicense").val().trim())){
 			if(!checkAttach($("#businessPhoto")[0])){
@@ -387,35 +411,41 @@ function addMerchantBtn(){
 		$("#compMainAcct").focus();
 		return false;
 	}
+	
 	if(!checkBankCardFormat($("#compMainAcct")[0])){
-		$("#compMainAcctLab").text("账号需用银行卡号 ");
+		$("#compMainAcctLab").text("银行卡号格式不正确  ");
 		$("#compMainAcct").focus();
 		return false;
 	}
+	
 	/*开户银行*/
 	var compAcctBank = $("#compAcctBank").val().trim();
 	if ("" == compAcctBank || compAcctBank.length == 0) {
 		$("#compMainAcctLab").text("请填写开户银行");
 		return false;
 	}
+	
 	/*开户行*/
 	if(isNull($("#branchBank")[0])){
 		$("#branchBankLab").text("请填写开户行");
 		$("#branchBank").focus();
 		return false;
 	}
+	
 	/*开户人 */
 	if(isNull($("#bankAcctName")[0])){
 		$("#bankAcctNameLab").text("请填写开户人");
 		$("#bankAcctName").focus();
 		return false;
 	}
+	
 	/*网点号*/
 	if(isNull($("#cnaps")[0])){
 		$("#cnapseLab").text("请填写银联号");
 		$("#cnaps").focus();
 		return false;
 	}
+	
 	/*结算类型*/
 	if(isNull($("#compMainAcctType")[0])){
 		$("#compMainAcctTypeLab").text("请填写结算类型");
@@ -458,45 +488,44 @@ function addMerchantBtn(){
 		type : "POST",
 		url : window.Constants.ContextPath +'<%=TinyMerchantPath.BASE + TinyMerchantPath.FILEUPLOAD%>',
 		data :{
-			businessPhoto : $('#businessPhototemp').val(),
+			businessPhoto  : $('#businessPhototemp').val(),
 			certAttribute1 : $('#certAttribute1temp').val(),
 			certAttribute2 : $('#certAttribute2temp').val(),
-			openAccount : $('#openAccounttemp').val(),
-			bankCardPhoto : $('#bankCardPhototemp').val()
-			
+			openAccount    : $('#openAccounttemp').val(),
+			bankCardPhoto  : $('#bankCardPhototemp').val()
 		},
 		dataType : "json",
 		success : function(data) {
 			if(data.result=='SUCCESS'){
 				$.post(window.Constants.ContextPath +'<%=MerchantEnterPath.BASE + MerchantEnterPath.ADD%>',{
-        			"custId":data.custId,							// 回传custId
-        			"merchantAccount":merchantAccount, 					// 商户二维码编号
-        			"custType":custType,
-        			"custName":custName, 							// 客户姓名
-        			"shortName":custShopName,                       // 客户简称
-        			"merchantEmail":merchantEmail,
-        			"contactPhone":contactPhone,
-        			"province":province,
-        			"city":city,
-        			"country" :country,
-        			"custAdd" : custAdd,
-        			"businessLicense":businessLicense,             // 营业执照注册号
-        			"businessTermStart":businessTermStart,
-        			"businessTermEnd" : businessTermEnd,
-        			"custManager":custManager,
-        			"agentName":agentName,
-        			"representativeName":representativeName,
-        			"representativeCertNo":representativeCertNo,
-        			"contactName":contactName,
-        			"contactMobile":contactMobile,
-        			"compMainAcct":compMainAcct,
-        			"compAcctBank":compAcctBank,
-        			"branchBank":branchBank,
-        			"bankAcctName" :bankAcctName,
-        			"bankProvinceName":bankProvinceName,
-        			"bankCityName":bankCityName,
-        			"cnaps":cnaps,
-        			"compMainAcctType":compMainAcctType
+        			"custId":                data.custId,						// 回传custId
+        			"merchantAccount":       merchantAccount, 					// 商户账号
+        			"custType":              custType,							// 商户类型
+        			"custName":              custName, 							// 客户姓名
+        			"shortName":             custShopName,                      // 客户简称
+        			"merchantEmail":         merchantEmail,						// 邮箱
+        			"contactPhone":          contactPhone,						// 客服电话
+        			"province":              province,							// 省份
+        			"city":                  city,								// 城市
+        			"country" :              country,							// 县区
+        			"custAdd" :              custAdd,							// 详细地址
+        			"businessLicense":       businessLicense,                   // 营业执照注册号
+        			"businessTermStart":     businessTermStart,					// 营业执照有限期
+        			"businessTermEnd" :      businessTermEnd,					// 营业执照有限截止期
+        			"custManager":           custManager,						// 客户经理
+        			"agentName":             agentName,							// 代理商
+        			"representativeName":    representativeName,				// 法人姓名
+        			"representativeCertNo":  representativeCertNo,				// 法人身份证号
+        			"contactName":           contactName,						// 联系人姓名
+        			"contactMobile":         contactMobile,						// 联系人电话
+        			"compMainAcct":          compMainAcct,						// 银行号
+        			"compAcctBank":          compAcctBank,						// 开户行
+        			"branchBank":            branchBank,						// 开户支行
+        			"bankAcctName":          bankAcctName,						// 开户人
+        			"bankProvinceName":      bankProvinceName,					// 开户行省份
+        			"bankCityName":          bankCityName,						// 开户行城市
+        			"cnaps":                 cnaps,								// 联行号
+        			"compMainAcctType":      compMainAcctType					// 结算类型
         		},function(data){
     				if(data.result=="SUCCESS"){
     					$.gyzbadmin.alertSuccess("注册申请成功",null,function(){
@@ -631,14 +660,14 @@ $('.bankCardPhotoClick').click(function(){
 				<!-- 主内容 -->
 				<div class="page-content">
 					<div class="row">
-						<div class="col-xs-12">
+					<div class="col-xs-12">
 						<input type="hidden" id="businessPhototemp">
 						<input type="hidden" id="certAttribute1temp">
 						<input type="hidden" id="certAttribute2temp">
 						<input type="hidden" id="openAccounttemp" />
 						<input type="hidden" id="bankCardPhototemp" />
                     <table id="merchant_table" class="list-table">
-						<tbody>
+					<tbody>
                         <tr>
 							<td colspan="4" class="headlerPreview" style="background:#7ebde1;">商户信息</td>
 						</tr>
@@ -718,7 +747,6 @@ $('.bankCardPhotoClick').click(function(){
                                     <input type="text" id="custAdd" name="custAdd"  placeholder="详细地址" style="width:100%">
                                 	<label class="label-tips" id="custAddLab"></label>
                                 </div>
-                                <!-- <label class="label-tips" id="countryLab"></label> -->
 							</td>
 					    </tr>
 						<tr>
@@ -736,23 +764,6 @@ $('.bankCardPhotoClick').click(function(){
 								<label id="businessTermStartLabel" class="label-tips"></label>
 							</td>
 						</tr>
-							
-							<!-- <tr>
-								<td class="td-left">营业执照照片：</td>
-								<td class="td-right" colspan="3">
-									<a data-toggle="modal" class="tooltip-success businessPhotoClick" data-target="#previewImageModal">
-										<label id="businessPhotoDiv" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
-										  <img id="businessPhotoImageDiv" onClick="bigImg(this);" src="./后台商户注册审核列表_files/image" style="width: 100%; height: 100%;">										  
-										</label>
-									</a>
-									<div class="updateImageDiv" style="float: left; margin-top: 75px; display: block;">
-										<input type="hidden" id="businessPhotoImageVal02">  
-										<input type="file" name="businessPhoto" id="businessPhoto" onChange="showBusinessPhotoImage(this)">
-									 	<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-									</div>
-									
-								</td>
-							</tr> -->
 						<tr>
 							<td class="td-left">营业执照照片<span style="color:red" class="businessPhotoImageSpan"></span></td>
 							<td class="td-right">
@@ -911,71 +922,52 @@ $('.bankCardPhotoClick').click(function(){
                                 </select>
 							</td>
 						</tr>
-						<!-- <tr>
-							<td class="td-left">开户许可证：</td>
-							<td class="td-right" colspan="3"> 
-								<a data-toggle="modal" class="tooltip-success certAttribute0Click" data-target="#previewImageModal">
-									<label id="certAttribute0Div" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
-									        <img id="certAttribute0ImageDiv" onClick="bigImg(this);" style="width: 100%; height: 100%;" src="./后台商户注册审核列表_files/image(1)">
+						<tr id="openAccount_" style="display: none">
+							<td class="td-left" >开户许可证</td>
+							<td class="td-right" > 
+								<a data-toggle='modal' class="tooltip-success openAccountClick"  data-target="#previewImageModal" >
+									<label id="openAccountDiv" class="uploadImage">  
+									        <img  id="openAccountImage" style="width:100%;height:100%;display:none"/>
 									</label>
 								</a>
-								<div class="updateImageDiv" style="float: left; margin-top: 75px; display: block;">
-									<input type="hidden" id="certAttribute0Val02">  
-									<input type="file" name="certAttribute0" id="certAttribute0" onChange="showCertAttribute0Image(this)">
-									<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+								<div style="float:left;margin-top:75" >
+								<input type="file" name="openAccount" id="openAccount" onChange="showOpenAccountImage(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 								</div>
-																		
+								<label class="label-tips" id="openAccountLabel" style="float:left;margin-top:88"></label>
 							</td>
-						</tr> -->
-							<tr id="openAccount_" style="display: none">
-								<td class="td-left" >开户许可证</td>
-								<td class="td-right" > 
-									<a data-toggle='modal' class="tooltip-success openAccountClick"  data-target="#previewImageModal" >
-										<label id="openAccountDiv" class="uploadImage">  
-										        <img  id="openAccountImage" style="width:100%;height:100%;display:none"/>
-										</label>
-									</a>
-									<div style="float:left;margin-top:75" >
-									<input type="file" name="openAccount" id="openAccount" onChange="showOpenAccountImage(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-									</div>
-									
-									<label class="label-tips" id="openAccountLabel" style="float:left;margin-top:88"></label>
-								</td>
-							</tr>
-							<tr id="bankCardPhoto_">
-								<td class="td-left" >银行卡照<span style="color:red"></span></td>
-								<td class="td-right" > 
-									<a data-toggle='modal' class="tooltip-success bankCardPhotoClick"  data-target="#previewImageModal" >
-										<label id="bankCardPhotoDiv" class="uploadImage">  
-										        <img  id="bankCardPhotoImage" style="width:100%;height:100%;display:none"/>
-										</label>
-									</a>
-									<div style="float:left;margin-top:75" >
-									<input type="file" name="bankCardPhoto" id="bankCardPhoto" onChange="showBankCardPhotoImage(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-									</div>
-									
-									<label class="label-tips" id="bankCardPhotoLabel" style="float:left;margin-top:88"></label>
-								</td>
-							</tr>
-						</tbody></table>
+						</tr>
+						<tr id="bankCardPhoto_">
+							<td class="td-left" >银行卡照<span style="color:red"></span></td>
+							<td class="td-right" > 
+								<a data-toggle='modal' class="tooltip-success bankCardPhotoClick"  data-target="#previewImageModal" >
+									<label id="bankCardPhotoDiv" class="uploadImage">  
+									        <img  id="bankCardPhotoImage" style="width:100%;height:100%;display:none"/>
+									</label>
+								</a>
+								<div style="float:left;margin-top:75" >
+								<input type="file" name="bankCardPhoto" id="bankCardPhoto" onChange="showBankCardPhotoImage(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+								</div>
+								<label class="label-tips" id="bankCardPhotoLabel" style="float:left;margin-top:88"></label>
+							</td>
+						</tr>
+					</tbody>
+					</table>
                         <div style="margin:50px 0 0 0;text-align:center">
                         	<button type="button"  class="btn btn-primary addMerchantBtn" onclick="addMerchantBtn()">保存</button> 
                         	<a href="<%=request.getContextPath()+MerchantEnterPath.BASE + MerchantEnterPath.LIST%>"  class="btn btn-default" >关闭</a>
-                        	<!-- <button type="button"  class="btn btn-default">关闭</button> --> 
                         </div>
-							</div>
-						</div>
 					</div>
-					<!-- 图片预览 -->
-					<div class="modal fade" id="previewImageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-					    <div class="modal-dialog showDiv" >
-		         			<div id="showImageDiv" style="width:100%;height:100%;">
-					           <img id="showImage" style="width:100%;height:100%;">
-					        </div>
-					     </div>
-					</div>	
+					</div>
+					
 				</div><!-- /.page-content -->
-				
+				<!-- 图片预览 -->
+				<div class="modal fade" id="previewImageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				    <div class="modal-dialog showDiv" >
+	         			<div id="showImageDiv" style="width:100%;height:100%;">
+				           <img id="showImage" style="width:100%;height:100%;">
+				        </div>
+				     </div>
+				</div>
 				<!-- 底部-->
 				<%@ include file="/include/bottom.jsp"%>
 			

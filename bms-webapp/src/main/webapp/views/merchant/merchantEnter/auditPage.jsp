@@ -5,8 +5,6 @@
 <%@page import="com.sevenpay.bms.basemanager.merchant.AuditorPath"%>
 <%@page import="com.sevenpay.bms.basemanager.merchant.TinyMerchantPath" %>
 <%@page import="com.sevenpay.bms.basemanager.agency.controller.AgentRegisterPath" %>
-<%-- <script src='<c:url value="/static/js/checkRule_source.js"/>'></script>
-<script src='<c:url value="/static/My97DatePicker/WdatePicker.js"/>'></script> --%>
 <script src='<c:url value="/static/js/ajaxfileupload.js"/>'></script>
 <script src='<c:url value="/static/js/comm.js"/>'></script>
 <script src='<c:url value="/static/js/upload.js"/>'></script>
@@ -32,7 +30,7 @@
 </head>
 <script type="text/javascript">
 $(function() {
-	
+	/**企业类型 **/
 	if($("#custType").val() =='0' ||$("#custType").val() =='2' ){
 		//个人
 		$("#bankCardPhoto_").attr("style","display:");
@@ -108,7 +106,7 @@ function showCertAttribute2Image(obj){
 function pass(){
 	
 	var isPass="1";
-	var merchantCode = $("merchantCode").val().trim();
+	var merchantCode = $("merchantCode").val();
 	var message = "";
 	$.ajax({
 		type:"POST",
@@ -135,8 +133,8 @@ function pass(){
 
 function noPass(){
 	var isPass="0";
-	var message = $("auditMessage").val().trim();
-	var merchantCode = $("merchantCode").val().trim();
+	var message = $("auditMessage").val();
+	var merchantCode = $("merchantCode").val();
 	$.ajax({
 		type:"POST",
 		dataType:"json",
@@ -189,7 +187,7 @@ function exit() {
 				<!-- 主内容 -->
 				<div class="page-content">
 					<div class="row">
-						<div class="col-xs-12">
+					<div class="col-xs-12">
 						<input type="hidden" id="businessPhototemp">
 						<input type="hidden" id="certAttribute1temp">
 						<input type="hidden" id="certAttribute2temp">
@@ -197,194 +195,189 @@ function exit() {
 						<input type="hidden" id="bankCardPhototemp" />
 						<input type="hidden" name="custId" id="custId" value="${merchantVo.custId}">
 						<input type="hidden" name="merchantCode" id="merchantCode" value="${merchantVo.merchantCode}">
-	                    <table id="merchant_table" class="list-table">
-							<tbody>
-	                        
-	                        <tr>
+                    <table id="merchant_table" class="list-table">
+					<tbody>
+                        <tr>
 							<td colspan="4" class="headlerPreview" style="background:#7ebde1;">商户信息</td></tr>
-						   <tr>
-							</tr>
-                            <tr>
-								<td class="td-left">商户账号：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.merchantCode }</td>
-							</tr>
+					    <tr>
+						</tr>
+                        <tr>
+							<td class="td-left">商户账号：</td>
+							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.merchantCode }</td>
+						</tr>
                         <tr>
 							<td colspan="4" class="headlerPreview" style="background:#7ebde1">基本信息</td>
 						</tr>
 						<tr>
 							<td class="td-left">商户类型：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">企业</td>
+							<td class="td-right" style="color:#666;padding:10px 8px">企业</td>
 						</tr>
                         <tr>
-							    <td class="td-left"  width="18%">商户名称：</td>
-								<td class="td-right" width="32%" style="color:#666;padding:10px 8px">${merchantVo.custName }</td>
-								<td class="td-left"  width="18%">商户简称：</td>
-								<td class="td-right" width="32%" style="color:#666;padding:10px 8px">${merchantVo.shortName }</td>
+						    <td class="td-left"  width="18%">商户名称：</td>
+							<td class="td-right" width="32%" style="color:#666;padding:10px 8px">${merchantVo.custName }</td>
+							<td class="td-left"  width="18%">商户简称：</td>
+							<td class="td-right" width="32%" style="color:#666;padding:10px 8px">${merchantVo.shortName }</td>
 						</tr>
 						<tr>
-								<td class="td-left">商户邮箱：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.merchantEmail }</td>
-								<td class="td-left">客服号码：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.contactPhone }</td>
+							<td class="td-left">商户邮箱：</td>
+							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.merchantEmail }</td>
+							<td class="td-left">客服号码：</td>
+							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.contactPhone }</td>
 						 </tr>
-						     <tr>
-								<td class="td-left">商户地址：</td>
-								<td class="td-right"  style="color:#666;padding:10px 8px">${merchantVo.custAdd }</td>
-							</tr>	
+					     <tr>
+							<td class="td-left">商户地址：</td>
+							<td class="td-right"  style="color:#666;padding:10px 8px">${merchantVo.custAdd }</td>
+						 </tr>	
 						 <tr>
-								<td class="td-left">营业执照编号：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.businessLicense }</td>
-								<td class="td-left">营业执照有限期：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">
-									${merchantVo.businessTermStart } -
-                                    <c:choose>   
-				                        <c:when test="${merchantVo.businessTermEnd =='forever'}">  									  
-				                            	长期  								  
-				                        </c:when>  
-				  						<c:otherwise>  								  
-				                            ${merchantVo.businessTermEnd }  									  
-				                        </c:otherwise>
-		                             </c:choose>
-								</td>
-							</tr>
-							<tr>
-								<td class="td-left">营业执照扫描件：</td>
-								<td class="td-right" colspan="3">
-									<a data-toggle='modal' class="tooltip-success businessPhotoClick" data-target="#previewImageModal" >
-										<label id="businessPhotoDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
-										  <img  id="businessPhotoImageDiv" onclick="bigImg(this);"  style="width:100%;height:100%;display:none"  />										  
-										</label>
-									</a>
-									<div class="updateImageDiv" style="float:left; margin-top:75 " >
-										<input type="hidden" id="businessPhotoImageVal02"  />  
-										<input type="file" name="businessPhoto" id="businessPhoto" onchange="showBusinessPhotoImage(this)" />
-									 	<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-									</div>
-									
-								</td>
-							</tr>
-							<tr>
-								<td class="td-left">所属业务人员：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.custManager }</td>
-								<td class="td-left">所属代理商：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.agentName }</td>
-							</tr>
-                        <tr>
-							<td colspan="4" class="headlerPreview" style="background:#7ebde1;">法人信息</td></tr>
-						<tr>
-							</tr><tr>
-								<td class="td-left">法人真实姓名：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.representativeName }</td>
-								<td class="td-left">法人身份证号码：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.representativeCertNo }</td>
-							</tr>
-							<tr>
-								<td class="td-left" >法人身份证正面：</td>
-								<td class="td-right" colspan="3">
-									<a data-toggle='modal' class="tooltip-success certAttribute1Click"   data-target="#previewImageModal" >
-									<label id="certAttribute1Div"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
-									        <img  id="certAttribute1ImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none"/>
+							<td class="td-left">营业执照编号：</td>
+							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.businessLicense }</td>
+							<td class="td-left">营业执照有限期：</td>
+							<td class="td-right" style="color:#666;padding:10px 8px">
+								${merchantVo.businessTermStart } -
+                                   <c:choose>   
+			                        <c:when test="${merchantVo.businessTermEnd =='forever'}">  									  
+			                            	长期  								  
+			                        </c:when>  
+			  						<c:otherwise>  								  
+			                            ${merchantVo.businessTermEnd }  									  
+			                        </c:otherwise>
+	                             </c:choose>
+							</td>
+						 </tr>
+						 <tr>
+							<td class="td-left">营业执照扫描件：</td>
+							<td class="td-right" colspan="3">
+								<a data-toggle='modal' class="tooltip-success businessPhotoClick" data-target="#previewImageModal" >
+									<label id="businessPhotoDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+									  <img  id="businessPhotoImageDiv" onclick="bigImg(this);"  style="width:100%;height:100%;display:none"  />										  
 									</label>
-									</a>
-									<div class="updateImageDiv" style="float:left; margin-top:75" >
-										<input type="hidden" id="certAttribute1Val02"  />  
-										<input type="file" name="certAttribute1" id="certAttribute1"  onchange="showCertAttribute1Image(this)"/> 
-										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-									</div>
-									
-								</td>
-							</tr>
-							<tr>
-								<td class="td-left" >法人身份证背面：</td>
-								<td class="td-right" colspan="3"> 
-									<a data-toggle='modal' class="tooltip-success certAttribute2Click"  data-target="#previewImageModal"  >
-										<label id="certAttribute2Div"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
-										        <img  id="certAttribute2ImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none" />
-										</label>
-									</a>
-									<div class="updateImageDiv" style="float:left; margin-top:75" >
-										<input type="hidden" id="certAttribute2Val02"  />  
-										<input type="file" name="certAttribute2" id="certAttribute2" onchange="showCertAttribute2Image(this)"/> 
-										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-									</div>
-									
-								</td>
-							</tr>
-                          <tr>
+								</a>
+								<div class="updateImageDiv" style="float:left; margin-top:75 " >
+									<input type="hidden" id="businessPhotoImageVal02"  />  
+									<input type="file" name="businessPhoto" id="businessPhoto" onchange="showBusinessPhotoImage(this)" />
+								 	<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+								</div>
+								
+							</td>
+						 </tr>
+						 <tr>
+							<td class="td-left">所属业务人员：</td>
+							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.custManager }</td>
+							<td class="td-left">所属代理商：</td>
+							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.agentName }</td>
+						 </tr>
+                         <tr>
+							<td colspan="4" class="headlerPreview" style="background:#7ebde1;">法人信息</td></tr>
+						 <tr>
+						 </tr>
+						 <tr>
+							<td class="td-left">法人真实姓名：</td>
+							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.representativeName }</td>
+							<td class="td-left">法人身份证号码：</td>
+							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.representativeCertNo }</td>
+						 </tr>
+						 <tr>
+							<td class="td-left" >法人身份证正面：</td>
+							<td class="td-right" colspan="3">
+								<a data-toggle='modal' class="tooltip-success certAttribute1Click"   data-target="#previewImageModal" >
+								<label id="certAttribute1Div"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
+								        <img  id="certAttribute1ImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none"/>
+								</label>
+								</a>
+								<div class="updateImageDiv" style="float:left; margin-top:75" >
+									<input type="hidden" id="certAttribute1Val02"  />  
+									<input type="file" name="certAttribute1" id="certAttribute1"  onchange="showCertAttribute1Image(this)"/> 
+									<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+								</div>
+								
+							</td>
+						 </tr>
+						 <tr>
+							<td class="td-left" >法人身份证背面：</td>
+							<td class="td-right" colspan="3"> 
+								<a data-toggle='modal' class="tooltip-success certAttribute2Click"  data-target="#previewImageModal"  >
+									<label id="certAttribute2Div"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
+									        <img  id="certAttribute2ImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none" />
+									</label>
+								</a>
+								<div class="updateImageDiv" style="float:left; margin-top:75" >
+									<input type="hidden" id="certAttribute2Val02"  />  
+									<input type="file" name="certAttribute2" id="certAttribute2" onchange="showCertAttribute2Image(this)"/> 
+									<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+								</div>
+								
+							</td>
+						 </tr>
+                         <tr>
 							<td colspan="4" class="headlerPreview" style="background:#7ebde1;">联系信息</td></tr>
-						   <tr>
-							</tr>
-                            
-                            <tr>
-								<td class="td-left">联系人姓名：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.contactName }</td>
-								<td class="td-left">联系人手机号码：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.contactMobile }</td>
-							</tr>
-						<tr id="next_id">
+						 <tr></tr>
+                         <tr>
+							<td class="td-left">联系人姓名：</td>
+							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.contactName }</td>
+							<td class="td-left">联系人手机号码：</td>
+							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.contactMobile }</td>
+						 </tr>
+						 <tr id="next_id">
 							<td colspan="4" class="headlerPreview" style="background:#7ebde1;">结算信息</td>
-						</tr>
-						<tr>
-								<td class="td-left">银行卡号</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.compMainAcct }</td>
-							
-								<td class="td-left">银行类型：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.compAcctBank }</td>
-							</tr>
-							<tr>
-								<td class="td-left">开户行：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.branchBank }</td>
-								<td class="td-left">开户人：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.bankAcctName }</td>
-							</tr>
-                            
-                            <tr>
-								<td class="td-left">开户省份：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.bankProvinceName }</td>
-								<td class="td-left">开户城市：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.bankCityName }</td>
-							</tr>
-                            
-                            <tr>
+						 </tr>
+						 <tr>
+							<td class="td-left">银行卡号</td>
+							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.compMainAcct }</td>
+						
+							<td class="td-left">银行类型：</td>
+							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.compAcctBank }</td>
+						 </tr>
+						 <tr>
+							<td class="td-left">开户行：</td>
+							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.branchBank }</td>
+							<td class="td-left">开户人：</td>
+							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.bankAcctName }</td>
+						 </tr>
+                         <tr>
+							<td class="td-left">开户省份：</td>
+							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.bankProvinceName }</td>
+							<td class="td-left">开户城市：</td>
+							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.bankCityName }</td>
+						 </tr>
+                         <tr>
 							<td class="td-left">网点号：</td>
-							  <td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.cnaps }</td>
-								<td class="td-left">结算类型：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.compMainAcctType }</td>
-							</tr>
-                            <tr>
-								<td class="td-left" >开户许可证：</td>
-								<td class="td-right" colspan="3"> 
-									<a data-toggle='modal' class="tooltip-success openAccountClick"  data-target="#previewImageModal" >
-										<label id="openAccountDiv"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
-										        <img  id="openAccountImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none"/>
-										</label>
-									</a>
-									<div class="updateImageDiv" style="float:left; margin-top:75" >
-										<input type="hidden" id="openAccountVal02"  />  
-										<input type="file" name="openAccount" id="openAccount" onchange="showopenAccountImage(this)"/>
-										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-									</div>
-																			
-								</td>
-							</tr>
-                           <tr>
-							<td colspan="4" class="headlerPreview" style="background:#7ebde1;">操作记录</td></tr>
-						   <tr>
-							</tr>
-                            
-                            <tr>
-								<td class="td-left">录入人：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.createId }</td>
-								<td class="td-left">录入时间：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.createTime }</td>
-							</tr>
-							</tbody>
-						</table>
+						  	<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.cnaps }</td>
+							<td class="td-left">结算类型：</td>
+							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.compMainAcctType }</td>
+						 </tr>
+                         <tr>
+							<td class="td-left" >开户许可证：</td>
+							<td class="td-right" colspan="3"> 
+								<a data-toggle='modal' class="tooltip-success openAccountClick"  data-target="#previewImageModal" >
+									<label id="openAccountDiv"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
+									        <img  id="openAccountImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none"/>
+									</label>
+								</a>
+								<div class="updateImageDiv" style="float:left; margin-top:75" >
+									<input type="hidden" id="openAccountVal02"  />  
+									<input type="file" name="openAccount" id="openAccount" onchange="showopenAccountImage(this)"/>
+									<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+								</div>
+																		
+							</td>
+						 </tr>
+                         <tr>
+							<td colspan="4" class="headlerPreview" style="background:#7ebde1;">操作记录</td>
+						 </tr>
+					   	<tr></tr>
+                        <tr>
+							<td class="td-left">录入人：</td>
+							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.createId }</td>
+							<td class="td-left">录入时间：</td>
+							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.createTime }</td>
+						</tr>
+					</tbody>
+					</table>
                         <div style="margin:50px 0 0 0;text-align:center">
                         	<button type="button"  class="btn btn-primary" onclick="pass()">审核通过</button> 
                         	<button type="button" class="btn btn-primary auditNotPassBtn" data-toggle='modal'  data-target="#auditMessageModel" >审核不通过</button>
                         	<button type="button"  class="btn btn-default" onclick="exit()">关闭</button> 
-						</div>
+					</div>
 					</div>
 				</div>
 				<!-- 图片预览 -->
@@ -422,6 +415,7 @@ function exit() {
 				      </div><!-- /.modal-content -->
 				   </div>
 				</div><!-- /.modal -->
+				
 				</div><!-- /.page-content -->
 				
 				<!-- 底部-->
@@ -441,8 +435,5 @@ function exit() {
 
 <script type="text/javascript">
 
-/* $('.auditNotPassBtn').click(function(){
-	
-}); */
 </script>
 </html>	

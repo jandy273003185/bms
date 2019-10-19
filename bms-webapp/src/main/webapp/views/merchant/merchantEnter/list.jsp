@@ -14,9 +14,9 @@
 <link rel="stylesheet" href="/static/css/ace-rtl.min.css">
 <link rel="stylesheet" href="/static/css/ace-skins.min.css">
 <link rel="stylesheet" href="/static/css/gyzb-admin.css">
+<link href="/static/js/WdatePicker.css" rel="stylesheet" type="text/css">
+<link href="/static/js/AutoDatePicker.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="/static/css/bootstrap-datetimepicker.min.css">
-<%-- <script src='<c:url value="/static/js/checkRule_source.js"/>'></script>
-<script src='<c:url value="/static/My97DatePicker/WdatePicker.js"/>'></script> --%>
 <script src='<c:url value="/static/js/jquery-ui.min.js"/>'></script>
 <script src='<c:url value="/static/js/jquery.divbox.js"/>'></script>
 <script src='<c:url value="/static/js/ajaxfileupload.js"/>'></script>
@@ -27,18 +27,16 @@
 <script src="/static/js/jquery.blockUI.js"></script>
 <script src="/static/js/jquery.pagination.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
-<!-- page specific plugin scripts -->
 <script src="/static/js/typeahead-bs2.min.js"></script>
 <script src="/static/js/dropzone.min.js"></script>
-		
 <script src="/static/js/ace-elements.min.js"></script>
 <script src="/static/js/ace.min.js"></script>
 <script src="/static/js/gyzb-admin.js"></script>
 <script src="/static/js/checkRule_source.js"></script>
 <script src="/static/js/service.js"></script>
 <script src="/static/js/bootstrap-datetimepicker.min.js"></script>
-<script src="/static/js/WdatePicker.js"></script><link href="/static/js/WdatePicker.css" rel="stylesheet" type="text/css">
-<script src="/static/js/AutoDatePicker.js"></script><link href="/static/js/AutoDatePicker.css" rel="stylesheet" type="text/css">
+<script src="/static/js/WdatePicker.js"></script>
+<script src="/static/js/AutoDatePicker.js"></script>
 <script src="/static/js/jquery-ui.min.js"></script>
 <script src="/static/js/jquery.divbox.js"></script>
 <script src="/static/js/ajaxfileupload.js"></script>
@@ -70,7 +68,7 @@ $(function(){
 		var auditState = $('.search-table #auditState').val();
 		var custName = $('.search-table #custName').val();
 		var email = $('.search-table #email').val();
-		var merchantState = $('.search-table #merchantState').val();
+		var merchantState = $('.search-table #state').val();
 		
 		var src ="<%= request.getContextPath()+ MerchantEnterPath.BASE+MerchantEnterPath.PROEXPORTMERCHANTINFO%>?merchantCode="+
 		merchantCode+
@@ -87,7 +85,6 @@ $(function(){
 		"&merchantState="+
 		merchantState;
 		$(".exportBut").attr("href",src);
-		
 	});
 	
 	
@@ -120,7 +117,7 @@ $(function(){
 	             $(".showDiv").width(width+"px");
 	             $(".showDiv").height(height+"px");
 	             
-	           //优图
+	           	 //优图
 	             var param = "{str:\""+base64_string+"\",flag:\""+_this.attr('id')+"\"}"
 	    		 $.ajax({
 	    	   			async:false,
@@ -155,7 +152,6 @@ $(function(){
 		});
 	});
 })	
-	
 	
 	
 $(document).ready(function(){
@@ -311,14 +307,12 @@ function productMerchantEntry(obj){
 										</span>
 									
 									</td>
-									
 									<td class="td-left">邮箱账号：</td>
 									<td class="td-right">
                                          <span class="input-icon">
 											<input type="text" name="email" id="email" value="">
 											<i class="icon-leaf blue"></i>
 										</span>								   
-										 
 									</td>
 								</tr>
 								<tr>
@@ -351,7 +345,7 @@ function productMerchantEntry(obj){
 									<input type="text" name="endCreateTime" id="endCreateTime" readonly value="" onFocus="WdatePicker({skin:&#39;whyGreen&#39;,maxDate:&#39;%y-%M-%d&#39;})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> 
 									</td>
 								</tr>
-                                <!-- <tr>
+                           <!-- <tr>
 									<td class="td-left">报备状态：</td>
 									<td class="td-right"> 
 										<select name="filingStatus" id="filingStatus">
@@ -373,7 +367,7 @@ function productMerchantEntry(obj){
 									    <label class="label-tips" id="businessRegAddrLab"></label>
 									</td>
 								</tr> -->
-									<tr>
+								<tr>
 									<td colspan="6" align="center">
 										<span class="input-group-btn">
 											<button type="submit" class="btn btn-purple btn-sm btn-margin  buttonSearch">
@@ -392,149 +386,151 @@ function productMerchantEntry(obj){
 							</table>
 						</form>
 							
-							<div style="margin:30px 0 10px 0">
-							   <a href="<%=request.getContextPath()+MerchantEnterPath.BASE + MerchantEnterPath.ADDPAGE%>"  class="btn btn-primary" >新增</a>
-							   <!-- <a href="#" class="btn btn-primary" onclick="addMerchantEntry()" data-rel="tooltip" data-toggle='modal'>新增</a> -->
-                               <button type="button"  class="btn btn-primary">重置密码</button>
-                               <button type="button"  class="btn btn-primary" disabled="disabled">批量审核资料</button>
-                               <button type="button"  class="btn btn-primary" disabled="disabled">批量录入</button>
-                               <!-- <button type="button"  class="btn btn-primary exportBut">导出</button> -->
-							   <a class="btn btn-primary exportBut">导出</a> 
-                               <button type="button"  class="btn btn-primary">打印二维码</button>
-                            </div>
+						<div style="margin:30px 0 10px 0">
+						   <a href="<%=request.getContextPath()+MerchantEnterPath.BASE + MerchantEnterPath.ADDPAGE%>"  class="btn btn-primary" >新增</a>
+						   <!-- <a href="#" class="btn btn-primary" onclick="addMerchantEntry()" data-rel="tooltip" data-toggle='modal'>新增</a> -->
+                           <button type="button"  class="btn btn-primary">重置密码</button>
+                           <button type="button"  class="btn btn-primary" disabled="disabled">批量审核资料</button>
+                           <button type="button"  class="btn btn-primary" disabled="disabled">批量录入</button>
+                           <!-- <button type="button"  class="btn btn-primary exportBut">导出</button> -->
+						   <a class="btn btn-primary exportBut">导出</a> 
+                           <button type="button"  class="btn btn-primary">打印二维码</button>
+                        </div>
                             
-							<div class="list-table-header">商户列表</div>
-							<div class="table-responsive">
-								<table id="sample-table-2" class="list-table">
-									<thead>
-										<tr>
-                                            <th><input name="" type="checkbox" value=""></th>
-											<th>商户名称</th>
-											<th>商户简称</th>
-											<th>商户编号</th>	
-											<th>邮箱账号</th>
-                                            <th width="12%">录入时间</th>	
-											<th>商户状态</th>
-											<th>审核状态</th>	
-                                            <!-- <th>报备状态</th>
-                                            <th>报备审核状态</th> -->
-											<th width="10%">审核人</th>									
-											<th width="28%">操作</th>
-										</tr>
-									</thead>
-									<tbody>
-									<c:forEach items="${merchantList }" var="merchant">
-										<tr class="merchant" id="merchant">
-											<td><input name="" type="checkbox" value=""></td>
-                                            <td>${merchant.custName }</td>
-											<td>${merchant.shortName }</td>
-											<td>${merchant.merchantCode }</td>
-											<td>${merchant.email }</td>
-											<td>${merchant.createTime }</td>
-											<td>
-												<c:choose>   
-							                        <c:when test="${merchant.state =='00'}">  									  
-							                                                                             有效  								  
-							                        </c:when>  
-							  						<c:when test="${merchant.state =='01'}">  									  
-							                                                                             待审核  								  
-							                        </c:when> 
-							                        <c:when test="${merchant.state =='02'}">  									  
-							                                                                              注销  								  
-							                        </c:when>
-							                        <c:when test="${merchant.state =='03'}">  									  
-							                                                                              冻结  								  
-							                        </c:when>
-							                        <c:when test="${merchant.state =='04'}">  									  
-							                                                                              审核不通过  								  
-							                        </c:when>
-	                                            </c:choose>
-											</td>
-											<td>
-												<c:choose>   
-							                        <c:when test="${merchant.auditState =='0'}">  									  
-							                                                                              审核通过  								  
-							                        </c:when>  
-							  						<c:when test="${merchant.auditState =='1'}">  									  
-							                                                                              待审核  								  
-							                        </c:when> 
-							                        <c:when test="${merchant.auditState =='2'}">  									  
-							                                                                               审核不通过  								  
-							                        </c:when>
-	                                            </c:choose>
-	                                        </td>
-											<%-- <td>
-												<c:choose>   
-							                        <c:when test="${merchant.filingStatus =='00'}">  									  
-							                                                                             未报备  								  
-							                        </c:when>  
-							  						<c:when test="${merchant.filingStatus =='01'}">  									  
-							                                                                             已报备 								  
-							                        </c:when> 
-							                        <c:when test="${merchant.state =='02'}">  									  
-							                                                                              注销  								  
-							                        </c:when>
-	                                            </c:choose>
-											</td>
-											<td>${merchant.filingAuditStatus }
-												<c:choose>   
-							                        <c:when test="${merchant.filingAuditStatus =='00'}">  									  
-							                                                                             成功  								  
-							                        </c:when>  
-							  						<c:when test="${merchant.filingAuditStatus =='99'}">  									  
-							                                                                             失败 								  
-							                        </c:when> 
-							                        <c:when test="${merchant.filingAuditStatus =='01'}">  									  
-							                                                                              待审核  								  
-							                        </c:when>
-							                        <c:when test="${merchant.filingAuditStatus =='02'}">  									  
-							                                                                              提交审核  								  
-							                        </c:when>
-	                                            </c:choose>
-											</td> --%>
-											<td>${merchant.aduitUserName }</td>
-											<td>
-												<input type="hidden" name="merchantCode" id = "merchantCode" value="${merchant.merchantCode }" />
-												<input type="hidden" name="custId"  id= "custId" value="${merchant.custId }" />
-												<gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.PREVIEW %>">
-													<a href="#" class="" onclick="previewMerchantEntry(this)" data-rel="tooltip" title="Query" data-toggle='modal'>
-														<button type="submit" class="btn btn-purple btn-sm">预览</button>
-													</a>
-												</gyzbadmin:function>
-												<gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.UPDATEPAGE %>">
-													<a href="#" class="" onclick="upadteMerchantEntry(this)" data-rel="tooltip" title="Query" data-toggle='modal'>
-														<button type="submit" class="btn btn-purple btn-sm">商户更新</button>
-													</a>
-												</gyzbadmin:function>
-												<gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.AUDITPAGE%>">
-													<a href="#" class="" onclick="aduitMerchantEntry(this)" data-rel="tooltip" title="Query" data-toggle='modal'>
-														<button type="submit" class="btn btn-purple btn-sm">商户审核</button>
-													</a>
-												</gyzbadmin:function>
-												<!-- 报备链接未建 -->
-												<gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.PRODUCT %>">
-													<a href="#" class="" onclick="productMerchantEntry(this)" data-rel="tooltip" title="Query" data-toggle='modal'>
-														<button type="submit" class="btn btn-purple btn-sm">报备</button>
-													</a>
-												</gyzbadmin:function>
-												<gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.PRODUCT %>">
-													<a href="#" class="" onclick="productMerchantEntry(this)" data-rel="tooltip" title="Query" data-toggle='modal'>
-														<button type="submit" class="btn btn-purple btn-sm">产品查看</button>
-													</a>
-												</gyzbadmin:function>
-											</td>
-										</tr>
-									</c:forEach>
-									<c:if test="${empty merchantList}">
-										<tr><td colspan="20" align="center"><font style="color: red; font-weight: bold;font-size: 15px;">暂无数据</font></td></tr>
-									</c:if>
-									</tbody>
-								</table>
-								<!-- 分页 -->
-								<c:if test="${not empty merchantList}">
-								<%@ include file="/include/page.jsp"%>
+						<div class="list-table-header">商户列表</div>
+						<div class="table-responsive">
+							<table id="sample-table-2" class="list-table">
+								<thead>
+									<tr>
+                                        <th><input name="" type="checkbox" value=""></th>
+										<th>商户名称</th>
+										<th>商户简称</th>
+										<th>商户编号</th>	
+										<th>邮箱账号</th>
+                                        <th width="12%">录入时间</th>	
+										<th>商户状态</th>
+										<th>审核状态</th>	
+                                        <!-- <th>报备状态</th>
+                                        <th>报备审核状态</th> -->
+										<th width="10%">审核人</th>									
+										<th width="28%">操作</th>
+									</tr>
+								</thead>
+								<tbody>
+								<c:forEach items="${merchantList }" var="merchant">
+									<tr class="merchant" id="merchant">
+										<td><input name="" type="checkbox" value=""></td>
+                                        <td>${merchant.custName }</td>
+										<td>${merchant.shortName }</td>
+										<td>${merchant.merchantCode }</td>
+										<td>${merchant.email }</td>
+										<td>${merchant.createTime }</td>
+										<td>
+											<c:choose>   
+						                        <c:when test="${merchant.state =='00'}">  									  
+						                                                                             有效  								  
+						                        </c:when>  
+						  						<c:when test="${merchant.state =='01'}">  									  
+						                                                                             待审核  								  
+						                        </c:when> 
+						                        <c:when test="${merchant.state =='02'}">  									  
+						                                                                              注销  								  
+						                        </c:when>
+						                        <c:when test="${merchant.state =='03'}">  									  
+						                                                                              冻结  								  
+						                        </c:when>
+						                        <c:when test="${merchant.state =='04'}">  									  
+						                                                                              审核不通过  								  
+						                        </c:when>
+                                            </c:choose>
+										</td>
+										<td>
+											<c:choose>   
+						                        <c:when test="${merchant.auditState =='0'}">  									  
+						                                                                              审核通过  								  
+						                        </c:when>  
+						  						<c:when test="${merchant.auditState =='1'}">  									  
+						                                                                              待审核  								  
+						                        </c:when> 
+						                        <c:when test="${merchant.auditState =='2'}">  									  
+						                                                                               审核不通过  								  
+						                        </c:when>
+                                            </c:choose>
+                                        </td>
+										<%-- <td>
+											<c:choose>   
+						                        <c:when test="${merchant.filingStatus =='00'}">  									  
+						                                                                             未报备  								  
+						                        </c:when>  
+						  						<c:when test="${merchant.filingStatus =='01'}">  									  
+						                                                                             已报备 								  
+						                        </c:when> 
+						                        <c:when test="${merchant.state =='02'}">  									  
+						                                                                              注销  								  
+						                        </c:when>
+                                            </c:choose>
+										</td>
+										<td>${merchant.filingAuditStatus }
+											<c:choose>   
+						                        <c:when test="${merchant.filingAuditStatus =='00'}">  									  
+						                                                                             成功  								  
+						                        </c:when>  
+						  						<c:when test="${merchant.filingAuditStatus =='99'}">  									  
+						                                                                             失败 								  
+						                        </c:when> 
+						                        <c:when test="${merchant.filingAuditStatus =='01'}">  									  
+						                                                                              待审核  								  
+						                        </c:when>
+						                        <c:when test="${merchant.filingAuditStatus =='02'}">  									  
+						                                                                              提交审核  								  
+						                        </c:when>
+                                            </c:choose>
+										</td> --%>
+										<td>${merchant.aduitUserName }</td>
+										<td>
+											<input type="hidden" name="merchantCode" id = "merchantCode" value="${merchant.merchantCode }" />
+											<input type="hidden" name="custId"  id= "custId" value="${merchant.custId }" />
+											<gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.PREVIEW %>">
+												<a href="#" class="" onclick="previewMerchantEntry(this)" data-rel="tooltip" title="Query" data-toggle='modal'>
+													<button type="submit" class="btn btn-purple btn-sm">预览</button>
+												</a>
+											</gyzbadmin:function>
+											<gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.UPDATEPAGE %>">
+												<a href="#" class="" onclick="upadteMerchantEntry(this)" data-rel="tooltip" title="Query" data-toggle='modal'>
+													<button type="submit" class="btn btn-purple btn-sm">商户更新</button>
+												</a>
+											</gyzbadmin:function>
+											<gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.AUDITPAGE%>">
+												<a href="#" class="" onclick="aduitMerchantEntry(this)" data-rel="tooltip" title="Query" data-toggle='modal'>
+													<button type="submit" class="btn btn-purple btn-sm">商户审核</button>
+												</a>
+											</gyzbadmin:function>
+											<!-- 报备链接未建 -->
+											<gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.PRODUCT %>">
+												<a href="#" class="" onclick="productMerchantEntry(this)" data-rel="tooltip" title="Query" data-toggle='modal'>
+													<button type="submit" class="btn btn-purple btn-sm">报备</button>
+												</a>
+											</gyzbadmin:function>
+											<gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.PRODUCT %>">
+												<a href="#" class="" onclick="productMerchantEntry(this)" data-rel="tooltip" title="Query" data-toggle='modal'>
+													<button type="submit" class="btn btn-purple btn-sm">产品查看</button>
+												</a>
+											</gyzbadmin:function>
+										</td>
+									</tr>
+								</c:forEach>
+								<c:if test="${empty merchantList}">
+									<tr>
+										<td colspan="20" align="center"><font style="color: red; font-weight: bold;font-size: 15px;">暂无数据</font></td>
+									</tr>
 								</c:if>
-							</div>
+								</tbody>
+							</table>
+							<!-- 分页 -->
+							<c:if test="${not empty merchantList}">
+							<%@ include file="/include/page.jsp"%>
+							</c:if>
+						</div>
 						</div>
 					</div>
 				</div><!-- /.page-content -->
@@ -547,16 +543,6 @@ function productMerchantEntry(obj){
 		<!-- 向上置顶 -->
 		<%@ include file="/include/up.jsp"%>
 	</div><!-- /.main-container -->
-
-
-	<!-- 图片预览 -->
-	<div class="modal fade" id="previewImageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	   <div class="modal-dialog showDiv" id="imageDiv" style="width:60%;height:80%;">
-	         <div id="showImageDiv" style="width:100%;height:100%;">
-	           <img id="showImage" style="width:100%;height:100%;">
-	         </div>
-	     </div>
-	</div>        
 </body>
 
 <script type="text/javascript">
