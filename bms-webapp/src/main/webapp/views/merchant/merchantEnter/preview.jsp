@@ -36,6 +36,72 @@
 	</style>
 </head>
 <script type="text/javascript">
+
+$(function() {
+	
+	if($("#custType").val() =='0' ||$("#custType").val() =='2' ){
+		//个人
+		$("#bankCardPhoto_").attr("style","display:");
+		$("#openAccount_").attr("style","display:none");
+	}
+	if($("#custType").val() =='1'){
+		//企业
+		$("#bankCardPhoto_").attr("style","display:none");
+		$("#openAccount_").attr("style","display:");
+	}
+
+	var custId = $("#custId").val();
+	var authId = $("#authId").val();
+
+	$("#updateMerchant #businessPhotoImageDiv").show();
+	$("#updateMerchant #bankCardPhotoImageDiv").show();
+	$("#updateMerchant #certAttribute1ImageDiv").show();
+	$("#updateMerchant #certAttribute2ImageDiv").show();
+	$("#updateMerchant #openAccountImageDiv").show();
+	$("#updateMerchant #businessPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=07&authId="+authId);
+	$("#updateMerchant #bankCardPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=08&authId="+authId);
+	$("#updateMerchant #certAttribute1ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=0&authId="+authId);
+	$("#updateMerchant #certAttribute2ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=1&authId="+authId);
+	$("#updateMerchant #openAccountImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=03&authId="+authId);
+
+
+	var cust_url = $("#url").val();
+	qrcode(cust_url);
+	function qrcode(url){
+		$("#code_2").html("");
+		$("#code_2").qrcode(url);
+		/* $("#code_3").qrcode(url); */
+		var mycanvas = $("#code_1").find("canvas")[0];
+		var image = mycanvas.toDataURL("image/png");
+		$("#code_1").html("<img id='qr_img' download='' src='"+image+"' width='100' height='100'  alt='from canvas'/>");
+	}
+
+	function preview(file)
+	{
+		var prevDiv = document.getElementById('img-' + file.id);
+		if (file.files && file.files[0]){
+			var reader = new FileReader();
+			reader.onload = function(evt){
+				prevDiv.innerHTML = '<img  style="width:50%;height:50%;" src="' + evt.target.result + '"   />';
+			};
+			reader.readAsDataURL(file.files[0]);
+		} else{
+			prevDiv.innerHTML = '<div style="width:50%;height:50%;" class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\''
+					+ file.value + '\'"></div>';
+		}
+	}
+	function check(obj){
+		var maxsize = '<%=res.getString("CERTIFY_FILE_MAX_SIZE")%>';
+		var fileType = '<%=res.getString("CERTIFY_SUPPORT_FILE_TYPE")%>';
+		if(!checkFileSize(maxsize,fileType,obj)){
+			var prevDiv = document.getElementById('img-' + obj.id);
+			$(prevDiv).html('<a href="javascript:;" >点击上传</a>');
+			obj.value='';
+			return false;
+		}
+		preview(obj);
+	}
+});
 </script>
 <body>
 	<%@ include file="/include/top.jsp"%>
@@ -65,6 +131,7 @@
 						<input type="hidden" name="custId" id="custId" value="${merchantVo.custId}">
 						<input type="hidden" name="merchantCode" id="merchantCode" value="${merchantVo.merchantCode}">
 						<input type="hidden" name="authId" id="authId" value="${merchantVo.authId}">
+						<input type="hidden" name="custType" id="custType" value="${merchantVo.custType}">
                     <table id="merchant_table" class="list-table">
 					<tbody>
                         <tr>
@@ -319,71 +386,7 @@
 
 <script type="text/javascript">
 
-	$(function() {
-
-		if($("#custType").val() =='0' ||$("#custType").val() =='2' ){
-			//个人
-			$("#bankCardPhoto_").attr("style","display:");
-			$("#openAccount_").attr("style","display:none");
-		}
-		if($("#custType").val() =='1'){
-			//企业
-			$("#bankCardPhoto_").attr("style","display:none");
-			$("#openAccount_").attr("style","display:");
-		}
-
-		var custId = $("#custId").val();
-		var authId = $("#authId").val();
-
-		$("#updateMerchant #businessPhotoImageDiv").show();
-		$("#updateMerchant #bankCardPhotoImageDiv").show();
-		$("#updateMerchant #certAttribute1ImageDiv").show();
-		$("#updateMerchant #certAttribute2ImageDiv").show();
-		$("#updateMerchant #openAccountImageDiv").show();
-		$("#updateMerchant #businessPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=07&authId="+authId);
-		$("#updateMerchant #bankCardPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=08&authId="+authId);
-		$("#updateMerchant #certAttribute1ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=0&authId="+authId);
-		$("#updateMerchant #certAttribute2ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=1&authId="+authId);
-		$("#updateMerchant #openAccountImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=03&authId="+authId);
-
-
-		var cust_url = $("#url").val();
-		qrcode(cust_url);
-		function qrcode(url){
-			$("#code_2").html("");
-			$("#code_2").qrcode(url);
-			/* $("#code_3").qrcode(url); */
-			var mycanvas = $("#code_1").find("canvas")[0];
-			var image = mycanvas.toDataURL("image/png");
-			$("#code_1").html("<img id='qr_img' download='' src='"+image+"' width='100' height='100'  alt='from canvas'/>");
-		}
-
-		function preview(file)
-		{
-			var prevDiv = document.getElementById('img-' + file.id);
-			if (file.files && file.files[0]){
-				var reader = new FileReader();
-				reader.onload = function(evt){
-					prevDiv.innerHTML = '<img  style="width:50%;height:50%;" src="' + evt.target.result + '"   />';
-				};
-				reader.readAsDataURL(file.files[0]);
-			} else{
-				prevDiv.innerHTML = '<div style="width:50%;height:50%;" class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\''
-						+ file.value + '\'"></div>';
-			}
-		}
-		function check(obj){
-			var maxsize = '<%=res.getString("CERTIFY_FILE_MAX_SIZE")%>';
-			var fileType = '<%=res.getString("CERTIFY_SUPPORT_FILE_TYPE")%>';
-			if(!checkFileSize(maxsize,fileType,obj)){
-				var prevDiv = document.getElementById('img-' + obj.id);
-				$(prevDiv).html('<a href="javascript:;" >点击上传</a>');
-				obj.value='';
-				return false;
-			}
-			preview(obj);
-		}
-	});
+	
 
 	/** 点击预览大图 **/
 	function bigImg(obj){
