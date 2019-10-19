@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
+<%@ page import="java.util.ResourceBundle"%>
+<%ResourceBundle res = ResourceBundle.getBundle("uploadFileConfig"); %>
 <%@page import="com.sevenpay.bms.basemanager.merchant.MerchantPath" %>
 <%@page import="com.sevenpay.bms.basemanager.merchant.MerchantEnterPath" %>
+<%@page import="com.sevenpay.bms.basemanager.merchant.StoreManagePath" %>
 <%@page import="com.sevenpay.bms.basemanager.merchant.AuditorPath"%>
 <%@page import="com.sevenpay.bms.basemanager.merchant.TinyMerchantPath" %>
 <%@page import="com.sevenpay.bms.basemanager.agency.controller.AgentRegisterPath" %>
@@ -12,6 +15,10 @@
 <script src='<c:url value="/static/js/upload.js"/>'></script>
 <script src='<c:url value="/static/js/mobileBUGFix.mini.js"/>'></script>
 <script src='<c:url value="/static/js/uploadCompress.js"/>'></script>
+<script src='<c:url value="/static/js/jquery.qrcode.min.js"/>'></script>
+<script src='<c:url value="/static/My97DatePicker/WdatePicker.js"/>'></script>
+<script src='<c:url value="/static/js/jquery-ui.min.js"/>'></script>
+<script src="<c:url value='/static/js/jquery.combo.select.js'/>"></script>
 <html>
 <head>
 	<meta charset="utf-8" />
@@ -31,136 +38,7 @@
 	</style>
 </head>
 <script type="text/javascript">
-$(function() {
-	
-	if($("#custType").val() =='0' ||$("#custType").val() =='2' ){
-		//个人
-		$("#bankCardPhoto_").attr("style","display:");
-		$("#openAccount_").attr("style","display:none");
-	}
-	if($("#custType").val() =='1'){
-		//企业
-		$("#bankCardPhoto_").attr("style","display:none");
-		$("#openAccount_").attr("style","display:");
-	}
-	
-	var custId = $("custId").val().trim();
-	var authId = $("authId").val().trim();
 
-	$("#updateMerchant #businessPhotoImageDiv").show();
-	$("#updateMerchant #bankCardPhotoImageDiv").show();
-	$("#updateMerchant #certAttribute1ImageDiv").show();
-	$("#updateMerchant #certAttribute2ImageDiv").show();
-	$("#updateMerchant #openAccountImageDiv").show();
-	$("#updateMerchant #businessPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=07&authId="+authId);
-	$("#updateMerchant #bankCardPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=08&authId="+authId);
-	$("#updateMerchant #certAttribute1ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=0&authId="+authId);
-	$("#updateMerchant #certAttribute2ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=1&authId="+authId);
-	$("#updateMerchant #openAccountImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=03&authId="+authId);
-
-});
-
-/** 点击预览大图 **/
-function bigImg(obj){
-    /* $('#showImageDiv #showImage').attr("src",obj.src); */
-    var realWidth;
-	var realHeight
-	$('#showImageDiv #showImage').attr("src",obj.src).load(function(){
-		realWidth = this.width;
-		realHeight = this.height;
-		var scale =  realWidth/realHeight;
-		if(realWidth >800){
-			realWidth = 800;
-			realHeight = realWidth / scale;
-		}
-		$("#imageDiv").css("width",realWidth+"px").css("height",realHeight+"px");
-	});
-}
-
-/********************图片预览***********************/
-/** 营业执照预览 **/
-function showBusinessPhotoImage(obj){  
-	 var divObj = document.getElementById("businessPhotoDiv");  
-	 var imageObj = document.getElementById("businessPhotoImage"); 
-	 var result1 = previewImage(divObj,imageObj,obj);
-	 return result1;
-}
-/** 营业执照点击预览 **/
-$('.businessPhotoClick').click(function(){
-	var divObj = document.getElementById("showImageDiv");
-	var imageObj = document.getElementById("showImage");
-	var obj = document.getElementById("businessPhoto"); 
-	return previewImage(divObj,imageObj,obj); 
-});  
-/** 身份证正面预览 **/
-function showCertAttribute1Image(obj){  
-	 var divObj = document.getElementById("certAttribute1Div");  
-	 var imageObj = document.getElementById("certAttribute1Image");
-	 var result1 = previewImage(divObj,imageObj,obj);
-	 return result1;  
-}
-/** 身份证正面点击预览 **/
-$('.certAttribute1Click').click(function(){
-	var divObj = document.getElementById("showImageDiv");
-	var imageObj = document.getElementById("showImage");
-	var obj = document.getElementById("certAttribute1");
-	return previewImage(divObj,imageObj,obj); 
-});
-/** 身份证背面预览 **/
-function showCertAttribute2Image(obj){  
-	 var divObj = document.getElementById("certAttribute2Div");  
-	 var imageObj = document.getElementById("certAttribute2Image");  
-	 var result1 = previewImage(divObj,imageObj,obj);
-	 return result1;  
-}
-/** 身份证背面点击预览 **/
-$('.certAttribute2Click').click(function(){
-	var divObj = document.getElementById("showImageDiv");
-	var imageObj = document.getElementById("showImage");
-	var obj = document.getElementById("certAttribute2");
-	return previewImage(divObj,imageObj,obj); 
-});
-
-/** 开户许可证预览 **/
-function showOpenAccountImage(obj){  
-	 var divObj = document.getElementById("openAccountDiv");  
-	 var imageObj = document.getElementById("openAccountImage");  
-	 var result1 = previewImage(divObj,imageObj,obj);
-	 return result1;  
-}
-/** 开户许可证背面点击预览 **/
-$('.openAccountClick').click(function(){
-	var divObj = document.getElementById("showImageDiv");
-	var imageObj = document.getElementById("showImage");
-	var obj = document.getElementById("openAccount");
-	return previewImage(divObj,imageObj,obj); 
-});
-
-/** 银行卡预览 **/
-function showBankCardPhotoImage(obj){  
-	 var divObj = document.getElementById("bankCardPhotoDiv");  
-	 var imageObj = document.getElementById("bankCardPhotoImage");  
-	 var result1 = previewImage(divObj,imageObj,obj);
-	 return result1;  
-}
-/** 银行卡点击预览 **/
-$('.bankCardPhotoClick').click(function(){
-	var divObj = document.getElementById("showImageDiv");
-	var imageObj = document.getElementById("showImage");
-	var obj = document.getElementById("bankCardPhoto");
-	return previewImage(divObj,imageObj,obj); 
-});
-
-
-function exit() {
-	if (confirm("您确定要关闭吗？")) {
-		window.opener=null;
-	
-		window.open("","_self");
-	
-		window.close();
-	}
-};
 </script>
 <body>
 	<%@ include file="/include/top.jsp"%>
@@ -416,8 +294,31 @@ function exit() {
 								<td class="td-right" style="color:#666;padding:10px 8px"></td>
 							</tr>
                             
-                            <tr><td colspan="4" class="headlerPreview" style="background:#7ebde1;">付款二维码</td></tr>
+                            <tr>
+								<td colspan="4" class="" style="background:#7ebde1;">付款二维码</td>
+								<div id="code_1" style="display: none; width: 100px;height: 100px;" >
+									<!-- <div id="code_1" style="display: none" class="col-xs-10 col-xs-offset-1 mt20 pd0 text-center"> -->
+								</div>
+								<%--<div id="code_2" class="col-xs-12 text-center" style="text-align:center;">
+									<input type="file" name="url" id="url" value=${qrCode}/>
+									<img id="showNewRecode" alt="" src="" style="text-align:center;">
+								</div>--%>
+							</tr>
+						 <%--<div id="code_1" style="display: none;margin-top:30px" class="col-xs-12 text-center">
+							 <!-- <div id="code_1" style="display: none" class="col-xs-10 col-xs-offset-1 mt20 pd0 text-center"> -->
+						 </div>
+						 <div id="code_2" class="col-xs-12 text-center" style="text-align:center;">
+							 <input type="file" name="url" id="url" value=${qrCode}/>
+							 <img id="showNewRecode" alt="" src="" style="text-align:center;">
+						 </div>--%>
+						 <%--<div id="code_3" class="col-xs-12 text-center"  style="text-align:center;">
+						 </div>--%>
 						    <tr></tr>
+						 <tr><td colspan="4"><div style="width:50px;height:50px; margin: 10 auto;" id="code_2" >
+							 <input type="file" name="url" id="url" value=${qrCode}/>
+							 <img id="showNewRecode" alt="" src="" style="text-align:center;">
+							 <%--<img style="width: 100%; height: 100%;" src="https://combinedpay.qifenqian.com/pub/merchantqr.do?mid=M123456789101112&sn=M123456789101112">--%>
+						 </div></td></tr>
 								
 						</tbody></table>
                         <div style="margin:50px 0 0 0;text-align:center">
@@ -452,5 +353,174 @@ function exit() {
 
 
 <script type="text/javascript">
+
+	$(function() {
+
+		if($("#custType").val() =='0' ||$("#custType").val() =='2' ){
+			//个人
+			$("#bankCardPhoto_").attr("style","display:");
+			$("#openAccount_").attr("style","display:none");
+		}
+		if($("#custType").val() =='1'){
+			//企业
+			$("#bankCardPhoto_").attr("style","display:none");
+			$("#openAccount_").attr("style","display:");
+		}
+
+		var custId = $("#custId").val();
+		var authId = $("#authId").val();
+
+		$("#updateMerchant #businessPhotoImageDiv").show();
+		$("#updateMerchant #bankCardPhotoImageDiv").show();
+		$("#updateMerchant #certAttribute1ImageDiv").show();
+		$("#updateMerchant #certAttribute2ImageDiv").show();
+		$("#updateMerchant #openAccountImageDiv").show();
+		$("#updateMerchant #businessPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=07&authId="+authId);
+		$("#updateMerchant #bankCardPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=08&authId="+authId);
+		$("#updateMerchant #certAttribute1ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=0&authId="+authId);
+		$("#updateMerchant #certAttribute2ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=1&authId="+authId);
+		$("#updateMerchant #openAccountImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=03&authId="+authId);
+
+
+		var cust_url = $("#url").val();
+		$("#showNewRecode").attr('src',"<%=request.getContextPath()+StoreManagePath.BASE+ StoreManagePath.GETIMAGE %>?custId=" + custId + "&certifyType=re");
+		qrcode(cust_url);
+		function qrcode(url){
+			$("#code_2").html("");
+			$("#code_2").qrcode(url);
+			$("#code_3").qrcode(url);
+			var mycanvas = $("#code_1").find("canvas")[0];
+			var image = mycanvas.toDataURL("image/png");
+			$("#code_1").html("<img id='qr_img' download='' src='"+image+"' width='100' height='100'  alt='from canvas'/>");
+		}
+
+		function preview(file)
+		{
+			var prevDiv = document.getElementById('img-' + file.id);
+			if (file.files && file.files[0]){
+				var reader = new FileReader();
+				reader.onload = function(evt){
+					prevDiv.innerHTML = '<img  style="width:50%;height:50%;" src="' + evt.target.result + '"   />';
+				};
+				reader.readAsDataURL(file.files[0]);
+			} else{
+				prevDiv.innerHTML = '<div style="width:50%;height:50%;" class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\''
+						+ file.value + '\'"></div>';
+			}
+		}
+		function check(obj){
+			var maxsize = '<%=res.getString("CERTIFY_FILE_MAX_SIZE")%>';
+			var fileType = '<%=res.getString("CERTIFY_SUPPORT_FILE_TYPE")%>';
+			if(!checkFileSize(maxsize,fileType,obj)){
+				var prevDiv = document.getElementById('img-' + obj.id);
+				$(prevDiv).html('<a href="javascript:;" >点击上传</a>');
+				obj.value='';
+				return false;
+			}
+			preview(obj);
+		}
+	});
+
+	/** 点击预览大图 **/
+	function bigImg(obj){
+		/* $('#showImageDiv #showImage').attr("src",obj.src); */
+		var realWidth;
+		var realHeight
+		$('#showImageDiv #showImage').attr("src",obj.src).load(function(){
+			realWidth = this.width;
+			realHeight = this.height;
+			var scale =  realWidth/realHeight;
+			if(realWidth >800){
+				realWidth = 800;
+				realHeight = realWidth / scale;
+			}
+			$("#imageDiv").css("width",realWidth+"px").css("height",realHeight+"px");
+		});
+	}
+
+	/********************图片预览***********************/
+	/** 营业执照预览 **/
+	function showBusinessPhotoImage(obj){
+		var divObj = document.getElementById("businessPhotoDiv");
+		var imageObj = document.getElementById("businessPhotoImage");
+		var result1 = previewImage(divObj,imageObj,obj);
+		return result1;
+	}
+	/** 营业执照点击预览 **/
+	$('.businessPhotoClick').click(function(){
+		var divObj = document.getElementById("showImageDiv");
+		var imageObj = document.getElementById("showImage");
+		var obj = document.getElementById("businessPhoto");
+		return previewImage(divObj,imageObj,obj);
+	});
+	/** 身份证正面预览 **/
+	function showCertAttribute1Image(obj){
+		var divObj = document.getElementById("certAttribute1Div");
+		var imageObj = document.getElementById("certAttribute1Image");
+		var result1 = previewImage(divObj,imageObj,obj);
+		return result1;
+	}
+	/** 身份证正面点击预览 **/
+	$('.certAttribute1Click').click(function(){
+		var divObj = document.getElementById("showImageDiv");
+		var imageObj = document.getElementById("showImage");
+		var obj = document.getElementById("certAttribute1");
+		return previewImage(divObj,imageObj,obj);
+	});
+	/** 身份证背面预览 **/
+	function showCertAttribute2Image(obj){
+		var divObj = document.getElementById("certAttribute2Div");
+		var imageObj = document.getElementById("certAttribute2Image");
+		var result1 = previewImage(divObj,imageObj,obj);
+		return result1;
+	}
+	/** 身份证背面点击预览 **/
+	$('.certAttribute2Click').click(function(){
+		var divObj = document.getElementById("showImageDiv");
+		var imageObj = document.getElementById("showImage");
+		var obj = document.getElementById("certAttribute2");
+		return previewImage(divObj,imageObj,obj);
+	});
+
+	/** 开户许可证预览 **/
+	function showOpenAccountImage(obj){
+		var divObj = document.getElementById("openAccountDiv");
+		var imageObj = document.getElementById("openAccountImage");
+		var result1 = previewImage(divObj,imageObj,obj);
+		return result1;
+	}
+	/** 开户许可证背面点击预览 **/
+	$('.openAccountClick').click(function(){
+		var divObj = document.getElementById("showImageDiv");
+		var imageObj = document.getElementById("showImage");
+		var obj = document.getElementById("openAccount");
+		return previewImage(divObj,imageObj,obj);
+	});
+
+	/** 银行卡预览 **/
+	function showBankCardPhotoImage(obj){
+		var divObj = document.getElementById("bankCardPhotoDiv");
+		var imageObj = document.getElementById("bankCardPhotoImage");
+		var result1 = previewImage(divObj,imageObj,obj);
+		return result1;
+	}
+	/** 银行卡点击预览 **/
+	$('.bankCardPhotoClick').click(function(){
+		var divObj = document.getElementById("showImageDiv");
+		var imageObj = document.getElementById("showImage");
+		var obj = document.getElementById("bankCardPhoto");
+		return previewImage(divObj,imageObj,obj);
+	});
+
+
+	function exit() {
+		if (confirm("您确定要关闭吗？")) {
+			window.opener=null;
+
+			window.open("","_self");
+
+			window.close();
+		}
+	};
 </script>
 </html>	
