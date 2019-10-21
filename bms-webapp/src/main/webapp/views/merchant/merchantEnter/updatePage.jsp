@@ -12,6 +12,7 @@
 <script src='<c:url value="/static/js/upload.js"/>'></script>
 <script src='<c:url value="/static/js/mobileBUGFix.mini.js"/>'></script>
 <script src='<c:url value="/static/js/uploadCompress.js"/>'></script>
+<script src='<c:url value="/static/js/register.js"/>'></script>
 <html>
 <head>
 	<meta charset="utf-8" />
