@@ -189,6 +189,7 @@ function updateMerchantBtn(){
 		$.gyzbadmin.alertFailure("结束日期不能小于开始日期");
 		return false;
 	}
+	var custType =$("#custType").val();
 	/*个人*/
 	if(custType=='0'){
 	}
