@@ -98,7 +98,7 @@ function updateMerchantBtn(){
 
 	var businessTermEnd = "forever";
 	/*账号校验*/
-	if(isNull($("#merchantAccount")[0])){
+	/* if(isNull($("#merchantAccount")[0])){
 		$("#merchantAccountLab").text("请设置商户账户");
 		$("#merchantAccount").focus();
 		return false;
@@ -108,7 +108,7 @@ function updateMerchantBtn(){
 		$("#merchantAccountLab").text("账号需用邮箱或者手机号 ");
 		$("#merchantAccount").focus();
 		return false;
-	}
+	} */
 
 	/*邮箱校验*/
 	if(isNull($("#merchantEmail")[0])){
@@ -150,7 +150,7 @@ function updateMerchantBtn(){
 
 	var businessLicense =$("#businessLicense").val();
 	//校验营业执照注册号唯一性
-	var validateLicense =true ;
+	<%-- var validateLicense =true ;
 
 	$.ajax({
 		async:false,
@@ -167,7 +167,7 @@ function updateMerchantBtn(){
 		}});
 	if(!validateLicense){
 		return false;
-	}
+	} --%>
 
 	/*营业执照有限期 */
 	if(isNull($("#businessTermStart")[0])){
@@ -356,7 +356,7 @@ function updateMerchantBtn(){
 		dataType : "json",
 		success : function(data) {
 			if(data.result=='SUCCESS'){
-				$.post(window.Constants.ContextPath +'<%=MerchantEnterPath.BASE + MerchantEnterPath.ADD%>',{
+				$.post(window.Constants.ContextPath +'<%=MerchantEnterPath.BASE + MerchantEnterPath.UPDATE%>',{
 					"custId":data.custId,							// 回传custId
 					"merchantAccount":merchantAccount, 					// 商户二维码编号
 					"custType":custType,
