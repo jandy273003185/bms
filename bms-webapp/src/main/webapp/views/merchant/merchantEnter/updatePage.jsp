@@ -94,7 +94,7 @@ function getBankCityList()
 	})
 }
 
-function addMerchantBtn(){
+function updateMerchantBtn(){
 
 	var businessTermEnd = "forever";
 	/*账号校验*/
