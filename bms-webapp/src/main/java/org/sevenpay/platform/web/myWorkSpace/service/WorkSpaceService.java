@@ -142,7 +142,7 @@ public class WorkSpaceService {
 		String certAttributeType1 = fileNames.get("certAttributeType1");
 		String idCardType_1 = fileNames.get("idCardType_1");
 		String idCardType_2 = fileNames.get("idCardType_2");
-		
+		String bankCard = fileNames.get("bankCard");
 		Properties p = PropertiesUtil.getProperties();
 		String cf_path = p.getProperty("CF_FILE_SAVE_PATH");
 		try {
@@ -165,6 +165,9 @@ public class WorkSpaceService {
 			 */
 			if(!StringUtils.isEmpty(certAttributeType1)){
 				this.updateScanPath(custId,Constant.CERTIFY_TYPE_OPEN,cf_path + File.separator + Constant.CERTIFY_TYPE_OPEN+File.separator+custId+File.separator+certAttributeType1,merchant.getCustName(),merchant.getCompMainAcct());
+			}
+			if(!StringUtils.isEmpty(bankCard)){
+				this.updateScanPath(custId,Constant.CERTIFY_TYPE_BANK_CARD,cf_path + File.separator + Constant.CERTIFY_TYPE_BANK_CARD+File.separator+custId+File.separator+bankCard,merchant.getCustName(),merchant.getCompMainAcct());
 			}
 			CustScan custScan = new CustScan();
 			custScan.setCustId(custId);
