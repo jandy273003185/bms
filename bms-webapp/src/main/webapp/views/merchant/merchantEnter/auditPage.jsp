@@ -42,8 +42,8 @@ $(function() {
 		$("#openAccount_").attr("style","display:");
 	}
 	
-	var custId = $("custId").val().trim();
-	var authId = $("authId").val().trim();
+	var custId = $("#custId").val().trim();
+	var authId = $("#authId").val().trim();
 
 	$("#updateMerchant #businessPhotoImageDiv").show();
 	$("#updateMerchant #bankCardPhotoImageDiv").show();
@@ -121,7 +121,7 @@ $('.bankCardPhotoClick').click(function(){
 function pass(){
 	
 	var isPass="1";
-	var merchantCode = $("merchantCode").val();
+	var merchantCode = $("#merchantCode").val();
 	var message = "";
 	$.ajax({
 		type:"POST",
@@ -148,8 +148,8 @@ function pass(){
 
 function noPass(){
 	var isPass="0";
-	var message = $("auditMessage").val();
-	var merchantCode = $("merchantCode").val();
+	var message = $("#auditMessage").val();
+	var merchantCode = $("#merchantCode").val();
 	$.ajax({
 		type:"POST",
 		dataType:"json",
