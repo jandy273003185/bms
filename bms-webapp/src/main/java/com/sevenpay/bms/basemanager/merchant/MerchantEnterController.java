@@ -401,7 +401,7 @@ public class MerchantEnterController {
 
 
         //二级审核不通过
-        /*merchantWorkFlowAuditService.secondAuditEnter(custInfo.getCustId(),false, custInfo.getAuthId(), message, "35", "2",null,"");
+       /* merchantWorkFlowAuditService.secondAuditEnter(custInfo.getCustId(),false, custInfo.getAuthId(), message, "35", "2",null,"");
         ob.put("result", "SUCCESS");*/
 
         /**
