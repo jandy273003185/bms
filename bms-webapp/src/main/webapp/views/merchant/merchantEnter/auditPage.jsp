@@ -146,7 +146,7 @@ function pass(){
 	})
 }
 
-function noPass(){
+function notPass(){
 	var isPass="0";
 	var message = $("#auditMessage").val();
 	var merchantCode = $("#merchantCode").val();
