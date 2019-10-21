@@ -343,7 +343,8 @@ function updateMerchantBtn(){
 	var bankCityName = $("#bankCityName").val();
 	var cnaps =  $("#cnaps").val();
 	var compMainAcctType = $("#compMainAcctType").val();
-
+	var custId = $("#custId").val();
+	/*alert(custId);*/
 	$.blockUI();
 	$.ajax({
 		type : "POST",
@@ -360,7 +361,7 @@ function updateMerchantBtn(){
 		success : function(data) {
 			if(data.result=='SUCCESS'){
 				$.post(window.Constants.ContextPath +'<%=MerchantEnterPath.BASE + MerchantEnterPath.UPDATE%>',{
-					"custId":data.custId,							// 回传custId
+					"custId":custId,							// 回传custId
 					"merchantAccount":merchantAccount, 					// 商户二维码编号
 					"custType":custType,
 					"custName":custName, 							// 客户姓名

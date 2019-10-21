@@ -275,6 +275,7 @@ public class MerchantEnterController {
 		filePath.put("idCardType_1", idCardType_1);
 		filePath.put("idCardType_2", idCardType_2);
 		try {
+			merchantVo.setMerchantState("03"); //merchantState
 			merchantService.updateMerchantEnterAndFeeRule(merchantVo,filePath);
 			object.put("result", "SUCCESS");
 			object.put("message", "修改商户信息成功");
@@ -354,9 +355,9 @@ public class MerchantEnterController {
         if (RequestColumnValues.RtnResult.SUCCESS == response.getRtnResult()) {
 
         }else{
-            ob.put("result", "FAILE");
-            ob.put("message", "七分钱账户开户失败"+response.getRtnInfo());
-            return ob;
+            //ob.put("result", "FAILE");
+            //ob.put("message", "七分钱账户开户失败"+response.getRtnInfo());
+            //return ob;
         }
         //merchantWorkFlowAuditService.secondAudit(tdCustInfo.getCustId(),number, true, tdCustInfo.getAuthId(), message, "30", "0","3","notEmpty");
         merchantWorkFlowAuditService.secondAuditEnter(tdCustInfo.getCustId(), true, tdCustInfo.getAuthId(), message, "30", "0","3","notEmpty");

@@ -173,16 +173,19 @@ public class WorkSpaceService {
 			custScan.setCustId(custId);
 			custScan.setCertifyType( Constant.CERTIFY_TYPE_MERCHANT_IDCARD);
 			String idcardPath = custScanMapper.findPathByIdAndType(custScan);
-			String path[] = idcardPath.split(";");
-			String idCard_1= path[0];
-			if(!StringUtils.isEmpty(idCardType_1)){
-				idCard_1=cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_IDCARD+File.separator+custId+File.separator+idCardType_1;
+			if((null == idcardPath && ("").equals(idcardPath))){
+				String path[] = idcardPath.split(";");
+				String idCard_1= path[0];
+				if(!StringUtils.isEmpty(idCardType_1)){
+					idCard_1=cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_IDCARD+File.separator+custId+File.separator+idCardType_1;
+				}
+				String idCard_2 =path[1];
+				if(!StringUtils.isEmpty(idCardType_2)){
+					idCard_2=cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_IDCARD+File.separator+custId+File.separator+idCardType_2;
+				}
+				idcardPath = idCard_1+";"+idCard_2;
 			}
-			String idCard_2 =path[1];
-			if(!StringUtils.isEmpty(idCardType_2)){
-				idCard_2=cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_IDCARD+File.separator+custId+File.separator+idCardType_2;
-			}
-			idcardPath = idCard_1+";"+idCard_2;
+
 			/**
 			 * 更新身份证件
 			 */

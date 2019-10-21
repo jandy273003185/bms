@@ -1591,7 +1591,7 @@ public class MerchantService {
       workSpaceService.updateEnterCustScanInfo(merchantVo.getCustId(), merchantVo, filePath);
 
     } catch (Exception e) {
-      throw e;
+      //throw e;
     }
   }
 
