@@ -277,7 +277,8 @@ function updateMerchantBtn(){
 		$("#compMainAcct").focus();
 		return false;
 	}
-	if(!checkBankCardFormat($("#compMainAcct")[0])){
+	var compMainAcct = $("#compMainAcct").val();
+	if(!checkBankCardFormat($("#compMainAcct"))){
 		$("#compMainAcctLab").text("账号需用银行卡号 ");
 		$("#compMainAcct").focus();
 		return false;
@@ -316,32 +317,32 @@ function updateMerchantBtn(){
 	// 提交前清空所有错误提示栏
 	Register.clearAllErrorMsgLabel();
 
-	var merchantAccount = $("#merchantAccount").val().trim();
-	var custType = $("#custType").val().trim();
-	var custName = $("#custName").val().trim();
-	var shortName = $("#shortName").val().trim();
-	var merchantEmail = $("#merchantEmail").val().trim();
-	var contactPhone =  $("#contactPhone").val().trim();
-	var province =  $("#province").val().trim();
-	var city = $("#city").val().trim();
-	var country = $("#country").val().trim();
-	var custAdd = $("#custAdd").val().trim();
-	var businessLicense = $("#businessLicense").val().trim();
-	var businessTermStart = $("#businessTermStart").val().trim();
-	var custManager = $("#custManager").val().trim();
-	var agentName = $("#agentName").val().trim();
-	var representativeName = $("#representativeName").val().trim();
-	var representativeCertNo = $("#representativeCertNo").val().trim();
-	var contactName = $("#contactName").val().trim();
-	var contactMobile = $("#contactMobile").val().trim();
-	var compMainAcct = $("#compMainAcct").val().trim();
-	var compAcctBank = $("#compAcctBank").val().trim();
-	var branchBank = $("#branchBank").val().trim();
-	var bankAcctName = $("#bankAcctName").val().trim();
-	var bankProvinceName = $("#bankProvinceName").val().trim();
-	var bankCityName = $("#bankCityName").val().trim();
-	var cnaps =  $("#cnaps").val().trim();
-	var compMainAcctType = $("#compMainAcctType").val().trim();
+	var merchantAccount = $("#merchantAccount").val();
+	var custType = $("#custType").val();
+	var custName = $("#custName").val();
+	var shortName = $("#shortName").val();
+	var merchantEmail = $("#merchantEmail").val();
+	var contactPhone =  $("#contactPhone").val();
+	var province =  $("#province").val();
+	var city = $("#city").val();
+	var country = $("#country").val();
+	var custAdd = $("#custAdd").val();
+	var businessLicense = $("#businessLicense").val();
+	var businessTermStart = $("#businessTermStart").val();
+	var custManager = $("#custManager").val();
+	var agentName = $("#agentName").val();
+	var representativeName = $("#representativeName").val();
+	var representativeCertNo = $("#representativeCertNo").val();
+	var contactName = $("#contactName").val();
+	var contactMobile = $("#contactMobile").val();
+	var compMainAcct = $("#compMainAcct").val();
+	var compAcctBank = $("#compAcctBank").val();
+	var branchBank = $("#branchBank").val();
+	var bankAcctName = $("#bankAcctName").val();
+	var bankProvinceName = $("#bankProvinceName").val();
+	var bankCityName = $("#bankCityName").val();
+	var cnaps =  $("#cnaps").val();
+	var compMainAcctType = $("#compMainAcctType").val();
 
 	$.blockUI();
 	$.ajax({
@@ -363,7 +364,7 @@ function updateMerchantBtn(){
 					"merchantAccount":merchantAccount, 					// 商户二维码编号
 					"custType":custType,
 					"custName":custName, 							// 客户姓名
-					"shortName":custShopName,                       // 客户简称
+					"shortName":shortName,                       // 客户简称
 					"merchantEmail":merchantEmail,
 					"contactPhone":contactPhone,
 					"province":province,
