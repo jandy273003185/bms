@@ -355,7 +355,7 @@ public class MerchantEnterController {
 
         }else{
             ob.put("result", "FAILE");
-            ob.put("message", "七分钱账户开户失败");
+            ob.put("message", "七分钱账户开户失败"+response.getRtnInfo());
             return ob;
         }
         //merchantWorkFlowAuditService.secondAudit(tdCustInfo.getCustId(),number, true, tdCustInfo.getAuthId(), message, "30", "0","3","notEmpty");
