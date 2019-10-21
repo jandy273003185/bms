@@ -1536,8 +1536,8 @@ public class MerchantService {
         merchantVo.setMerchantCode("M" + merchantVo.getBusinessLicense());
       }
 
-      //merchantMapper.updateMerchantLoginInfo(merchantVo);
-      merchantMapper.updateByPrimaryKeySelective(merchantVo);
+      merchantMapper.updateMerchantLoginInfo(merchantVo);
+//      merchantMapper.updateByPrimaryKeySelective(merchantVo);
 
       merchantMapper.updateMerchant(merchantVo);
     } catch (Exception e) {

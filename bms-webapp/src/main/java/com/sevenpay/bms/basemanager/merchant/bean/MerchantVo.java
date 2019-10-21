@@ -417,18 +417,6 @@ public class MerchantVo implements Serializable {
 	private String bankProvinceName;
 	//开户银行城市
 	private String bankCityName;
-	//
-	private String roleId;
-	
-	
-	
-	public String getRoleId() {
-		return roleId;
-	}
-
-	public void setRoleId(String roleId) {
-		this.roleId = roleId;
-	}
 
 	public String getBankProvinceName() {
 		return bankProvinceName;
