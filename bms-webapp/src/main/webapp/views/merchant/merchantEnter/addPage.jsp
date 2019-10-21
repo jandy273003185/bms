@@ -277,15 +277,15 @@ function addMerchantBtn(){
 	if(custType=='1'){
 		
 		/*营业执照有限期 */
-		if(isNull($("businessTermStart")[0])){
-			$("businessTermStartLab").text("请选择日期");
-			$("businessTermStart").focus();
+		if(isNull($("#businessTermStart")[0])){
+			$("#businessTermStartLab").text("请选择日期");
+			$("#businessTermStart").focus();
 			return false;
 		}
 		
-		if(isNull($("businessTermEnd")[0])){
-			$("businessTermEndLab").text("请选择日期");
-			$("businessTermEnd").focus();
+		if(isNull($("#businessTermEnd")[0])){
+			$("#businessTermEndLab").text("请选择日期");
+			$("#businessTermEnd").focus();
 			return false;
 		}
 		
@@ -327,15 +327,15 @@ function addMerchantBtn(){
 	if(custType=='2'){
 		
 		/*营业执照有限期 */
-		if(isNull($("businessTermStart")[0])){
-			$("businessTermStartLab").text("请选择日期");
-			$("businessTermStart").focus();
+		if(isNull($("#businessTermStart")[0])){
+			$("#businessTermStartLab").text("请选择日期");
+			$("#businessTermStart").focus();
 			return false;
 		}
 		
-		if(isNull($("businessTermEnd")[0])){
-			$("businessTermEndLab").text("请选择日期");
-			$("businessTermEnd").focus();
+		if(isNull($("#businessTermEnd")[0])){
+			$("#businessTermEndLab").text("请选择日期");
+			$("#businessTermEnd").focus();
 			return false;
 		}
 		

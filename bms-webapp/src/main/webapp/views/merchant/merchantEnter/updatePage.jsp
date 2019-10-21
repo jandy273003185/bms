@@ -44,8 +44,8 @@ $(function() {
 		$("#openAccount_").attr("style","display:");
 	}
 	
-	var custId = $("custId").val().trim();
-	var authId = $("authId").val().trim();
+	var custId = $("#custId").val().trim();
+	var authId = $("#authId").val().trim();
 
 	$("#updateMerchant #businessPhotoImageDiv").show();
 	$("#updateMerchant #bankCardPhotoImageDiv").show();
@@ -170,14 +170,14 @@ function addMerchantBtn(){
 	}
 
 	/*营业执照有限期 */
-	if(isNull($("businessTermStart")[0])){
-		$("businessTermStartLab").text("请选择日期");
-		$("businessTermStart").focus();
+	if(isNull($("#businessTermStart")[0])){
+		$("#businessTermStartLab").text("请选择日期");
+		$("#businessTermStart").focus();
 		return false;
 	}
-	if(isNull($("businessTermEnd")[0])){
-		$("businessTermEndLab").text("请选择日期");
-		$("businessTermEnd").focus();
+	if(isNull($("#businessTermEnd")[0])){
+		$("#businessTermEndLab").text("请选择日期");
+		$("#businessTermEnd").focus();
 		return false;
 	}
 
