@@ -533,6 +533,36 @@ function productMerchantEntry(obj){
 						</div>
 						</div>
 					</div>
+					
+					
+					
+					<!-- 审核不通过弹框 -->
+				<div class="modal fade" style="z-index:1043;" id="auditMessageModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				   <div class="modal-dialog" style="width:30%;z-index:99;">
+				      <div class="modal-content" >
+				         <div class="modal-header" style="background-color:0099CC">
+				            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				            <h4 class="modal-title" id="myModalLabel">审核不通过</h4>
+				         </div>
+				         <div class="modal-body">
+				            <table 	 >
+								<tr>	
+									<td >请输入审核不通过理由：</td>
+								</tr>
+								<tr>	
+									<td>
+										<textarea rows="5" cols="40" id="auditMessage" ></textarea>
+									</td>
+								</tr>
+				            </table>
+				         </div>
+				         <div class="modal-footer">
+				            <button type="button" class="btn btn-default messageDefault" data-dismiss="modal">取消</button>
+				            <button type="button" class="btn btn-primary addadBtn" onclick="notPass()">确定</button>
+				         </div>
+				      </div><!-- /.modal-content -->
+				   </div>
+				</div><!-- /.modal -->
 				</div><!-- /.page-content -->
 				<!-- 底部-->
 				<%@ include file="/include/bottom.jsp"%>
