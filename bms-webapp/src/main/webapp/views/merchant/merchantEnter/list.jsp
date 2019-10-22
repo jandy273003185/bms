@@ -389,12 +389,12 @@ function productMerchantEntry(obj){
 						<div style="margin:30px 0 10px 0">
 						   <a href="<%=request.getContextPath()+MerchantEnterPath.BASE + MerchantEnterPath.ADDPAGE%>"  class="btn btn-primary" >新增</a>
 						   <!-- <a href="#" class="btn btn-primary" onclick="addMerchantEntry()" data-rel="tooltip" data-toggle='modal'>新增</a> -->
-                           <button type="button"  class="btn btn-primary">重置密码</button>
+                           <%--<button type="button"  class="btn btn-primary">重置密码</button>--%>
                            <button type="button"  class="btn btn-primary" disabled="disabled">批量审核资料</button>
                            <button type="button"  class="btn btn-primary" disabled="disabled">批量录入</button>
                            <!-- <button type="button"  class="btn btn-primary exportBut">导出</button> -->
 						   <a class="btn btn-primary exportBut">导出</a> 
-                           <button type="button"  class="btn btn-primary">打印二维码</button>
+                           <%--<button type="button"  class="btn btn-primary">打印二维码</button>--%>
                         </div>
                             
 						<div class="list-table-header">商户列表</div>
@@ -410,7 +410,8 @@ function productMerchantEntry(obj){
                                         <th width="12%">录入时间</th>	
 										<th>商户状态</th>
 										<th>审核状态</th>	
-                                        <!-- <th>报备状态</th>
+										<th>报备状态</th>
+										<!--
                                         <th>报备审核状态</th> -->
 										<th width="10%">审核人</th>									
 										<th width="28%">操作</th>
@@ -457,7 +458,7 @@ function productMerchantEntry(obj){
 						                        </c:when>
                                             </c:choose>
                                         </td>
-										<%-- <td>
+										 <td>
 											<c:choose>   
 						                        <c:when test="${merchant.filingStatus =='00'}">  									  
 						                                                                             未报备  								  
@@ -470,7 +471,7 @@ function productMerchantEntry(obj){
 						                        </c:when>
                                             </c:choose>
 										</td>
-										<td>${merchant.filingAuditStatus }
+										<%--<td>${merchant.filingAuditStatus }
 											<c:choose>   
 						                        <c:when test="${merchant.filingAuditStatus =='00'}">  									  
 						                                                                             成功  								  
@@ -506,7 +507,7 @@ function productMerchantEntry(obj){
 												</a>
 											</gyzbadmin:function>
 											<!-- 报备链接未建 -->
-											<gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.PRODUCT %>">
+											<%--<gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.PRODUCT %>">
 												<a href="#" class="" onclick="productMerchantEntry(this)" data-rel="tooltip" title="Query" data-toggle='modal'>
 													<button type="submit" class="btn btn-purple btn-sm">报备</button>
 												</a>
@@ -515,7 +516,7 @@ function productMerchantEntry(obj){
 												<a href="#" class="" onclick="productMerchantEntry(this)" data-rel="tooltip" title="Query" data-toggle='modal'>
 													<button type="submit" class="btn btn-purple btn-sm">产品查看</button>
 												</a>
-											</gyzbadmin:function>
+											</gyzbadmin:function>--%>
 										</td>
 									</tr>
 								</c:forEach>

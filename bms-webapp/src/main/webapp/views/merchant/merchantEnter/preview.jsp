@@ -341,7 +341,7 @@ $(function() {
 							<td class="td-left">审核记录：</td>
 							<td class="td-right" style="color:#666;padding:10px 8px"></td>
 						 </tr>
-                         <tr>
+                         <%--<tr>
                          	<td colspan="4" class="headlerPreview" style="background:#7ebde1;">付款二维码</td>
 						 </tr>
 						 <tr>
@@ -353,7 +353,7 @@ $(function() {
 									<img id="showNewRecode" alt="" src="" style="text-align:center;">
 							 	</div>
 						 	</td>
-						 </tr>
+						 </tr>--%>
 					     <tr></tr>
 					</tbody>
 					</table>
