@@ -925,6 +925,9 @@
 			<if test="custName != null and custName != '' ">
 				AND C.CUST_NAME LIKE CONCAT('%',#{custName},'%')
 			</if>
+            <if test="state != null and state != '' ">
+                AND C.STATE = #{state, jdbcType=VARCHAR}
+            </if>
 			<if test="email != null and email != '' ">
 				AND U.EMAIL LIKE CONCAT('%',#{email},'%')
 			</if>

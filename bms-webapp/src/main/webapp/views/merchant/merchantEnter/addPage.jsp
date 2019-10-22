@@ -757,7 +757,7 @@ $('.bankCardPhotoClick').click(function(){
 								<i class="icon-leaf blue"></i>
 								<label class="label-tips" id="businessLicenseLab"></label>
 							</td>
-							<td class="td-left">营业执照有限期：</td>
+							<td class="td-left">营业执照有效期：</td>
 							<td class="td-right">
 								<input type="text" name="businessTermStart"   id="businessTermStart" readonly="readonly"   onfocus="WdatePicker({skin:'whyGreen',minDate:'#F{$dp.$D(\'businessTermEnd\')}'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> 
 								-		

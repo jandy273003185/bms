@@ -248,9 +248,10 @@ public class MerchantWorkFlowAuditService {
 			auditBean.setAuditer(String.valueOf(WebUtils.getUserInfo().getUserId()));
 			if("1".equals(isPass)){
 				auditBean.setStatus("01");//01 一级审核通过
-				this.updateCustNumberEnter(custId, null);
+				this.updateCustNumberEnter(custId, "00");
 			}else{
 				auditBean.setStatus("03");//03审核不通过
+				this.updateCustNumberEnter(custId, "04");
 			}
 			ActWorkflowMerchantAudit audit =  actWorkflowMerchantAuditMapper.selectListByMerchantId(custId);
 			if(audit!= null){
@@ -447,7 +448,12 @@ public class MerchantWorkFlowAuditService {
 	 * @param auditStatus
 	 */
 	@Transactional
-	public void firstNotPass(String custId,String message,boolean isPass,String certifiyStatus,String authId,String auditStatus){
+	public void firstNotPass(String custId,
+							 String message,
+							 boolean isPass,
+							 String certifiyStatus,
+							 String authId,
+							 String auditStatus){
 		/**
 		 * 启动工作流并完成任务
 		 * @param custId

@@ -85,7 +85,7 @@ public class MerchantEnterController {
 	public ModelAndView auditList(MerchantVo merchantVo){
 		Bank bank = new Bank();
 		Rule rule = new Rule();
-		ModelAndView mv = new ModelAndView();
+		ModelAndView mv = new ModelAndView(MerchantEnterPath.BASE + MerchantEnterPath.LIST);
 		List<MerchantVo> list = null;
 		String userId  = String.valueOf(WebUtils.getUserInfo().getUserId());
 		merchantVo.setUserId(userId);
@@ -106,6 +106,27 @@ public class MerchantEnterController {
 		mv.addObject("queryBean", merchantVo);
 		return mv;
 	}
+
+	/**
+	 * 显示后台商户待审核列表
+	 * @param merchantVo
+	 * @return
+	 */
+	@RequestMapping(MerchantPath.BACKLIST)
+	public ModelAndView backList(MerchantVo merchantVo){
+		Bank bank = new Bank();
+		Rule rule = new Rule();
+		ModelAndView mv = new ModelAndView(MerchantPath.BASE + MerchantPath.BACKLIST);
+		List<MerchantVo> list = merchantService.selectBackMerchants(merchantVo);
+
+		mv.addObject("banklist", bankMapper.selectBanks(bank));
+		mv.addObject("merchantList", JSONObject.toJSON(list));
+		mv.addObject("rulelist", ruleMapper.selectRules02(rule));
+		mv.addObject("provincelist", cityService.selectAllProvince());
+		mv.addObject("queryBean", merchantVo);
+		return mv;
+	}
+
 	/**
 	 * 跳转到相应的页面
 	 */
@@ -355,9 +376,9 @@ public class MerchantEnterController {
         if (RequestColumnValues.RtnResult.SUCCESS == response.getRtnResult()) {
 
         }else{
-            //ob.put("result", "FAILE");
-            //ob.put("message", "七分钱账户开户失败"+response.getRtnInfo());
-            //return ob;
+            ob.put("result", "FAILE");
+            ob.put("message", "七分钱账户开户失败"+response.getRtnInfo());
+            return ob;
         }
         //merchantWorkFlowAuditService.secondAudit(tdCustInfo.getCustId(),number, true, tdCustInfo.getAuthId(), message, "30", "0","3","notEmpty");
         merchantWorkFlowAuditService.secondAuditEnter(tdCustInfo.getCustId(), true, tdCustInfo.getAuthId(), message, "30", "0","3","notEmpty");

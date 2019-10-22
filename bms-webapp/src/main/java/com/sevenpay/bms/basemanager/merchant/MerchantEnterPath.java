@@ -9,6 +9,8 @@ public final class MerchantEnterPath {
 	 * 列表
 	 */
 	public final static String LIST ="/list";
+
+	public final static String BACKLIST = "/backList";
 	
 	/**
 	 * 添加

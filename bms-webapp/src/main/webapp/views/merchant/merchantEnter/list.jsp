@@ -370,10 +370,12 @@ function productMerchantEntry(obj){
 								<tr>
 									<td colspan="6" align="center">
 										<span class="input-group-btn">
-											<button type="submit" class="btn btn-purple btn-sm btn-margin  buttonSearch">
-												查询
-												<i class="icon-search icon-on-right bigger-110"></i>
-											</button>
+											<gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.BACKLIST %>">
+											  <button type="submit" class="btn btn-purple btn-sm btn-margin  buttonSearch">
+											  	查询
+											  	<i class="icon-search icon-on-right bigger-110"></i>
+											  </button>
+											</gyzbadmin:function>
 											<button class="btn btn-purple btn-sm btn-margin clearMerchantSearch">
 												清空
 											<i class=" icon-move icon-on-right bigger-110"></i>
