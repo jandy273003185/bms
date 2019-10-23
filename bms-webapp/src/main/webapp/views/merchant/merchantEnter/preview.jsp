@@ -140,7 +140,8 @@ $(function() {
 						<tr></tr>
                         <tr>
 						    <td class="td-left">商户账号：</td>
-						    <td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.merchantCode }</td>
+						    <%--<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.merchantCode }</td>--%>
+						    <td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.email }</td>
 						</tr>
                         <tr>
 							<td colspan="4" class="headlerPreview" style="background:#7ebde1">基本信息</td>

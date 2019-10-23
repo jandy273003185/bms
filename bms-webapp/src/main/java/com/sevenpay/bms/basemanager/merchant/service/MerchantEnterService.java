@@ -3,8 +3,10 @@ package com.sevenpay.bms.basemanager.merchant.service;
 import com.sevenpay.bms.basemanager.acctsevenbuss.mapper.AcctSevenBussMapper;
 import com.sevenpay.bms.basemanager.bank.service.BankService;
 import com.sevenpay.bms.basemanager.custInfo.mapper.TdCustInfoMapper;
+import com.sevenpay.bms.basemanager.merchant.bean.Merchant;
 import com.sevenpay.bms.basemanager.merchant.bean.MerchantExport;
 import com.sevenpay.bms.basemanager.merchant.bean.MerchantVo;
+import com.sevenpay.bms.basemanager.merchant.bean.TdLoginUserInfo;
 import com.sevenpay.bms.basemanager.merchant.dao.MerchantDao;
 import com.sevenpay.bms.basemanager.merchant.mapper.*;
 import com.sevenpay.bms.expresspay.CommonService;
@@ -100,5 +102,16 @@ public class MerchantEnterService {
      */
     public List<MerchantExport> proExportMerchantInfo(MerchantVo merchantVo) {
       return merchantEnterMapper.newExportlist(merchantVo);
+    }
+
+    public TdLoginUserInfo validateMerchantAccount(String merchantAccount, String custId) {
+        TdLoginUserInfo tdLoginUserInfo = null;
+        if(merchantAccount.contains("@")){
+            //账号为邮箱
+            tdLoginUserInfo = tdLoginUserInfoMapper.selectByEmail(merchantAccount, null, null);
+        }else {
+            tdLoginUserInfo = tdLoginUserInfoMapper.selectByPhoneEnter(merchantAccount);
+        }
+        return tdLoginUserInfo;
     }
 }

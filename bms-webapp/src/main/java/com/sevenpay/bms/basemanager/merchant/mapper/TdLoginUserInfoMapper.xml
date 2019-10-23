@@ -127,6 +127,13 @@
 			T.MOBILE = #{mobile,jdbcType=VARCHAR}
 		and T.role_id = #{roleId,jdbcType=VARCHAR}
 	</select>
+
+	<select id="selectByPhoneEnter" parameterType="string" resultType="com.sevenpay.bms.basemanager.merchant.bean.TdLoginUserInfo">
+		SELECT * FROM
+		TD_LOGIN_USER_INFO T
+		WHERE
+			T.MOBILE = #{mobile,jdbcType=VARCHAR}
+	</select>
 	
 	<update id="updateEmail" parameterType="string">
 		UPDATE TD_LOGIN_USER_INFO

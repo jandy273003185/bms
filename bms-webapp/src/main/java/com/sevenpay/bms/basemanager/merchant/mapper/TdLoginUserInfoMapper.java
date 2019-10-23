@@ -53,4 +53,6 @@ public interface TdLoginUserInfoMapper {
 	public void updateLoginUserInfo(TdLoginUserInfo userInfo);
 	
 	public TdLoginUserInfo selectLoginUserInfo(@Param("custId") String custId);
+
+	TdLoginUserInfo selectByPhoneEnter(String merchantAccount);
 }

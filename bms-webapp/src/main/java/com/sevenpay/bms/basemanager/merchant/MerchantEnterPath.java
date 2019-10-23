@@ -48,4 +48,9 @@ public final class MerchantEnterPath {
 	 * 导出报表
 	 */
 	public final static String PROEXPORTMERCHANTINFO ="/proExportMerchantInfo";
+
+	/**
+	 * 验证商户账号唯一性
+	 */
+	public final static String VALIDATEMERCHANTACCOUNT ="/validateMerchantAccount";
 }

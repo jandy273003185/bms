@@ -9,6 +9,7 @@
 <script src='<c:url value="/static/js/upload.js"/>'></script>
 <script src='<c:url value="/static/js/mobileBUGFix.mini.js"/>'></script>
 <script src='<c:url value="/static/js/uploadCompress.js"/>'></script>
+<script src='<c:url value="/static/js/register.js"/>'></script>
 <html>
 <head>
 	<meta charset="utf-8" />
@@ -18,7 +19,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<style type="text/css">
 	table tr td{word-wrap:break-word;word-break:break-all;}
-	.uploadImage{ float:left; 
+	.uploadImage{ float:left;
 			background:url(<%=request.getContextPath() %>/static/images/upload.jpg);
 			background-size:120px 100px;
 			width:120px;
@@ -29,22 +30,22 @@
 </head>
 <script type="text/javascript">
 $(function(){
-	
+
 	$("input[type=file]").each(
 		function() {
 			var _this = $(this);
 			_this.localResizeIMG({
 				quality : 0.8,
 				success : function(result,file) {
-					
+
 					var att = pre.substr(pre.lastIndexOf("."));
 					//压缩后图片的base64字符串
 					var base64_string = result.clearBase64;
-					
+
 					$('#'+_this.attr('id')+'temp').val(att+","+base64_string);
 					//图片预览
 		            var imgObj = $('#'+_this.attr('id')+'ImageDiv');
-		            imgObj.attr("src", "data:image/jpeg;base64," + base64_string).show(); 
+		            imgObj.attr("src", "data:image/jpeg;base64," + base64_string).show();
 		            var width = result.width;
 		            var height = result.height;
 		            var scale =  width/height;
@@ -54,7 +55,7 @@ $(function(){
 		            }
 		            $(".showDiv").width(width+"px");
 		            $(".showDiv").height(height+"px");
-		             
+
 		            //优图
 		            var param = "{str:\""+base64_string+"\",flag:\""+_this.attr('id')+"\"}"
 		    		$.ajax({
@@ -79,7 +80,7 @@ $(function(){
 	    	       	  					$("#businessTermEnd").val(json.businessTermEnd);
 	    	       	  				}
 	    	       	  				$("#custAdd").val(json.legalAddress);
-	    	       	  			} 
+	    	       	  			}
 	    	   				}
 	    	   			}
 		    	   	});
@@ -90,7 +91,7 @@ $(function(){
 });
 /**开户行城市 **/
 function getBankCityList(){
-	
+
 	var provVal = $("#province").val().trim();
 	$("#cityDef").siblings().remove();
 	if ("" == provVal || provVal.length == 0) {
@@ -119,7 +120,7 @@ function getBankCityList(){
 }
 
 function getCityList(){
-	
+
 	var provVal = $("#province").val().trim();
 	$("#cityDef").siblings().remove();
 	$("#areaDef").siblings().remove();
@@ -149,7 +150,7 @@ function getCityList(){
 }
 
 function getAreaList(){
-	
+
 	var city = $("#city").val().trim();
 	$("#areaDef").siblings().remove();
 	if ("" == city || city.length == 0) {
@@ -192,8 +193,13 @@ function selCustType(){
 		$("#openAccount_").attr("style","display:");
 	}
 }
+
+//点击长期给营业有效期赋forver
+function foreverTime() {
+
+}
 function addMerchantBtn(){
-	
+	console.log("点击保存")
 	var businessTermEnd = "forever";
 	/*账号校验*/
 	if(isNull($("#merchantAccount")[0])){
@@ -201,57 +207,57 @@ function addMerchantBtn(){
 		$("#merchantAccount").focus();
 		return false;
 	}
-	/* 
+	/*
 	if(!verifyEmailAddress($("#merchantAccount")[0]) || !isMobilePhone($("#merchantAccount")[0])){
 		$("#merchantAccountLab").text("账号需用邮箱或者手机号 ");
 		$("#merchantAccount").focus();
 		return false;
 	}  */
-	
+
 	/*邮箱校验*/
 	if(isNull($("#merchantEmail")[0])){
 		$("#merchantEmailLab").text("请设置邮箱账户");
 		$("#merchantEmail").focus();
 		return false;
 	}
-	
+
 	if(!verifyEmailAddress($("#merchantEmail")[0])){
 		$("#merchantEmailLab").text("邮箱格式不对,可使用字母、数字、下划线 ");
 		$("#merchantEmail").focus();
 		return false;
 	}
-	
+
 	/*客服号码校验*/
 	if(isNull($("#contactPhone")[0])){
 		$("#contactPhoneLab").text("请设置客服号码");
 		$("#contactPhone").focus();
 		return false;
 	}
-	
+
 	if(!isPhoneNo($("#contactPhone")[0])){
 		$("#contactPhoneLab").text("客服号码格式不对 ");
 		$("#contactPhone").focus();
 		return false;
 	}
-	
+
 	/*商户地址*/
 	if(isNull($("#custAdd")[0])){
 		$("#custAddLab").text("请填写地址");
 		$("#custAdd").focus();
 		return false;
 	}
-	
+
 	/*营业执照号*/
 	if(isNull($("#businessLicense")[0])){
 		$("#businessLicenseLab").text("请填写营业执照注册号");
 		$("#businessLicense").focus();
 		return false;
 	}
-	
+
 	//校验营业执照注册号唯一性
 	var businessLicense =$("#businessLicense").val();
 	var validateLicense =true ;
-	
+
 	$.ajax({
 		async:false,
 		dataType:"json",
@@ -268,44 +274,68 @@ function addMerchantBtn(){
 	if(!validateLicense){
 		return false;
 	}
-	
+
+	var merchantAccount =$("#merchantAccount").val();
+	var validateLicense =true ;
+	//验证商户账户唯一性
+	$.ajax({
+		async:false,
+		dataType:"json",
+		url:window.Constants.ContextPath +'<%=MerchantEnterPath.BASE+MerchantEnterPath.VALIDATEMERCHANTACCOUNT%>',
+		data:{merchantAccount:merchantAccount},
+		success:function(data){
+			if(data.result=="FAIL"){
+				$("#merchantAccountLab").text("该营业执照注册号已经被使用");
+				validateLicense = false;
+			}else{
+				validateLicense = true;
+			}
+		}});
+	if(!validateLicense){
+		return false;
+	}
+
 	var custType =$("#custType").val();
 	/*个人*/
 	if(custType=='0'){
 	}
 	/*企业*/
 	if(custType=='1'){
-		
+
 		/*营业执照有限期 */
 		if(isNull($("#businessTermStart")[0])){
 			$("#businessTermStartLab").text("请选择日期");
 			$("#businessTermStart").focus();
 			return false;
 		}
-		
+
 		if(isNull($("#businessTermEnd")[0])){
 			$("#businessTermEndLab").text("请选择日期");
 			$("#businessTermEnd").focus();
 			return false;
 		}
-		
+
 		/*起始日期判断 */
 		var startDate = $("#businessTermStart").val();
 		var endDate= $("#businessTermEnd").val();
-		if("" != startDate && "" != endDate && startDate > endDate) 
+		if("" != startDate && "" != endDate && startDate > endDate)
 		{
 			$.gyzbadmin.alertFailure("结束日期不能小于开始日期");
 			return false;
 		}
-		
+
 		// 校验营业时间
-		if(!Register.validateBusinessTerm($("#businessTermStart").val().trim(),$("#businessTermStartLabel"))){return false;}
-		
+		if(!Register.validateBusinessTerm($("#businessTermStart").val().trim(),$("#businessTermStartLabel"))){
+			return false;
+		}
+
 		if($("input:radio[name='end']:checked").val()=='sel'){
-			if(!Register.validateBusinessTerm($("#businessTermEnd").val().trim(),$("#businessTermStartLabel"))){return false;}
+			if(!Register.validateBusinessTerm($("#businessTermEnd").val().trim(),$("#businessTermStartLabel"))){
+				return false;
+			}
 			businessTermEnd = $("#businessTermEnd").val();
 		}
-		
+
 		//营业执照号
 		var flag = Register.validateBusinessLicense($("#businessLicense").val().trim(),$("#businessLicenseLab"));
 
@@ -317,53 +347,56 @@ function addMerchantBtn(){
 			$.gyzbadmin.alertFailure("必须提交营业执照扫描件");
 			return false;
 		}
-		
+
 		if(!checkAttach($("#openAccount")[0])){
 			$.gyzbadmin.alertFailure("必须提交开户许可证");
 			return false;
-		} 
+		}
 	}
 	/*个体户*/
 	if(custType=='2'){
-		
+
 		/*营业执照有限期 */
 		if(isNull($("#businessTermStart")[0])){
 			$("#businessTermStartLab").text("请选择日期");
 			$("#businessTermStart").focus();
 			return false;
 		}
-		
+
 		if(isNull($("#businessTermEnd")[0])){
 			$("#businessTermEndLab").text("请选择日期");
 			$("#businessTermEnd").focus();
 			return false;
 		}
-		
+
 		/*起始日期判断 */
 		var startDate = $("#businessTermStart").val();
 		var endDate= $("#businessTermEnd").val();
-		if("" != startDate && "" != endDate && startDate > endDate) 
+		if("" != startDate && "" != endDate && startDate > endDate)
 		{
 			$.gyzbadmin.alertFailure("结束日期不能小于开始日期");
 			return false;
 		}
-		
+
 		if(checkAttach($("#businessPhoto")[0])){
 			if(isNull($("#businessLicense")[0])){
 				$("#businessLicenseLab").text("必须填写营业执照注册号");
 				return false;
 			}
-			
+
 			// 校验营业时间
-			if(!Register.validateBusinessTerm($("#businessTermStart").val().trim(),$("#businessTermStartLabel"))){return false;}
-			
+			if(!Register.validateBusinessTerm($("#businessTermStart").val().trim(), $("#businessTermStartLabel"))) {
+				return false;
+			}
 			if($("input:radio[name='end']:checked").val()=='sel'){
-				if(!Register.validateBusinessTerm($("#businessTermEnd").val().trim(),$("#businessTermStartLabel"))){return false;}
+				if(!Register.validateBusinessTerm($("#businessTermEnd").val().trim(),$("#businessTermStartLabel"))) {
+					return false;
+				}
 				businessTermEnd = $("#businessTermEnd").val();
 			}
-			
+
 			var flag = Register.validateBusinessLicense($("#businessLicense").val(),$("#businessLicenseLab"));
-			
+
 			if(!flag){
 				return false;
 			}
@@ -375,7 +408,7 @@ function addMerchantBtn(){
 			}
 		}
 	}
-	
+
 	/*法人姓名*/
 	if(isNull($("#representativeName")[0])){
 		$("#representativeNameLab").text("请填写法人姓名");
@@ -388,7 +421,7 @@ function addMerchantBtn(){
 		$("#representativeCertNo").focus();
 		return false;
 	}
-	
+
 	/*联系人姓名*/
 	if(isNull($("#contactName")[0])){
 		$("#contactNameLab").text("请填写联系人姓名");
@@ -412,51 +445,44 @@ function addMerchantBtn(){
 		$("#compMainAcct").focus();
 		return false;
 	}
-	
-	/* if(!checkBankCardFormat($("#compMainAcct")[0])){
-		$("#compMainAcctLab").text("银行卡号格式不正确  ");
-		$("#compMainAcct").focus();
-		return false;
-	} */
-	
+
 	/*开户银行*/
 	var compAcctBank = $("#compAcctBank").val().trim();
 	if ("" == compAcctBank || compAcctBank.length == 0) {
 		$("#compMainAcctLab").text("请填写开户银行");
 		return false;
 	}
-	
+
 	/*开户行*/
 	if(isNull($("#branchBank")[0])){
 		$("#branchBankLab").text("请填写开户行");
 		$("#branchBank").focus();
 		return false;
 	}
-	
+
 	/*开户人 */
 	if(isNull($("#bankAcctName")[0])){
 		$("#bankAcctNameLab").text("请填写开户人");
 		$("#bankAcctName").focus();
 		return false;
 	}
-	
+
 	/*网点号*/
 	if(isNull($("#cnaps")[0])){
 		$("#cnapseLab").text("请填写银联号");
 		$("#cnaps").focus();
 		return false;
 	}
-	
+
 	/*结算类型*/
 	if(isNull($("#compMainAcctType")[0])){
 		$("#compMainAcctTypeLab").text("请填写结算类型");
 		$("#compMainAcctType").focus();
 		return false;
 	}
-	
+
 	// 提交前清空所有错误提示栏
-	// Register.clearAllErrorMsgLabel();
-	
+
 	var merchantAccount = $("#merchantAccount").val().trim();
 	var custType = $("#custType").val().trim();
 	var custName = $("#custName").val().trim();
@@ -470,20 +496,20 @@ function addMerchantBtn(){
 	var businessLicense = $("#businessLicense").val().trim();
 	var businessTermStart = $("#businessTermStart").val().trim();
 	var custManager = $("#custManager").val().trim();
-	var agentName = $("#agentName").val().trim(); 
-	var representativeName = $("#representativeName").val().trim();  
-	var representativeCertNo = $("#representativeCertNo").val().trim();  
-	var contactName = $("#contactName").val().trim(); 
+	var agentName = $("#agentName").val().trim();
+	var representativeName = $("#representativeName").val().trim();
+	var representativeCertNo = $("#representativeCertNo").val().trim();
+	var contactName = $("#contactName").val().trim();
 	var contactMobile = $("#contactMobile").val().trim();
-	var compMainAcct = $("#compMainAcct").val().trim(); 
-	var compAcctBank = $("#compAcctBank").val().trim(); 
-	var branchBank = $("#branchBank").val().trim();  
-	var bankAcctName = $("#bankAcctName").val().trim();  
-	var bankProvinceName = $("#bankProvinceName").val().trim(); 
-	var bankCityName = $("#bankCityName").val().trim(); 
-	var cnaps =  $("#cnaps").val().trim(); 
-	var compMainAcctType = $("#compMainAcctType").val().trim(); 
-	
+	var compMainAcct = $("#compMainAcct").val().trim();
+	var compAcctBank = $("#compAcctBank").val().trim();
+	var branchBank = $("#branchBank").val().trim();
+	var bankAcctName = $("#bankAcctName").val().trim();
+	var bankProvinceName = $("#bankProvinceName").val().trim();
+	var bankCityName = $("#bankCityName").val().trim();
+	var cnaps =  $("#cnaps").val().trim();
+	var compMainAcctType = $("#compMainAcctType").val().trim();
+
 	$.blockUI();
  	$.ajax({
 		type : "POST",
@@ -538,17 +564,17 @@ function addMerchantBtn(){
         		},'json')
         	}else{
         		$.gyzbadmin.alertFailure("服务器内部错误，请联系相关技术人员，错误原因是：" + data.message);
-				
+
         	}
 		}
-	});   
-	
+	});
+
 }
 
 
 /********************图片预览***********************/
- 
- 
+
+
 /** 点击预览大图 **/
 function bigImg(obj){
     /* $('#showImageDiv #showImage').attr("src",obj.src); */
@@ -568,9 +594,9 @@ function bigImg(obj){
 
 
 /** 营业执照预览 **/
-function showBusinessPhotoImage(obj){  
-	 var divObj = document.getElementById("businessPhotoDiv");  
-	 var imageObj = document.getElementById("businessPhotoImage"); 
+function showBusinessPhotoImage(obj){
+	 var divObj = document.getElementById("businessPhotoDiv");
+	 var imageObj = document.getElementById("businessPhotoImage");
 	 var result1 = previewImage(divObj,imageObj,obj);
 	 return result1;
 }
@@ -578,66 +604,66 @@ function showBusinessPhotoImage(obj){
 $('.businessPhotoClick').click(function(){
 	var divObj = document.getElementById("showImageDiv");
 	var imageObj = document.getElementById("showImage");
-	var obj = document.getElementById("businessPhoto"); 
-	return previewImage(divObj,imageObj,obj); 
-});  
+	var obj = document.getElementById("businessPhoto");
+	return previewImage(divObj,imageObj,obj);
+});
 /** 身份证正面预览 **/
-function showCertAttribute1Image(obj){  
-	 var divObj = document.getElementById("certAttribute1Div");  
+function showCertAttribute1Image(obj){
+	 var divObj = document.getElementById("certAttribute1Div");
 	 var imageObj = document.getElementById("certAttribute1Image");
 	 var result1 = previewImage(divObj,imageObj,obj);
-	 return result1;  
+	 return result1;
 }
 /** 身份证正面点击预览 **/
 $('.certAttribute1Click').click(function(){
 	var divObj = document.getElementById("showImageDiv");
 	var imageObj = document.getElementById("showImage");
 	var obj = document.getElementById("certAttribute1");
-	return previewImage(divObj,imageObj,obj); 
+	return previewImage(divObj,imageObj,obj);
 });
 /** 身份证背面预览 **/
-function showCertAttribute2Image(obj){  
-	 var divObj = document.getElementById("certAttribute2Div");  
-	 var imageObj = document.getElementById("certAttribute2Image");  
+function showCertAttribute2Image(obj){
+	 var divObj = document.getElementById("certAttribute2Div");
+	 var imageObj = document.getElementById("certAttribute2Image");
 	 var result1 = previewImage(divObj,imageObj,obj);
-	 return result1;  
+	 return result1;
 }
 /** 身份证背面点击预览 **/
 $('.certAttribute2Click').click(function(){
 	var divObj = document.getElementById("showImageDiv");
 	var imageObj = document.getElementById("showImage");
 	var obj = document.getElementById("certAttribute2");
-	return previewImage(divObj,imageObj,obj); 
+	return previewImage(divObj,imageObj,obj);
 });
 
 /** 开户许可证预览 **/
-function showOpenAccountImage(obj){  
-	 var divObj = document.getElementById("openAccountDiv");  
-	 var imageObj = document.getElementById("openAccountImage");  
+function showOpenAccountImage(obj){
+	 var divObj = document.getElementById("openAccountDiv");
+	 var imageObj = document.getElementById("openAccountImage");
 	 var result1 = previewImage(divObj,imageObj,obj);
-	 return result1;  
+	 return result1;
 }
 /** 开户许可证背面点击预览 **/
 $('.openAccountClick').click(function(){
 	var divObj = document.getElementById("showImageDiv");
 	var imageObj = document.getElementById("showImage");
 	var obj = document.getElementById("openAccount");
-	return previewImage(divObj,imageObj,obj); 
+	return previewImage(divObj,imageObj,obj);
 });
 
 /** 银行卡预览 **/
-function showBankCardPhotoImage(obj){  
-	 var divObj = document.getElementById("bankCardPhotoDiv");  
-	 var imageObj = document.getElementById("bankCardPhotoImage");  
+function showBankCardPhotoImage(obj){
+	 var divObj = document.getElementById("bankCardPhotoDiv");
+	 var imageObj = document.getElementById("bankCardPhotoImage");
 	 var result1 = previewImage(divObj,imageObj,obj);
-	 return result1;  
+	 return result1;
 }
 /** 银行卡点击预览 **/
 $('.bankCardPhotoClick').click(function(){
 	var divObj = document.getElementById("showImageDiv");
 	var imageObj = document.getElementById("showImage");
 	var obj = document.getElementById("bankCardPhoto");
-	return previewImage(divObj,imageObj,obj); 
+	return previewImage(divObj,imageObj,obj);
 });
 
 
@@ -653,11 +679,11 @@ $('.bankCardPhotoClick').click(function(){
 		<div class="main-container-inner">
 			<!-- 菜单 -->
 			<%@ include file="/include/left.jsp"%>
-			
+
 			<div class="main-content">
 				<!-- 路径 -->
 				<%@ include file="/include/path.jsp"%>
-				
+
 				<!-- 主内容 -->
 				<div class="page-content">
 					<div class="row">
@@ -675,7 +701,7 @@ $('.bankCardPhotoClick').click(function(){
 						<tr></tr>
                         <tr>
 							<td class="td-left">商户账号：<span style="color:red;">（必填)</span></td>
-							<td class="td-right"> 
+							<td class="td-right">
 								<input type="text" id="merchantAccount" name="merchantAccount" placeholder="请输入手机号或邮箱" maxlength="50" style="width:90%">
 								<label class="label-tips" id="merchantAccountLab"></label>
 							</td>
@@ -685,23 +711,23 @@ $('.bankCardPhotoClick').click(function(){
 						</tr>
 						<tr>
 							<td class="td-left">商户类型：<span style="color:red;">（必填)</span></td>
-							<td class="td-right"> 
+							<td class="td-right">
 							   <select name="custType" class="width-90" id="custType" onchange="selCustType();">
 									<option value="0">个人</option>
 									<option value="1">企业</option>
 									<option value="2">个体户</option>
-								</select>	
+								</select>
 							</td>
 						</tr>
                         <tr>
 						    <td class="td-left" width="18%">商户名称：<span style="color:red;">（必填)</span></td>
-							<td class="td-right" width="32%"> 
+							<td class="td-right" width="32%">
 								<input type="text" id="custName" name="custName" maxlength="100"  placeholder="请输入商户名称" style="width:90%">
 								<i class="icon-leaf blue"></i>
 								<label class="label-tips" id="custNameLab"></label>
 							</td>
 							<td class="td-left" width="18%">商户简称：<span style="color:red;">（必填)</span></td>
-							<td class="td-right" width="32%"> 
+							<td class="td-right" width="32%">
 							    <input type="text" id="shortName" name="shortName" placeholder="请输入商户简称" style="width:90%">
 								<i class="icon-leaf blue"></i>
 								<label class="label-tips" id="shortNameLab"></label>
@@ -759,9 +785,11 @@ $('.bankCardPhotoClick').click(function(){
 							</td>
 							<td class="td-left">营业执照有效期：</td>
 							<td class="td-right">
-								<input type="text" name="businessTermStart"   id="businessTermStart" readonly="readonly"   onfocus="WdatePicker({skin:'whyGreen',minDate:'#F{$dp.$D(\'businessTermEnd\')}'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> 
-								-		
-								<input type="radio" checked="checked" name="end" value="sel"/><input type="text" name="businessTermEnd"   id="businessTermEnd" readonly="readonly"  onfocus="WdatePicker({skin:'whyGreen',minDate:'#F{$dp.$D(\'businessTermStart\')}'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> <input type="radio" name="end" value="forever">长期
+								<input type="text" name="businessTermStart"   id="businessTermStart" readonly="readonly"   onfocus="WdatePicker({skin:'whyGreen',minDate:'#F{$dp.$D(\'businessTermEnd\')}'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
+								-
+								<input type="radio" checked="checked" name="end" value="sel"/>有期
+								<input type="text" name="businessTermEnd"   id="businessTermEnd" readonly="readonly"  onfocus="WdatePicker({skin:'whyGreen',minDate:'#F{$dp.$D(\'businessTermStart\')}'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
+								<input type="radio" name="end" value="forever" onclick="foreverTime()">长期
 								<label id="businessTermStartLabel" class="label-tips"></label>
 							</td>
 						</tr>
@@ -775,7 +803,7 @@ $('.bankCardPhotoClick').click(function(){
 								</a>
 								<div style="float:left;margin-top:75" >
 									<input type="file" name="businessPhoto" id="businessPhoto" onChange="showBusinessPhotoImage(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-								</div> 
+								</div>
 								<label class="label-tips" id="businessPhotoLabel" style="float:left;margin-top:88" ></label>
 							</td>
 						</tr>
@@ -786,7 +814,7 @@ $('.bankCardPhotoClick').click(function(){
 							</td>
 							<td class="td-left">所属代理商：</td>
 							<td class="td-right">
-								<input type="text" name="agentName" id="agentName" placeholder="请输入所属代理商" style="width:90%">  
+								<input type="text" name="agentName" id="agentName" placeholder="请输入所属代理商" style="width:90%">
 							</td>
 						</tr>
                         <tr>
@@ -795,13 +823,13 @@ $('.bankCardPhotoClick').click(function(){
 						<tr></tr>
 						<tr>
 							<td class="td-left">法人真实姓名：<span style="color:red;">（必填)</span></td>
-							<td class="td-right"> 
+							<td class="td-right">
 								<input type="text" id="representativeName" name="representativeName" placeholder="请输入法人真实姓名" maxlength="50" style="width:90%">
 								<i class="icon-leaf blue"></i>
 								<label class="label-tips" id="representativeNameLab"></label>
 							</td>
 							<td class="td-left">法人身份证号码：<span style="color:red;">（必填)</span></td>
-							<td class="td-right"> 
+							<td class="td-right">
 								<input type="text" name="representativeCertNo" id="representativeCertNo" placeholder="请输入法人身份证号码" style="width:90%">
 								<i class="icon-leaf blue"></i>
 								<label class="label-tips" id="representativeCertNoLab"></label>
@@ -811,7 +839,7 @@ $('.bankCardPhotoClick').click(function(){
 							<td class="td-left" >法人身份证正面<span style="color:red">*</span></td>
 							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success certAttribute1Click"  data-target="#previewImageModal" >
-								<label id="certAttribute1Div" class="uploadImage">  
+								<label id="certAttribute1Div" class="uploadImage">
 								        <img  id="certAttribute1Image" style="width:100%;height:100%;display:none"/>
 								</label>
 								</a>
@@ -823,9 +851,9 @@ $('.bankCardPhotoClick').click(function(){
 						</tr>
 						<tr>
 							<td class="td-left" >法人身份证背面<span style="color:red">*</span></td>
-							<td class="td-right" > 
+							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success certAttribute2Click"  data-target="#previewImageModal" >
-									<label id="certAttribute2Div2" class="uploadImage">  
+									<label id="certAttribute2Div2" class="uploadImage">
 									        <img  id="certAttribute2Image" style="width:100%;height:100%;display:none"/>
 									</label>
 								</a>
@@ -841,13 +869,13 @@ $('.bankCardPhotoClick').click(function(){
 						<tr></tr>
                         <tr>
 							<td class="td-left">联系人姓名：<span style="color:red;">（必填)</span></td>
-							<td class="td-right"> 
+							<td class="td-right">
 								<input type="text" id="contactName" name="contactName" placeholder="请输入联系人姓名" maxlength="50" style="width:90%">
 								<i class="icon-leaf blue"></i>
 								<label class="label-tips" id="contactNameLab"></label>
 							</td>
 							<td class="td-left">联系人手机号码：<span style="color:red;">（必填)</span></td>
-							<td class="td-right"> 
+							<td class="td-right">
 								<input type="text" name="contactMobile" id="contactMobile" placeholder="请输入联系人手机号码" style="width:90%">
 								<i class="icon-leaf blue"></i>
 								<label class="label-tips" id="contactMobileLab"></label>
@@ -858,13 +886,13 @@ $('.bankCardPhotoClick').click(function(){
 						</tr>
 						<tr>
 							<td class="td-left">银行卡号<span style="color:red;">（必填)</span></td>
-							<td class="td-right"> 
+							<td class="td-right">
 								<input type="text" id="compMainAcct" name="compMainAcct" maxlength="100" placeholder="请输入银行卡号" style="width:90%">
 								<i class="icon-leaf blue"></i>
 								<label class="label-tips" id="compMainAcctLab"></label>
 							</td>
 							<td class="td-left">开户银行：<span style="color:red;">（必填)</span></td>
-							<td class="td-right"> 
+							<td class="td-right">
 								<select class="width-90" id="compAcctBank" name="compAcctBank">
                                 <c:if test="${not empty banklist }">
                                    <option value="">--请选择--</option>
@@ -879,13 +907,13 @@ $('.bankCardPhotoClick').click(function(){
 						</tr>
 						<tr>
 							<td class="td-left">开户行：<span style="color:red;">（必填)</span></td>
-							<td class="td-right"> 
-								<input type="text" id="branchBank" name="branchBank" placeholder="请输入开户行" style="width:90%">  
+							<td class="td-right">
+								<input type="text" id="branchBank" name="branchBank" placeholder="请输入开户行" style="width:90%">
 								<i class="icon-leaf blue"></i>
 								<label class="label-tips" id="branchBankLab"></label>
 							</td>
 							<td class="td-left">开户人：<span style="color:red;">（必填)</span></td>
-							<td class="td-right"> 
+							<td class="td-right">
 								<input type="text" id="bankAcctName" name="bankAcctName" placeholder="请输入开户人" style="width:90%">
 								<i class="icon-leaf blue"></i>
 								<label class="label-tips" id="bankAcctNameLab"></label>
@@ -893,7 +921,7 @@ $('.bankCardPhotoClick').click(function(){
 						</tr>
                         <tr>
 							<td class="td-left">开户省份：<span style="color:red;">（必填)</span></td>
-							<td class="td-right"> 
+							<td class="td-right">
 								<select class="width-90" id="bankProvinceName" onchange="getBankCityList();">
 	                                   <c:if test="${not empty provincelist_ }">
                                         	<option value="">--请选择--</option>
@@ -904,7 +932,7 @@ $('.bankCardPhotoClick').click(function(){
 	                               </select>
 							</td>
 							<td class="td-left">开户城市：<span style="color:red;">（必填)</span></td>
-							<td class="td-right"> 
+							<td class="td-right">
 							   <select class="width-90" id="bankCityName">
                                   <option value="" id="cityDef">--请选择--</option>
                                </select>
@@ -912,11 +940,11 @@ $('.bankCardPhotoClick').click(function(){
 						</tr>
                         <tr>
 							<td class="td-left">网点号：<span style="color:red;">（必填)</span></td>
-							<td class="td-right"> 
+							<td class="td-right">
 								<input type="text" id="cnaps" name="cnaps" placeholder="请输入网点号" style="width:90%"> <a href="http://www.lianhanghao.com" target="_blank">[查找]</a>
 							</td>
 							<td class="td-left">结算类型：<span style="color:red;">（必填)</span></td>
-							<td class="td-right"> 
+							<td class="td-right">
 								<select class="width-90" id="compMainAcctType">
                                     <option value="01">对公</option>
                                     <option value="02">对私</option>
@@ -925,9 +953,9 @@ $('.bankCardPhotoClick').click(function(){
 						</tr>
 						<tr id="openAccount_" style="display: none">
 							<td class="td-left" >开户许可证</td>
-							<td class="td-right" > 
+							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success openAccountClick"  data-target="#previewImageModal" >
-									<label id="openAccountDiv" class="uploadImage">  
+									<label id="openAccountDiv" class="uploadImage">
 									        <img  id="openAccountImage" style="width:100%;height:100%;display:none"/>
 									</label>
 								</a>
@@ -939,9 +967,9 @@ $('.bankCardPhotoClick').click(function(){
 						</tr>
 						<tr id="bankCardPhoto_">
 							<td class="td-left" >银行卡照<span style="color:red"></span></td>
-							<td class="td-right" > 
+							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success bankCardPhotoClick"  data-target="#previewImageModal" >
-									<label id="bankCardPhotoDiv" class="uploadImage">  
+									<label id="bankCardPhotoDiv" class="uploadImage">
 									        <img  id="bankCardPhotoImage" style="width:100%;height:100%;display:none"/>
 									</label>
 								</a>
@@ -954,12 +982,12 @@ $('.bankCardPhotoClick').click(function(){
 					</tbody>
 					</table>
                         <div style="margin:50px 0 0 0;text-align:center">
-                        	<button type="button"  class="btn btn-primary addMerchantBtn" onclick="addMerchantBtn()">保存</button> 
+                        	<button type="button"  class="btn btn-primary addMerchantBtn" onclick="addMerchantBtn()">保存</button>
                         	<a href="<%=request.getContextPath()+MerchantEnterPath.BASE + MerchantEnterPath.LIST%>"  class="btn btn-default" >关闭</a>
                         </div>
 					</div>
 					</div>
-					
+
 				</div><!-- /.page-content -->
 				<!-- 图片预览 -->
 				<div class="modal fade" id="previewImageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -971,7 +999,7 @@ $('.bankCardPhotoClick').click(function(){
 				</div>
 				<!-- 底部-->
 				<%@ include file="/include/bottom.jsp"%>
-			
+
 			</div><!-- /.main-content -->
 			<!-- 设置 -->
 			<%@ include file="/include/setting.jsp"%>
@@ -980,10 +1008,10 @@ $('.bankCardPhotoClick').click(function(){
 		<!-- 向上置顶 -->
 		<%@ include file="/include/up.jsp"%>
 	</div><!-- /.main-container -->
-	
+
 </body>
 
 
 <script type="text/javascript">
 </script>
-</html>	
+</html>

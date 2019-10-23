@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sevenpay.bms.basemanager.merchant.bean.*;
 import org.gyzb.platform.web.admin.user.bean.User;
 import org.gyzb.platform.web.admin.user.service.UserService;
 import org.gyzb.platform.web.admin.utils.WebUtils;
@@ -24,11 +25,6 @@ import com.sevenpay.bms.basemanager.city.service.CityService;
 import com.sevenpay.bms.basemanager.custInfo.bean.TdCustInfo;
 import com.sevenpay.bms.basemanager.custInfo.mapper.TdCustInfoMapper;
 import com.sevenpay.bms.basemanager.custInfo.service.TdCustInfoService;
-import com.sevenpay.bms.basemanager.merchant.bean.BmsProtocolContent;
-import com.sevenpay.bms.basemanager.merchant.bean.CustScan;
-import com.sevenpay.bms.basemanager.merchant.bean.Merchant;
-import com.sevenpay.bms.basemanager.merchant.bean.MerchantExport;
-import com.sevenpay.bms.basemanager.merchant.bean.MerchantVo;
 import com.sevenpay.bms.basemanager.merchant.mapper.CustScanMapper;
 import com.sevenpay.bms.basemanager.merchant.mapper.MerchantMapper;
 import com.sevenpay.bms.basemanager.merchant.service.MerchantEnterService;
@@ -227,10 +223,10 @@ public class MerchantEnterController {
         //查询商户门头照信息
         //String path = auditorService.findScanPath(merchantVo.getCustId(), "08",merchantVo.getAuthId());
         //获取二维码
-		String qrCode = getQrCode(merchantVo);
+		//String qrCode = getQrCode(merchantVo);
 		mv.addObject("merchantVo", merchant);
 		//预览返回的二维码信息
-		mv.addObject("qrCode", qrCode);
+		mv.addObject("qrCode", null);
 		//mv.addObject("path", path);
 		return mv;
     }
@@ -552,6 +548,31 @@ public class MerchantEnterController {
 			logger.error("导出excel商户列表异常", e);
 			throw new RuntimeException(e);
 		}
+	}
+
+	/**
+	 * 校验商户账户否已经存在
+	 *
+	 * @return
+	 */
+	@RequestMapping(MerchantEnterPath.VALIDATEMERCHANTACCOUNT)
+	@ResponseBody
+	public String validateLicense(String merchantAccount, String custId) {
+		logger.info("校验商户账户是否已经存在");
+		JSONObject object = new JSONObject();
+		try {
+			TdLoginUserInfo tdLoginUserInfo = merchantEnterService.validateMerchantAccount(merchantAccount, custId);
+			if (null == tdLoginUserInfo) {
+				object.put("result", "SUCCESS");
+			} else {
+				object.put("result", "FAIL");
+			}
+		} catch (Exception e) {
+			logger.error("校验商户账户出现问题" + e);
+			object.put("result", "FAIL");
+			object.put("message", e.getMessage());
+		}
+		return object.toJSONString();
 	}
 
 }

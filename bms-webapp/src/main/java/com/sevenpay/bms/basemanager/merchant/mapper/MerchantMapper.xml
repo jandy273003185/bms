@@ -890,7 +890,9 @@
 		U.STATE merchantState,
 		T.CERTIFICATE_STATE auditState,
 		T.AUTH_RESULT_DESC aduitMessage,
-		S.USER_NAME aduitUserName
+		S.USER_NAME aduitUserName,
+        C.merchant_email,
+        c.SHORT_NAME
 		FROM TD_CUST_INFO C
 		INNER JOIN TD_LOGIN_USER_INFO U
 		ON C.CUST_ID = U.CUST_ID
