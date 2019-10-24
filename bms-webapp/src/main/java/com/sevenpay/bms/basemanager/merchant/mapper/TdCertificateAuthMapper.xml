@@ -213,4 +213,12 @@
       MODIFY_TIME = NOW()
     where AUTH_ID = #{authId,jdbcType=INTEGER}
   </update>
+  <select id="findTdCertificateAuthByCustId" parameterType="string" resultType="com.sevenpay.bms.basemanager.merchant.bean.TdCertificateAuth">
+    select
+    *
+    from
+    td_certificate_auth
+    where
+    AUTH_ID = #{authId,jdbcType=INTEGER}
+  </select>
 </mapper>

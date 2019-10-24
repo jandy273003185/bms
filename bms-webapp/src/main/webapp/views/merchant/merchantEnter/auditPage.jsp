@@ -435,7 +435,7 @@ function exit() {
 								</tr>
 								<tr>	
 									<td>
-										<textarea rows="5" cols="40" id="auditMessage" ></textarea>
+										<textarea rows="5" cols="40" id="auditMessage" maxlength="50"  ></textarea>
 									</td>
 								</tr>
 				            </table>

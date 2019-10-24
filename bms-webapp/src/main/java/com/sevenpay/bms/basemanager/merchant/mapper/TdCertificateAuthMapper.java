@@ -17,4 +17,6 @@ public interface TdCertificateAuthMapper {
     int updateByPrimaryKeySelective(TdCertificateAuth record);
 
     int updateByPrimaryKey(TdCertificateAuth record);
+
+    TdCertificateAuth findTdCertificateAuthByCustId(String custId);
 }

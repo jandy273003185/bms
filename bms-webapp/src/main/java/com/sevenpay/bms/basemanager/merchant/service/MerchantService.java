@@ -19,6 +19,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import com.sevenpay.bms.basemanager.merchant.bean.*;
+import com.sevenpay.bms.basemanager.merchant.mapper.*;
 import org.activiti.engine.IdentityService;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
@@ -48,11 +49,6 @@ import com.sevenpay.bms.basemanager.bank.service.BankService;
 import com.sevenpay.bms.basemanager.custInfo.bean.TdCustInfo;
 import com.sevenpay.bms.basemanager.custInfo.mapper.TdCustInfoMapper;
 import com.sevenpay.bms.basemanager.merchant.dao.MerchantDao;
-import com.sevenpay.bms.basemanager.merchant.mapper.BmsProtocolContentMapper;
-import com.sevenpay.bms.basemanager.merchant.mapper.CustScanMapper;
-import com.sevenpay.bms.basemanager.merchant.mapper.MerchantMapper;
-import com.sevenpay.bms.basemanager.merchant.mapper.StoreManageMapper;
-import com.sevenpay.bms.basemanager.merchant.mapper.TdLoginUserInfoMapper;
 import com.sevenpay.bms.basemanager.photo.bean.CertificateAuth;
 import com.sevenpay.bms.basemanager.utils.DatetimeUtils;
 import com.sevenpay.bms.basemanager.utils.GenSN;
@@ -132,6 +128,9 @@ public class MerchantService {
 
   @Autowired
   private StoreManageMapper storeManageMapper;
+
+  @Autowired
+  private TdCertificateAuthMapper tdCertificateAuthMapper;
 
   private static final Logger logger = LoggerFactory.getLogger(MerchantService.class);
 
@@ -1077,7 +1076,8 @@ public class MerchantService {
   }
 
   public MerchantVo findMerchantInfo(String custId) {
-    return merchantMapper.findMerchantInfo(custId);
+    MerchantVo merchantVo  = merchantMapper.findMerchantInfo(custId);
+    return merchantVo;
 
   }
 

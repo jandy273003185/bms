@@ -10,6 +10,7 @@
 <script src='<c:url value="/static/js/mobileBUGFix.mini.js"/>'></script>
 <script src='<c:url value="/static/js/uploadCompress.js"/>'></script>
 <script src='<c:url value="/static/js/register.js"/>'></script>
+<script src='<c:url value="/static/js/checkRule_source.js"/>'></script>
 <html>
 <head>
 	<meta charset="utf-8" />
@@ -92,8 +93,8 @@ $(function(){
 /**开户行城市 **/
 function getBankCityList(){
 
-	var provVal = $("#province").val().trim();
-	$("#cityDef").siblings().remove();
+	var provVal = $("#bankProvinceName").val().trim();
+	$("#backCityDef").siblings().remove();
 	if ("" == provVal || provVal.length == 0) {
 		return false;
 	}
@@ -446,7 +447,11 @@ function addMerchantBtn(){
 		return false;
 	}
 
-	/*开户银行*/
+
+
+
+
+    /*开户银行*/
 	var compAcctBank = $("#compAcctBank").val().trim();
 	if ("" == compAcctBank || compAcctBank.length == 0) {
 		$("#compMainAcctLab").text("请填写开户银行");
@@ -946,8 +951,8 @@ $(function(){
 							</td>
 							<td class="td-left">开户城市：<span style="color:red;">（必填)</span></td>
 							<td class="td-right">
-							   <select class="width-90" id="bankCityName">
-                                  <option value="" id="cityDef">--请选择--</option>
+							   <select class="width-90" id="bankCityName" onchange="getAreaList()">
+                                  <option value="" id="backCityDef">--请选择--</option>
                                </select>
 							</td>
 						</tr>
@@ -1030,5 +1035,26 @@ $(function(){
 
 
 <script type="text/javascript">
+
+        $("#compMainAcct").on('blur',function(){
+            if($("#compMainAcct").val().length < 12 || $("#compMainAcct").val().length > 19){
+                $("#compMainAcctLab").text("请填写12-19位银行卡号");
+                $("#compMainAcct").focus();
+                return false;
+            }else{
+                $("#compMainAcctLab").text('');
+            }
+        });
+
+        $("#representativeCertNo").on('blur',function () {
+            if ($("#representativeCertNo").val().length == 18 ){
+                $("#representativeCertNoLab").text('');
+            }else {
+                $("#representativeCertNoLab").text("请填写18位身份证号");
+                $("#representativeCertNoLab").focus();
+                return false;
+            }
+        });
+
 </script>
 </html>

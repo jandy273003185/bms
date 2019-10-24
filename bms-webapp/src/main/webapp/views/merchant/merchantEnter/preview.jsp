@@ -191,7 +191,7 @@ window.onload = function(){
 						<tr>
 							<td class="td-left">营业执照编号：</td>
 							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.businessLicense }</td>
-							<td class="td-left">营业执照有限期：</td>
+							<td class="td-left">营业执照有效期：</td>
 							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.businessTermStart } -
 								<c:choose>   
 			                        <c:when test="${merchantVo.businessTermEnd =='forever'}">  									  
@@ -341,7 +341,7 @@ window.onload = function(){
 						 <tr></tr>
                          <tr>
 							<td class="td-left">录入人：</td>
-							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.createId }</td>
+							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.createName }</td>
 							<td class="td-left">录入时间：</td>
 							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.createTime }</td>
 						 </tr>
@@ -355,7 +355,9 @@ window.onload = function(){
 						 </tr>
                          <tr>
 							<td class="td-left">审核记录：</td>
-							<td class="td-right" style="color:#666;padding:10px 8px"></td>
+							<td class="td-right" style="color:#666;padding:10px 8px">
+								${merchantVo.aduitMessage }
+							</td>
 						 </tr>
                          <%--<tr>
                          	<td colspan="4" class="headlerPreview" style="background:#7ebde1;">付款二维码</td>

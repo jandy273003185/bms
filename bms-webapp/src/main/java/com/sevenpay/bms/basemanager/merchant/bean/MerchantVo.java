@@ -418,6 +418,17 @@ public class MerchantVo implements Serializable {
 	//开户银行城市
 	private String bankCityName;
 
+	//创建人名称
+	private String createName;
+
+	public String getCreateName() {
+		return createName;
+	}
+
+	public void setCreateName(String createName) {
+		this.createName = createName;
+	}
+
 	public String getBankProvinceName() {
 		return bankProvinceName;
 	}

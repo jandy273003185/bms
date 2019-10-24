@@ -1688,16 +1688,26 @@
 	</update>
 	
 	<select id="findMerchantInfo" resultType="merchantVo" parameterType="string">
-		SELECT 
+		SELECT
 			C.*,
 			C.MERCHANT_MOBILE agentMobile,
 			IFNULL(U.EMAIL,U.MOBILE) EMAIL,
 			U.MOBILE,
-			F.FEE_CODE	
-		FROM TD_CUST_INFO C 
-		INNER JOIN TD_LOGIN_USER_INFO U 
+			F.FEE_CODE,
+            T.AUTH_RESULT_DESC aduitMessage,
+		    S.USER_NAME aduitUserName,
+		    Y.USER_NAME createName
+		FROM TD_CUST_INFO C
+		INNER JOIN TD_LOGIN_USER_INFO U
 		ON C.CUST_ID=U.CUST_ID
-		LEFT JOIN TD_CUST_FEE_RULE F ON C.CUST_ID=F.CUST_ID		
+
+		JOIN TD_CERTIFICATE_AUTH T
+		ON C.AUTH_ID = T.AUTH_ID
+		left JOIN SYS_USER S
+		ON S.USER_ID = T.CERTIFY_USER
+		left JOIN SYS_USER Y
+		ON Y.USER_ID = C.CREATE_ID
+		LEFT JOIN TD_CUST_FEE_RULE F ON C.CUST_ID=F.CUST_ID
 		WHERE c.CUST_ID = #{custId,jdbcType=VARCHAR}
 	</select>
 	

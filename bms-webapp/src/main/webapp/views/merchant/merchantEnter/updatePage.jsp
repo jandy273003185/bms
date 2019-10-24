@@ -576,7 +576,7 @@ function exit() {
 								<td class="td-right" style="color:#666;padding:10px 8px">
 									<input type="text" id="businessLicense" name="businessLicense"  placeholder="请输入营业执照" value=${merchantVo.businessLicense } style="width:90%">
 								</td>
-								<td class="td-left">营业执照有限期：</td>
+								<td class="td-left">营业执照有效期：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
 									<input type="text" name="businessTermStart"   id="businessTermStart" value = ${merchantVo.businessTermStart }    onfocus="WdatePicker({skin:'whyGreen',minDate:'#F{$dp.$D(\'businessTermEnd\')}'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
 									 -
