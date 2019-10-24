@@ -522,7 +522,7 @@ function exit() {
 								<td type="hidden" class="td-right" style="color:#666;padding:10px 8px" id="merchantCode">${merchantVo.merchantCode }</td>
 								<td type="hidden" class="td-right" style="color:#666;padding:10px 8px" id="authId">${merchantVo.authId }</td> --%>
 								<td class="td-right" style="color:#666;padding:10px 8px">
-									${merchantVo.merchantCode }
+									${merchantVo.email }
 								</td>
 								
 							</tr>

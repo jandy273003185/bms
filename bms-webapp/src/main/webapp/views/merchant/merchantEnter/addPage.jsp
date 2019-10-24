@@ -665,6 +665,19 @@ $('.bankCardPhotoClick').click(function(){
 	var obj = document.getElementById("bankCardPhoto");
 	return previewImage(divObj,imageObj,obj);
 });
+$(function(){
+	$('#compMainAcctType').on('change', function (e) {
+		//bankCardPhoto_
+		let compMainAcctType = $('#compMainAcctType').val();
+		if(compMainAcctType == '01'){
+			$('#openAccount_').show();
+			$('#bankCardPhoto_').hide();
+		}else{
+			$('#bankCardPhoto_').show();
+			$('#openAccount_').hide();
+		}
+	});
+})
 
 
 </script>
@@ -945,14 +958,16 @@ $('.bankCardPhotoClick').click(function(){
 							</td>
 							<td class="td-left">结算类型：<span style="color:red;">（必填)</span></td>
 							<td class="td-right">
-								<select class="width-90" id="compMainAcctType">
-                                    <option value="01">对公</option>
-                                    <option value="02">对私</option>
+								<select class="width-90 form-control"   id="compMainAcctType">
+                                    <option  value="01">对公</option>
+                                    <option  value="02">对私</option>
                                 </select>
 							</td>
 						</tr>
-						<tr id="openAccount_" style="display: none">
-							<td class="td-left" >开户许可证</td>
+						<tr id="openAccount_" style="display: none" class="tab-pane active">
+							<td class="td-left" >
+                                开户许可证
+                            </td>
 							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success openAccountClick"  data-target="#previewImageModal" >
 									<label id="openAccountDiv" class="uploadImage">
@@ -965,8 +980,9 @@ $('.bankCardPhotoClick').click(function(){
 								<label class="label-tips" id="openAccountLabel" style="float:left;margin-top:88"></label>
 							</td>
 						</tr>
-						<tr id="bankCardPhoto_">
-							<td class="td-left" >银行卡照<span style="color:red"></span></td>
+
+						<tr id="bankCardPhoto_" class="tab-pane">
+							<td class="td-left" id="cnm">银行卡照<span style="color:red"></span></td>
 							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success bankCardPhotoClick"  data-target="#previewImageModal" >
 									<label id="bankCardPhotoDiv" class="uploadImage">
@@ -987,6 +1003,7 @@ $('.bankCardPhotoClick').click(function(){
                         </div>
 					</div>
 					</div>
+
 
 				</div><!-- /.page-content -->
 				<!-- 图片预览 -->

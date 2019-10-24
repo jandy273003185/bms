@@ -398,6 +398,7 @@ public class MerchantWorkFlowAuditService {
 			custInfo.setTrustCertifyAuditState(status);
 			custInfo.setTrustCertifyLvl(trustCertifyLvl);
 			custInfo.setMerchantCode(empty);
+			custInfo.setState("04");
 			tdCustInfoMapper.updateInfo(custInfo);
 		} catch (Exception e) {
 			logger.error("录入商户认证状态失败",e);
@@ -470,7 +471,7 @@ public class MerchantWorkFlowAuditService {
 		/**
 		 * 录入商户审核状态
 		 */
-		this.updateAuditStatus(authId, message, auditStatus);
+		this.updateAuditStatus(authId, message, "2");
 	}
 	
 	/**

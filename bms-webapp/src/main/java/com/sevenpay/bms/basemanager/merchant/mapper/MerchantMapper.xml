@@ -931,7 +931,7 @@
                 AND C.STATE = #{state, jdbcType=VARCHAR}
             </if>
 			<if test="email != null and email != '' ">
-				AND U.EMAIL LIKE CONCAT('%',#{email},'%')
+				AND C.merchant_email LIKE CONCAT('%',#{email},'%')
 			</if>
 			<if test="merchantCode != null and merchantCode != '' ">
 				AND C.MERCHANT_CODE LIKE CONCAT('%',#{merchantCode},'%')

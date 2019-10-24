@@ -102,6 +102,18 @@ $(function() {
 		preview(obj);
 	}
 });
+
+
+window.onload = function(){
+	$('#bank').val(${merchantVo.compAcctBank });
+	console.log("01",${merchantVo.bankProvinceName });
+	console.log("02",${provincelist_ });
+
+	$('#province').val(${merchantVo.bankProvinceName });
+	$('#bank').val(${merchantVo.compAcctBank });
+	$('#bank').val(${merchantVo.compAcctBank });
+
+};
 </script>
 <body>
 	<%@ include file="/include/top.jsp"%>
@@ -199,11 +211,11 @@ $(function() {
 									  <img  id="businessPhotoImageDiv" onclick="bigImg(this);"  style="width:100%;height:100%;display:none"  />										  
 									</label>
 								</a>
-								<div class="updateImageDiv" style="float:left; margin-top:75 " >
+								<%--<div class="updateImageDiv" style="float:left; margin-top:75 " >
 									<input type="hidden" id="businessPhotoImageVal02"  />  
 									<input type="file" name="businessPhoto" id="businessPhoto" onchange="showBusinessPhotoImage(this)" />
 								 	<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-								</div>
+								</div>--%>
 							</td>
 						</tr>
 						<tr>
@@ -230,11 +242,11 @@ $(function() {
 								        <img  id="certAttribute1ImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none"/>
 								</label>
 								</a>
-								<div class="updateImageDiv" style="float:left; margin-top:75" >
+								<%--<div class="updateImageDiv" style="float:left; margin-top:75" >
 									<input type="hidden" id="certAttribute1Val02"  />  
 									<input type="file" name="certAttribute1" id="certAttribute1"  onchange="showCertAttribute1Image(this)"/> 
 									<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-								</div>
+								</div>--%>
 							</td>
 						</tr>
 						<tr>
@@ -245,11 +257,11 @@ $(function() {
 									        <img  id="certAttribute2ImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none" />
 									</label>
 								</a>
-								<div class="updateImageDiv" style="float:left; margin-top:75" >
+								<%--<div class="updateImageDiv" style="float:left; margin-top:75" >
 									<input type="hidden" id="certAttribute2Val02"  />  
 									<input type="file" name="certAttribute2" id="certAttribute2" onchange="showCertAttribute2Image(this)"/> 
 									<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-								</div>
+								</div>--%>
 								
 							</td>
 						</tr>
@@ -282,7 +294,9 @@ $(function() {
 							<td class="td-left">开户省份：</td>
 							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.bankProvinceName }</td>
 							<td class="td-left">开户城市：</td>
-							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.bankCityName }</td>
+							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.bankCityName }
+								<%--<sevenpay:selectTag id="city" name ="provincelist_"  banks="${provincelist_}"  clasS="width-90"/>--%>
+							</td>
 						 </tr>
                          <tr>
 							<td class="td-left">网点号：</td>
@@ -298,11 +312,11 @@ $(function() {
 									        <img  id="openAccountImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none"/>
 									</label>
 								</a>
-								<div class="updateImageDiv" style="float:left; margin-top:75" >
+								<%--<div class="updateImageDiv" style="float:left; margin-top:75" >
 									<input type="hidden" id="openAccountVal02"  />  
 									<input type="file" name="openAccount" id="openAccount" onchange="showopenAccountImage(this)"/>
 									<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-								</div>
+								</div>--%>
 							</td>
 						 </tr>
 						 <tr id="bankCardPhoto_">
@@ -313,9 +327,10 @@ $(function() {
 									        <img  id="bankCardPhotoImageDiv" style="width:100%;height:100%;display:none"/>
 									</label>
 								</a>
-								<div style="float:left;margin-top:75" >
-								<input type="file" name="bankCardPhoto" id="bankCardPhoto" onChange="showBankCardPhotoImage(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-								</div>
+								<%--<div style="float:left;margin-top:75" >
+								<input type="file" name="bankCardPhoto" id="bankCardPhoto" onChange="showBankCardPhotoImage(this)"/>
+									<p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+								</div>--%>
 								
 								<label class="label-tips" id="bankCardPhotoLabel" style="float:left;margin-top:88"></label>
 							</td>
@@ -333,7 +348,7 @@ $(function() {
                          <tr>
 							<td class="td-left">审核人：</td>
 							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.aduitUserName }</td>
-							<td class="td-left">录入时间：</td>
+							<td class="td-left">审核时间：</td>
 							<td class="td-right" style="color:#666;padding:10px 8px">
 								<fmt:formatDate value="${merchantVo.modifyTime }" pattern="yyyy-MM-dd HH:mm"/>
 							</td>

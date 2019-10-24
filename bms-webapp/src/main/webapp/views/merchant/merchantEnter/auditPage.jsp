@@ -220,7 +220,7 @@ function exit() {
 						</tr>
                         <tr>
 							<td class="td-left">商户账号：</td>
-							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.merchantCode }</td>
+							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.email }</td>
 						</tr>
                         <tr>
 							<td colspan="4" class="headlerPreview" style="background:#7ebde1">基本信息</td>
@@ -269,11 +269,11 @@ function exit() {
 									  <img  id="businessPhotoImageDiv" onclick="bigImg(this);"  style="width:100%;height:100%;display:none"  />										  
 									</label>
 								</a>
-								<div class="updateImageDiv" style="float:left; margin-top:75 " >
+								<%--<div class="updateImageDiv" style="float:left; margin-top:75 " >
 									<input type="hidden" id="businessPhotoImageVal02"  />  
 									<input type="file" name="businessPhoto" id="businessPhoto" onchange="showBusinessPhotoImage(this)" />
 								 	<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-								</div>
+								</div>--%>
 								
 							</td>
 						 </tr>
@@ -301,11 +301,11 @@ function exit() {
 								        <img  id="certAttribute1ImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none"/>
 								</label>
 								</a>
-								<div class="updateImageDiv" style="float:left; margin-top:75" >
+								<%--<div class="updateImageDiv" style="float:left; margin-top:75" >
 									<input type="hidden" id="certAttribute1Val02"  />  
 									<input type="file" name="certAttribute1" id="certAttribute1"  onchange="showCertAttribute1Image(this)"/> 
 									<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-								</div>
+								</div>--%>
 								
 							</td>
 						 </tr>
@@ -317,11 +317,11 @@ function exit() {
 									        <img  id="certAttribute2ImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none" />
 									</label>
 								</a>
-								<div class="updateImageDiv" style="float:left; margin-top:75" >
+								<%--<div class="updateImageDiv" style="float:left; margin-top:75" >
 									<input type="hidden" id="certAttribute2Val02"  />  
 									<input type="file" name="certAttribute2" id="certAttribute2" onchange="showCertAttribute2Image(this)"/> 
 									<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-								</div>
+								</div>--%>
 								
 							</td>
 						 </tr>
@@ -370,11 +370,11 @@ function exit() {
 									        <img  id="openAccountImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none"/>
 									</label>
 								</a>
-								<div class="updateImageDiv" style="float:left; margin-top:75" >
+								<%--<div class="updateImageDiv" style="float:left; margin-top:75" >
 									<input type="hidden" id="openAccountVal02"  />  
 									<input type="file" name="openAccount" id="openAccount" onchange="showopenAccountImage(this)"/>
 									<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-								</div>
+								</div>--%>
 																		
 							</td>
 						 </tr>
@@ -386,9 +386,9 @@ function exit() {
 									        <img  id="bankCardPhotoImageDiv" style="width:100%;height:100%;display:none"/>
 									</label>
 								</a>
-								<div style="float:left;margin-top:75" >
+								<%--<div style="float:left;margin-top:75" >
 								<input type="file" name="bankCardPhoto" id="bankCardPhoto" onChange="showBankCardPhotoImage(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-								</div>
+								</div>--%>
 								
 								<label class="label-tips" id="bankCardPhotoLabel" style="float:left;margin-top:88"></label>
 							</td>
