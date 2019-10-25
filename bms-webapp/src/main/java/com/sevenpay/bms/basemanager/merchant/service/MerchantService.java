@@ -1530,7 +1530,8 @@ public class MerchantService {
     }
 
     try {
-      if (null != merchantVo.getCustName()) {
+        MerchantVo merchantInfo = merchantMapper.findMerchantInfo(merchantVo.getCustId());
+        if (null != merchantVo.getCustName()) {
         merchantMapper.updateAcctNameByCustName(merchantVo);
       }
       if (StringUtils.isEmpty(merchantVo.getMerchantCode())) {
@@ -1538,9 +1539,13 @@ public class MerchantService {
       }
 
       merchantMapper.updateMerchantLoginInfo(merchantVo);
-//      merchantMapper.updateByPrimaryKeySelective(merchantVo);
 
       merchantMapper.updateMerchant(merchantVo);
+        TdCertificateAuth tdCertificateAuth = new TdCertificateAuth();
+        tdCertificateAuth.setCertificateState("1");
+        tdCertificateAuth.setAuthId(Integer.parseInt(merchantInfo.getAuthId()));
+        tdCertificateAuth.setCustId(merchantVo.getCustId());
+        tdCertificateAuthMapper.updateByPrimaryKeySelective(tdCertificateAuth);
     } catch (Exception e) {
       logger.error("修改异常", e);
       throw e;
@@ -1588,7 +1593,7 @@ public class MerchantService {
       // 更新商户信息
       //updateMerchant(merchantVo);
       updateMerchantEnter(merchantVo);
-      workSpaceService.updateCustScanInfo(merchantVo.getCustId(), merchantVo, filePath);
+      //workSpaceService.updateCustScanInfo(merchantVo.getCustId(), merchantVo, filePath);
       workSpaceService.updateEnterCustScanInfo(merchantVo.getCustId(), merchantVo, filePath);
 
     } catch (Exception e) {

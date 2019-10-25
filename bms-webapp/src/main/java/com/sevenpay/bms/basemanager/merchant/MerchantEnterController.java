@@ -277,22 +277,27 @@ public class MerchantEnterController {
 	public String updateMerchantInfo(MerchantVo merchantVo,HttpServletRequest request) {
 		logger.info("修改商户信息");
 		JSONObject object = new JSONObject();
-		String businessType = request.getParameter("businessType");
+		String businessType = request.getParameter("businessPhoto");
 		String doorPhoto = request.getParameter("doorPhoto");
 		String doorFlag = request.getParameter("doorFlag");
-		String certAttributeType1 = request.getParameter("certAttributeType1");
-		String idCardType_1 = request.getParameter("idCardType_1");
-		String idCardType_2 = request.getParameter("idCardType_2");
+		String certAttributeType1 = request.getParameter("openAccount"); //开户证件
+		String idCardType_1 = request.getParameter("certAttribute1");
+		String idCardType_2 = request.getParameter("certAttribute2");
+		String bankCard = request.getParameter("bankCardPhoto");
 
 		Map<String,String> filePath = new HashMap<String, String>();
 		filePath.put("businessType", businessType);
 		filePath.put("doorPhoto", doorPhoto);
 		filePath.put("doorFlag", doorFlag);
-		filePath.put("certAttributeType1", certAttributeType1);
+		filePath.put("certAttributeType1", certAttributeType1); //开户证件
 		filePath.put("idCardType_1", idCardType_1);
 		filePath.put("idCardType_2", idCardType_2);
+		filePath.put("bankCard", bankCard);
 		try {
-			merchantVo.setMerchantState("03"); //merchantState
+			//客户状态：00 有效；01 待审核；02 注销；03 冻结；04 审核不通过'
+			merchantVo.setMerchantState("01"); //merchantState
+			//审核状态：0 审核通过；1 待审核；2 审核不通过
+			merchantVo.setState("1");
 			merchantService.updateMerchantEnterAndFeeRule(merchantVo,filePath);
 			object.put("result", "SUCCESS");
 			object.put("message", "修改商户信息成功");

@@ -254,10 +254,10 @@ function exit() {
                                    <c:choose>   
 			                        <c:when test="${merchantVo.businessTermEnd =='forever'}">  									  
 			                            	长期  								  
-			                        </c:when>  
-			  						<c:otherwise>  								  
-			                            ${merchantVo.businessTermEnd }  									  
-			                        </c:otherwise>
+			                        </c:when>
+									<c:otherwise>
+			                            ${merchantVo.businessTermEnd }
+									</c:otherwise>
 	                             </c:choose>
 							</td>
 						 </tr>

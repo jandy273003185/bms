@@ -343,15 +343,15 @@ function addMerchantBtn(){
 			return false;
 		}
 
-		if(!checkAttach($("#businessPhoto")[0])){
+		/*if(!checkAttach($("#businessPhoto")[0])){
 			$.gyzbadmin.alertFailure("必须提交营业执照扫描件");
 			return false;
-		}
+		}*/
 
-		if(!checkAttach($("#openAccount")[0])){
+		/*if(!checkAttach($("#openAccount")[0])){
 			$.gyzbadmin.alertFailure("必须提交开户许可证");
 			return false;
-		}
+		}*/
 	}
 	/*个体户*/
 	if(custType=='2'){
@@ -519,10 +519,10 @@ function addMerchantBtn(){
 		type : "POST",
 		url : window.Constants.ContextPath +'<%=TinyMerchantPath.BASE + TinyMerchantPath.FILEUPLOAD%>',
 		data :{
-			businessPhoto  : $('#businessPhototemp').val(),
-			certAttribute1 : $('#certAttribute1temp').val(),
-			certAttribute2 : $('#certAttribute2temp').val(),
-			openAccount    : $('#openAccounttemp').val(),
+			businessPhoto  : $('#businessPhototemp').val(), //营业执照
+			certAttribute1 : $('#certAttribute1temp').val(), //身份证正
+			certAttribute2 : $('#certAttribute2temp').val(), //身份证反
+			openAccount    : $('#openAccounttemp').val(), // kai
 			bankCardPhoto  : $('#bankCardPhototemp').val()
 		},
 		dataType : "json",
@@ -811,10 +811,10 @@ $(function(){
 							</td>--%>
 
 							<td class="td-right">
-								<input type="text" id="businessTermStart" name="businessTermStart" readonly="readonly" onfocus="WdatePicker({minDate:'%y-%M-%d'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
+								<input type="text" id="businessTermStart" name="businessTermStart" readonly="readonly" onfocus="WdatePicker({skin:'whyGreen',minDate:'%y-%M-%d'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
 								<label class="label-tips" id="businessTermLabStart"></label>
 								-
-								<input type="text" id="businessTermEnd" name="businessTermEnd" readonly="readonly" onfocus="WdatePicker({minDate:'%y-%M-%d'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
+								<input type="text" id="businessTermEnd" name="businessTermEnd" readonly="readonly" onfocus="WdatePicker({skin:'whyGreen',minDate:'%y-%M-%d'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
 								<label class="label-tips" id="businessTermLabEnd"></label>
 
 								<input type="button" onclick="fun()" value="长期" />

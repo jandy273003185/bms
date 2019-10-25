@@ -931,10 +931,10 @@
                 AND C.STATE = #{state, jdbcType=VARCHAR}
             </if>
 			<if test="email != null and email != '' ">
-				AND C.merchant_email LIKE CONCAT('%',#{email},'%')
+				AND C.merchant_email = #{email, jdbcType=VARCHAR}
 			</if>
 			<if test="merchantCode != null and merchantCode != '' ">
-				AND C.MERCHANT_CODE LIKE CONCAT('%',#{merchantCode},'%')
+				AND C.MERCHANT_CODE = #{merchantCode, jdbcType=VARCHAR}
 			</if>
 		</where>
 		ORDER BY C.CREATE_TIME    DESC
@@ -1835,6 +1835,9 @@
 			<if test="filingAuditStatus != null">
 				filing_audit_status =  #{filingAuditStatus , jdbcType = VARCHAR}
 			</if>
+            <if test="merchantState != null">
+                STATE =  #{merchantState , jdbcType = VARCHAR}
+            </if>
 		
 		</set>
 		WHERE CUST_ID = #{custId,jdbcType=VARCHAR}

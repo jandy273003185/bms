@@ -102,6 +102,6 @@ public class CityNew implements Serializable {
 		this.cityLvl = cityLvl;
 	}
 
-	
+
 
 }
