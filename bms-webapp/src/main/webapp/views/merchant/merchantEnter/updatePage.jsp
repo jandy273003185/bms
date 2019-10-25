@@ -59,6 +59,15 @@ $(function() {
 	$("#updateMerchant #certAttribute2ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=1&authId="+authId);
 	$("#updateMerchant #openAccountImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=03&authId="+authId);
 
+
+    if ("style=\"width:90%\"" == document.getElementById("custManager").value){
+        $("#custManager").attr("value","");
+    }
+
+    if ("style=\"width:90%\"" == document.getElementById("agentName").value){
+        $("#agentName").attr("value","");
+    }
+
 	
 });
 
@@ -578,20 +587,20 @@ function exit() {
 								</td>
 								<td class="td-left">营业执照有效期：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
-									<input type="text" name="businessTermStart"   id="businessTermStart" value = ${merchantVo.businessTermStart }    onfocus="WdatePicker({skin:'whyGreen',minDate:'#F{$dp.$D(\'businessTermEnd\')}'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
-									 -
-									 <input type="radio" checked="checked" name="end" value="sel"/>
-									 <input type="text" name="businessTermEnd"   id="businessTermEnd" readonly="readonly" value = ${merchantVo.businessTermEnd }    onfocus="WdatePicker({skin:'whyGreen',minDate:'#F{$dp.$D(\'businessTermStart\')}'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> 
-									 <input type="radio" name="end" value="forever">长期
-									<%-- <c:choose>   
-				                        <c:when test="${merchantVo.businessTermEnd =='forever'}">  									  
-				                            	长期  								  
-				                        </c:when>  
-				  						<c:otherwise>  								  
-				                            ${merchantVo.businessTermEnd }  									  
-				                        </c:otherwise>
-		                             </c:choose> --%>
-                                    <!--  <input name="" type="radio" value=""> 长期 -->
+
+                                    <input type="text" id="businessTermStart" name="businessTermStart" value = ${merchantVo.businessTermStart }  onfocus="WdatePicker({minDate:'%y-%M-%d'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
+                                    <label class="label-tips" id="businessTermLabStart"></label>
+                                    -
+                                    <input type="text" id="businessTermEnd" name="businessTermEnd" value = ${merchantVo.businessTermEnd } onfocus="WdatePicker({minDate:'%y-%M-%d'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
+                                    <label class="label-tips" id="businessTermLabEnd"></label>
+
+                                    <input type="button" onclick="fun()" value="长期" />
+                                    <script>
+                                        function fun(){
+                                            $("input[name='businessTermEnd']").val("2040-05-25").focus();
+                                            $("#businessTermEnd").attr("value","2040-05-25");
+                                        }
+                                    </script>
 								</td>
 							</tr>
 							<tr>

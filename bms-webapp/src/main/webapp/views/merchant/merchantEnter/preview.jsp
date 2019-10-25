@@ -192,6 +192,8 @@ window.onload = function(){
 							<td class="td-left">营业执照编号：</td>
 							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.businessLicense }</td>
 							<td class="td-left">营业执照有效期：</td>
+
+
 							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.businessTermStart } -
 								<c:choose>   
 			                        <c:when test="${merchantVo.businessTermEnd =='forever'}">  									  
@@ -202,6 +204,8 @@ window.onload = function(){
 			                        </c:otherwise>
 	                             </c:choose>
 							</td>
+
+
 						</tr>
 						<tr>
 							<td class="td-left">营业执照扫描件：</td>

@@ -89,6 +89,8 @@ $(function(){
 			});
 		}
 	);
+
+
 });
 /**开户行城市 **/
 function getBankCityList(){
@@ -195,10 +197,7 @@ function selCustType(){
 	}
 }
 
-//点击长期给营业有效期赋forver
-function foreverTime() {
 
-}
 function addMerchantBtn(){
 	console.log("点击保存")
 	var businessTermEnd = "forever";
@@ -802,14 +801,32 @@ $(function(){
 								<label class="label-tips" id="businessLicenseLab"></label>
 							</td>
 							<td class="td-left">营业执照有效期：</td>
-							<td class="td-right">
+							<%--<td class="td-right">
 								<input type="text" name="businessTermStart"   id="businessTermStart" readonly="readonly"   onfocus="WdatePicker({skin:'whyGreen',minDate:'#F{$dp.$D(\'businessTermEnd\')}'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
 								-
 								<input type="radio" checked="checked" name="end" value="sel"/>有期
 								<input type="text" name="businessTermEnd"   id="businessTermEnd" readonly="readonly"  onfocus="WdatePicker({skin:'whyGreen',minDate:'#F{$dp.$D(\'businessTermStart\')}'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
 								<input type="radio" name="end" value="forever" onclick="foreverTime()">长期
 								<label id="businessTermStartLabel" class="label-tips"></label>
+							</td>--%>
+
+							<td class="td-right">
+								<input type="text" id="businessTermStart" name="businessTermStart" readonly="readonly" onfocus="WdatePicker({minDate:'%y-%M-%d'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
+								<label class="label-tips" id="businessTermLabStart"></label>
+								-
+								<input type="text" id="businessTermEnd" name="businessTermEnd" readonly="readonly" onfocus="WdatePicker({minDate:'%y-%M-%d'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
+								<label class="label-tips" id="businessTermLabEnd"></label>
+
+								<input type="button" onclick="fun()" value="长期" />
+								<script>
+									function fun(){
+										$("input[name='businessTermEnd']").val("2040-05-25").focus();
+										$("#businessTermEnd").attr("value","2040-05-25");
+									}
+								</script>
+
 							</td>
+
 						</tr>
 						<tr>
 							<td class="td-left">营业执照照片<span style="color:red" class="businessPhotoImageSpan"></span></td>
