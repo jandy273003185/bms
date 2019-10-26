@@ -281,7 +281,7 @@
 								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.compMainAcct }</td>
 								<td class="td-left">银行类型：</td>
 
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.compAcctBank }</td>
+								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.bankName }</td>
 							</tr>
 							<tr>
 								<td class="td-left">开户行：</td>
@@ -302,7 +302,16 @@
 								<td class="td-left">网点号：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.cnaps }</td>
 								<td class="td-left">结算类型：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.compMainAcctType }</td>
+								<td class="td-right" style="color:#666;padding:10px 8px">
+                                    <c:choose>
+                                        <c:when test="${merchantVo.compMainAcctType =='01'}">
+                                            对公
+                                        </c:when>
+                                        <c:otherwise>
+                                            对私
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
 							</tr>
 							<tr id="openAccount_" style="display: none">
 								<td class="td-left" >开户许可证：</td>

@@ -68,6 +68,20 @@
 			$("#agentName").attr("value","");
 		}
 
+		$(function(){
+			$('#compMainAcctType').on('change', function (e) {
+				//bankCardPhoto_
+				let compMainAcctType = $('#compMainAcctType').val();
+				if(compMainAcctType == '01'){
+					$('#openAccount_').show();
+					$('#bankCardPhoto_').hide();
+				}else{
+					$('#bankCardPhoto_').show();
+					$('#openAccount_').hide();
+				}
+			});
+		})
+
 
 	});
 
@@ -712,7 +726,7 @@
 								<td class="td-right" style="color:#666;padding:10px 8px">
 									<select class="width-90" id="compAcctBank" name="compAcctBank">
 										<c:if test="${not empty banklist }">
-											<option value=${merchantVo.compAcctBank }>${merchantVo.compAcctBank }</option>
+											<option value=${merchantVo.bankName }>${merchantVo.bankName }</option>
 											<c:forEach items="${banklist }" var="bank">
 												<option value="${bank.bankCode}">${bank.bankName}</option>
 											</c:forEach>
@@ -735,7 +749,7 @@
 								<td class="td-right" style="color:#666;padding:10px 8px">
 									<select class="width-90" id="bankProvinceName" onchange="getBankCityList();">
 										<c:if test="${not empty provincelist_ }">
-											<option value=${merchantVo.bankProvinceName }>${merchantVo.bankProvinceName }</option>
+											<option value=${merchantVo.provinceName }>${merchantVo.provinceName }</option>
 											<c:forEach items="${provincelist_ }" var="prov">
 												<option value="${prov.provinceId}">${prov.provinceName}</option>
 											</c:forEach>
@@ -745,7 +759,7 @@
 								<td class="td-left">开户城市：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
 									<select class="width-90" id="bankCityName">
-										<option value="" id="cityDef">${merchantVo.bankCityName }</option>
+										<option value="" id="cityDef">${merchantVo.cityName }</option>
 									</select>
 								</td>
 							</tr>

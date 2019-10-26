@@ -1698,6 +1698,7 @@
 		    S.USER_NAME aduitUserName,
 		    Y.USER_NAME createName,
 		    P.PROVINCE_NAME,
+		    Q.BANK_NAME bankName,
 		    B.city_name
 		FROM TD_CUST_INFO C
 		INNER JOIN TD_LOGIN_USER_INFO U
@@ -1712,6 +1713,7 @@
 		LEFT JOIN TD_CUST_FEE_RULE F ON C.CUST_ID=F.CUST_ID
 		left join tb_sp_province p ON P.PROVINCE_ID = C.province
 		left join tb_sp_city B ON B.city_id = C.city
+        left join tb_bank_code Q ON Q.BANK_CODE = C.COMP_ACCT_BANK
 		WHERE c.CUST_ID = #{custId,jdbcType=VARCHAR}
 	</select>
 	
