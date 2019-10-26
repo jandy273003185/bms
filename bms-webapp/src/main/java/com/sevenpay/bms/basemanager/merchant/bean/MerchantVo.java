@@ -35,8 +35,9 @@ public class MerchantVo implements Serializable {
 	 */
 	private String shortName;
 
-	
+	private String provinceName;
 
+	private String cityName;
 	/**
 	 * 商户邮箱，1mian9
 	 */
@@ -420,6 +421,22 @@ public class MerchantVo implements Serializable {
 
 	//创建人名称
 	private String createName;
+
+	public String getCityName() {
+		return cityName;
+	}
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+
+	public String getProvinceName() {
+		return provinceName;
+	}
+
+	public void setProvinceName(String provinceName) {
+		this.provinceName = provinceName;
+	}
 
 	public String getCreateName() {
 		return createName;

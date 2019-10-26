@@ -66,15 +66,15 @@
 
 
 		var cust_url = $("#url").val();
-		qrcode(cust_url);
+        /*qrcode(cust_url);
 		function qrcode(url){
 			$("#code_2").html("");
 			$("#code_2").qrcode(url);
-			/* $("#code_3").qrcode(url); */
+			/!* $("#code_3").qrcode(url); *!/
 			var mycanvas = $("#code_1").find("canvas")[0];
 			var image = mycanvas.toDataURL("image/png");
 			$("#code_1").html("<img id='qr_img' download='' src='"+image+"' width='100' height='100'  alt='from canvas'/>");
-		}
+		}*/
 
 		function preview(file)
 		{
@@ -103,19 +103,10 @@
 		};
 
 
-	});
+
+    });
 
 
-	window.onload = function(){
-		$('#bank').val(${merchantVo.compAcctBank });
-		console.log("01",${merchantVo.bankProvinceName });
-		console.log("02",${provincelist_ });
-
-		$('#province').val(${merchantVo.bankProvinceName });
-		$('#bank').val(${merchantVo.compAcctBank });
-		$('#bank').val(${merchantVo.compAcctBank });
-
-	};
 </script>
 <body>
 <%@ include file="/include/top.jsp"%>
@@ -294,15 +285,16 @@
 							</tr>
 							<tr>
 								<td class="td-left">开户行：</td>
+
 								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.branchBank }</td>
 								<td class="td-left">开户人：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.bankAcctName }</td>
 							</tr>
 							<tr>
 								<td class="td-left">开户省份：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.bankProvinceName }</td>
+								<td class="td-right" style="color:#666;padding:10px 8px" id="province1">${merchantVo.provinceName }</td>
 								<td class="td-left">开户城市：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.bankCityName }
+								<td class="td-right" style="color:#666;padding:10px 8px" id="city">${merchantVo.cityName }
 									<%--<sevenpay:selectTag id="city" name ="provincelist_"  banks="${provincelist_}"  clasS="width-90"/>--%>
 								</td>
 							</tr>
@@ -517,11 +509,7 @@
 			window.close();
 		}
 	};
-alert(888)
-    var provincelist = ${provincelist_ };
-    for (var i = 0; i < provincelist; i ++  ){
-        alert("4544");
-        console.log(provincelist[i]);
-    }
+
+
 </script>
 </html>

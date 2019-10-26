@@ -1696,7 +1696,9 @@
 			F.FEE_CODE,
             T.AUTH_RESULT_DESC aduitMessage,
 		    S.USER_NAME aduitUserName,
-		    Y.USER_NAME createName
+		    Y.USER_NAME createName,
+		    P.PROVINCE_NAME,
+		    B.city_name
 		FROM TD_CUST_INFO C
 		INNER JOIN TD_LOGIN_USER_INFO U
 		ON C.CUST_ID=U.CUST_ID
@@ -1708,6 +1710,8 @@
 		left JOIN SYS_USER Y
 		ON Y.USER_ID = C.CREATE_ID
 		LEFT JOIN TD_CUST_FEE_RULE F ON C.CUST_ID=F.CUST_ID
+		left join tb_sp_province p ON P.PROVINCE_ID = C.province
+		left join tb_sp_city B ON B.city_id = C.city
 		WHERE c.CUST_ID = #{custId,jdbcType=VARCHAR}
 	</select>
 	
