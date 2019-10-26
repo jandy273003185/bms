@@ -137,7 +137,7 @@ function pass(){
 			if(data.result=="SUCCESS"){
 				$.gyzbadmin.alertSuccess("审核完成！",function(){
 				},function(){
-					window.location.reload();
+					window.close();
 				});
 			}else{
 				$.gyzbadmin.alertFailure("审核失败！"+data.message);
@@ -164,7 +164,7 @@ function notPass(){
 			if(data.result=="SUCCESS"){
 				$.gyzbadmin.alertSuccess("审核完成！",function(){
 				},function(){
-					window.location.reload();
+                    window.close();
 				});
 			}else{
 				$.gyzbadmin.alertFailure("审核失败！"+data.message);

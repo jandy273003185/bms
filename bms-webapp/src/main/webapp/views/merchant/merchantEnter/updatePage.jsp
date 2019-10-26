@@ -620,8 +620,8 @@
 									<input type="button" onclick="fun()" value="长期" />
 									<script>
 										function fun(){
-											$("input[name='businessTermEnd']").val("2040-05-25").focus();
-											$("#businessTermEnd").attr("value","2040-05-25");
+											$("input[name='businessTermEnd']").val("2099-12-31").focus();
+											$("#businessTermEnd").attr("value","2099-12-31");
 										}
 									</script>
 								</td>

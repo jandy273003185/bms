@@ -811,19 +811,21 @@ $(function(){
 							</td>--%>
 
 							<td class="td-right">
-								<input type="text" id="businessTermStart" name="businessTermStart" readonly="readonly" onfocus="WdatePicker({skin:'whyGreen',minDate:'%y-%M-%d'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
+								<input type="text" id="businessTermStart" name="businessTermStart" readonly="readonly" onfocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
 								<label class="label-tips" id="businessTermLabStart"></label>
 								-
-								<input type="text" id="businessTermEnd" name="businessTermEnd" readonly="readonly" onfocus="WdatePicker({skin:'whyGreen',minDate:'%y-%M-%d'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
+								<input type="text" id="businessTermEnd" name="businessTermEnd" readonly="readonly" onfocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
 								<label class="label-tips" id="businessTermLabEnd"></label>
 
 								<input type="button" onclick="fun()" value="长期" />
 								<script>
 									function fun(){
-										$("input[name='businessTermEnd']").val("2040-05-25").focus();
-										$("#businessTermEnd").attr("value","2040-05-25");
+										$("input[name='businessTermEnd']").val("2099-12-31").focus();
+										$("#businessTermEnd").attr("value","2099-12-31");
 									}
 								</script>
+
+
 
 							</td>
 
