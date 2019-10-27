@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.myworkspace.overAudit.mapper.OverAuditMapper">
+<mapper namespace="com.qifenqian.bms.myworkspace.overAudit.mapper.OverAuditMapper">
 
-	<select id="getOverAudit" parameterType="com.sevenpay.bms.myworkspace.overAudit.bean.OverAuditBean" resultType="com.sevenpay.bms.myworkspace.overAudit.bean.OverAuditBean">
+	<select id="getOverAudit" parameterType="com.qifenqian.bms.myworkspace.overAudit.bean.OverAuditBean" resultType="com.qifenqian.bms.myworkspace.overAudit.bean.OverAuditBean">
 		select A.* ,B.BUSINESS_KEY_ businessKey,  C.NAME_ proName , T.REAL_NAME realName ,U.URL
 		from act_hi_taskinst A 
 		left join act_hi_procinst B on A.PROC_INST_ID_ = B.ID_

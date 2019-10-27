@@ -2,7 +2,6 @@ package com.qifenqian.bms.basemanager.trade.dao;
 
 import java.util.List;
 
-import org.gyzb.platform.web.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +9,7 @@ import com.qifenqian.bms.basemanager.trade.bean.AllTradeBill;
 import com.qifenqian.bms.basemanager.trade.bean.TdTradeBillMainVO;
 import com.qifenqian.bms.basemanager.trade.mapper.AllTradeBillMapper;
 import com.qifenqian.bms.basemanager.trade.mapper.TdTradeBillMainMapper;
+import com.qifenqian.bms.platform.web.page.Page;
 
 @Repository
 public class TradeBillDAO {

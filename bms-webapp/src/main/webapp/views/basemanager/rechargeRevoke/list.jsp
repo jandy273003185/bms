@@ -77,7 +77,7 @@
 										<i class=" icon-move icon-on-right bigger-110"></i>
 									</button>
 								</gyzbadmin:function>
-								<gyzbadmin:function url="<%=RechargeRevokePath.BASE+RechargeRevokePath.RECHARGE_REVOKE_APPLY %>">
+								<gyzbadmin:function url="<%=RechargeRevokePath.BASE+RechargeRevokePath.RECHARGE_REVOKE_APPLY%>">
 									<button  class="btn btn-purple btn-sm" data-toggle='modal' data-target="#addTransRevokeModal">
 										新增申请
 										<i class="icon-plus-sign icon-on-right bigger-110"></i>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sevenpay.bms.accounting.adjust.dao.AccountingAdjustMainMapper" >
-  <resultMap id="BaseResultMap" type="com.sevenpay.bms.accounting.adjust.bean.AccountingAdjustMain" >
+<mapper namespace="com.qifenqian.bms.accounting.adjust.dao.AccountingAdjustMainMapper" >
+  <resultMap id="BaseResultMap" type="com.qifenqian.bms.accounting.adjust.bean.AccountingAdjustMain" >
     <id column="op_id" property="opId" jdbcType="VARCHAR" />
     <result column="process_instance_id" property="processInstanceId" jdbcType="VARCHAR" />
     <result column="handle_datetime" property="handleDatetime" jdbcType="TIMESTAMP" />
@@ -17,7 +17,7 @@
     <result column="relation_op_id" property="relationOpId" jdbcType="VARCHAR" />
     <result column="memo" property="memo" jdbcType="VARCHAR" />
   </resultMap>
-  <resultMap id="HistoryListResultMap" type="com.sevenpay.bms.accounting.adjust.bean.AccountingAdjustHistoryListBean" >
+  <resultMap id="HistoryListResultMap" type="com.qifenqian.bms.accounting.adjust.bean.AccountingAdjustHistoryListBean" >
     <result column="op_id" property="opId" jdbcType="VARCHAR" />
     <result column="process_instance_id" property="processInstanceId" jdbcType="VARCHAR" />
     <result column="handle_datetime" property="handleDatetime" jdbcType="TIMESTAMP" />
@@ -46,7 +46,7 @@
     <result column="curcde" property="curcde" jdbcType="VARCHAR" />
     <result column="amt" property="amt" jdbcType="DECIMAL" />
   </resultMap>
-  <resultMap id="SingleHistoryListResultMap" type="com.sevenpay.bms.accounting.adjust.bean.AccountingAdjustSingleHistoryListBean" >
+  <resultMap id="SingleHistoryListResultMap" type="com.qifenqian.bms.accounting.adjust.bean.AccountingAdjustSingleHistoryListBean" >
     <result column="op_id" property="opId" jdbcType="VARCHAR" />
     <result column="process_instance_id" property="processInstanceId" jdbcType="VARCHAR" />
     <result column="handle_datetime" property="handleDatetime" jdbcType="TIMESTAMP" />
@@ -149,7 +149,7 @@
     entry_id, acct_no, acct_name, acct_type, curcde, amt, usable_amt, onway_amt, 
     is_adjust_JGKJ
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sevenpay.bms.accounting.adjust.bean.AccountingAdjustMainExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qifenqian.bms.accounting.adjust.bean.AccountingAdjustMainExample" >
     select
     <if test="distinct" >
       distinct
@@ -179,13 +179,13 @@
     delete from bms_td_accounting_adjust_main
     where op_id = #{opId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.sevenpay.bms.accounting.adjust.bean.AccountingAdjustMainExample" >
+  <delete id="deleteByExample" parameterType="com.qifenqian.bms.accounting.adjust.bean.AccountingAdjustMainExample" >
     delete from bms_td_accounting_adjust_main
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.sevenpay.bms.accounting.adjust.bean.AccountingAdjustMain" >
+  <insert id="insert" parameterType="com.qifenqian.bms.accounting.adjust.bean.AccountingAdjustMain" >
     insert into bms_td_accounting_adjust_main (op_id, process_instance_id, handle_datetime, 
       handler_uid, check_datetime, checker_uid, 
       approval_datetime, manager_uid, org_id, single_flag, 
@@ -197,7 +197,7 @@
       #{finishedFlag,jdbcType=VARCHAR}, #{deleteDatetime,jdbcType=TIMESTAMP}, #{relationOpId,jdbcType=VARCHAR}, 
       #{memo,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.sevenpay.bms.accounting.adjust.bean.AccountingAdjustMain" >
+  <insert id="insertSelective" parameterType="com.qifenqian.bms.accounting.adjust.bean.AccountingAdjustMain" >
     insert into bms_td_accounting_adjust_main
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="opId != null" >
@@ -284,7 +284,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.sevenpay.bms.accounting.adjust.bean.AccountingAdjustMainExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.qifenqian.bms.accounting.adjust.bean.AccountingAdjustMainExample" resultType="java.lang.Integer" >
     select count(*) from bms_td_accounting_adjust_main
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -360,7 +360,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.sevenpay.bms.accounting.adjust.bean.AccountingAdjustMain" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.qifenqian.bms.accounting.adjust.bean.AccountingAdjustMain" >
     update bms_td_accounting_adjust_main
     <set >
       <if test="processInstanceId != null" >
@@ -405,7 +405,7 @@
     </set>
     where op_id = #{opId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.sevenpay.bms.accounting.adjust.bean.AccountingAdjustMain" >
+  <update id="updateByPrimaryKey" parameterType="com.qifenqian.bms.accounting.adjust.bean.AccountingAdjustMain" >
     update bms_td_accounting_adjust_main
     set process_instance_id = #{processInstanceId,jdbcType=VARCHAR},
       handle_datetime = #{handleDatetime,jdbcType=TIMESTAMP},
@@ -422,7 +422,7 @@
       memo = #{memo,jdbcType=VARCHAR}
     where op_id = #{opId,jdbcType=VARCHAR}
   </update>
-  <select id="selectHistoryList" resultMap="HistoryListResultMap" parameterType="com.sevenpay.bms.accounting.adjust.bean.AccountingAdjustHistoryListBean" >
+  <select id="selectHistoryList" resultMap="HistoryListResultMap" parameterType="com.qifenqian.bms.accounting.adjust.bean.AccountingAdjustHistoryListBean" >
    SELECT
 			M.OP_ID,
 			PROCESS_INSTANCE_ID,
@@ -488,7 +488,7 @@
     </if>
     order by m.op_id
   </select>
-  <select id="selectSingleHistoryList" resultMap="SingleHistoryListResultMap" parameterType="com.sevenpay.bms.accounting.adjust.bean.AccountingAdjustSingleHistoryListBean" >
+  <select id="selectSingleHistoryList" resultMap="SingleHistoryListResultMap" parameterType="com.qifenqian.bms.accounting.adjust.bean.AccountingAdjustSingleHistoryListBean" >
 	SELECT
 			M.OP_ID,
 			PROCESS_INSTANCE_ID,

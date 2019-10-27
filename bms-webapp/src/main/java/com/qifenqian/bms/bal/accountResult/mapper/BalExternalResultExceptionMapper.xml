@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sevenpay.bms.bal.accountResult.mapper.BalExternalResultExceptionMapper">
+<mapper namespace="com.qifenqian.bms.bal.accountResult.mapper.BalExternalResultExceptionMapper">
 
-  <resultMap id="BaseResultMap" type="com.sevenpay.bms.bal.accountResult.bean.BalExternalResultException">
+  <resultMap id="BaseResultMap" type="com.qifenqian.bms.bal.accountResult.bean.BalExternalResultException">
     <id column="exception_id" jdbcType="INTEGER" property="exceptionId" />
     <result column="data_id" jdbcType="INTEGER" property="dataId" />
     <result column="channel_id" jdbcType="INTEGER" property="channelId" />
@@ -83,7 +83,7 @@
     exception_id, data_id, channel_id, file_id, seq, clear_id, work_date, batch_id, bal_result, 
     bal_memo, inst_user, inst_date, inst_datetime, deal_flag, deal_memo, deal_user, deal_datetime
   </sql>
-  <select id="selectByExample" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalExternalResultExceptionExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalExternalResultExceptionExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -107,13 +107,13 @@
     delete from bal_external_result_exception
     where exception_id = #{exceptionId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalExternalResultExceptionExample">
+  <delete id="deleteByExample" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalExternalResultExceptionExample">
     delete from bal_external_result_exception
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalExternalResultException">
+  <insert id="insert" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalExternalResultException">
     insert into bal_external_result_exception (exception_id, data_id, channel_id, 
       file_id, seq, clear_id, 
       work_date, batch_id, bal_result, 
@@ -127,7 +127,7 @@
       #{instDatetime,jdbcType=TIMESTAMP}, #{dealFlag,jdbcType=VARCHAR}, #{dealMemo,jdbcType=VARCHAR}, 
       #{dealUser,jdbcType=INTEGER}, #{dealDatetime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalExternalResultException">
+  <insert id="insertSelective" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalExternalResultException">
     insert into bal_external_result_exception
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="exceptionId != null">
@@ -236,7 +236,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalExternalResultExceptionExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalExternalResultExceptionExample" resultType="java.lang.Integer">
     select count(*) from bal_external_result_exception
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -324,7 +324,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalExternalResultException">
+  <update id="updateByPrimaryKeySelective" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalExternalResultException">
     update bal_external_result_exception
     <set>
       <if test="dataId != null">
@@ -378,7 +378,7 @@
     </set>
     where exception_id = #{exceptionId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalExternalResultException">
+  <update id="updateByPrimaryKey" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalExternalResultException">
     update bal_external_result_exception
     set data_id = #{dataId,jdbcType=INTEGER},
       channel_id = #{channelId,jdbcType=INTEGER},
@@ -400,7 +400,7 @@
   </update>
   
   
-  <select id="selectList" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalExternalResultException" resultType="com.sevenpay.bms.bal.accountResult.bean.BalExternalResultException">
+  <select id="selectList" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalExternalResultException" resultType="com.qifenqian.bms.bal.accountResult.bean.BalExternalResultException">
   		SELECT
 	   	a.*,
 	   	C.channel_name,

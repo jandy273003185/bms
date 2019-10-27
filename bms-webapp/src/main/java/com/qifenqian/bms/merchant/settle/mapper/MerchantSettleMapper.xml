@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.merchant.settle.mapper.MerchantSettleMapper">
+<mapper namespace="com.qifenqian.bms.merchant.settle.mapper.MerchantSettleMapper">
 	
-	<select id="selectList" parameterType="com.sevenpay.bms.merchant.settle.bean.MerchantSettle" resultType="com.sevenpay.bms.merchant.settle.bean.MerchantSettle">
+	<select id="selectList" parameterType="com.qifenqian.bms.merchant.settle.bean.MerchantSettle" resultType="com.qifenqian.bms.merchant.settle.bean.MerchantSettle">
     	SELECT T.ID,
 				M.MERCHANT_CODE,
 				T.CUST_ID,
@@ -105,7 +105,7 @@
 		ORDER BY T.WORK_DATE DESC, T.AUDIT_DATETIME DESC
 	</select>
 	
-	<select id="selectAgencyList" parameterType="com.sevenpay.bms.merchant.settle.bean.MerchantSettle" resultType="com.sevenpay.bms.merchant.settle.bean.MerchantSettle">
+	<select id="selectAgencyList" parameterType="com.qifenqian.bms.merchant.settle.bean.MerchantSettle" resultType="com.qifenqian.bms.merchant.settle.bean.MerchantSettle">
     	SELECT T.ID,
 				M.MERCHANT_CODE,
 				T.CUST_ID,
@@ -196,7 +196,7 @@
 		ORDER BY T.WORK_DATE DESC, T.AUDIT_DATETIME DESC
 	</select>
 	
-	<select id="selectSingle" parameterType="java.lang.String" resultType="com.sevenpay.bms.merchant.settle.bean.MerchantSettle">
+	<select id="selectSingle" parameterType="java.lang.String" resultType="com.qifenqian.bms.merchant.settle.bean.MerchantSettle">
 		SELECT T.*,
 			   A1.COLUMN_VALUE BANK_CARD_NO,
     		   M.CUST_NAME MERCHANT_NAME,
@@ -211,7 +211,7 @@
     	  WHERE T.ID = #{id, jdbcType=VARCHAR}
 	</select>
   
-  	<update id="updateById" parameterType="com.sevenpay.bms.merchant.settle.bean.MerchantSettle">
+  	<update id="updateById" parameterType="com.qifenqian.bms.merchant.settle.bean.MerchantSettle">
   		UPDATE BMS_MERCHANT_SETTLE T
   		<set>
   			<if test="finishDate != null">
@@ -245,7 +245,7 @@
   		WHERE T.ID = #{id, 	jdbcType=VARCHAR}
   	</update>
   	
-  	<update id="updateToSettle" parameterType="com.sevenpay.bms.merchant.settle.bean.MerchantSettle">
+  	<update id="updateToSettle" parameterType="com.qifenqian.bms.merchant.settle.bean.MerchantSettle">
   		UPDATE TR_MERCHANT_SETTLE T
   			SET T.SETTLE_STATUS = '1', 
   			T.FINISH_DATE = #{finishDate, jdbcType=VARCHAR}
@@ -254,7 +254,7 @@
   		  AND #{settleEndDate, jdbcType=VARCHAR} >= T.TRAN_DATE
   	</update>
   	
-  	<select id="selectExportList" parameterType="com.sevenpay.bms.merchant.settle.bean.MerchantSettle" resultType="com.sevenpay.bms.merchant.settle.bean.MerchantSettleExport">
+  	<select id="selectExportList" parameterType="com.qifenqian.bms.merchant.settle.bean.MerchantSettle" resultType="com.qifenqian.bms.merchant.settle.bean.MerchantSettleExport">
     	SELECT  T.ID,
     			T.APPLY_CORE_ID,
 				M.MERCHANT_CODE, 
@@ -352,7 +352,7 @@
 		ORDER BY T.WORK_DATE ,T.AUDIT_DATETIME DESC
 	</select>
 	
-	<select id="selectAgencyExportList" parameterType="com.sevenpay.bms.merchant.settle.bean.MerchantSettle" resultType="com.sevenpay.bms.merchant.settle.bean.MerchantSettleExport">
+	<select id="selectAgencyExportList" parameterType="com.qifenqian.bms.merchant.settle.bean.MerchantSettle" resultType="com.qifenqian.bms.merchant.settle.bean.MerchantSettleExport">
     	SELECT  T.ID,
     			T.APPLY_CORE_ID,
 				M.MERCHANT_CODE, 
@@ -440,7 +440,7 @@
 	</select>
 	
 	
-  	<select id="selectListByIds" resultType="com.sevenpay.bms.merchant.settle.bean.MerchantSettle">
+  	<select id="selectListByIds" resultType="com.qifenqian.bms.merchant.settle.bean.MerchantSettle">
     	SELECT T.*
     	  FROM BMS_MERCHANT_SETTLE T
          WHERE T.ID IN
@@ -450,14 +450,14 @@
        	 ORDER BY T.SETTLE_BEGIN_DATE
   	</select> 
   	
-  	<select id="selectDetailListByTogetherId" parameterType="java.lang.String" resultType="com.sevenpay.bms.merchant.settle.bean.MerchantSettle">
+  	<select id="selectDetailListByTogetherId" parameterType="java.lang.String" resultType="com.qifenqian.bms.merchant.settle.bean.MerchantSettle">
     	SELECT T.*
     	  FROM BMS_MERCHANT_SETTLE_DETAIL T
          WHERE T.TOGETHER_ID = #{togetherId, jdbcType=VARCHAR}
        	 ORDER BY T.SETTLE_BEGIN_DATE
   	</select> 
   	
-  	<update id="insertSettleDetailById" parameterType="com.sevenpay.bms.merchant.settle.bean.MerchantSettle">
+  	<update id="insertSettleDetailById" parameterType="com.qifenqian.bms.merchant.settle.bean.MerchantSettle">
   		insert into bms_merchant_settle_detail(
 			settle_id,
 			cust_id,
@@ -549,7 +549,7 @@
   		delete from BMS_MERCHANT_SETTLE where id = #{id, jdbcType=VARCHAR}
   	</delete>
   	
-  	<insert id="insertSettle" parameterType="com.sevenpay.bms.merchant.settle.bean.MerchantSettle">
+  	<insert id="insertSettle" parameterType="com.qifenqian.bms.merchant.settle.bean.MerchantSettle">
   		insert into bms_merchant_settle(
   			id,
 			cust_id,
@@ -617,7 +617,7 @@
   		)
   	</insert>
   	
-  	<update id="insertSettleByTogetherBean" parameterType="com.sevenpay.bms.merchant.settle.bean.MerchantSettle">
+  	<update id="insertSettleByTogetherBean" parameterType="com.qifenqian.bms.merchant.settle.bean.MerchantSettle">
   		INSERT INTO BMS_MERCHANT_SETTLE(
 			ID,
 			CUST_ID,
@@ -696,7 +696,7 @@
   		WHERE T.TOGETHER_ID = #{togetherId, jdbcType=VARCHAR}
   	</update>
   	
-  	<insert id="insertChildSettle" parameterType="com.sevenpay.bms.merchant.settle.bean.MerchantChildSettle">
+  	<insert id="insertChildSettle" parameterType="com.qifenqian.bms.merchant.settle.bean.MerchantChildSettle">
 	  	INSERT INTO BMS_MERCHANT_CHILD_SETTLE(
 	  		ORDER_ID,
 	  		SETTLE_ID,
@@ -716,7 +716,7 @@
 	  	)
   	</insert>
   	
-  	<update id="updateChildSettle" parameterType="com.sevenpay.bms.merchant.settle.bean.MerchantChildSettle">
+  	<update id="updateChildSettle" parameterType="com.qifenqian.bms.merchant.settle.bean.MerchantChildSettle">
   		UPDATE BMS_MERCHANT_CHILD_SETTLE T
   		<set>
 	  		<if test="status!=null and status!='' ">

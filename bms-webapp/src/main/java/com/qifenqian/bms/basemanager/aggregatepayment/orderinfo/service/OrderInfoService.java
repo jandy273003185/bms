@@ -16,7 +16,6 @@ import java.util.Properties;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.poi.ss.formula.functions.T;
-import org.gyzb.platform.web.page.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +35,7 @@ import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
 import com.qifenqian.bms.basemanager.custInfo.service.TdCustInfoService;
 import com.qifenqian.bms.basemanager.utils.GenSN;
 import com.qifenqian.bms.common.util.PropertiesUtil;
+import com.qifenqian.bms.platform.web.page.Page;
 import com.sevenpay.invoke.SevenpayCoreServiceInterface;
 import com.sevenpay.invoke.common.message.request.RequestMessage;
 import com.sevenpay.invoke.common.message.response.ResponseMessage;

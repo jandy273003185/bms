@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.transfer.mapper.TransferMapper">
+<mapper namespace="com.qifenqian.bms.basemanager.transfer.mapper.TransferMapper">
 
-	<select id="selectTransfer" parameterType="com.sevenpay.bms.basemanager.transfer.bean.TransferBean"
-	resultType="com.sevenpay.bms.basemanager.transfer.bean.TransferBean">
+	<select id="selectTransfer" parameterType="com.qifenqian.bms.basemanager.transfer.bean.TransferBean"
+	resultType="com.qifenqian.bms.basemanager.transfer.bean.TransferBean">
 		SELECT
 				T.ORDER_ID,
 				T.ORDER_NAME,
@@ -104,8 +104,8 @@
 		ORDER BY T.ORDER_CREATE_TIME DESC
 	</select>
 	
-	<select id="selectTransferExcel" parameterType="com.sevenpay.bms.basemanager.transfer.bean.TransferBean"
-	resultType="com.sevenpay.bms.basemanager.transfer.bean.TransferExcel">
+	<select id="selectTransferExcel" parameterType="com.qifenqian.bms.basemanager.transfer.bean.TransferBean"
+	resultType="com.qifenqian.bms.basemanager.transfer.bean.TransferExcel">
 		SELECT
 				T.ORDER_ID,
 				T.ORDER_NAME,
@@ -209,7 +209,7 @@
 		 ORDER BY T.ORDER_CREATE_TIME DESC
 	</select>
 	
-	<select id="selectTransferByOrderId" resultType="com.sevenpay.bms.basemanager.trade.bean.TdTradeBillMainVO" parameterType="string">
+	<select id="selectTransferByOrderId" resultType="com.qifenqian.bms.basemanager.trade.bean.TdTradeBillMainVO" parameterType="string">
 		SELECT 
 			T.* 
 		FROM 

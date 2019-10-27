@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sevenpay.bms.accounting.kingdee.mapper.BmsClearKingdeePayMapper" >
-  <select id="selectList" parameterType="com.sevenpay.bms.accounting.kingdee.bean.BmsClearKingdeePayInfo" resultType="com.sevenpay.bms.accounting.kingdee.bean.BmsClearKingdeePayInfo">
+<mapper namespace="com.qifenqian.bms.accounting.kingdee.mapper.BmsClearKingdeePayMapper" >
+  <select id="selectList" parameterType="com.qifenqian.bms.accounting.kingdee.bean.BmsClearKingdeePayInfo" resultType="com.qifenqian.bms.accounting.kingdee.bean.BmsClearKingdeePayInfo">
   	SELECT
   		A.CLEAR_ID,
 		CASE WHEN 	A.BUSINESS_TYPE = 'PERSONAL_WITHDRAW' THEN '个人提现' 

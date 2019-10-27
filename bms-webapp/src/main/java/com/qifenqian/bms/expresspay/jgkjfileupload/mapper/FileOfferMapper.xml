@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.expresspay.jgkjfileupload.mapper.FileOfferMapper">
+<mapper namespace="com.qifenqian.bms.expresspay.jgkjfileupload.mapper.FileOfferMapper">
 
-	<insert id="insert" parameterType="com.sevenpay.bms.expresspay.jgkjfileupload.bean.FileOffer">  
+	<insert id="insert" parameterType="com.qifenqian.bms.expresspay.jgkjfileupload.bean.FileOffer">  
         INSERT INTO BAL_FILE_RECEIVE (
 			FILE_ID,
 			CHANNEL_ID,
@@ -29,13 +29,13 @@
         )  
     </insert>  
     
-    <select id="selectByFileName" resultType="com.sevenpay.bms.expresspay.jgkjfileupload.bean.FileOffer">
+    <select id="selectByFileName" resultType="com.qifenqian.bms.expresspay.jgkjfileupload.bean.FileOffer">
     	SELECT T.*
     	  FROM BAL_FILE_RECEIVE T
     	 WHERE T.FILE_NAME = #{fileName,	jdbcType=VARCHAR}	
     </select>
     
-    <select id="selectByBean" resultType="com.sevenpay.bms.expresspay.jgkjfileupload.bean.FileOffer" parameterType="com.sevenpay.bms.expresspay.jgkjfileupload.bean.FileOffer">
+    <select id="selectByBean" resultType="com.qifenqian.bms.expresspay.jgkjfileupload.bean.FileOffer" parameterType="com.qifenqian.bms.expresspay.jgkjfileupload.bean.FileOffer">
     	SELECT T.*
     	  FROM BAL_FILE_RECEIVE T
     	  <where>
@@ -47,7 +47,7 @@
 		 ORDER BY INST_DATETIME DESC
     </select>
     
-    <update id="update" parameterType="com.sevenpay.bms.expresspay.jgkjfileupload.bean.FileOffer">
+    <update id="update" parameterType="com.qifenqian.bms.expresspay.jgkjfileupload.bean.FileOffer">
     	UPDATE BAL_FILE_RECEIVE T
    	    <set>
 	    	<if test="fileName != null">
@@ -61,7 +61,7 @@
     	 WHERE T.FILE_ID 	= #{fileId,		jdbcType=VARCHAR}
     </update>
 
-    <select id="selectByFileId" resultType="com.sevenpay.bms.expresspay.jgkjfileupload.bean.FileOffer" parameterType="string">
+    <select id="selectByFileId" resultType="com.qifenqian.bms.expresspay.jgkjfileupload.bean.FileOffer" parameterType="string">
     	SELECT 
     		T.*
     	FROM 

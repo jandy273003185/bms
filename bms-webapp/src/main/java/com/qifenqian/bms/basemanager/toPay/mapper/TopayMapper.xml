@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.toPay.mapper.TopayMapper">
+<mapper namespace="com.qifenqian.bms.basemanager.toPay.mapper.TopayMapper">
  	<!-- 获取Tyy渠道银行编码信息 -->
- 	<select id="listTyyBankCode" resultType="com.sevenpay.bms.basemanager.toPay.bean.TyyBankInfo">
+ 	<select id="listTyyBankCode" resultType="com.qifenqian.bms.basemanager.toPay.bean.TyyBankInfo">
  		SELECT
  			*
  		FROM
  			TD_TYY_BANK_INFO
  	</select>
  	<!-- 获取省份信息 -->
- 	<select id="listProvince" resultType="com.sevenpay.bms.basemanager.city.bean.ProvinceBean">
+ 	<select id="listProvince" resultType="com.qifenqian.bms.basemanager.city.bean.ProvinceBean">
  		SELECT 
  			*
  		FROM
  			TD_ZB_PROVINCE_CODE
  	</select>
  	<!-- 根据城市编码获取城市信息 -->
- 	<select id="listCityByProvinceCode" parameterType="java.lang.String" resultType="com.sevenpay.bms.basemanager.city.bean.CityNew">
+ 	<select id="listCityByProvinceCode" parameterType="java.lang.String" resultType="com.qifenqian.bms.basemanager.city.bean.CityNew">
  		SELECT
  			CITY_CODE cityId,
  			CITY_NAME
@@ -31,7 +31,7 @@
  	
 
  	<!-- 插入代付批次信息 -->
- 	<insert id="saveBatTopay" parameterType="com.sevenpay.bms.basemanager.toPay.bean.TopayBatDetail">
+ 	<insert id="saveBatTopay" parameterType="com.qifenqian.bms.basemanager.toPay.bean.TopayBatDetail">
  		INSERT INTO TD_AGENT_PAYMENT_BAT_RECORD(
  			BAT_NO,
  			SUM_AMT,
@@ -64,7 +64,7 @@
  	</insert>
  	
  	<!-- 批量插入单条代付信息 -->
- 	<insert id="saveSingleTopay" parameterType="com.sevenpay.bms.basemanager.toPay.bean.TopayBatDetail">
+ 	<insert id="saveSingleTopay" parameterType="com.qifenqian.bms.basemanager.toPay.bean.TopayBatDetail">
  		INSERT INTO TD_AGENT_PAYMENT_BAT_DETAIL_RECORD(
  			BAT_NO,
  			ROW_NO,
@@ -102,7 +102,7 @@
  		)	
  	</insert>	
  	<!-- 获取代付汇总信息 -->
- 	<select id="listBatRecord" resultType="com.sevenpay.bms.basemanager.toPay.bean.TopayBatDetail" parameterType="com.sevenpay.bms.basemanager.toPay.bean.TopayBatDetail" >
+ 	<select id="listBatRecord" resultType="com.qifenqian.bms.basemanager.toPay.bean.TopayBatDetail" parameterType="com.qifenqian.bms.basemanager.toPay.bean.TopayBatDetail" >
  		SELECT
  			T.*,
  			A.MEMO,
@@ -146,7 +146,7 @@
  	</select>
  	
  	<!-- 根据汇总信息的批次号获取单笔支付的信息 -->
- 	<select id="listSingleRecordByOrderNo" parameterType="java.lang.String" resultType="com.sevenpay.bms.basemanager.toPay.bean.TopaySingleDetail">
+ 	<select id="listSingleRecordByOrderNo" parameterType="java.lang.String" resultType="com.qifenqian.bms.basemanager.toPay.bean.TopaySingleDetail">
  		SELECT
  			T.*,
  			A.MEMO
@@ -162,7 +162,7 @@
  	
 
 	<!-- 更新单笔交易状态 -->
-	<update id="updateSinglePayInfo" parameterType="com.sevenpay.bms.basemanager.toPay.bean.TopaySingleDetail">
+	<update id="updateSinglePayInfo" parameterType="com.qifenqian.bms.basemanager.toPay.bean.TopaySingleDetail">
 		UPDATE TD_AGENT_PAYMENT_BAT_DETAIL_RECORD T
 		<set>
 			<if test="tradeStatus != null and tradeStatus != ''">
@@ -178,7 +178,7 @@
 	
 	</update>
 	
-	<update id="updateBatchPayInfo" parameterType="com.sevenpay.bms.basemanager.toPay.bean.TopayBatDetail">
+	<update id="updateBatchPayInfo" parameterType="com.qifenqian.bms.basemanager.toPay.bean.TopayBatDetail">
 		UPDATE TD_AGENT_PAYMENT_BAT_RECORD T
 		<set>
 			<if test="tradeStatus != null and tradeStatus != ''">
@@ -200,7 +200,7 @@
 	
 	</update>
 	<!-- 查询系统用户id与名字 -->
-	<select id="listCreater" resultType="com.sevenpay.bms.basemanager.toPay.bean.Creater">
+	<select id="listCreater" resultType="com.qifenqian.bms.basemanager.toPay.bean.Creater">
 		SELECT
 			USER_ID,
 			USER_NAME
@@ -210,7 +210,7 @@
  	
  	
  	<!-- 根据省份名称获取省份信息 -->
- 	<select id="selProvinceByName" resultType="com.sevenpay.bms.basemanager.city.bean.ProvinceBean">
+ 	<select id="selProvinceByName" resultType="com.qifenqian.bms.basemanager.city.bean.ProvinceBean">
  		SELECT 
  			*
  		FROM
@@ -220,7 +220,7 @@
  	</select>
  	
  	<!-- 根据城市名称获取城市信息 -->
- 	<select id="selCityByName" parameterType="java.lang.String" resultType="com.sevenpay.bms.basemanager.city.bean.CityNew">
+ 	<select id="selCityByName" parameterType="java.lang.String" resultType="com.qifenqian.bms.basemanager.city.bean.CityNew">
  		SELECT
  			CITY_CODE cityId,
  			CITY_NAME
@@ -233,7 +233,7 @@
  	</select>
  	
  	<!-- 根据银行名称获取银行code -->
- 	<select id="selBankCodeByName" parameterType="java.lang.String" resultType="com.sevenpay.bms.basemanager.toPay.bean.TyyBankInfo">
+ 	<select id="selBankCodeByName" parameterType="java.lang.String" resultType="com.qifenqian.bms.basemanager.toPay.bean.TyyBankInfo">
  		SELECT
  			BANK_CODE,
  			BANK_NAME
@@ -272,7 +272,7 @@
  	</select>
  	
  	 <!-- 获取充值利润 -->
-   <select id="getProfitOfRecharge" parameterType="com.sevenpay.bms.basemanager.toPay.bean.DateBean" resultType="com.sevenpay.bms.basemanager.toPay.bean.ProfitBean">
+   <select id="getProfitOfRecharge" parameterType="com.qifenqian.bms.basemanager.toPay.bean.DateBean" resultType="com.qifenqian.bms.basemanager.toPay.bean.ProfitBean">
    		SELECT
 			COALESCE(SUM(T.RECHARGE_FEEAMT),0) incomeAmt,
 			COALESCE(SUM(T.CHANNEL_RECHARGE_FEEAMT),0) expenseAmt
@@ -294,7 +294,7 @@
    </select>
    
    <!-- 获取手续费利润 -->
-   <select id="getProfitOfPoundage" parameterType="com.sevenpay.bms.basemanager.toPay.bean.DateBean" resultType="com.sevenpay.bms.basemanager.toPay.bean.ProfitBean">
+   <select id="getProfitOfPoundage" parameterType="com.qifenqian.bms.basemanager.toPay.bean.DateBean" resultType="com.qifenqian.bms.basemanager.toPay.bean.ProfitBean">
    		SELECT
 			COALESCE(SUM(T.CHANNEL_FEEAMT),0) expenseAmt,
 			COALESCE(SUM(T.Single_FeeAmt),0) incomeAmt
@@ -318,7 +318,7 @@
    
    <!-- 插入代付收益提现信息 -->
    <insert id="insertBatInfo"
-		parameterType="com.sevenpay.bms.basemanager.toPay.bean.TdPaymentBatInfoBean">
+		parameterType="com.qifenqian.bms.basemanager.toPay.bean.TdPaymentBatInfoBean">
 		INSERT INTO `stcdb`.`td_agent_payment_bat_record` (
 		`BAT_NO`,
 		`PAER_ACCT_NO`,
@@ -347,7 +347,7 @@
 	</insert>
 	
 	<!-- 插入代付收益提现明细表 -->
-	<insert id="insertPaymentDetail" parameterType="com.sevenpay.bms.basemanager.toPay.bean.TdPaymentBatDetailBean">
+	<insert id="insertPaymentDetail" parameterType="com.qifenqian.bms.basemanager.toPay.bean.TdPaymentBatDetailBean">
 		insert into `stcdb`.`td_agent_payment_bat_detail_record` (
 		`BAT_NO`,
 		`ROW_NO`,
@@ -392,7 +392,7 @@
 			
     </insert>
     
-      <select id="getBankNameByBankNum"  parameterType="java.lang.String" resultType="com.sevenpay.bms.basemanager.toPay.bean.TbBankCardBin">
+      <select id="getBankNameByBankNum"  parameterType="java.lang.String" resultType="com.qifenqian.bms.basemanager.toPay.bean.TbBankCardBin">
    		SELECT
 			x.BANK_NAME,
 			x.TYY_CODE
@@ -411,7 +411,7 @@
    
    </select>
    
-   <select id="getChnanelInfoByChannelName" parameterType="java.lang.String" resultType="com.sevenpay.bms.basemanager.toPay.bean.ToPayChannelInfo">
+   <select id="getChnanelInfoByChannelName" parameterType="java.lang.String" resultType="com.qifenqian.bms.basemanager.toPay.bean.ToPayChannelInfo">
    		SELECT
 			C.*
 		FROM
@@ -420,7 +420,7 @@
 			C.channel_name = #{channelName}
    </select>
    
-   <update id="updateCoreSn" parameterType="com.sevenpay.bms.basemanager.toPay.bean.TdPaymentBatDetailBean">
+   <update id="updateCoreSn" parameterType="com.qifenqian.bms.basemanager.toPay.bean.TdPaymentBatDetailBean">
 	UPDATE 
 		td_agent_payment_bat_detail_record
 	SET 

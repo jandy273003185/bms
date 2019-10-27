@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.photo.mapper.PhotoMapper">
+<mapper namespace="com.qifenqian.bms.basemanager.photo.mapper.PhotoMapper">
 
-	<select id="list" resultType="com.sevenpay.bms.basemanager.photo.bean.CertificateAuth" parameterType="com.sevenpay.bms.basemanager.photo.bean.CertificateAuth">
+	<select id="list" resultType="com.qifenqian.bms.basemanager.photo.bean.CertificateAuth" parameterType="com.qifenqian.bms.basemanager.photo.bean.CertificateAuth">
 		SELECT 
 			  IFNULL(bid.status,'无') as status,
 			  IFNULL(bid.rtn_msg,'') as rtnMsg,
@@ -45,7 +45,7 @@
 		ORDER BY A.CREATE_TIME DESC
 	</select>
 	
-	<select id="selectCustCertificate" resultType="com.sevenpay.bms.basemanager.photo.bean.Photo">
+	<select id="selectCustCertificate" resultType="com.qifenqian.bms.basemanager.photo.bean.Photo">
 		SELECT  
 		  SCAN_ID,
 		  CUST_ID,
@@ -62,7 +62,7 @@
 	  FROM TD_CUST_SCAN_COPY WHERE AUTH_ID = #{authId , jdbcType = INTEGER}
 	</select>
 	
-	<update id="update" parameterType="com.sevenpay.bms.basemanager.photo.bean.CertificateAuth">
+	<update id="update" parameterType="com.qifenqian.bms.basemanager.photo.bean.CertificateAuth">
 		UPDATE TD_CERTIFICATE_AUTH
 		<set>
 			<if test="certificateState != null">

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sevenpay.bms.bal.accountResult.mapper.BalInternalResultEqualMapper" >
-  <resultMap id="BaseResultMap" type="com.sevenpay.bms.bal.accountResult.bean.BalInternalResultEqual" >
+<mapper namespace="com.qifenqian.bms.bal.accountResult.mapper.BalInternalResultEqualMapper" >
+  <resultMap id="BaseResultMap" type="com.qifenqian.bms.bal.accountResult.bean.BalInternalResultEqual" >
     <id column="equal_id" property="equalId" jdbcType="INTEGER" />
     <result column="data_id" property="dataId" jdbcType="INTEGER" />
     <result column="channel_id" property="channelId" jdbcType="INTEGER" />
@@ -76,7 +76,7 @@
     equal_id, data_id, channel_id, clear_id, work_date, batch_id, bal_result, bal_memo, 
     inst_user, inst_date, inst_datetime
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalInternalResultEqualExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalInternalResultEqualExample" >
     select
     <if test="distinct" >
       distinct
@@ -100,13 +100,13 @@
     delete from bal_internal_result_equal
     where equal_id = #{equalId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalInternalResultEqualExample" >
+  <delete id="deleteByExample" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalInternalResultEqualExample" >
     delete from bal_internal_result_equal
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalInternalResultEqual" >
+  <insert id="insert" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalInternalResultEqual" >
     insert into bal_internal_result_equal (equal_id, data_id, channel_id, 
       clear_id, work_date, batch_id, 
       bal_result, bal_memo, inst_user, 
@@ -116,7 +116,7 @@
       #{balResult,jdbcType=VARCHAR}, #{balMemo,jdbcType=VARCHAR}, #{instUser,jdbcType=INTEGER}, 
       #{instDate,jdbcType=VARCHAR}, #{instDatetime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalInternalResultEqual" >
+  <insert id="insertSelective" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalInternalResultEqual" >
     insert into bal_internal_result_equal
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="equalId != null" >
@@ -189,7 +189,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalInternalResultEqualExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalInternalResultEqualExample" resultType="java.lang.Integer" >
     select count(*) from bal_internal_result_equal
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -253,7 +253,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalInternalResultEqual" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalInternalResultEqual" >
     update bal_internal_result_equal
     <set >
       <if test="dataId != null" >
@@ -289,7 +289,7 @@
     </set>
     where equal_id = #{equalId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalInternalResultEqual" >
+  <update id="updateByPrimaryKey" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalInternalResultEqual" >
     update bal_internal_result_equal
     set data_id = #{dataId,jdbcType=INTEGER},
       channel_id = #{channelId,jdbcType=INTEGER},
@@ -304,7 +304,7 @@
     where equal_id = #{equalId,jdbcType=INTEGER}
   </update>
   
-   <select id="selectList" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalInternalResultEqual" resultType="com.sevenpay.bms.bal.accountResult.bean.BalInternalResultEqual">
+   <select id="selectList" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalInternalResultEqual" resultType="com.qifenqian.bms.bal.accountResult.bean.BalInternalResultEqual">
   	SELECT 
 			b.*,
 			C.channel_name,

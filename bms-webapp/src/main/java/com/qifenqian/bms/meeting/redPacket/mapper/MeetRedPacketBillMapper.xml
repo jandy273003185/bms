@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sevenpay.bms.meeting.redPacket.mapper.MeetRedPacketBillMapper" >
+<mapper namespace="com.qifenqian.bms.meeting.redPacket.mapper.MeetRedPacketBillMapper" >
 
-  <select id="selectRedPacket" parameterType="com.sevenpay.bms.meeting.redPacket.bean.MeetRedPacketBillConditionBean" resultType="com.sevenpay.bms.meeting.redPacket.bean.MeetRedPacketBill">
+  <select id="selectRedPacket" parameterType="com.qifenqian.bms.meeting.redPacket.bean.MeetRedPacketBillConditionBean" resultType="com.qifenqian.bms.meeting.redPacket.bean.MeetRedPacketBill">
   	SELECT 
   		M.RED_PACKET_SN,
   		M.RECEIVE_CUST_ID,

@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.utils.DateUtils;
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +35,7 @@ import com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.service.OrderRef
 import com.qifenqian.bms.basemanager.custInfo.service.TdCustInfoService;
 import com.qifenqian.bms.basemanager.trade.service.DownLoadUtil;
 import com.qifenqian.bms.basemanager.utils.DatetimeUtils;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 
 @Controller

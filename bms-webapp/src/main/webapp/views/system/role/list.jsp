@@ -522,14 +522,14 @@
 												<td>${role.lupdUserName }</td>
 												<td><fmt:formatDate value="${role.lupdDatetime }" type="both"/></td>
 												<td>
-													<gyzbadmin:function url="<%=RolePath.BASE + RolePath.EDIT %>">
+													<gyzbadmin:function url="<%=RolePath.BASE + RolePath.EDIT%>">
 													<a href="#"  data-toggle='modal' class="tooltip-error previewRole" data-rel="tooltip" title="预览" data-target="#previewRoleModal">
 														<span class="green">
 															<i class="iconfont icon-shenhe "></i>
 														</span>
 													</a>
 													</gyzbadmin:function>
-													<gyzbadmin:function url="<%=RolePath.BASE + RolePath.EDIT %>">
+													<gyzbadmin:function url="<%=RolePath.BASE + RolePath.EDIT%>">
 													<a href="#" class="tooltip-success editRole" data-rel="tooltip" data-toggle='modal' data-target="#editRoleModal" title="Edit" >
 														<span class="green">
 															<i class="icon-edit bigger-120"></i>

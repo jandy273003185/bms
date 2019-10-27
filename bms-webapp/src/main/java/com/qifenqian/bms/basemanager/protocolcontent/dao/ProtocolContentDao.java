@@ -3,7 +3,6 @@ package com.qifenqian.bms.basemanager.protocolcontent.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.gyzb.platform.web.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +11,7 @@ import com.qifenqian.bms.basemanager.protocolcontent.bean.ProtocolContent;
 import com.qifenqian.bms.basemanager.protocolcontent.bean.ProtocolContentExportBean;
 import com.qifenqian.bms.basemanager.protocolcontent.bean.ProtocolInfo;
 import com.qifenqian.bms.basemanager.protocolcontent.mapper.ProtocolContentMapper;
+import com.qifenqian.bms.platform.web.page.Page;
 
 @Repository
 public class ProtocolContentDao {

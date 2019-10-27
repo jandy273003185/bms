@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sevenpay.bms.bal.accountResult.mapper.BalInternalDataMapper" >
-  <resultMap id="BaseResultMap" type="com.sevenpay.bms.bal.accountResult.bean.BalInternalData" >
+<mapper namespace="com.qifenqian.bms.bal.accountResult.mapper.BalInternalDataMapper" >
+  <resultMap id="BaseResultMap" type="com.qifenqian.bms.bal.accountResult.bean.BalInternalData" >
     <id column="data_id" property="dataId" jdbcType="INTEGER" />
     <result column="channel_id" property="channelId" jdbcType="INTEGER" />
     <result column="clear_id" property="clearId" jdbcType="VARCHAR" />
@@ -71,7 +71,7 @@
   <sql id="Base_Column_List" >
     data_id, channel_id, clear_id, work_date, inst_user, inst_date, inst_datetime
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalInternalDataExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalInternalDataExample" >
     select
     <if test="distinct" >
       distinct
@@ -95,13 +95,13 @@
     delete from bal_internal_data
     where data_id = #{dataId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalInternalDataExample" >
+  <delete id="deleteByExample" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalInternalDataExample" >
     delete from bal_internal_data
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalInternalData" >
+  <insert id="insert" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalInternalData" >
     insert into bal_internal_data (data_id, channel_id, clear_id, 
       work_date, inst_user, inst_date, 
       inst_datetime)
@@ -109,7 +109,7 @@
       #{workDate,jdbcType=VARCHAR}, #{instUser,jdbcType=INTEGER}, #{instDate,jdbcType=VARCHAR}, 
       #{instDatetime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalInternalData" >
+  <insert id="insertSelective" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalInternalData" >
     insert into bal_internal_data
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="dataId != null" >
@@ -158,7 +158,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalInternalDataExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalInternalDataExample" resultType="java.lang.Integer" >
     select count(*) from bal_internal_data
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -206,7 +206,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalInternalData" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalInternalData" >
     update bal_internal_data
     <set >
       <if test="channelId != null" >
@@ -230,7 +230,7 @@
     </set>
     where data_id = #{dataId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalInternalData" >
+  <update id="updateByPrimaryKey" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalInternalData" >
     update bal_internal_data
     set channel_id = #{channelId,jdbcType=INTEGER},
       clear_id = #{clearId,jdbcType=VARCHAR},
@@ -241,7 +241,7 @@
     where data_id = #{dataId,jdbcType=INTEGER}
   </update>
   
-   <select id="selectList" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalInternalData" resultType="com.sevenpay.bms.bal.accountResult.bean.BalInternalData">
+   <select id="selectList" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalInternalData" resultType="com.qifenqian.bms.bal.accountResult.bean.BalInternalData">
   	select 
   			T.*,
   			C.channel_name,

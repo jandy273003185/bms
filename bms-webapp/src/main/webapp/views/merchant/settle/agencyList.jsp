@@ -374,7 +374,7 @@
 													清空
 													<i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
-											<gyzbadmin:function url="<%=MerchantSettlePath.BASE + MerchantSettlePath.AGENCYEXPORT %>">
+											<gyzbadmin:function url="<%=MerchantSettlePath.BASE + MerchantSettlePath.AGENCYEXPORT%>">
 												<span class="input-group-btn" style="display:inline;">
 													<a class="btn btn-purple btn-sm exportBut">
 														导出报表
@@ -393,7 +393,7 @@
 																<i class="icon-download-alt bigger-110"></i> 
 															</a> 
 											</span>	
-											<gyzbadmin:function url="<%=MerchantSettlePath.BASE + MerchantSettlePath.TOGETHER %>">
+											<gyzbadmin:function url="<%=MerchantSettlePath.BASE + MerchantSettlePath.TOGETHER%>">
 												<span class="input-group-btn" style="display:inline;">
 													<a class="btn btn-purple btn-sm togetherBtn"  href="#"  data-rel="tooltip"  data-toggle='modal' data-target="#togetherModal">
 														联合
@@ -492,13 +492,13 @@
 											<td class="buttonTd">
 												<input type="hidden" name="id" value="${settle.id }"/>
 												<c:if test="${settle.status == 'INIT'}">
-													<gyzbadmin:function url="<%=MerchantSettlePath.BASE + MerchantSettlePath.AUDIT %>">
+													<gyzbadmin:function url="<%=MerchantSettlePath.BASE + MerchantSettlePath.AUDIT%>">
 														<button type="button" class="btn btn-primary btn-xs auditLink" title="Audit" data-toggle='modal' data-target="#auditModal">
 															确认
 														</button>
 													</gyzbadmin:function>
 													<c:if test="${settle.isTogether == 'Y'}">
-													<gyzbadmin:function url="<%=MerchantSettlePath.BASE + MerchantSettlePath.SEPARATE %>">
+													<gyzbadmin:function url="<%=MerchantSettlePath.BASE + MerchantSettlePath.SEPARATE%>">
 														<button type="button" class="btn btn-primary btn-xs separateLink" title="Separate" data-toggle='modal' data-target="#separateModal">
 															分离
 														</button>
@@ -506,20 +506,20 @@
 													</c:if>
 												</c:if>
 												   <c:if test="${settle.status == 'AUDIT_PASS'||settle.status == 'PAY_FAIL'}">
-													<gyzbadmin:function url="<%=MerchantSettlePath.BASE + MerchantSettlePath.CANCEL %>">
+													<gyzbadmin:function url="<%=MerchantSettlePath.BASE + MerchantSettlePath.CANCEL%>">
 														<button type="button" class="btn btn-primary btn-xs cancelLink" title="Cancel" data-toggle='modal' data-target="#cancelModal">
 															确认撤销
 														</button>
 													</gyzbadmin:function>
 													</c:if>
 													<c:if test="${settle.status == 'PAY_SUCC'}">
-													<gyzbadmin:function url="<%=MerchantSettlePath.BASE + MerchantSettlePath.VERIFIED %>">
+													<gyzbadmin:function url="<%=MerchantSettlePath.BASE + MerchantSettlePath.VERIFIED%>">
 														<button type="button" class="btn btn-primary btn-xs verifiedLink" title="Verified" data-toggle='modal' data-target="#verifiedModal">
 															核销
 														</button>
 													</gyzbadmin:function>
 													</c:if>
-												<gyzbadmin:function url="<%=MerchantSettlePath.BASE + MerchantSettlePath.DETAIL %>">
+												<gyzbadmin:function url="<%=MerchantSettlePath.BASE + MerchantSettlePath.DETAIL%>">
 													<button type="button" class="btn btn-primary btn-xs detailLink" title="Detail" data-toggle='modal' data-target="#detailModal">
 														明细
 													</button>

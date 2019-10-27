@@ -112,7 +112,7 @@
 												<fmt:formatDate value="${calendarVo.lastupdateTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
 											</td>
 											<td>
-												<gyzbadmin:function url="<%=CalendarPath.BASE + CalendarPath.EDIT %>">
+												<gyzbadmin:function url="<%=CalendarPath.BASE + CalendarPath.EDIT%>">
 													<a href="#" class="tooltip-success updateCalendarLink" data-rel="tooltip" title="Edit" data-toggle='modal' data-target="#updateCalendarModal" >
 													<span class="green"><i class="icon-edit bigger-120"></i></span>
 													</a>	

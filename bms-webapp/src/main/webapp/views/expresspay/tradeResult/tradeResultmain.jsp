@@ -76,7 +76,7 @@
 								清空
 								<i class=" icon-move icon-on-right bigger-110"></i>
 							</button>
-							<gyzbadmin:function url="<%=TradeResultPath.BASE + TradeResultPath.TRADERESULTEXPORT %>">
+							<gyzbadmin:function url="<%=TradeResultPath.BASE + TradeResultPath.TRADERESULTEXPORT%>">
 								<a class="btn btn-purple btn-sm exportTradeResultBut">
 									导出报表
 								</a> 
@@ -123,7 +123,7 @@
 							<td>${jgkjTrade.rtnSeq }</td>
 							<td>${jgkjTrade.rtnCode }</td>
 							<td>
-								<gyzbadmin:function url="<%=TradeResultPath.BASE + TradeResultPath.TRADERESULT %>">
+								<gyzbadmin:function url="<%=TradeResultPath.BASE + TradeResultPath.TRADERESULT%>">
 									<a href="#" class="tooltip-success selectTradeResultLink" data-rel="tooltip" title="Query" data-toggle='modal' data-target="#selectTradeResult">
 										<button type="button"  id="btnEmail2"  class="btn btn-primary btn-xs"  >查询交广科技</button>	
 									</a>

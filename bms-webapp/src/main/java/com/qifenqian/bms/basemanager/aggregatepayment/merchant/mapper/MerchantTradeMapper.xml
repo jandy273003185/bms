@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.aggregatepayment.merchant.mapper.MerchantTradeMapper">
-	<select id="getMerchantTradeList" parameterType="com.sevenpay.bms.basemanager.aggregatepayment.merchant.bean.MerchantTradeQueryBean"
-		resultType="com.sevenpay.bms.basemanager.aggregatepayment.merchant.bean.OrderSummaryBean">
+<mapper namespace="com.qifenqian.bms.basemanager.aggregatepayment.merchant.mapper.MerchantTradeMapper">
+	<select id="getMerchantTradeList" parameterType="com.qifenqian.bms.basemanager.aggregatepayment.merchant.bean.MerchantTradeQueryBean"
+		resultType="com.qifenqian.bms.basemanager.aggregatepayment.merchant.bean.OrderSummaryBean">
 		SELECT 
 			COUNT(*) countTrade, 
 			temp.MCH_ID custId,
@@ -84,8 +84,8 @@
 		ORDER BY SUM(temp.ORDER_AMT) desc 
 	</select>	
 	
-	<select id="getMerchantRefundList" parameterType="com.sevenpay.bms.basemanager.aggregatepayment.merchant.bean.MerchantTradeQueryBean"
-		resultType="com.sevenpay.bms.basemanager.aggregatepayment.merchant.bean.OrderSummaryBean">
+	<select id="getMerchantRefundList" parameterType="com.qifenqian.bms.basemanager.aggregatepayment.merchant.bean.MerchantTradeQueryBean"
+		resultType="com.qifenqian.bms.basemanager.aggregatepayment.merchant.bean.OrderSummaryBean">
 		SELECT 
 			COUNT(*) countTrade, 
 			temp.MCH_ID custId,

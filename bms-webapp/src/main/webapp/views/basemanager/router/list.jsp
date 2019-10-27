@@ -222,7 +222,7 @@
 												清空
 												<i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
-											<gyzbadmin:function url="<%=RouterPath.BASE + RouterPath.ADD %>">
+											<gyzbadmin:function url="<%=RouterPath.BASE + RouterPath.ADD%>">
 											<button  class="btn btn-purple btn-sm" data-toggle='modal' data-target="#addModal">
 												新增
 												<i class="icon-plus-sign icon-on-right bigger-110"></i>
@@ -302,14 +302,14 @@
 												<td>${router.busiCtrl }</td>
 												<td>${router.weight }</td>
 												<td>
-													<gyzbadmin:function url="<%=RouterPath.BASE + RouterPath.UPDATE %>">
+													<gyzbadmin:function url="<%=RouterPath.BASE + RouterPath.UPDATE%>">
 														<a href="#updateModal"  data-toggle='modal' class="tooltip-success updateBank" data-rel="tooltip" title="Edit">
 															<span class="green">
 																<i class="icon-edit bigger-120"></i>
 															</span>
 														</a>
 													</gyzbadmin:function>
-													<gyzbadmin:function url="<%=RouterPath.BASE + RouterPath.DELETE %>">
+													<gyzbadmin:function url="<%=RouterPath.BASE + RouterPath.DELETE%>">
 														<a href="#deleteBankModal"  data-toggle='modal' class="tooltip-error delBank" data-rel="tooltip" title="Delete">
 															<span class="red">
 																<i class="icon-trash bigger-120"></i>

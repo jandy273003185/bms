@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.tradeControl.mapper.TradeControlMapper">
+<mapper namespace="com.qifenqian.bms.basemanager.tradeControl.mapper.TradeControlMapper">
 
 	
 	<sql id="Where_Clause">
@@ -23,8 +23,8 @@
 	</sql>
 	
 	
-	<select id="selectAll" resultType="com.sevenpay.bms.basemanager.tradeControl.bean.TradeControl"
-	parameterType="com.sevenpay.bms.basemanager.tradeControl.bean.TradeControl">
+	<select id="selectAll" resultType="com.qifenqian.bms.basemanager.tradeControl.bean.TradeControl"
+	parameterType="com.qifenqian.bms.basemanager.tradeControl.bean.TradeControl">
 		SELECT T.* FROM TB_TRADE_CONTROL T
 		<where>
 			<if test="tradeType != null and tradeType != '' ">AND T.TRADE_TYPE = #{tradeType, jdbcType=VARCHAR}</if>
@@ -34,8 +34,8 @@
 		
 	</select>
 	
-	<select id="selectTradeControl" parameterType="com.sevenpay.bms.basemanager.tradeControl.bean.TradeControl" 
-	resultType="com.sevenpay.bms.basemanager.tradeControl.bean.TradeControl">
+	<select id="selectTradeControl" parameterType="com.qifenqian.bms.basemanager.tradeControl.bean.TradeControl" 
+	resultType="com.qifenqian.bms.basemanager.tradeControl.bean.TradeControl">
 		SELECT T.* FROM TB_TRADE_CONTROL T
 		WHERE TRADE_TYPE = #{tradeType, jdbcType=VARCHAR} AND 
 			  PAYER_ACCT_TYPE = #{payerAcctType, 		jdbcType=VARCHAR} AND
@@ -43,7 +43,7 @@
 		
 	</select>
 	
-	<insert id="addTradeControl" parameterType="com.sevenpay.bms.basemanager.tradeControl.bean.TradeControl">
+	<insert id="addTradeControl" parameterType="com.qifenqian.bms.basemanager.tradeControl.bean.TradeControl">
 		
 		INSERT INTO TB_TRADE_CONTROL  (
 		TRADE_TYPE,
@@ -84,7 +84,7 @@
 		)
 	</insert>
 	
-	<update id="editTradeControl" parameterType="com.sevenpay.bms.basemanager.tradeControl.bean.TradeControl">
+	<update id="editTradeControl" parameterType="com.qifenqian.bms.basemanager.tradeControl.bean.TradeControl">
 		UPDATE 
 			   TB_TRADE_CONTROL T
 		   SET 
@@ -106,7 +106,7 @@
 			   PAYEE_ACCT_TYPE = #{payeeAcctType, 		jdbcType=VARCHAR}
 	</update>
 	
-	<delete id="deleteTradeControl" parameterType="com.sevenpay.bms.basemanager.tradeControl.bean.TradeControl">
+	<delete id="deleteTradeControl" parameterType="com.qifenqian.bms.basemanager.tradeControl.bean.TradeControl">
 		DELETE FROM TB_TRADE_CONTROL
 		WHERE TRADE_TYPE = #{tradeType, jdbcType=VARCHAR} AND 
 			   PAYER_ACCT_TYPE = #{payerAcctType, 		jdbcType=VARCHAR} AND

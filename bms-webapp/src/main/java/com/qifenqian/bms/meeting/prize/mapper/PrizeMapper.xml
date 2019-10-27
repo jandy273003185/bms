@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.meeting.prize.mapper.PrizeMapper">
+<mapper namespace="com.qifenqian.bms.meeting.prize.mapper.PrizeMapper">
 
 	<!-- 根据编号查询单个 -->
-	<select id="selectPrizeSingleById" parameterType="java.lang.Integer" resultType="com.sevenpay.bms.meeting.prize.bean.PrizeBean">
+	<select id="selectPrizeSingleById" parameterType="java.lang.Integer" resultType="com.qifenqian.bms.meeting.prize.bean.PrizeBean">
 		SELECT P.*,
 			   A.ACTIVITY_NAME
 		  FROM BASE_PRIZE P
@@ -12,7 +12,7 @@
 		WHERE P.PRIZE_ID = #{prizeId, jdbcType=INTEGER}
 	</select>
 	
-	<select id="selectPrizeBeanList" parameterType="com.sevenpay.bms.meeting.prize.bean.PrizeBean" resultType="com.sevenpay.bms.meeting.prize.bean.PrizeBean">
+	<select id="selectPrizeBeanList" parameterType="com.qifenqian.bms.meeting.prize.bean.PrizeBean" resultType="com.qifenqian.bms.meeting.prize.bean.PrizeBean">
 		    SELECT 
 		    T.PRIZE_ID,
 			  T.PRIZE_NO,
@@ -56,7 +56,7 @@
 			  ORDER BY T.PRIZE_ID DESC
 	</select>
 
-	<insert id="insertPrizeSingle" useGeneratedKeys="true" keyProperty="prizeId" parameterType="com.sevenpay.bms.meeting.prize.bean.PrizeBean">
+	<insert id="insertPrizeSingle" useGeneratedKeys="true" keyProperty="prizeId" parameterType="com.qifenqian.bms.meeting.prize.bean.PrizeBean">
 		INSERT INTO BASE_PRIZE(
 			PRIZE_NO,
 			ACTIVITY_ID,
@@ -138,7 +138,7 @@
 		)
 	</insert>
 
-	<update id="updatePrizeById" parameterType="com.sevenpay.bms.meeting.prize.bean.PrizeBean">
+	<update id="updatePrizeById" parameterType="com.qifenqian.bms.meeting.prize.bean.PrizeBean">
 		UPDATE BASE_PRIZE T
 		<set>
 			<if test="prizeNo!= null  and prizeNo!= '' ">

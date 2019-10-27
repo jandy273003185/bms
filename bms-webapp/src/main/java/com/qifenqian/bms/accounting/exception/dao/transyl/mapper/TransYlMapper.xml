@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.accounting.exception.dao.transyl.mapper.TransYlMapper">
+<mapper namespace="com.qifenqian.bms.accounting.exception.dao.transyl.mapper.TransYlMapper">
 
-  <insert id="insertTransYl" parameterType="com.sevenpay.bms.accounting.exception.dao.transyl.bean.TransYl">
+  <insert id="insertTransYl" parameterType="com.qifenqian.bms.accounting.exception.dao.transyl.bean.TransYl">
 	INSERT INTO TD_TRANS_YL(
 		  TRANS_ID,
 		  TRANS_SN,
@@ -41,7 +41,7 @@
 	)
 	</insert>
 	
-	<select id="selectBySn" resultType="com.sevenpay.bms.accounting.exception.dao.transyl.bean.TransYl">
+	<select id="selectBySn" resultType="com.qifenqian.bms.accounting.exception.dao.transyl.bean.TransYl">
 		SELECT
 			T.*,
 			(CASE 
@@ -60,7 +60,7 @@
 			T.TRANS_SN = #{transSn, jdbcType=VARCHAR}
 	</select>
 	
-	<select id="selectTransYlByTransId" resultType="com.sevenpay.bms.accounting.exception.dao.transyl.bean.TransYl" parameterType="string" >
+	<select id="selectTransYlByTransId" resultType="com.qifenqian.bms.accounting.exception.dao.transyl.bean.TransYl" parameterType="string" >
 		SELECT
 			T.*
 		FROM TD_TRANS_YL T
@@ -68,7 +68,7 @@
 			T.TRANS_ID = #{transId, jdbcType=VARCHAR}
 	</select>
 	
-	<select id="selectTransYlByTransSn" resultType="com.sevenpay.bms.accounting.exception.dao.transyl.bean.TransYl" parameterType="string" >
+	<select id="selectTransYlByTransSn" resultType="com.qifenqian.bms.accounting.exception.dao.transyl.bean.TransYl" parameterType="string" >
 		SELECT
 			T.*
 		FROM TD_TRANS_YL T
@@ -76,7 +76,7 @@
 			T.TRANS_SN = #{transSn, jdbcType=VARCHAR}
 	</select>
 	
-	<update id="updateTransYl" parameterType="com.sevenpay.bms.accounting.exception.dao.transyl.bean.TransYl">
+	<update id="updateTransYl" parameterType="com.qifenqian.bms.accounting.exception.dao.transyl.bean.TransYl">
 		UPDATE TD_TRANS_YL T
 	 	<set>
 	 		<if test="null!=ylRespTimeTb and ylRespTimeTb!='' ">

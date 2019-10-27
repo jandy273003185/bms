@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.merchant.auding.mapper.WechatAudingMapper">
-  <resultMap type="com.sevenpay.bms.basemanager.merchant.auding.bean.AgencyAuding" id="getAgencyAudingListMap">
+<mapper namespace="com.qifenqian.bms.basemanager.merchant.auding.mapper.WechatAudingMapper">
+  <resultMap type="com.qifenqian.bms.basemanager.merchant.auding.bean.AgencyAuding" id="getAgencyAudingListMap">
     <result property="merchantCode" column="MERCHANT_CODE"/>
     <result property="custId" column="CUST_ID"/>
     <result property="custName" column="CUST_NAME"/>
@@ -23,7 +23,7 @@
     
   </resultMap>
 
-<select id="getWechatAudingList"  resultMap="getAgencyAudingListMap" parameterType="com.sevenpay.bms.basemanager.merchant.auding.bean.MerchantVo">
+<select id="getWechatAudingList"  resultMap="getAgencyAudingListMap" parameterType="com.qifenqian.bms.basemanager.merchant.auding.bean.MerchantVo">
 	SELECT
 	IFNULL(hc.num, 0) count_num,
 	t.STATE,
@@ -141,7 +141,7 @@
    ORDER BY t.CREATE_TIME    DESC	  
 </select>
 <!-- 查询商户信息 -->
-<select id="getSingleWechatAuding" resultType="com.sevenpay.bms.basemanager.merchant.auding.bean.MerchantVo"  parameterType="com.sevenpay.bms.basemanager.merchant.auding.bean.MerchantVo">
+<select id="getSingleWechatAuding" resultType="com.qifenqian.bms.basemanager.merchant.auding.bean.MerchantVo"  parameterType="com.qifenqian.bms.basemanager.merchant.auding.bean.MerchantVo">
      select 
 			t.*,
 			a.mobile,
@@ -161,12 +161,12 @@
 </select>
 
 <!-- 查询收银员信息 -->
-<select id="findCashierList" resultType="com.sevenpay.bms.basemanager.merchant.auding.bean.MerchantCashier"  parameterType="String">
+<select id="findCashierList" resultType="com.qifenqian.bms.basemanager.merchant.auding.bean.MerchantCashier"  parameterType="String">
     select * from td_merchant_cashier_ref INNER JOIN td_cust_info on MERCHANT_CUST_ID = cust_id where MERCHANT_CUST_ID=#{custId} 
 </select>
 
 <!-- 查询开通产品信息 -->
-<select id="findColumnList" resultType="com.sevenpay.bms.basemanager.merchant.auding.bean.bmsProtocolColumn"  parameterType="String">
+<select id="findColumnList" resultType="com.qifenqian.bms.basemanager.merchant.auding.bean.bmsProtocolColumn"  parameterType="String">
      
 SELECT
 	c.*
@@ -203,7 +203,7 @@ ORDER BY  column_code LIKE '%.pay_rate%' DESC
 </select>
 
 <!-- 更新栏位表 -->
-<update id="updatebmsprotocolColumn" parameterType="com.sevenpay.bms.basemanager.merchant.auding.bean.bmsProtocolColumn">
+<update id="updatebmsprotocolColumn" parameterType="com.qifenqian.bms.basemanager.merchant.auding.bean.bmsProtocolColumn">
       
 UPDATE 
    bms_protocol_column b
@@ -216,7 +216,7 @@ UPDATE
     	b.protocol_id=#{protocolId}
 </update>
 
-<update id="updatebmsprotocolColumn2" parameterType="com.sevenpay.bms.basemanager.merchant.auding.bean.bmsProtocolColumn">
+<update id="updatebmsprotocolColumn2" parameterType="com.qifenqian.bms.basemanager.merchant.auding.bean.bmsProtocolColumn">
       
 UPDATE 
    bms_protocol_column b
@@ -230,7 +230,7 @@ UPDATE
 </update>
 
 <!-- 更新协议表 -->
-<update id="updatebmsprotocolContent" parameterType="com.sevenpay.bms.basemanager.merchant.auding.bean.bmsProtocolContent">
+<update id="updatebmsprotocolContent" parameterType="com.qifenqian.bms.basemanager.merchant.auding.bean.bmsProtocolContent">
       UPDATE  bms_protocol_content
 		<set>
 			
@@ -258,7 +258,7 @@ UPDATE
    
 </update>
 
-<select id="tinyMerchantExport" resultType="com.sevenpay.bms.basemanager.merchant.auding.bean.WechatExport" parameterType="merchantVo">
+<select id="tinyMerchantExport" resultType="com.qifenqian.bms.basemanager.merchant.auding.bean.WechatExport" parameterType="merchantVo">
 	SELECT
 	t.MERCHANT_CODE,
 	t.`CUST_NAME`,
@@ -324,7 +324,7 @@ LEFT JOIN td_merchant_cashier_ref m on m.MERCHANT_CUST_ID = t.CUST_ID
 	</select>
 
 
-<update id="updateMerchantCashierInfo" parameterType="com.sevenpay.bms.basemanager.merchant.auding.bean.MerchantCashier">
+<update id="updateMerchantCashierInfo" parameterType="com.qifenqian.bms.basemanager.merchant.auding.bean.MerchantCashier">
 		update 
 			td_merchant_cashier_ref T
 		<set>
@@ -341,7 +341,7 @@ LEFT JOIN td_merchant_cashier_ref m on m.MERCHANT_CUST_ID = t.CUST_ID
 		where
 		    T.only_id = #{onlyId}
 	</update>
-<select id="getCustScanCopy" resultType="String" parameterType="com.sevenpay.bms.basemanager.merchant.bean.CustScan">
+<select id="getCustScanCopy" resultType="String" parameterType="com.qifenqian.bms.basemanager.merchant.bean.CustScan">
 		SELECT 
 			S.SCAN_COPY_PATH 
 		FROM 
@@ -351,7 +351,7 @@ LEFT JOIN td_merchant_cashier_ref m on m.MERCHANT_CUST_ID = t.CUST_ID
 		AND S.CERTIFY_TYPE = #{certifyType, jdbcType = VARCHAR}
 </select>
 
-<select id="getbmsProtocolColumnList" resultType="com.sevenpay.bms.basemanager.merchant.auding.bean.bmsProtocolColumn" parameterType="String">
+<select id="getbmsProtocolColumnList" resultType="com.qifenqian.bms.basemanager.merchant.auding.bean.bmsProtocolColumn" parameterType="String">
 	   
 SELECT
     c.*
@@ -373,7 +373,7 @@ ORDER BY  column_code LIKE '%.pay_rate%' DESC
 </select>
 
 
-<select id="getCheckbmsProtocolColumnList" resultType="com.sevenpay.bms.basemanager.merchant.auding.bean.bmsProtocolColumn" parameterType="String">
+<select id="getCheckbmsProtocolColumnList" resultType="com.qifenqian.bms.basemanager.merchant.auding.bean.bmsProtocolColumn" parameterType="String">
 
 
  SELECT
@@ -408,7 +408,7 @@ ORDER BY  column_code LIKE '%.pay_rate%' DESC
 	
 </select>
 
-<select id="getCategoryCodeInfoByType" parameterType="com.sevenpay.bms.basemanager.merchant.auding.bean.CategoryCodeInfo" resultType="com.sevenpay.bms.basemanager.merchant.auding.bean.CategoryCodeInfo">
+<select id="getCategoryCodeInfoByType" parameterType="com.qifenqian.bms.basemanager.merchant.auding.bean.CategoryCodeInfo" resultType="com.qifenqian.bms.basemanager.merchant.auding.bean.CategoryCodeInfo">
 			select  
 				c.*
 			from 
@@ -424,7 +424,7 @@ ORDER BY  column_code LIKE '%.pay_rate%' DESC
 </select>
 
 <!-- 账户信息-查询省份列表 -->
-	<select id="selectProvinceList" resultType="com.sevenpay.bms.basemanager.merchant.auding.bean.TbProvince">
+	<select id="selectProvinceList" resultType="com.qifenqian.bms.basemanager.merchant.auding.bean.TbProvince">
 		SELECT
 			t.province_id,
 			t.province_name
@@ -433,12 +433,12 @@ ORDER BY  column_code LIKE '%.pay_rate%' DESC
 		
 	</select>
 	
-	 <select id="getCityInfoById" resultType="com.sevenpay.bms.basemanager.merchant.auding.bean.TbCity" parameterType="Integer">
+	 <select id="getCityInfoById" resultType="com.qifenqian.bms.basemanager.merchant.auding.bean.TbCity" parameterType="Integer">
       select * from  tb_sp_city  where city_id =#{cityId,jdbcType=VARCHAR}
      
    </select>	
    
-<select id="getAreaInfoById" parameterType="Integer" resultType="com.sevenpay.bms.basemanager.merchant.auding.bean.TbAreaInfo">
+<select id="getAreaInfoById" parameterType="Integer" resultType="com.qifenqian.bms.basemanager.merchant.auding.bean.TbAreaInfo">
 		   select 
 		    AREA_ID,
 		    AREA_NAME,

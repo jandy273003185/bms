@@ -331,7 +331,7 @@ function onLoadSearch(){
 												<i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
 										
-											<gyzbadmin:function url="<%=MarketAuthoControllerPath.BASE + MarketAuthoControllerPath.ADD  %>">
+											<gyzbadmin:function url="<%=MarketAuthoControllerPath.BASE + MarketAuthoControllerPath.ADD%>">
 											<button  class="btn btn-purple btn-sm" data-toggle='modal' data-target="#addUserModal">
 												新增
 												<i class="icon-plus-sign icon-on-right bigger-110"></i>
@@ -352,7 +352,7 @@ function onLoadSearch(){
 											<th>用户账号</th>
 											<th>用户名称</th>							
 											<th>用户角色</th>
-											<gyzbadmin:function url="<%=MarketAuthoControllerPath.BASE + MarketAuthoControllerPath.UPDATE %>">
+											<gyzbadmin:function url="<%=MarketAuthoControllerPath.BASE + MarketAuthoControllerPath.UPDATE%>">
 												<th>操作</th>
 											</gyzbadmin:function>
 										</tr>
@@ -367,7 +367,7 @@ function onLoadSearch(){
 													<c:if test="${marketRole.userRole==presidentId}">总裁</c:if>
 													<c:if test="${marketRole.userRole==vicePresidentId}">副总裁</c:if>
 												</td>
-												<gyzbadmin:function url="<%=MarketAuthoControllerPath.BASE + MarketAuthoControllerPath.UPDATE %>">								
+												<gyzbadmin:function url="<%=MarketAuthoControllerPath.BASE + MarketAuthoControllerPath.UPDATE%>">								
 												<td>
 														<a href="#updateUserModal"  data-toggle='modal' class="tooltip-success updateUserLink"  data-rel="tooltip" title="Edit">
 															<span class="green">

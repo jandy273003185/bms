@@ -9,10 +9,9 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import org.gyzb.platform.common.utils.SpringUtils;
-
 import com.qifenqian.bms.basemanager.rule.bean.Rule;
 import com.qifenqian.bms.basemanager.rule.mapper.RuleMapper;
+import com.qifenqian.bms.platform.common.utils.SpringUtils;
 
 /**
  * 选择套餐费率标签

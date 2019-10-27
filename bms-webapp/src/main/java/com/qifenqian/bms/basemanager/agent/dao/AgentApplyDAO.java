@@ -2,13 +2,13 @@ package com.qifenqian.bms.basemanager.agent.dao;
 
 import java.util.List;
 
-import org.gyzb.platform.web.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.qifenqian.bms.basemanager.agent.bean.AgentApplyBean;
 import com.qifenqian.bms.basemanager.agent.bean.CustVo;
 import com.qifenqian.bms.basemanager.agent.mapper.AgentApplyMapper;
+import com.qifenqian.bms.platform.web.page.Page;
 
 @Repository
 public class AgentApplyDAO {

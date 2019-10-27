@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sevenpay.bms.accounting.aggregations.mapper.BalAggregationResultExceptionMapper" >
+<mapper namespace="com.qifenqian.bms.accounting.aggregations.mapper.BalAggregationResultExceptionMapper" >
 	
-  <select id="selectZxResultExceptionList"  resultType="com.sevenpay.bms.accounting.aggregations.bean.BalAggregationResultException" 
-  	parameterType="com.sevenpay.bms.accounting.aggregations.bean.BalAggregationResultException" >
+  <select id="selectZxResultExceptionList"  resultType="com.qifenqian.bms.accounting.aggregations.bean.BalAggregationResultException" 
+  	parameterType="com.qifenqian.bms.accounting.aggregations.bean.BalAggregationResultException" >
   		SELECT 
 		      T.BAL_DATE,
 			  <!-- 

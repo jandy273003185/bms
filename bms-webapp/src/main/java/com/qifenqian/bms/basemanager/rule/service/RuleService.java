@@ -2,8 +2,6 @@ package com.qifenqian.bms.basemanager.rule.service;
 
 import java.util.List;
 
-import org.gyzb.platform.web.admin.user.bean.User;
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +10,8 @@ import com.qifenqian.bms.basemanager.rule.bean.Rule;
 import com.qifenqian.bms.basemanager.rule.dao.RuleDAO;
 import com.qifenqian.bms.basemanager.rule.mapper.RuleMapper;
 import com.qifenqian.bms.basemanager.utils.GenSN;
+import com.qifenqian.bms.platform.web.admin.user.bean.User;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 /**
  * 费率服务层

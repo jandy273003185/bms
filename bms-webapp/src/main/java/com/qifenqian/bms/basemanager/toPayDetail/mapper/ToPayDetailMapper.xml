@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.toPayDetail.mapper.ToPayDetailMapper">
+<mapper namespace="com.qifenqian.bms.basemanager.toPayDetail.mapper.ToPayDetailMapper">
 
- 	<select id="listDetail" parameterType="com.sevenpay.bms.basemanager.toPayDetail.bean.ToPaySingleDetail" resultType="com.sevenpay.bms.basemanager.toPayDetail.bean.ToPaySingleDetail">
+ 	<select id="listDetail" parameterType="com.qifenqian.bms.basemanager.toPayDetail.bean.ToPaySingleDetail" resultType="com.qifenqian.bms.basemanager.toPayDetail.bean.ToPaySingleDetail">
  		select 
  			T.*,
  			C.CUST_NAME	
@@ -47,7 +47,7 @@
  	</select>
  	
  	
- 	<select id="exportDetailList" parameterType="com.sevenpay.bms.basemanager.toPayDetail.bean.ToPaySingleDetail" resultType="com.sevenpay.bms.basemanager.toPayDetail.bean.ToPaySingleDetail">
+ 	<select id="exportDetailList" parameterType="com.qifenqian.bms.basemanager.toPayDetail.bean.ToPaySingleDetail" resultType="com.qifenqian.bms.basemanager.toPayDetail.bean.ToPaySingleDetail">
  		select 
  			T.ORDER_NO,
  			T.BAT_NO,

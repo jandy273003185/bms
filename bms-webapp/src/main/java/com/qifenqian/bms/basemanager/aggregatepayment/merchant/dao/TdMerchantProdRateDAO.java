@@ -2,13 +2,13 @@ package com.qifenqian.bms.basemanager.aggregatepayment.merchant.dao;
 
 import java.util.List;
 
-import org.gyzb.platform.web.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.qifenqian.bms.basemanager.aggregatepayment.merchant.bean.TdMerchantProdRate;
 import com.qifenqian.bms.basemanager.aggregatepayment.merchant.mapper.TdMerchantProdRateOperationMapper;
 import com.qifenqian.bms.basemanager.aggregatepayment.merchant.mapper.TdMerchantProdRateSelectMapper;
+import com.qifenqian.bms.platform.web.page.Page;
 
 @Repository
 public class TdMerchantProdRateDAO {

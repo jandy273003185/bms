@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.accounting.financequery.mapper.CommerciaBalanceMapper">
+<mapper namespace="com.qifenqian.bms.accounting.financequery.mapper.CommerciaBalanceMapper">
 	<select id="selectCommerciaBalanceList" resultType="commerciaBalance"  parameterType="commerciaBalance">
 		SELECT
 				B.ACCT_ID,

@@ -17,8 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.gyzb.platform.web.admin.user.bean.User;
-import org.gyzb.platform.web.admin.user.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +42,8 @@ import com.qifenqian.bms.basemanager.utils.MD5Security;
 import com.qifenqian.bms.common.util.PropertiesUtil;
 import com.qifenqian.bms.expresspay.CommonService;
 import com.qifenqian.bms.myworkspace.WorkFlowHelper;
+import com.qifenqian.bms.platform.web.admin.user.bean.User;
+import com.qifenqian.bms.platform.web.admin.user.service.UserService;
 import com.sevenpay.invoke.SevenpayCoreServiceInterface;
 import com.sevenpay.invoke.common.message.request.RequestMessage;
 import com.sevenpay.invoke.common.message.response.ResponseMessage;

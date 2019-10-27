@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sevenpay.bms.accounting.acctingworkdate.mapper.AcctWorkDateMapper">
-	<select id="queryAcctWorkDatList" resultType="com.sevenpay.bms.accounting.acctingworkdate.bean.AcctWorkDate" parameterType="com.sevenpay.bms.accounting.acctingworkdate.bean.AcctWorkDate">
+<mapper namespace="com.qifenqian.bms.accounting.acctingworkdate.mapper.AcctWorkDateMapper">
+	<select id="queryAcctWorkDatList" resultType="com.qifenqian.bms.accounting.acctingworkdate.bean.AcctWorkDate" parameterType="com.qifenqian.bms.accounting.acctingworkdate.bean.AcctWorkDate">
 		SELECT
 		WORK_DATE,
 		INST_USER,
@@ -16,7 +16,7 @@
 		ORDER BY INST_DATETIME DESC
 	</select>
 
-	<select id="selectWorkDateHis" resultType="com.sevenpay.bms.accounting.acctingworkdate.bean.AcctWorkDate" parameterType="string">
+	<select id="selectWorkDateHis" resultType="com.qifenqian.bms.accounting.acctingworkdate.bean.AcctWorkDate" parameterType="string">
 		SELECT
 		WORK_DATE,
 		MEMO
@@ -25,7 +25,7 @@
 		WHERE WORK_DATE = #{workDate,jdbcType=VARCHAR}
 	</select>
 
-	<insert id="insertWorkDateHis" parameterType="com.sevenpay.bms.accounting.acctingworkdate.bean.AcctWorkDate">
+	<insert id="insertWorkDateHis" parameterType="com.qifenqian.bms.accounting.acctingworkdate.bean.AcctWorkDate">
 		INSERT INTO ACCTING_WORK_DATE_HIS(
 		WORK_DATE,
 		INST_USER,
@@ -52,7 +52,7 @@
 		DELETE FROM ACCTING_WORK_DATE
 	</delete>
 	
-	<insert id="insertWorkDate" parameterType="com.sevenpay.bms.accounting.acctingworkdate.bean.AcctWorkDate">
+	<insert id="insertWorkDate" parameterType="com.qifenqian.bms.accounting.acctingworkdate.bean.AcctWorkDate">
 		INSERT INTO ACCTING_WORK_DATE(
 		WORK_DATE,
 		INST_USER,

@@ -140,7 +140,7 @@
 											</td>
 											<td>
 												<input type="hidden" name="userId" value="${user.userId }"/>
-												<gyzbadmin:function url="<%=UserPath.BASE + UserPath.EDIT %>">
+												<gyzbadmin:function url="<%=UserPath.BASE + UserPath.EDIT%>">
 													<a href="#" class="tooltip-success editUserLink" data-rel="tooltip" title="Edit" data-toggle='modal' data-target="#editUserModal">
 														<span class="green"><i class="icon-edit bigger-120"></i></span>
 													</a>

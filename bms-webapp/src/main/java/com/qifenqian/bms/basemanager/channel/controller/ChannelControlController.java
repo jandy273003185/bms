@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.channel.bean.ChannelControlBean;
 import com.qifenqian.bms.basemanager.channel.service.ChannelControlService;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 
 @Controller

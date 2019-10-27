@@ -2,13 +2,13 @@ package com.qifenqian.bms.paymentmanager.topay.dao;
 
 import java.util.List;
 
-import org.gyzb.platform.web.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.qifenqian.bms.paymentmanager.bean.TdPaymentBatDetail;
 import com.qifenqian.bms.paymentmanager.bean.TdPaymentBatInfo;
 import com.qifenqian.bms.paymentmanager.topay.mapper.PaymentQueryMapper;
+import com.qifenqian.bms.platform.web.page.Page;
 
 
 @Repository

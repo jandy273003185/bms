@@ -6,9 +6,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.gyzb.platform.web.admin.role.service.RoleService;
-import org.gyzb.platform.web.admin.utils.WebUtils;
-import org.sevenpay.platform.web.myWorkSpace.service.WorkSpaceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +19,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.myworkspace.allTask.bean.AllTaskBean;
 import com.qifenqian.bms.myworkspace.allTask.service.AllTaskService;
 import com.qifenqian.bms.myworkspace.overAudit.OverAuditController;
+import com.qifenqian.bms.platform.web.myWorkSpace.service.WorkSpaceService;
+import com.qifenqian.bms.platform.web.admin.role.service.RoleService;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 
 @RequestMapping(AllTaskPath.BASE)

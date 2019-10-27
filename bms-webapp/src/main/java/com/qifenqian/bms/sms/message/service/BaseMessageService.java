@@ -11,8 +11,10 @@ import java.util.List;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -21,16 +23,17 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.gyzb.platform.common.utils.SpringUtils;
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.accounting.utils.DictionaryUtils;
 import com.qifenqian.bms.common.util.PropertiesUtil;
 import com.qifenqian.bms.expresspay.CommonService;
+import com.qifenqian.bms.platform.common.utils.SpringUtils;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 import com.qifenqian.bms.sms.message.bean.BaseMessage;
 import com.qifenqian.bms.sms.message.mapper.BaseMessageMapper;
 import com.qifenqian.bms.sms.thread.BaseMessageThreadPool;
@@ -58,15 +61,13 @@ public class BaseMessageService {
 
   private static final String FIRST_SHEET = "FIRST_SHEET";
 
-  @Autowired
-  private BaseMessageMapper baseMessageMapper;
+  @Autowired private BaseMessageMapper baseMessageMapper;
 
-  @Autowired
-  private CommonService commonService;
+  @Autowired private CommonService commonService;
 
-  /***
-   * 上传并保存数据
-   * 
+  /**
+   * * 上传并保存数据
+   *
    * @param request
    * @param response
    * @throws FileNotFoundException
@@ -159,9 +160,9 @@ public class BaseMessageService {
     return json;
   }
 
-  /***
-   * 保存数据
-   * 
+  /**
+   * * 保存数据
+   *
    * @param filePath
    * @throws IOException
    */
@@ -171,7 +172,7 @@ public class BaseMessageService {
     HSSFWorkbook hssfWorkbook = new HSSFWorkbook(is);
 
     String instUser = String.valueOf(WebUtils.getUserInfo().getUserId());
-    /** 发送短信通知 **/
+    /** 发送短信通知 * */
     String sendMessageContent =
         SpringUtils.getBean(DictionaryUtils.class).getDataValueByPath(dictpath);
 
@@ -181,12 +182,12 @@ public class BaseMessageService {
       switch (sheetIndex) {
         case ALL_SHEET:
           logger.info("======保存所有工作表数据");
-          /** 循环工作表Sheet **/
+          /** 循环工作表Sheet * */
           for (int j = 0; j < hssfWorkbook.getNumberOfSheets(); j++) {
 
             HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(j);
             String sheetName = hssfSheet.getSheetName();
-            /** 循环行Row **/
+            /** 循环行Row * */
             for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
               HSSFRow hssfRow = hssfSheet.getRow(rowNum);
               if (hssfRow != null) {
@@ -207,7 +208,7 @@ public class BaseMessageService {
           HSSFSheet firstHssfSheet = hssfWorkbook.getSheetAt(0);
           String firstSheetName = firstHssfSheet.getSheetName();
           logger.info("======保存第一个工作表数据:{}", firstSheetName);
-          /** 循环行Row **/
+          /** 循环行Row * */
           for (int rowNum = 1; rowNum <= firstHssfSheet.getLastRowNum(); rowNum++) {
             HSSFRow hssfRow = firstHssfSheet.getRow(rowNum);
             if (hssfRow != null) {
@@ -227,7 +228,7 @@ public class BaseMessageService {
           HSSFSheet lastHssfSheet = hssfWorkbook.getSheetAt(i - 1);
           String lastSheetName = lastHssfSheet.getSheetName();
           logger.info("======保存最后一个工作表数据:{}", lastSheetName);
-          /** 循环行Row **/
+          /** 循环行Row * */
           for (int rowNum = 1; rowNum <= lastHssfSheet.getLastRowNum(); rowNum++) {
             HSSFRow hssfRow = lastHssfSheet.getRow(rowNum);
             if (hssfRow != null) {
@@ -248,14 +249,16 @@ public class BaseMessageService {
 
   /**
    * 批量发送短信
-   * 
+   *
    * @param baseMessageBean
    * @return
    */
   public String sendBatchMessage(BaseMessage baseMessageBean) {
     String result = EXCEPTION;
     try {
-      logger.info("=========待发送数据客户号========{},手机号码====={}", baseMessageBean.getId(),
+      logger.info(
+          "=========待发送数据客户号========{},手机号码====={}",
+          baseMessageBean.getId(),
           baseMessageBean.getMobile());
       MessageBean messageBean = new MessageBean();
       messageBean.setContent(baseMessageBean.getContent());
@@ -286,14 +289,16 @@ public class BaseMessageService {
 
   /**
    * 单个发送短信
-   * 
+   *
    * @param baseMessageBean
    * @return
    */
   public String sendMessage(BaseMessage baseMessageBean) {
     String result = EXCEPTION;
     try {
-      logger.info("=========待发送数据客户号========{},手机号码====={}", baseMessageBean.getId(),
+      logger.info(
+          "=========待发送数据客户号========{},手机号码====={}",
+          baseMessageBean.getId(),
           baseMessageBean.getMobile());
       MessageBean messageBean = new MessageBean();
       messageBean.setContent(baseMessageBean.getContent());
@@ -321,5 +326,4 @@ public class BaseMessageService {
     baseMessageMapper.updateSingleMessage(baseMessageBean);
     return result;
   }
-
 }

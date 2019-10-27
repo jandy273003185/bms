@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sevenpay.bms.accounting.exception.dao.clearjgkj.mapper.ClearJgkjMapper">
-	<select id="selectJgkjRegisterByFLowId" parameterType="java.lang.String" resultType="com.sevenpay.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkj">
+<mapper namespace="com.qifenqian.bms.accounting.exception.dao.clearjgkj.mapper.ClearJgkjMapper">
+	<select id="selectJgkjRegisterByFLowId" parameterType="java.lang.String" resultType="com.qifenqian.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkj">
 		SELECT
 			F.ACCT_ID,
 			T.ID,
@@ -18,7 +18,7 @@
 		WHERE F.ID = #{transFlowId,jdbcType = VARCHAR}
 	</select>
 	
-	<select id="selectJgkjRebackByFLowId" parameterType="java.lang.String" resultType="com.sevenpay.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkj">
+	<select id="selectJgkjRebackByFLowId" parameterType="java.lang.String" resultType="com.qifenqian.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkj">
 		SELECT
 			F.ACCT_ID,
 			T.ID,
@@ -56,7 +56,7 @@
 		WHERE F.ID = #{transFlowId,jdbcType = VARCHAR}
 	</select>
 	
-	<select id="selectJgkjModifyByFLowId" parameterType="java.lang.String" resultType="com.sevenpay.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkj">
+	<select id="selectJgkjModifyByFLowId" parameterType="java.lang.String" resultType="com.qifenqian.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkj">
 		SELECT
 			F.ACCT_ID,
 			T.ID,
@@ -72,7 +72,7 @@
 		WHERE F.ID = #{transFlowId,jdbcType = VARCHAR}
 	</select>
 	
-	<select id="selectJgkjFreezeByFLowId" parameterType="java.lang.String" resultType="com.sevenpay.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkj">
+	<select id="selectJgkjFreezeByFLowId" parameterType="java.lang.String" resultType="com.qifenqian.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkj">
 		SELECT
 			F.ACCT_ID,
 			T.ID,
@@ -99,7 +99,7 @@
 		WHERE F.ID = #{transFlowId,jdbcType = VARCHAR}
 	</select>
 		
-	<select id="selectJgkjTradeByFLowId" resultType="com.sevenpay.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkj">
+	<select id="selectJgkjTradeByFLowId" resultType="com.qifenqian.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkj">
 		SELECT 
 			  F.ACCT_ID,
 			  T.ID,
@@ -135,7 +135,7 @@
 		  WHERE F.ID = #{transFlowId,jdbcType = VARCHAR}
 	</select>
 	
-	<select id="selectJgkjRechargeByFLowId" resultType="com.sevenpay.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkj">
+	<select id="selectJgkjRechargeByFLowId" resultType="com.qifenqian.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkj">
 		SELECT 
 			  F.ACCT_ID,
 			  T.ID,
@@ -173,7 +173,7 @@
 		  WHERE F.ID = #{transFlowId,jdbcType = VARCHAR}
 	</select>
 	
-	<select id="selectJgkjTransferByFLowId" resultType="com.sevenpay.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkjTransfer">
+	<select id="selectJgkjTransferByFLowId" resultType="com.qifenqian.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkjTransfer">
 		SELECT 
 			  F.ACCT_ID,
 			  T.ID,
@@ -208,7 +208,7 @@
 		  WHERE F.ID = #{transFlowId,jdbcType = VARCHAR}
 	</select>
 	
-	<select id="selectCardNoByTransFlowId" parameterType="string" resultType="com.sevenpay.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkj">
+	<select id="selectCardNoByTransFlowId" parameterType="string" resultType="com.qifenqian.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkj">
 		SELECT
 			C.CARD_NO
 		FROM
@@ -217,7 +217,7 @@
 		WHERE F.ID = #{transFlowId,jdbcType = VARCHAR}
 	</select>
 	
-	<update id="updateClearJgkjTrade" parameterType="com.sevenpay.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkj">
+	<update id="updateClearJgkjTrade" parameterType="com.qifenqian.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkj">
 	    UPDATE CLEAR_JGKJ_TRADE T
 			<set>
 				<if test="workDate!=null and workDate !=''">
@@ -231,7 +231,7 @@
 		WHERE T.TRANS_FLOW_ID = #{transFlowId,jdbcType = VARCHAR}
 	</update>
 	
-	<update id="updateClearJgkjRecharge" parameterType="com.sevenpay.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkj">
+	<update id="updateClearJgkjRecharge" parameterType="com.qifenqian.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkj">
 		UPDATE CLEAR_JGKJ_RECHARGE T
 			<set>
 				<if test="workDate!=null and workDate !=''">
@@ -245,7 +245,7 @@
 		WHERE T.TRANS_FLOW_ID = #{transFlowId,jdbcType = VARCHAR}
 	</update>
 	
-	<update id="updateClearJgkjReback" parameterType="com.sevenpay.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkj">
+	<update id="updateClearJgkjReback" parameterType="com.qifenqian.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkj">
 		UPDATE CLEAR_JGKJ_REBACK T
 			<set>
 				<if test="workDate!=null and workDate !=''">
@@ -259,7 +259,7 @@
 		WHERE T.TRANS_FLOW_ID = #{transFlowId,jdbcType = VARCHAR}
 	</update>
 	
-	<update id="updateJgkjTransfer" parameterType="com.sevenpay.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkjTransfer">
+	<update id="updateJgkjTransfer" parameterType="com.qifenqian.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkjTransfer">
 		UPDATE CLEAR_JGKJ_TRANSFER T
 			<set>
 				<if test="workDate!=null and workDate !=''">
@@ -273,7 +273,7 @@
 		WHERE T.TRANS_FLOW_ID = #{transFlowId,jdbcType = VARCHAR}
 	</update>
 	
-	<update id="updateJgkjFreeze" parameterType="com.sevenpay.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkj">
+	<update id="updateJgkjFreeze" parameterType="com.qifenqian.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkj">
 		UPDATE CLEAR_JGKJ_FREEZE T
 			<set>
 				<if test="workDate!=null and workDate !=''">

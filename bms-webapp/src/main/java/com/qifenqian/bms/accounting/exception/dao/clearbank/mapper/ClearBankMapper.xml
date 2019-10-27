@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.accounting.exception.dao.clearbank.mapper.ClearBankMapper">
-	<select id="selectBankClearByFLowId" parameterType="java.lang.String" resultType="com.sevenpay.bms.accounting.exception.dao.clearbank.bean.ClearBank">
+<mapper namespace="com.qifenqian.bms.accounting.exception.dao.clearbank.mapper.ClearBankMapper">
+	<select id="selectBankClearByFLowId" parameterType="java.lang.String" resultType="com.qifenqian.bms.accounting.exception.dao.clearbank.bean.ClearBank">
 	SELECT
 	ID AS id,
 	trans_flow_id AS transFlowId,
@@ -42,7 +42,7 @@
 	FROM stcs.CLEAR_BANK WHERE TRANS_FLOW_ID = #{transFlowId,jdbcType = VARCHAR}
 	</select>
 	
-	<update id="updateBankClearFlow" parameterType="com.sevenpay.bms.accounting.exception.dao.clearbank.bean.ClearBank">
+	<update id="updateBankClearFlow" parameterType="com.qifenqian.bms.accounting.exception.dao.clearbank.bean.ClearBank">
 		UPDATE STCS.CLEAR_BANK 
 		<set>
 			<if test="workDate!=null and workDate!='' ">

@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import org.sevenpay.platform.utils.GenSN;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,7 @@ import com.qifenqian.bms.basemanager.merchant.bean.MerchantExport;
 import com.qifenqian.bms.basemanager.merchant.bean.MerchantVo;
 import com.qifenqian.bms.basemanager.utils.MD5Security;
 import com.qifenqian.bms.expresspay.CommonService;
+import com.qifenqian.bms.platform.utils.GenSN;
 import com.qifenqian.bms.upgrade.merchant.MerchantListController;
 import com.qifenqian.bms.upgrade.merchant.bean.MerchantAuditExport;
 import com.qifenqian.bms.upgrade.merchant.bean.MerchantRegisterInfo;

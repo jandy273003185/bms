@@ -13,7 +13,6 @@ import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
 import org.apache.commons.lang3.StringUtils;
-import org.gyzb.platform.web.page.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +30,7 @@ import com.qifenqian.bms.accounting.adjust.bean.AccountingSingleAdjustDetailExam
 import com.qifenqian.bms.accounting.adjust.dao.AccountingAdjustDetailMapper;
 import com.qifenqian.bms.accounting.adjust.dao.AccountingAdjustMainMapper;
 import com.qifenqian.bms.accounting.adjust.dao.AccountingSingleAdjustDetailMapper;
+import com.qifenqian.bms.platform.web.page.Page;
 
 /**
  * 调账Service事务辅助类

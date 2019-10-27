@@ -2,8 +2,6 @@ package com.qifenqian.bms.accounting.acctingworkdate;
 
 import java.util.List;
 
-import org.gyzb.platform.web.admin.user.bean.User;
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +15,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.accounting.acctingworkdate.bean.AcctWorkDate;
 import com.qifenqian.bms.accounting.acctingworkdate.dao.AcctWorkDateDao;
 import com.qifenqian.bms.accounting.acctingworkdate.mapper.AcctWorkDateMapper;
+import com.qifenqian.bms.platform.web.admin.user.bean.User;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 @Controller
 @RequestMapping(AcctWorkDatePath.BASE)

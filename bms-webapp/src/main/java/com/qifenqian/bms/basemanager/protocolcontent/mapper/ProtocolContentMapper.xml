@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.protocolcontent.mapper.ProtocolContentMapper">
-	<insert id="insertContent" parameterType="com.sevenpay.bms.basemanager.protocolcontent.bean.ProtocolContent">
+<mapper namespace="com.qifenqian.bms.basemanager.protocolcontent.mapper.ProtocolContentMapper">
+	<insert id="insertContent" parameterType="com.qifenqian.bms.basemanager.protocolcontent.bean.ProtocolContent">
 		INSERT INTO BMS_PROTOCOL_CONTENT(
 		ID,
 		PROTOCOL_NAME,
@@ -29,7 +29,7 @@
 		#{disableDate,jdbcType = VARCHAR}
 		)
 	</insert>
-	<select id="selectProto" parameterType="string" resultType="com.sevenpay.bms.basemanager.protocolcontent.bean.ProtocolContent">
+	<select id="selectProto" parameterType="string" resultType="com.qifenqian.bms.basemanager.protocolcontent.bean.ProtocolContent">
 		SELECT
 			ID,
 			PROTOCOL_NAME,
@@ -46,7 +46,7 @@
 			CUST_ID = #{custId,jdbcType=VARCHAR} and STATUS = 'VALID'
 			
 	</select>
-	<select id="selectByBean" parameterType="com.sevenpay.bms.basemanager.protocolcontent.bean.ProtocolContent" resultType="com.sevenpay.bms.basemanager.protocolcontent.bean.ProtocolContent">
+	<select id="selectByBean" parameterType="com.qifenqian.bms.basemanager.protocolcontent.bean.ProtocolContent" resultType="com.qifenqian.bms.basemanager.protocolcontent.bean.ProtocolContent">
 		select 
 			ID,
 			PROTOCOL_NAME,
@@ -73,7 +73,7 @@
 			</if>
 		</where>
 	</select>
-	<select id="select" parameterType="com.sevenpay.bms.basemanager.protocolcontent.bean.ProtocolContent" resultType="com.sevenpay.bms.basemanager.protocolcontent.bean.ProtocolContent">
+	<select id="select" parameterType="com.qifenqian.bms.basemanager.protocolcontent.bean.ProtocolContent" resultType="com.qifenqian.bms.basemanager.protocolcontent.bean.ProtocolContent">
 		SELECT
 			C.*,
 			U.MERCHANT_CODE,
@@ -105,7 +105,7 @@
 		ORDER BY C.INST_DATETIME DESC
 	</select>
 	
-	<select id="selectAgent" parameterType="com.sevenpay.bms.basemanager.protocolcontent.bean.ProtocolContent" resultType="com.sevenpay.bms.basemanager.protocolcontent.bean.ProtocolContent">
+	<select id="selectAgent" parameterType="com.qifenqian.bms.basemanager.protocolcontent.bean.ProtocolContent" resultType="com.qifenqian.bms.basemanager.protocolcontent.bean.ProtocolContent">
 		SELECT
 			C.*,
 			DATE_FORMAT(C.update_datetime,'%Y-%m-%d %H:%i:%s') AS upDatetime,
@@ -138,7 +138,7 @@
 		</if>
 		ORDER BY C.INST_DATETIME DESC
 	</select>
-	<select id="selectMyAgentProto" parameterType="com.sevenpay.bms.basemanager.protocolcontent.bean.ProtocolContent" resultType="com.sevenpay.bms.basemanager.protocolcontent.bean.ProtocolContent">
+	<select id="selectMyAgentProto" parameterType="com.qifenqian.bms.basemanager.protocolcontent.bean.ProtocolContent" resultType="com.qifenqian.bms.basemanager.protocolcontent.bean.ProtocolContent">
 			SELECT
 				C.*, 
 				DATE_FORMAT(C.update_datetime,'%Y-%m-%d %H:%i:%s') AS upDatetime,
@@ -221,7 +221,7 @@
 		ORDER BY C.INST_DATETIME DESC
 	</select>
 	
-	<select id="selectMyProto" parameterType="com.sevenpay.bms.basemanager.protocolcontent.bean.ProtocolContent" resultType="com.sevenpay.bms.basemanager.protocolcontent.bean.ProtocolContent">
+	<select id="selectMyProto" parameterType="com.qifenqian.bms.basemanager.protocolcontent.bean.ProtocolContent" resultType="com.qifenqian.bms.basemanager.protocolcontent.bean.ProtocolContent">
 			SELECT
 				C.*, U.MERCHANT_CODE,
 				U.cust_name merchantName,
@@ -301,7 +301,7 @@
 		ORDER BY C.INST_DATETIME DESC
 	</select>
 	
-	<insert id="insertColumn" parameterType="com.sevenpay.bms.basemanager.protocolcontent.bean.ProtocolColumn">
+	<insert id="insertColumn" parameterType="com.qifenqian.bms.basemanager.protocolcontent.bean.ProtocolColumn">
 	
 	INSERT INTO BMS_PROTOCOL_COLUMN( 
 	  ID,
@@ -325,7 +325,7 @@
 	  )
 	
 	</insert>
-	<update id="delete" parameterType="com.sevenpay.bms.basemanager.protocolcontent.bean.ProtocolContent">
+	<update id="delete" parameterType="com.qifenqian.bms.basemanager.protocolcontent.bean.ProtocolContent">
 	 UPDATE 
 		 BMS_PROTOCOL_CONTENT b LEFT JOIN td_login_user_info t ON b.cust_id = t.CUST_ID
 	 SET 
@@ -337,7 +337,7 @@
 	 	ID = #{id, jdbcType = VARCHAR}
 	</update>
 	
-	<update id="deleteProtocol" parameterType="com.sevenpay.bms.basemanager.protocolcontent.bean.ProtocolContent">
+	<update id="deleteProtocol" parameterType="com.qifenqian.bms.basemanager.protocolcontent.bean.ProtocolContent">
 	 UPDATE BMS_PROTOCOL_CONTENT
 		SET UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
 		 UPDATE_DATETIME = now(),
@@ -360,7 +360,7 @@
 				) TT
 		)
 	</update>
-	<select id="selectProtocolInfo" parameterType="string" resultType="com.sevenpay.bms.basemanager.protocolcontent.bean.ProtocolInfo">
+	<select id="selectProtocolInfo" parameterType="string" resultType="com.qifenqian.bms.basemanager.protocolcontent.bean.ProtocolInfo">
 		SELECT
 			t.inst_user,
 			c1.column_value custManager,
@@ -383,7 +383,7 @@
 			t.cust_id = #{custId,jdbcType=VARCHAR}
 		AND t.`status` = 'AUDIT'
 	</select>
-	<update id="updateProt" parameterType="com.sevenpay.bms.basemanager.protocolcontent.bean.ProtocolContent">
+	<update id="updateProt" parameterType="com.qifenqian.bms.basemanager.protocolcontent.bean.ProtocolContent">
 		update
 			BMS_PROTOCOL_CONTENT
 		set
@@ -419,7 +419,7 @@
 				</if>
 			</where>
 	</update>
-	<select id="getProtocolContentExport" parameterType="com.sevenpay.bms.basemanager.protocolcontent.bean.ProtocolContent" resultType="com.sevenpay.bms.basemanager.protocolcontent.bean.ProtocolContentExportBean">
+	<select id="getProtocolContentExport" parameterType="com.qifenqian.bms.basemanager.protocolcontent.bean.ProtocolContent" resultType="com.qifenqian.bms.basemanager.protocolcontent.bean.ProtocolContentExportBean">
 		SELECT 
 			A.*,
 			DATE_FORMAT(A.update_datetime,'%Y-%m-%d %H:%i:%s') AS updateDatetime,
@@ -469,7 +469,7 @@
 		ORDER BY A.INST_DATETIME DESC
 	</select>
 	
-	<update id="updateColumn" parameterType="com.sevenpay.bms.basemanager.protocolcontent.bean.ProtocolColumn" >
+	<update id="updateColumn" parameterType="com.qifenqian.bms.basemanager.protocolcontent.bean.ProtocolColumn" >
 		UPDATE 
 			BMS_PROTOCOL_COLUMN
 		set
@@ -486,13 +486,13 @@
 			</where>
 	</update>
 	
-	<select id="selectNewProtocolInfo" parameterType="string" resultType="com.sevenpay.bms.basemanager.protocolcontent.bean.ProtocolContent">
+	<select id="selectNewProtocolInfo" parameterType="string" resultType="com.qifenqian.bms.basemanager.protocolcontent.bean.ProtocolContent">
 		select * from 
 		bms_protocol_content t 
 		where t.cust_id = #{custId,jdbcType=VARCHAR} and (t.`status` = 'VALID' or t.`status` = 'AUDIT')
 	</select>
 	
-	<select id="selectProtocolForEmail" parameterType="string" resultType="com.sevenpay.bms.basemanager.protocolcontent.bean.ProtocolInfo">
+	<select id="selectProtocolForEmail" parameterType="string" resultType="com.qifenqian.bms.basemanager.protocolcontent.bean.ProtocolInfo">
 		SELECT
 			t.inst_user,
 			CASE WHEN

@@ -1,13 +1,13 @@
 package com.qifenqian.bms.basemanager.merchant;
 
 import java.util.List;
-import org.gyzb.platform.web.admin.utils.WebUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import redis.clients.jedis.Jedis;
+
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.custInfo.service.TdCustInfoService;
 import com.qifenqian.bms.basemanager.merchant.bean.CashierInfo;
@@ -18,6 +18,9 @@ import com.qifenqian.bms.basemanager.merchant.mapper.MerchantMapper;
 import com.qifenqian.bms.basemanager.merchant.service.CashierManageService;
 import com.qifenqian.bms.basemanager.utils.GenSN;
 import com.qifenqian.bms.common.util.RedisUtil;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
+
+import redis.clients.jedis.Jedis;
 
 /**
  * 收银员管理

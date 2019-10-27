@@ -2,8 +2,6 @@ package com.qifenqian.bms.basemanager.market.controller;
 
 import java.util.List;
 
-import org.gyzb.platform.web.admin.user.bean.User;
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +17,8 @@ import com.qifenqian.bms.basemanager.market.mapper.ManagerMapper;
 import com.qifenqian.bms.basemanager.market.service.ManagerService;
 import com.qifenqian.bms.basemanager.market.service.MarketAuthoService;
 import com.qifenqian.bms.basemanager.market.utils.JSONUtil;
+import com.qifenqian.bms.platform.web.admin.user.bean.User;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 import net.sf.json.JSONArray;
 

@@ -330,7 +330,7 @@
 															<i class=" icon-move icon-on-right bigger-110"></i>
 													</button>
 											</span>
-											<gyzbadmin:function url="<%=TradeBillMainPath.BASE + TradeBillMainPath.TRADEEXPORT %>">
+											<gyzbadmin:function url="<%=TradeBillMainPath.BASE + TradeBillMainPath.TRADEEXPORT%>">
 											<span class="input-group-btn" style="display:inline;">
 												<a class="btn btn-purple btn-sm exportBut">
 													导出报表

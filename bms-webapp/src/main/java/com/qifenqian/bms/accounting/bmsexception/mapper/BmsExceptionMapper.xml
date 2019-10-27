@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.accounting.bmsexception.mapper.BmsExceptionMapper">
+<mapper namespace="com.qifenqian.bms.accounting.bmsexception.mapper.BmsExceptionMapper">
 
-	<select id="selectBmsExceptionList" parameterType="com.sevenpay.bms.accounting.bmsexception.bean.BmsException" resultType="com.sevenpay.bms.accounting.bmsexception.bean.BmsException">
+	<select id="selectBmsExceptionList" parameterType="com.qifenqian.bms.accounting.bmsexception.bean.BmsException" resultType="com.qifenqian.bms.accounting.bmsexception.bean.BmsException">
 		SELECT
 		  EXCE_ID,
 		  EXCE_TYPE,

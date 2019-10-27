@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.accounting.financequery.mapper.FinanceSumMapper">
+<mapper namespace="com.qifenqian.bms.accounting.financequery.mapper.FinanceSumMapper">
 
 	<sql id="Base_Column_List">
 		F.SUBJECT_CODE,F.SUBJECT_NAME,S.FINAL_AMOUNT,S.SUBJECT_ID,S.WORK_DATE

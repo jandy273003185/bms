@@ -132,7 +132,7 @@
 											<button class="btn btn-purple btn-sm btn-margin clearMerchantSearch" >
 												清空<i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
-											<gyzbadmin:function url="<%=ToPayDetailPath.BASE + ToPayDetailPath.EXPORTDETAIL %>">
+											<gyzbadmin:function url="<%=ToPayDetailPath.BASE + ToPayDetailPath.EXPORTDETAIL%>">
 												<span class="input-group-btn" style="display:inline;">
 													<a class="btn btn-purple btn-sm exportBut">导出报表</a> 
 												</span>

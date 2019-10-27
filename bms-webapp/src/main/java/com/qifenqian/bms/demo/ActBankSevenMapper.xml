@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.demo.ActBankSevenMapper">
+<mapper namespace="com.qifenqian.bms.demo.ActBankSevenMapper">
 
-	<select id="selectBankList" resultType="com.sevenpay.bms.demo.ActBankSevenFlow">
+	<select id="selectBankList" resultType="com.qifenqian.bms.demo.ActBankSevenFlow">
 		SELECT
 			*
 		FROM

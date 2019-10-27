@@ -2,13 +2,13 @@ package com.qifenqian.bms.meeting.activity.service;
 
 import java.util.List;
 
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qifenqian.bms.meeting.activity.bean.ActivityBean;
 import com.qifenqian.bms.meeting.activity.dao.ActivityDao;
 import com.qifenqian.bms.meeting.activity.mapper.ActivityMapper;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 @Service
 public class ActivityService {

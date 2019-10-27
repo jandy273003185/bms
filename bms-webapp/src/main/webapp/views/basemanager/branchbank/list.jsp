@@ -276,14 +276,14 @@
 												<td>${branchBank.bankName }</td>
 												<td>${branchBank.bankAddress }</td>
 												<td>
-													<gyzbadmin:function url="<%=BranchBankPath.BASE + BranchBankPath.UPDATE %>">
+													<gyzbadmin:function url="<%=BranchBankPath.BASE + BranchBankPath.UPDATE%>">
 														<a href="#updateBranchBankModal"  data-toggle='modal' class="tooltip-success updateBranchBank" data-rel="tooltip" title="Edit">
 															<span class="green">
 																<i class="icon-edit bigger-120"></i>
 															</span>
 														</a>
 													</gyzbadmin:function>
-													<gyzbadmin:function url="<%=BranchBankPath.BASE + BranchBankPath.DELETE %>">
+													<gyzbadmin:function url="<%=BranchBankPath.BASE + BranchBankPath.DELETE%>">
 														<a href="#deleteBranchBankModal"  data-toggle='modal' class="tooltip-error deleteBranchBank" data-rel="tooltip" title="Delete">
 															<span class="red">
 																<i class="icon-trash bigger-120"></i>

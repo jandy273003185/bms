@@ -5,11 +5,11 @@
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="com.qifenqian.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkj"%>
 <%@page import="com.qifenqian.bms.accounting.exception.dao.transyl.bean.TransYl"%>
-<%@page import="org.gyzb.platform.common.utils.DateUtils"%>
+<%@page import="com.qifenqian.platform.common.utils.DateUtils"%>
 <%@page import="com.qifenqian.bms.accounting.exception.base.bean.TransAction"%>
 <%@page import="com.qifenqian.bms.accounting.exception.base.bean.Operation"%>
 <%@page import="com.qifenqian.bms.accounting.exception.base.type.OperationStatus"%>
-<%@page import="org.gyzb.platform.common.utils.ReflectUtils"%>
+<%@page import="com.qifenqian.platform.common.utils.ReflectUtils"%>
 <%@page import="com.sevenpay.invoke.common.type.RequestColumnValues"%>
 <%@page import="com.qifenqian.bms.accounting.exception.OperationExceptionPath"%>
 <%@page import="com.qifenqian.bms.accounting.exception.service.TransDealService"%>
@@ -118,7 +118,7 @@
 							<!-- 核心基本信息 -->
 							<c:if test="${not empty transRecord }">
 								<%
-									TransRecord transRecord = (TransRecord)pageContext.findAttribute("transRecord");
+								  TransRecord transRecord = (TransRecord)pageContext.findAttribute("transRecord");
 								%>
 								<table class="search-table" style="margin-top: 10px;">
 									<tr>
@@ -174,23 +174,25 @@
 								<c:forEach items="${transList }" var="trans" varStatus="status">
 									<!-- 标题 -->
 									<%
-										TransAction trans = (TransAction)pageContext.findAttribute("trans");
+									  TransAction trans = (TransAction)pageContext.findAttribute("trans");
 									%>
 									<!-- 交易明细 -->
 									<%
-										if(trans.getTransFlowOperate() == RequestColumnValues.TransFlowOperate.JGKJ_CARD_FREEZE||
-										trans.getTransFlowOperate() == RequestColumnValues.TransFlowOperate.JGKJ_CARD_UNFREEZE) {
-										ClearJgkj clearJgkj = (ClearJgkj)trans;
+									  if(trans.getTransFlowOperate() == RequestColumnValues.TransFlowOperate.JGKJ_CARD_FREEZE||
+																			trans.getTransFlowOperate() == RequestColumnValues.TransFlowOperate.JGKJ_CARD_UNFREEZE) {
+																			ClearJgkj clearJgkj = (ClearJgkj)trans;
 									%>
 									<tr>
 										<td class="bg-e" colspan="2" width="33%" align="right" style="padding-right: 60px;border-right:0px;font-size: 15px;font-weight: bold;">
-											<%=ReflectUtils.getDesc(trans.getTransFlowOperate()) %>&nbsp;[<font color="red"><%=ReflectUtils.getDesc(trans.getResultStatus()) %></font>]
+											<%=ReflectUtils.getDesc(trans.getTransFlowOperate())%>&nbsp;[<font color="red"><%=ReflectUtils.getDesc(trans.getResultStatus())%></font>]
 										</td>
 										<td class="bg-e" colspan="4" width="67%" align="right" style="padding-right: 50px;border-left:0px;">
 											<input type="hidden" name="transFlowId" value="${trans.transRecordFlow.id}" />
 											<input type="hidden" name="transFlowOperate" value="${trans.transFlowOperate}" />
 											<input type="hidden" name="msgId" value="${trans.transRecordFlow.msgId}" />
-											<%if(trans.getResultStatus() == RequestColumnValues.TransStatus.EXCEPTION) {%>
+											<%
+											  if(trans.getResultStatus() == RequestColumnValues.TransStatus.EXCEPTION) {
+											%>
 													<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.QUERY_RESULT_TRANS%>">
 														<a href="#" class="tooltip-success" onclick="queryResultTrans(this)" data-rel="tooltip" title="Query" data-toggle='modal' data-target="#queryResultModel">
 															<button type="submit" class="btn btn-purple btn-sm"> 结果自查</button>
@@ -208,25 +210,31 @@
 															<button type="submit" class="btn btn-purple btn-sm">确认失败</button>
 														</a>
 													</gyzbadmin:function>
-												<%} else if(trans.getResultStatus() == RequestColumnValues.TransStatus.SUCCESS || trans.getResultStatus() == RequestColumnValues.TransStatus.CONFIRM_SUCCESS) {%>
-														<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.SEQUEL_NEXT_STEP_OPERATION %>">
+												<%
+												  } else if(trans.getResultStatus() == RequestColumnValues.TransStatus.SUCCESS || trans.getResultStatus() == RequestColumnValues.TransStatus.CONFIRM_SUCCESS) {
+												%>
+														<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.SEQUEL_NEXT_STEP_OPERATION%>">
 															<a href="#transBaseModal"  class="tooltip-success sequelNextStepOperation" data-rel="tooltip"  data-toggle='modal' title="续作下一步">
 																<button type="submit" class="btn btn-purple btn-sm">续作下一步</button>
 															</a>
 														</gyzbadmin:function>
-												<% } else if(trans.getResultStatus() == RequestColumnValues.TransStatus.FAILURE || trans.getResultStatus() == RequestColumnValues.TransStatus.CONFIRM_FAILURE) { %>
-														<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.REXECUTE_TRANS %>">
+												<%
+												  } else if(trans.getResultStatus() == RequestColumnValues.TransStatus.FAILURE || trans.getResultStatus() == RequestColumnValues.TransStatus.CONFIRM_FAILURE) {
+												%>
+														<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.REXECUTE_TRANS%>">
 															<a href="#transBaseModal"  data-toggle='modal' class="tooltip-success rexecuteTrans" data-rel="tooltip" title="重新执行" >
 																<button type="submit" class="btn btn-purple btn-sm">重新执行</button>
 															</a>
 														</gyzbadmin:function>
 														&nbsp;
-														<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.RESTART_OPERATION %>">
+														<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.RESTART_OPERATION%>">
 															<a href="#transBaseModal"  data-toggle='modal' class="tooltip-success restartOperation" data-rel="tooltip" title="续作整个流程" >
 																<button type="submit" class="btn btn-purple btn-sm " >续作整个流程</button>
 															</a>
 														</gyzbadmin:function>
-												<% } %>
+												<%
+												  }
+												%>
 										</td>
 									</tr>
 									<!-- 交易明细 -->
@@ -234,7 +242,7 @@
 											<td class="td-left bg-e">交易流水号</td>
 											<td class="td-right">${trans.transRecordFlow.id}</td>
 											<td class="td-left bg-e">业务类型</td>
-											<td class="td-right"><%=ReflectUtils.getDesc(trans.getTransRecordFlow().getBusinessType()) %></td>
+											<td class="td-right"><%=ReflectUtils.getDesc(trans.getTransRecordFlow().getBusinessType())%></td>
 											<td class="td-left bg-e">状态</td>
 											<td class="td-right"><%=ReflectUtils.getDesc(trans.getTransRecordFlow().getStatus())%></td>
 										</tr>
@@ -251,7 +259,7 @@
 											<td class="td-left bg-e">客户号</td>
 											<td class="td-right">${trans.transRecordFlow.custId}</td>
 											<td class="td-left bg-e">账户类型</td>
-											<td class="td-right"><%=ReflectUtils.getDesc(trans.getTransRecordFlow().getAcctType()) %></td>
+											<td class="td-right"><%=ReflectUtils.getDesc(trans.getTransRecordFlow().getAcctType())%></td>
 											<td class="td-left bg-e">账号</td>
 											<td class="td-right">${trans.transRecordFlow.acctId}</td>
 										</tr>
@@ -269,7 +277,7 @@
 											<td class="td-left bg-e">交广交易码</td>
 											<td class="td-right">${trans.transCode}</td>
 											<td class="td-left bg-e">收支标记</td>
-											<td class="td-right"><%=ReflectUtils.getDesc(trans.getTransRecordFlow().getLoanFlag()) %></td>
+											<td class="td-right"><%=ReflectUtils.getDesc(trans.getTransRecordFlow().getLoanFlag())%></td>
 										</tr>
 										<tr>
 											<td class="td-left bg-e">返回编号</td>
@@ -287,45 +295,49 @@
 											<td class="td-left bg-e">记账摘要</td>
 											<td class="td-right">${trans.brief}</td>
 										</tr>
-									<% 
-										} if(trans.getTransFlowOperate()==RequestColumnValues.TransFlowOperate.SEVEN_CUST_FULL_FREEZE||
-										trans.getTransFlowOperate()==RequestColumnValues.TransFlowOperate.SEVEN_CUST_FULL_UNFREEZE) {
-											AcctSevenFreeze sevenTrans = (AcctSevenFreeze)trans;
+									<%
+									  } if(trans.getTransFlowOperate()==RequestColumnValues.TransFlowOperate.SEVEN_CUST_FULL_FREEZE||
+																			trans.getTransFlowOperate()==RequestColumnValues.TransFlowOperate.SEVEN_CUST_FULL_UNFREEZE) {
+																				AcctSevenFreeze sevenTrans = (AcctSevenFreeze)trans;
 									%>
 									<tr>
 										<td class="bg-e" colspan="2" width="33%" align="right" style="padding-right: 60px;border-right:0px;font-size: 15px;font-weight: bold;">
-											<%=ReflectUtils.getDesc(trans.getTransFlowOperate()) %>&nbsp;[<font color="red"><%=ReflectUtils.getDesc(trans.getResultStatus()) %></font>]
+											<%=ReflectUtils.getDesc(trans.getTransFlowOperate())%>&nbsp;[<font color="red"><%=ReflectUtils.getDesc(trans.getResultStatus())%></font>]
 										</td>
 										<td class="bg-e" colspan="4" width="67%" align="right" style="padding-right: 50px;border-left:0px;">
 											<input type="hidden" name="transFlowId" value="${trans.transRecordFlow.id}" />
 											<input type="hidden" name="transFlowOperate" value="${trans.transFlowOperate}" />
 											<input type="hidden" name="msgId" value="${trans.transRecordFlow.msgId}" />
-											<% if(trans.getResultStatus() == RequestColumnValues.TransStatus.EXCEPTION) { %>
+											<%
+											  if(trans.getResultStatus() == RequestColumnValues.TransStatus.EXCEPTION) {
+											%>
 													<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.QUERY_RESULT_TRANS%>">
 														<a href="#" class="tooltip-success" onclick="queryResultTrans(this)" data-rel="tooltip" title="Query" data-toggle='modal' data-target="#queryResultModel">
 															<button type="submit" class="btn btn-purple btn-sm"> 结果自查</button>
 														</a>
 													</gyzbadmin:function>
 													&nbsp;
-													<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.CONFIRM_SUCCESS_TRANS %>">
+													<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.CONFIRM_SUCCESS_TRANS%>">
 														<a href="#transBaseModal"  class="tooltip-success confirmSuccess" data-rel="tooltip"  data-toggle='modal' title="确认成功">
 															<button type="submit" class="btn btn-purple btn-sm">确认成功</button>
 														</a>
 													</gyzbadmin:function>
 													&nbsp;
-													<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.CONFIRM_FAILURE_TRANS %>">
+													<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.CONFIRM_FAILURE_TRANS%>">
 														<a href="#transBaseModal"  class="tooltip-success confirmFailure" data-rel="tooltip"  data-toggle='modal' title="确认失败">
 															<button type="submit" class="btn btn-purple btn-sm">确认失败</button>
 														</a>
 													</gyzbadmin:function>
-											<% } else if(trans.getResultStatus() == RequestColumnValues.TransStatus.FAILURE || trans.getResultStatus() == RequestColumnValues.TransStatus.CONFIRM_FAILURE) { %>
-													<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.REXECUTE_TRANS %>">
+											<%
+											  } else if(trans.getResultStatus() == RequestColumnValues.TransStatus.FAILURE || trans.getResultStatus() == RequestColumnValues.TransStatus.CONFIRM_FAILURE) {
+											%>
+													<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.REXECUTE_TRANS%>">
 														<a href="#transBaseModal"  data-toggle='modal' class="tooltip-success rexecuteTrans" data-rel="tooltip" title="重新执行" >
 															<button type="submit" class="btn btn-purple btn-sm">重新执行</button>
 														</a>
 													</gyzbadmin:function>
 													&nbsp;
-													<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.RESTART_OPERATION %>">
+													<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.RESTART_OPERATION%>">
 														<a href="#transBaseModal"  data-toggle='modal' class="tooltip-success restartOperation" data-rel="tooltip" title="续作整个流程" >
 															<button type="submit" class="btn btn-purple btn-sm " >续作整个流程</button>
 														</a>

@@ -798,7 +798,7 @@ function updateAverallControlType(obj){
 												清空
 												<i class=" icon-move icon-on-right bigger-110"></i>
 										</button>
-										<gyzbadmin:function url="<%=PrizePath.BASE + PrizePath.ADD %>">
+										<gyzbadmin:function url="<%=PrizePath.BASE + PrizePath.ADD%>">
 											<button class="btn btn-purple btn-sm btn-margin" data-toggle='modal' data-target="#addPrizeModal">
 												新增
 												<i class="icon-plus-sign icon-on-right bigger-110"></i>
@@ -861,19 +861,19 @@ function updateAverallControlType(obj){
 											<td>
 												<input type="hidden" name="prizeId" value="${prize.prizeId}"/>
 												<c:if test="${prize.status == 'INIT'}">
-													<gyzbadmin:function url="<%=PrizePath.BASE + PrizePath.START %>">
+													<gyzbadmin:function url="<%=PrizePath.BASE + PrizePath.START%>">
 														<button type="button" class="btn btn-primary btn-xs startPrizeLink" title="Start" data-toggle='modal' data-target="#startPrizeModal">
 															开始
 														</button>
 													</gyzbadmin:function>
 												</c:if>
 												<c:if test="${prize.status == 'DRAW_IN'}">
-													<gyzbadmin:function url="<%=PrizePath.BASE + PrizePath.RESEND %>">
+													<gyzbadmin:function url="<%=PrizePath.BASE + PrizePath.RESEND%>">
 														<button type="button" class="btn btn-primary btn-xs resendPrizeLink" title="Resend" data-toggle='modal' data-target="#resendPrizeModal">
 															重发
 														</button>
 													</gyzbadmin:function>
-													<gyzbadmin:function url="<%=PrizePath.BASE + PrizePath.END %>">
+													<gyzbadmin:function url="<%=PrizePath.BASE + PrizePath.END%>">
 														<button type="button" class="btn btn-primary btn-xs endPrizeLink" title="End" data-toggle='modal' data-target="#endPrizeModal">
 															结束
 														</button>

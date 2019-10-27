@@ -10,7 +10,6 @@ import org.apache.commons.lang.StringUtils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.sevenpay.platform.utils.FormTokenUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +41,7 @@ import com.qifenqian.bms.merchant.reported.dao.FmIncomeMapperDao;
 import com.qifenqian.bms.merchant.reported.mapper.FmIncomeMapper;
 import com.qifenqian.bms.merchant.reported.service.CrIncomeService;
 import com.qifenqian.bms.merchant.reported.service.FmIncomeService;
+import com.qifenqian.bms.platform.utils.FormTokenUtil;
 import com.seven.micropay.base.domain.ChannelResult;
 import com.seven.micropay.base.enums.ReStatus;
 import com.seven.micropay.channel.domain.merchant.BestCoMerOpenProdct;

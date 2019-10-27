@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.channelroute.mapper.ChannelRouteMapper">
+<mapper namespace="com.qifenqian.bms.basemanager.channelroute.mapper.ChannelRouteMapper">
 	
 	<!-- 查询 --> 
-	<select id="selectRoute" parameterType="com.sevenpay.bms.basemanager.channelroute.bean.ChannelRouteBean" 
-		resultType="com.sevenpay.bms.basemanager.channelroute.bean.ChannelRouteBean">
+	<select id="selectRoute" parameterType="com.qifenqian.bms.basemanager.channelroute.bean.ChannelRouteBean" 
+		resultType="com.qifenqian.bms.basemanager.channelroute.bean.ChannelRouteBean">
 			select 
 				T.*
 			from 
@@ -23,7 +23,7 @@
 	</select>
 	
 	<!-- 添加 --> 
-	<insert id="addChannelRoute" parameterType="com.sevenpay.bms.basemanager.channelroute.bean.ChannelRouteBean">
+	<insert id="addChannelRoute" parameterType="com.qifenqian.bms.basemanager.channelroute.bean.ChannelRouteBean">
 		INSERT INTO tb_channel_route(
 			name,
 			paychannel_type,
@@ -68,7 +68,7 @@
 	
 	
 	<!-- 修改 --> 
-	<update id="updateChannelRoute" parameterType="com.sevenpay.bms.basemanager.channelroute.bean.ChannelRouteBean">
+	<update id="updateChannelRoute" parameterType="com.qifenqian.bms.basemanager.channelroute.bean.ChannelRouteBean">
 		update 
 			tb_channel_route
 		<set>
@@ -119,8 +119,8 @@
 	
 	
 	<!-- 查询 --> 
-	<select id="selectId" parameterType="com.sevenpay.bms.basemanager.channelroute.bean.ChannelRouteBean" 
-		resultType="com.sevenpay.bms.basemanager.channelroute.bean.ChannelRouteBean">
+	<select id="selectId" parameterType="com.qifenqian.bms.basemanager.channelroute.bean.ChannelRouteBean" 
+		resultType="com.qifenqian.bms.basemanager.channelroute.bean.ChannelRouteBean">
 			select 
 				
 				I.ID
@@ -134,7 +134,7 @@
 	
 	
 	<!-- 添加渠道关系 --> 
-	<insert id="addRouteRf" parameterType="com.sevenpay.bms.basemanager.channelroute.bean.ChannelRouteBean">
+	<insert id="addRouteRf" parameterType="com.qifenqian.bms.basemanager.channelroute.bean.ChannelRouteBean">
 		INSERT INTO tb_route_rf_channel(
 			channel_route_id,
 			channel_id

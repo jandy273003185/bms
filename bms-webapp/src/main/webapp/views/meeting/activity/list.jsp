@@ -244,7 +244,7 @@
 												清空
 												<i class=" icon-move icon-on-right bigger-110"></i>
 										</button>
-										<gyzbadmin:function url="<%=ActivityPath.BASE + ActivityPath.ADD %>">
+										<gyzbadmin:function url="<%=ActivityPath.BASE + ActivityPath.ADD%>">
 											<button class="btn btn-purple btn-sm btn-margin" data-toggle='modal' data-target="#addActivityModal">
 												新增
 												<i class="icon-plus-sign icon-on-right bigger-110"></i>
@@ -304,12 +304,12 @@
 											<td><fmt:formatDate value="${activity.instDatetime}" type="both"/></td>
 											<td>
 												<input type="hidden" name="activityId" value="${activity.activityId }"/>
-												<gyzbadmin:function url="<%=ActivityPath.BASE + ActivityPath.EDIT %>">
+												<gyzbadmin:function url="<%=ActivityPath.BASE + ActivityPath.EDIT%>">
 													<a href="#" class="tooltip-success updateActivityLink" data-rel="tooltip" title="Edit" data-toggle='modal' data-target="#updateActivityModal" >
 													<span class="green"><i class="icon-edit bigger-120"></i></span>
 													</a>	
 												</gyzbadmin:function>	
-												<gyzbadmin:function url="<%=LuckDrawPath.BASE + LuckDrawPath.PRIZE_LIST %>">
+												<gyzbadmin:function url="<%=LuckDrawPath.BASE + LuckDrawPath.PRIZE_LIST%>">
 													<button type="button" class="btn btn-primary btn-xs prizeListLick" data-toggle='modal'>
 														抽奖
 													</button>	

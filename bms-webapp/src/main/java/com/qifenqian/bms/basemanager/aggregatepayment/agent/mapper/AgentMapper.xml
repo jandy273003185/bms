@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.aggregatepayment.agent.mapper.AgentMapper">
+<mapper namespace="com.qifenqian.bms.basemanager.aggregatepayment.agent.mapper.AgentMapper">
 	
-	<select id="getAgentCollectDailyList" parameterType="com.sevenpay.bms.basemanager.aggregatepayment.agent.bean.AgentCollectDailyBean" 
-		resultType="com.sevenpay.bms.basemanager.aggregatepayment.agent.bean.AgentCollectDailyBean">
+	<select id="getAgentCollectDailyList" parameterType="com.qifenqian.bms.basemanager.aggregatepayment.agent.bean.AgentCollectDailyBean" 
+		resultType="com.qifenqian.bms.basemanager.aggregatepayment.agent.bean.AgentCollectDailyBean">
 			select 
 				T.*
 			from 
@@ -25,8 +25,8 @@
 		
 	</select>
 	
-	<select id="getAgentCollectDailyListExport" parameterType="com.sevenpay.bms.basemanager.aggregatepayment.agent.bean.AgentCollectDailyBean" 
-		resultType="com.sevenpay.bms.basemanager.aggregatepayment.agent.bean.AgentCollectDailyBean">
+	<select id="getAgentCollectDailyListExport" parameterType="com.qifenqian.bms.basemanager.aggregatepayment.agent.bean.AgentCollectDailyBean" 
+		resultType="com.qifenqian.bms.basemanager.aggregatepayment.agent.bean.AgentCollectDailyBean">
 		select 
 				T.daily_id,
 				T.agent_id,
@@ -53,8 +53,8 @@
 				</if>
 			</where>
 	</select>
-	<select id="getAgreementList" parameterType="com.sevenpay.bms.basemanager.aggregatepayment.agent.bean.AgreementBean" 
-		resultType="com.sevenpay.bms.basemanager.aggregatepayment.agent.bean.AgreementBean">
+	<select id="getAgreementList" parameterType="com.qifenqian.bms.basemanager.aggregatepayment.agent.bean.AgreementBean" 
+		resultType="com.qifenqian.bms.basemanager.aggregatepayment.agent.bean.AgreementBean">
 		select 
 			T.*
 		from
@@ -75,7 +75,7 @@
 		</where>
 	</select>
 	
-	<insert id="addAgreementInfo" parameterType="com.sevenpay.bms.basemanager.aggregatepayment.agent.bean.AgreementBean">
+	<insert id="addAgreementInfo" parameterType="com.qifenqian.bms.basemanager.aggregatepayment.agent.bean.AgreementBean">
 		insert into 
 			td_agent_merchant_prod_rate 
 		(
@@ -95,7 +95,7 @@
 			
 		)
 	</insert>
-	<update id="updateAgreementInfo" parameterType="com.sevenpay.bms.basemanager.aggregatepayment.agent.bean.AgreementBean">
+	<update id="updateAgreementInfo" parameterType="com.qifenqian.bms.basemanager.aggregatepayment.agent.bean.AgreementBean">
 		update 
 			td_agent_merchant_prod_rate T
 		<set>
@@ -131,7 +131,7 @@
 				AND PROD_CODE=#{prodCode,jdbcType=VARCHAR}
 	</delete>
 	
-	<select id="getAgentSettleList" parameterType="com.sevenpay.bms.basemanager.aggregatepayment.agent.bean.AgentSettleBean" resultType="com.sevenpay.bms.basemanager.aggregatepayment.agent.bean.AgentSettleBean">
+	<select id="getAgentSettleList" parameterType="com.qifenqian.bms.basemanager.aggregatepayment.agent.bean.AgentSettleBean" resultType="com.qifenqian.bms.basemanager.aggregatepayment.agent.bean.AgentSettleBean">
 		select 
 			settle_id,
 			agent_id,
@@ -166,7 +166,7 @@
 			
 	</select>
 	
-	<select id="getDetailBySettleId" parameterType="String" resultType="com.sevenpay.bms.basemanager.aggregatepayment.agent.bean.AgentSettleDetailBean">
+	<select id="getDetailBySettleId" parameterType="String" resultType="com.qifenqian.bms.basemanager.aggregatepayment.agent.bean.AgentSettleDetailBean">
 		select 
 			*
 		from
@@ -178,8 +178,8 @@
 		</where>
 	</select>
 	
-	<select id="getPayChannelList" parameterType="com.sevenpay.bms.basemanager.aggregatepayment.agent.bean.PayChannelBean" 
-		resultType="com.sevenpay.bms.basemanager.aggregatepayment.agent.bean.PayChannelBean">
+	<select id="getPayChannelList" parameterType="com.qifenqian.bms.basemanager.aggregatepayment.agent.bean.PayChannelBean" 
+		resultType="com.qifenqian.bms.basemanager.aggregatepayment.agent.bean.PayChannelBean">
 		select 
 			*
 		from
@@ -200,7 +200,7 @@
 		</where>
 	</select>
 	
-	<insert id="addPayChannelInfo" parameterType="com.sevenpay.bms.basemanager.aggregatepayment.agent.bean.PayChannelBean" >
+	<insert id="addPayChannelInfo" parameterType="com.qifenqian.bms.basemanager.aggregatepayment.agent.bean.PayChannelBean" >
 		insert into 
 			td_pay_channel_cfg
 		(
@@ -259,8 +259,8 @@
 			pay_channel_code = #{payChannelCode,jdbcType=VARCHAR}		
 	</delete>
 	
-	<select id="getPayProdList" parameterType="com.sevenpay.bms.basemanager.aggregatepayment.agent.bean.PayProdBean"
-	 resultType="com.sevenpay.bms.basemanager.aggregatepayment.agent.bean.PayProdBean">
+	<select id="getPayProdList" parameterType="com.qifenqian.bms.basemanager.aggregatepayment.agent.bean.PayProdBean"
+	 resultType="com.qifenqian.bms.basemanager.aggregatepayment.agent.bean.PayProdBean">
 		select
 			PROD_CODE,
 			PROD_NAME,
@@ -285,7 +285,7 @@
 		</where>
 	</select>
 	
-	<insert id="addPayProdInfo" parameterType="com.sevenpay.bms.basemanager.aggregatepayment.agent.bean.PayProdBean">
+	<insert id="addPayProdInfo" parameterType="com.qifenqian.bms.basemanager.aggregatepayment.agent.bean.PayProdBean">
 		insert into 
 			td_payment_prod_for_merchant
 		(

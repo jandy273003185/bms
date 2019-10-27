@@ -1,7 +1,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sevenpay.bms.accounting.balunionpayuniondatasource.mapper.BalUnionpayUnionDataSourceMapper">
+<mapper namespace="com.qifenqian.bms.accounting.balunionpayuniondatasource.mapper.BalUnionpayUnionDataSourceMapper">
 
-	<select id="selectUnionpayUnionDataSourceList" resultType="com.sevenpay.bms.accounting.balunionpayuniondatasource.bean.BalUnionpayUnionDataSource" parameterType="com.sevenpay.bms.accounting.balunionpayuniondatasource.bean.BalUnionpayUnionDataSource">
+	<select id="selectUnionpayUnionDataSourceList" resultType="com.qifenqian.bms.accounting.balunionpayuniondatasource.bean.BalUnionpayUnionDataSource" parameterType="com.qifenqian.bms.accounting.balunionpayuniondatasource.bean.BalUnionpayUnionDataSource">
 			SELECT
 			C.ID,
 			T.FILE_ID,

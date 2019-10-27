@@ -2,14 +2,14 @@ package com.qifenqian.bms.accounting.accountMaintain.service;
 
 import java.util.List;
 
-import org.gyzb.platform.web.admin.user.bean.User;
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qifenqian.bms.accounting.accountMaintain.bean.BmsBaseBankAccount;
 import com.qifenqian.bms.accounting.accountMaintain.dao.BmsBaseBankAccountDAO;
 import com.qifenqian.bms.accounting.accountMaintain.mapper.BmsBaseBankAccountMapper;
+import com.qifenqian.bms.platform.web.admin.user.bean.User;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 @Service
 public class BmsBaseBankAccountService {

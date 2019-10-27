@@ -171,7 +171,7 @@
 											<td>	
 												<input type="hidden" name="custId_01" id="custId_01" value="${merchant.custId}"> 
 												
-												<gyzbadmin:function url="<%=AgencyPath.BASE + AgencyPath.UPDATEAGENCYINFO %>">  	
+												<gyzbadmin:function url="<%=AgencyPath.BASE + AgencyPath.UPDATEAGENCYINFO%>">  	
 													<button type="button" onclick="updateAgencyInfo(this,'edit')" data-toggle='modal' data-target="#updateAgency" class="btn btn-primary btn-xs qifenqian_update_tc" >修改代理商信息</button>
 												</gyzbadmin:function>
                                             	

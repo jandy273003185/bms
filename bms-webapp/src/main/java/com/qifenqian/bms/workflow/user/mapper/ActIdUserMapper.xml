@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sevenpay.bms.workflow.user.mapper.ActIdUserMapper" >
-  <resultMap id="BaseResultMap" type="com.sevenpay.bms.workflow.user.bean.ActIdUser" >
+<mapper namespace="com.qifenqian.bms.workflow.user.mapper.ActIdUserMapper" >
+  <resultMap id="BaseResultMap" type="com.qifenqian.bms.workflow.user.bean.ActIdUser" >
     <id column="ID_" property="id" jdbcType="VARCHAR" />
     <result column="REV_" property="rev" jdbcType="INTEGER" />
     <result column="FIRST_" property="first" jdbcType="VARCHAR" />
@@ -77,7 +77,7 @@
     from act_id_user
     where ID_ = #{id,jdbcType=VARCHAR}
   </select>
-  <select id="selectListActUser" parameterType="com.sevenpay.bms.workflow.user.bean.ActIdUser" resultType="com.sevenpay.bms.workflow.user.bean.ActIdUser">
+  <select id="selectListActUser" parameterType="com.qifenqian.bms.workflow.user.bean.ActIdUser" resultType="com.qifenqian.bms.workflow.user.bean.ActIdUser">
   	 SELECT
   	 <include refid="Base_Column_List" />
   	 FROM ACT_ID_USER A
@@ -91,7 +91,7 @@
     delete from act_id_user
     where ID_ = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insertSelective" parameterType="com.sevenpay.bms.workflow.user.bean.ActIdUser" >
+  <insert id="insertSelective" parameterType="com.qifenqian.bms.workflow.user.bean.ActIdUser" >
     insert into act_id_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -140,7 +140,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.sevenpay.bms.workflow.user.bean.ActIdUser" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.qifenqian.bms.workflow.user.bean.ActIdUser" >
     update act_id_user
     <set >
       <if test="rev != null" >
@@ -164,7 +164,7 @@
     </set>
     where ID_ = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.sevenpay.bms.workflow.user.bean.ActIdUser" >
+  <update id="updateByPrimaryKey" parameterType="com.qifenqian.bms.workflow.user.bean.ActIdUser" >
     update act_id_user
     set REV_ = #{rev,jdbcType=INTEGER},
       FIRST_ = #{first,jdbcType=VARCHAR},

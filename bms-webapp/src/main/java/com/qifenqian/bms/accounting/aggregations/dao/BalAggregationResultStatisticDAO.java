@@ -2,13 +2,13 @@ package com.qifenqian.bms.accounting.aggregations.dao;
 
 import java.util.List;
 
-import org.gyzb.platform.web.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.qifenqian.bms.accounting.aggregations.bean.BalAggregationResultStatistic;
 import com.qifenqian.bms.accounting.aggregations.bean.BaseChannel;
 import com.qifenqian.bms.accounting.aggregations.mapper.BalAggregationResultStatisticMapper;
+import com.qifenqian.bms.platform.web.page.Page;
 
 
 

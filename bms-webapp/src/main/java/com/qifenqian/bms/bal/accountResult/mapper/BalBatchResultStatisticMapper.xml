@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sevenpay.bms.bal.accountResult.mapper.BalBatchResultStatisticMapper">
-  <resultMap id="BaseResultMap" type="com.sevenpay.bms.bal.accountResult.bean.BalBatchResultStatistic">
+<mapper namespace="com.qifenqian.bms.bal.accountResult.mapper.BalBatchResultStatisticMapper">
+  <resultMap id="BaseResultMap" type="com.qifenqian.bms.bal.accountResult.bean.BalBatchResultStatistic">
     <id column="statistic_id" jdbcType="INTEGER" property="statisticId" />
     <result column="batch_id" jdbcType="VARCHAR" property="batchId" />
     <result column="bal_date" jdbcType="VARCHAR" property="balDate" />
@@ -91,7 +91,7 @@
     bal_doubt_count, bal_doubt_amt, bal_error_count, bal_error_amt, self_doubt_count, 
     self_doubt_amt, inst_datetime, status, memo, update_datetime
   </sql>
-  <select id="selectByExample" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalBatchResultStatisticExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalBatchResultStatisticExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -115,13 +115,13 @@
     delete from bal_batch_result_statistic
     where statistic_id = #{statisticId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalBatchResultStatisticExample">
+  <delete id="deleteByExample" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalBatchResultStatisticExample">
     delete from bal_batch_result_statistic
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalBatchResultStatistic">
+  <insert id="insert" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalBatchResultStatistic">
     insert into bal_batch_result_statistic (statistic_id, batch_id, bal_date, 
       work_date, file_id, channel_id, 
       data_owner, trans_status, trans_type, 
@@ -141,7 +141,7 @@
       #{status,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalBatchResultStatistic">
+  <insert id="insertSelective" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalBatchResultStatistic">
     insert into bal_batch_result_statistic
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="statisticId != null">
@@ -292,7 +292,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalBatchResultStatisticExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalBatchResultStatisticExample" resultType="java.lang.Integer">
     select count(*) from bal_batch_result_statistic
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -408,7 +408,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalBatchResultStatistic">
+  <update id="updateByPrimaryKeySelective" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalBatchResultStatistic">
     update bal_batch_result_statistic
     <set>
       <if test="batchId != null">
@@ -483,7 +483,7 @@
     </set>
     where statistic_id = #{statisticId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalBatchResultStatistic">
+  <update id="updateByPrimaryKey" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalBatchResultStatistic">
     update bal_batch_result_statistic
     set batch_id = #{batchId,jdbcType=VARCHAR},
       bal_date = #{balDate,jdbcType=VARCHAR},
@@ -512,7 +512,7 @@
   </update>
   
   
-  <select id="selectList" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalBatchResultStatistic" resultType="com.sevenpay.bms.bal.accountResult.bean.BalBatchResultStatistic">
+  <select id="selectList" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalBatchResultStatistic" resultType="com.qifenqian.bms.bal.accountResult.bean.BalBatchResultStatistic">
   	select 
 		T.statistic_id,
 		T.batch_id,
@@ -569,7 +569,7 @@
 		ORDER BY T.work_date DESC
   </select>
   
-  <select id="queryBalBaseChannel" resultType="com.sevenpay.bms.bal.accountResult.bean.BaseChannel">
+  <select id="queryBalBaseChannel" resultType="com.qifenqian.bms.bal.accountResult.bean.BaseChannel">
   	select
   	 * 
   	from

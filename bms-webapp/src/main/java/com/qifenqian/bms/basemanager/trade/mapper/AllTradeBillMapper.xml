@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.trade.mapper.AllTradeBillMapper">
+<mapper namespace="com.qifenqian.bms.basemanager.trade.mapper.AllTradeBillMapper">
 	<!-- 查询所有交易 -->
-	<select id="getAllTradeBill" parameterType="String" resultType="com.sevenpay.bms.basemanager.trade.bean.AllTradeBill">
+	<select id="getAllTradeBill" parameterType="String" resultType="com.qifenqian.bms.basemanager.trade.bean.AllTradeBill">
 		select 
 			T.*
 		from
@@ -122,7 +122,7 @@
 	</select>
 	
 	<!-- 导出 -->
-	<select id="getAllTradeBillExport" parameterType="String" resultType="com.sevenpay.bms.basemanager.trade.bean.AllTradeBill">
+	<select id="getAllTradeBillExport" parameterType="String" resultType="com.qifenqian.bms.basemanager.trade.bean.AllTradeBill">
 		select 
 			T.*
 		from

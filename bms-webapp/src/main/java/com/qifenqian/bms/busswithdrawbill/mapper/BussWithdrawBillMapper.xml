@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.busswithdrawbill.mapper.BussWithdrawBillMapper">
+<mapper namespace="com.qifenqian.bms.busswithdrawbill.mapper.BussWithdrawBillMapper">
 	
-	<insert id="insertWithdrawBill" parameterType="com.sevenpay.bms.busswithdrawbill.bean.TdBussWithdrawBill" >
+	<insert id="insertWithdrawBill" parameterType="com.qifenqian.bms.busswithdrawbill.bean.TdBussWithdrawBill" >
     insert into td_buss_withdraw_bill
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="withdrawSn != null" >

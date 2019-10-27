@@ -2,12 +2,12 @@ package com.qifenqian.bms.basemanager.aggregatepayment.agent.dao;
 
 import java.util.List;
 
-import org.gyzb.platform.web.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.qifenqian.bms.basemanager.aggregatepayment.agent.bean.AgentCollectDailyBean;
 import com.qifenqian.bms.basemanager.aggregatepayment.agent.mapper.AgentMapper;
+import com.qifenqian.bms.platform.web.page.Page;
 
 @Repository
 public class AgentCollectDAO {

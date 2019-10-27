@@ -12,7 +12,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +24,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.agent.bean.AgentSignBean;
 import com.qifenqian.bms.basemanager.agent.bean.AgentSignVO;
 import com.qifenqian.bms.basemanager.agent.service.AgentSignService;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 
 @Controller

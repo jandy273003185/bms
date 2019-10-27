@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sevenpay.bms.accounting.checkquery.mapper.JgkjResultExceptionMapper" >
+<mapper namespace="com.qifenqian.bms.accounting.checkquery.mapper.JgkjResultExceptionMapper" >
 	
-  <select id="selectZytResultExceptionList"  resultType="com.sevenpay.bms.accounting.checkquery.bean.JgkjResultException" 
-  	parameterType="com.sevenpay.bms.accounting.checkquery.bean.JgkjResultException" >
+  <select id="selectZytResultExceptionList"  resultType="com.qifenqian.bms.accounting.checkquery.bean.JgkjResultException" 
+  	parameterType="com.qifenqian.bms.accounting.checkquery.bean.JgkjResultException" >
 	   	SELECT 
 		      T.BAL_DATE,
 			  IFNULL((SELECT TYPE_NAME FROM BASE_TYPE WHERE TYPE_SORT = 'CHANNEL_ID' AND TYPE_CODE = T.CHANNEL_ID),T.CHANNEL_ID) CHANNEL_ID,

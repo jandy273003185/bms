@@ -231,13 +231,13 @@
 												<!-- <i class="icon-search icon-on-right bigger-110"></i> -->
 											</button> 
 											</gyzbadmin:function>
-											<gyzbadmin:function url="<%=PaymentManagerPath.BASE + PaymentManagerPath.SELECTLIST %>">
+											<gyzbadmin:function url="<%=PaymentManagerPath.BASE + PaymentManagerPath.SELECTLIST%>">
 											<button  class="btn btn-purple btn-sm" data-toggle='modal' data-target="#selectModal">
 												预览
 												<i class="icon-search icon-on-right bigger-110"></i>
 											</button>
 											</gyzbadmin:function>
-											<gyzbadmin:function url="<%=PaymentManagerPath.BASE + PaymentManagerPath.BATPAYMENTDATA %>">
+											<gyzbadmin:function url="<%=PaymentManagerPath.BASE + PaymentManagerPath.BATPAYMENTDATA%>">
 											<button  class="btn btn-purple btn-sm" data-toggle='modal' data-target="#submitModal">
 												提交
 												<i class="icon-plus-sign icon-on-right bigger-110"></i>
@@ -295,7 +295,7 @@
 													<fmt:formatDate value="${detail.createrTime }" pattern="yyyy-MM-dd HH:mm:ss"/>	
 												</td> --%>
 												<td>
-													<gyzbadmin:function url="<%=PaymentManagerPath.BASE + PaymentManagerPath.UPDATE %>">
+													<gyzbadmin:function url="<%=PaymentManagerPath.BASE + PaymentManagerPath.UPDATE%>">
 														<a href="#updateModal"  data-toggle='modal' class="tooltip-success updateBank" data-rel="tooltip" title="Edit">
 															<span class="green">
 																<i class="icon-edit bigger-120"></i>

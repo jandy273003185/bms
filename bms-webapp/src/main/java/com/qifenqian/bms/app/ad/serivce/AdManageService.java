@@ -3,13 +3,13 @@ package com.qifenqian.bms.app.ad.serivce;
 import java.util.Date;
 import java.util.List;
 
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qifenqian.bms.app.ad.bean.AdManageBean;
 import com.qifenqian.bms.app.ad.dao.AdManageDao;
 import com.qifenqian.bms.basemanager.utils.GenSN;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 /**
  * APP登录页广告管理Service
  * @author hongjiagui

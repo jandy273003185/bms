@@ -100,12 +100,12 @@
 											</td>
 											<td>
 												<input type="hidden" name="questNo" value="${question.questNo }"/>
-												<gyzbadmin:function url="<%=QuestionPath.BASE + QuestionPath.EDIT %>">
+												<gyzbadmin:function url="<%=QuestionPath.BASE + QuestionPath.EDIT%>">
 													<a href="#" class="tooltip-success editquest" data-rel="tooltip" title="Edit" data-toggle='modal' data-target="#editQuestModal">
 														<span class="green"><i class="icon-edit bigger-120"></i></span>
 													</a>
 												</gyzbadmin:function>
-												<gyzbadmin:function url="<%=QuestionPath.BASE + QuestionPath.DELETE %>">
+												<gyzbadmin:function url="<%=QuestionPath.BASE + QuestionPath.DELETE%>">
 													<a href="#" class="tooltip-error deleteQuest" data-rel="tooltip" title="Delete" data-toggle='modal' data-target="#deleteQuestModal">
 														<span class="red"><i class="icon-trash bigger-120"></i></span>
 													</a>

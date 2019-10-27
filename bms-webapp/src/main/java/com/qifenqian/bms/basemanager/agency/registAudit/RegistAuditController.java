@@ -12,7 +12,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +32,7 @@ import com.qifenqian.bms.basemanager.utils.GenSN;
 import com.qifenqian.bms.basemanager.utils.YouTuUtils;
 import com.qifenqian.bms.upgrade.merchant.bean.MerchantRegisterInfo;
 import com.qifenqian.bms.upgrade.merchant.bean.TdAuditRecodeInfo;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 
 

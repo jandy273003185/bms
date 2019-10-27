@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sevenpay.bms.app.creditcard.mapper.CreditCardManageMapper">
+<mapper namespace="com.qifenqian.bms.app.creditcard.mapper.CreditCardManageMapper">
 	<!-- 查询信用卡申请链接列表 -->
-	<select id="selectCreditCardList" parameterType="com.sevenpay.bms.app.creditcard.bean.CreditCardManageBean" resultType="com.sevenpay.bms.app.creditcard.bean.CreditCardManageBean">
+	<select id="selectCreditCardList" parameterType="com.qifenqian.bms.app.creditcard.bean.CreditCardManageBean" resultType="com.qifenqian.bms.app.creditcard.bean.CreditCardManageBean">
 		SELECT
 			CARD_ID,
 			CARD_NAME,
@@ -19,7 +19,7 @@
 		ORDER BY SORT
 	</select>
 	
-	<insert id="saveCreditCardManage" parameterType="com.sevenpay.bms.app.creditcard.bean.CreditCardManageBean">
+	<insert id="saveCreditCardManage" parameterType="com.qifenqian.bms.app.creditcard.bean.CreditCardManageBean">
 		INSERT INTO TD_APP_CREDIT_CARD 
 		(
 			`CARD_ID`,
@@ -40,7 +40,7 @@
 		)	
 	</insert>
 	
-	<update id="updateCreditCardManage" parameterType="com.sevenpay.bms.app.creditcard.bean.CreditCardManageBean">
+	<update id="updateCreditCardManage" parameterType="com.qifenqian.bms.app.creditcard.bean.CreditCardManageBean">
 		UPDATE TD_APP_CREDIT_CARD
 		<set>
 			CARD_NAME=#{cardName},
@@ -60,7 +60,7 @@
 			CARD_ID=#{cardId}
 	</select>
 	
-	<select id="listCreditCardBySort" parameterType="int"   resultType="com.sevenpay.bms.app.creditcard.bean.CreditCardManageBean">
+	<select id="listCreditCardBySort" parameterType="int"   resultType="com.qifenqian.bms.app.creditcard.bean.CreditCardManageBean">
 		SELECT
 			CARD_ID,
 			CARD_NAME,
@@ -76,7 +76,7 @@
 		ORDER BY SORT
 	</select>
 	
-	<update id="updateSortByCardId" parameterType="com.sevenpay.bms.app.creditcard.bean.CreditCardManageBean">
+	<update id="updateSortByCardId" parameterType="com.qifenqian.bms.app.creditcard.bean.CreditCardManageBean">
 		UPDATE TD_APP_CREDIT_CARD
 		SET
 			SORT=#{sort}

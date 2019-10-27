@@ -4,13 +4,13 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.gyzb.platform.web.page.Page;
 import org.springframework.stereotype.Repository;
 
 import com.qifenqian.bms.accounting.checkquery.bean.BalSevenResultEqual;
 import com.qifenqian.bms.accounting.checkquery.bean.BalSevenResultException;
 import com.qifenqian.bms.accounting.checkquery.mapper.BalSevenResultEqualMapper;
 import com.qifenqian.bms.accounting.checkquery.mapper.BalSevenResultExceptionMapper;
+import com.qifenqian.bms.platform.web.page.Page;
 
 @Repository
 public class BalSevenResultExceptionDao {

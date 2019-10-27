@@ -3,7 +3,6 @@ package com.qifenqian.bms.basemanager.toPay.dao;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.gyzb.platform.web.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -20,6 +19,7 @@ import com.qifenqian.bms.basemanager.toPay.bean.TopayBatDetail;
 import com.qifenqian.bms.basemanager.toPay.bean.TopaySingleDetail;
 import com.qifenqian.bms.basemanager.toPay.bean.TyyBankInfo;
 import com.qifenqian.bms.basemanager.toPay.mapper.TopayMapper;
+import com.qifenqian.bms.platform.web.page.Page;
 /**
  * 代付Dao
  * @author hongjiagui

@@ -2,8 +2,6 @@ package com.qifenqian.bms.demo;
 
 import java.util.List;
 
-import org.gyzb.platform.web.admin.function.bean.Function;
-import org.gyzb.platform.web.admin.function.service.FunctionService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.qifenqian.bms.demo.ActBankSevenFlow;
 import com.qifenqian.bms.demo.ActBankSevenMapper;
+import com.qifenqian.bms.platform.web.admin.function.bean.Function;
+import com.qifenqian.bms.platform.web.admin.function.service.FunctionService;
 
 /**
  * 

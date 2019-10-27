@@ -245,7 +245,7 @@
 													<td id="modifyTime"><fmt:formatDate value="${bean.modifyTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>	
 												<td>
 													<c:if test="${bean.productStatus =='00'}">
-														<gyzbadmin:function url="<%=ToPayProductPath.BASE + ToPayProductPath.LIST %>">
+														<gyzbadmin:function url="<%=ToPayProductPath.BASE + ToPayProductPath.LIST%>">
 															<a href="#" class="tooltip-success updateModal" data-rel="tooltip" title="编辑" data-toggle="modal" data-target="#updateModal">
 																<span class="green">
 																	<i class="icon-edit bigger-120"></i>

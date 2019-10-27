@@ -799,7 +799,7 @@ $(document).ready(function(){
 														</span>
 													</a>
 												</gyzbadmin:function>  --%>
-												<gyzbadmin:function url="<%=StoreManagePath.BASE + StoreManagePath.ADD %>">
+												<gyzbadmin:function url="<%=StoreManagePath.BASE + StoreManagePath.ADD%>">
 													<a href="#addStoreManageModalS"  class="tooltip-success addStoreManageLink" data-toggle='modal'  data-rel="tooltip" title="Add">
 														<span class="blue">
 															【添加】

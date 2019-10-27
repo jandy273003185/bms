@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +27,7 @@ import com.qifenqian.bms.sns.balance.bean.ResultStatistic;
 import com.qifenqian.bms.sns.balance.bean.ResultSummary;
 import com.qifenqian.bms.sns.balance.dao.RedenvResultDao;
 import com.qifenqian.bms.sns.balance.mapper.RedenvResultMapper;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 @Controller
 @RequestMapping(RedenvResultPath.BASE)

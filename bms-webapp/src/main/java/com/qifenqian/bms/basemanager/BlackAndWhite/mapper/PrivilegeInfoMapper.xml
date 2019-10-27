@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.BlackAndWhite.mapper.PrivilegeInfoMapper">
+<mapper namespace="com.qifenqian.bms.basemanager.BlackAndWhite.mapper.PrivilegeInfoMapper">
 	<select id="list" resultType="privilegeInfo" >
 		SELECT p.* FROM TD_PRIVILEGE_INFO p 
 	</select>		

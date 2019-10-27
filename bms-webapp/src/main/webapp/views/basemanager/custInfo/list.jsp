@@ -573,16 +573,16 @@ $('.queryBankCard').click(function(){
 												<td>${custInfo.certifyNo }</td>
 												<td>
 													<c:if test="${custInfo.trustCertifyLvl =='0'}">
-														未认证 <img title="未验证任何信息材料" width="15px" height="15px"  src="<%=request.getContextPath() %>/static/images/iconfont-wenhao.png" />
+														未认证 <img title="未验证任何信息材料" width="15px" height="15px"  src="<%=request.getContextPath()%>/static/images/iconfont-wenhao.png" />
 													</c:if>
 													<c:if test="${custInfo.trustCertifyLvl =='1'}">
-														一级认证 <img title="身份证验证" width="15px" height="15px"  src="<%=request.getContextPath() %>/static/images/iconfont-wenhao.png" >
+														一级认证 <img title="身份证验证" width="15px" height="15px"  src="<%=request.getContextPath()%>/static/images/iconfont-wenhao.png" >
 													</c:if>
 													<c:if test="${custInfo.trustCertifyLvl =='2'}">
-														二级认证 <img title="身份证+银行卡验证" width="15px" height="15px"  src="<%=request.getContextPath() %>/static/images/iconfont-wenhao.png" >
+														二级认证 <img title="身份证+银行卡验证" width="15px" height="15px"  src="<%=request.getContextPath()%>/static/images/iconfont-wenhao.png" >
 													</c:if>
 													<c:if test="${custInfo.trustCertifyLvl =='3'}">
-														三级认证 <img title="身份证+银行卡+证件审核" width="15px" height="15px"  src="<%=request.getContextPath() %>/static/images/iconfont-wenhao.png" >
+														三级认证 <img title="身份证+银行卡+证件审核" width="15px" height="15px"  src="<%=request.getContextPath()%>/static/images/iconfont-wenhao.png" >
 													</c:if>
 												</td>
 												<td>${custInfo.createTime }</td>
@@ -610,7 +610,7 @@ $('.queryBankCard').click(function(){
 														</a>
 													</gyzbadmin:function>
 														
-													<gyzbadmin:function url="<%=TdCustInfoPath.BASE + TdCustInfoPath.EDIT %>">
+													<gyzbadmin:function url="<%=TdCustInfoPath.BASE + TdCustInfoPath.EDIT%>">
 														<a href="#" class="tooltip-success updateCustLink" data-rel="tooltip" title="Edit" data-toggle="modal" data-target="#updateCustModal">
 															<button type="button"   id="btnInfoEdit"  class="btn btn-primary btn-xs"  >信息修改</button>	
 														</a>
@@ -618,7 +618,7 @@ $('.queryBankCard').click(function(){
 													<a href="#passwordEditModal"  data-toggle='modal' class="tooltip-success passwordEdit" data-rel="tooltip" title="密码重置">
 															<button type="button"   id="btnEmail2"  class="btn btn-warning btn-xs"  >密码重置</button>	
 													</a>
-													<gyzbadmin:function url="<%=TdCustInfoPath.BASE + TdCustInfoPath.SEND_MESSAGE %>">
+													<gyzbadmin:function url="<%=TdCustInfoPath.BASE + TdCustInfoPath.SEND_MESSAGE%>">
 														<a href="#" class="tooltip-success sendMessageLink" data-rel="tooltip" title="Edit" data-toggle="modal" data-target="#sendMessageModal">
 															<button type="button"   id="btnInfoEdit"  class="btn btn-primary btn-xs"  >发送短信</button>	
 														</a>

@@ -331,7 +331,7 @@
 												清空
 												<i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
-											<gyzbadmin:function url="<%=ChannelRouteControlPath.BASE + ChannelRouteControlPath.ADD %>">
+											<gyzbadmin:function url="<%=ChannelRouteControlPath.BASE + ChannelRouteControlPath.ADD%>">
 											<button  class="btn btn-purple btn-sm" data-toggle='modal' data-target="#addModal">
 												新增
 												<i class="icon-plus-sign icon-on-right bigger-110"></i>
@@ -411,7 +411,7 @@
 															</span>
 														</a>
 												<%-- 	</gyzbadmin:function> --%>
-													<gyzbadmin:function url="<%=ChannelRouteControlPath.BASE + ChannelRouteControlPath.DELETE %>">
+													<gyzbadmin:function url="<%=ChannelRouteControlPath.BASE + ChannelRouteControlPath.DELETE%>">
 														<a href="#deleteBankModal"  data-toggle='modal' class="tooltip-error delBank" data-rel="tooltip" title="Delete">
 															<span class="red">
 																<i class="icon-trash bigger-120"></i>

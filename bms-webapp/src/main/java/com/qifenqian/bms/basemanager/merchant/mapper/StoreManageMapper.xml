@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.merchant.mapper.StoreManageMapper">
+<mapper namespace="com.qifenqian.bms.basemanager.merchant.mapper.StoreManageMapper">
 
-	<select id="getStoreList" parameterType="com.sevenpay.bms.basemanager.merchant.bean.StoreManage" 
-			resultType="com.sevenpay.bms.basemanager.merchant.bean.StoreManage">
+	<select id="getStoreList" parameterType="com.qifenqian.bms.basemanager.merchant.bean.StoreManage" 
+			resultType="com.qifenqian.bms.basemanager.merchant.bean.StoreManage">
 		SELECT 
 			t.SHOP_ID,
 			c.MERCHANT_CODE,
@@ -48,13 +48,13 @@
 	
 	</select>
 
-	<select id="exists" resultType="int" parameterType="com.sevenpay.bms.basemanager.merchant.bean.StoreManage">
+	<select id="exists" resultType="int" parameterType="com.qifenqian.bms.basemanager.merchant.bean.StoreManage">
 		SELECT COUNT(*)
 		FROM TD_CUST_INFO 
 		WHERE CUST_ID = #{merchantCode,jdbcType=VARCHAR}
 	</select>
 	
-	<insert id="insert" parameterType="com.sevenpay.bms.basemanager.merchant.bean.StoreManage">
+	<insert id="insert" parameterType="com.qifenqian.bms.basemanager.merchant.bean.StoreManage">
 		INSERT INTO TD_SHOP(
 			SHOP_ID,
 			SHOP_NO,
@@ -83,7 +83,7 @@
 	</insert>
 	
 	
-	<update id="update" parameterType="com.sevenpay.bms.basemanager.merchant.bean.StoreManage">
+	<update id="update" parameterType="com.qifenqian.bms.basemanager.merchant.bean.StoreManage">
 		UPDATE TD_SHOP
 		<set>
 			<if test="shopNo != null">
@@ -111,13 +111,13 @@
 	</update>
 	
 	
-	<delete id="delete" parameterType="com.sevenpay.bms.basemanager.merchant.bean.StoreManage">
+	<delete id="delete" parameterType="com.qifenqian.bms.basemanager.merchant.bean.StoreManage">
 		DELETE FROM TD_SHOP
 		WHERE SHOP_ID = #{shopId,jdbcType=VARCHAR}
 	</delete>
 	
 	
-	<select id="repeats" resultType="int" parameterType="com.sevenpay.bms.basemanager.merchant.bean.StoreManage">
+	<select id="repeats" resultType="int" parameterType="com.qifenqian.bms.basemanager.merchant.bean.StoreManage">
 		SELECT COUNT(1)
 		from td_shop t
 		WHERE MCH_ID = #{mchId,jdbcType=VARCHAR}	

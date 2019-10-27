@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.merchant.reported.mapper.FmIncomeMapper">
+<mapper namespace="com.qifenqian.bms.merchant.reported.mapper.FmIncomeMapper">
 	
-	<select id="selMerchantDetailInfoList" parameterType="com.sevenpay.bms.merchant.reported.bean.TdMerchantDetailInfo" resultType="com.sevenpay.bms.merchant.reported.bean.TdMerchantDetailInfo">
+	<select id="selMerchantDetailInfoList" parameterType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo" resultType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo">
     	SELECT
 			t.patch_no,
 			t.merchant_code,
@@ -40,21 +40,21 @@
     </select>
     
     
-    <select id="selProvinceList"  resultType="com.sevenpay.bms.merchant.reported.bean.Province">
+    <select id="selProvinceList"  resultType="com.qifenqian.bms.merchant.reported.bean.Province">
     	select * from tb_fm_province
     </select>
     
-    <select id="selBankList"  resultType="com.sevenpay.bms.merchant.reported.bean.Bank">
+    <select id="selBankList"  resultType="com.qifenqian.bms.merchant.reported.bean.Bank">
     	select * from tb_fm_bankcode
     </select>
     
-    <select id="selPowerIdList"  resultType="com.sevenpay.bms.merchant.reported.bean.TbFmTradeInfo">
+    <select id="selPowerIdList"  resultType="com.qifenqian.bms.merchant.reported.bean.TbFmTradeInfo">
     	select * from tb_fm_trade_info
     </select>
     
     
     
-    <select id="selCityList" parameterType="String" resultType="com.sevenpay.bms.merchant.reported.bean.City">
+    <select id="selCityList" parameterType="String" resultType="com.qifenqian.bms.merchant.reported.bean.City">
 		SELECT
 			*
 		FROM
@@ -63,7 +63,7 @@
 			t.province_id = #{province,jdbcType = VARCHAR}
 	</select>
     
-    <select id="selAreaList" parameterType="String" resultType="com.sevenpay.bms.merchant.reported.bean.Area">
+    <select id="selAreaList" parameterType="String" resultType="com.qifenqian.bms.merchant.reported.bean.Area">
 		SELECT
 			*
 		FROM
@@ -72,7 +72,7 @@
 			t.city_id = #{city,jdbcType = VARCHAR}
 	</select>
 	
-	<select id="selInterBankList" parameterType="String" resultType="com.sevenpay.bms.merchant.reported.bean.BankBranch">
+	<select id="selInterBankList" parameterType="String" resultType="com.qifenqian.bms.merchant.reported.bean.BankBranch">
 		SELECT
 			*
 		FROM
@@ -81,31 +81,31 @@
 			t.bank_branch_name LIKE CONCAT('%',#{interBank,jdbcType = VARCHAR},'%') 
 	</select>
 	
-	<select id="selAlipayList" parameterType="String" resultType="com.sevenpay.bms.merchant.reported.bean.FmWxCategory">
+	<select id="selAlipayList" parameterType="String" resultType="com.qifenqian.bms.merchant.reported.bean.FmWxCategory">
 		select t.id,t.category_name from fm_alipay_category t
 	</select>
 	
-	<select id="selWxList" parameterType="String" resultType="com.sevenpay.bms.merchant.reported.bean.FmWxCategory">
+	<select id="selWxList" parameterType="String" resultType="com.qifenqian.bms.merchant.reported.bean.FmWxCategory">
 		select t.id,t.first_type,t.second_type,t.third_type from fm_wx_category t GROUP BY first_type 
 	</select>
 	
-	<select id="selWxSecondTypeList" parameterType="com.sevenpay.bms.merchant.reported.bean.FmWxCategory" resultType="com.sevenpay.bms.merchant.reported.bean.FmWxCategory">
+	<select id="selWxSecondTypeList" parameterType="com.qifenqian.bms.merchant.reported.bean.FmWxCategory" resultType="com.qifenqian.bms.merchant.reported.bean.FmWxCategory">
 		select t.id,t.first_type,t.second_type,t.third_type from fm_wx_category t where first_type = #{firstType,jdbcType = VARCHAR} GROUP BY second_type
 	</select>
 	
-	<select id="selWxThirdTypeList" parameterType="com.sevenpay.bms.merchant.reported.bean.FmWxCategory" resultType="com.sevenpay.bms.merchant.reported.bean.FmWxCategory">
+	<select id="selWxThirdTypeList" parameterType="com.qifenqian.bms.merchant.reported.bean.FmWxCategory" resultType="com.qifenqian.bms.merchant.reported.bean.FmWxCategory">
 		select t.id,t.first_type,t.second_type,t.third_type from fm_wx_category t where second_type = #{secondType,jdbcType = VARCHAR} and first_type=#{firstType,jdbcType = VARCHAR}
 	</select>
 	
-	<select id="selJdList" parameterType="String" resultType="com.sevenpay.bms.merchant.reported.bean.FmWxCategory">
+	<select id="selJdList" parameterType="String" resultType="com.qifenqian.bms.merchant.reported.bean.FmWxCategory">
 		select t.id,t.second_type,t.third_type from fm_jd_category t GROUP BY second_type
 	</select>
 	
-	<select id="selJdThirdTypeList" parameterType="String" resultType="com.sevenpay.bms.merchant.reported.bean.FmWxCategory">
+	<select id="selJdThirdTypeList" parameterType="String" resultType="com.qifenqian.bms.merchant.reported.bean.FmWxCategory">
 		select t.id,t.second_type,t.third_type from fm_jd_category t where second_type = #{secondType,jdbcType = VARCHAR}
 	</select>
 	
-	<select id="selTdMerchantReport" parameterType="com.sevenpay.bms.merchant.reported.bean.CrInComeBean" resultType="com.sevenpay.bms.merchant.reported.bean.TdMerchantDetailInfo">
+	<select id="selTdMerchantReport" parameterType="com.qifenqian.bms.merchant.reported.bean.CrInComeBean" resultType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo">
 		SELECT
 			t1.*,t2.report_status as detailStatus
 		FROM
@@ -115,7 +115,7 @@
 			t1.merchant_code = #{merchantCode,jdbcType = VARCHAR} AND t1.channel_no = #{channelNo,jdbcType = VARCHAR}
 	</select>
 	
-	<select id="selInComeInfo" parameterType="String"  resultType="com.sevenpay.bms.basemanager.custInfo.bean.TdCustInfo">
+	<select id="selInComeInfo" parameterType="String"  resultType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo">
 		SELECT
 			c.*, 
   			t.*
@@ -128,7 +128,7 @@
 	
 	
 	<!-- 写入商户报备表 -->
-	<insert id="insertTdMerchantReport" parameterType="com.sevenpay.bms.merchant.reported.bean.TdMerchantDetailInfo">
+	<insert id="insertTdMerchantReport" parameterType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo">
 		INSERT INTO `stcdb`.`td_merchant_report` (
 			`id`,
 			`merchant_code`,
@@ -149,7 +149,7 @@
 	</insert>
 	
 	<!-- 写入商户报备详情表 -->
-	<insert id="inserTdMerchantDetailInfo" parameterType="com.sevenpay.bms.merchant.reported.bean.TdMerchantDetailInfo">
+	<insert id="inserTdMerchantDetailInfo" parameterType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo">
 		INSERT INTO `stcdb`.`td_merchant_detail_info` (
 			`patch_no`,
 			`merchant_code`,
@@ -203,7 +203,7 @@
 			)
 	</insert>
 	
-	<update id="updateTdMerchantReport"  parameterType="com.sevenpay.bms.merchant.reported.bean.TdMerchantDetailInfo" >
+	<update id="updateTdMerchantReport"  parameterType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo" >
     	 UPDATE `stcdb`.`td_merchant_report`
 			SET 
 			<if test="reportStatus != null and reportStatus !='' ">
@@ -212,7 +212,7 @@
 		 WHERE `merchant_code` = #{merchantCode,jdbcType = VARCHAR} and channel_no = #{channelNo,jdbcType = VARCHAR}
     </update>
     
-    <update id="updateTdMerchantDetailInfo"  parameterType="com.sevenpay.bms.merchant.reported.bean.TdMerchantDetailInfo" >
+    <update id="updateTdMerchantDetailInfo"  parameterType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo" >
     	 UPDATE `stcdb`.`td_merchant_detail_info`
 		 SET 
 		 	<if test="reportStatus != null and reportStatus !='' ">
@@ -251,7 +251,7 @@
 			WHERE
 				t.MERCHANT_CODE =  #{merchantCode}
     </update>
-	<select id="selTdMerchantDetailInfo" parameterType="com.sevenpay.bms.merchant.reported.bean.TdMerchantDetailInfo"  resultType="com.sevenpay.bms.merchant.reported.bean.TdMerchantDetailInfo">
+	<select id="selTdMerchantDetailInfo" parameterType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo"  resultType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo">
 		SELECT
 			*
 		FROM
@@ -260,7 +260,7 @@
 			t1.`merchant_code` = #{merchantCode,jdbcType = VARCHAR} and t1.channel_no = #{channelNo,jdbcType = VARCHAR}
 	</select>
 	
-		<select id="selMerchantDetailInfo" parameterType="com.sevenpay.bms.merchant.reported.bean.TdMerchantDetailInfo" resultType="com.sevenpay.bms.merchant.reported.bean.TdMerchantDetailInfo">
+		<select id="selMerchantDetailInfo" parameterType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo" resultType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo">
     	SELECT
 			t.*,
 			f.cust_name,
@@ -287,18 +287,18 @@
     </select>
     
     
-     <select id="selIndustryList"  resultType="com.sevenpay.bms.merchant.reported.bean.Industry">
+     <select id="selIndustryList"  resultType="com.qifenqian.bms.merchant.reported.bean.Industry">
     	select * from td_merchant_industry_info
     </select>
     
-    <select id="selSuiXingIndustryList"  resultType="com.sevenpay.bms.merchant.reported.bean.Industry">
+    <select id="selSuiXingIndustryList"  resultType="com.qifenqian.bms.merchant.reported.bean.Industry">
     	select 
     		t.industry_code,
     		t.industry_name
     	from td_suixing_mcc_info t
     </select>
 	
-	<select id="selSuiXingProvinceList"  resultType="com.sevenpay.bms.merchant.reported.bean.Province">
+	<select id="selSuiXingProvinceList"  resultType="com.qifenqian.bms.merchant.reported.bean.Province">
     	SELECT DISTINCT 
 			b.province_id,
 			b.province_name
@@ -307,7 +307,7 @@
 		ORDER BY b.province_id 
     </select>
     
-    <select id="selSuiXingCityList" parameterType="String" resultType="com.sevenpay.bms.merchant.reported.bean.City">
+    <select id="selSuiXingCityList" parameterType="String" resultType="com.qifenqian.bms.merchant.reported.bean.City">
 		SELECT
 			t.city_id,
 			t.city_name
@@ -317,7 +317,7 @@
 			t.province_id = #{province,jdbcType = VARCHAR}
 	</select>
     
-    <select id="selSuiXingAreaList" parameterType="String" resultType="com.sevenpay.bms.merchant.reported.bean.MerchantCity">
+    <select id="selSuiXingAreaList" parameterType="String" resultType="com.qifenqian.bms.merchant.reported.bean.MerchantCity">
 		SELECT
 			t.*
 		FROM
@@ -326,7 +326,7 @@
 			t.superior_area_code = #{superiorAreaCode,jdbcType = VARCHAR}
 	</select>
 	
-	<select id="selSuiXingMerchantCityList" parameterType="String" resultType="com.sevenpay.bms.merchant.reported.bean.MerchantCity">
+	<select id="selSuiXingMerchantCityList" parameterType="String" resultType="com.qifenqian.bms.merchant.reported.bean.MerchantCity">
 		SELECT
 			t.*
 		FROM
@@ -335,14 +335,14 @@
 			t.area_type = #{areaType,jdbcType = VARCHAR}
 	</select>
 	
-	<select id="selSumPayBankList"  resultType="com.sevenpay.bms.merchant.reported.bean.Bank">
+	<select id="selSumPayBankList"  resultType="com.qifenqian.bms.merchant.reported.bean.Bank">
     	select 
     		*
     	from 
     		td_sumpay_bank_info s
     </select>
     
-      <select id="selSumPayProvinceList"  parameterType="String"  resultType="com.sevenpay.bms.merchant.reported.bean.SumPayArea">
+      <select id="selSumPayProvinceList"  parameterType="String"  resultType="com.qifenqian.bms.merchant.reported.bean.SumPayArea">
     	select 
     		t.* 
     	from 
@@ -350,14 +350,14 @@
     	where t.superior_area_code = #{superiorAreaCode,jdbcType = VARCHAR}
     </select>
     
-    <select id="selSumpayMccList"  resultType="com.sevenpay.bms.merchant.reported.bean.SumpayMcc">
+    <select id="selSumpayMccList"  resultType="com.qifenqian.bms.merchant.reported.bean.SumpayMcc">
     	SELECT DISTINCT
 			z.level_one 
 		FROM 
 			td_sumpay_zfb_mcc_info z
     </select>
     
-          <select id="selSumPayMccTwoList"  parameterType="String"  resultType="com.sevenpay.bms.merchant.reported.bean.SumpayMcc">
+          <select id="selSumPayMccTwoList"  parameterType="String"  resultType="com.qifenqian.bms.merchant.reported.bean.SumpayMcc">
     	SELECT DISTINCT
 			z.level_two 
 		FROM 
@@ -365,7 +365,7 @@
     	where z.level_one = #{one,jdbcType = VARCHAR}
     </select>
     
-     <select id="selSumPayMccThreeList"  parameterType="com.sevenpay.bms.merchant.reported.bean.SumpayMcc"  resultType="com.sevenpay.bms.merchant.reported.bean.SumpayMcc">
+     <select id="selSumPayMccThreeList"  parameterType="com.qifenqian.bms.merchant.reported.bean.SumpayMcc"  resultType="com.qifenqian.bms.merchant.reported.bean.SumpayMcc">
     	SELECT 
 			z.*
 		FROM 
@@ -390,14 +390,14 @@
     	
     </select>
     
-    <select id="selSumpayMccWXList"  resultType="com.sevenpay.bms.merchant.reported.bean.SumpayMcc">
+    <select id="selSumpayMccWXList"  resultType="com.qifenqian.bms.merchant.reported.bean.SumpayMcc">
     	SELECT DISTINCT
 			z.level_one 
 		FROM 
 			td_sumpay_wx_mcc_info z
     </select>
     
-    <select id="selSumPayMccTwoWXList"  parameterType="String"  resultType="com.sevenpay.bms.merchant.reported.bean.SumpayMcc">
+    <select id="selSumPayMccTwoWXList"  parameterType="String"  resultType="com.qifenqian.bms.merchant.reported.bean.SumpayMcc">
     	SELECT DISTINCT
 			z.level_two 
 		FROM 
@@ -405,7 +405,7 @@
     	where z.level_one = #{one,jdbcType = VARCHAR}
     </select>
     
-     <select id="selSumPayMccThreeWXList"  parameterType="com.sevenpay.bms.merchant.reported.bean.SumpayMcc"  resultType="com.sevenpay.bms.merchant.reported.bean.SumpayMcc">
+     <select id="selSumPayMccThreeWXList"  parameterType="com.qifenqian.bms.merchant.reported.bean.SumpayMcc"  resultType="com.qifenqian.bms.merchant.reported.bean.SumpayMcc">
     	SELECT 
 			z.*
 		FROM 
@@ -414,14 +414,14 @@
     	and  z.level_two = #{levelTwo,jdbcType = VARCHAR}
     </select>
     
-    <select id="selSumpayMccZFBList"  resultType="com.sevenpay.bms.merchant.reported.bean.SumpayMcc">
+    <select id="selSumpayMccZFBList"  resultType="com.qifenqian.bms.merchant.reported.bean.SumpayMcc">
     	SELECT DISTINCT
 			z.* 
 		FROM 
 			td_sumpay_zfb_info z
     </select>
     
-     <select id="selYQBProvinceList"  resultType="com.sevenpay.bms.merchant.reported.bean.YQBArea">
+     <select id="selYQBProvinceList"  resultType="com.qifenqian.bms.merchant.reported.bean.YQBArea">
     	SELECT DISTINCT
     		c.province_name,
     		c.area_code
@@ -431,7 +431,7 @@
 		and c.area_name = ''
     </select>
     
-    <select id="selYQBCityList" parameterType="com.sevenpay.bms.merchant.reported.bean.YQBArea"  resultType="com.sevenpay.bms.merchant.reported.bean.YQBArea">
+    <select id="selYQBCityList" parameterType="com.qifenqian.bms.merchant.reported.bean.YQBArea"  resultType="com.qifenqian.bms.merchant.reported.bean.YQBArea">
     	SELECT DISTINCT
     		c.city_name,
     		c.area_code
@@ -450,7 +450,7 @@
 
     </select>
     
-    <select id="selYQBAreaList" parameterType="com.sevenpay.bms.merchant.reported.bean.YQBArea"  resultType="com.sevenpay.bms.merchant.reported.bean.YQBArea">
+    <select id="selYQBAreaList" parameterType="com.qifenqian.bms.merchant.reported.bean.YQBArea"  resultType="com.qifenqian.bms.merchant.reported.bean.YQBArea">
     	SELECT DISTINCT
     		c.area_name,
     		c.area_code
@@ -468,14 +468,14 @@
 
     </select>
     
-    <select id="selYQBIndustryList"  resultType="com.sevenpay.bms.merchant.reported.bean.YQBIndustry">
+    <select id="selYQBIndustryList"  resultType="com.qifenqian.bms.merchant.reported.bean.YQBIndustry">
     	SELECT DISTINCT
 			m.level_one
 		FROM 
 			td_yqb_mcc_info m
     </select>
     
-    <select id="selYQBIndustryCodeList"  parameterType="com.sevenpay.bms.merchant.reported.bean.YQBIndustry" resultType="com.sevenpay.bms.merchant.reported.bean.YQBIndustry">
+    <select id="selYQBIndustryCodeList"  parameterType="com.qifenqian.bms.merchant.reported.bean.YQBIndustry" resultType="com.qifenqian.bms.merchant.reported.bean.YQBIndustry">
     	SELECT DISTINCT
     		m.level_two,
 			m.level_code
@@ -498,7 +498,7 @@
 		
     </select>
     
-    <select id="selYQBBankList"  parameterType="com.sevenpay.bms.merchant.reported.bean.Bank" resultType="com.sevenpay.bms.merchant.reported.bean.Bank">
+    <select id="selYQBBankList"  parameterType="com.qifenqian.bms.merchant.reported.bean.Bank" resultType="com.qifenqian.bms.merchant.reported.bean.Bank">
     	SELECT 
 			b.bank_id,
 			b.bank_name

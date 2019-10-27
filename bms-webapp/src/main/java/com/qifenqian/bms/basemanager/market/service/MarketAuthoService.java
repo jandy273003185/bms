@@ -3,9 +3,6 @@ package com.qifenqian.bms.basemanager.market.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.gyzb.platform.web.admin.user.bean.User;
-import org.gyzb.platform.web.admin.userRole.bean.UserRole;
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.qifenqian.bms.basemanager.market.bean.MarketRole;
 import com.qifenqian.bms.basemanager.market.bean.UpdateMarketRole;
 import com.qifenqian.bms.basemanager.market.dao.MarketAuthoDao;
+import com.qifenqian.bms.platform.web.admin.user.bean.User;
+import com.qifenqian.bms.platform.web.admin.userRole.bean.UserRole;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 @Service
 public class MarketAuthoService {

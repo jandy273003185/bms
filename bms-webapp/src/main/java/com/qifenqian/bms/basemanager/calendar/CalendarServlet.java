@@ -8,13 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.gyzb.platform.common.utils.SpringUtils;
-import org.gyzb.platform.third.scheduler.ISchedulerServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.qifenqian.bms.basemanager.calendar.service.CalendarService;
 import com.qifenqian.bms.expresspay.CommonService;
+import com.qifenqian.bms.platform.common.utils.SpringUtils;
+import com.qifenqian.bms.platform.third.scheduler.ISchedulerServlet;
 import com.qifenqian.bms.task.TaskPath;
 import com.sevenpay.plugin.IPlugin;
 

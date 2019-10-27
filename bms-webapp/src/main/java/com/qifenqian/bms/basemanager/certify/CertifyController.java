@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +18,7 @@ import com.qifenqian.bms.basemanager.certify.bean.Certify;
 import com.qifenqian.bms.basemanager.certify.bean.FileBean;
 import com.qifenqian.bms.basemanager.certify.bean.IdentityDetailBean;
 import com.qifenqian.bms.basemanager.certify.service.CertifyService;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 @Controller
 @RequestMapping(CertifyPath.BASE)

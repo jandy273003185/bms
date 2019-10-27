@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.myworkspace.allTask.mapper.AllTaskMapper">
+<mapper namespace="com.qifenqian.bms.myworkspace.allTask.mapper.AllTaskMapper">
 
-	<select id="getAllTaskbyRole"  resultType="com.sevenpay.bms.myworkspace.allTask.bean.AllTaskBean">
+	<select id="getAllTaskbyRole"  resultType="com.qifenqian.bms.myworkspace.allTask.bean.AllTaskBean">
 		SELECT 
 			T.* ,P.NAME_ proName ,U.REAL_NAME realName
 		FROM 
@@ -53,7 +53,7 @@
 		</where>
 	</select>
 	
-	<select id="getTasks" parameterType="com.sevenpay.bms.myworkspace.allTask.bean.AllTaskBean" resultType="com.sevenpay.bms.myworkspace.allTask.bean.AllTaskBean">
+	<select id="getTasks" parameterType="com.qifenqian.bms.myworkspace.allTask.bean.AllTaskBean" resultType="com.qifenqian.bms.myworkspace.allTask.bean.AllTaskBean">
 		SELECT 
 			T.* ,P.NAME_ proName ,U.REAL_NAME realName
 		FROM 
@@ -109,7 +109,7 @@
 			T.START_TIME_ DESC
 			
 	</select>
-	<select id="getTaskById" parameterType="string" resultType="com.sevenpay.bms.myworkspace.allTask.bean.AllTaskBean">
+	<select id="getTaskById" parameterType="string" resultType="com.qifenqian.bms.myworkspace.allTask.bean.AllTaskBean">
 		SELECT
 			T.* ,P.NAME_ proName ,U.REAL_NAME realName
 		FROM

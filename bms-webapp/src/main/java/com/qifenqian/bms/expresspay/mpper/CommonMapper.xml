@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.expresspay.mpper.CommonMapper">
+<mapper namespace="com.qifenqian.bms.expresspay.mpper.CommonMapper">
 
-  <select id="getCustId" parameterType="com.sevenpay.bms.expresspay.cardholderInfo.bean.Cardholder" resultType="string">
+  <select id="getCustId" parameterType="com.qifenqian.bms.expresspay.cardholderInfo.bean.Cardholder" resultType="string">
 		SELECT
 			C.CUST_ID
 		FROM

@@ -4,14 +4,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.gyzb.platform.common.utils.SpringUtils;
-import org.gyzb.platform.third.scheduler.ISchedulerServlet;
+import com.qifenqian.bms.platform.common.utils.SpringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.qifenqian.bms.accounting.exception.dao.opercharge.mapper.OperChargeMapper;
 import com.qifenqian.bms.accounting.exception.dao.opertrade.mapper.OperTradeMapper;
 import com.qifenqian.bms.expresspay.CommonService;
+import com.qifenqian.bms.platform.third.scheduler.ISchedulerServlet;
 
 @WebServlet(name = "OrderTimeOutServlet", urlPatterns = { TaskPath.BASE
 		+ TaskPath.ORDERTIMEOUTSERVLET })

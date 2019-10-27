@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sevenpay.bms.accounting.unionpayQuery.mapper.UnionpayResultMapper" >
+<mapper namespace="com.qifenqian.bms.accounting.unionpayQuery.mapper.UnionpayResultMapper" >
   
   <sql id="Base_Column_List" >
 	t.bal_date,
@@ -27,8 +27,8 @@
         </if> 
 	</sql>
 	
-  <select id="selectImpeachList"  resultType="com.sevenpay.bms.accounting.unionpayQuery.bean.BalUnionpayUnionResultException" 
-  parameterType="com.sevenpay.bms.accounting.unionpayQuery.bean.UnionpayUnionResultExceptionBean" >
+  <select id="selectImpeachList"  resultType="com.qifenqian.bms.accounting.unionpayQuery.bean.BalUnionpayUnionResultException" 
+  parameterType="com.qifenqian.bms.accounting.unionpayQuery.bean.UnionpayUnionResultExceptionBean" >
     SELECT 
    		a.file_id ,
 		a.seq ,
@@ -126,8 +126,8 @@
 	</where> 
 		ORDER BY a.work_date desc
   </select>
-  <select id="selectImpeachListExport"  resultType="com.sevenpay.bms.accounting.unionpayQuery.bean.UnionpayImpeathExport" 
-  parameterType="com.sevenpay.bms.accounting.unionpayQuery.bean.BalUnionpayUnionResultException" >
+  <select id="selectImpeachListExport"  resultType="com.qifenqian.bms.accounting.unionpayQuery.bean.UnionpayImpeathExport" 
+  parameterType="com.qifenqian.bms.accounting.unionpayQuery.bean.BalUnionpayUnionResultException" >
     SELECT 
    		a.file_id ,
 		a.seq ,
@@ -226,8 +226,8 @@
 		ORDER BY a.work_date desc
   </select>
    
-   <select id="selectQfqImpeachList"  parameterType="com.sevenpay.bms.accounting.unionpayQuery.bean.BalUnionpaySevenResultExceptionBean"
-   resultType="com.sevenpay.bms.accounting.unionpayQuery.bean.BalUnionpaySevenResultException">
+   <select id="selectQfqImpeachList"  parameterType="com.qifenqian.bms.accounting.unionpayQuery.bean.BalUnionpaySevenResultExceptionBean"
+   resultType="com.qifenqian.bms.accounting.unionpayQuery.bean.BalUnionpaySevenResultException">
    	SELECT
    		a.*
    	FROM
@@ -270,8 +270,8 @@
 		ORDER BY A.inst_datetime DESC
    </select>
   
-  <select id="selectQfqImpeachExport" parameterType="com.sevenpay.bms.accounting.unionpayQuery.bean.BalUnionpaySevenResultExceptionBean"
-  resultType="com.sevenpay.bms.accounting.unionpayQuery.bean.BalUnionpaySevenResultExceptionExport">
+  <select id="selectQfqImpeachExport" parameterType="com.qifenqian.bms.accounting.unionpayQuery.bean.BalUnionpaySevenResultExceptionBean"
+  resultType="com.qifenqian.bms.accounting.unionpayQuery.bean.BalUnionpaySevenResultExceptionExport">
   	SELECT
 	  	  a.clear_id,
 		  a.batch_id,
@@ -359,8 +359,8 @@
 	</where> 
   </select>
   
-  <select id="selectSlipList" parameterType="com.sevenpay.bms.accounting.unionpayQuery.bean.BalUnionpaySevenResultExceptionBean"
-   resultType="com.sevenpay.bms.accounting.unionpayQuery.bean.BalUnionpaySevenResultException">
+  <select id="selectSlipList" parameterType="com.qifenqian.bms.accounting.unionpayQuery.bean.BalUnionpaySevenResultExceptionBean"
+   resultType="com.qifenqian.bms.accounting.unionpayQuery.bean.BalUnionpaySevenResultException">
    	  SELECT 
     	  b.clear_id,
 		  b.batch_id,
@@ -450,8 +450,8 @@
 			ORDER BY  b.work_date DESC
    </select>
   	
-  	<select id="selectSlipExport" parameterType="com.sevenpay.bms.accounting.unionpayQuery.bean.BalUnionpaySevenResultExceptionBean"
-  resultType="com.sevenpay.bms.accounting.unionpayQuery.bean.BalUnionpaySevenResultExceptionExport">
+  	<select id="selectSlipExport" parameterType="com.qifenqian.bms.accounting.unionpayQuery.bean.BalUnionpaySevenResultExceptionBean"
+  resultType="com.qifenqian.bms.accounting.unionpayQuery.bean.BalUnionpaySevenResultExceptionExport">
   	SELECT 
     		b.*
      	FROM 
@@ -494,8 +494,8 @@
 		</where> 
 		 ORDER BY  b.work_date DESC
   </select>
-  <select id="selectFitList" parameterType="com.sevenpay.bms.accounting.unionpayQuery.bean.BalUnionpaySevenResultEqualBean"
-   resultType="com.sevenpay.bms.accounting.unionpayQuery.bean.BalUnionpaySevenResultEqual">
+  <select id="selectFitList" parameterType="com.qifenqian.bms.accounting.unionpayQuery.bean.BalUnionpaySevenResultEqualBean"
+   resultType="com.qifenqian.bms.accounting.unionpayQuery.bean.BalUnionpaySevenResultEqual">
    	 	SELECT 
 			b.*
     	FROM
@@ -537,8 +537,8 @@
 
    </select>
    
-   <select id="selectFitexport" parameterType="com.sevenpay.bms.accounting.unionpayQuery.bean.BalUnionpaySevenResultEqualBean"
-   resultType="com.sevenpay.bms.accounting.unionpayQuery.bean.BalUnionpaySevenResultEqualExport">
+   <select id="selectFitexport" parameterType="com.qifenqian.bms.accounting.unionpayQuery.bean.BalUnionpaySevenResultEqualBean"
+   resultType="com.qifenqian.bms.accounting.unionpayQuery.bean.BalUnionpaySevenResultEqualExport">
    		SELECT 
 		  b.clear_id,
 		  b.batch_id,

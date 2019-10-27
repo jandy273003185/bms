@@ -148,7 +148,7 @@
 												清空
 											    <i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
-											<gyzbadmin:function url="<%=AgentSettlePath.BASE + AgentSettlePath.AGENTSETTLEEXPORT %>">
+											<gyzbadmin:function url="<%=AgentSettlePath.BASE + AgentSettlePath.AGENTSETTLEEXPORT%>">
 												<a class="btn btn-purple btn-sm exportBut">
 													导出报表
 												</a> 
@@ -232,7 +232,7 @@
 												<td id="verifiedUser">${bean.verifiedUser}</td>
 												<td id="verifiedDatetime">${bean.verifiedDatetime}</td>
 												<td>
-													<gyzbadmin:function url="<%=AgentSettlePath.BASE + AgentSettlePath.DETAIL %>">
+													<gyzbadmin:function url="<%=AgentSettlePath.BASE + AgentSettlePath.DETAIL%>">
 														<button type="button" class="btn btn-primary" title="Detail" data-toggle='modal' data-target="#detailModal" id = "detail">
 															明细
 														</button>

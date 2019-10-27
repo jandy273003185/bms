@@ -244,7 +244,7 @@
 													清空
 													<i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
-										<gyzbadmin:function url="<%=RechargePath.BASE + RechargePath.RECHARGEEXPORT %>">
+										<gyzbadmin:function url="<%=RechargePath.BASE + RechargePath.RECHARGEEXPORT%>">
 											<a class="btn btn-purple btn-sm exportBut">
 												导出报表
 											</a> 

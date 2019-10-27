@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.gyzb.platform.common.utils.ReflectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +49,7 @@ import com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.mapper.OrderMapp
 import com.qifenqian.bms.basemanager.recharge.bean.RechargeBean;
 import com.qifenqian.bms.basemanager.trade.bean.TdTradeBillMainVO;
 import com.qifenqian.bms.merchant.settle.bean.MerchantSettle;
+import com.qifenqian.bms.platform.common.utils.ReflectUtils;
 import com.qifenqian.bms.sns.redpacket.bean.RedEnvelopeInfo;
 import com.qifenqian.bms.sns.redpacket.mapper.RedEnvelopeInfoMapper;
 import com.qifenqian.bms.sns.redpacketdetail.bean.RedPacketDetail;

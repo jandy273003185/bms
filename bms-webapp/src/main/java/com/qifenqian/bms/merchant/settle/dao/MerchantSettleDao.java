@@ -6,8 +6,6 @@ import java.util.List;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
-import org.gyzb.platform.web.admin.utils.WebUtils;
-import org.gyzb.platform.web.page.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.merchant.settle.bean.MerchantSettle;
 import com.qifenqian.bms.merchant.settle.mapper.MerchantSettleMapper;
 import com.qifenqian.bms.merchant.settle.type.MerchantSettleStatus;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
+import com.qifenqian.bms.platform.web.page.Page;
 
 /**
  * @project sevenpay-bms-web

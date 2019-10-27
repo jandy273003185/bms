@@ -2,7 +2,6 @@ package com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.dao;
 
 import java.util.List;
 
-import org.gyzb.platform.web.page.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.RefundBean;
 import com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.RefundQueryBean;
 import com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.mapper.OrderMapperMaster;
 import com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.mapper.OrderMapperSlave;
+import com.qifenqian.bms.platform.web.page.Page;
 
 /**
  * @author Chen Gao

@@ -387,7 +387,7 @@
 													清空
 													<i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
-											<gyzbadmin:function url="<%=CityPath.BASE + CityPath.ADD %>">
+											<gyzbadmin:function url="<%=CityPath.BASE + CityPath.ADD%>">
 												<button  class="btn btn-purple btn-sm" data-toggle='modal' data-target="#addCityModal">
 													新增
 													<i class="icon-plus-sign icon-on-right bigger-110"></i>
@@ -428,7 +428,7 @@
 												<td>${city.areaCode}</td>
 												<td>${city.areaName }</td>
 												<td>
-													<gyzbadmin:function url="<%=CityPath.BASE + CityPath.UPDATE %>">
+													<gyzbadmin:function url="<%=CityPath.BASE + CityPath.UPDATE%>">
 														<a href="#" class="tooltip-success updateCity" data-rel="tooltip" title="Edit" data-toggle="modal" data-target="#updateCityModal">
 															<span class="green">
 																<i class="icon-edit bigger-120"></i>

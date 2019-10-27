@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +26,7 @@ import com.qifenqian.bms.meeting.prize.type.PrizeType;
 import com.qifenqian.bms.meeting.prizewin.bean.PrizeWinBean;
 import com.qifenqian.bms.meeting.prizewin.mapper.PrizeWinMapper;
 import com.qifenqian.bms.meeting.prizewin.type.PrizeWinStatus;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 @Service
 public class PrizeService {

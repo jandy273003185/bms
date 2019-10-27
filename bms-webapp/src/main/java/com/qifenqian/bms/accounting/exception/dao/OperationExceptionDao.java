@@ -2,13 +2,13 @@ package com.qifenqian.bms.accounting.exception.dao;
 
 import java.util.List;
 
-import org.gyzb.platform.web.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.qifenqian.bms.accounting.exception.base.bean.Operation;
 import com.qifenqian.bms.accounting.exception.dao.operdeal.mapper.OperationExceptionMapper;
 import com.qifenqian.bms.accounting.exception.dao.operdealflow.bean.OperationExceptionFlow;
+import com.qifenqian.bms.platform.web.page.Page;
 
 /**
  * @project sevenpay-bms-web

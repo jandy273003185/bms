@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.gyzb.platform.common.utils.SpringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.accounting.exception.OperationExceptionController;
 import com.qifenqian.bms.basemanager.Constant;
+import com.qifenqian.bms.platform.common.utils.SpringUtils;
 import com.qifenqian.bms.sms.message.bean.BaseMessage;
 import com.qifenqian.bms.sms.message.dao.BaseMessageDao;
 import com.qifenqian.bms.sms.message.mapper.BaseMessageMapper;

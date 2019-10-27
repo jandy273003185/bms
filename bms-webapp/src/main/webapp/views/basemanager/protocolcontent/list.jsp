@@ -110,7 +110,7 @@ table tr td {
 														<i class="icon-plus-sign icon-on-right bigger-110"></i>
 													</button>
 											    </gyzbadmin:function>
-											    <gyzbadmin:function url="<%=ProtocolContentPath.BASE + ProtocolContentPath.PROTOCOLCONTENTEXPORT %>">
+											    <gyzbadmin:function url="<%=ProtocolContentPath.BASE + ProtocolContentPath.PROTOCOLCONTENTEXPORT%>">
 														<a class="btn btn-purple btn-sm exportBut">
 															导出报表
 														</a> 

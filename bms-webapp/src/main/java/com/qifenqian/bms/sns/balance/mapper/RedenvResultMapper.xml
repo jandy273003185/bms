@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.sns.balance.mapper.RedenvResultMapper">
+<mapper namespace="com.qifenqian.bms.sns.balance.mapper.RedenvResultMapper">
 
-	<select id="selectResultStatistic" parameterType="com.sevenpay.bms.sns.balance.bean.ResultStatistic" resultType="com.sevenpay.bms.sns.balance.bean.ResultStatistic">  
+	<select id="selectResultStatistic" parameterType="com.qifenqian.bms.sns.balance.bean.ResultStatistic" resultType="com.qifenqian.bms.sns.balance.bean.ResultStatistic">  
 		    SELECT 
 				 T.BATCH_ID,
 				 T.BAL_DATE,
@@ -60,7 +60,7 @@
 			T.SYSTEM
 	</select>
 	
-	<select id="selectResultEqual" parameterType="com.sevenpay.bms.sns.balance.bean.ResultEqual" resultType="com.sevenpay.bms.sns.balance.bean.ResultEqual">  
+	<select id="selectResultEqual" parameterType="com.qifenqian.bms.sns.balance.bean.ResultEqual" resultType="com.qifenqian.bms.sns.balance.bean.ResultEqual">  
 		SELECT 
 			A.BATCH_ID,
 			A.INST_DATE,
@@ -105,7 +105,7 @@
 		ORDER BY A.INST_DATE DESC
 	</select>
 	
-	<select id="selectResultFailure" parameterType="com.sevenpay.bms.sns.balance.bean.ResultFailure" resultType="com.sevenpay.bms.sns.balance.bean.ResultFailure">  
+	<select id="selectResultFailure" parameterType="com.qifenqian.bms.sns.balance.bean.ResultFailure" resultType="com.qifenqian.bms.sns.balance.bean.ResultFailure">  
 		SELECT 
 			A.BATCH_ID,
 			A.INST_DATE,
@@ -151,7 +151,7 @@
 		ORDER BY A.INST_DATE DESC
 	</select>
 	
-	<select id="selectResultRedenvDoubt" parameterType="com.sevenpay.bms.sns.balance.bean.ResultRedenvDoubt" resultType="com.sevenpay.bms.sns.balance.bean.ResultRedenvDoubt">  
+	<select id="selectResultRedenvDoubt" parameterType="com.qifenqian.bms.sns.balance.bean.ResultRedenvDoubt" resultType="com.qifenqian.bms.sns.balance.bean.ResultRedenvDoubt">  
 		SELECT 
 		    A.BATCH_ID,
 			A.INST_DATE,
@@ -197,7 +197,7 @@
 		ORDER BY A.INST_DATE DESC
 	</select>
 	
-	<select id="selectResultSevenDoubt" parameterType="com.sevenpay.bms.sns.balance.bean.ResultSevenDoubt" resultType="com.sevenpay.bms.sns.balance.bean.ResultSevenDoubt">  
+	<select id="selectResultSevenDoubt" parameterType="com.qifenqian.bms.sns.balance.bean.ResultSevenDoubt" resultType="com.qifenqian.bms.sns.balance.bean.ResultSevenDoubt">  
 		SELECT 
 		  A.BATCH_ID,
 			A.INST_DATE,
@@ -240,7 +240,7 @@
 		</where>
 		ORDER BY A.INST_DATE DESC
 	</select>
-	<select id="selectResultSummary" parameterType="com.sevenpay.bms.sns.balance.bean.ResultSummary" resultType="com.sevenpay.bms.sns.balance.bean.ResultSummary">
+	<select id="selectResultSummary" parameterType="com.qifenqian.bms.sns.balance.bean.ResultSummary" resultType="com.qifenqian.bms.sns.balance.bean.ResultSummary">
 		SELECT
 		  T.BATCH_ID,
 		  T.BAL_DATE,
@@ -318,7 +318,7 @@
 		  ORDER BY T.BAL_DATE DESC
 	</select>
 	
-	<update id="updateResultSummary" parameterType="com.sevenpay.bms.sns.balance.bean.ResultSummary">
+	<update id="updateResultSummary" parameterType="com.qifenqian.bms.sns.balance.bean.ResultSummary">
 		UPDATE BAL_REDENV_RESULT_SUMMARY T
 		<set>
 			<if test="dealStatus!=null and dealStatus!='' ">

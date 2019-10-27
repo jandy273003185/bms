@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.merchant.mapper.CustScanMapper">
+<mapper namespace="com.qifenqian.bms.basemanager.merchant.mapper.CustScanMapper">
 
-	<insert id="insertCustScan" parameterType="com.sevenpay.bms.basemanager.merchant.bean.CustScan">
+	<insert id="insertCustScan" parameterType="com.qifenqian.bms.basemanager.merchant.bean.CustScan">
 		INSERT INTO TD_CUST_SCAN_COPY (
 			AUTH_ID,
 			CUST_ID,
@@ -31,7 +31,7 @@
 		)
 	</insert>
 	
-	<select id="findPath" resultType="string" parameterType="com.sevenpay.bms.basemanager.merchant.bean.CustScan">
+	<select id="findPath" resultType="string" parameterType="com.qifenqian.bms.basemanager.merchant.bean.CustScan">
 		SELECT 
 			S.SCAN_COPY_PATH 
 		FROM 
@@ -48,7 +48,7 @@
 			</if>
 		</where>
 	</select>
-	<select id="findPathByIdAndType" resultType="string" parameterType="com.sevenpay.bms.basemanager.merchant.bean.CustScan">
+	<select id="findPathByIdAndType" resultType="string" parameterType="com.qifenqian.bms.basemanager.merchant.bean.CustScan">
 		SELECT 
 			S.SCAN_COPY_PATH
 		FROM 
@@ -68,7 +68,7 @@
 	</select>
 	
 	<!-- 根据扫描件类型和客户姓名查询扫描件 -->
-	<select id="findCountCustScanInfo" parameterType="com.sevenpay.bms.basemanager.merchant.bean.CustScan" resultType="int">
+	<select id="findCountCustScanInfo" parameterType="com.qifenqian.bms.basemanager.merchant.bean.CustScan" resultType="int">
 		select count(*) from td_cust_scan_copy where CERTIFY_TYPE =#{certifyType} and CUST_ID = #{custId}
 		<!-- <where>
 			<if test="certifyType != null and certifyType != ''">
@@ -80,7 +80,7 @@
 		</where> -->
 	</select>
 	
-	<update id="updateCustScan" parameterType="com.sevenpay.bms.basemanager.merchant.bean.CustScan">
+	<update id="updateCustScan" parameterType="com.qifenqian.bms.basemanager.merchant.bean.CustScan">
 		UPDATE  TD_CUST_SCAN_COPY U  	
 		<set>
 			<if test="custName !=null and custName !='' ">
@@ -101,7 +101,7 @@
 		AND U.CERTIFY_TYPE = #{certifyType,jdbcType = VARCHAR}
 	</update>
 	
-	<update id="updateCustScanById" parameterType="com.sevenpay.bms.basemanager.merchant.bean.CustScan">
+	<update id="updateCustScanById" parameterType="com.qifenqian.bms.basemanager.merchant.bean.CustScan">
 		UPDATE TD_CUST_SCAN_COPY U  	
 		<set>
 			<if test="custName !=null and custName !='' ">
@@ -130,7 +130,7 @@
 		S.CUST_ID = #{CUSTID,jdbcType = VARCHAR}
 	</select>
 	
-	<insert id="insertCertificateAuth" useGeneratedKeys="true" keyProperty="authId" parameterType="com.sevenpay.bms.basemanager.photo.bean.CertificateAuth">
+	<insert id="insertCertificateAuth" useGeneratedKeys="true" keyProperty="authId" parameterType="com.qifenqian.bms.basemanager.photo.bean.CertificateAuth">
 		INSERT INTO TD_CERTIFICATE_AUTH(
 			  CUST_ID,
 			  CERTIFICATE_STATE,
@@ -149,7 +149,7 @@
 	</insert>
 	
 	<!-- 保存微商户审核信息 -->
-	<insert id="saveTinyCertificateAuth" useGeneratedKeys="true" keyProperty="authId" parameterType="com.sevenpay.bms.basemanager.photo.bean.CertificateAuth">
+	<insert id="saveTinyCertificateAuth" useGeneratedKeys="true" keyProperty="authId" parameterType="com.qifenqian.bms.basemanager.photo.bean.CertificateAuth">
 		insert into TD_CERTIFICATE_AUTH(
 				CUST_ID,
 				CERTIFICATE_STATE,

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.accounting.exception.dao.operrefund.mapper.OperRefundMapper">
-	<select id="selectRefundBillById" resultType="com.sevenpay.bms.accounting.exception.dao.operrefund.bean.OperRefund">
+<mapper namespace="com.qifenqian.bms.accounting.exception.dao.operrefund.mapper.OperRefundMapper">
+	<select id="selectRefundBillById" resultType="com.qifenqian.bms.accounting.exception.dao.operrefund.bean.OperRefund">
 		SELECT
 			  E.ID ORDER_ID,
 			  T.ORIGIN_ORDER_ID,
@@ -37,7 +37,7 @@
 		 AND E.ID = #{orderId, jdbcType=VARCHAR}
 	</select>
 	
-	<select id="selectOrderIdById" resultType="com.sevenpay.bms.accounting.refund.bean.RefundBill" parameterType="string">
+	<select id="selectOrderIdById" resultType="com.qifenqian.bms.accounting.refund.bean.RefundBill" parameterType="string">
 		SELECT 
 			T.REFUND_ORDER_ID AS ORDERID 
 		FROM 
@@ -46,7 +46,7 @@
 			T.ID = #{id,jdbcType = VARCHAR}
 	</select>
 	
-	<update id="updateRefundOrderState" parameterType="com.sevenpay.bms.accounting.refund.bean.RefundBill">
+	<update id="updateRefundOrderState" parameterType="com.qifenqian.bms.accounting.refund.bean.RefundBill">
 		UPDATE TD_REFUND_BILL
 			<set>
 				<if test="refundState!=null and refundState!='' ">
@@ -61,7 +61,7 @@
 			ORDER_ID =  #{orderId, jdbcType=VARCHAR}
 	</update>
 	
-	<update id="updateTransRecordByOperRefund" parameterType="com.sevenpay.bms.accounting.refund.bean.RefundBill">
+	<update id="updateTransRecordByOperRefund" parameterType="com.qifenqian.bms.accounting.refund.bean.RefundBill">
 		UPDATE STCS.TRANS_RECORD T
 			<set>
 				<if test="refundState!=null and refundState!='' ">

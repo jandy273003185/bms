@@ -39,7 +39,7 @@
 	</mvc:annotation-driven>
 
 	<!-- 扫描组件 -->
-	<context:component-scan base-package="org.sevenpay,com.sevenpay,org.gyzb,meeting" />
+	<!-- <context:component-scan base-package="org.sevenpay,com.qifenqian,org.gyzb,meeting" /> -->
 
 	<!-- 处理静态资源 -->
 	<mvc:default-servlet-handler />

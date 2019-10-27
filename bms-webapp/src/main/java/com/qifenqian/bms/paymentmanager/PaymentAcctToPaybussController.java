@@ -6,7 +6,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
-import org.gyzb.platform.common.utils.DatetimeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.paymentmanager.bean.AcctSevenBussAgentpay;
 import com.qifenqian.bms.paymentmanager.service.PaymentService;
+import com.qifenqian.bms.platform.common.utils.DatetimeUtils;
 import com.sevenpay.invoke.SevenpayCoreServiceInterface;
 import com.sevenpay.invoke.common.message.request.RequestMessage;
 import com.sevenpay.invoke.common.message.response.ResponseMessage;

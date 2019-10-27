@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.formula.functions.T;
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,6 +34,7 @@ import com.qifenqian.bms.basemanager.protocolcontent.mapper.ProtocolContentMappe
 import com.qifenqian.bms.basemanager.utils.GenSN;
 import com.qifenqian.bms.common.util.PropertiesUtil;
 import com.qifenqian.bms.common.util.RedisUtil;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 import redis.clients.jedis.Jedis;
 

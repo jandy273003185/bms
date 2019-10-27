@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sevenpay.bms.accounting.adjust.dao.AccountingSingleAdjustDetailMapper" >
-  <resultMap id="BaseResultMap" type="com.sevenpay.bms.accounting.adjust.bean.AccountingSingleAdjustDetail" >
+<mapper namespace="com.qifenqian.bms.accounting.adjust.dao.AccountingSingleAdjustDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.qifenqian.bms.accounting.adjust.bean.AccountingSingleAdjustDetail" >
     <id column="op_id" property="opId" jdbcType="VARCHAR" />
     <id column="entry_id" property="entryId" jdbcType="VARCHAR" />
     <result column="acct_no" property="acctNo" jdbcType="VARCHAR" />
@@ -75,7 +75,7 @@
     op_id, entry_id, acct_no, acct_name, acct_type, curcde, amt, usable_amt, onway_amt, 
     is_adjust_JGKJ
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sevenpay.bms.accounting.adjust.bean.AccountingSingleAdjustDetailExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qifenqian.bms.accounting.adjust.bean.AccountingSingleAdjustDetailExample" >
     select
     <if test="distinct" >
       distinct
@@ -89,25 +89,25 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.sevenpay.bms.accounting.adjust.bean.AccountingSingleAdjustDetailKey" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.qifenqian.bms.accounting.adjust.bean.AccountingSingleAdjustDetailKey" >
     select 
     <include refid="Base_Column_List" />
     from bms_td_accounting_single_adjust_detail
     where op_id = #{opId,jdbcType=VARCHAR}
       and entry_id = #{entryId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.sevenpay.bms.accounting.adjust.bean.AccountingSingleAdjustDetailKey" >
+  <delete id="deleteByPrimaryKey" parameterType="com.qifenqian.bms.accounting.adjust.bean.AccountingSingleAdjustDetailKey" >
     delete from bms_td_accounting_single_adjust_detail
     where op_id = #{opId,jdbcType=VARCHAR}
       and entry_id = #{entryId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.sevenpay.bms.accounting.adjust.bean.AccountingSingleAdjustDetailExample" >
+  <delete id="deleteByExample" parameterType="com.qifenqian.bms.accounting.adjust.bean.AccountingSingleAdjustDetailExample" >
     delete from bms_td_accounting_single_adjust_detail
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.sevenpay.bms.accounting.adjust.bean.AccountingSingleAdjustDetail" >
+  <insert id="insert" parameterType="com.qifenqian.bms.accounting.adjust.bean.AccountingSingleAdjustDetail" >
     insert into bms_td_accounting_single_adjust_detail (op_id, entry_id, acct_no, 
       acct_name, acct_type, curcde, 
       amt, usable_amt, onway_amt, 
@@ -117,7 +117,7 @@
       #{amt,jdbcType=DECIMAL}, #{usableAmt,jdbcType=DECIMAL}, #{onwayAmt,jdbcType=DECIMAL}, 
       #{isAdjustJGKJ,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.sevenpay.bms.accounting.adjust.bean.AccountingSingleAdjustDetail" >
+  <insert id="insertSelective" parameterType="com.qifenqian.bms.accounting.adjust.bean.AccountingSingleAdjustDetail" >
     insert into bms_td_accounting_single_adjust_detail
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="opId != null" >
@@ -184,7 +184,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.sevenpay.bms.accounting.adjust.bean.AccountingSingleAdjustDetailExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.qifenqian.bms.accounting.adjust.bean.AccountingSingleAdjustDetailExample" resultType="java.lang.Integer" >
     select count(*) from bms_td_accounting_single_adjust_detail
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -244,7 +244,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.sevenpay.bms.accounting.adjust.bean.AccountingSingleAdjustDetail" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.qifenqian.bms.accounting.adjust.bean.AccountingSingleAdjustDetail" >
     update bms_td_accounting_single_adjust_detail
     <set >
       <if test="acctNo != null" >
@@ -275,7 +275,7 @@
     where op_id = #{opId,jdbcType=VARCHAR}
       and entry_id = #{entryId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.sevenpay.bms.accounting.adjust.bean.AccountingSingleAdjustDetail" >
+  <update id="updateByPrimaryKey" parameterType="com.qifenqian.bms.accounting.adjust.bean.AccountingSingleAdjustDetail" >
     update bms_td_accounting_single_adjust_detail
     set acct_no = #{acctNo,jdbcType=VARCHAR},
       acct_name = #{acctName,jdbcType=VARCHAR},

@@ -2,8 +2,6 @@ package com.qifenqian.bms.basemanager.market.dao;
 
 import java.util.List;
 
-import org.gyzb.platform.web.admin.user.bean.User;
-import org.gyzb.platform.web.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +9,8 @@ import com.qifenqian.bms.basemanager.market.bean.Manager;
 import com.qifenqian.bms.basemanager.market.bean.MarketRole;
 import com.qifenqian.bms.basemanager.market.mapper.ManagerMapper;
 import com.qifenqian.bms.basemanager.market.mapper.MarketAuthoMapper;
+import com.qifenqian.bms.platform.web.admin.user.bean.User;
+import com.qifenqian.bms.platform.web.page.Page;
 
 @Repository
 public class ManagerDao {

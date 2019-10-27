@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.accounting.financequery.mapper.UserBalanceMapper">
+<mapper namespace="com.qifenqian.bms.accounting.financequery.mapper.UserBalanceMapper">
 
 	<select id="selectUserBalanceList" resultType="userBalance" parameterType="userBalance">
 		SELECT

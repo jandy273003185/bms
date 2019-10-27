@@ -2,12 +2,12 @@ package com.qifenqian.bms.basemanager.rule.dao;
 
 import java.util.List;
 
-import org.gyzb.platform.web.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.qifenqian.bms.basemanager.rule.bean.Rule;
 import com.qifenqian.bms.basemanager.rule.mapper.RuleMapper;
+import com.qifenqian.bms.platform.web.page.Page;
 
 /**
  * 费率dao层，一般分页需要

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.upgrade.merchant.mapper.MerchantListMapper">
+<mapper namespace="com.qifenqian.bms.upgrade.merchant.mapper.MerchantListMapper">
 	<!-- 查询商户列表 -->
-	<select id="listMerchant" resultType="com.sevenpay.bms.basemanager.merchant.bean.MerchantVo" parameterType="com.sevenpay.bms.basemanager.merchant.bean.MerchantVo">
+	<select id="listMerchant" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo" parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">
 		SELECT 
 			C.*,
 			DATE_FORMAT(C.CREATE_TIME,'%Y-%m-%d %H:%i:%s') createTime,
@@ -78,7 +78,7 @@
 	</select>
 	
 	<!-- 查询商户信息  -->
-	<select id="queryMerchantInfo" parameterType="java.lang.String" resultType="com.sevenpay.bms.upgrade.merchant.bean.MerchantRegisterInfo">
+	<select id="queryMerchantInfo" parameterType="java.lang.String" resultType="com.qifenqian.bms.upgrade.merchant.bean.MerchantRegisterInfo">
 		SELECT
 			a.*,
 			a.MERCHANT_EMAIL as email,
@@ -107,7 +107,7 @@
 	</select>
 	
 	<!-- 导出表格 -->
-	<select id="exportlist" resultType="com.sevenpay.bms.upgrade.merchant.bean.MerchantAuditExport" parameterType="com.sevenpay.bms.basemanager.merchant.bean.MerchantVo">
+	<select id="exportlist" resultType="com.qifenqian.bms.upgrade.merchant.bean.MerchantAuditExport" parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">
 		SELECT 
 			C.*,
 			DATE_FORMAT(C.CREATE_TIME,'%Y-%m-%d %H:%i:%s') createTime,
@@ -160,7 +160,7 @@
 	
 	
 	<!-- 插入审核信息 -->
-	<insert id="insertAuditInfo" parameterType="com.sevenpay.bms.upgrade.merchant.bean.TdAuditRecodeInfo">
+	<insert id="insertAuditInfo" parameterType="com.qifenqian.bms.upgrade.merchant.bean.TdAuditRecodeInfo">
 		INSERT INTO TD_AUDIT_RECODE_INFO
 		(
 			`ID`,
@@ -183,7 +183,7 @@
 		)	
 	</insert>
 	<!-- 删除审核信息 -->
-	<delete id="deleteAuditInfo" parameterType="com.sevenpay.bms.upgrade.merchant.bean.TdAuditRecodeInfo" >
+	<delete id="deleteAuditInfo" parameterType="com.qifenqian.bms.upgrade.merchant.bean.TdAuditRecodeInfo" >
 		DELETE	
 		FROM 
 			TD_AUDIT_RECODE_INFO
@@ -217,7 +217,7 @@
 	</update>
 	
 	<!-- 账户信息-查询银行信息 -->
-	<select id="selectBankByBankCode" resultType="com.sevenpay.bms.basemanager.merchant.auding.bean.TbBankCode">
+	<select id="selectBankByBankCode" resultType="com.qifenqian.bms.basemanager.merchant.auding.bean.TbBankCode">
 		SELECT
 			t.bank_code,
 			t.bank_type,
@@ -233,7 +233,7 @@
 	</select>
 	
 	<!--根据custId获取用户登录信息-->
-	<select id="getUserInfoByCustId" resultType="com.sevenpay.bms.basemanager.custInfo.bean.TdLoginUserInfo" parameterType="java.lang.String">
+	<select id="getUserInfoByCustId" resultType="com.qifenqian.bms.basemanager.custInfo.bean.TdLoginUserInfo" parameterType="java.lang.String">
 		SELECT 
 			*
 		FROM 
@@ -243,7 +243,7 @@
 	</select>
 	
 	<!-- 根据custId获取用户信息 -->
-	<select id="getCustInfoByCustId" resultType="com.sevenpay.bms.basemanager.custInfo.bean.TdCustInfo" parameterType="java.lang.String">
+	<select id="getCustInfoByCustId" resultType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo" parameterType="java.lang.String">
 		SELECT 
 			*
 		FROM 
@@ -253,7 +253,7 @@
 	</select>
 	
 	<!--  审核通过时，将密码加密后的字段以及attachStr写入TdLoginUserInfo表中-->
-	<update id="updateLoginUserInfo" parameterType="com.sevenpay.bms.basemanager.custInfo.bean.TdLoginUserInfo">
+	<update id="updateLoginUserInfo" parameterType="com.qifenqian.bms.basemanager.custInfo.bean.TdLoginUserInfo">
 		UPDATE
 			TD_LOGIN_USER_INFO U, TD_CUST_INFO C
 		SET

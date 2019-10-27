@@ -2,7 +2,6 @@ package com.qifenqian.bms.sns.balance.dao;
 
 import java.util.List;
 
-import org.gyzb.platform.web.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +12,7 @@ import com.qifenqian.bms.sns.balance.bean.ResultSevenDoubt;
 import com.qifenqian.bms.sns.balance.bean.ResultStatistic;
 import com.qifenqian.bms.sns.balance.bean.ResultSummary;
 import com.qifenqian.bms.sns.balance.mapper.RedenvResultMapper;
+import com.qifenqian.bms.platform.web.page.Page;
 
 @Repository
 public class RedenvResultDao {

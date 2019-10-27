@@ -2,11 +2,11 @@ package com.qifenqian.bms.basemanager.aggregatepayment.merchant.mapper;
 
 import java.util.List;
 
-import org.gyzb.platform.web.page.Page;
 import org.springframework.stereotype.Repository;
 
 import com.qifenqian.bms.basemanager.aggregatepayment.merchant.bean.TdRefund;
 import com.qifenqian.bms.common.annotation.MapperScanPayment;
+import com.qifenqian.bms.platform.web.page.Page;
 
 
 @Repository

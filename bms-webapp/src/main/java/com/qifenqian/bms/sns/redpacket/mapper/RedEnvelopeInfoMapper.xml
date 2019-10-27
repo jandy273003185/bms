@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.sns.redpacket.mapper.RedEnvelopeInfoMapper">
+<mapper namespace="com.qifenqian.bms.sns.redpacket.mapper.RedEnvelopeInfoMapper">
 
-<select id="selectList"  parameterType="com.sevenpay.bms.sns.redpacket.bean.RedEnvelopeInfo" resultType="com.sevenpay.bms.sns.redpacket.bean.RedEnvelopeInfo">  
+<select id="selectList"  parameterType="com.qifenqian.bms.sns.redpacket.bean.RedEnvelopeInfo" resultType="com.qifenqian.bms.sns.redpacket.bean.RedEnvelopeInfo">  
 		SELECT
 			  T.RED_ENV_ID,
 			  T.RED_ENV_TITLE,
@@ -84,7 +84,7 @@
 		ORDER BY T.CREATE_TIME DESC
 	</select>
     
-	<select id="selectExpriedRedPacket"  resultType="com.sevenpay.bms.sns.redpacket.bean.RedEnvelopeInfo">  
+	<select id="selectExpriedRedPacket"  resultType="com.qifenqian.bms.sns.redpacket.bean.RedEnvelopeInfo">  
 		SELECT
 			T.RED_ENV_ID,
 			T.RED_ENV_AMT,
@@ -104,7 +104,7 @@
 		 AND T.EXPIRED_LEFT_AMT > 0 LIMIT 100 FOR UPDATE
 	</select>
 	
-	<update id="updateRedEnvelopeInfo" parameterType="com.sevenpay.bms.sns.redpacket.bean.RedEnvelopeInfo">
+	<update id="updateRedEnvelopeInfo" parameterType="com.qifenqian.bms.sns.redpacket.bean.RedEnvelopeInfo">
 		UPDATE 
 			SNS_TD_RED_ENVELOPE_INFO T
 		<set>
@@ -119,7 +119,7 @@
 		WHERE T.RED_ENV_ID = #{redEnvId,jdbcType = VARCHAR}
 	</update>
 	
-	<update id="updateRedEnvelopeInfoState" parameterType="com.sevenpay.bms.sns.redpacket.bean.RedEnvelopeInfo">
+	<update id="updateRedEnvelopeInfoState" parameterType="com.qifenqian.bms.sns.redpacket.bean.RedEnvelopeInfo">
 		UPDATE SNS_TD_RED_ENVELOPE_INFO T
 		SET 
 			T.EXPIRED_BAL_PROC_STATUS = '02',
@@ -130,7 +130,7 @@
    		 </foreach>  				
 	</update>
 	
-	<select id="selectRedEnvelopeInfoRefund" resultType="com.sevenpay.bms.sns.redpacket.bean.RedEnvelopeInfo">
+	<select id="selectRedEnvelopeInfoRefund" resultType="com.qifenqian.bms.sns.redpacket.bean.RedEnvelopeInfo">
 		SELECT
 			E.RED_ENV_ID
 		FROM
@@ -141,7 +141,7 @@
 		AND T.ORDER_ID = #{orderId,jdbcType = VARCHAR}
 	</select>
 	
-	<select id="selectRedEnvelopeInfo" resultType="com.sevenpay.bms.sns.redpacket.bean.RedEnvelopeInfo">
+	<select id="selectRedEnvelopeInfo" resultType="com.qifenqian.bms.sns.redpacket.bean.RedEnvelopeInfo">
 		SELECT
 			E.RED_ENV_ID
 		FROM
@@ -152,7 +152,7 @@
 		AND T.ORDER_ID = #{orderId,jdbcType = VARCHAR}
 	</select>
 	
-	<update id="updateRedEnvelopeInfoByRefund" parameterType="com.sevenpay.bms.sns.redpacket.bean.RedEnvelopeInfo">
+	<update id="updateRedEnvelopeInfoByRefund" parameterType="com.qifenqian.bms.sns.redpacket.bean.RedEnvelopeInfo">
 		UPDATE 
 			SNS_TD_RED_ENVELOPE_INFO T
 		<set>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.merchant.auding.mapper.audingMapper">
-  <resultMap type="com.sevenpay.bms.basemanager.merchant.auding.bean.AgencyAuding" id="getAgencyAudingListMap">
+<mapper namespace="com.qifenqian.bms.basemanager.merchant.auding.mapper.audingMapper">
+  <resultMap type="com.qifenqian.bms.basemanager.merchant.auding.bean.AgencyAuding" id="getAgencyAudingListMap">
     <result property="merchantCode" column="MERCHANT_CODE"/>
     <result property="custId" column="CUST_ID"/>
     <result property="custName" column="CUST_NAME"/>
@@ -22,7 +22,7 @@
     <result property="agentName" column="AGENT_NAME"/>
   </resultMap>
 
-<select id="getAgencyAudingList"  resultMap="getAgencyAudingListMap" parameterType="com.sevenpay.bms.basemanager.merchant.auding.bean.MerchantVo">
+<select id="getAgencyAudingList"  resultMap="getAgencyAudingListMap" parameterType="com.qifenqian.bms.basemanager.merchant.auding.bean.MerchantVo">
 	SELECT
 	IFNULL(hc.num, 0) count_num,
 	t.STATE,
@@ -141,7 +141,7 @@ LEFT JOIN td_certificate_auth h ON t.AUTH_ID = h.AUTH_ID
    ORDER BY t.CREATE_TIME    DESC	  
 </select>
 
-<select id="getSingleAgencyAuding" resultType="com.sevenpay.bms.basemanager.merchant.auding.bean.MerchantVo"  parameterType="com.sevenpay.bms.basemanager.merchant.auding.bean.MerchantVo">
+<select id="getSingleAgencyAuding" resultType="com.qifenqian.bms.basemanager.merchant.auding.bean.MerchantVo"  parameterType="com.qifenqian.bms.basemanager.merchant.auding.bean.MerchantVo">
     SELECT 
         p1.column_value bankCardName,
 		p2.column_value bankCardNo,
@@ -176,7 +176,7 @@ LEFT JOIN td_certificate_auth h ON t.AUTH_ID = h.AUTH_ID
 
 </select>
 
-<update id="updatebmsprotocolContent" parameterType="com.sevenpay.bms.basemanager.merchant.auding.bean.bmsProtocolContent">
+<update id="updatebmsprotocolContent" parameterType="com.qifenqian.bms.basemanager.merchant.auding.bean.bmsProtocolContent">
       UPDATE  bms_protocol_content
 		<set>
 			
@@ -200,7 +200,7 @@ LEFT JOIN td_certificate_auth h ON t.AUTH_ID = h.AUTH_ID
    
 </update>
 
-<select id="agentExportMerchantInfo" resultType="com.sevenpay.bms.basemanager.merchant.auding.bean.agencyExport" parameterType="merchantVo">
+<select id="agentExportMerchantInfo" resultType="com.qifenqian.bms.basemanager.merchant.auding.bean.agencyExport" parameterType="merchantVo">
 	SELECT
 	t.MERCHANT_CODE,
 	t.`CUST_NAME`,
@@ -264,7 +264,7 @@ LEFT JOIN sys_user s ON c.column_value = s.user_id
 </where>
    ORDER BY t.CREATE_TIME    DESC	   		
 	</select>
-<select id="getbmsProtocolColumnList" resultType="com.sevenpay.bms.basemanager.merchant.auding.bean.bmsProtocolColumn" parameterType="String">
+<select id="getbmsProtocolColumnList" resultType="com.qifenqian.bms.basemanager.merchant.auding.bean.bmsProtocolColumn" parameterType="String">
 	   
 SELECT
 	c.*
@@ -293,7 +293,7 @@ WHERE
 	
 </select>
 
-<select id="getCheckbmsProtocolColumnList" resultType="com.sevenpay.bms.basemanager.merchant.auding.bean.bmsProtocolColumn" parameterType="String">
+<select id="getCheckbmsProtocolColumnList" resultType="com.qifenqian.bms.basemanager.merchant.auding.bean.bmsProtocolColumn" parameterType="String">
 	   
 SELECT
 	c.*
@@ -323,7 +323,7 @@ ORDER BY  column_code LIKE '%.pay_rate%' DESC
 
 </select>
 
-<update id="updatebmsProtocolColumn" parameterType="com.sevenpay.bms.basemanager.merchant.auding.bean.bmsProtocolColumn">
+<update id="updatebmsProtocolColumn" parameterType="com.qifenqian.bms.basemanager.merchant.auding.bean.bmsProtocolColumn">
       
 UPDATE 
 
@@ -343,7 +343,7 @@ UPDATE
 
 </update>	
 	
-<insert id="addbmsProtocolColumn" parameterType="com.sevenpay.bms.basemanager.merchant.auding.bean.bmsProtocolColumn">
+<insert id="addbmsProtocolColumn" parameterType="com.qifenqian.bms.basemanager.merchant.auding.bean.bmsProtocolColumn">
   INSERT INTO bms_protocol_column(
 		id,
 		protocol_id,
@@ -367,7 +367,7 @@ UPDATE
 
 </insert>
 
-<resultMap type="com.sevenpay.bms.basemanager.merchant.auding.bean.TdCustScanCopy" id="getAgencyPicturesMap">
+<resultMap type="com.qifenqian.bms.basemanager.merchant.auding.bean.TdCustScanCopy" id="getAgencyPicturesMap">
    <result property="certifyType" column="CERTIFY_TYPE"/>
    <result property="custId" column="CUST_ID"/>
    <result property="scanCopyPath" column="SCAN_COPY_PATH"/>
@@ -388,7 +388,7 @@ FROM
 	</where>
 
 </select>	
-<select id="getbmsProtocolContentList" resultType="com.sevenpay.bms.basemanager.merchant.auding.bean.bmsProtocolContent"  parameterType="String">
+<select id="getbmsProtocolContentList" resultType="com.qifenqian.bms.basemanager.merchant.auding.bean.bmsProtocolContent"  parameterType="String">
      
 SELECT
  b.id,
@@ -408,7 +408,7 @@ AND b.`status` = 'AUDIT'
 
 </select>	
 
-<update id="updatetdCertificateAuth" parameterType="com.sevenpay.bms.basemanager.merchant.bean.TdCertificateAuth" >
+<update id="updatetdCertificateAuth" parameterType="com.qifenqian.bms.basemanager.merchant.bean.TdCertificateAuth" >
     update    td_certificate_auth
     <set >
      
@@ -434,7 +434,7 @@ AND b.`status` = 'AUDIT'
     where  CUST_ID= #{custId,jdbcType=INTEGER} and AUTH_ID=#{authId}
   </update>
 
-<select id="findPath" resultType="string" parameterType="com.sevenpay.bms.basemanager.merchant.bean.CustScan">
+<select id="findPath" resultType="string" parameterType="com.qifenqian.bms.basemanager.merchant.bean.CustScan">
 		SELECT 
 			S.SCAN_COPY_PATH 
 		FROM 
@@ -445,7 +445,7 @@ AND b.`status` = 'AUDIT'
 	
 	</select>
 
-<resultMap type="com.sevenpay.bms.basemanager.merchant.bean.TdCertificateAuth" id="getAgencyCheckHistoryMap">
+<resultMap type="com.qifenqian.bms.basemanager.merchant.bean.TdCertificateAuth" id="getAgencyCheckHistoryMap">
    <result property="custName"       column="CUST_NAME"/>
    <result property="roleId"         column="ROLE_ID"/>
    <result property="addTime"        column="submit_time"/>
@@ -480,7 +480,7 @@ FROM
 </select>
 
 
-<select id="getbmsPbmsProtocolContent" resultType="com.sevenpay.bms.basemanager.merchant.auding.bean.bmsProtocolContent" parameterType="String">
+<select id="getbmsPbmsProtocolContent" resultType="com.qifenqian.bms.basemanager.merchant.auding.bean.bmsProtocolContent" parameterType="String">
 	   
           SELECT
 			ID,

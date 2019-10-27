@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.paymentmanager.topay.mapper.PaymentQueryMapper">
+<mapper namespace="com.qifenqian.bms.paymentmanager.topay.mapper.PaymentQueryMapper">
   
-<select id="getPaymetList"  resultType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatInfo" parameterType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatInfo">
+<select id="getPaymetList"  resultType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatInfo" parameterType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatInfo">
 	 SELECT
 	t.BAT_NO,
 	t.PAER_ACCT_NO,
@@ -47,7 +47,7 @@ FROM
    ORDER BY t.CREATE_TIME    DESC	  
 </select>
 
-<select id="getPaymetbatNoList" resultType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatDetail" parameterType="String">
+<select id="getPaymetbatNoList" resultType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatDetail" parameterType="String">
 
 SELECT
 	t.BAT_NO,
@@ -73,7 +73,7 @@ WHERE
 	
 </select>
 
-<select id="exportPaymentList"  resultType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatInfo" parameterType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatInfo">
+<select id="exportPaymentList"  resultType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatInfo" parameterType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatInfo">
     SELECT
 	t.BAT_NO,
 	t.PAER_ACCT_NO,
@@ -128,7 +128,7 @@ FROM
 </select>
 
 
-<select id="exportPaymentInfoList" resultType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatDetail" parameterType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatDetail">
+<select id="exportPaymentInfoList" resultType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatDetail" parameterType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatDetail">
 
 SELECT
 	t.BAT_NO,
@@ -167,7 +167,7 @@ WHERE
 </select>
 
 
-<select id="selectPaymetbatNoList" resultType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatDetail" parameterType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatDetail">
+<select id="selectPaymetbatNoList" resultType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatDetail" parameterType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatDetail">
 
 SELECT
 	t.BAT_NO,

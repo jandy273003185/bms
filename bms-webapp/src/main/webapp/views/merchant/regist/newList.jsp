@@ -645,12 +645,12 @@ function confirmMerchantInfo(){
 												<input type="hidden" name="attachStr" id="attachStr" value="${merchant.attachStr}">
 												<input type="hidden" name="authId_01" id="authId_01" value="${merchant.authId}">	
 												
-												<gyzbadmin:function url="<%=MerchantPath.BASE + MerchantPath.UPDATEMERCHANTINFO %>">  	
+												<gyzbadmin:function url="<%=MerchantPath.BASE + MerchantPath.UPDATEMERCHANTINFO%>">  	
 													<button type="button" onclick="updateMerchantInfo(this,'edit')" data-toggle='modal'  data-target="#updateMerchant"  class="btn btn-primary btn-xs" >修改商户信息</button>
 												 </gyzbadmin:function>
 												 <button type="button" onclick="updateMerchantInfo(this,'preview')" data-toggle='modal'  data-target="#updateMerchant"  class="btn btn-primary btn-xs" >预览</button> 
 												<c:if test="${merchant.merchantFlag=='0' }">
-													<gyzbadmin:function url="<%=MerchantPath.BASE + MerchantPath.SENDEMAIL %>"> 
+													<gyzbadmin:function url="<%=MerchantPath.BASE + MerchantPath.SENDEMAIL%>"> 
 														<c:choose>   
 									  						<c:when test="${merchant.auditState=='00'}">  									  
 									                          <button type="button"  id="btnEmail2" onclick="sendEmail(this)"  class="btn btn-primary btn-xs"  style="margin-top:5px;" >重发邮件</button>				  
@@ -660,7 +660,7 @@ function confirmMerchantInfo(){
 									                        </c:otherwise>    
 		                                            	 </c:choose>  
 	                                            	</gyzbadmin:function>
-	                                            	<gyzbadmin:function url="<%=MerchantPath.BASE + MerchantPath.UPDATEEMAIL %>">	
+	                                            	<gyzbadmin:function url="<%=MerchantPath.BASE + MerchantPath.UPDATEEMAIL%>">	
 														<button type="button" onclick="toUpdateEmail(this)" data-toggle='modal' style="margin-top:5px;" class="btn btn-primary btn-xs" data-target="#updateEmail" >修改邮箱</button>
 													</gyzbadmin:function>
                                             	</c:if> 

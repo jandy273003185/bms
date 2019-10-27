@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.meeting.luckdraw.mapper.LuckDrawMapper">
+<mapper namespace="com.qifenqian.bms.meeting.luckdraw.mapper.LuckDrawMapper">
 
 	<!-- 根据编号查询单个 -->
-	<select id="selectPrizeSingleById" parameterType="java.lang.Integer" resultType="com.sevenpay.bms.meeting.luckdraw.bean.Prize">
+	<select id="selectPrizeSingleById" parameterType="java.lang.Integer" resultType="com.qifenqian.bms.meeting.luckdraw.bean.Prize">
 		SELECT P.*,
 			   A.ACTIVITY_NAME,
 			   (SELECT COUNT(1) FROM BASE_PRIZE_WIN PW WHERE PW.PRIZE_ID = P.PRIZE_ID AND PW.STATUS != 'DISABLE' ) WIN_NUMBER 
@@ -14,14 +14,14 @@
 	</select>
 	
 	<!-- 根据编号查询单个 -->
-	<select id="selectActivitySingleById" parameterType="java.lang.Integer" resultType="com.sevenpay.bms.meeting.luckdraw.bean.Activity">
+	<select id="selectActivitySingleById" parameterType="java.lang.Integer" resultType="com.qifenqian.bms.meeting.luckdraw.bean.Activity">
 		SELECT A.*
 		  FROM BASE_ACTIVITY A
 		WHERE A.ACTIVITY_ID = #{activityId, jdbcType=INTEGER}
 	</select>
 	
 	<!-- 查询列表 -->
-	<select id="selectPrizeList" parameterType="com.sevenpay.bms.meeting.luckdraw.bean.Prize" resultType="com.sevenpay.bms.meeting.luckdraw.bean.Prize">
+	<select id="selectPrizeList" parameterType="com.qifenqian.bms.meeting.luckdraw.bean.Prize" resultType="com.qifenqian.bms.meeting.luckdraw.bean.Prize">
 		SELECT
 			P.*,
 			A.ACTIVITY_NAME,
@@ -37,7 +37,7 @@
 		ORDER BY P.PRIZE_SORT, P.PRIZE_ID DESC
 	</select>
 	
-	<select id="selectCustSingleById" parameterType="java.lang.String" resultType="com.sevenpay.bms.basemanager.custInfo.bean.TdCustInfo">
+	<select id="selectCustSingleById" parameterType="java.lang.String" resultType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo">
 		SELECT
 			LU.MOBILE,
 			LU.CUST_ID
@@ -46,7 +46,7 @@
 		WHERE LU.CUST_ID = #{custId, jdbcType=VARCHAR}
 	</select>
 	
-	<select id="selectCustDrawByPrizeRandom" parameterType="com.sevenpay.bms.meeting.luckdraw.bean.Prize" resultType="com.sevenpay.bms.meeting.luckdraw.bean.PrizeWin">
+	<select id="selectCustDrawByPrizeRandom" parameterType="com.qifenqian.bms.meeting.luckdraw.bean.Prize" resultType="com.qifenqian.bms.meeting.luckdraw.bean.PrizeWin">
 		SELECT
 			T.CUST_ID WIN_CUST_ID,
 			CONCAT(LEFT(T.MOBILE, 3), '****', RIGHT(T.MOBILE, 4)) WIN_CUST_PHONE,
@@ -105,7 +105,7 @@
 	</select>
 	
 	<!-- 写入单个用户 -->
-	<insert id="insertPrizeWinSingle" useGeneratedKeys="true" keyProperty="prizeId" parameterType="com.sevenpay.bms.meeting.luckdraw.bean.PrizeWin">
+	<insert id="insertPrizeWinSingle" useGeneratedKeys="true" keyProperty="prizeId" parameterType="com.qifenqian.bms.meeting.luckdraw.bean.PrizeWin">
 		INSERT INTO BASE_PRIZE_WIN (
 			PRIZE_ID,
 			WIN_CUST_ID,
@@ -127,14 +127,14 @@
 		)
 	</insert>
 	<!-- 根据编号查询单个 -->
-	<select id="selectPrizeWinSingleById" parameterType="java.lang.Integer" resultType="com.sevenpay.bms.meeting.luckdraw.bean.PrizeWin">
+	<select id="selectPrizeWinSingleById" parameterType="java.lang.Integer" resultType="com.qifenqian.bms.meeting.luckdraw.bean.PrizeWin">
 		SELECT PW.* 
 		  FROM BASE_PRIZE_WIN PW
 		WHERE PW.WIN_ID = #{winId, jdbcType=INTEGER}
 	</select>
 	
 	<!-- 查询列表 -->
-	<select id="selectPrizeWinList" parameterType="com.sevenpay.bms.meeting.luckdraw.bean.PrizeWin" resultType="com.sevenpay.bms.meeting.luckdraw.bean.PrizeWin">
+	<select id="selectPrizeWinList" parameterType="com.qifenqian.bms.meeting.luckdraw.bean.PrizeWin" resultType="com.qifenqian.bms.meeting.luckdraw.bean.PrizeWin">
 		SELECT
 			PW.*
 		FROM
@@ -147,7 +147,7 @@
 	</select>
 	
 	<!-- 写入单个-->
-	<insert id="insertRedPacketSingle" parameterType="com.sevenpay.bms.meeting.luckdraw.bean.RedPacket">
+	<insert id="insertRedPacketSingle" parameterType="com.qifenqian.bms.meeting.luckdraw.bean.RedPacket">
 		INSERT INTO MEET_RED_PACKET_BILL (
 			RED_PACKET_SN,
 			RECEIVE_CUST_ID,
@@ -170,7 +170,7 @@
 	</insert>
 	
 	<!-- 查询出下一个待抽奖奖项 -->
-	<select id="selectNextDrawPrize" parameterType="java.lang.Integer" resultType="com.sevenpay.bms.meeting.luckdraw.bean.Prize">
+	<select id="selectNextDrawPrize" parameterType="java.lang.Integer" resultType="com.qifenqian.bms.meeting.luckdraw.bean.Prize">
 		SELECT
 			P.*,
 			A.ACTIVITY_NAME,

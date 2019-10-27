@@ -81,7 +81,7 @@
 								清空
 								<i class=" icon-move icon-on-right bigger-110"></i>
 							</button>
-							<gyzbadmin:function url="<%=TradeYlResultPath.BASE+TradeYlResultPath.TRADEYLRESULTEXPORT %>">
+							<gyzbadmin:function url="<%=TradeYlResultPath.BASE+TradeYlResultPath.TRADEYLRESULTEXPORT%>">
 								<a class="btn btn-purple btn-sm exportTradeResultMainBut">
 									导出报表
 								</a> 
@@ -130,7 +130,7 @@
 							<td>${ylResult.traceNo }</td>
 							<td>${ylResult.queryId}</td>
 							<td>
-								<gyzbadmin:function url="<%=TradeYlResultPath.BASE + TradeYlResultPath.EDIT %>">
+								<gyzbadmin:function url="<%=TradeYlResultPath.BASE + TradeYlResultPath.EDIT%>">
 									<a href="#" class="tooltip-success editTransYlResultLink" data-rel="tooltip" title="Edit" data-toggle='modal' data-target="#editTransYlResultModal">
 										<span class="green"><i class="icon-edit bigger-120"></i></span>
 									</a>

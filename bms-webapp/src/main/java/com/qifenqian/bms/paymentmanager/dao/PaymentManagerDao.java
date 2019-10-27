@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
-import org.gyzb.platform.web.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -28,6 +27,7 @@ import com.qifenqian.bms.paymentmanager.bean.TdPaymentFeeInfo;
 import com.qifenqian.bms.paymentmanager.bean.TdRecodeExport;
 import com.qifenqian.bms.paymentmanager.bean.TdReportExport;
 import com.qifenqian.bms.paymentmanager.mapper.PaymentManagerMapper;
+import com.qifenqian.bms.platform.web.page.Page;
 
 @Repository
 public class PaymentManagerDao {

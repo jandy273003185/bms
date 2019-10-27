@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.dictData.mapper.DictDataMapper">
+<mapper namespace="com.qifenqian.bms.basemanager.dictData.mapper.DictDataMapper">
 
-	<select id="selectListDict" resultType="com.sevenpay.bms.basemanager.dictData.bean.DictData" parameterType="com.sevenpay.bms.basemanager.dictData.bean.DictData">
+	<select id="selectListDict" resultType="com.qifenqian.bms.basemanager.dictData.bean.DictData" parameterType="com.qifenqian.bms.basemanager.dictData.bean.DictData">
 	 SELECT 
 	 	T.ID,	
 		T.DICT_PATH,
@@ -30,7 +30,7 @@
 	    </where>
 	</select>
 
-	<insert id="insertDict" parameterType="com.sevenpay.bms.basemanager.dictData.bean.DictData">
+	<insert id="insertDict" parameterType="com.qifenqian.bms.basemanager.dictData.bean.DictData">
 	INSERT INTO BMS_DICT_DATA (
 		DICT_PATH,
 		NAME,
@@ -66,7 +66,7 @@
 	</insert>
 	
 	
-	<update id="updateDict" parameterType="com.sevenpay.bms.basemanager.dictData.bean.DictData">
+	<update id="updateDict" parameterType="com.qifenqian.bms.basemanager.dictData.bean.DictData">
 		update bms_dict_data
 		<set>
 			<if test="null != value and value != '' ">
@@ -110,12 +110,12 @@
 			WHERE id = #{id,jdbcType=INTEGER}
 	</update>
 	
-	<delete id="delDict" parameterType="com.sevenpay.bms.basemanager.dictData.bean.DictData">
+	<delete id="delDict" parameterType="com.qifenqian.bms.basemanager.dictData.bean.DictData">
 		DELETE FROM bms_dict_data
 		WHERE id = #{id,jdbcType=INTEGER}
 	</delete>
 	
-	<select id="selectDictionaryBeanByRestrict" resultType="com.sevenpay.bms.basemanager.dictData.bean.DictData" parameterType="com.sevenpay.bms.basemanager.dictData.bean.DictData">
+	<select id="selectDictionaryBeanByRestrict" resultType="com.qifenqian.bms.basemanager.dictData.bean.DictData" parameterType="com.qifenqian.bms.basemanager.dictData.bean.DictData">
 		SELECT 
 			 	T.ID,	
 			  T.DICT_PATH,
@@ -142,7 +142,7 @@
 			<if test="value != null and value != ''">AND T.VALUE = #{value,jdbcType=VARCHAR}</if>
 	    	<if test="name != null and name != ''">AND T.NAME LIKE CONCAT('%',#{name},'%')</if>				
 	</select>
-	<select id="selectByDataPath" parameterType="string"  resultType="com.sevenpay.bms.basemanager.dictData.bean.DictData">
+	<select id="selectByDataPath" parameterType="string"  resultType="com.qifenqian.bms.basemanager.dictData.bean.DictData">
 		SELECT
 			T.*
 		FROM

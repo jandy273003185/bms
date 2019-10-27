@@ -93,7 +93,7 @@
 												清空
 												<i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
-											<gyzbadmin:function url="<%=AdPath.BASE + AdPath.ADD %>">
+											<gyzbadmin:function url="<%=AdPath.BASE + AdPath.ADD%>">
 												<button id="addModal" class="btn btn-purple btn-sm   addAdClick" data-toggle='modal' data-target="#addAdModal">
 													新增
 													<i class="icon-plus-sign icon-on-right bigger-110"></i>
@@ -141,7 +141,7 @@
 							                        <c:if test="${ad.isValid == '0'}">无效</c:if>  
                                                 </td>
 												<td>
-													<gyzbadmin:function url="<%=AdPath.BASE + AdPath.UPDATE %>">
+													<gyzbadmin:function url="<%=AdPath.BASE + AdPath.UPDATE%>">
 														<a href="#"  class="tooltip-success updateAdClick" data-toggle='modal'  data-target="#updateAdModal"  data-rel="tooltip" title="Edit">
 															<span class="green">
 																<i class="icon-edit bigger-120"></i>

@@ -7,7 +7,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import org.sevenpay.platform.type.ProductCodeState;
+import com.qifenqian.bms.platform.type.ProductCodeState;
 
 
 

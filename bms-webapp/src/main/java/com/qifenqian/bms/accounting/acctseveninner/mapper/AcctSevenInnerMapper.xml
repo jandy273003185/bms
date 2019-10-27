@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sevenpay.bms.accounting.acctseveninner.mapper.AcctSevenInnerMapper">
-	<select id="queryAcctSevenInnerList" resultType="com.sevenpay.bms.accounting.acctseveninner.bean.AcctSevenInner" parameterType="com.sevenpay.bms.accounting.acctseveninner.bean.AcctSevenInner">
+<mapper namespace="com.qifenqian.bms.accounting.acctseveninner.mapper.AcctSevenInnerMapper">
+	<select id="queryAcctSevenInnerList" resultType="com.qifenqian.bms.accounting.acctseveninner.bean.AcctSevenInner" parameterType="com.qifenqian.bms.accounting.acctseveninner.bean.AcctSevenInner">
 		SELECT
 		ACCT_ID,
 		ACCT_NAME,

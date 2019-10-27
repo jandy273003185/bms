@@ -258,7 +258,7 @@
 												清空
 											    <i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
-											<gyzbadmin:function url="<%=PayChannelPath.BASE + PayChannelPath.PAYCHANNELADD %>">
+											<gyzbadmin:function url="<%=PayChannelPath.BASE + PayChannelPath.PAYCHANNELADD%>">
 											<button  class="btn btn-purple btn-sm" data-toggle='modal' data-target="#addModal">
 												新增
 												<i class="icon-plus-sign icon-on-right bigger-110"></i>
@@ -297,14 +297,14 @@
 												<td id="ourBankAcctNo">${bean.ourBankAcctNo}</td>
 												<td id="ourBankAcctName">${bean.ourBankAcctName}</td>
 												<td>
-													<gyzbadmin:function url="<%=PayChannelPath.BASE + PayChannelPath.PAYCHANNELUPDATE %>">
+													<gyzbadmin:function url="<%=PayChannelPath.BASE + PayChannelPath.PAYCHANNELUPDATE%>">
 														<a href="#" class="tooltip-success updateModal" data-rel="tooltip" title="编辑" data-toggle="modal" data-target="#updateModal">
 															<span class="green">
 																<i class="icon-edit bigger-120"></i>
 															</span>
 														</a>
 													</gyzbadmin:function>
-													<gyzbadmin:function url="<%=PayChannelPath.BASE + PayChannelPath.PAYCHANNELDELETE %>">
+													<gyzbadmin:function url="<%=PayChannelPath.BASE + PayChannelPath.PAYCHANNELDELETE%>">
 													
 														<a href="#" class="tooltip-error deleteModal" data-rel="tooltip" title="删除" data-toggle="modal" data-target="#deleteModal">
 																<span class="red">

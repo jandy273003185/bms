@@ -459,7 +459,7 @@ function updateWithdrawControl(obj,option){
 											    <i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
 											
-											<gyzbadmin:function url="<%=WithdrawControlPath.BASE + WithdrawControlPath.ADD %>">
+											<gyzbadmin:function url="<%=WithdrawControlPath.BASE + WithdrawControlPath.ADD%>">
 											<button  class="btn btn-purple btn-sm" data-toggle='modal' data-target="#addWithdrawControlModal">
 												新增
 												<i class="icon-plus-sign icon-on-right bigger-110"></i>
@@ -518,14 +518,14 @@ function updateWithdrawControl(obj,option){
 															<i class="iconfont icon-shenhe "></i>
 														</span>
 													</a>
-													<gyzbadmin:function url="<%=WithdrawControlPath.BASE + WithdrawControlPath.UPDATE %>">
+													<gyzbadmin:function url="<%=WithdrawControlPath.BASE + WithdrawControlPath.UPDATE%>">
 														<a href="#" class="tooltip-success" onclick="updateWithdrawControl(this,'edit')" data-rel="tooltip" title="编辑" data-toggle="modal" data-target="#updateWithdrawControlModal">
 															<span class="green">
 																<i class="icon-edit bigger-120"></i>
 															</span>
 														</a>
 													</gyzbadmin:function>
-													<gyzbadmin:function url="<%=WithdrawControlPath.BASE + WithdrawControlPath.DELETE %>">
+													<gyzbadmin:function url="<%=WithdrawControlPath.BASE + WithdrawControlPath.DELETE%>">
 													<c:if test="${withdrawControl.custId!='0000'}">
 														<a href="#" class="tooltip-error deleteWithdrawControl" data-rel="tooltip" title="删除" data-toggle="modal" data-target="#deleteWithdrawControlModal">
 																<span class="red">

@@ -1,6 +1,6 @@
 package com.qifenqian.bms.accounting.exception.base.type;
 
-import org.gyzb.platform.common.annotation.Comment;
+import com.qifenqian.bms.platform.common.annotation.Comment;
 
 /**
  * @project sevenpay-bms-web

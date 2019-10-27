@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.upgrade.mapper.ProductMapper">
-	<select id="getProductAuditList"  resultType="com.sevenpay.bms.upgrade.bean.ProductAuding" parameterType="com.sevenpay.bms.upgrade.bean.ProductAuding">
+<mapper namespace="com.qifenqian.bms.upgrade.mapper.ProductMapper">
+	<select id="getProductAuditList"  resultType="com.qifenqian.bms.upgrade.bean.ProductAuding" parameterType="com.qifenqian.bms.upgrade.bean.ProductAuding">
     	SELECT
 			t1.*,
 			t2.CUST_NAME,
@@ -63,7 +63,7 @@
 			ORDER BY t1.create_time DESC
 	</select>
 	
-	<select id="getAgencyAudingListExport"  resultType="com.sevenpay.bms.upgrade.bean.ProductExport" parameterType="com.sevenpay.bms.upgrade.bean.ProductAuding">
+	<select id="getAgencyAudingListExport"  resultType="com.qifenqian.bms.upgrade.bean.ProductExport" parameterType="com.qifenqian.bms.upgrade.bean.ProductAuding">
     	SELECT
 			t1.*,
 			t2.CUST_NAME,
@@ -105,7 +105,7 @@
 	</select>
 	
 	
-	<select id="ProductByMerchantCode"  resultType="com.sevenpay.bms.upgrade.bean.ProductAuding" parameterType="String">
+	<select id="ProductByMerchantCode"  resultType="com.qifenqian.bms.upgrade.bean.ProductAuding" parameterType="String">
     	SELECT
 			c.*
 		FROM
@@ -114,7 +114,7 @@
 		where a.merchant_id = #{merchantCode}
 	</select>
 	
-	<select id="selCustInfoByMerchantCode"  resultType="com.sevenpay.bms.basemanager.custInfo.bean.TdCustInfo" parameterType="String">
+	<select id="selCustInfoByMerchantCode"  resultType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo" parameterType="String">
     	SELECT
 			*
 		FROM
@@ -123,7 +123,7 @@
 		where t2.merchant_code = #{merchantCode}
 	</select>
 	
-	<update id="updateProduct" parameterType="com.sevenpay.bms.upgrade.bean.ProductAuding">
+	<update id="updateProduct" parameterType="com.qifenqian.bms.upgrade.bean.ProductAuding">
 		UPDATE td_customer_product_info c  	
 		<set>
 			<if test="signStatus !=null and signStatus !='' ">
@@ -141,7 +141,7 @@
 		 
 	</update>
 	
-	<insert id="insertAuditRecode" parameterType="com.sevenpay.bms.upgrade.bean.TdAuditRecodeInfo">
+	<insert id="insertAuditRecode" parameterType="com.qifenqian.bms.upgrade.bean.TdAuditRecodeInfo">
 		INSERT INTO `stcdb`.`td_audit_recode_info` (
 			`ID`,
 			`MERCHANT_CODE`,

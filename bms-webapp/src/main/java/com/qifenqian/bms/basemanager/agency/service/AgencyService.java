@@ -14,7 +14,6 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.lang3.StringUtils;
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +35,7 @@ import com.qifenqian.bms.basemanager.merchant.bean.CustScan;
 import com.qifenqian.bms.basemanager.merchant.bean.MerchantVo;
 import com.qifenqian.bms.basemanager.merchant.mapper.CustScanMapper;
 import com.qifenqian.bms.common.util.PropertiesUtil;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 @Service
 public class AgencyService {

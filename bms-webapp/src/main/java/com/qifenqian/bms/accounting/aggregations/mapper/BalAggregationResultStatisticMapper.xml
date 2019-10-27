@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sevenpay.bms.accounting.aggregations.mapper.BalAggregationResultStatisticMapper" >
+<mapper namespace="com.qifenqian.bms.accounting.aggregations.mapper.BalAggregationResultStatisticMapper" >
   
-  <select id="selectList" resultType="com.sevenpay.bms.accounting.aggregations.bean.BalAggregationResultStatistic" parameterType="com.sevenpay.bms.accounting.aggregations.bean.BalAggregationResultStatistic" >
+  <select id="selectList" resultType="com.qifenqian.bms.accounting.aggregations.bean.BalAggregationResultStatistic" parameterType="com.qifenqian.bms.accounting.aggregations.bean.BalAggregationResultStatistic" >
   	select 
 		T.statistic_id,
 		T.batch_id,
@@ -55,7 +55,7 @@
 		ORDER BY T.work_date DESC
   </select>
   
-  <select id="queryBalBaseChannel" resultType="com.sevenpay.bms.accounting.aggregations.bean.BaseChannel">
+  <select id="queryBalBaseChannel" resultType="com.qifenqian.bms.accounting.aggregations.bean.BaseChannel">
   	select
   	 * 
   	from

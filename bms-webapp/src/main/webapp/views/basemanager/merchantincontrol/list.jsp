@@ -310,7 +310,7 @@ $(document).ready(function(){
 												<i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
 											
-											<gyzbadmin:function url="<%=TdMerchantInControPath.BASE + TdMerchantInControPath.ADD %>">
+											<gyzbadmin:function url="<%=TdMerchantInControPath.BASE + TdMerchantInControPath.ADD%>">
 											<button  class="btn btn-purple btn-sm" data-toggle='modal' data-target="#addMerchantModal">
 												新增
 												<i class="icon-plus-sign icon-on-right bigger-110"></i>
@@ -361,14 +361,14 @@ $(document).ready(function(){
 													<fmt:formatDate value="${result.modifiedTime }" pattern="yyyy-MM-dd HH:mm:ss"/>
 												</td>												
 												<td>
-													<gyzbadmin:function url="<%=TdMerchantInControPath.BASE + TdMerchantInControPath.UPDATE %>">
+													<gyzbadmin:function url="<%=TdMerchantInControPath.BASE + TdMerchantInControPath.UPDATE%>">
 														<a href="#updateMerchantModal"  data-toggle='modal' class="tooltip-success updateMerchantLink" data-rel="tooltip" title="Edit">
 															<span class="green">
 																<i class="icon-edit bigger-120"></i>
 															</span>
 														</a>
 													</gyzbadmin:function>
-													<gyzbadmin:function url="<%=TdMerchantInControPath.BASE + TdMerchantInControPath.DELETE %>">
+													<gyzbadmin:function url="<%=TdMerchantInControPath.BASE + TdMerchantInControPath.DELETE%>">
 														<a href="#deleteMerchantModal" data-toggle='modal' class="tooltip-error deleteMerchantLink" data-rel="tooltip" title="Delete">
 															<span class="red">
 																<i class="icon-trash bigger-120"></i>

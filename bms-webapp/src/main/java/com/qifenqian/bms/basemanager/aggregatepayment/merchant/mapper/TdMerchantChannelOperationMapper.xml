@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.aggregatepayment.merchant.mapper.TdMerchantChannelOperationMapper">
+<mapper namespace="com.qifenqian.bms.basemanager.aggregatepayment.merchant.mapper.TdMerchantChannelOperationMapper">
 	
-	<insert id="insertMerchantChannel" parameterType="com.sevenpay.bms.basemanager.aggregatepayment.merchant.bean.TdMerchantChannel">
+	<insert id="insertMerchantChannel" parameterType="com.qifenqian.bms.basemanager.aggregatepayment.merchant.bean.TdMerchantChannel">
 		insert
 			into 
 		td_merchant_channel 
@@ -25,7 +25,7 @@
 		)
 	</insert>
 	
-	<update id="updateMerchantChannel" parameterType="com.sevenpay.bms.basemanager.aggregatepayment.merchant.bean.TdMerchantChannel">
+	<update id="updateMerchantChannel" parameterType="com.qifenqian.bms.basemanager.aggregatepayment.merchant.bean.TdMerchantChannel">
 		update
 			td_merchant_channel t
 		<set>
@@ -43,7 +43,7 @@
 			t.mch_id = #{mchId ,jdbcType = VARCHAR} AND t.chanel = #{chanel,jdbcType = VARCHAR}
 		</where>
 	</update>
-	<delete id="deleteMerchantChannel" parameterType="com.sevenpay.bms.basemanager.aggregatepayment.merchant.bean.TdMerchantChannel">
+	<delete id="deleteMerchantChannel" parameterType="com.qifenqian.bms.basemanager.aggregatepayment.merchant.bean.TdMerchantChannel">
 		delete t.*
 			from
 		td_merchant_channel t

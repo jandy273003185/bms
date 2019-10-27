@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sevenpay.bms.accounting.checkV2.mapper.CheckStatsMapper" >
-  <resultMap id="BaseResultMap" type="com.sevenpay.bms.accounting.checkV2.bean.CheckStats" >
+<mapper namespace="com.qifenqian.bms.accounting.checkV2.mapper.CheckStatsMapper" >
+  <resultMap id="BaseResultMap" type="com.qifenqian.bms.accounting.checkV2.bean.CheckStats" >
     <id column="ID" property="id" jdbcType="INTEGER" />
     <result column="CHANNEL_TYPE" property="channelType" jdbcType="VARCHAR" />
     <result column="CHECK_ALL_NUM" property="checkAllNum" jdbcType="INTEGER" />
@@ -32,7 +32,7 @@
     delete from td_check_stats
     where ID = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.sevenpay.bms.accounting.checkV2.bean.CheckStats" >
+  <insert id="insert" parameterType="com.qifenqian.bms.accounting.checkV2.bean.CheckStats" >
     insert into td_check_stats (ID, CHANNEL_TYPE, CHECK_ALL_NUM, 
       CHECK_ALL_AMT, CHECK_SUCCESS_NUM, CHECK_SUCCESS_TRADE_AMT, 
       CHECK_PLACK_NUM, CHECK_PLACK_AMT, CHECK_CLACK_NUM, 
@@ -44,7 +44,7 @@
       #{checkClackAmt,jdbcType=DECIMAL}, #{checkOthrerNum,jdbcType=INTEGER}, #{checkOtherAmt,jdbcType=DECIMAL}, 
       #{checkDate,jdbcType=DATE}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.sevenpay.bms.accounting.checkV2.bean.CheckStats" >
+  <insert id="insertSelective" parameterType="com.qifenqian.bms.accounting.checkV2.bean.CheckStats" >
     insert into td_check_stats
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -135,7 +135,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.sevenpay.bms.accounting.checkV2.bean.CheckStats" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.qifenqian.bms.accounting.checkV2.bean.CheckStats" >
     update td_check_stats
     <set >
       <if test="channelType != null" >
@@ -180,7 +180,7 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.sevenpay.bms.accounting.checkV2.bean.CheckStats" >
+  <update id="updateByPrimaryKey" parameterType="com.qifenqian.bms.accounting.checkV2.bean.CheckStats" >
     update td_check_stats
     set CHANNEL_TYPE = #{channelType,jdbcType=VARCHAR},
       CHECK_ALL_NUM = #{checkAllNum,jdbcType=INTEGER},
@@ -197,7 +197,7 @@
       CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=INTEGER}
   </update>
-  <select id="findCheckStats" resultType="com.sevenpay.bms.accounting.checkV2.bean.CheckStats" parameterType="com.sevenpay.bms.accounting.checkV2.bean.CheckStats" >
+  <select id="findCheckStats" resultType="com.qifenqian.bms.accounting.checkV2.bean.CheckStats" parameterType="com.qifenqian.bms.accounting.checkV2.bean.CheckStats" >
     select 
     <include refid="Base_Column_List" />
     from td_check_stats

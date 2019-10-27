@@ -57,7 +57,7 @@
 		<property name="receiveTimeout" value="10000" />
 	</bean>
 	
-<!-- 	<bean id="BaseMailSender" class="com.sevenpay.bms.basemanager.mail.BaseMailSender" scope="prototype">
+<!-- 	<bean id="BaseMailSender" class="com.qifenqian.bms.basemanager.mail.BaseMailSender" scope="prototype">
 		<property name="javaMailSender">
 			<ref bean="javaMailSender" />
 		</property>

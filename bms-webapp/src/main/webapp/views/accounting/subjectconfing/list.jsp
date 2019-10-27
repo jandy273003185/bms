@@ -87,7 +87,7 @@
 													清空
 													<i class=" icon-move icon-on-right bigger-110"></i>
 												</button>
-												<gyzbadmin:function url="<%=SubjectConfigPath.BASE + SubjectConfigPath.ADD %>">
+												<gyzbadmin:function url="<%=SubjectConfigPath.BASE + SubjectConfigPath.ADD%>">
 												<button class="btn btn-purple btn-sm btn-margin" data-toggle='modal' data-target="#addsubjectConfigModal">
 													新增
 													<i class="icon-plus-sign icon-on-right bigger-110"></i>
@@ -135,13 +135,13 @@
 												<td width="5%">${sub.creator }</td>
 												<td width="5%">${sub.memo }</td>
 												<td width="10%">
-												    <gyzbadmin:function url="<%=SubjectConfigPath.BASE + SubjectConfigPath.UPDATE %>">
+												    <gyzbadmin:function url="<%=SubjectConfigPath.BASE + SubjectConfigPath.UPDATE%>">
 														<a href="#" class="tooltip-success updateadSubjectModal" data-rel="tooltip" title="Edit" data-toggle='modal' data-target="#updateSubjectConfigModal">
 														<span class="green"><i class="icon-edit bigger-120"></i></span>
 														</a>
 													</gyzbadmin:function>
 													
-													<gyzbadmin:function url="<%=SubjectConfigPath.BASE + SubjectConfigPath.DELETE %>">
+													<gyzbadmin:function url="<%=SubjectConfigPath.BASE + SubjectConfigPath.DELETE%>">
 														<a href="#deleteadModal"  data-toggle='modal' class="tooltip-error deleteSubjectConfig" data-rel="tooltip" title="Delete">
 														<span class="red">
 															<i class="icon-trash bigger-120"></i>

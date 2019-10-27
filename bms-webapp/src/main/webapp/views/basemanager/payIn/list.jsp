@@ -220,7 +220,7 @@
 												清空
 												<i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
-											<gyzbadmin:function url="<%=PayInPath.BASE + PayInPath.ADD %>">
+											<gyzbadmin:function url="<%=PayInPath.BASE + PayInPath.ADD%>">
 											<button  class="btn btn-purple btn-sm" data-toggle='modal' data-target="#addPayInModal">
 												新增
 												<i class="icon-plus-sign icon-on-right bigger-110"></i>
@@ -261,14 +261,14 @@
 												</td>
 												<td>${payIn.merchantCode }</td>
 												<td>
-													<gyzbadmin:function url="<%=PayInPath.BASE + PayInPath.UPDATE %>">
+													<gyzbadmin:function url="<%=PayInPath.BASE + PayInPath.UPDATE%>">
 														<a href="#updatePayInModal"  data-toggle='modal' class="tooltip-success updatePayIn" data-rel="tooltip" title="Edit">
 															<span class="green">
 																编辑
 															</span>
 														</a>
 													</gyzbadmin:function>
-													<gyzbadmin:function url="<%=PayInPath.BASE + PayInPath.STOP %>">
+													<gyzbadmin:function url="<%=PayInPath.BASE + PayInPath.STOP%>">
 														<a href="#stopPayInModal"  data-toggle='modal' class="tooltip-error stopPayIn" data-rel="tooltip" title="Stop">
 															<span class="red">
 																停用

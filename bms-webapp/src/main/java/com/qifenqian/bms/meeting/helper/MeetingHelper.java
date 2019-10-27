@@ -1,10 +1,10 @@
 package com.qifenqian.bms.meeting.helper;
 
 import org.apache.commons.lang3.StringUtils;
-import org.gyzb.platform.common.utils.SpringUtils;
 
 import com.qifenqian.bms.accounting.utils.DictionaryUtils;
 import com.qifenqian.bms.meeting.MeetingConstant;
+import com.qifenqian.bms.platform.common.utils.SpringUtils;
 
 public class MeetingHelper {
 	

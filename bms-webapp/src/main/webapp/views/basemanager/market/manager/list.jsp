@@ -166,7 +166,7 @@
 												清空
 												<i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
-											<gyzbadmin:function url="<%=ManagerPath.BASE + ManagerPath.ADD %>">
+											<gyzbadmin:function url="<%=ManagerPath.BASE + ManagerPath.ADD%>">
 											<a  onclick="queryWater(this)" data-toggle='modal'  class="tooltip-success detailLink" >
 												<button type="button"   id="queryWaterBtn"  class="btn btn-purple btn-sm"  >新增</button>
 											</a> 

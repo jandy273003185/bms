@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sevenpay.bms.accounting.checkV2.mapper.CheckDetailMapper" >
-  <resultMap id="BaseResultMap" type="com.sevenpay.bms.accounting.checkV2.bean.CheckDetail" >
+<mapper namespace="com.qifenqian.bms.accounting.checkV2.mapper.CheckDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.qifenqian.bms.accounting.checkV2.bean.CheckDetail" >
     <id column="ID" property="id" jdbcType="INTEGER" />
     <result column="TRADE_ID" property="tradeId" jdbcType="VARCHAR" />
     <result column="TRADE_TYPE" property="tradeType" jdbcType="VARCHAR" />
@@ -42,7 +42,7 @@
     delete from td_check_detail
     where ID = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.sevenpay.bms.accounting.checkV2.bean.CheckDetail" >
+  <insert id="insert" parameterType="com.qifenqian.bms.accounting.checkV2.bean.CheckDetail" >
     insert into td_check_detail (ID, TRADE_ID, TRADE_TYPE, 
       AGENT_MCH_ID, MCH_ORDER_ID, MCH_ID, 
       MCH_NAME, CHANNEL, CHANNEL_SUB, 
@@ -60,7 +60,7 @@
       #{orderCreateTime,jdbcType=TIMESTAMP}, #{orderFinishTime,jdbcType=TIMESTAMP}, #{checkResult,jdbcType=VARCHAR}, 
       #{checkDate,jdbcType=DATE}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.sevenpay.bms.accounting.checkV2.bean.CheckDetail" >
+  <insert id="insertSelective" parameterType="com.qifenqian.bms.accounting.checkV2.bean.CheckDetail" >
     insert into td_check_detail
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -205,7 +205,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.sevenpay.bms.accounting.checkV2.bean.CheckDetail" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.qifenqian.bms.accounting.checkV2.bean.CheckDetail" >
     update td_check_detail
     <set >
       <if test="tradeId != null" >
@@ -277,7 +277,7 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.sevenpay.bms.accounting.checkV2.bean.CheckDetail" >
+  <update id="updateByPrimaryKey" parameterType="com.qifenqian.bms.accounting.checkV2.bean.CheckDetail" >
     update td_check_detail
     set TRADE_ID = #{tradeId,jdbcType=VARCHAR},
       TRADE_TYPE = #{tradeType,jdbcType=VARCHAR},
@@ -304,7 +304,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   
-  <select id="findCheckDetail" resultType="com.sevenpay.bms.accounting.checkV2.bean.CheckDetail" parameterType="com.sevenpay.bms.accounting.checkV2.bean.CheckDetail" >
+  <select id="findCheckDetail" resultType="com.qifenqian.bms.accounting.checkV2.bean.CheckDetail" parameterType="com.qifenqian.bms.accounting.checkV2.bean.CheckDetail" >
     select 
     <include refid="Base_Column_List" />
     from td_check_detail

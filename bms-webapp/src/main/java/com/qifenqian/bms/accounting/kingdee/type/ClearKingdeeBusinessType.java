@@ -1,6 +1,6 @@
 package com.qifenqian.bms.accounting.kingdee.type;
 
-import org.gyzb.platform.common.annotation.Description;
+import com.qifenqian.bms.platform.common.annotation.Description;
 
 
 public enum ClearKingdeeBusinessType {

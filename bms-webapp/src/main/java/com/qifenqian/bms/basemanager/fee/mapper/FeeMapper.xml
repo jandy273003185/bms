@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.fee.mapper.FeeMapper">
+<mapper namespace="com.qifenqian.bms.basemanager.fee.mapper.FeeMapper">
 
 	<!-- 查询手续费列表 -->
 	<select id="selectFees" resultType="fee" parameterType="fee">

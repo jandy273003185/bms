@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.virtual.mapper.MerchantTradeInfoMapper">
+<mapper namespace="com.qifenqian.bms.basemanager.virtual.mapper.MerchantTradeInfoMapper">
  
- <insert id="insertInfos" parameterType="com.sevenpay.bms.basemanager.virtual.bean.MerchantTradeInfo">
+ <insert id="insertInfos" parameterType="com.qifenqian.bms.basemanager.virtual.bean.MerchantTradeInfo">
  	insert into merchant_trade_infos(
  			merchant_id,
 			merchant_Name,
@@ -19,7 +19,7 @@
 		  	#{tradeTime, jdbcType=VARCHAR},
 		  	#{tradeStatus, jdbcType=VARCHAR})
  </insert>
- <select id="getTradeInfos" parameterType="com.sevenpay.bms.basemanager.virtual.bean.MerchantTradeInfo" resultType="com.sevenpay.bms.basemanager.virtual.bean.MerchantTradeInfo">
+ <select id="getTradeInfos" parameterType="com.qifenqian.bms.basemanager.virtual.bean.MerchantTradeInfo" resultType="com.qifenqian.bms.basemanager.virtual.bean.MerchantTradeInfo">
  		select
  			merchant_Id,
 			case 
@@ -46,7 +46,7 @@
 		  		</if>
 		  </where>
  </select>
- <select id="getTotalAmt" parameterType="com.sevenpay.bms.basemanager.virtual.bean.MerchantTradeInfo" resultType="string">
+ <select id="getTotalAmt" parameterType="com.qifenqian.bms.basemanager.virtual.bean.MerchantTradeInfo" resultType="string">
  	SELECT
 		SUM(cast(t.trade_amt AS SIGNED))
 	FROM

@@ -9,7 +9,7 @@
 	<!-- <bean id="httpInvokerProxy" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
 		<property name="overloadEnabled" value="true" />
 		<property name="serviceUrl" value="http://10.0.0.74:1234/remoting/service" />
-		<property name="serviceInterface" value="com.sevenpay.invoke.common.service.InterfaceService" />
+		<property name="serviceInterface" value="com.qifenqian.invoke.common.service.InterfaceService" />
 		</bean>
 		
 		
@@ -18,7 +18,7 @@
 		<property name="readTimeout" value="5000"/>  
 		</bean>  
 		
-		<bean id="balanceHttpClient" class="com.sevenpay.invoke.common.builder.InvokeHttpClientBuilder" />-->
+		<bean id="balanceHttpClient" class="com.qifenqian.invoke.common.builder.InvokeHttpClientBuilder" />-->
 
 	<bean id="httpInvokerProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
 		<property name="serviceUrl" value="http://127.0.0.1:5001/sevenpay/unionpay/refund" />

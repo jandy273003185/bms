@@ -3,7 +3,6 @@ package com.qifenqian.bms.basemanager.dictData.controller;
 
 import java.util.List;
 
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.dictData.bean.DictData;
 import com.qifenqian.bms.basemanager.dictData.service.DictDataService;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 /***
  * 数据字典
  * @author shen

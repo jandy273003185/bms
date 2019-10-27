@@ -212,7 +212,7 @@
 																	<button type="button" id="btnEmail2" class="btn btn-purple btn-xs">详情</button>										
 																</a>
 															</c:if>	
-															<gyzbadmin:function url="<%=RedenvResultPath.BASE + RedenvResultPath.DEAL_REDENV %>">
+															<gyzbadmin:function url="<%=RedenvResultPath.BASE + RedenvResultPath.DEAL_REDENV%>">
 																<c:if test="${summary.dealStatus=='01'}">
 																	<a href="#" class="tooltip-success dealRedenvLink" data-rel="tooltip" title="Edit" data-toggle='modal'  data-target="#dealRedenvModal">
 																		<button type="button" id="btnEmail2" class="btn btn-primary btn-xs">处理</button>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sevenpay.bms.basemanager.agency.mapper.AgencyReportMapper">
+<mapper namespace="com.qifenqian.bms.basemanager.agency.mapper.AgencyReportMapper">
 	
-	<select id="getAgenReportList" parameterType="com.sevenpay.bms.basemanager.agency.bean.AgenReport"
-	resultType="com.sevenpay.bms.basemanager.agency.bean.AgenReport">
+	<select id="getAgenReportList" parameterType="com.qifenqian.bms.basemanager.agency.bean.AgenReport"
+	resultType="com.qifenqian.bms.basemanager.agency.bean.AgenReport">
 		SELECT
 			#{beginWorkDate,jdbcType = VARCHAR} beginWorkDate,
 			#{endDate,jdbcType = VARCHAR} endDate,
@@ -103,8 +103,8 @@
 			GROUP BY t.AGENT_CUST_ID
 			order by T.CREATE_TIME DESC
 	</select>
-	<select id="getAgentMerchantReport" parameterType="com.sevenpay.bms.basemanager.agency.bean.AgentMerchantReport"
-	resultType="com.sevenpay.bms.basemanager.agency.bean.AgentMerchantReport">
+	<select id="getAgentMerchantReport" parameterType="com.qifenqian.bms.basemanager.agency.bean.AgentMerchantReport"
+	resultType="com.qifenqian.bms.basemanager.agency.bean.AgentMerchantReport">
 		SELECT
 			#{beginWorkDate,jdbcType = VARCHAR} beginWorkDate,
 			#{endDate,jdbcType = VARCHAR} endDate,

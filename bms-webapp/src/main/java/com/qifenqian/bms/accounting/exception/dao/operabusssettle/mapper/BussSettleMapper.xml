@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sevenpay.bms.accounting.exception.dao.operabusssettle.mapper.BussSettleMapper">
-	<select id="selectBussSettleApplyById" resultType="com.sevenpay.bms.accounting.exception.dao.operabusssettle.bean.BussSettleBean">
+<mapper namespace="com.qifenqian.bms.accounting.exception.dao.operabusssettle.mapper.BussSettleMapper">
+	<select id="selectBussSettleApplyById" resultType="com.qifenqian.bms.accounting.exception.dao.operabusssettle.bean.BussSettleBean">
   		select 
 			S.*,
 			SC.CORE_RETURN_CODE,
@@ -58,7 +58,7 @@
 		AND SC.ORDER_ID = #{orderId,jdbcType = VARCHAR}
 	</select>
 	
-	<update id="updateMerchantSettleStatus" parameterType="com.sevenpay.bms.merchant.settle.bean.MerchantSettle">
+	<update id="updateMerchantSettleStatus" parameterType="com.qifenqian.bms.merchant.settle.bean.MerchantSettle">
 		UPDATE BMS_MERCHANT_SETTLE S
 		SET S. STATUS = #{statusStr,jdbcType = VARCHAR} 
 		WHERE S.ID = (SELECT 

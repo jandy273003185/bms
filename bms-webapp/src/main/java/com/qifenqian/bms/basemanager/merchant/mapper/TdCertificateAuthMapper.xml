@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sevenpay.bms.basemanager.merchant.mapper.TdCertificateAuthMapper" >
-  <resultMap id="BaseResultMap" type="com.sevenpay.bms.basemanager.merchant.bean.TdCertificateAuth" >
+<mapper namespace="com.qifenqian.bms.basemanager.merchant.mapper.TdCertificateAuthMapper" >
+  <resultMap id="BaseResultMap" type="com.qifenqian.bms.basemanager.merchant.bean.TdCertificateAuth" >
     <id column="AUTH_ID" property="authId" jdbcType="INTEGER" />
     <result column="CUST_ID" property="custId" jdbcType="VARCHAR" />
     <result column="CERTIFICATE_STATE" property="certificateState" jdbcType="VARCHAR" />
@@ -83,7 +83,7 @@
     where AUTH_ID = #{authId,jdbcType=INTEGER}
   </delete>
  
-  <insert id="insert" parameterType="com.sevenpay.bms.basemanager.merchant.bean.TdCertificateAuth" >
+  <insert id="insert" parameterType="com.qifenqian.bms.basemanager.merchant.bean.TdCertificateAuth" >
     insert into td_certificate_auth (AUTH_ID, CUST_ID, CERTIFICATE_STATE, 
       CERTIFY_USER, CERTIFY_DATETIME, AUTH_RESULT_CODE, 
       AUTH_RESULT_DESC, CREATE_ID, CREATE_TIME, 
@@ -93,7 +93,7 @@
       #{authResultDesc,jdbcType=VARCHAR}, #{createId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{modifyId,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.sevenpay.bms.basemanager.merchant.bean.TdCertificateAuth" >
+  <insert id="insertSelective" parameterType="com.qifenqian.bms.basemanager.merchant.bean.TdCertificateAuth" >
     insert into td_certificate_auth
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="authId != null" >
@@ -167,7 +167,7 @@
     </trim>
   </insert>
  
-  <update id="updateByPrimaryKeySelective" parameterType="com.sevenpay.bms.basemanager.merchant.bean.TdCertificateAuth" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.qifenqian.bms.basemanager.merchant.bean.TdCertificateAuth" >
     update td_certificate_auth
     <set >
       <if test="custId != null" >
@@ -199,7 +199,7 @@
     </set>
     where AUTH_ID = #{authId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.sevenpay.bms.basemanager.merchant.bean.TdCertificateAuth" >
+  <update id="updateByPrimaryKey" parameterType="com.qifenqian.bms.basemanager.merchant.bean.TdCertificateAuth" >
     update td_certificate_auth
     set CUST_ID = #{custId,jdbcType=VARCHAR},
       CERTIFICATE_STATE = #{certificateState,jdbcType=VARCHAR},
@@ -213,7 +213,7 @@
       MODIFY_TIME = NOW()
     where AUTH_ID = #{authId,jdbcType=INTEGER}
   </update>
-  <select id="findTdCertificateAuthByCustId" parameterType="string" resultType="com.sevenpay.bms.basemanager.merchant.bean.TdCertificateAuth">
+  <select id="findTdCertificateAuthByCustId" parameterType="string" resultType="com.qifenqian.bms.basemanager.merchant.bean.TdCertificateAuth">
     select
     *
     from

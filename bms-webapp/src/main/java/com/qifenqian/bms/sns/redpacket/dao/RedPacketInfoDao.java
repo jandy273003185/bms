@@ -2,10 +2,10 @@ package com.qifenqian.bms.sns.redpacket.dao;
 
 import java.util.List;
 
-import org.gyzb.platform.web.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.qifenqian.bms.platform.web.page.Page;
 import com.qifenqian.bms.sns.redpacket.bean.RedEnvelopeInfo;
 import com.qifenqian.bms.sns.redpacket.mapper.RedEnvelopeInfoMapper;
 

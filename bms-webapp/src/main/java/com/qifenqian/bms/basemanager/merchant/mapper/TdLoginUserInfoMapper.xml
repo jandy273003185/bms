@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.merchant.mapper.TdLoginUserInfoMapper">
+<mapper namespace="com.qifenqian.bms.basemanager.merchant.mapper.TdLoginUserInfoMapper">
 
 	
-	<insert id="saveLoginUserInfo" parameterType="com.sevenpay.bms.basemanager.merchant.bean.TdLoginUserInfo">
+	<insert id="saveLoginUserInfo" parameterType="com.qifenqian.bms.basemanager.merchant.bean.TdLoginUserInfo">
 		INSERT INTO TD_LOGIN_USER_INFO(
 			CUST_ID,
 			ROLE_ID,
@@ -39,7 +39,7 @@
 		
 	</insert>
 
-	<update id="updatePwd"  parameterType="com.sevenpay.bms.basemanager.merchant.bean.TdLoginUserInfo">
+	<update id="updatePwd"  parameterType="com.qifenqian.bms.basemanager.merchant.bean.TdLoginUserInfo">
 		UPDATE td_login_user_info
 		<set>
 			<if test="loginPwd != null">
@@ -55,7 +55,7 @@
 		where CUST_ID = #{custId,jdbcType=VARCHAR}
 	</update>
 	
-	<select id="selectByEmail" parameterType="string" resultType="com.sevenpay.bms.basemanager.merchant.bean.TdLoginUserInfo">
+	<select id="selectByEmail" parameterType="string" resultType="com.qifenqian.bms.basemanager.merchant.bean.TdLoginUserInfo">
 		SELECT * FROM
 			TD_LOGIN_USER_INFO t
 		left join 
@@ -93,7 +93,7 @@
 		
 	</select>
 	
-	<select id="selectByLicense" parameterType="string" resultType="com.sevenpay.bms.basemanager.custInfo.bean.TdCustInfo">
+	<select id="selectByLicense" parameterType="string" resultType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo">
 		select * from TD_CUST_INFO T
 		left join 
 		    TD_LOGIN_USER_INFO a
@@ -109,7 +109,7 @@
 		</where>
 	</select>
 	
-	<select id="selectLoginUserInfo" parameterType="string" resultType="com.sevenpay.bms.basemanager.merchant.bean.TdLoginUserInfo">
+	<select id="selectLoginUserInfo" parameterType="string" resultType="com.qifenqian.bms.basemanager.merchant.bean.TdLoginUserInfo">
 		SELECT * FROM
 		TD_LOGIN_USER_INFO
 		<where>
@@ -120,7 +120,7 @@
 	</select>
 	
 	
-	<select id="selectByPhone" parameterType="string" resultType="com.sevenpay.bms.basemanager.merchant.bean.TdLoginUserInfo">
+	<select id="selectByPhone" parameterType="string" resultType="com.qifenqian.bms.basemanager.merchant.bean.TdLoginUserInfo">
 		SELECT * FROM
 		TD_LOGIN_USER_INFO T
 		WHERE 
@@ -128,7 +128,7 @@
 		and T.role_id = #{roleId,jdbcType=VARCHAR}
 	</select>
 
-	<select id="selectByPhoneEnter" parameterType="string" resultType="com.sevenpay.bms.basemanager.merchant.bean.TdLoginUserInfo">
+	<select id="selectByPhoneEnter" parameterType="string" resultType="com.qifenqian.bms.basemanager.merchant.bean.TdLoginUserInfo">
 		SELECT * FROM
 		TD_LOGIN_USER_INFO T
 		WHERE
@@ -143,7 +143,7 @@
 			CUST_ID = #{custId,jdbcType=VARCHAR}
 	</update>
 	
-	<update id="updateLoginUserInfo" parameterType="com.sevenpay.bms.basemanager.merchant.bean.TdLoginUserInfo">
+	<update id="updateLoginUserInfo" parameterType="com.qifenqian.bms.basemanager.merchant.bean.TdLoginUserInfo">
 		UPDATE
 			TD_LOGIN_USER_INFO
 		<set>

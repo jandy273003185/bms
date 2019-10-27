@@ -38,13 +38,13 @@
         </encoder>
     </appender>
 
-	<root level="${LOG.LEVEL}">
+	<root level="debug">
 		<!-- <appender-ref ref="FILE" /> -->
 		<appender-ref ref="STDOUT" />
 	</root>
-<!-- 	<logger name="org.springframework" level="info" additivity="false" />
-	<logger name="org.apache" level="info" additivity="false" />
+	<!-- <logger name="org.springframework" level="debug" additivity="false" /> -->
+	<!-- <logger name="org.apache" level="info" additivity="false" />
 	<logger name="org.activiti" level="info" additivity="false" />
-	<logger name="org.mybatis" level="info" additivity="false" />
-	 -->
+	<logger name="org.mybatis" level="info" additivity="false" /> -->
+	
 </configuration>

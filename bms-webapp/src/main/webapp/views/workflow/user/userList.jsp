@@ -309,7 +309,7 @@
 												清空
 												<i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
-											<gyzbadmin:function url="<%=UserPath.BASE + UserPath.ADD %>">
+											<gyzbadmin:function url="<%=UserPath.BASE + UserPath.ADD%>">
 											<button  class="btn btn-purple btn-sm" data-toggle='modal' data-target="#addModal">
 												新增
 												<i class="icon-plus-sign icon-on-right bigger-110"></i>
@@ -343,7 +343,7 @@
 																<i class="icon-edit bigger-120"></i>
 															</span>
 													</a>
-													<gyzbadmin:function url="<%=UserPath.BASE + UserPath.DELETE %>">
+													<gyzbadmin:function url="<%=UserPath.BASE + UserPath.DELETE%>">
 														<input type="hidden" value="${userTamp.id}" id="hiddenValue">
 														<a href="#deleteModal"  data-toggle='modal' class="tooltip-error delUser" data-rel="tooltip" title="Delete">
 															<span class="red">

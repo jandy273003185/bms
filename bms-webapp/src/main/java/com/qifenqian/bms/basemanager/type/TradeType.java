@@ -2,7 +2,7 @@ package com.qifenqian.bms.basemanager.type;
 
 import java.lang.reflect.Field;
 
-import org.gyzb.platform.common.annotation.Comment;
+import com.qifenqian.bms.platform.common.annotation.Comment;
 
 /**
  * 用户状态

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sevenpay.bms.accounting.jgkjdatasource.mapper.BalJgkjDataSourceMapper">
+<mapper namespace="com.qifenqian.bms.accounting.jgkjdatasource.mapper.BalJgkjDataSourceMapper">
 
-	<select id="selectZytDataSourceList" resultType="com.sevenpay.bms.accounting.jgkjdatasource.bean.BalJgkjDataSource" parameterType="com.sevenpay.bms.accounting.jgkjdatasource.bean.BalJgkjDataSource">
+	<select id="selectZytDataSourceList" resultType="com.qifenqian.bms.accounting.jgkjdatasource.bean.BalJgkjDataSource" parameterType="com.qifenqian.bms.accounting.jgkjdatasource.bean.BalJgkjDataSource">
 		SELECT
 			C.CHANNEL_SERIAL_SEQ,
 			T.FILE_ID,

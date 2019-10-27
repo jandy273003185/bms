@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sevenpay.bms.accounting.reconciliationSummary.mapper.ReconciliationSummaryMapper" >
-<resultMap type="com.sevenpay.bms.accounting.reconciliationSummary.bean.Summary" id="basicResultMap">
+<mapper namespace="com.qifenqian.bms.accounting.reconciliationSummary.mapper.ReconciliationSummaryMapper" >
+<resultMap type="com.qifenqian.bms.accounting.reconciliationSummary.bean.Summary" id="basicResultMap">
 	<result property="paychannelType" column="PAYCHANNEL_TYPE"/>
 	<result property="success_total" column="SUCCESS_TOTAL"/>
 	<result property="success_amt" column="SUCCESS_AMT"/>
@@ -15,7 +15,7 @@
 	
 </resultMap>
 
-<resultMap type="com.sevenpay.bms.accounting.reconciliationSummary.bean.ReconDetail" id="successResultMap">
+<resultMap type="com.qifenqian.bms.accounting.reconciliationSummary.bean.ReconDetail" id="successResultMap">
 	<result property="id" column="ID"/>
 	<result property="orderId" column="ORDER_ID"/>
 	<result property="oldOrderId" column="OLD_ORDER_ID"/>
@@ -27,7 +27,7 @@
 	
 </resultMap>
 
-<resultMap type="com.sevenpay.bms.accounting.reconciliationSummary.bean.ReconDiff" id="DiffResultMap">
+<resultMap type="com.qifenqian.bms.accounting.reconciliationSummary.bean.ReconDiff" id="DiffResultMap">
 	<result property="Id" column="ID"/>
 	<result property="orderId" column="ORDER_ID"/>
 	<result property="paychannelType" column="PAYCHANNEL_TYPE"/>
@@ -39,7 +39,7 @@
 </resultMap>
 
 	<!-- 分页对账信息 -->  
-	<select id="selectSummary" resultType="com.sevenpay.bms.accounting.reconciliationSummary.mapper.ReconciliationSummaryMapper" parameterType="com.sevenpay.bms.accounting.reconciliationSummary.bean.Summary" resultMap="basicResultMap">  
+	<select id="selectSummary" resultType="com.qifenqian.bms.accounting.reconciliationSummary.mapper.ReconciliationSummaryMapper" parameterType="com.qifenqian.bms.accounting.reconciliationSummary.bean.Summary" resultMap="basicResultMap">  
   			select   
   			* 
   			from td_channel_recon_rst T
@@ -130,7 +130,7 @@
 			order by t.CREATE_TIME desc
 	</select>
 	
-	<update id="updateByErrorDisposal" parameterType="com.sevenpay.bms.accounting.reconciliationSummary.bean.ReconDiff">
+	<update id="updateByErrorDisposal" parameterType="com.qifenqian.bms.accounting.reconciliationSummary.bean.ReconDiff">
 		UPDATE TD_CHANNEL_RECON_DIFF T
 		<set>
 			T.DEAL_FLAG = 1

@@ -1,8 +1,5 @@
 package com.qifenqian.bms.basemanager.rule;
 
-import org.gyzb.platform.web.admin.user.bean.User;
-import org.gyzb.platform.web.admin.utils.WebUtils;
-import org.sevenpay.platform.utils.BusinessUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +11,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.rule.bean.Rule;
 import com.qifenqian.bms.basemanager.rule.service.RuleService;
+import com.qifenqian.bms.platform.utils.BusinessUtils;
+import com.qifenqian.bms.platform.web.admin.user.bean.User;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 /**
  * 费率业务层
  * @author pc

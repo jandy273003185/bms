@@ -100,7 +100,7 @@
 																清空
 																<i class=" icon-move icon-on-right bigger-110"></i>
 														</button>
-														<gyzbadmin:function url="<%=BmsBaseBankAccountPath.BASE + BmsBaseBankAccountPath.ADD %>">
+														<gyzbadmin:function url="<%=BmsBaseBankAccountPath.BASE + BmsBaseBankAccountPath.ADD%>">
 														<button  class="btn btn-purple btn-sm" data-toggle='modal' data-target="#addAccountModel">
 															新增
 															<i class="icon-plus-sign icon-on-right bigger-110"></i>

@@ -1,7 +1,5 @@
 package com.qifenqian.bms.accounting.checkquery.type;
 
-import org.gyzb.platform.common.annotation.Description;
-
 /**
  * @project sevenpay-bms-web
  * @fileName BalResultStatus.java
@@ -10,10 +8,7 @@ import org.gyzb.platform.common.annotation.Description;
  * @memo
  */
 public enum BalResultStatus {
-
-  @Description("有效")
-  VALID("有效"), 
-  @Description("无效")
+  VALID("有效"),
   INVALID("无效");
 
   private String desc;
@@ -30,5 +25,3 @@ public enum BalResultStatus {
     return desc;
   }
 }
-
-

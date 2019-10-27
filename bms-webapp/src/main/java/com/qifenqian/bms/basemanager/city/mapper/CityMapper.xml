@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.city.mapper.CityMapper">
+<mapper namespace="com.qifenqian.bms.basemanager.city.mapper.CityMapper">
 
 	<select id="selectCitys" resultType="city" parameterType="city">
 		SELECT
@@ -40,7 +40,7 @@
 	FROM 
 		TB_PROVINCE P
 	</select>
-	<select id="selectSpProvince" resultType="com.sevenpay.bms.basemanager.city.bean.RegionsBean">
+	<select id="selectSpProvince" resultType="com.qifenqian.bms.basemanager.city.bean.RegionsBean">
 		SELECT 
 		P.PROVINCE_ID,
 		P.PROVINCE_NAME 
@@ -57,7 +57,7 @@
 			C.PROVINCE_ID = #{provinceId,jdbcType = VARCHAR}  
 	</select>
 	
-	<select id="getSpCityByProvinceId" parameterType="string" resultType="com.sevenpay.bms.basemanager.city.bean.RegionsBean">
+	<select id="getSpCityByProvinceId" parameterType="string" resultType="com.qifenqian.bms.basemanager.city.bean.RegionsBean">
 		SELECT 
 			C.CITY_ID,
 			C.CITY_NAME 
@@ -77,7 +77,7 @@
 			A.CITY_ID = #{cityId,jdbcType = VARCHAR}
 	</select>
 	
-	<select id="getSpAreaByCityId" parameterType="string" resultType="com.sevenpay.bms.basemanager.city.bean.RegionsBean">
+	<select id="getSpAreaByCityId" parameterType="string" resultType="com.qifenqian.bms.basemanager.city.bean.RegionsBean">
 		SELECT 
 			A.AREA_ID,
 			A.AREA_NAME 
@@ -194,7 +194,7 @@
 		WHERE AREA_ID = #{areaId,jdbcType = VARCHAR}
 	</delete>
 
-	<select id="findProvineAndCity" parameterType="string" resultType="com.sevenpay.bms.basemanager.city.bean.ProvinceCityBean">
+	<select id="findProvineAndCity" parameterType="string" resultType="com.qifenqian.bms.basemanager.city.bean.ProvinceCityBean">
 		SELECT 
 			T.PROVINCE_ID,
 			T.PROVINCE_NAME,
@@ -224,7 +224,7 @@
 	
 	
 	<!-- 账户信息-查询省份列表 -->
-	<select id="getProvinceLists" resultType="com.sevenpay.bms.basemanager.city.bean.CityNew">
+	<select id="getProvinceLists" resultType="com.qifenqian.bms.basemanager.city.bean.CityNew">
 		SELECT
 			t.province_id,
 			t.province_name
@@ -233,7 +233,7 @@
 		
 	</select>
 	<!-- 账户信息-查询城市列表 -->
-	<select id="getCityList" parameterType="com.sevenpay.bms.basemanager.city.bean.CityNew" resultType="com.sevenpay.bms.basemanager.city.bean.CityNew">
+	<select id="getCityList" parameterType="com.qifenqian.bms.basemanager.city.bean.CityNew" resultType="com.qifenqian.bms.basemanager.city.bean.CityNew">
 		SELECT
 			t.city_id,
 			t.city_name,
@@ -249,7 +249,7 @@
 	</select>
 	
 	<!-- 账户信息-查询区域列表 -->
-	<select id="getAreaList" parameterType="com.sevenpay.bms.basemanager.city.bean.CityNew" resultType="com.sevenpay.bms.basemanager.city.bean.CityNew">
+	<select id="getAreaList" parameterType="com.qifenqian.bms.basemanager.city.bean.CityNew" resultType="com.qifenqian.bms.basemanager.city.bean.CityNew">
 		SELECT
 			t.area_id,
 			t.area_name,

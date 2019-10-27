@@ -3,7 +3,6 @@ package com.qifenqian.bms.basemanager.protocoltemplate.service;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import com.qifenqian.bms.basemanager.protocoltemplate.bean.ProtocolTemplate;
 import com.qifenqian.bms.basemanager.protocoltemplate.dao.ProtocolTemplateDao;
 import com.qifenqian.bms.basemanager.protocoltemplate.mapper.ProtocolTemplateMapper;
 import com.qifenqian.bms.basemanager.utils.GenSN;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 @Service
 public class ProtocolTemplateService {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.merchant.mapper.MerchantMapper">
-	<insert id="saveMerchant" parameterType="com.sevenpay.bms.basemanager.merchant.bean.Merchant">
+<mapper namespace="com.qifenqian.bms.basemanager.merchant.mapper.MerchantMapper">
+	<insert id="saveMerchant" parameterType="com.qifenqian.bms.basemanager.merchant.bean.Merchant">
 		INSERT INTO TD_CUST_INFO(
 			CUST_ID,
 			CUST_NAME,
@@ -142,7 +142,7 @@
 		)
 	</insert>
 
-    <insert id="saveMerchant2" parameterType="com.sevenpay.bms.basemanager.merchant.bean.Merchant" >
+    <insert id="saveMerchant2" parameterType="com.qifenqian.bms.basemanager.merchant.bean.Merchant" >
         insert into td_cust_info
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="custType != null" >
@@ -633,7 +633,7 @@
         </trim>
   </insert>
 
-	<select id="validateLicense" resultType="com.sevenpay.bms.basemanager.merchant.bean.Merchant" parameterType="string">
+	<select id="validateLicense" resultType="com.qifenqian.bms.basemanager.merchant.bean.Merchant" parameterType="string">
 		select t.BUSINESS_LICENSE from td_cust_info t 
 		<where>
 			<if test="businessLicense != null and businessLicense !='' ">
@@ -658,7 +658,7 @@
 				t.MOBILE =  #{mobile,jdbcType = VARCHAR}
 			AND t.ROLE_ID = 'ent'
 	</select>
-	<select id="validateOrgInstCode" resultType="com.sevenpay.bms.basemanager.merchant.bean.Merchant" parameterType="string">
+	<select id="validateOrgInstCode" resultType="com.qifenqian.bms.basemanager.merchant.bean.Merchant" parameterType="string">
 		select t.ORG_INST_CODE from td_cust_info t 
 		<where>
 			<if test="orgInstCode !=null and orgInstCode !='' ">
@@ -1255,7 +1255,7 @@
 		order by c.create_time desc
 	</select>
 	<!-- 微商户列表查询 -->
-	<select id="exportTinyMerchantsList" resultType="com.sevenpay.bms.basemanager.merchant.bean.TinyMerchantExport" parameterType="merchantVo">
+	<select id="exportTinyMerchantsList" resultType="com.qifenqian.bms.basemanager.merchant.bean.TinyMerchantExport" parameterType="merchantVo">
 		<!-- select 
 		c.MERCHANT_CODE,
 		c.CUST_NAME,
@@ -1363,7 +1363,7 @@
 		</where>
 		ORDER BY C.CREATE_TIME    DESC	    		
 	</select>
-	<select id="backExportlist" resultType="com.sevenpay.bms.basemanager.merchant.bean.MerchantExport" parameterType="merchantVo">
+	<select id="backExportlist" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantExport" parameterType="merchantVo">
 		SELECT
 			C.MERCHANT_CODE,
 			C.CUST_NAME,
@@ -1455,7 +1455,7 @@
 		 </where>
 		ORDER BY C.CREATE_TIME DESC	    		
 	</select>
-	<select id="proExportlist" resultType="com.sevenpay.bms.basemanager.merchant.bean.MerchantExport" parameterType="merchantVo">
+	<select id="proExportlist" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantExport" parameterType="merchantVo">
 		SELECT
 			C.MERCHANT_CODE,
 			C.CUST_NAME,
@@ -1548,7 +1548,7 @@
 		ORDER BY C.CREATE_TIME DESC	    		
 	</select>
 	
-	<select id="exportlist" resultType="com.sevenpay.bms.basemanager.merchant.bean.MerchantExport" parameterType="merchantVo">
+	<select id="exportlist" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantExport" parameterType="merchantVo">
 		SELECT
 			C.MERCHANT_CODE,
 			C.CUST_NAME,
@@ -1736,7 +1736,7 @@
 		where c.cust_id = #{custId,jdbcType=VARCHAR}
 	</select>
 	
-	<select id="findPath" parameterType="com.sevenpay.bms.basemanager.merchant.bean.CustScan" resultType="string" >
+	<select id="findPath" parameterType="com.qifenqian.bms.basemanager.merchant.bean.CustScan" resultType="string" >
 		select scan_copy_path 
 		from td_cust_scan_copy 
 		where cust_id = #{custId,jdbcType=VARCHAR} and certify_type = #{certifyType,jdbcType=VARCHAR}
@@ -1878,7 +1878,7 @@
 		WHERE	T.CUST_ID = #{custId,jdbcType=VARCHAR}
 	</update>
 	
-	<select id="selectMerchant" resultType="com.sevenpay.bms.basemanager.merchant.bean.Merchant" >
+	<select id="selectMerchant" resultType="com.qifenqian.bms.basemanager.merchant.bean.Merchant" >
 		SELECT
 			t.CUST_ID,
 			t.CUST_NAME,
@@ -1900,7 +1900,7 @@
 		AND t.MERCHANT_CODE IS NOT NULL ORDER BY t.CREATE_TIME DESC;
 	</select>
 	
-	<select id="selectAgent" resultType="com.sevenpay.bms.basemanager.merchant.bean.Merchant" >
+	<select id="selectAgent" resultType="com.qifenqian.bms.basemanager.merchant.bean.Merchant" >
 		SELECT
 			t.CUST_ID,
 			t.CUST_NAME,
@@ -1916,7 +1916,7 @@
 	<select id="validateTinyMerchantCode" parameterType="string" resultType="int">
 		SELECT COUNT(1) FROM td_cust_info WHERE merchant_code = #{merchantCode,jdbcType=VARCHAR}
 	</select>
-	<select id="getAllMerchant" resultType="com.sevenpay.bms.basemanager.merchant.bean.Merchant">
+	<select id="getAllMerchant" resultType="com.qifenqian.bms.basemanager.merchant.bean.Merchant">
 		SELECT
 			*
 		FROM
@@ -2125,7 +2125,7 @@
 	</select>
  	
  	<!-- 新商户列表导出 -->
-	<select id="newExportlist" resultType="com.sevenpay.bms.basemanager.merchant.bean.MerchantExport" parameterType="merchantVo">
+	<select id="newExportlist" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantExport" parameterType="merchantVo">
 		SELECT
 			C.AUTH_ID,
 			C.CUST_ID,

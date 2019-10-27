@@ -349,7 +349,7 @@ function onLoadStatus(){
 												<i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
 										
-											<gyzbadmin:function url="<%=CreditCardManagePath.BASE + CreditCardManagePath.ADD  %>">
+											<gyzbadmin:function url="<%=CreditCardManagePath.BASE + CreditCardManagePath.ADD%>">
 											<button  class="btn btn-purple btn-sm" data-toggle='modal' data-target="#addCardModal">
 												新增
 												<i class="icon-plus-sign icon-on-right bigger-110"></i>
@@ -400,14 +400,14 @@ function onLoadStatus(){
 												</td>															
 																								
 												<td>
-													<gyzbadmin:function url="<%=CreditCardManagePath.BASE + CreditCardManagePath.UPDATE %>">
+													<gyzbadmin:function url="<%=CreditCardManagePath.BASE + CreditCardManagePath.UPDATE%>">
 														<a href="#updateCardModal"  data-toggle='modal' class="tooltip-success updateCardLink"  data-rel="tooltip" title="Edit">
 															<span class="green">
 																<i class="icon-edit bigger-120"></i>
 															</span>
 														</a>
 													</gyzbadmin:function>
-													<gyzbadmin:function url="<%=CreditCardManagePath.BASE + CreditCardManagePath.DELETE %>">
+													<gyzbadmin:function url="<%=CreditCardManagePath.BASE + CreditCardManagePath.DELETE%>">
 														<a href="#deleteCardModal" data-toggle='modal' class="tooltip-error deleteCardLink" data-rel="tooltip" title="Delete">
 															<span class="red">
 																<i class="icon-trash bigger-120"></i>

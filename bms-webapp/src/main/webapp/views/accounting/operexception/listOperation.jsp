@@ -141,7 +141,7 @@
 													<i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
 											&nbsp;
-											<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.EXPORTEXCEL %>">
+											<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.EXPORTEXCEL%>">
 												<a class="btn btn-purple btn-sm exportBut">
 													导出报表
 												</a> 
@@ -173,22 +173,24 @@
 
 									<tbody>
 									<c:forEach items="${exceptionList }" var="exception">
-										<% Operation exception = (Operation)pageContext.findAttribute("exception"); %>
+										<%
+										  Operation exception = (Operation)pageContext.findAttribute("exception");
+										%>
 										<tr class="settle">
 											<td>${exception.operId }</td>
-											<td><%=ReflectUtils.getDesc(exception.getOperType()) %></td>
+											<td><%=ReflectUtils.getDesc(exception.getOperType())%></td>
 											<td>${exception.payCustId }</td>
 											<td>${exception.payCustName }</td>
 											<td>${exception.transAmt }</td>
 											<td>${exception.rcvCustId }</td>
 											<td>${exception.rcvCustName }</td>
-											<td><%=ReflectUtils.getDesc(exception.getStatus()) %></td>
+											<td><%=ReflectUtils.getDesc(exception.getStatus())%></td>
 											<td>${exception.operDatetime }</td>
 											<td class="buttonTd">
 												<input type="hidden" name="operId" value="${exception.operId }"/>
 												<input type="hidden" name="operType" value="${exception.operType }"/>
 												<input type="hidden" name="status" value="${exception.status }"/>
-												<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.DETAIL_OPERATION %>">
+												<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.DETAIL_OPERATION%>">
 												   <c:if test="${exception.status !='DEAL_SUCCESS'&& exception.status !='DEAL_CANCELLED'}">
 													<button type="button" class="btn btn-primary btn-xs detailLink" data-toggle='modal'>
 														处理

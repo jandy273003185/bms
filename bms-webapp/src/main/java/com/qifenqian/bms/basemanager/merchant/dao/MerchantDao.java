@@ -2,7 +2,6 @@ package com.qifenqian.bms.basemanager.merchant.dao;
 
 import java.util.List;
 
-import org.gyzb.platform.web.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +10,7 @@ import com.qifenqian.bms.basemanager.merchant.bean.Merchant;
 import com.qifenqian.bms.basemanager.merchant.bean.MerchantVo;
 import com.qifenqian.bms.basemanager.merchant.mapper.CashierManageMapper;
 import com.qifenqian.bms.basemanager.merchant.mapper.MerchantMapper;
+import com.qifenqian.bms.platform.web.page.Page;
 
 @Repository
 public class MerchantDao {

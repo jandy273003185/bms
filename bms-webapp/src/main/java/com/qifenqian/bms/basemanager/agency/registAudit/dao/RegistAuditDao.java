@@ -2,7 +2,6 @@ package com.qifenqian.bms.basemanager.agency.registAudit.dao;
 
 import java.util.List;
 
-import org.gyzb.platform.web.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +13,7 @@ import com.qifenqian.bms.basemanager.merchant.bean.MerchantExport;
 import com.qifenqian.bms.basemanager.merchant.bean.MerchantVo;
 import com.qifenqian.bms.upgrade.merchant.bean.MerchantRegisterInfo;
 import com.qifenqian.bms.upgrade.merchant.bean.TdAuditRecodeInfo;
+import com.qifenqian.bms.platform.web.page.Page;
 
 @Repository
 public class RegistAuditDao {

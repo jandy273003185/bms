@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.paymentmanager.mapper.PaymentManagerMapper">
+<mapper namespace="com.qifenqian.bms.paymentmanager.mapper.PaymentManagerMapper">
 
- <select id="selecPaymentList" resultType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatDetail" parameterType="String">
+ <select id="selecPaymentList" resultType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatDetail" parameterType="String">
 	SELECT
 	T.BAT_NO,
 	T.ROW_NO,
@@ -47,7 +47,7 @@
 	</foreach>
     </insert> 
 
- <select id="selectCardBinList" resultType="com.sevenpay.bms.paymentmanager.bean.TdBankCardBin">
+ <select id="selectCardBinList" resultType="com.qifenqian.bms.paymentmanager.bean.TdBankCardBin">
 		SELECT
 		T.CARD_BIN,
 		T.CARD_NAME,
@@ -61,7 +61,7 @@
 		LENGTH(CARD_BIN) DESC;
 	</select>
 
-<update id="upPaymentBatDetail" parameterType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatDetail">
+<update id="upPaymentBatDetail" parameterType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatDetail">
 		UPDATE `stcdb`.`td_agent_payment_bat_detail_info` T
 		<set>
 			<if test="recAccountName != null">
@@ -98,7 +98,7 @@
 			</if>
 	</update>
 
- <insert id="insertBatInfo" parameterType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatInfo">
+ <insert id="insertBatInfo" parameterType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatInfo">
 		INSERT INTO `stcdb`.`td_agent_payment_bat_info` (
 		`BAT_NO`,
 		`PAER_ACCT_NO`,
@@ -121,7 +121,7 @@
 		);
 	</insert>
 
-	<update id="upPaymentBatInfo" parameterType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatInfo">
+	<update id="upPaymentBatInfo" parameterType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatInfo">
 		UPDATE `stcdb`.`td_agent_payment_bat_info` T
 		<set>
 			<if test="paerAcctNo != null">
@@ -189,7 +189,7 @@
 	</update>
 
 	
-	<select id="selToPayCustList" resultType="com.sevenpay.bms.basemanager.custInfo.bean.TdCustInfo" parameterType="com.sevenpay.bms.basemanager.custInfo.bean.TdCustInfo">
+	<select id="selToPayCustList" resultType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo" parameterType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo">
 		SELECT
 		  t1.CUST_ID,
 		  t1.MERCHANT_CODE,
@@ -237,7 +237,7 @@
 	</select>
 	
 
-	<select id="selRechargeCustList" resultType="com.sevenpay.bms.basemanager.custInfo.bean.TdCustInfo" parameterType="string">
+	<select id="selRechargeCustList" resultType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo" parameterType="string">
 		SELECT
 		  t1.CUST_ID,
 		  t1.MERCHANT_CODE,
@@ -269,7 +269,7 @@
 	</select>
 	
 
-	<select id="selToPayCust" resultType="com.sevenpay.bms.basemanager.custInfo.bean.TdCustInfo"  parameterType="com.sevenpay.bms.basemanager.custInfo.bean.TdCustInfo">
+	<select id="selToPayCust" resultType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo"  parameterType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo">
 		SELECT
 			t1.*,
 			t2.EMAIL,
@@ -287,7 +287,7 @@
 	</select>
 	
 	<!-- 账户信息-更新客户信息表 -->
-	<update id="updateToPayCust" parameterType="com.sevenpay.bms.basemanager.custInfo.bean.TdCustInfo" >
+	<update id="updateToPayCust" parameterType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo" >
 		UPDATE td_cust_info t
 		<set>
 			
@@ -304,7 +304,7 @@
 	</update>
 	
 	
-	<insert id="insertTdPaymentFeeInfo"  parameterType="com.sevenpay.bms.paymentmanager.bean.TdPaymentFeeInfo">
+	<insert id="insertTdPaymentFeeInfo"  parameterType="com.qifenqian.bms.paymentmanager.bean.TdPaymentFeeInfo">
 		INSERT INTO `stcdb`.`td_payment_fee_info` (
 			`ACCOUNT_NO`,
 			`PAY_FEE`,
@@ -323,17 +323,17 @@
 
 	</insert>
 	
-	<select id="selTdPaymentFeeInfo" resultType="com.sevenpay.bms.paymentmanager.bean.TdPaymentFeeInfo"  parameterType="com.sevenpay.bms.paymentmanager.bean.TdPaymentFeeInfo">
+	<select id="selTdPaymentFeeInfo" resultType="com.qifenqian.bms.paymentmanager.bean.TdPaymentFeeInfo"  parameterType="com.qifenqian.bms.paymentmanager.bean.TdPaymentFeeInfo">
 		select * from td_payment_fee_info where account_no =#{accountNo, jdbcType=VARCHAR}
 	</select>
 	
-	<select id="getDefaultFeeInfo" resultType="com.sevenpay.bms.paymentmanager.bean.TdPayInInfo"  parameterType="com.sevenpay.bms.paymentmanager.bean.TdPayInInfo">
+	<select id="getDefaultFeeInfo" resultType="com.qifenqian.bms.paymentmanager.bean.TdPayInInfo"  parameterType="com.qifenqian.bms.paymentmanager.bean.TdPayInInfo">
 		select * from td_pay_in_info where td_pay_in_info.`STATUS`='00' and FEE_CODE =#{feeCode, jdbcType=VARCHAR}
 	</select>
 	
 	
 	
-	<select id="getToPayHistory" resultType="com.sevenpay.bms.paymentmanager.bean.TdPaymentAccountAuditInfo"  parameterType="com.sevenpay.bms.paymentmanager.bean.TdPaymentAccountAuditInfo">
+	<select id="getToPayHistory" resultType="com.qifenqian.bms.paymentmanager.bean.TdPaymentAccountAuditInfo"  parameterType="com.qifenqian.bms.paymentmanager.bean.TdPaymentAccountAuditInfo">
 		SELECT
 			t.ID,
 			t.ACCOUNT,
@@ -352,7 +352,7 @@
 	
 	
 	
-	<select id="getSingleToPayInfo" resultType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatInfo"  parameterType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatInfo">
+	<select id="getSingleToPayInfo" resultType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatInfo"  parameterType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatInfo">
 		SELECT
 			t1.`BAT_NO`,
 			t1.`PAER_ACCT_NO`,
@@ -392,7 +392,7 @@
 		    AND t1.BAT_NO = #{batNo, jdbcType=VARCHAR}
 	</select>
 	
-<select id="getBatchToPayInfo" resultType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatInfo"  parameterType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatInfo">
+<select id="getBatchToPayInfo" resultType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatInfo"  parameterType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatInfo">
 		SELECT
 			t1.`BAT_NO`,
 			t1.`PAER_ACCT_NO`,
@@ -418,7 +418,7 @@
 		     t1.BAT_NO = #{batNo, jdbcType=VARCHAR}
 </select>
 	
-	<insert id="insertPaymentAccountAuditInfo"  parameterType="com.sevenpay.bms.paymentmanager.bean.TdPaymentAccountAuditInfo">
+	<insert id="insertPaymentAccountAuditInfo"  parameterType="com.qifenqian.bms.paymentmanager.bean.TdPaymentAccountAuditInfo">
 		INSERT INTO `stcdb`.`td_payment_account_audit_info` (
 			`ID`,
 			`ACCOUNT`,
@@ -441,7 +441,7 @@
 
 	
 	
-<select id="queryAcctSevenToPayBuss"   resultType="com.sevenpay.bms.paymentmanager.bean.AcctSevenBussAgentpay" parameterType="com.sevenpay.bms.paymentmanager.bean.AcctSevenBussAgentpay">
+<select id="queryAcctSevenToPayBuss"   resultType="com.qifenqian.bms.paymentmanager.bean.AcctSevenBussAgentpay" parameterType="com.qifenqian.bms.paymentmanager.bean.AcctSevenBussAgentpay">
 
 	SELECT
 	t.CUST_ID,
@@ -470,7 +470,7 @@
 	</select>
 	
 	
-<select id="getAudingPaymentBatList"  resultType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatInfo" parameterType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatInfo">
+<select id="getAudingPaymentBatList"  resultType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatInfo" parameterType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatInfo">
 
 	  SELECT
 	  temp.*, (
@@ -573,7 +573,7 @@
 
 
 
-<select id="exportPayment"  resultType="com.sevenpay.bms.paymentmanager.bean.TdAuditReportExport" parameterType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatInfo">
+<select id="exportPayment"  resultType="com.qifenqian.bms.paymentmanager.bean.TdAuditReportExport" parameterType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatInfo">
 
 		SELECT
 			temp.BAT_NO,
@@ -720,7 +720,7 @@
 
 	
 
-<select id="getPaymentRecodeQuery"  resultType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatInfo" parameterType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatInfo">
+<select id="getPaymentRecodeQuery"  resultType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatInfo" parameterType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatInfo">
 
 	  SELECT
 	  temp.*, (
@@ -804,7 +804,7 @@
 	
 	
 	
-<select id="getPaymentRecodeQueryExcel"  resultType="com.sevenpay.bms.paymentmanager.bean.TdRecodeExport" parameterType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatInfo">
+<select id="getPaymentRecodeQueryExcel"  resultType="com.qifenqian.bms.paymentmanager.bean.TdRecodeExport" parameterType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatInfo">
 
 	 SELECT
   temp.BAT_NO,
@@ -940,7 +940,7 @@
 	
 	
 	
-<select id="getPaymentReportList"  resultType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatInfo" parameterType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatInfo">
+<select id="getPaymentReportList"  resultType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatInfo" parameterType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatInfo">
 
 	  SELECT
 	  temp.*, (
@@ -1015,7 +1015,7 @@
 	
 	
 	
-<select id="getReportExport"  resultType="com.sevenpay.bms.paymentmanager.bean.TdReportExport" parameterType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatInfo">
+<select id="getReportExport"  resultType="com.qifenqian.bms.paymentmanager.bean.TdReportExport" parameterType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatInfo">
 
 	SELECT
 	temp.BAT_NO,
@@ -1116,7 +1116,7 @@
 	  order by temp.CREATE_TIME DESC
 </select>
 
-<select id="getBatchAuditPayment" parameterType="String" resultType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatInfo">
+<select id="getBatchAuditPayment" parameterType="String" resultType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatInfo">
 
 	SELECT
 	t.*,
@@ -1143,7 +1143,7 @@
 	 </where>
 </select>
 
-<select id="getBatchAuditPaymentList" parameterType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatDetail" resultType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatDetail">
+<select id="getBatchAuditPaymentList" parameterType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatDetail" resultType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatDetail">
     SELECT
 	t.BAT_NO,
 	t.ROW_NO,
@@ -1171,7 +1171,7 @@
 	 </where>
 </select>
 	
-<select id="selectCardName" resultType="com.sevenpay.bms.paymentmanager.bean.TdBankCardBin"  parameterType="com.sevenpay.bms.paymentmanager.bean.TdBankCardBin">
+<select id="selectCardName" resultType="com.qifenqian.bms.paymentmanager.bean.TdBankCardBin"  parameterType="com.qifenqian.bms.paymentmanager.bean.TdBankCardBin">
 		SELECT
 		T.CARD_BIN,
 		T.CARD_NAME,
@@ -1186,7 +1186,7 @@
 </select> 	
 
 
-<select id="selectBatRecode" resultType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatInfo"  parameterType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatInfo">
+<select id="selectBatRecode" resultType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatInfo"  parameterType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatInfo">
 		SELECT
 			`BAT_NO`,
 			`PAER_ACCT_NO`,
@@ -1211,7 +1211,7 @@
 
 
 	
-<insert id="InsertTdPaymentAuditRecode" parameterType="com.sevenpay.bms.paymentmanager.bean.TdPaymentAuditRecode">
+<insert id="InsertTdPaymentAuditRecode" parameterType="com.qifenqian.bms.paymentmanager.bean.TdPaymentAuditRecode">
 	INSERT INTO  td_payment_audit_recode (
 			`id`,
 		   `BAT_NO`,
@@ -1231,7 +1231,7 @@
 			)
 </insert>
 
-<update id="updateTdPaymentBatInfo" parameterType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatInfo">
+<update id="updateTdPaymentBatInfo" parameterType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatInfo">
 		UPDATE `stcdb`.`td_agent_payment_bat_record` t
 		<set>
 		  <if test="tradeStatus != null and tradeStatus != ''">
@@ -1246,7 +1246,7 @@
 			t.`BAT_NO` =#{batNo,jdbcType=VARCHAR};
 </update>
 
-	<update id="updateTdPaymentSingleInfo" parameterType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatInfo">
+	<update id="updateTdPaymentSingleInfo" parameterType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatInfo">
 			UPDATE `stcdb`.`td_agent_payment_single_record` t
 			<set>
 			  <if test="tradeStatus != null and tradeStatus != ''">
@@ -1261,7 +1261,7 @@
 
 
 		
-<update id="updateTdPaymentBatDetail" parameterType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatDetail">
+<update id="updateTdPaymentBatDetail" parameterType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatDetail">
 		UPDATE `stcdb`.`td_agent_payment_bat_detail_record` t
 		<set>
 		  <if test="tradeStatus != null and tradeStatus != ''">
@@ -1276,7 +1276,7 @@
 		t.`BAT_NO` =#{batNo,jdbcType=VARCHAR};
 </update>
 	
-<select id="getPaymentCheckHistory" parameterType="String" resultType="com.sevenpay.bms.paymentmanager.bean.TdPaymentAuditRecode">
+<select id="getPaymentCheckHistory" parameterType="String" resultType="com.qifenqian.bms.paymentmanager.bean.TdPaymentAuditRecode">
 
 SELECT
 	t.*, p.PAER_ACCT_NO,
@@ -1300,7 +1300,7 @@ FROM
 </select>	
 
 	
-<select id="getSinglePaymentCheckHistory" parameterType="String" resultType="com.sevenpay.bms.paymentmanager.bean.TdPaymentAuditRecode">
+<select id="getSinglePaymentCheckHistory" parameterType="String" resultType="com.qifenqian.bms.paymentmanager.bean.TdPaymentAuditRecode">
 SELECT
 	t.*, p2.PAER_ACCT_NO,
   (
@@ -1327,7 +1327,7 @@ left join td_agent_payment_single_record p2 on t.BAT_NO=p2.BAT_NO
 
 
 	
-<select id="getTdAgentPaymentChildRecord" parameterType="String" resultType="com.sevenpay.bms.paymentmanager.bean.TdAgentPaymentChildRecord">
+<select id="getTdAgentPaymentChildRecord" parameterType="String" resultType="com.qifenqian.bms.paymentmanager.bean.TdAgentPaymentChildRecord">
 	SELECT
 		c.*
 	FROM
@@ -1338,7 +1338,7 @@ left join td_agent_payment_single_record p2 on t.BAT_NO=p2.BAT_NO
 	AND BAT_NO = #{batNo,jdbcType=VARCHAR}
 </select>
 	
-<select id="selTdAgentPaymentChildRecord" parameterType="String" resultType="com.sevenpay.bms.paymentmanager.bean.TdAgentPaymentChildRecord">
+<select id="selTdAgentPaymentChildRecord" parameterType="String" resultType="com.qifenqian.bms.paymentmanager.bean.TdAgentPaymentChildRecord">
 	SELECT
 		c.*
 	FROM
@@ -1349,7 +1349,7 @@ left join td_agent_payment_single_record p2 on t.BAT_NO=p2.BAT_NO
 	AND BAT_NO = #{batNo,jdbcType=VARCHAR}
 </select>
 
-<insert id="addTdAgentPaymentChildRecord" parameterType="com.sevenpay.bms.paymentmanager.bean.TdAgentPaymentChildRecord">
+<insert id="addTdAgentPaymentChildRecord" parameterType="com.qifenqian.bms.paymentmanager.bean.TdAgentPaymentChildRecord">
 		INSERT INTO `stcdb`.`td_agent_payment_child_record` (
 			`RECORD_ID`,
 			`BAT_NO`,
@@ -1379,7 +1379,7 @@ left join td_agent_payment_single_record p2 on t.BAT_NO=p2.BAT_NO
 
 
 
-<select id="getSingleInfo" parameterType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatInfo" resultType="com.sevenpay.bms.paymentmanager.bean.TdPaymentBatInfo">
+<select id="getSingleInfo" parameterType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatInfo" resultType="com.qifenqian.bms.paymentmanager.bean.TdPaymentBatInfo">
 
     SELECT t.*,(
 	SELECT
@@ -1405,7 +1405,7 @@ left join td_agent_payment_single_record p2 on t.BAT_NO=p2.BAT_NO
 
 
 
-<select id="getBankScanPath" resultType="string" parameterType="com.sevenpay.bms.paymentmanager.bean.TdPayCreditInfo">
+<select id="getBankScanPath" resultType="string" parameterType="com.qifenqian.bms.paymentmanager.bean.TdPayCreditInfo">
 		SELECT
 			t.SCAN_COPY_PATH
 		FROM
@@ -1427,7 +1427,7 @@ left join td_agent_payment_single_record p2 on t.BAT_NO=p2.BAT_NO
 
 
 
-<select id="rechargePaymentList" resultType="com.sevenpay.bms.paymentmanager.bean.TdPayCreditInfo" parameterType="com.sevenpay.bms.paymentmanager.bean.TdPayCreditInfo">
+<select id="rechargePaymentList" resultType="com.qifenqian.bms.paymentmanager.bean.TdPayCreditInfo" parameterType="com.qifenqian.bms.paymentmanager.bean.TdPayCreditInfo">
 
 	SELECT
 	temp.*,
@@ -1500,7 +1500,7 @@ order by  temp.CREATE_TIME DESC
 </select>
 
 
-<select id="selRechargeInfo" parameterType="String" resultType="com.sevenpay.bms.paymentmanager.bean.TdPayCreditInfo">
+<select id="selRechargeInfo" parameterType="String" resultType="com.qifenqian.bms.paymentmanager.bean.TdPayCreditInfo">
 
  SELECT
 	t.*,
@@ -1530,7 +1530,7 @@ ORDER BY t.id  DESC
 
 </select>
 
-<insert id="InsertTdPayCreditAuditInfo" parameterType="com.sevenpay.bms.paymentmanager.bean.TdPayCreditAuditInfo">
+<insert id="InsertTdPayCreditAuditInfo" parameterType="com.qifenqian.bms.paymentmanager.bean.TdPayCreditAuditInfo">
 	INSERT INTO  td_pay_credit_audit_info (
 			`ID`,
 		   `CREDIT_ID`,
@@ -1556,7 +1556,7 @@ ORDER BY t.id  DESC
 
 
 
-<select id="getRechargeCheckHistory" parameterType="String" resultType="com.sevenpay.bms.paymentmanager.bean.TdPayCreditAuditInfo">
+<select id="getRechargeCheckHistory" parameterType="String" resultType="com.qifenqian.bms.paymentmanager.bean.TdPayCreditAuditInfo">
   SELECT
 	t.*,
   u.EMAIL,
@@ -1579,7 +1579,7 @@ FROM
 
 
 
-<update id="updateTdPayCreditInfo" parameterType="com.sevenpay.bms.paymentmanager.bean.TdPayCreditInfo">
+<update id="updateTdPayCreditInfo" parameterType="com.qifenqian.bms.paymentmanager.bean.TdPayCreditInfo">
 		UPDATE `stcdb`.`td_pay_credit_info` t
 		<set>
 		  <if test="auditStatus != null and auditStatus != ''">
@@ -1596,7 +1596,7 @@ FROM
 
 
 
-<update id="updateTdPayCreditAuditInfo" parameterType="com.sevenpay.bms.paymentmanager.bean.TdPayCreditAuditInfo">
+<update id="updateTdPayCreditAuditInfo" parameterType="com.qifenqian.bms.paymentmanager.bean.TdPayCreditAuditInfo">
 		UPDATE `stcdb`.`td_pay_credit_audit_info` t
 		<set>
 		  <if test="secondAuditTime != null and secondAuditTime != ''">
@@ -1610,7 +1610,7 @@ FROM
 		t.`CREDIT_ID` =#{creditId,jdbcType=VARCHAR};
 </update>
 
-<update id="updateToTdPayCreditAuditInfo" parameterType="com.sevenpay.bms.paymentmanager.bean.TdPayCreditInfo">
+<update id="updateToTdPayCreditAuditInfo" parameterType="com.qifenqian.bms.paymentmanager.bean.TdPayCreditInfo">
 		UPDATE `stcdb`.`td_pay_credit_audit_info` t
 		<set>
 		  <if test="payStatus != null and payStatus != ''">
@@ -1635,7 +1635,7 @@ FROM
  
 </select>
 
-<select id="getOrderInfoByCreditId" parameterType="String" resultType="com.sevenpay.bms.basemanager.aggregatepayment.orderinfo.bean.OrderInfoBean">
+<select id="getOrderInfoByCreditId" parameterType="String" resultType="com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.OrderInfoBean">
  	SELECT 
  		o.ORDER_ID,
  		o.EXT_DATA2,
@@ -1681,7 +1681,7 @@ FROM
 		LIMIT 1
 	</select>
 	
-		<select id="selCustInfoByEmail" parameterType="String"  resultType="com.sevenpay.bms.basemanager.custInfo.bean.TdCustInfo">
+		<select id="selCustInfoByEmail" parameterType="String"  resultType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo">
 		SELECT
 			c.*, 
   			t.*
@@ -1692,7 +1692,7 @@ FROM
 			t.email = #{email,jdbcType = VARCHAR} AND c.STATE = '00' AND t.STATE = '00'
 	</select>
 	
-	<select id="getChannelInfoByMerchantCode" parameterType="java.lang.String" resultType="com.sevenpay.bms.paymentmanager.bean.TdChannelInfo">
+	<select id="getChannelInfoByMerchantCode" parameterType="java.lang.String" resultType="com.qifenqian.bms.paymentmanager.bean.TdChannelInfo">
 		select 
 			c.*
 		from 
@@ -1705,7 +1705,7 @@ FROM
 			p.merchant_code = #{merchantCode,jdbcType=VARCHAR}
  	</select>
  	
- 	<select id="selMerchantChannelList" parameterType="com.sevenpay.bms.paymentmanager.bean.TdChannelInfo" resultType="com.sevenpay.bms.paymentmanager.bean.TdChannelInfo">
+ 	<select id="selMerchantChannelList" parameterType="com.qifenqian.bms.paymentmanager.bean.TdChannelInfo" resultType="com.qifenqian.bms.paymentmanager.bean.TdChannelInfo">
  		select
  			c.channel_id,
  			c.channel_name,

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.unionPay.tradedoc.mapper.TradeDocMapper">
+<mapper namespace="com.qifenqian.bms.unionPay.tradedoc.mapper.TradeDocMapper">
 
-	<select id="selectDocList" parameterType="com.sevenpay.bms.unionPay.tradedoc.bean.TradeDoc" resultType="com.sevenpay.bms.unionPay.tradedoc.bean.TradeDoc">
+	<select id="selectDocList" parameterType="com.qifenqian.bms.unionPay.tradedoc.bean.TradeDoc" resultType="com.qifenqian.bms.unionPay.tradedoc.bean.TradeDoc">
 		SELECT
 		T.*
 		FROM

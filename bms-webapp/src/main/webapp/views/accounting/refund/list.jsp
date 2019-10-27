@@ -138,7 +138,7 @@
 												<i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
 										</gyzbadmin:function>
-										<gyzbadmin:function url="<%=RefundBillPath.BASE + RefundBillPath.REFUNDEXPORT %>">
+										<gyzbadmin:function url="<%=RefundBillPath.BASE + RefundBillPath.REFUNDEXPORT%>">
 										<a class="btn btn-purple btn-sm exportBut">
 												导出报表
 										</a> 
@@ -216,7 +216,7 @@
 														<button type="button"   id="btnEmail2"  class="btn btn-purple btn-xs" >查看详情</button>										
 													</a>
 												</c:if>	
-												<gyzbadmin:function url="<%=RefundBillPath.BASE + RefundBillPath.APPROVAL %>">
+												<gyzbadmin:function url="<%=RefundBillPath.BASE + RefundBillPath.APPROVAL%>">
 													<c:if test="${refund.auditState=='01'}">
 														<a href="#" class="tooltip-success approveLink" data-rel="tooltip" title="Edit" data-toggle='modal'  data-target="#approveModal">
 															<button type="button"   id="btnEmail2"  class="btn btn-primary btn-xs"  >退款审核</button>

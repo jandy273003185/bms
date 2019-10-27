@@ -2,7 +2,6 @@ package com.qifenqian.bms.myworkspace.applicationForm.service;
 
 import java.util.List;
 
-import org.gyzb.platform.web.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +11,7 @@ import com.qifenqian.bms.myworkspace.applicationForm.bean.ActHiProcinst;
 import com.qifenqian.bms.myworkspace.applicationForm.bean.ApplicationFormBean;
 import com.qifenqian.bms.myworkspace.applicationForm.dao.ApplicationFormDAO;
 import com.qifenqian.bms.myworkspace.applicationForm.mapper.ApplicationFormMapper;
+import com.qifenqian.bms.platform.web.page.Page;
 
 @Service
 public class ApplicationFormService {

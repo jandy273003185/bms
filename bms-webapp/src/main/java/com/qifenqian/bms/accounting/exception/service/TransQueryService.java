@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
-import org.gyzb.platform.common.utils.SequenceUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +35,7 @@ import com.qifenqian.bms.accounting.exception.dao.transrecordflow.bean.TransReco
 import com.qifenqian.bms.basemanager.Constant;
 import com.qifenqian.bms.basemanager.utils.DatetimeUtils;
 import com.qifenqian.bms.expresspay.CommonService;
+import com.qifenqian.bms.platform.common.utils.SequenceUtils;
 import com.qifenqian.bms.unionPay.tradeylresult.bean.TradeYlResut;
 import com.qifenqian.bms.unionPay.tradeylresult.mapper.TradeYlResultMapper;
 import com.sevenpay.gateway.jgkj.Head;

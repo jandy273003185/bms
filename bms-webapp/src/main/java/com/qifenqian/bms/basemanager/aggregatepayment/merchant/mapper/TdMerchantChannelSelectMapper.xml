@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.aggregatepayment.merchant.mapper.TdMerchantChannelSelectMapper">
+<mapper namespace="com.qifenqian.bms.basemanager.aggregatepayment.merchant.mapper.TdMerchantChannelSelectMapper">
 	
-	<select id="selectMerchantChannel" parameterType="com.sevenpay.bms.basemanager.aggregatepayment.merchant.bean.TdMerchantChannel"
-	resultType="com.sevenpay.bms.basemanager.aggregatepayment.merchant.bean.TdMerchantChannel">
+	<select id="selectMerchantChannel" parameterType="com.qifenqian.bms.basemanager.aggregatepayment.merchant.bean.TdMerchantChannel"
+	resultType="com.qifenqian.bms.basemanager.aggregatepayment.merchant.bean.TdMerchantChannel">
 			select  
 				t.mch_id,
 				t.chanel,

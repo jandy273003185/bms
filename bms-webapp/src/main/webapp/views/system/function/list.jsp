@@ -393,7 +393,7 @@
 													清空
 													<i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
-											<gyzbadmin:function url="<%=FunctionPath.BASE + FunctionPath.ADD %>">
+											<gyzbadmin:function url="<%=FunctionPath.BASE + FunctionPath.ADD%>">
 											<button  class="btn btn-purple btn-sm" data-toggle='modal' data-target="#addfunctionModal">
 												新增
 												<i class="icon-plus-sign icon-on-right bigger-110"></i>
@@ -445,7 +445,7 @@
 												<fmt:formatDate value="${function.instDatetime}" pattern="yyyy-MM-dd HH:mm:ss" />
 												</td>
 												<td>
-													<gyzbadmin:function url="<%=FunctionPath.BASE + FunctionPath.EDIT %>">
+													<gyzbadmin:function url="<%=FunctionPath.BASE + FunctionPath.EDIT%>">
 													<a href="#updatefunctionModal"  data-toggle='modal' class="tooltip-success updatefunction" data-rel="tooltip" title="Edit">
 														<span class="green">
 															<i class="icon-edit bigger-120"></i>

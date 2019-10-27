@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.unionPay.tradeylresult.mapper.TradeYlResultMapper">
-	<select id="selectTransYlResut" parameterType="com.sevenpay.bms.unionPay.tradeylresult.bean.TradeYlResut" resultType="com.sevenpay.bms.unionPay.tradeylresult.bean.TradeYlResut">
+<mapper namespace="com.qifenqian.bms.unionPay.tradeylresult.mapper.TradeYlResultMapper">
+	<select id="selectTransYlResut" parameterType="com.qifenqian.bms.unionPay.tradeylresult.bean.TradeYlResut" resultType="com.qifenqian.bms.unionPay.tradeylresult.bean.TradeYlResut">
 			SELECT
 				Y.TRANS_ID,
 				Y.TRANS_SN,
@@ -47,7 +47,7 @@
 		ORDER BY Y.TRANS_SUBMIT_TIME DESC
 	</select>
 	
-	<update id="updateTransYlResut" parameterType="com.sevenpay.bms.unionPay.tradeylresult.bean.TradeYlResut">
+	<update id="updateTransYlResut" parameterType="com.qifenqian.bms.unionPay.tradeylresult.bean.TradeYlResut">
 		UPDATE TD_TRANS_YL S
 		<set>
 			<if test="ylRespCodeYb != null">
@@ -66,7 +66,7 @@
 		WHERE S.TRANS_ID = #{transId,jdbcType=VARCHAR}
 	</update>
 	
-	<select id="selectTransYlResutByTransId" parameterType="string" resultType="com.sevenpay.bms.unionPay.tradeylresult.bean.TradeYlResut">
+	<select id="selectTransYlResutByTransId" parameterType="string" resultType="com.qifenqian.bms.unionPay.tradeylresult.bean.TradeYlResut">
 		SELECT
 			Y.TRANS_ID,
 			Y.TRANS_SN,

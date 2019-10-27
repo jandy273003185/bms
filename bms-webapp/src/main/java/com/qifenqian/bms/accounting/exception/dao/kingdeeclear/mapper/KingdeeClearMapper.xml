@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sevenpay.bms.accounting.exception.dao.kingdeeclear.mapper.KingdeeClearMapper">
-	<select id="selectKingdeeClearByOperaId" resultType="com.sevenpay.bms.accounting.exception.dao.kingdeeclear.bean.KingdeeClear">
+<mapper namespace="com.qifenqian.bms.accounting.exception.dao.kingdeeclear.mapper.KingdeeClearMapper">
+	<select id="selectKingdeeClearByOperaId" resultType="com.qifenqian.bms.accounting.exception.dao.kingdeeclear.bean.KingdeeClear">
   		SELECT 
   			T.*,
 			CASE 
@@ -19,13 +19,13 @@
 		WHERE T.OPER_ID = #{operId,jdbcType = VARCHAR}
 	</select>
 	
-	<select id="queryKingdeeEntryList" resultType="com.sevenpay.bms.accounting.exception.dao.kingdeeclear.bean.KingdeePayEntry">
+	<select id="queryKingdeeEntryList" resultType="com.qifenqian.bms.accounting.exception.dao.kingdeeclear.bean.KingdeePayEntry">
 		SELECT T.*
 		FROM BMS_CLEAR_KINGDEE_PAY_ENTRY T
 		WHERE T.CLEAR_ID  = #{clearId,jdbcType = VARCHAR}
 	</select>
 	
-	<select id="selectKingdeeClearByClearId" resultType="com.sevenpay.bms.accounting.exception.dao.kingdeeclear.bean.KingdeeClear">
+	<select id="selectKingdeeClearByClearId" resultType="com.qifenqian.bms.accounting.exception.dao.kingdeeclear.bean.KingdeeClear">
   		SELECT 
 			T.*
 		FROM BMS_CLEAR_KINGDEE_PAY T
@@ -65,7 +65,7 @@
 		)
 	</update>
 	
-	<update id="updateKingdeeClear" parameterType="com.sevenpay.bms.accounting.exception.dao.kingdeeclear.bean.KingdeeClear">
+	<update id="updateKingdeeClear" parameterType="com.qifenqian.bms.accounting.exception.dao.kingdeeclear.bean.KingdeeClear">
 		UPDATE BMS_CLEAR_KINGDEE_PAY T
 		<set>
 			<if test="status!=null and status!='' ">

@@ -2,9 +2,6 @@ package com.qifenqian.bms.busswithdrawbill.service;
 
 import java.util.Date;
 
-import org.gyzb.platform.common.utils.DateUtils;
-import org.gyzb.platform.web.admin.utils.WebUtils;
-import org.sevenpay.platform.utils.BusinessUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +13,9 @@ import com.qifenqian.bms.accounting.financequery.bean.CommerciaBalance;
 import com.qifenqian.bms.basemanager.utils.DatetimeUtils;
 import com.qifenqian.bms.busswithdrawbill.bean.TdBussWithdrawBill;
 import com.qifenqian.bms.busswithdrawbill.mapper.BussWithdrawBillMapper;
+import com.qifenqian.bms.platform.common.utils.DateUtils;
+import com.qifenqian.bms.platform.utils.BusinessUtils;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 import com.sevenpay.invoke.SevenpayCoreServiceInterface;
 import com.sevenpay.invoke.common.message.request.RequestMessage;
 import com.sevenpay.invoke.common.message.response.ResponseMessage;

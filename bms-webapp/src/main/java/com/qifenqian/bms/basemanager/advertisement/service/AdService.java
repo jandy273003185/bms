@@ -3,14 +3,14 @@ package com.qifenqian.bms.basemanager.advertisement.service;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.gyzb.platform.web.admin.user.bean.User;
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qifenqian.bms.basemanager.advertisement.bean.Ad;
 import com.qifenqian.bms.basemanager.advertisement.dao.AdDao;
 import com.qifenqian.bms.basemanager.advertisement.mapper.AdMapper;
+import com.qifenqian.bms.platform.web.admin.user.bean.User;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 @Service
 public class AdService {

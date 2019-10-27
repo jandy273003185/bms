@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +24,7 @@ import com.qifenqian.bms.myworkspace.ActViewUrl;
 import com.qifenqian.bms.myworkspace.applicationForm.bean.ActHiProcinst;
 import com.qifenqian.bms.myworkspace.applicationForm.bean.ApplicationFormBean;
 import com.qifenqian.bms.myworkspace.applicationForm.service.ApplicationFormService;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 @RequestMapping(ApplicationFormPath.BASE)
 @Controller
@@ -32,7 +32,7 @@ public class ApplicationFormController {
 
 	private static Logger logger = LoggerFactory.getLogger(ApplicationFormController.class);
 
-	@Autowired
+	@Autowired 
 	private ApplicationFormService applicationFormService;
 
 	@Autowired

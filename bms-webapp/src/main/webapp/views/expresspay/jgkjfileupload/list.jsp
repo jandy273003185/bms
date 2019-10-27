@@ -302,7 +302,7 @@ $(function() {
 													<fmt:formatDate value="${balFile.updateDatetime }" pattern="yyyy-MM-dd HH:mm:ss"/>
 												</td>
 												<td>
-													<gyzbadmin:function url="<%=JgkjFilePath.BASE + JgkjFilePath.DELETE %>">
+													<gyzbadmin:function url="<%=JgkjFilePath.BASE + JgkjFilePath.DELETE%>">
 														<a href="#" class="tooltip-error deleteFileLink" data-rel="tooltip" title="Delete" data-toggle='modal' data-target="#deleteFileModal">
 															<span class="red"><i class="icon-trash bigger-120"></i></span>
 														</a>

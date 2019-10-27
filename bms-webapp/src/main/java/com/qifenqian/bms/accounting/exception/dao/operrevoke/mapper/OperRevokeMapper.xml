@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.accounting.exception.dao.operrevoke.mapper.OperRevokeMapper">
-	<select id="selectRevokeBillById" resultType="com.sevenpay.bms.accounting.exception.dao.operrevoke.bean.OperRevoke">
+<mapper namespace="com.qifenqian.bms.accounting.exception.dao.operrevoke.mapper.OperRevokeMapper">
+	<select id="selectRevokeBillById" resultType="com.qifenqian.bms.accounting.exception.dao.operrevoke.bean.OperRevoke">
 		SELECT
 				T.ORDER_ID,
 				T.ORIGIN_ORDER_ID,
@@ -25,7 +25,7 @@
 				AND T.ORDER_ID = #{orderId,jdbcType = VARCHAR}
 	</select>
 	
-	<select id="selectRechargeRevokeById" resultType="com.sevenpay.bms.accounting.exception.dao.operrevoke.bean.OperRevoke">
+	<select id="selectRechargeRevokeById" resultType="com.qifenqian.bms.accounting.exception.dao.operrevoke.bean.OperRevoke">
 		SELECT
 				T.ORDER_ID,
 				T.ORIGIN_ORDER_ID,
@@ -45,7 +45,7 @@
 				AND T.ORDER_ID = #{orderId,jdbcType = VARCHAR}
 	</select>
 	
-	<select id="selectTransferRevokeById" resultType="com.sevenpay.bms.accounting.exception.dao.operrevoke.bean.OperRevoke">
+	<select id="selectTransferRevokeById" resultType="com.qifenqian.bms.accounting.exception.dao.operrevoke.bean.OperRevoke">
 		SELECT
 				T.ORDER_ID,
 				T.ORIGIN_ORDER_ID,
@@ -70,7 +70,7 @@
 				AND T.ORDER_ID = #{orderId,jdbcType = VARCHAR}
 	</select>
 	
-	<update id="updatePaymentRevoke" parameterType="com.sevenpay.bms.accounting.exception.dao.operrevoke.bean.OperRevoke">
+	<update id="updatePaymentRevoke" parameterType="com.qifenqian.bms.accounting.exception.dao.operrevoke.bean.OperRevoke">
 		UPDATE TD_CUST_TRANS_REVOKE R
 		<set>
 			<if test="revokeStatus!=null">
@@ -83,7 +83,7 @@
 		WHERE R.ORDER_ID = #{orderId,jdbcType = VARCHAR}
 	</update>
 	
-	<update id="updateRechargeRevoke" parameterType="com.sevenpay.bms.accounting.exception.dao.operrevoke.bean.OperRevoke">
+	<update id="updateRechargeRevoke" parameterType="com.qifenqian.bms.accounting.exception.dao.operrevoke.bean.OperRevoke">
 		UPDATE TD_CUST_RECHARGE_REVOKE R
 		<set>
 			<if test="revokeStatus!=null">
@@ -96,7 +96,7 @@
 		WHERE R.ORDER_ID = #{orderId,jdbcType = VARCHAR}
 	</update>
 	
-	<update id="updateTransferRevokeState" parameterType="com.sevenpay.bms.accounting.exception.dao.operrevoke.bean.OperRevoke">
+	<update id="updateTransferRevokeState" parameterType="com.qifenqian.bms.accounting.exception.dao.operrevoke.bean.OperRevoke">
 		UPDATE TD_CUST_TRANSFER_REVOKE R
 		<set>
 			<if test="revokeStatus!=null">

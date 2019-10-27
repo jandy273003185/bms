@@ -1,7 +1,6 @@
 package com.qifenqian.bms.expresspay;
 
 import org.apache.commons.lang3.StringUtils;
-import org.gyzb.platform.common.utils.SpringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import com.qifenqian.bms.basemanager.merchant.mapper.TdLoginUserInfoMapper;
 import com.qifenqian.bms.expresspay.cardholderInfo.bean.Cardholder;
 import com.qifenqian.bms.expresspay.mpper.CommonMapper;
 import com.qifenqian.bms.expresspay.mpper.JgkjCardMapper;
+import com.qifenqian.bms.platform.common.utils.SpringUtils;
 import com.sevenpay.gateway.k3cloud.IK3Cloud;
 import com.sevenpay.invoke.SevenpayCoreServiceInterface;
 import com.sevenpay.plugin.IPlugin;
@@ -51,8 +51,8 @@ public class CommonService {
 	 * @return
 	 */
 	public SevenpayCoreServiceInterface getSevenpayCoreServiceInterface() {
-		SevenpayCoreServiceInterface interfaceService = (SevenpayCoreServiceInterface) SpringUtils
-				.getBean("coreHttpInvokerProxy");
+		SevenpayCoreServiceInterface interfaceService = SpringUtils
+				.getBean(SevenpayCoreServiceInterface.class);
 		return interfaceService;
 	}
 

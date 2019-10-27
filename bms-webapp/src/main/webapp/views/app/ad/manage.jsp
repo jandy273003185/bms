@@ -346,7 +346,7 @@ function showCertAttribute1Image(obj){
 												<i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
 										
-											<gyzbadmin:function url="<%=AdManagePath.BASE + AdManagePath.ADD  %>">
+											<gyzbadmin:function url="<%=AdManagePath.BASE + AdManagePath.ADD%>">
 											<button  class="btn btn-purple btn-sm" data-toggle='modal' data-target="#addAdModal">
 												新增
 												<i class="icon-plus-sign icon-on-right bigger-110"></i>
@@ -388,14 +388,14 @@ function showCertAttribute1Image(obj){
 													<fmt:formatDate value="${adManage.createTime }" pattern="yyyy-MM-dd HH:mm"/>	
 												</td>																	
 												<td>
-													<gyzbadmin:function url="<%=AdManagePath.BASE + AdManagePath.UPDATE %>">
+													<gyzbadmin:function url="<%=AdManagePath.BASE + AdManagePath.UPDATE%>">
 														<a href="#updateAdModal"  data-toggle='modal' class="tooltip-success updateAdLink"  data-rel="tooltip" title="Edit">
 															<span class="green">
 																<i class="icon-edit bigger-120"></i>
 															</span>
 														</a>
 													</gyzbadmin:function>
-													<gyzbadmin:function url="<%=AdManagePath.BASE + AdManagePath.DELETE %>">
+													<gyzbadmin:function url="<%=AdManagePath.BASE + AdManagePath.DELETE%>">
 														<a href="#deleteAdModal" data-toggle='modal' class="tooltip-error deleteAdLink" data-rel="tooltip" title="Delete">
 															<span class="red">
 																<i class="icon-trash bigger-120"></i>

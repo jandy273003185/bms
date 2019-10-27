@@ -14,20 +14,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.gyzb.platform.web.Constants;
-import org.gyzb.platform.web.admin.function.bean.Function;
-import org.gyzb.platform.web.admin.login.LoginPath;
-import org.gyzb.platform.web.admin.user.bean.User;
-import org.gyzb.platform.web.admin.utils.PrivilegeUtils;
-import org.gyzb.platform.web.admin.utils.WebUtils;
-import org.sevenpay.platform.utils.CommonData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.meeting.luckdraw.LuckDrawPath;
 import com.qifenqian.bms.meeting.winShow.controller.WinShowPath;
+import com.qifenqian.bms.platform.utils.CommonData;
 import com.qifenqian.bms.task.TaskPath;
+import com.qifenqian.bms.platform.web.Constants;
+import com.qifenqian.bms.platform.web.admin.function.bean.Function;
+import com.qifenqian.bms.platform.web.admin.login.LoginPath;
+import com.qifenqian.bms.platform.web.admin.user.bean.User;
+import com.qifenqian.bms.platform.web.admin.utils.PrivilegeUtils;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 /**
  * 权限过滤器
@@ -38,7 +38,7 @@ public class PrivilegeFilter implements Filter {
 
   private static Logger logger = LoggerFactory.getLogger(PrivilegeFilter.class);
 
-  private String excludedPages;
+  private String excludedPages = "/unionpay/refund,/unionpay/revocation";
   private String[] excludedPageArray;
 
   /** 需要登录的公共功用 */
@@ -166,7 +166,7 @@ public class PrivilegeFilter implements Filter {
 
   public void init(FilterConfig fConfig) throws ServletException {
 
-    excludedPages = fConfig.getInitParameter("excludedPages");
+    //excludedPages = fConfig.getInitParameter("excludedPages");
     if (StringUtils.isNotEmpty(excludedPages)) {
       excludedPageArray = excludedPages.split(",");
     }

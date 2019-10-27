@@ -4,7 +4,6 @@ package com.qifenqian.bms.basemanager.merchant.service;
 
 import java.util.List;
 
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +11,7 @@ import com.qifenqian.bms.basemanager.merchant.bean.StoreManage;
 import com.qifenqian.bms.basemanager.merchant.dao.StoreManageDao;
 import com.qifenqian.bms.basemanager.merchant.mapper.StoreManageMapper;
 import com.qifenqian.bms.basemanager.utils.GenSN;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 
 

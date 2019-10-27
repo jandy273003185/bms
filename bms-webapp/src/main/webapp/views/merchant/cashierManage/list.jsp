@@ -246,7 +246,7 @@ $(document).ready(function(){
 												<i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
 											
-											<gyzbadmin:function url="<%=CashierManagePath.BASE + CashierManagePath.ADD %>">
+											<gyzbadmin:function url="<%=CashierManagePath.BASE + CashierManagePath.ADD%>">
 											<button  class="btn btn-purple btn-sm" data-toggle='modal' data-target="#addCashierModal">
 												新增
 												<i class="icon-plus-sign icon-on-right bigger-110"></i>
@@ -311,14 +311,14 @@ $(document).ready(function(){
 													
 												</td> 								
 												<td>
-													<gyzbadmin:function url="<%=CashierManagePath.BASE + CashierManagePath.UPDATE %>">
+													<gyzbadmin:function url="<%=CashierManagePath.BASE + CashierManagePath.UPDATE%>">
 														<a href="#" class="tooltip-success updateCashier" data-rel="tooltip" title="编辑" data-toggle="modal" data-target="#updateModal">
 															<span class="green">
 																<i class="icon-edit bigger-120"></i>
 															</span>
 														</a>
 													</gyzbadmin:function>
-													<gyzbadmin:function url="<%=CashierManagePath.BASE + CashierManagePath.DELETE %>">
+													<gyzbadmin:function url="<%=CashierManagePath.BASE + CashierManagePath.DELETE%>">
 														<a href="#deleteCashierModal" data-toggle='modal' class="tooltip-error deleteCashier" data-rel="tooltip" title="Delete">
 															<span class="red">
 																<i class="icon-trash bigger-120"></i>

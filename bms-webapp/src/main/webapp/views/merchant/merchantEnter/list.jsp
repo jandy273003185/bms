@@ -496,7 +496,7 @@ function productMerchantEntry(obj){
 													<button type="submit" class="btn btn-purple btn-sm">预览</button>
 												</a>
 											</gyzbadmin:function>
-											<gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.UPDATEPAGE %>">
+											<gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.UPDATEPAGE%>">
 												<a href="#" class="" onclick="upadteMerchantEntry(this)" data-rel="tooltip" title="Query" data-toggle='modal'>
 													<button type="submit" class="btn btn-purple btn-sm">商户更新</button>
 												</a>

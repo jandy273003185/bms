@@ -91,14 +91,14 @@
 													<i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
 											&nbsp;
-											<gyzbadmin:function url="<%=BaseMessagePath.BASE + BaseMessagePath.IMPORT_EXCEL %>">
+											<gyzbadmin:function url="<%=BaseMessagePath.BASE + BaseMessagePath.IMPORT_EXCEL%>">
 												<button class="btn btn-purple btn-sm btn-margin importExcelLink" data-toggle='modal' data-target="#importExcelModal">
 													导入EXCEL
 													<i class="icon-plus-sign icon-on-right bigger-110"></i>
 												</button>
 											</gyzbadmin:function>
 											&nbsp;
-											<gyzbadmin:function url="<%=BaseMessagePath.BASE + BaseMessagePath.BATCH_SEND %>">
+											<gyzbadmin:function url="<%=BaseMessagePath.BASE + BaseMessagePath.BATCH_SEND%>">
 												<a href="#"  data-toggle='modal' class="tooltip-error batchSendLink" data-rel="tooltip" title="批量发送" data-target="#batchSendModal">
 													<button type="submit" class="btn btn-purple btn-sm">批量发送</button>
 												</a> 

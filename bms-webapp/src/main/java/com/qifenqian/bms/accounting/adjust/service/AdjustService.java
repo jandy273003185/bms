@@ -9,8 +9,6 @@ import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.annotation.AfterThrowing;
-import org.sevenpay.platform.ConstantUtils;
-import org.sevenpay.platform.utils.SequenceUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +28,8 @@ import com.qifenqian.bms.accounting.adjust.dao.AccountingSingleAdjustDetailMappe
 import com.qifenqian.bms.accounting.exception.dao.transrecordflow.bean.TransRecordFlow;
 import com.qifenqian.bms.accounting.exception.dao.transrecordflow.mapper.TransRecordFlowMapper;
 import com.qifenqian.bms.basemanager.utils.GenSN;
+import com.qifenqian.bms.platform.ConstantUtils;
+import com.qifenqian.bms.platform.utils.SequenceUtils;
 import com.sevenpay.invoke.SevenpayCoreServiceInterface;
 import com.sevenpay.invoke.common.message.request.RequestMessage;
 import com.sevenpay.invoke.common.message.response.ResponseMessage;

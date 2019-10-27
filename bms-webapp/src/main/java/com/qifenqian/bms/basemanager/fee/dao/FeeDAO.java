@@ -5,12 +5,12 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.activiti.engine.TaskService;
-import org.gyzb.platform.web.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.qifenqian.bms.basemanager.fee.bean.Fee;
 import com.qifenqian.bms.basemanager.fee.mapper.FeeMapper;
+import com.qifenqian.bms.platform.web.page.Page;
 
 /**
  * dao层，一般分页需要

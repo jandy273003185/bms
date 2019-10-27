@@ -19,8 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.sevenpay.platform.utils.DownLoadUtils;
-import org.sevenpay.platform.utils.ExportExcelUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +35,8 @@ import com.qifenqian.bms.basemanager.toPayDetail.bean.ToPaySingleDetail;
 import com.qifenqian.bms.basemanager.toPayDetail.service.ToPayDetailService;
 import com.qifenqian.bms.basemanager.trade.service.TradeBillService;
 import com.qifenqian.bms.basemanager.utils.DatetimeUtils;
+import com.qifenqian.bms.platform.utils.DownLoadUtils;
+import com.qifenqian.bms.platform.utils.ExportExcelUtils;
 
 /**
  * 代付Controller

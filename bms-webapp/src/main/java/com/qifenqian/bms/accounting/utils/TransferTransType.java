@@ -1,6 +1,6 @@
 package com.qifenqian.bms.accounting.utils;
 
-import org.gyzb.platform.common.annotation.Comment;
+import com.qifenqian.bms.platform.common.annotation.Comment;
 
 public enum TransferTransType {
 	/**

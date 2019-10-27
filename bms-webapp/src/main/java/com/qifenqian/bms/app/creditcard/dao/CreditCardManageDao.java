@@ -1,15 +1,13 @@
 package com.qifenqian.bms.app.creditcard.dao;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.gyzb.platform.web.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.qifenqian.bms.app.creditcard.bean.CreditCardManageBean;
 import com.qifenqian.bms.app.creditcard.mapper.CreditCardManageMapper;
+import com.qifenqian.bms.platform.web.page.Page;
 /**
  * 信用卡申请链接管理Dao层
  * @author hongjiagui

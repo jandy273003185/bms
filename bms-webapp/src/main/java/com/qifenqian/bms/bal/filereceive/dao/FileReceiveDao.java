@@ -2,13 +2,12 @@ package com.qifenqian.bms.bal.filereceive.dao;
 
 import java.util.List;
 
-import org.gyzb.platform.web.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.qifenqian.bms.bal.filereceive.bean.FileReceive;
 import com.qifenqian.bms.bal.filereceive.mapper.FileReceiveMapper;
-import com.qifenqian.bms.merchant.channel.bean.AgentMerInfo;
+import com.qifenqian.bms.platform.web.page.Page;
 
 
 /**

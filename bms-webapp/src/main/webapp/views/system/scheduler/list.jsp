@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="org.sevenpay.platform.web.scheduler.SchedulerJobPath"%>
+<%@page import="com.qifenqian.bms.platform.web.scheduler.SchedulerJobPath"%>
 <link rel="stylesheet" href='<c:url value="/static/css/bootstrap-datetimepicker.min.css"/>' />
 <script src='<c:url value="/static/js/bootstrap-datetimepicker.min.js"/>'></script>
 <script src='<c:url value="/static/js/checkRule_source.js"/>'></script>
@@ -145,17 +145,17 @@
 											<td>${jobVo.memo }</td>
 											<td>
 												<input type="hidden" name="id" value="${jobVo.id}"/>
-												<gyzbadmin:function url="<%=SchedulerJobPath.BASE + SchedulerJobPath.EDIT %>">
+												<gyzbadmin:function url="<%=SchedulerJobPath.BASE + SchedulerJobPath.EDIT%>">
 													<a href="#" class="tooltip-success editJobLink" data-rel="tooltip" title="Edit" data-toggle='modal' data-target="#editJobModal">
 														<span class="green"><i class="icon-edit bigger-120"></i></span>
 													</a>
 												</gyzbadmin:function>
-												<gyzbadmin:function url="<%=SchedulerJobPath.BASE + SchedulerJobPath.DELETE %>">
+												<gyzbadmin:function url="<%=SchedulerJobPath.BASE + SchedulerJobPath.DELETE%>">
 													<a href="#" class="tooltip-error deleteJobLink" data-rel="tooltip" title="Delete" data-toggle='modal' data-target="#deleteJobModal">
 														<span class="red"><i class="icon-trash bigger-120"></i></span>
 													</a>
 												</gyzbadmin:function>
-												<gyzbadmin:function url="<%=SchedulerJobPath.BASE + SchedulerJobPath.EXECUTE %>">
+												<gyzbadmin:function url="<%=SchedulerJobPath.BASE + SchedulerJobPath.EXECUTE%>">
 													<button type="button" class="btn btn-primary btn-xs executeJobLink" data-toggle='modal' data-target="#executeJobModal">
 														执行
 													</button>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sevenpay.bms.meeting.activity.mapper.ActivityMapper">
+<mapper namespace="com.qifenqian.bms.meeting.activity.mapper.ActivityMapper">
 
-	<select id="selectActivityList" parameterType="com.sevenpay.bms.meeting.activity.bean.ActivityBean" resultType="com.sevenpay.bms.meeting.activity.bean.ActivityBean">
+	<select id="selectActivityList" parameterType="com.qifenqian.bms.meeting.activity.bean.ActivityBean" resultType="com.qifenqian.bms.meeting.activity.bean.ActivityBean">
 			SELECT 
 			  T.ACTIVITY_ID,
 			  T.ACTIVITY_TYPE,
@@ -33,13 +33,13 @@
 	</select>
 	
 	
-	<select id="selectActivityById" parameterType="java.lang.Integer" resultType="com.sevenpay.bms.meeting.activity.bean.ActivityBean">
+	<select id="selectActivityById" parameterType="java.lang.Integer" resultType="com.qifenqian.bms.meeting.activity.bean.ActivityBean">
 		   SELECT T.*
 			 FROM BASE_ACTIVITY T
 			 WHERE T.ACTIVITY_ID = #{activityId,jdbcType = INTEGER}
 	</select>
 	
-	<insert id="insertActivitySingle" parameterType="com.sevenpay.bms.meeting.activity.bean.ActivityBean">
+	<insert id="insertActivitySingle" parameterType="com.qifenqian.bms.meeting.activity.bean.ActivityBean">
 		INSERT INTO BASE_ACTIVITY(
 			ACTIVITY_NO,
 		    ACTIVITY_CODE,
@@ -67,7 +67,7 @@
 		)
 	</insert>
 
-	<update id="updateActivityById" parameterType="com.sevenpay.bms.meeting.activity.bean.ActivityBean">
+	<update id="updateActivityById" parameterType="com.qifenqian.bms.meeting.activity.bean.ActivityBean">
 		UPDATE BASE_ACTIVITY T
 		<set>
 		    <if test="activityNo!= null  and activityNo!= '' ">

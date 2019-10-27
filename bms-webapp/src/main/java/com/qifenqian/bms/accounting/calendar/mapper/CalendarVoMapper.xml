@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.accounting.calendar.mapper.CalendarVoMapper">
+<mapper namespace="com.qifenqian.bms.accounting.calendar.mapper.CalendarVoMapper">
 
-	<select id="selectCalendarList" parameterType="com.sevenpay.bms.accounting.calendar.bean.CalendarVo" resultType="com.sevenpay.bms.accounting.calendar.bean.CalendarVo">
+	<select id="selectCalendarList" parameterType="com.qifenqian.bms.accounting.calendar.bean.CalendarVo" resultType="com.qifenqian.bms.accounting.calendar.bean.CalendarVo">
 		SELECT
 		C.*,
 		(SELECT U.USER_NAME FROM SYS_USER U WHERE U.USER_ID =C.INST_USER) instUserName,
@@ -20,7 +20,7 @@
 		ORDER BY C.DATE 
 	</select>
 
-	<update id="updateCalendar" parameterType="com.sevenpay.bms.accounting.calendar.bean.CalendarVo">
+	<update id="updateCalendar" parameterType="com.qifenqian.bms.accounting.calendar.bean.CalendarVo">
 		UPDATE BMS_CALENDAR
 		<set>
 			<if test="holiday != null">

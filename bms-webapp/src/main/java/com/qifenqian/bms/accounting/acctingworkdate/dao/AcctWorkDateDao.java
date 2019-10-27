@@ -2,12 +2,12 @@ package com.qifenqian.bms.accounting.acctingworkdate.dao;
 
 import java.util.List;
 
-import org.gyzb.platform.web.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.qifenqian.bms.accounting.acctingworkdate.bean.AcctWorkDate;
 import com.qifenqian.bms.accounting.acctingworkdate.mapper.AcctWorkDateMapper;
+import com.qifenqian.bms.platform.web.page.Page;
 @Repository
 public class AcctWorkDateDao {
 	@Autowired

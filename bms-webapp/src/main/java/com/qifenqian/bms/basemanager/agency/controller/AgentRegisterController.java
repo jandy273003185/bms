@@ -13,7 +13,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.sevenpay.platform.utils.SequenceUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +35,7 @@ import com.qifenqian.bms.basemanager.rule.mapper.RuleMapper;
 import com.qifenqian.bms.basemanager.trade.service.TradeBillService;
 import com.qifenqian.bms.basemanager.utils.GenSN;
 import com.qifenqian.bms.basemanager.utils.YouTuUtils;
+import com.qifenqian.bms.platform.utils.SequenceUtils;
 
 @Controller
 @RequestMapping(AgentRegisterPath.BASE)

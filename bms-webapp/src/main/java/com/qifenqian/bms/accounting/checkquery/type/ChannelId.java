@@ -1,6 +1,6 @@
 package com.qifenqian.bms.accounting.checkquery.type;
 
-import org.gyzb.platform.common.annotation.Description;
+import com.qifenqian.bms.platform.common.annotation.Description;
 
 /**
  * @project sevenpay-bms-web

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sevenpay.bms.basemanager.merchant.mapper.ActWorkflowMerchantAuditHistoryMapper" >
-  <resultMap id="BaseResultMap" type="com.sevenpay.bms.basemanager.merchant.bean.ActWorkflowMerchantAudit" >
+<mapper namespace="com.qifenqian.bms.basemanager.merchant.mapper.ActWorkflowMerchantAuditHistoryMapper" >
+  <resultMap id="BaseResultMap" type="com.qifenqian.bms.basemanager.merchant.bean.ActWorkflowMerchantAudit" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="merchantId" property="merchantid" jdbcType="VARCHAR" />
     <result column="proc_inst_id" property="procInstId" jdbcType="VARCHAR" />
@@ -73,7 +73,7 @@
   </sql>
   
   
-  <insert id="insert" parameterType="com.sevenpay.bms.basemanager.merchant.bean.ActWorkflowMerchantAudit" >
+  <insert id="insert" parameterType="com.qifenqian.bms.basemanager.merchant.bean.ActWorkflowMerchantAudit" >
     insert into act_workflow_merchantaudit_history 
     	( 	merchantId, 
     		proc_inst_id, 

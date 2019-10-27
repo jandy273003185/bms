@@ -82,7 +82,7 @@
 													清空
 													<i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
-											<gyzbadmin:function url="<%=AdjustPath.BASE + AdjustPath.HISTORY_LIST_EXCEL %>">
+											<gyzbadmin:function url="<%=AdjustPath.BASE + AdjustPath.HISTORY_LIST_EXCEL%>">
 												<a class="btn btn-purple btn-sm" id="exportHistoryList"  >
 													导出报表
 													<i class="icon-download bigger-110"></i> 

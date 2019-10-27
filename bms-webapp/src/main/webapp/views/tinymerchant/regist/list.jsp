@@ -211,7 +211,7 @@
 												</gyzbadmin:function> 
 												--%>
 												
-												<gyzbadmin:function url="<%=TinyMerchantPath.BASE + TinyMerchantPath.UPDATETINYMERCHANTINFO %>">  	
+												<gyzbadmin:function url="<%=TinyMerchantPath.BASE + TinyMerchantPath.UPDATETINYMERCHANTINFO%>">  	
 													<button type="button" onclick="updateTinyMerchantInfo(this,'edit')" data-toggle='modal' data-target="#updateMerchant" class="btn btn-primary btn-xs qifenqian_update_tc" >修改商户信息</button>
 												</gyzbadmin:function>
                                             	

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.accounting.refund.mapper.RebackRecordMapper">
+<mapper namespace="com.qifenqian.bms.accounting.refund.mapper.RebackRecordMapper">
 
 	<select id="countOriginRelateSuccessOrUnknowTrans" resultType="java.lang.Integer">
 		SELECT
@@ -14,7 +14,7 @@
 		AND T.STATUS ='EXCEPTION'
 	</select>
 	
-	<select id="countRebackAmtSuccessOrUnknowTrans" resultType="com.sevenpay.bms.accounting.refund.bean.RefundRecord">
+	<select id="countRebackAmtSuccessOrUnknowTrans" resultType="com.qifenqian.bms.accounting.refund.bean.RefundRecord">
 		SELECT
 			SUM(A.REBACK_AMT) REFUND_AMT
 		FROM
@@ -25,7 +25,7 @@
 		AND T.STATUS IN ('SUCCESS', 'EXCEPTION')
 	</select>
 	
-	<select id="queryAcctBussByMerchantCode" resultType="com.sevenpay.bms.basemanager.acctsevenbuss.bean.AcctSevenBuss">
+	<select id="queryAcctBussByMerchantCode" resultType="com.qifenqian.bms.basemanager.acctsevenbuss.bean.AcctSevenBuss">
 		SELECT 
 			BALANCE,
 			USABLE_AMT 

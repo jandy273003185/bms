@@ -15,7 +15,6 @@ import java.util.Properties;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.poi.ss.formula.functions.T;
-import org.gyzb.platform.web.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +23,7 @@ import com.qifenqian.bms.basemanager.aggregatepayment.merchant.bean.MerchantTrad
 import com.qifenqian.bms.basemanager.aggregatepayment.merchant.bean.OrderSummaryBean;
 import com.qifenqian.bms.basemanager.aggregatepayment.merchant.mapper.MerchantTradeMapper;
 import com.qifenqian.bms.common.util.PropertiesUtil;
+import com.qifenqian.bms.platform.web.page.Page;
 
 @Service
 public class MerchantTradeService {

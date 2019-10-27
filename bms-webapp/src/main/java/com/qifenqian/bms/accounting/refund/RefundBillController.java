@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +26,7 @@ import com.qifenqian.bms.basemanager.acctsevenbuss.bean.AcctSevenBuss;
 import com.qifenqian.bms.basemanager.trade.service.DownLoadUtil;
 import com.qifenqian.bms.basemanager.trade.service.TradeBillService;
 import com.qifenqian.bms.basemanager.utils.DatetimeUtils;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 
 /**

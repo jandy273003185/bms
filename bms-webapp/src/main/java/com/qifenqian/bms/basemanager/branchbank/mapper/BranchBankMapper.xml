@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.branchbank.mapper.BranchBankMapper">
+<mapper namespace="com.qifenqian.bms.basemanager.branchbank.mapper.BranchBankMapper">
 
-	<select id="branchBankList" parameterType="com.sevenpay.bms.basemanager.branchbank.bean.BranchBank" resultType="com.sevenpay.bms.basemanager.branchbank.bean.BranchBank">
+	<select id="branchBankList" parameterType="com.qifenqian.bms.basemanager.branchbank.bean.BranchBank" resultType="com.qifenqian.bms.basemanager.branchbank.bean.BranchBank">
 		SELECT
 			T.BANK_CNAPS,
 			T.BANK_CODE,
@@ -26,7 +26,7 @@
 		ORDER BY T.BANK_CODE
 	</select>
 	
-	<select id="selectBankCnaps" resultType="com.sevenpay.bms.basemanager.branchbank.bean.BranchBank" parameterType="string">
+	<select id="selectBankCnaps" resultType="com.qifenqian.bms.basemanager.branchbank.bean.BranchBank" parameterType="string">
 		SELECT 
 			T.BANK_CNAPS 
 		FROM 
@@ -35,7 +35,7 @@
 		T.BANK_CNAPS = #{bankCnaps,jdbcType = VARCHAR}
 	</select>
 	
-	<insert id="insertBranchBank" parameterType ="com.sevenpay.bms.basemanager.branchbank.bean.BranchBank">
+	<insert id="insertBranchBank" parameterType ="com.qifenqian.bms.basemanager.branchbank.bean.BranchBank">
 		INSERT INTO TB_BANK_INFO(
 			BANK_CNAPS,
 			BANK_CODE,
@@ -51,7 +51,7 @@
 		)
 	</insert>
 	
-	<update id="updateBranchBank" parameterType ="com.sevenpay.bms.basemanager.branchbank.bean.BranchBank">
+	<update id="updateBranchBank" parameterType ="com.qifenqian.bms.basemanager.branchbank.bean.BranchBank">
 		UPDATE TB_BANK_INFO T
 		<set>
 			<if test="bankCode!=null">
@@ -70,7 +70,7 @@
 		WHERE T.BANK_CNAPS = #{bankCnaps,jdbcType = VARCHAR}
 	</update>
 	
-	<delete id="deleteBranchBank" parameterType ="com.sevenpay.bms.basemanager.branchbank.bean.BranchBank">
+	<delete id="deleteBranchBank" parameterType ="com.qifenqian.bms.basemanager.branchbank.bean.BranchBank">
 	 	DELETE FROM TB_BANK_INFO  WHERE BANK_CNAPS = #{bankCnaps,jdbcType = VARCHAR}
 	</delete>
 </mapper>

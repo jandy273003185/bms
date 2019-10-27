@@ -3,7 +3,6 @@ package com.qifenqian.bms.accounting.calendar;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,7 @@ import com.qifenqian.bms.accounting.calendar.bean.CalendarVo;
 import com.qifenqian.bms.accounting.calendar.dao.CalendarDao;
 import com.qifenqian.bms.accounting.calendar.mapper.CalendarVoMapper;
 import com.qifenqian.bms.basemanager.calendar.service.CalendarService;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 /**
  * 节假日管理
  * @author shen

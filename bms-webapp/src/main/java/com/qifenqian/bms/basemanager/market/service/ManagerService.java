@@ -2,7 +2,6 @@ package com.qifenqian.bms.basemanager.market.service;
 
 import java.util.List;
 
-import org.gyzb.platform.web.admin.user.bean.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +9,7 @@ import com.qifenqian.bms.basemanager.market.bean.Manager;
 import com.qifenqian.bms.basemanager.market.bean.MarketRole;
 import com.qifenqian.bms.basemanager.market.dao.ManagerDao;
 import com.qifenqian.bms.basemanager.market.mapper.ManagerMapper;
+import com.qifenqian.bms.platform.web.admin.user.bean.User;
 
 
 @Service

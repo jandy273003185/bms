@@ -223,7 +223,7 @@ function clearUpdateTips(){
 												清空
 												<i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
-											<gyzbadmin:function url="<%=CertifyPath.BASE + CertifyPath.ADD %>">
+											<gyzbadmin:function url="<%=CertifyPath.BASE + CertifyPath.ADD%>">
 											<button  class="btn btn-purple btn-sm" data-toggle='modal' data-target="#addCertifyModal">
 												新增
 												<i class="icon-plus-sign icon-on-right bigger-110"></i>
@@ -255,14 +255,14 @@ function clearUpdateTips(){
 												<td>${certify.certifyType }</td>
 												<td>${certify.certifyName }</td>
 												<td>
-													<gyzbadmin:function url="<%=CertifyPath.BASE + CertifyPath.UPDATE %>">
+													<gyzbadmin:function url="<%=CertifyPath.BASE + CertifyPath.UPDATE%>">
 														<a href="#" class="tooltip-success updateCertify" data-rel="tooltip" title="Edit" data-toggle="modal" data-target="#updateCertifyModal">
 															<span class="green">
 																<i class="icon-edit bigger-120"></i>
 															</span>
 														</a>
 													</gyzbadmin:function>
-													<gyzbadmin:function url="<%=CertifyPath.BASE + CertifyPath.DELETE %>">
+													<gyzbadmin:function url="<%=CertifyPath.BASE + CertifyPath.DELETE%>">
 														<a href="#" class="tooltip-error deleteCertify" data-rel="tooltip" title="Delete" data-toggle='modal' data-target="#deleteCertifyModal">
 															<span class="red">
 																<i class="icon-trash bigger-120"></i>

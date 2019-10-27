@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.rechargeRevoke.mapper.RechargeRevokeMapper">
-	<select id="selectRechargeRevokeList" parameterType="com.sevenpay.bms.basemanager.rechargeRevoke.bean.RechargeRevoke" resultType="com.sevenpay.bms.basemanager.rechargeRevoke.bean.RechargeRevoke">
+<mapper namespace="com.qifenqian.bms.basemanager.rechargeRevoke.mapper.RechargeRevokeMapper">
+	<select id="selectRechargeRevokeList" parameterType="com.qifenqian.bms.basemanager.rechargeRevoke.bean.RechargeRevoke" resultType="com.qifenqian.bms.basemanager.rechargeRevoke.bean.RechargeRevoke">
 		SELECT 
 			  T.ORDER_ID,
 			  T.ORIGIN_ORDER_ID,
@@ -48,7 +48,7 @@
 	</select>
 	
 	
-	<insert id="insertRechargeRevoke" parameterType="com.sevenpay.bms.basemanager.rechargeRevoke.bean.RechargeRevoke">
+	<insert id="insertRechargeRevoke" parameterType="com.qifenqian.bms.basemanager.rechargeRevoke.bean.RechargeRevoke">
 	INSERT INTO TD_CUST_RECHARGE_REVOKE(
 			  ORDER_ID,
 			  ORIGIN_ORDER_ID,
@@ -74,7 +74,7 @@
 		)
 	</insert>
 	
-	<update id="updateRechargeRevoke" parameterType="com.sevenpay.bms.basemanager.rechargeRevoke.bean.RechargeRevoke">
+	<update id="updateRechargeRevoke" parameterType="com.qifenqian.bms.basemanager.rechargeRevoke.bean.RechargeRevoke">
 	UPDATE TD_CUST_RECHARGE_REVOKE
 		<set>
 			<if test="orderStatus !=null and orderStatus !='' ">
@@ -94,7 +94,7 @@
 		WHERE ORDER_ID = #{orderId,jdbcType = VARCHAR}
 	</update>
 	
-	<update id="updateByAudit" parameterType="com.sevenpay.bms.basemanager.rechargeRevoke.bean.RechargeRevoke">
+	<update id="updateByAudit" parameterType="com.qifenqian.bms.basemanager.rechargeRevoke.bean.RechargeRevoke">
 		UPDATE TD_CUST_RECHARGE_REVOKE
 		<set>
 			<if test="orderStatus !=null and orderStatus !='' ">

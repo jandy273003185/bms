@@ -1,6 +1,6 @@
 package com.qifenqian.bms.accounting.bmsexception.type;
 
-import org.gyzb.platform.common.annotation.Comment;
+import com.qifenqian.bms.platform.common.annotation.Comment;
 
 public enum BusType {
 

@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="com.qifenqian.bms.accounting.utils.CommonConfig"%>
-<%@page import="org.gyzb.platform.web.admin.user.bean.User"%>
-<%@page import="org.gyzb.platform.web.admin.utils.WebUtils"%>
-<%@page import="org.gyzb.platform.web.Constants"%>
-<%@page import="org.gyzb.platform.web.admin.function.bean.Function"%>
-<%@page import="org.gyzb.platform.common.utils.SpringUtils"%>
-<%@page import="org.gyzb.platform.common.config.SystemInfo"%>
+<%@page import="com.qifenqian.platform.web.admin.user.bean.User"%>
+<%@page import="com.qifenqian.platform.web.admin.utils.WebUtils"%>
+<%@page import="com.qifenqian.platform.web.Constants"%>
+<%@page import="com.qifenqian.platform.web.admin.function.bean.Function"%>
+<%@page import="com.qifenqian.platform.common.utils.SpringUtils"%>
+<%@page import="com.qifenqian.platform.common.config.SystemInfo"%>
 <%@page import="java.util.List"%>
 
 <!-- taglib -->

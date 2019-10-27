@@ -3,7 +3,6 @@ package com.qifenqian.bms.meeting.luckdraw.service;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +11,7 @@ import com.qifenqian.bms.meeting.luckdraw.bean.Prize;
 import com.qifenqian.bms.meeting.luckdraw.bean.PrizeWin;
 import com.qifenqian.bms.meeting.luckdraw.dao.LuckDrawDao;
 import com.qifenqian.bms.meeting.luckdraw.mapper.LuckDrawMapper;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 /**
  * @project sevenpay-bms-web

@@ -204,7 +204,7 @@
 												清空
 												<i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
-											<gyzbadmin:function url="<%=GroupPath.BASE + GroupPath.ADD %>">
+											<gyzbadmin:function url="<%=GroupPath.BASE + GroupPath.ADD%>">
 											<button  class="btn btn-purple btn-sm" data-toggle='modal' data-target="#addModal">
 												新增
 												<i class="icon-plus-sign icon-on-right bigger-110"></i>
@@ -242,7 +242,7 @@
 															</span>
 														</a>
 													</gyzbadmin:function> --%>
-													<gyzbadmin:function url="<%=GroupPath.BASE + GroupPath.DELETE %>">
+													<gyzbadmin:function url="<%=GroupPath.BASE + GroupPath.DELETE%>">
 														<input type="hidden" value="${groupTamp.id}" id="hiddenValue">
 														<a href="#deleteModal"  data-toggle='modal' class="tooltip-error delGroup" data-rel="tooltip" title="Delete">
 															<span class="red">

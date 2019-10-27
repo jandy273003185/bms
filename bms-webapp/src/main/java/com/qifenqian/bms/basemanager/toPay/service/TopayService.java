@@ -1,26 +1,20 @@
 package com.qifenqian.bms.basemanager.toPay.service;
 
-import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.lang.RandomStringUtils;
-import org.gyzb.platform.common.utils.DatetimeUtils;
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.qifenqian.bms.basemanager.city.bean.City;
 import com.qifenqian.bms.basemanager.city.bean.CityNew;
 import com.qifenqian.bms.basemanager.city.bean.ProvinceBean;
 import com.qifenqian.bms.basemanager.toPay.bean.Creater;
@@ -36,17 +30,13 @@ import com.qifenqian.bms.basemanager.toPay.bean.TyyBankInfo;
 import com.qifenqian.bms.basemanager.toPay.dao.TopayDao;
 import com.qifenqian.bms.common.util.PropertiesUtil;
 import com.qifenqian.bms.paymentmanager.service.PaymentService;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 import com.seven.micropay.base.domain.ChannelResult;
 import com.seven.micropay.base.enums.ReStatus;
 import com.seven.micropay.channel.domain.api.b2e.TransferApiReq;
 import com.seven.micropay.channel.enums.ChannelCode;
 import com.seven.micropay.channel.enums.PaychannelType;
 import com.seven.micropay.channel.service.api.IB2eApiService;
-import com.sevenpay.invoke.common.message.request.RequestMessage;
-import com.sevenpay.invoke.common.message.response.ResponseMessage;
-import com.sevenpay.invoke.common.type.RequestColumnValues;
-import com.sevenpay.invoke.transaction.bussagentpay.BussAgentpayApplyRequest;
-import com.sevenpay.invoke.transaction.bussagentpay.BussAgentpayApplyResponse;
 
 /**
  * 代付Service

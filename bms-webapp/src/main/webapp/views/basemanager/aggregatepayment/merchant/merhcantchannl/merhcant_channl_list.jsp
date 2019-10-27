@@ -265,7 +265,7 @@
 												清空
 												<i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
-											<gyzbadmin:function url="<%=TdMerchantChannelPath.BASE + TdMerchantChannelPath.ADD %>">
+											<gyzbadmin:function url="<%=TdMerchantChannelPath.BASE + TdMerchantChannelPath.ADD%>">
 											<button  class="btn btn-purple btn-sm" data-toggle='modal' data-target="#addModal">
 												新增
 												<i class="icon-plus-sign icon-on-right bigger-110"></i>
@@ -304,14 +304,14 @@
 												<td>${merchantChannel.modifyTime}</td>
 												<td>${merchantChannel.modifyId}</td>
 												<td>
-													<gyzbadmin:function url="<%=TdMerchantChannelPath.BASE + TdMerchantChannelPath.UPDATE %>">
+													<gyzbadmin:function url="<%=TdMerchantChannelPath.BASE + TdMerchantChannelPath.UPDATE%>">
 														<a href="#updateModal"  data-toggle='modal' class="tooltip-success updateChannel" data-rel="tooltip" title="Edit">
 															<span class="green">
 																<i class="icon-edit bigger-120"></i>
 															</span>
 														</a>
 													</gyzbadmin:function>
-													<gyzbadmin:function url="<%=TdMerchantChannelPath.BASE + TdMerchantChannelPath.DELETE %>">
+													<gyzbadmin:function url="<%=TdMerchantChannelPath.BASE + TdMerchantChannelPath.DELETE%>">
 														<a href="#deleteModal"  data-toggle='modal' class="tooltip-error delBank" data-rel="tooltip" title="Delete">
 															<span class="red">
 																<i class="icon-trash bigger-120"></i>

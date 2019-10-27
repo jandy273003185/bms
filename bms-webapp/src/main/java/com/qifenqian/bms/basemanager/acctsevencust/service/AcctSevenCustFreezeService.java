@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
-import org.gyzb.platform.web.admin.utils.WebUtils;
-import org.sevenpay.platform.utils.BusinessUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +15,8 @@ import com.qifenqian.bms.basemanager.acctsevencust.bean.AcctSevenCust;
 import com.qifenqian.bms.basemanager.acctsevencust.bean.AcctSevenCustFreeze;
 import com.qifenqian.bms.basemanager.acctsevencust.mapper.AcctSevenCustFreezeMapper;
 import com.qifenqian.bms.expresspay.CommonService;
+import com.qifenqian.bms.platform.utils.BusinessUtils;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 import com.sevenpay.invoke.SevenpayCoreServiceInterface;
 import com.sevenpay.invoke.common.message.request.RequestMessage;
 import com.sevenpay.invoke.common.message.response.ResponseMessage;

@@ -2,11 +2,11 @@ package com.qifenqian.bms.basemanager.market.mapper;
 
 import java.util.List;
 
-import org.gyzb.platform.web.admin.user.bean.User;
 import org.mybatis.spring.annotation.MapperScan;
 
 import com.qifenqian.bms.basemanager.market.bean.Manager;
 import com.qifenqian.bms.basemanager.market.bean.MarketRole;
+import com.qifenqian.bms.platform.web.admin.user.bean.User;
 
 
 

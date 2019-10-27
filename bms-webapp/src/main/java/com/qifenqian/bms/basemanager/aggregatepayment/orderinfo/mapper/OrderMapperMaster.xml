@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.aggregatepayment.orderinfo.mapper.OrderMapperMaster">
+<mapper namespace="com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.mapper.OrderMapperMaster">
 	
-	<update id="updateOrder" parameterType="com.sevenpay.bms.basemanager.aggregatepayment.orderinfo.bean.OrderInfoBean">
+	<update id="updateOrder" parameterType="com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.OrderInfoBean">
 		update TD_ORDER
 		<set>
 			<if test="mchId != null and mchId != ''">
@@ -117,7 +117,7 @@
 			ORDER_ID =#{orderId,jdbcType=VARCHAR}
 		</where>
 	</update>
-	<update id="updateRefundRecode" parameterType="com.sevenpay.bms.basemanager.aggregatepayment.orderinfo.bean.RefundBean">
+	<update id="updateRefundRecode" parameterType="com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.RefundBean">
 		update
 			td_refund
 		<set>
@@ -184,7 +184,7 @@
 		</where>
 	</update>
 	
-	<update id="updateOrderInfo" parameterType="com.sevenpay.bms.basemanager.aggregatepayment.orderinfo.bean.OrderInfoBean">
+	<update id="updateOrderInfo" parameterType="com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.OrderInfoBean">
 		UPDATE td_order o
 		<set>
 		  <if test="orderState != null and orderState != ''">

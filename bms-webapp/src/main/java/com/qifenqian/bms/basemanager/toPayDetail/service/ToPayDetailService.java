@@ -2,7 +2,6 @@ package com.qifenqian.bms.basemanager.toPayDetail.service;
 
 import java.util.List;
 
-import org.mybatis.generator.codegen.ibatis2.dao.DAOGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

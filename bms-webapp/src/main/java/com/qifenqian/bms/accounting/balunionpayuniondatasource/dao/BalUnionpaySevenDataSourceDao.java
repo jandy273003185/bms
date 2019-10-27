@@ -2,12 +2,12 @@ package com.qifenqian.bms.accounting.balunionpayuniondatasource.dao;
 
 import java.util.List;
 
-import org.gyzb.platform.web.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.qifenqian.bms.accounting.balunionpayuniondatasource.bean.BalUnionpaySevenDataSource;
 import com.qifenqian.bms.accounting.balunionpayuniondatasource.mapper.BalUnionpaySevenDataSourceMapper;
+import com.qifenqian.bms.platform.web.page.Page;
 
 @Repository
 public class BalUnionpaySevenDataSourceDao {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sevenpay.bms.workflow.group.mapper.ActIdGroupMapper" >
-  <resultMap id="BaseResultMap" type="com.sevenpay.bms.workflow.group.bean.ActIdGroup" >
+<mapper namespace="com.qifenqian.bms.workflow.group.mapper.ActIdGroupMapper" >
+  <resultMap id="BaseResultMap" type="com.qifenqian.bms.workflow.group.bean.ActIdGroup" >
     <id column="ID_" property="id" jdbcType="VARCHAR" />
     <result column="REV_" property="rev" jdbcType="INTEGER" />
     <result column="NAME_" property="name" jdbcType="VARCHAR" />
@@ -69,7 +69,7 @@
     ID_, REV_, NAME_, TYPE_
   </sql>
   
-  <select id="selectListActIdGroup" parameterType="com.sevenpay.bms.workflow.group.bean.ActIdGroup" resultType="com.sevenpay.bms.workflow.group.bean.ActIdGroup">
+  <select id="selectListActIdGroup" parameterType="com.qifenqian.bms.workflow.group.bean.ActIdGroup" resultType="com.qifenqian.bms.workflow.group.bean.ActIdGroup">
   	SELECT 
   	<include refid="Base_Column_List" />
   	FROM act_id_group A
@@ -84,13 +84,13 @@
     delete from act_id_group
     where ID_ = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.sevenpay.bms.workflow.group.bean.ActIdGroup" >
+  <insert id="insert" parameterType="com.qifenqian.bms.workflow.group.bean.ActIdGroup" >
     insert into act_id_group (ID_, REV_, NAME_, 
       TYPE_)
     values (#{id,jdbcType=VARCHAR}, #{rev,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
       #{type,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.sevenpay.bms.workflow.group.bean.ActIdGroup" >
+  <insert id="insertSelective" parameterType="com.qifenqian.bms.workflow.group.bean.ActIdGroup" >
     insert into act_id_group
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -121,7 +121,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.sevenpay.bms.workflow.group.bean.ActIdGroup" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.qifenqian.bms.workflow.group.bean.ActIdGroup" >
     update act_id_group
     <set >
       <if test="rev != null" >
@@ -136,7 +136,7 @@
     </set>
     where ID_ = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.sevenpay.bms.workflow.group.bean.ActIdGroup" >
+  <update id="updateByPrimaryKey" parameterType="com.qifenqian.bms.workflow.group.bean.ActIdGroup" >
     update act_id_group
     set REV_ = #{rev,jdbcType=INTEGER},
       NAME_ = #{name,jdbcType=VARCHAR},

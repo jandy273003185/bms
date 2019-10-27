@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.aggregatepayment.merchant.mapper.RefundMapper">
-	<select id="getRefundList" parameterType="com.sevenpay.bms.basemanager.aggregatepayment.merchant.bean.TdRefund" 
-	resultType="com.sevenpay.bms.basemanager.aggregatepayment.merchant.bean.TdRefund">
+<mapper namespace="com.qifenqian.bms.basemanager.aggregatepayment.merchant.mapper.RefundMapper">
+	<select id="getRefundList" parameterType="com.qifenqian.bms.basemanager.aggregatepayment.merchant.bean.TdRefund" 
+	resultType="com.qifenqian.bms.basemanager.aggregatepayment.merchant.bean.TdRefund">
 		select 
 			*
 		from
@@ -24,8 +24,8 @@
 	</select>
 	
 	
-	<select id="getRefundExport" parameterType="com.sevenpay.bms.basemanager.aggregatepayment.merchant.bean.TdRefund" 
-	resultType="com.sevenpay.bms.basemanager.aggregatepayment.merchant.bean.TdRefund">
+	<select id="getRefundExport" parameterType="com.qifenqian.bms.basemanager.aggregatepayment.merchant.bean.TdRefund" 
+	resultType="com.qifenqian.bms.basemanager.aggregatepayment.merchant.bean.TdRefund">
 		select 
 			*
 		from

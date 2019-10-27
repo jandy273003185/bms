@@ -202,7 +202,7 @@
 												清空
 												<i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
-											<gyzbadmin:function url="<%=OrderInfoPath.BASE + OrderInfoPath.ORDERINFOEXPORT %>">
+											<gyzbadmin:function url="<%=OrderInfoPath.BASE + OrderInfoPath.ORDERINFOEXPORT%>">
 												<a class="btn btn-purple btn-sm exportBut">
 													导出报表
 												</a> 

@@ -657,10 +657,10 @@ var custId05=$("#custName_id_01").val().trim();
 												<input type="hidden" name="custName_01" id="custName_01" value="${merchant.custName}">
 												<input type="hidden" name="attachStr" id="attachStr" value="${merchant.attachStr}">
 												<input type="hidden" name="authId_01" id="authId_01" value="${merchant.authId}">
-												<gyzbadmin:function url="<%=MerchantPath.BASE + MerchantPath.UPDATEEMAIL %>">	
+												<gyzbadmin:function url="<%=MerchantPath.BASE + MerchantPath.UPDATEEMAIL%>">	
 													<button type="button" onclick="toUpdateEmail(this)" data-toggle='modal'  class="btn btn-primary btn-xs" data-target="#updateEmail" >修改邮箱</button>
 												</gyzbadmin:function>
-												<gyzbadmin:function url="<%=MerchantPath.BASE + MerchantPath.UPDATEMERCHANTINFO %>">  	
+												<gyzbadmin:function url="<%=MerchantPath.BASE + MerchantPath.UPDATEMERCHANTINFO%>">  	
 													<button type="button" onclick="updateMerchantInfo(this,'edit')"  class="btn btn-primary btn-xs" >修改商户信息</button>
 												 </gyzbadmin:function>
 												<%-- <gyzbadmin:function url="<%=MerchantPath.BASE + MerchantPath.SENDEMAIL %>"> 

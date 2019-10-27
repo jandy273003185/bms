@@ -72,7 +72,7 @@
 													<i class=" icon-move icon-on-right bigger-110"></i>
 												</button>
 												</gyzbadmin:function>
-												<gyzbadmin:function url="<%=SubjectInfoPath.BASE + SubjectInfoPath.ADD %>">
+												<gyzbadmin:function url="<%=SubjectInfoPath.BASE + SubjectInfoPath.ADD%>">
 												<button class="btn btn-purple btn-sm btn-margin addUserLink" data-toggle='modal' data-target="#addsubjectModal">
 													新增
 													<i class="icon-plus-sign icon-on-right bigger-110"></i>
@@ -127,12 +127,12 @@
 												<td>${sub.creator }</td>
 												<td>${sub.memo }</td>
 												<td>
-													<gyzbadmin:function url="<%=SubjectInfoPath.BASE + SubjectInfoPath.UPDATE %>">
+													<gyzbadmin:function url="<%=SubjectInfoPath.BASE + SubjectInfoPath.UPDATE%>">
 														<a href="#" class="tooltip-success updateSubjectLink" data-rel="tooltip" title="Edit" data-toggle='modal' data-target="#updateadSubjectModal">
 														<span class="green"><i class="icon-edit bigger-120"></i></span>
 														</a>
 													</gyzbadmin:function>
-													<gyzbadmin:function url="<%=SubjectInfoPath.BASE + SubjectInfoPath.DELETE %>">
+													<gyzbadmin:function url="<%=SubjectInfoPath.BASE + SubjectInfoPath.DELETE%>">
 														<a href="#deleteadModal"  data-toggle='modal' class="tooltip-error deleteSubjectLink" data-rel="tooltip" title="Delete">
 														<span class="red">
 															<i class="icon-trash bigger-120"></i>

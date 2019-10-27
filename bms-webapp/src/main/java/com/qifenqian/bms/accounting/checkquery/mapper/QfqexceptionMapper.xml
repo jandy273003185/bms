@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sevenpay.bms.accounting.checkquery.mapper.QfqexceptionMapper" >
+<mapper namespace="com.qifenqian.bms.accounting.checkquery.mapper.QfqexceptionMapper" >
 	
-  <select id="selectQfqResultExceptionList"  resultType="com.sevenpay.bms.accounting.checkquery.bean.Qfqexception" 
-  	parameterType="com.sevenpay.bms.accounting.checkquery.bean.Qfqexception" >
+  <select id="selectQfqResultExceptionList"  resultType="com.qifenqian.bms.accounting.checkquery.bean.Qfqexception" 
+  	parameterType="com.qifenqian.bms.accounting.checkquery.bean.Qfqexception" >
 		   SELECT 
 		    	T.BAL_DATE,
 		    	B.CLEAR_ID,

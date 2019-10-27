@@ -4,13 +4,13 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.gyzb.platform.web.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.qifenqian.bms.basemanager.payIn.bean.PayIn;
 import com.qifenqian.bms.basemanager.payIn.mapper.PayInMapper;
 import com.qifenqian.bms.basemanager.payIn.service.PayInService;
+import com.qifenqian.bms.platform.web.page.Page;
 
 /**
  * dao层，一般分页需要

@@ -281,7 +281,7 @@
 												<td>${data.lastupdateUser }</td>
 												<td>${data.lastupdateTime }</td>
 												<td>
-													<gyzbadmin:function url="<%=RestrictPath.BASE + RestrictPath.EDIT %>">
+													<gyzbadmin:function url="<%=RestrictPath.BASE + RestrictPath.EDIT%>">
 														<a href="#updateDictDataModal"  data-toggle='modal' class="tooltip-success updateDictData" data-rel="tooltip" title="Edit">
 															<span class="green">
 																<i class="icon-edit bigger-120"></i>

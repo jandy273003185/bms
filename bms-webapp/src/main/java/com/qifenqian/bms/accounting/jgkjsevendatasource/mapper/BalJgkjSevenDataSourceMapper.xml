@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sevenpay.bms.accounting.jgkjsevendatasource.mapper.BalJgkjSevenDataSourceMapper">
-	<select id="selectSevenDataSourceList" resultType="com.sevenpay.bms.accounting.jgkjsevendatasource.bean.BalJgkjSevenDataSource" parameterType="com.sevenpay.bms.accounting.jgkjsevendatasource.bean.BalJgkjSevenDataSource">
+<mapper namespace="com.qifenqian.bms.accounting.jgkjsevendatasource.mapper.BalJgkjSevenDataSourceMapper">
+	<select id="selectSevenDataSourceList" resultType="com.qifenqian.bms.accounting.jgkjsevendatasource.bean.BalJgkjSevenDataSource" parameterType="com.qifenqian.bms.accounting.jgkjsevendatasource.bean.BalJgkjSevenDataSource">
 	SELECT
 		T.CLEAR_ID,
 		R.REQ_SERIAL_ID,

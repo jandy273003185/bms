@@ -2,12 +2,12 @@ package com.qifenqian.bms.app.ad.dao;
 
 import java.util.List;
 
-import org.gyzb.platform.web.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.qifenqian.bms.app.ad.bean.AdManageBean;
 import com.qifenqian.bms.app.ad.mapper.AdManageMapper;
+import com.qifenqian.bms.platform.web.page.Page;
 /**
  * APP登录页广告管理Dao
  * @author hongjiagui

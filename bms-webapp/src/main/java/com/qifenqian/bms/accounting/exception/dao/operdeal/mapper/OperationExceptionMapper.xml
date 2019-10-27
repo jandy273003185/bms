@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.accounting.exception.dao.operdeal.mapper.OperationExceptionMapper">
+<mapper namespace="com.qifenqian.bms.accounting.exception.dao.operdeal.mapper.OperationExceptionMapper">
 
-	<select id="selectExceptionList" parameterType="com.sevenpay.bms.accounting.exception.base.bean.Operation" resultType="com.sevenpay.bms.accounting.exception.base.bean.Operation">
+	<select id="selectExceptionList" parameterType="com.qifenqian.bms.accounting.exception.base.bean.Operation" resultType="com.qifenqian.bms.accounting.exception.base.bean.Operation">
 			SELECT
 				EXCP.*
 			FROM
@@ -397,7 +397,7 @@
 		ORDER BY EXCP.OPER_DATETIME DESC
 	</select>
 	
-	<select id="exportOperationListExcel" parameterType="com.sevenpay.bms.accounting.exception.base.bean.Operation" resultType="com.sevenpay.bms.accounting.exception.base.bean.OperationExcel">
+	<select id="exportOperationListExcel" parameterType="com.qifenqian.bms.accounting.exception.base.bean.Operation" resultType="com.qifenqian.bms.accounting.exception.base.bean.OperationExcel">
 		SELECT
 			EXCP.OPER_ID,
 			CASE EXCP.OPER_TYPE
@@ -823,7 +823,7 @@
 		ORDER BY EXCP.OPER_DATETIME DESC
 	</select>
 
-	<insert id="insertOperationException" parameterType="com.sevenpay.bms.accounting.exception.dao.operdeal.bean.OperationException">
+	<insert id="insertOperationException" parameterType="com.qifenqian.bms.accounting.exception.dao.operdeal.bean.OperationException">
 		INSERT INTO BMS_OPERATION_EXCEPTION(
 		ID,
 		OPERATION_ID,
@@ -853,7 +853,7 @@
 		)
 	</insert>
 	
-	<update id="updateOperationException" parameterType="com.sevenpay.bms.accounting.exception.dao.operdeal.bean.OperationException">
+	<update id="updateOperationException" parameterType="com.qifenqian.bms.accounting.exception.dao.operdeal.bean.OperationException">
 		UPDATE BMS_OPERATION_EXCEPTION E
 		<set>
 			<if test="operationType != null and operationType != ''">
@@ -890,7 +890,7 @@
 			E.OPERATION_ID = #{operationId, jdbcType = VARCHAR}
 	</select>
 	
-	<select id="queryOperationRecord"  resultType="com.sevenpay.bms.accounting.exception.dao.operdealflow.bean.OperationExceptionFlow" parameterType="string">
+	<select id="queryOperationRecord"  resultType="com.qifenqian.bms.accounting.exception.dao.operdealflow.bean.OperationExceptionFlow" parameterType="string">
 		SELECT   
 		  F.DEAL_SEQ,
 		  F.OPERATION_ID,

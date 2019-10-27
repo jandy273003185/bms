@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.accounting.subjectInfo.mapper.SubjectInfoMapper">
+<mapper namespace="com.qifenqian.bms.accounting.subjectInfo.mapper.SubjectInfoMapper">
 	<select id="list" resultType="subjectInfo">
 		SELECT p.* FROM ACCTING_SUBJECT_INFO p WHERE p.STATE ='VALID'
 	</select>

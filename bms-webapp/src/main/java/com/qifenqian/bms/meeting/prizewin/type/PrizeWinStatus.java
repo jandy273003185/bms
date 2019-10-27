@@ -1,7 +1,7 @@
 package com.qifenqian.bms.meeting.prizewin.type;
 
-import org.gyzb.platform.common.annotation.Comment;
-import org.gyzb.platform.common.utils.ReflectUtils;
+import com.qifenqian.bms.platform.common.annotation.Comment;
+import com.qifenqian.bms.platform.common.utils.ReflectUtils;
 
 /**
  * @project sevenpay-bms-web

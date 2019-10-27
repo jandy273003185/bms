@@ -2,12 +2,12 @@ package com.qifenqian.bms.basemanager.question.dao;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.gyzb.platform.web.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.qifenqian.bms.basemanager.question.bean.Question;
 import com.qifenqian.bms.basemanager.question.mapper.QuestionMapper;
+import com.qifenqian.bms.platform.web.page.Page;
 
 /**
  * dao层，一般分页需要

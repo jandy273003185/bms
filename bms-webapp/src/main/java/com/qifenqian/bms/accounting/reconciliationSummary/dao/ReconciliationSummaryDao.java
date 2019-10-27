@@ -2,7 +2,6 @@ package com.qifenqian.bms.accounting.reconciliationSummary.dao;
 
 import java.util.List;
 
-import org.gyzb.platform.web.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +9,7 @@ import com.qifenqian.bms.accounting.reconciliationSummary.bean.ReconDetail;
 import com.qifenqian.bms.accounting.reconciliationSummary.bean.ReconDiff;
 import com.qifenqian.bms.accounting.reconciliationSummary.bean.Summary;
 import com.qifenqian.bms.accounting.reconciliationSummary.mapper.ReconciliationSummaryMapper;
+import com.qifenqian.bms.platform.web.page.Page;
 
 @Repository
 public class ReconciliationSummaryDao {

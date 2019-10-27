@@ -5,11 +5,11 @@
 <%@page import="com.qifenqian.bms.accounting.exception.dao.kingdeeclear.bean.KingdeeClear"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="com.qifenqian.bms.accounting.exception.dao.clearbank.bean.ClearBank"%>
-<%@page import="org.gyzb.platform.common.utils.DateUtils"%>
+<%@page import="com.qifenqian.platform.common.utils.DateUtils"%>
 <%@page import="com.qifenqian.bms.accounting.exception.base.bean.TransAction"%>
 <%@page import="com.qifenqian.bms.accounting.exception.base.bean.Operation"%>
 <%@page import="com.qifenqian.bms.accounting.exception.base.type.OperationStatus"%>
-<%@page import="org.gyzb.platform.common.utils.ReflectUtils"%>
+<%@page import="com.qifenqian.platform.common.utils.ReflectUtils"%>
 <%@page import="com.sevenpay.invoke.common.type.RequestColumnValues"%>
 <%@page import="com.qifenqian.bms.accounting.exception.OperationExceptionPath"%>
 <%@page import="com.qifenqian.bms.accounting.exception.service.TransDealService"%>
@@ -64,7 +64,7 @@
 										&nbsp;
 										<button type="button" class="btn btn-purple btn-sm backListBtn">返回列表</button>
 										&nbsp;
-										<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.QUERY_OPERATION_RECORD %>">
+										<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.QUERY_OPERATION_RECORD%>">
 											<a href="#" data-toggle='modal' onclick="queryOperationRecord(this)" data-rel="tooltip" title="查看操作日志" >
 												<button type="submit" class="btn btn-primary btn-sm"> 操作日志</button>
 											</a> 
@@ -78,7 +78,7 @@
 									<td class="td-left bg-e" width="11%">业务编号</td>
 									<td class="td-right" width="22%">${operation.operId}</td>
 									<td class="td-left bg-e" width="11%">业务类型</td>
-									<td class="td-right" width="22%"><%=ReflectUtils.getDesc(operation.getOperType()) %></td>
+									<td class="td-right" width="22%"><%=ReflectUtils.getDesc(operation.getOperType())%></td>
 									<td class="td-left bg-e" width="11%">状态</td>
 									<td class="td-right" width="23%">
 										<c:choose>
@@ -170,20 +170,22 @@
 							</table>
 							<!-- 核心基本信息 -->
 							<c:if test="${not empty transRecord }">
-								<% TransRecord transRecord = (TransRecord)pageContext.findAttribute("transRecord"); %>
+								<%
+								  TransRecord transRecord = (TransRecord)pageContext.findAttribute("transRecord");
+								%>
 								<table class="search-table" style="margin-top: 10px;">
 									<tr>
 										<td class="bg-e" colspan="6" align="center" style="border-right:0px;font: 16px;font-weight: bold;">核心处理信息</td>
 									</tr>
 									<tr>
 										<td class="td-left bg-e" width="11%">请求报文类型</td>
-										<td class="td-right"  width="22%"><%=ReflectUtils.getDesc(transRecord.getMsgType()) %></td>
+										<td class="td-right"  width="22%"><%=ReflectUtils.getDesc(transRecord.getMsgType())%></td>
 										<td class="td-left bg-e"  width="11%">核心报文编号</td>
 										<td class="td-right" colspan="3" width="56%">${transRecord.msgId}</td>
 									</tr>
 									<tr>
 										<td class="td-left bg-e" width="11%">请求方系统</td>
-										<td class="td-right" width="22%"><%=ReflectUtils.getDesc(transRecord.getReqSysId()) %></td>
+										<td class="td-right" width="22%"><%=ReflectUtils.getDesc(transRecord.getReqSysId())%></td>
 										<td class="td-left bg-e" width="11%">请求方流水号</td>
 										<td class="td-right" width="22%">${transRecord.reqSerialId}</td>
 										<td class="td-left bg-e" width="11%">请求方服务器</td>
@@ -195,7 +197,7 @@
 										<td class="td-left bg-e">请求时间</td>
 										<td class="td-right"><fmt:formatDate value="${transRecord.reqDatetime }" type="both"/> </td>
 										<td class="td-left bg-e">处理状态</td>
-										<td class="td-right"><%=ReflectUtils.getDesc(transRecord.getStatus()) %></td>
+										<td class="td-right"><%=ReflectUtils.getDesc(transRecord.getStatus())%></td>
 									</tr>
 									<tr>
 										<td class="td-left bg-e">核心接收时间</td>
@@ -225,46 +227,55 @@
 									</tr>
 									<c:forEach items="${transList }" var="trans" varStatus="status">
 										<!-- 标题 -->
-										<% TransAction trans = (TransAction)pageContext.findAttribute("trans"); %>
-										
-										<% if(trans.getTransFlowOperate()==RequestColumnValues.TransFlowOperate.BUSS_SETTLE_APPLY_RECEIVE||
-											trans.getTransFlowOperate()==RequestColumnValues.TransFlowOperate.BUSS_SETTLE_REVOKE_RECEIVE||
-											trans.getTransFlowOperate()==RequestColumnValues.TransFlowOperate.SEVEN_BUSS_SETTLE) {
-											AcctSevenTrans sevenTrans = (AcctSevenTrans)trans;
+										<%
+										  TransAction trans = (TransAction)pageContext.findAttribute("trans");
 										%>
+										
+										<%
+																				  if(trans.getTransFlowOperate()==RequestColumnValues.TransFlowOperate.BUSS_SETTLE_APPLY_RECEIVE||
+																															trans.getTransFlowOperate()==RequestColumnValues.TransFlowOperate.BUSS_SETTLE_REVOKE_RECEIVE||
+																															trans.getTransFlowOperate()==RequestColumnValues.TransFlowOperate.SEVEN_BUSS_SETTLE) {
+																															AcctSevenTrans sevenTrans = (AcctSevenTrans)trans;
+																				%>
 										<tr>
 											<td class="bg-e" colspan="2" width="33%" align="right" style="padding-right: 60px;border-right:0px;font-size: 15px;font-weight: bold;">
-												<%=ReflectUtils.getDesc(trans.getTransFlowOperate()) %>&nbsp;[<font color="red"><%=ReflectUtils.getDesc(trans.getResultStatus()) %></font>]
+												<%=ReflectUtils.getDesc(trans.getTransFlowOperate())%>&nbsp;[<font color="red"><%=ReflectUtils.getDesc(trans.getResultStatus())%></font>]
 											</td>
 											<td class="bg-e" colspan="4" width="67%" align="right" style="padding-right: 50px;border-left:0px;">
 												<input type="hidden" name="transFlowId" value="${trans.transRecordFlow.id}" />
 												<input type="hidden" name="transFlowOperate" value="${trans.transFlowOperate}" />
 												<input type="hidden" name="msgId" value="${trans.transRecordFlow.msgId}" />
-												<% if(trans.getResultStatus() == RequestColumnValues.TransStatus.EXCEPTION) { %>
-													<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.QUERY_RESULT_TRANS %>">
+												<%
+												  if(trans.getResultStatus() == RequestColumnValues.TransStatus.EXCEPTION) {
+												%>
+													<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.QUERY_RESULT_TRANS%>">
 														<a href="#" class="tooltip-success" onclick="queryResultTrans(this)" data-rel="tooltip" title="Query" data-toggle='modal' data-target="#queryResultModel">
 															<button type="submit" class="btn btn-purple btn-sm">结果自查</button>
 														</a>
 													</gyzbadmin:function>
 													&nbsp;
-													<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.CONFIRM_SUCCESS_TRANS %>">
+													<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.CONFIRM_SUCCESS_TRANS%>">
 														<a href="#transBaseModal"  class="tooltip-success confirmSuccess" data-rel="tooltip"  data-toggle='modal' title="确认成功">
 															<button type="submit" class="btn btn-purple btn-sm">确认成功</button>
 														</a>
 													</gyzbadmin:function>
 													&nbsp;
-													<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.CONFIRM_FAILURE_TRANS %>">
+													<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.CONFIRM_FAILURE_TRANS%>">
 														<a href="#transBaseModal"  class="tooltip-success confirmFailure" data-rel="tooltip"  data-toggle='modal' title="确认失败">
 															<button type="submit" class="btn btn-purple btn-sm">确认失败</button>
 														</a>
 													</gyzbadmin:function>
-												<% } else if(trans.getResultStatus() == RequestColumnValues.TransStatus.FAILURE || trans.getResultStatus() == RequestColumnValues.TransStatus.CONFIRM_FAILURE) { %>
-													<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.QUERY_RESULT_TRANS %>">
+												<%
+												  } else if(trans.getResultStatus() == RequestColumnValues.TransStatus.FAILURE || trans.getResultStatus() == RequestColumnValues.TransStatus.CONFIRM_FAILURE) {
+												%>
+													<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.QUERY_RESULT_TRANS%>">
 														<a href="#" class="tooltip-success" onclick="queryResultTrans(this)" data-rel="tooltip" title="Query" data-toggle='modal' data-target="#queryResultModel">
 															<button type="submit" class="btn btn-purple btn-sm">结果自查</button>
 														</a>
 													</gyzbadmin:function>
-												<% } %>
+												<%
+												  }
+												%>
 											</td>
 										</tr>
 										<!-- 交易明细 -->
@@ -272,9 +283,9 @@
 											<td class="td-left bg-e">交易流水号</td>
 											<td class="td-right">${trans.transRecordFlow.id}</td>
 											<td class="td-left bg-e">业务类型</td>
-											<td class="td-right"><%=ReflectUtils.getDesc(trans.getTransRecordFlow().getBusinessType()) %></td>
+											<td class="td-right"><%=ReflectUtils.getDesc(trans.getTransRecordFlow().getBusinessType())%></td>
 											<td class="td-left bg-e">状态</td>
-											<td class="td-right"><%=ReflectUtils.getDesc(trans.getTransRecordFlow().getStatus()) %></td>
+											<td class="td-right"><%=ReflectUtils.getDesc(trans.getTransRecordFlow().getStatus())%></td>
 										</tr>
 										<tr>
 											<td class="td-left bg-e">写入时间</td>
@@ -282,7 +293,7 @@
 											<td class="td-left bg-e">交易金额</td>
 											<td class="td-right" style="color: red;">${trans.transRecordFlow.transAmt}</td>
 											<td class="td-left bg-e">交易币别</td>
-											<td class="td-right"><%=ReflectUtils.getDesc(trans.getTransRecordFlow().getCurrCode()) %></td>
+											<td class="td-right"><%=ReflectUtils.getDesc(trans.getTransRecordFlow().getCurrCode())%></td>
 										</tr>
 										<tr>
 											<td class="td-left bg-e">核心报文编号</td>
@@ -290,13 +301,13 @@
 											<td class="td-left bg-e">原/对应编号</td>
 											<td class="td-right">${trans.transRecordFlow.originId}</td>
 											<td class="td-left bg-e">收支标记</td>
-											<td class="td-right"><%=ReflectUtils.getDesc(trans.getTransRecordFlow().getLoanFlag()) %></td>
+											<td class="td-right"><%=ReflectUtils.getDesc(trans.getTransRecordFlow().getLoanFlag())%></td>
 										</tr>
 										<tr>
 											<td class="td-left bg-e">客户号</td>
 											<td class="td-right">${trans.transRecordFlow.custId}</td>
 											<td class="td-left bg-e">账户类型</td>
-											<td class="td-right"><%=ReflectUtils.getDesc(trans.getTransRecordFlow().getAcctType()) %></td>
+											<td class="td-right"><%=ReflectUtils.getDesc(trans.getTransRecordFlow().getAcctType())%></td>
 											<td class="td-left bg-e">账号</td>
 											<td class="td-right">${trans.transRecordFlow.acctId}</td>
 										</tr>
@@ -330,37 +341,42 @@
 											<td class="td-left bg-e">摘要</td>
 											<td class="td-right" >${trans.brief}</td>
 										</tr>
-								<% } if(trans.getTransFlowOperate()==RequestColumnValues.TransFlowOperate.BANK_CLEAR) {
-									ClearBank clearBank = (ClearBank)trans;
+								<%
+								  } if(trans.getTransFlowOperate()==RequestColumnValues.TransFlowOperate.BANK_CLEAR) {
+																	ClearBank clearBank = (ClearBank)trans;
 								%>
 								<tr>
 									<td class="bg-e" colspan="2" width="33%" align="right" style="padding-right: 60px;border-right:0px;font-size: 15px;font-weight: bold;">
-										<%=ReflectUtils.getDesc(trans.getTransFlowOperate()) %>&nbsp;[<font color="red"><%=ReflectUtils.getDesc(trans.getResultStatus()) %></font>]
+										<%=ReflectUtils.getDesc(trans.getTransFlowOperate())%>&nbsp;[<font color="red"><%=ReflectUtils.getDesc(trans.getResultStatus())%></font>]
 									</td>
 									<td class="bg-e" colspan="4" width="67%" align="right" style="padding-right: 50px;border-left:0px;">
 										<input type="hidden" name="transFlowId" value="${trans.transRecordFlow.id}" />
 										<input type="hidden" name="transFlowOperate" value="${trans.transFlowOperate}" />
 										<input type="hidden" name="msgId" value="${trans.transRecordFlow.msgId}" />
-										<% if(trans.getResultStatus() == RequestColumnValues.TransStatus.EXCEPTION) { %>
-												<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.QUERY_RESULT_TRANS %>">
+										<%
+										  if(trans.getResultStatus() == RequestColumnValues.TransStatus.EXCEPTION) {
+										%>
+												<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.QUERY_RESULT_TRANS%>">
 													<a href="#" class="tooltip-success" onclick="queryResultTrans(this)" data-rel="tooltip" title="Query" data-toggle='modal' data-target="#queryResultModel">
 														<button type="submit" class="btn btn-purple btn-sm">结果自查</button>
 													</a>
 												</gyzbadmin:function>
 												&nbsp;
-												<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.CONFIRM_SUCCESS_TRANS %>">
+												<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.CONFIRM_SUCCESS_TRANS%>">
 													<a href="#transBaseModal"  class="tooltip-success confirmSuccess" data-rel="tooltip"  data-toggle='modal' title="确认成功">
 														<button type="submit" class="btn btn-purple btn-sm">确认成功</button>
 													</a>
 												</gyzbadmin:function>
 												&nbsp;
-												<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.CONFIRM_FAILURE_TRANS %>">
+												<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.CONFIRM_FAILURE_TRANS%>">
 													<a href="#transBaseModal"  class="tooltip-success confirmFailure" data-rel="tooltip"  data-toggle='modal' title="确认失败">
 														<button type="submit" class="btn btn-purple btn-sm">确认失败</button>
 													</a>
 												</gyzbadmin:function>
-											<% } else if(trans.getResultStatus() == RequestColumnValues.TransStatus.FAILURE || trans.getResultStatus() == RequestColumnValues.TransStatus.CONFIRM_FAILURE) { %>
-												<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.QUERY_RESULT_TRANS %>">
+											<%
+											  } else if(trans.getResultStatus() == RequestColumnValues.TransStatus.FAILURE || trans.getResultStatus() == RequestColumnValues.TransStatus.CONFIRM_FAILURE) {
+											%>
+												<gyzbadmin:function url="<%=OperationExceptionPath.BASE + OperationExceptionPath.QUERY_RESULT_TRANS%>">
 													<a href="#" class="tooltip-success" onclick="queryResultTrans(this)" data-rel="tooltip" title="Query" data-toggle='modal' data-target="#queryResultModel">
 														<button type="submit" class="btn btn-purple btn-sm">结果自查</button>
 													</a>

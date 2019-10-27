@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.market.mapper.ManagerMapper">
-	<select id="selectManagerList" resultType="com.sevenpay.bms.basemanager.market.bean.Manager" parameterType="com.sevenpay.bms.basemanager.market.bean.Manager">
+<mapper namespace="com.qifenqian.bms.basemanager.market.mapper.ManagerMapper">
+	<select id="selectManagerList" resultType="com.qifenqian.bms.basemanager.market.bean.Manager" parameterType="com.qifenqian.bms.basemanager.market.bean.Manager">
 	
 		select 
 			M.USER_CODE,
@@ -41,7 +41,7 @@
 	
 	
 	
-	<update id="updateManagerList" parameterType="com.sevenpay.bms.basemanager.market.bean.Manager">
+	<update id="updateManagerList" parameterType="com.qifenqian.bms.basemanager.market.bean.Manager">
 		update bms_manager_info
 		<set>
 			
@@ -57,7 +57,7 @@
 	</update>
 	
 	
-	<select id="selectNewManagerList" resultType="com.sevenpay.bms.basemanager.market.bean.Manager" parameterType="com.sevenpay.bms.basemanager.market.bean.Manager">
+	<select id="selectNewManagerList" resultType="com.qifenqian.bms.basemanager.market.bean.Manager" parameterType="com.qifenqian.bms.basemanager.market.bean.Manager">
 		 select 
 			U.USER_CODE,
 			U.USER_NAME,
@@ -87,7 +87,7 @@
 		
 	</select>
 	
-	<insert id="insertNewManagerList"  parameterType="com.sevenpay.bms.basemanager.market.bean.Manager">
+	<insert id="insertNewManagerList"  parameterType="com.qifenqian.bms.basemanager.market.bean.Manager">
 		
 		INSERT INTO 
 		stcdb.bms_manager_info(
@@ -103,7 +103,7 @@
 	</insert>
 	
 	
-	<select id="selectManangerJurisdiction" parameterType="com.sevenpay.bms.basemanager.market.bean.MarketRole" resultType="com.sevenpay.bms.basemanager.market.bean.MarketRole" >
+	<select id="selectManangerJurisdiction" parameterType="com.qifenqian.bms.basemanager.market.bean.MarketRole" resultType="com.qifenqian.bms.basemanager.market.bean.MarketRole" >
 	
 		 SELECT 
 			 R.USER_ROLE,
@@ -129,7 +129,7 @@
 		
 	</select>
 	
-	<select id="getManager" parameterType="java.lang.String"  resultType="com.sevenpay.bms.basemanager.market.bean.Manager" >
+	<select id="getManager" parameterType="java.lang.String"  resultType="com.qifenqian.bms.basemanager.market.bean.Manager" >
 		SELECT	
 			M.USER_CODE,
 			M.USER_NAME,

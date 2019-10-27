@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.gyzb.platform.common.utils.DatetimeUtils;
-import org.sevenpay.platform.utils.FormTokenUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +32,8 @@ import com.qifenqian.bms.paymentmanager.bean.TdPaymentBatDetail;
 import com.qifenqian.bms.paymentmanager.bean.TdPaymentBatInfo;
 import com.qifenqian.bms.paymentmanager.dao.PaymentManagerDao;
 import com.qifenqian.bms.paymentmanager.service.PaymentService;
+import com.qifenqian.bms.platform.common.utils.DatetimeUtils;
+import com.qifenqian.bms.platform.utils.FormTokenUtil;
 import com.sevenpay.invoke.SevenpayCoreServiceInterface;
 import com.sevenpay.invoke.common.message.request.RequestMessage;
 import com.sevenpay.invoke.common.message.response.ResponseMessage;

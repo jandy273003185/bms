@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.sns.redpacketdetail.mapper.RedPacketDetailMapper">
+<mapper namespace="com.qifenqian.bms.sns.redpacketdetail.mapper.RedPacketDetailMapper">
 
-	<select id="selectRedPacketDetailByRedEnvId" parameterType="com.sevenpay.bms.sns.redpacketdetail.bean.RedPacketDetail" resultType="com.sevenpay.bms.sns.redpacketdetail.bean.RedPacketDetail">
+	<select id="selectRedPacketDetailByRedEnvId" parameterType="com.qifenqian.bms.sns.redpacketdetail.bean.RedPacketDetail" resultType="com.qifenqian.bms.sns.redpacketdetail.bean.RedPacketDetail">
 		SELECT
 			T.RED_ENV_ID,
 			U.MOBILE AS CUST_ID,
@@ -42,7 +42,7 @@
 		ORDER BY T.CREATE_TIME DESC
 	</select>
 	
-	<select id="selectRedPacketDetailList" parameterType="com.sevenpay.bms.sns.redpacketdetail.bean.RedPacketDetail" resultType="com.sevenpay.bms.sns.redpacketdetail.bean.RedPacketDetail">
+	<select id="selectRedPacketDetailList" parameterType="com.qifenqian.bms.sns.redpacketdetail.bean.RedPacketDetail" resultType="com.qifenqian.bms.sns.redpacketdetail.bean.RedPacketDetail">
 		SELECT
 			T.RED_ENV_ID,
 			U.MOBILE AS CUST_ID,
@@ -94,7 +94,7 @@
 		ORDER BY T.PICK_TIME DESC
 		
 	</select>
-	<update id="updateRedPacketDetail" parameterType="com.sevenpay.bms.sns.redpacketdetail.bean.RedPacketDetail">
+	<update id="updateRedPacketDetail" parameterType="com.qifenqian.bms.sns.redpacketdetail.bean.RedPacketDetail">
 		UPDATE 
 			SNS_TD_PICK_REDENV_DETAIL T
 		<set>

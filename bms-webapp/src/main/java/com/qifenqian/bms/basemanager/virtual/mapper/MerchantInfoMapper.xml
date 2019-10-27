@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.virtual.mapper.MerchantInfoMapper">
+<mapper namespace="com.qifenqian.bms.basemanager.virtual.mapper.MerchantInfoMapper">
  
  
- <select id="getDataInfos" resultType="com.sevenpay.bms.basemanager.virtual.bean.MerchantInfo">
+ <select id="getDataInfos" resultType="com.qifenqian.bms.basemanager.virtual.bean.MerchantInfo">
  	SELECT * FROM MERCHANT_AMT_INFOS T
  	<where>
  		LENGTH(T.ID) <![CDATA[ = ]]> 12
@@ -12,7 +12,7 @@
  	
  </select>
  
- <select id="getInfos" parameterType="com.sevenpay.bms.basemanager.virtual.bean.MerchantInfo" resultType="com.sevenpay.bms.basemanager.virtual.bean.MerchantInfo">
+ <select id="getInfos" parameterType="com.qifenqian.bms.basemanager.virtual.bean.MerchantInfo" resultType="com.qifenqian.bms.basemanager.virtual.bean.MerchantInfo">
  
  	<!-- SELECT * FROM MERCHANT_AMT_INFO T
  	<where>
@@ -43,7 +43,7 @@
 	</where>
  </select>
  
- <insert id="insertInfos" parameterType="com.sevenpay.bms.basemanager.virtual.bean.MerchantTradeInfo">
+ <insert id="insertInfos" parameterType="com.qifenqian.bms.basemanager.virtual.bean.MerchantTradeInfo">
  	insert into merchant_detail_info(
  			id,
 			merchant_Name,
@@ -60,7 +60,7 @@
 		  	#{tradeStatus, jdbcType=VARCHAR})
  </insert>
  
- <update id="updateInfos" parameterType="com.sevenpay.bms.basemanager.virtual.bean.MerchantInfo">
+ <update id="updateInfos" parameterType="com.qifenqian.bms.basemanager.virtual.bean.MerchantInfo">
  	update 
  		merchant_detail_info
  	set
@@ -70,8 +70,8 @@
  		id =  #{id,jdbcType = VARCHAR}
  </update>
  
- <select id="getAgentInfo" parameterType="com.sevenpay.bms.basemanager.virtual.bean.AgentInfo"
-  resultType="com.sevenpay.bms.basemanager.virtual.bean.AgentInfo">
+ <select id="getAgentInfo" parameterType="com.qifenqian.bms.basemanager.virtual.bean.AgentInfo"
+  resultType="com.qifenqian.bms.basemanager.virtual.bean.AgentInfo">
   	
 	SELECT
 		t.agent_id,

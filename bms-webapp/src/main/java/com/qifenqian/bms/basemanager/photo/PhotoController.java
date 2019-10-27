@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.gyzb.platform.web.admin.user.bean.User;
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +25,8 @@ import com.qifenqian.bms.basemanager.fee.service.FeeService;
 import com.qifenqian.bms.basemanager.photo.bean.CertificateAuth;
 import com.qifenqian.bms.basemanager.photo.bean.Photo;
 import com.qifenqian.bms.basemanager.photo.service.PhotoService;
+import com.qifenqian.bms.platform.web.admin.user.bean.User;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 @Controller
 @RequestMapping(PhotoPath.BASE)

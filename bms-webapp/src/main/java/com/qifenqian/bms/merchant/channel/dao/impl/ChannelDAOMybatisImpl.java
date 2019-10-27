@@ -2,7 +2,6 @@ package com.qifenqian.bms.merchant.channel.dao.impl;
 
 import java.util.List;
 
-import org.gyzb.platform.web.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +11,7 @@ import com.qifenqian.bms.merchant.channel.bean.ChannelDetailBean;
 import com.qifenqian.bms.merchant.channel.dao.ChannelDAO;
 import com.qifenqian.bms.merchant.channel.mapper.ChannelMapperReader;
 import com.qifenqian.bms.merchant.channel.mapper.ChannelMapperWriter;
+import com.qifenqian.bms.platform.web.page.Page;
 
 import redis.clients.jedis.Jedis;
 

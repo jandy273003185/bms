@@ -3,7 +3,6 @@ package com.qifenqian.bms.meeting.luckdraw.dao;
 import java.util.Date;
 
 import org.apache.commons.lang3.time.DateUtils;
-import org.sevenpay.platform.utils.SequenceUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +22,7 @@ import com.qifenqian.bms.meeting.luckdraw.type.RedPacketType;
 import com.qifenqian.bms.meeting.prize.bean.PrizeBean;
 import com.qifenqian.bms.meeting.prize.mapper.PrizeMapper;
 import com.qifenqian.bms.meeting.prize.type.PrizeStatus;
+import com.qifenqian.bms.platform.utils.SequenceUtils;
 
 /**
  * @project sevenpay-bms-web

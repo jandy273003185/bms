@@ -9,8 +9,6 @@ import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
-import org.gyzb.platform.web.admin.user.bean.User;
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +29,8 @@ import com.qifenqian.bms.basemanager.merchant.mapper.ActWorkflowMerchantAuditMap
 import com.qifenqian.bms.basemanager.merchant.mapper.TdCertificateAuthMapper;
 import com.qifenqian.bms.basemanager.merchant.mapper.TdLoginUserInfoMapper;
 import com.qifenqian.bms.basemanager.rule.mapper.RuleMapper;
+import com.qifenqian.bms.platform.web.admin.user.bean.User;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 import cn.jpush.api.utils.StringUtils;
 

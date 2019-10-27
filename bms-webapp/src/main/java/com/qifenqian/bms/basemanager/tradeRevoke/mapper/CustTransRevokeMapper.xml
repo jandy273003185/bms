@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.tradeRevoke.mapper.CustTransRevokeMapper">
+<mapper namespace="com.qifenqian.bms.basemanager.tradeRevoke.mapper.CustTransRevokeMapper">
 
-	<select id="selectTransRevokeList" parameterType="com.sevenpay.bms.basemanager.tradeRevoke.bean.CustTransRevoke" resultType="com.sevenpay.bms.basemanager.tradeRevoke.bean.CustTransRevoke">
+	<select id="selectTransRevokeList" parameterType="com.qifenqian.bms.basemanager.tradeRevoke.bean.CustTransRevoke" resultType="com.qifenqian.bms.basemanager.tradeRevoke.bean.CustTransRevoke">
 	SELECT 
 		  T.ORDER_ID,
 		  T.ORIGIN_ORDER_ID,
@@ -51,7 +51,7 @@
 		ORDER BY T.CREATE_TIME DESC
 	</select>
 	
-	<insert id="insert" parameterType="com.sevenpay.bms.basemanager.tradeRevoke.bean.CustTransRevoke">
+	<insert id="insert" parameterType="com.qifenqian.bms.basemanager.tradeRevoke.bean.CustTransRevoke">
 		INSERT INTO TD_CUST_TRANS_REVOKE(
 			  ORDER_ID,
 			  ORIGIN_ORDER_ID,
@@ -83,7 +83,7 @@
 		)
 	</insert>
 	
-	<update id="updateByRevoke" parameterType="com.sevenpay.bms.basemanager.tradeRevoke.bean.CustTransRevoke">
+	<update id="updateByRevoke" parameterType="com.qifenqian.bms.basemanager.tradeRevoke.bean.CustTransRevoke">
 		UPDATE TD_CUST_TRANS_REVOKE
 		<set>
 			<if test="orderStatus !=null and orderStatus !='' ">
@@ -103,7 +103,7 @@
 		WHERE ORDER_ID = #{orderId,jdbcType = VARCHAR}
 	</update>
 	
-	<update id="updateByAudit" parameterType="com.sevenpay.bms.basemanager.tradeRevoke.bean.CustTransRevoke">
+	<update id="updateByAudit" parameterType="com.qifenqian.bms.basemanager.tradeRevoke.bean.CustTransRevoke">
 		UPDATE TD_CUST_TRANS_REVOKE
 		<set>
 			<if test="orderStatus !=null and orderStatus !='' ">

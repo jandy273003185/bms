@@ -2,7 +2,6 @@ package com.qifenqian.bms.basemanager.merchant.service;
 
 import java.util.List;
 
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +20,7 @@ import com.qifenqian.bms.basemanager.merchant.mapper.CustScanMapper;
 import com.qifenqian.bms.basemanager.merchant.mapper.MerchantMapper;
 import com.qifenqian.bms.basemanager.merchant.mapper.TdCertificateAuthMapper;
 import com.qifenqian.bms.basemanager.merchant.mapper.TdLoginUserInfoMapper;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 @Service
 public class AuditorService {

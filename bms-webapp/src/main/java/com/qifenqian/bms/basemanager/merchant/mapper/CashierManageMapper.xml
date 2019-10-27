@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.merchant.mapper.CashierManageMapper">
+<mapper namespace="com.qifenqian.bms.basemanager.merchant.mapper.CashierManageMapper">
 	<!-- 收银员管理 -->
-	<select id="getCashierList" parameterType="com.sevenpay.bms.basemanager.merchant.bean.CashierInfo" resultType="com.sevenpay.bms.basemanager.merchant.bean.CashierInfo">
+	<select id="getCashierList" parameterType="com.qifenqian.bms.basemanager.merchant.bean.CashierInfo" resultType="com.qifenqian.bms.basemanager.merchant.bean.CashierInfo">
 		SELECT
 			T.*, A.cust_name merchantName,
 			B.cust_name createName,
@@ -33,7 +33,7 @@
 		</if>
 		order by T.create_time desc
 	</select>
-	<select id="getMyCashierList" parameterType="com.sevenpay.bms.basemanager.merchant.bean.CashierInfo" resultType="com.sevenpay.bms.basemanager.merchant.bean.CashierInfo">
+	<select id="getMyCashierList" parameterType="com.qifenqian.bms.basemanager.merchant.bean.CashierInfo" resultType="com.qifenqian.bms.basemanager.merchant.bean.CashierInfo">
 			SELECT
 				T.*, 
 				A.cust_name merchantName,
@@ -102,7 +102,7 @@
 		order by T.create_time desc
 	</select>
 	
-	<insert id="addCashier" parameterType="com.sevenpay.bms.basemanager.merchant.bean.CashierInfo">
+	<insert id="addCashier" parameterType="com.qifenqian.bms.basemanager.merchant.bean.CashierInfo">
 		insert into
 		td_merchant_cashier_ref(
 			ONLY_ID,
@@ -136,7 +136,7 @@
 	</delete>
 	
 	
-	<select id="getCustInfoByMobile" parameterType="String" resultType="com.sevenpay.bms.basemanager.merchant.bean.TdLoginUserInfo">
+	<select id="getCustInfoByMobile" parameterType="String" resultType="com.qifenqian.bms.basemanager.merchant.bean.TdLoginUserInfo">
 		select
 			T.*
 		from
@@ -146,7 +146,7 @@
 			and t.mobile=#{mobile,jdbcType=VARCHAR}
 	</select>
 	
-	<update id="updateCashier" parameterType="com.sevenpay.bms.basemanager.merchant.bean.CashierInfo">
+	<update id="updateCashier" parameterType="com.qifenqian.bms.basemanager.merchant.bean.CashierInfo">
 		update 
 			td_merchant_cashier_ref T
 		<set>
@@ -170,11 +170,11 @@
 		    T.only_id = #{onlyId,jdbcType=VARCHAR}
 	</update>
 	
-		<select id="getMyCashierRef" parameterType="String" resultType="com.sevenpay.bms.basemanager.merchant.bean.CashierInfo">	
+		<select id="getMyCashierRef" parameterType="String" resultType="com.qifenqian.bms.basemanager.merchant.bean.CashierInfo">	
 			select * from td_merchant_cashier_ref tmc where tmc.ONLY_ID  =  #{onlyId,jdbcType=VARCHAR}
 	   </select>
 	<!-- 除某条记录外的数据 -->
-	<select id="getCashierListExcept" parameterType="com.sevenpay.bms.basemanager.merchant.bean.CashierInfo" resultType="com.sevenpay.bms.basemanager.merchant.bean.CashierInfo">
+	<select id="getCashierListExcept" parameterType="com.qifenqian.bms.basemanager.merchant.bean.CashierInfo" resultType="com.qifenqian.bms.basemanager.merchant.bean.CashierInfo">
 		select 
 			T.*
 		from
@@ -193,7 +193,7 @@
 		order by T.create_time desc
 	</select>
 	
-	<select id="selectStore" resultType="com.sevenpay.bms.basemanager.merchant.bean.StoreManage" >
+	<select id="selectStore" resultType="com.qifenqian.bms.basemanager.merchant.bean.StoreManage" >
 		SELECT
 		  shop_id,
 		  shop_name,

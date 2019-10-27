@@ -2,7 +2,6 @@ package com.qifenqian.bms.basemanager.agent.controller;
 
 import java.util.List;
 
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.agent.bean.AgentApplyBean;
 import com.qifenqian.bms.basemanager.agent.bean.CustVo;
 import com.qifenqian.bms.basemanager.agent.service.AgentApplyService;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 
 @Controller

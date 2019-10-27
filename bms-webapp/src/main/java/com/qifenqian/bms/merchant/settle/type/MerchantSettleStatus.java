@@ -2,7 +2,7 @@ package com.qifenqian.bms.merchant.settle.type;
 
 import java.lang.reflect.Field;
 
-import org.gyzb.platform.common.annotation.Description;
+import com.qifenqian.bms.platform.common.annotation.Description;
 
 /**
  * @project sevenpay-bms-web

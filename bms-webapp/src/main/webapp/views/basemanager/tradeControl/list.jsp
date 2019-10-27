@@ -520,7 +520,7 @@ function updateTradeControl(obj,option){
 												清空
 											    <i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
-											<gyzbadmin:function url="<%=TradeControlPath.BASE + TradeControlPath.ADD %>">
+											<gyzbadmin:function url="<%=TradeControlPath.BASE + TradeControlPath.ADD%>">
 												<button  class="btn btn-purple btn-sm" data-toggle='modal' data-target="#addTradeControlModal">
 													新增
 													<i class="icon-plus-sign icon-on-right bigger-110"></i>
@@ -580,14 +580,14 @@ function updateTradeControl(obj,option){
 															<i class="iconfont icon-shenhe "></i>
 														</span>
 													</a>
-													<gyzbadmin:function url="<%=TradeControlPath.BASE + TradeControlPath.UPDATE %>">
+													<gyzbadmin:function url="<%=TradeControlPath.BASE + TradeControlPath.UPDATE%>">
 														<a href="#" class="tooltip-success" data-rel="tooltip" onclick="updateTradeControl(this,'edit')" data-toggle="modal" title="修改"  data-target="#updateTradeControlModal">
 															<span class="green">
 																<i class="icon-edit bigger-120"></i>
 															</span>
 														</a>
 													</gyzbadmin:function>
-													<gyzbadmin:function url="<%=TradeControlPath.BASE + TradeControlPath.DELETE %>">
+													<gyzbadmin:function url="<%=TradeControlPath.BASE + TradeControlPath.DELETE%>">
 														<a href="#" class="tooltip-error deleteTradeControl" data-rel="tooltip" title="Delete" data-toggle="modal" data-target="#deleteTradeControlModal">
 															<span class="red">
 																<i class="icon-trash bigger-120"></i>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.acctsevencust.mapper.AcctSevenCustFreezeMapper">
+<mapper namespace="com.qifenqian.bms.basemanager.acctsevencust.mapper.AcctSevenCustFreezeMapper">
 
-	<insert id="insert" parameterType="com.sevenpay.bms.basemanager.acctsevencust.bean.AcctSevenCustFreeze">
+	<insert id="insert" parameterType="com.qifenqian.bms.basemanager.acctsevencust.bean.AcctSevenCustFreeze">
 		INSERT INTO ACCT_SEVEN_CUST_FREEZE(
 		ID,
 		ACCT_ID,
@@ -27,7 +27,7 @@
 		)
 	</insert>
 
-	<update id="update" parameterType="com.sevenpay.bms.basemanager.acctsevencust.bean.AcctSevenCustFreeze">
+	<update id="update" parameterType="com.qifenqian.bms.basemanager.acctsevencust.bean.AcctSevenCustFreeze">
 		UPDATE ACCT_SEVEN_CUST_FREEZE
 		<set>
 			<if test="rtnDatetime != null">
@@ -49,7 +49,7 @@
 		WHERE ID = #{id,jdbcType=VARCHAR}
 	</update>
 	
-	<select id="selectMsgId" parameterType="com.sevenpay.bms.basemanager.acctsevencust.bean.AcctSevenCustFreeze" resultType="com.sevenpay.bms.basemanager.acctsevencust.bean.AcctSevenCustFreeze">
+	<select id="selectMsgId" parameterType="com.qifenqian.bms.basemanager.acctsevencust.bean.AcctSevenCustFreeze" resultType="com.qifenqian.bms.basemanager.acctsevencust.bean.AcctSevenCustFreeze">
 		  SELECT
 				F.RELATE_ID
 			FROM

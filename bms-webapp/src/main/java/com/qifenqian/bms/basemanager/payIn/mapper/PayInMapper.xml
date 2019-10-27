@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace ="com.sevenpay.bms.basemanager.payIn.mapper.PayInMapper" >
+<mapper namespace ="com.qifenqian.bms.basemanager.payIn.mapper.PayInMapper" >
 
 	<!-- 查询用户列表 -->
-	<select id="selectPayIns"  parameterType="com.sevenpay.bms.basemanager.payIn.bean.PayIn" resultType="com.sevenpay.bms.basemanager.payIn.bean.PayIn">
+	<select id="selectPayIns"  parameterType="com.qifenqian.bms.basemanager.payIn.bean.PayIn" resultType="com.qifenqian.bms.basemanager.payIn.bean.PayIn">
 		SELECT 
 			P.FEE_CODE,
 			P.FEE_NAME,
@@ -27,7 +27,7 @@
 	
 	<!-- 根据费用代码查询信息 -->
 	
-	<select id="selectPayInByFeeCode" parameterType="string" resultType="com.sevenpay.bms.basemanager.payIn.bean.PayIn">
+	<select id="selectPayInByFeeCode" parameterType="string" resultType="com.qifenqian.bms.basemanager.payIn.bean.PayIn">
 		SELECT 
 			P.FEE_CODE,
 			P.FEE_NAME,
@@ -40,7 +40,7 @@
 	</select>
 	
 	<!-- 添加代付垫资费率信息 -->
-	<insert id="insertPayIn" parameterType="com.sevenpay.bms.basemanager.payIn.bean.PayIn" >
+	<insert id="insertPayIn" parameterType="com.qifenqian.bms.basemanager.payIn.bean.PayIn" >
 		INSERT INTO TD_PAY_IN_INFO (
 			FEE_CODE,
 			FEE_NAME,
@@ -59,7 +59,7 @@
 	</insert>
 	
 	<!-- 更新代付垫资费率信息 -->
-	<update id="updatePayIn" parameterType="com.sevenpay.bms.basemanager.payIn.bean.PayIn">
+	<update id="updatePayIn" parameterType="com.qifenqian.bms.basemanager.payIn.bean.PayIn">
 		update TD_PAY_IN_INFO P
 		<set>
 			<if test="feeName != null">
@@ -77,7 +77,7 @@
 	</update>
 	
 	<!-- 停用代付垫资费率信息 -->
-	<update id="stopPayInByCode" parameterType="com.sevenpay.bms.basemanager.payIn.bean.PayIn" >
+	<update id="stopPayInByCode" parameterType="com.qifenqian.bms.basemanager.payIn.bean.PayIn" >
 		update 
 			TD_PAY_IN_INFO T
 		set

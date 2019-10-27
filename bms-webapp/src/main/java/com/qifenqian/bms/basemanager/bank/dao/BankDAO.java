@@ -2,12 +2,12 @@ package com.qifenqian.bms.basemanager.bank.dao;
 
 import java.util.List;
 
-import org.gyzb.platform.web.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.qifenqian.bms.basemanager.bank.bean.Bank;
 import com.qifenqian.bms.basemanager.bank.mapper.BankMapper;
+import com.qifenqian.bms.platform.web.page.Page;
 
 /**
  * dao层，一般分页需要

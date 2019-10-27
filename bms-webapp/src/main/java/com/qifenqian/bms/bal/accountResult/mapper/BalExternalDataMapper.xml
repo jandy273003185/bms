@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sevenpay.bms.bal.accountResult.mapper.BalExternalDataMapper">
+<mapper namespace="com.qifenqian.bms.bal.accountResult.mapper.BalExternalDataMapper">
 
-  <resultMap id="BaseResultMap" type="com.sevenpay.bms.bal.accountResult.bean.BalExternalData">
+  <resultMap id="BaseResultMap" type="com.qifenqian.bms.bal.accountResult.bean.BalExternalData">
     <id column="data_id" jdbcType="INTEGER" property="dataId" />
     <result column="channel_id" jdbcType="INTEGER" property="channelId" />
     <result column="file_id" jdbcType="VARCHAR" property="fileId" />
@@ -74,7 +74,7 @@
   <sql id="Base_Column_List">
     data_id, channel_id, file_id, seq, clear_id, work_date, inst_user, inst_date, inst_datetime
   </sql>
-  <select id="selectByExample" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalExternalDataExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalExternalDataExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -98,13 +98,13 @@
     delete from bal_external_data
     where data_id = #{dataId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalExternalDataExample">
+  <delete id="deleteByExample" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalExternalDataExample">
     delete from bal_external_data
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalExternalData">
+  <insert id="insert" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalExternalData">
     insert into bal_external_data (data_id, channel_id, file_id, 
       seq, clear_id, work_date, 
       inst_user, inst_date, inst_datetime
@@ -114,7 +114,7 @@
       #{instUser,jdbcType=INTEGER}, #{instDate,jdbcType=VARCHAR}, #{instDatetime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalExternalData">
+  <insert id="insertSelective" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalExternalData">
     insert into bal_external_data
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="dataId != null">
@@ -175,7 +175,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalExternalDataExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalExternalDataExample" resultType="java.lang.Integer">
     select count(*) from bal_external_data
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -231,7 +231,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalExternalData">
+  <update id="updateByPrimaryKeySelective" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalExternalData">
     update bal_external_data
     <set>
       <if test="channelId != null">
@@ -261,7 +261,7 @@
     </set>
     where data_id = #{dataId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalExternalData">
+  <update id="updateByPrimaryKey" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalExternalData">
     update bal_external_data
     set channel_id = #{channelId,jdbcType=INTEGER},
       file_id = #{fileId,jdbcType=VARCHAR},
@@ -274,7 +274,7 @@
     where data_id = #{dataId,jdbcType=INTEGER}
   </update>
   
-  <select id="selectList" parameterType="com.sevenpay.bms.bal.accountResult.bean.BalExternalData" resultType="com.sevenpay.bms.bal.accountResult.bean.BalExternalData">
+  <select id="selectList" parameterType="com.qifenqian.bms.bal.accountResult.bean.BalExternalData" resultType="com.qifenqian.bms.bal.accountResult.bean.BalExternalData">
   	select 
   		
 		  	T.data_id,

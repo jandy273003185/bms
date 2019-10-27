@@ -134,7 +134,7 @@ function loadQueryBean(){
 												清空
 												<i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
-											<gyzbadmin:function url="<%=MerchantTradePath.BASE + MerchantTradePath.EXPORTLIST %>">
+											<gyzbadmin:function url="<%=MerchantTradePath.BASE + MerchantTradePath.EXPORTLIST%>">
 											<a class="btn btn-purple btn-sm exportBut" id="export">
 												导出报表
 											</a> 

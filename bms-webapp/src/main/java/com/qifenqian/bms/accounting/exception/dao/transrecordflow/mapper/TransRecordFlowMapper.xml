@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.accounting.exception.dao.transrecordflow.mapper.TransRecordFlowMapper">
+<mapper namespace="com.qifenqian.bms.accounting.exception.dao.transrecordflow.mapper.TransRecordFlowMapper">
 	
-  	<select id="selectRecordFlowListByReqId" resultType="com.sevenpay.bms.accounting.exception.dao.transrecordflow.bean.TransRecordFlow">
+  	<select id="selectRecordFlowListByReqId" resultType="com.qifenqian.bms.accounting.exception.dao.transrecordflow.bean.TransRecordFlow">
 	SELECT
 	FLOW.*
 	FROM TRANS_RECORD T
@@ -12,14 +12,14 @@
 	ORDER BY FLOW.ID 
   	</select>
   	
-  	<select id="selectRecordFlowById" resultType="com.sevenpay.bms.accounting.exception.dao.transrecordflow.bean.TransRecordFlow" parameterType="string" >
+  	<select id="selectRecordFlowById" resultType="com.qifenqian.bms.accounting.exception.dao.transrecordflow.bean.TransRecordFlow" parameterType="string" >
 		SELECT 
 			T.* 
 		FROM TRANS_RECORD_FLOW T 
 		WHERE T.ID = #{id,jdbcType = VARCHAR}
 	</select>
 	
-	<select id="selectRecordFlowByReqId" resultType="com.sevenpay.bms.accounting.exception.dao.transrecordflow.bean.TransRecordFlow" parameterType="string">
+	<select id="selectRecordFlowByReqId" resultType="com.qifenqian.bms.accounting.exception.dao.transrecordflow.bean.TransRecordFlow" parameterType="string">
 		SELECT
 			FLOW.*
 		FROM TRANS_RECORD T
@@ -28,7 +28,7 @@
 		AND FLOW.OPERATE='JGKJ_PAYMENT'
 	</select>
 	
-	<update id="updateRecordFlow" parameterType="com.sevenpay.bms.accounting.exception.dao.transrecordflow.bean.TransRecordFlow">
+	<update id="updateRecordFlow" parameterType="com.qifenqian.bms.accounting.exception.dao.transrecordflow.bean.TransRecordFlow">
   	  UPDATE 
   	  		TRANS_RECORD_FLOW  T 
   	  SET

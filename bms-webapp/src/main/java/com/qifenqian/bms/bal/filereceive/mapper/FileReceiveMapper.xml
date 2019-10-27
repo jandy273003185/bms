@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.sevenpay.bms.bal.filereceive.mapper.FileReceiveMapper">
+<mapper namespace="com.qifenqian.bms.bal.filereceive.mapper.FileReceiveMapper">
 
-<select id="selectFileReceiveList" parameterType="com.sevenpay.bms.bal.filereceive.bean.FileReceive"  resultType="com.sevenpay.bms.bal.filereceive.bean.FileReceive" >
+<select id="selectFileReceiveList" parameterType="com.qifenqian.bms.bal.filereceive.bean.FileReceive"  resultType="com.qifenqian.bms.bal.filereceive.bean.FileReceive" >
 	SELECT
 		   T.FILE_ID,
 		   T.CHANNEL_ID,
@@ -33,7 +33,7 @@
 </select>
 
 
-<select id="selectByFileName" parameterType="com.sevenpay.bms.bal.filereceive.bean.FileReceive" >
+<select id="selectByFileName" parameterType="com.qifenqian.bms.bal.filereceive.bean.FileReceive" >
 	SELECT T.*
     	  FROM BAL_FILE_RECEIVE T
     	 WHERE 
@@ -42,7 +42,7 @@
 </select>
 
 
-<update id="updateFile" parameterType="com.sevenpay.bms.bal.filereceive.bean.FileReceive">
+<update id="updateFile" parameterType="com.qifenqian.bms.bal.filereceive.bean.FileReceive">
 	UPDATE BAL_FILE_RECEIVE T
    	    <set>
 	    	<if test="fileName != null">
@@ -57,7 +57,7 @@
 </update>
 
 
-<insert id="insertFile" parameterType="com.sevenpay.bms.bal.filereceive.bean.FileReceive">
+<insert id="insertFile" parameterType="com.qifenqian.bms.bal.filereceive.bean.FileReceive">
 	INSERT INTO BAL_FILE_RECEIVE (
 			FILE_ID,
 			CHANNEL_ID,

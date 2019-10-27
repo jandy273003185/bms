@@ -244,7 +244,7 @@
 													清空
 													<i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
-											<gyzbadmin:function url="<%=FeePath.BASE + FeePath.ADD %>">
+											<gyzbadmin:function url="<%=FeePath.BASE + FeePath.ADD%>">
 											<button  class="btn btn-purple btn-sm" data-toggle='modal' data-target="#addFeeModal">
 												新增
 												<i class="icon-plus-sign icon-on-right bigger-110"></i>
@@ -280,14 +280,14 @@
 												<td>${fee.feeName }</td>
 												<td>${fee.feeCodeDesc}</td>
 												<td>
-													<gyzbadmin:function url="<%=FeePath.BASE + FeePath.UPDATE %>">
+													<gyzbadmin:function url="<%=FeePath.BASE + FeePath.UPDATE%>">
 													<a href="#" class="tooltip-success updateFee" data-rel="tooltip" title="Edit" data-toggle="modal" data-target="#updateFeeModal">
 														<span class="green">
 															<i class="icon-edit bigger-120"></i>
 														</span>
 													</a>
 													</gyzbadmin:function>
-													<gyzbadmin:function url="<%=FeePath.BASE + FeePath.DELETE %>">
+													<gyzbadmin:function url="<%=FeePath.BASE + FeePath.DELETE%>">
 													<a href="#" class="tooltip-error deleteFee" data-rel="tooltip" title="Delete" data-toggle="modal" data-target="#deleteFeeModal">
 														<span class="red">
 															<i class="icon-trash bigger-120"></i>

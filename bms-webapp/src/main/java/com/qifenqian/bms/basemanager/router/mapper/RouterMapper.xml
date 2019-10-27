@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.router.mapper.RouterMapper">
- <resultMap type="com.sevenpay.bms.basemanager.router.bean.Servicechannel" id="basicResultMap">
+<mapper namespace="com.qifenqian.bms.basemanager.router.mapper.RouterMapper">
+ <resultMap type="com.qifenqian.bms.basemanager.router.bean.Servicechannel" id="basicResultMap">
  	<result property="id" column="ID"/>
 	<result property="productCode" column="PRODUCT_CODE"/>
 	<result property="channel" column="CHANNEL"/>
@@ -12,14 +12,14 @@
 	<result property="busiCtrl" column="BUSI_CTRL"/>
 	<result property="weight" column="WEIGHT"/>
  </resultMap>
-	<select id="selectRouters" resultType="com.sevenpay.bms.basemanager.router.mapper.RouterMapper" parameterType="com.sevenpay.bms.basemanager.router.bean.Servicechannel" resultMap="basicResultMap">
+	<select id="selectRouters" resultType="com.qifenqian.bms.basemanager.router.mapper.RouterMapper" parameterType="com.qifenqian.bms.basemanager.router.bean.Servicechannel" resultMap="basicResultMap">
 		SELECT 
 		*
 		FROM td_service_channel_control
 		
 	</select>
 	
-	<insert id="addRouters" parameterType="com.sevenpay.bms.basemanager.router.bean.Servicechannel">
+	<insert id="addRouters" parameterType="com.qifenqian.bms.basemanager.router.bean.Servicechannel">
 		INSERT INTO td_service_channel_control(
 			ID,
 			PRODUCT_CODE,
@@ -37,7 +37,7 @@
 		)	
 	</insert>	
 	
-	<update id="updateRouter" parameterType="com.sevenpay.bms.basemanager.router.bean.Servicechannel">	
+	<update id="updateRouter" parameterType="com.qifenqian.bms.basemanager.router.bean.Servicechannel">	
 		UPDATE	
 			td_service_channel_control	
 		<set>	

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.trade.mapper.TdTradeBillMainMapper">
+<mapper namespace="com.qifenqian.bms.basemanager.trade.mapper.TdTradeBillMainMapper">
 	
-	<select id="selectConsume" parameterType="com.sevenpay.bms.basemanager.trade.bean.TdTradeBillMainVO"
-	resultType="com.sevenpay.bms.basemanager.trade.bean.TdTradeBillMainVO">
+	<select id="selectConsume" parameterType="com.qifenqian.bms.basemanager.trade.bean.TdTradeBillMainVO"
+	resultType="com.qifenqian.bms.basemanager.trade.bean.TdTradeBillMainVO">
 			SELECT TT.* FROM 
 				(SELECT
 					T.ORDER_ID,
@@ -144,7 +144,7 @@
 			ORDER BY TT.ORDER_CREATE_TIME DESC 
 	</select>
 	
-	<select id="selectTdradeBillMainByOrderId" parameterType="string" resultType="com.sevenpay.bms.basemanager.trade.bean.TdTradeBillMainVO">
+	<select id="selectTdradeBillMainByOrderId" parameterType="string" resultType="com.qifenqian.bms.basemanager.trade.bean.TdTradeBillMainVO">
 			SELECT 
 				T.ORDER_NAME,
 				T.ORDER_DESC,
@@ -179,8 +179,8 @@
 		
 	</select>
 	
-	<select id="selectTradeConsumeExcel" parameterType="com.sevenpay.bms.basemanager.trade.bean.TdTradeBillMainVO"
-	resultType="com.sevenpay.bms.basemanager.trade.bean.TradeExcel">
+	<select id="selectTradeConsumeExcel" parameterType="com.qifenqian.bms.basemanager.trade.bean.TdTradeBillMainVO"
+	resultType="com.qifenqian.bms.basemanager.trade.bean.TradeExcel">
 	   SELECT  
 				TT.ORDER_ID,
 				TT.ORDER_NAME,
@@ -361,8 +361,8 @@
 			ORDER BY TT.ORDER_CREATE_TIME DESC 
 	</select>
 	
-	<select id="selectTdradeBillMainSummary" parameterType="com.sevenpay.bms.basemanager.trade.bean.TdTradeBillMainVO"
-	resultType="com.sevenpay.bms.basemanager.trade.bean.TdTradeBillMainVO">
+	<select id="selectTdradeBillMainSummary" parameterType="com.qifenqian.bms.basemanager.trade.bean.TdTradeBillMainVO"
+	resultType="com.qifenqian.bms.basemanager.trade.bean.TdTradeBillMainVO">
 		SELECT 
 			C.MERCHANT_CODE,
 			C.CUST_NAME,
@@ -401,8 +401,8 @@
         GROUP BY M.CUST_ID
 	</select>
 	
-	<select id="selectTradeSummaryExcel" parameterType="com.sevenpay.bms.basemanager.trade.bean.TdTradeBillMainVO"
-	resultType="com.sevenpay.bms.basemanager.trade.bean.TradeSummaryExcel">
+	<select id="selectTradeSummaryExcel" parameterType="com.qifenqian.bms.basemanager.trade.bean.TdTradeBillMainVO"
+	resultType="com.qifenqian.bms.basemanager.trade.bean.TradeSummaryExcel">
 		SELECT 
 			C.MERCHANT_CODE,
 			C.CUST_NAME,
@@ -441,7 +441,7 @@
         GROUP BY M.CUST_ID
 	</select>
 	
-	<select id="selectRedpacketPaymentByOrderId" resultType="com.sevenpay.bms.basemanager.trade.bean.TdTradeBillMainVO">
+	<select id="selectRedpacketPaymentByOrderId" resultType="com.qifenqian.bms.basemanager.trade.bean.TdTradeBillMainVO">
 		SELECT
 			T.ORDER_ID,
 			T.CORE_SN,

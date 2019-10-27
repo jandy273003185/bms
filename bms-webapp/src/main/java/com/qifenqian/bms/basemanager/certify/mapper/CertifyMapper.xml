@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.certify.mapper.CertifyMapper">
+<mapper namespace="com.qifenqian.bms.basemanager.certify.mapper.CertifyMapper">
 
-	<resultMap type="com.sevenpay.bms.basemanager.certify.bean.IdentityDetailBean" id="identityDetailList">  
+	<resultMap type="com.qifenqian.bms.basemanager.certify.bean.IdentityDetailBean" id="identityDetailList">  
 	    <result column="file_id" property="fileId" jdbcType="VARCHAR" />  
 	    <result column="validate_id" property="validateId" jdbcType="VARCHAR" />  
 	    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
@@ -51,7 +51,7 @@
 	</update>
 	
 	<!-- 查询认证文件 -->
-	<select id="getFileList" resultType="com.sevenpay.bms.basemanager.certify.bean.FileBean" parameterType="com.sevenpay.bms.basemanager.certify.bean.FileBean">
+	<select id="getFileList" resultType="com.qifenqian.bms.basemanager.certify.bean.FileBean" parameterType="com.qifenqian.bms.basemanager.certify.bean.FileBean">
 		select
 			 *
 		from 
@@ -68,7 +68,7 @@
 	
 	
 	<!-- 查询实名认证验证详情 -->
-	<select id="getIdentityDetail" resultType="com.sevenpay.bms.basemanager.certify.bean.IdentityDetailBean" parameterType="com.sevenpay.bms.basemanager.certify.bean.IdentityDetailBean">
+	<select id="getIdentityDetail" resultType="com.qifenqian.bms.basemanager.certify.bean.IdentityDetailBean" parameterType="com.qifenqian.bms.basemanager.certify.bean.IdentityDetailBean">
 		select 
 			b.*,
 			s.user_name dealUserName
@@ -109,13 +109,13 @@
 			b.file_id = #{fileId,jdbcType = VARCHAR}
 	</update>
 	
-	 <select id="selectByFileName" resultType="com.sevenpay.bms.basemanager.certify.bean.FileBean">
+	 <select id="selectByFileName" resultType="com.qifenqian.bms.basemanager.certify.bean.FileBean">
     	SELECT T.*
     	  FROM BMS_IDENTITY_FILE_RECEIVE T
     	 WHERE T.FILE_NAME = #{fileName,	jdbcType=VARCHAR}	
     	 AND T.STATUS != 'INVALID'
     </select>
-    <update id="updateFile" parameterType="com.sevenpay.bms.basemanager.certify.bean.FileBean">
+    <update id="updateFile" parameterType="com.qifenqian.bms.basemanager.certify.bean.FileBean">
     	UPDATE BMS_IDENTITY_FILE_RECEIVE T
    	    <set>
 	    	<if test="fileName != null">
@@ -129,7 +129,7 @@
     	 WHERE T.FILE_ID 	= #{fileId,		jdbcType=VARCHAR}
     </update>
     
-    <insert id="insertFile" parameterType="com.sevenpay.bms.basemanager.certify.bean.FileBean">
+    <insert id="insertFile" parameterType="com.qifenqian.bms.basemanager.certify.bean.FileBean">
      INSERT INTO BMS_IDENTITY_FILE_RECEIVE (
 			FILE_ID,
 			UPLOAD_DATE,
@@ -154,7 +154,7 @@
     
     </insert>
     
-    <delete id="deleteIdentityDetailBean" parameterType="com.sevenpay.bms.basemanager.certify.bean.IdentityDetailBean">
+    <delete id="deleteIdentityDetailBean" parameterType="com.qifenqian.bms.basemanager.certify.bean.IdentityDetailBean">
     	DELETE FROM BMS_IDENTITY_DETAIL WHERE FILE_ID = #{fileId,jdbcType = VARCHAR}
     </delete>
     
@@ -166,7 +166,7 @@
 	    </foreach>  
 	</insert>  
 	
-	<update id="updateIdentityDetialList" parameterType="com.sevenpay.bms.basemanager.certify.bean.IdentityDetailBean">
+	<update id="updateIdentityDetialList" parameterType="com.qifenqian.bms.basemanager.certify.bean.IdentityDetailBean">
 		UPDATE BMS_IDENTITY_DETAIL T,
 			 TD_CUST_INFO U,
 			 TD_LOGIN_USER_INFO L
@@ -181,7 +181,7 @@
 			AND t.WORK_DATE = #{workDate,jdbcType = VARCHAR}
 	</update>
 	
-	<update id="updateIdentityDetial" parameterType="com.sevenpay.bms.basemanager.certify.bean.IdentityDetailBean">
+	<update id="updateIdentityDetial" parameterType="com.qifenqian.bms.basemanager.certify.bean.IdentityDetailBean">
 		UPDATE BMS_IDENTITY_DETAIL D
     		<set>
 			<if test="rtnCode!=null and rtnCode!=''">

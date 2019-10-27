@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.utils.DateUtils;
-import org.sevenpay.platform.utils.FormTokenUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +28,7 @@ import com.qifenqian.bms.expresspay.CommonService;
 import com.qifenqian.bms.merchant.settle.bean.MerchantSettle;
 import com.qifenqian.bms.merchant.settle.bean.MerchantSettleExport;
 import com.qifenqian.bms.merchant.settle.service.MerchantSettleService;
+import com.qifenqian.bms.platform.utils.FormTokenUtil;
 import com.sevenpay.plugin.IPlugin;
 import com.sevenpay.plugin.message.bean.MessageBean;
 import com.sevenpay.plugin.message.bean.MessageColumnValues;

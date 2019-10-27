@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sevenpay.bms.basemanager.aggregatepayment.orderinfo.mapper.OrderMapperSlave">
-	<select id="getOrderInfoList" parameterType="com.sevenpay.bms.basemanager.aggregatepayment.orderinfo.bean.OrderInfoQueryBean" resultType="com.sevenpay.bms.basemanager.aggregatepayment.orderinfo.bean.OrderInfoBean">
+<mapper namespace="com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.mapper.OrderMapperSlave">
+	<select id="getOrderInfoList" parameterType="com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.OrderInfoQueryBean" resultType="com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.OrderInfoBean">
 		select 
 			T.ORDER_ID,
 			T.MCH_ID,
@@ -129,7 +129,7 @@
 	</select>
 	
 	<!-- 导出 -->
-	<select id="getOrderInfoListExport" parameterType="com.sevenpay.bms.basemanager.aggregatepayment.orderinfo.bean.OrderInfoQueryBean" resultType="com.sevenpay.bms.basemanager.aggregatepayment.orderinfo.bean.ExportOrderInfoBean">
+	<select id="getOrderInfoListExport" parameterType="com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.OrderInfoQueryBean" resultType="com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.ExportOrderInfoBean">
 		select 
 			T.ORDER_ID,
 			T.MCH_ID,
@@ -253,7 +253,7 @@
 		order by  CREATE_TIME DESC
 	</select>
 	<!-- 查询交易成功非七分钱支付，写核心失败的交易数据 AND t.CORE_SUBMIT_STATE IN ('04') AND t.CORE_SUBMIT_STATE IN ('04')-->
-	<select id="getOrderExceptionList" parameterType="com.sevenpay.bms.basemanager.aggregatepayment.orderinfo.bean.OrderInfoQueryBean" resultType="com.sevenpay.bms.basemanager.aggregatepayment.orderinfo.bean.OrderInfoBean">
+	<select id="getOrderExceptionList" parameterType="com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.OrderInfoQueryBean" resultType="com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.OrderInfoBean">
 		
 	select ORDER_ID,MCH_ID,MCH_NAME,TRADE_AMT,ORDER_STATE,ORDER_TIME_STAMP,
 	CORE_SUBMIT_STATE,CORE_SN,SERVICE,ORDER_CORE_RETURN_CODE,ORDER_CORE_RETURN_MSG,ORDER_CORE_RETURN_TIME,
@@ -339,7 +339,7 @@
 
 	</select>
 
-	<select id="getOrderRefundList" parameterType="com.sevenpay.bms.basemanager.aggregatepayment.orderinfo.bean.RefundQueryBean" resultType="com.sevenpay.bms.basemanager.aggregatepayment.orderinfo.bean.RefundBean">
+	<select id="getOrderRefundList" parameterType="com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.RefundQueryBean" resultType="com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.RefundBean">
 		select
 			T.REFUND_ID,
 			T.MER_REFUND_ID,
@@ -416,7 +416,7 @@
 
 	</select>
 	
-	<select id="getOrderRefundListExport" parameterType="com.sevenpay.bms.basemanager.aggregatepayment.orderinfo.bean.RefundQueryBean" resultType="com.sevenpay.bms.basemanager.aggregatepayment.orderinfo.bean.RefundBean">
+	<select id="getOrderRefundListExport" parameterType="com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.RefundQueryBean" resultType="com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.RefundBean">
 		select
 			T.REFUND_ID,
 			T.MER_REFUND_ID,
@@ -490,7 +490,7 @@
 		order by  CREATE_TIME DESC
 
 	</select>
-	<select id="getOrderInfoDetail" parameterType="string" resultType="com.sevenpay.bms.basemanager.aggregatepayment.orderinfo.bean.OrderInfoBean">
+	<select id="getOrderInfoDetail" parameterType="string" resultType="com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.OrderInfoBean">
 		select 
 			* ,
 			'1' orderType
@@ -500,7 +500,7 @@
 			t.CHANNEL_SUB NOT LIKE 'local.%' and
 			t.ORDER_ID = #{orderId,jdbcType=VARCHAR}
 	</select>
-	<select id="getRefundDetail" parameterType="string" resultType="com.sevenpay.bms.basemanager.aggregatepayment.orderinfo.bean.RefundBean">
+	<select id="getRefundDetail" parameterType="string" resultType="com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.RefundBean">
 		select
 			 T.REFUND_ID,
 			 T.MER_REFUND_ID,
@@ -535,7 +535,7 @@
 			d.CHANNEL_SUB NOT LIKE 'local.%'
 	</select>
 	
-	<select id="queryMylist" parameterType="com.sevenpay.bms.basemanager.aggregatepayment.orderinfo.bean.OrderInfoQueryBean" resultType="com.sevenpay.bms.basemanager.aggregatepayment.orderinfo.bean.OrderInfoBean">
+	<select id="queryMylist" parameterType="com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.OrderInfoQueryBean" resultType="com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.OrderInfoBean">
 		SELECT
 			T.ORDER_ID,
 			T.MCH_ID,
@@ -641,8 +641,8 @@
 		CREATE_TIME DESC
 	</select>
 	<select id="queryMyRefundList"
-		parameterType="com.sevenpay.bms.basemanager.aggregatepayment.orderinfo.bean.RefundQueryBean" 
-		resultType="com.sevenpay.bms.basemanager.aggregatepayment.orderinfo.bean.RefundBean">
+		parameterType="com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.RefundQueryBean" 
+		resultType="com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.RefundBean">
 		select
 			T.REFUND_ID,
 			T.MER_REFUND_ID,
@@ -725,7 +725,7 @@
 		order by  T.CREATE_TIME DESC
 			
 	</select>
-	<select id="getMyOrderInfoListExport" parameterType="com.sevenpay.bms.basemanager.aggregatepayment.orderinfo.bean.OrderInfoQueryBean" resultType="com.sevenpay.bms.basemanager.aggregatepayment.orderinfo.bean.ExportOrderInfoBean">
+	<select id="getMyOrderInfoListExport" parameterType="com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.OrderInfoQueryBean" resultType="com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.ExportOrderInfoBean">
 		select 
 			T.ORDER_ID,
 			T.MCH_ID,
@@ -839,8 +839,8 @@
 			</if>
 		order by  CREATE_TIME DESC
 	</select>
-	<select id="getMyOrderRefundListExport" parameterType="com.sevenpay.bms.basemanager.aggregatepayment.orderinfo.bean.RefundQueryBean" 
-			resultType="com.sevenpay.bms.basemanager.aggregatepayment.orderinfo.bean.RefundBean">
+	<select id="getMyOrderRefundListExport" parameterType="com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.RefundQueryBean" 
+			resultType="com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.RefundBean">
 			select
 			T.REFUND_ID,
 			T.MER_REFUND_ID,

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sevenpay.bms.basemanager.custInfo.mapper.TdCustInfoMapper">
+<mapper namespace="com.qifenqian.bms.basemanager.custInfo.mapper.TdCustInfoMapper">
 	<select id="selectCustInfos" parameterType="custInfo" resultType="custInfo">
 		SELECT
 			U.CUST_ID,
@@ -64,7 +64,7 @@
 		ORDER BY U.CREATE_TIME DESC
 	</select>
 	
-	<select id="exportCustInfos" parameterType="custInfo" resultType="com.sevenpay.bms.basemanager.custInfo.bean.TdCustInfoExcel">
+	<select id="exportCustInfos" parameterType="custInfo" resultType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfoExcel">
 		SELECT
 			U.CUST_ID,
 			U.CUST_NAME,
@@ -136,7 +136,7 @@
 		</where>
 		ORDER BY U.CREATE_TIME DESC
 	</select>
-	<select id="selectLoginInfo" parameterType="string" resultType="com.sevenpay.bms.basemanager.custInfo.bean.TdLoginUserInfo">
+	<select id="selectLoginInfo" parameterType="string" resultType="com.qifenqian.bms.basemanager.custInfo.bean.TdLoginUserInfo">
 		SELECT T.* 
 		FROM TD_LOGIN_USER_INFO T
 		WHERE T.CUST_ID = #{custId}
@@ -343,7 +343,7 @@
 	 
 	
 </update>
-	<select id="validateCustMobile" resultType="com.sevenpay.bms.basemanager.custInfo.bean.TdLoginUserInfo" parameterType="string" >
+	<select id="validateCustMobile" resultType="com.qifenqian.bms.basemanager.custInfo.bean.TdLoginUserInfo" parameterType="string" >
 		SELECT C.*
 		FROM TD_LOGIN_USER_INFO c
 		WHERE c.MOBILE = #{mobile,jdbcType=VARCHAR}
@@ -351,7 +351,7 @@
 		and C.ROLE_ID = 'per'
 	</select>
 	
-	<select id="validateEmail" resultType="com.sevenpay.bms.basemanager.custInfo.bean.TdLoginUserInfo" parameterType="string" >
+	<select id="validateEmail" resultType="com.qifenqian.bms.basemanager.custInfo.bean.TdLoginUserInfo" parameterType="string" >
 		SELECT C.*
 		FROM TD_LOGIN_USER_INFO c
 		WHERE C.EMAIL = #{email,jdbcType=VARCHAR}
@@ -359,7 +359,7 @@
 		and C.ROLE_ID = 'per'
 	</select>
 	
-	<select id="validateMerchantName" resultType="com.sevenpay.bms.basemanager.custInfo.bean.TdCustInfo" parameterType="string">
+	<select id="validateMerchantName" resultType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo" parameterType="string">
 		SELECT
 			*
 		FROM
@@ -370,7 +370,7 @@
 			T.CUST_NAME = #{name,jdbcType=VARCHAR}
 			
 	</select>
-	<select id="selectByBean" parameterType="com.sevenpay.bms.basemanager.custInfo.bean.TdCustInfo" resultType="com.sevenpay.bms.basemanager.custInfo.bean.TdCustInfo">
+	<select id="selectByBean" parameterType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo" resultType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo">
 		SELECT 
 			* 
 		FROM
@@ -421,7 +421,7 @@
 			t.role_code = 'MarketPresident' or t.role_code = 'MarketVicePresident'
 	</select>
 
-	<select id="selectByMerchantCode" resultType="com.sevenpay.bms.basemanager.custInfo.bean.TdCustInfo" parameterType="java.lang.String" >
+	<select id="selectByMerchantCode" resultType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo" parameterType="java.lang.String" >
 		select
 		*
 		from td_cust_info

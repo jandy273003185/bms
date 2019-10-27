@@ -2,13 +2,13 @@ package com.qifenqian.bms.basemanager.merchantincontrol.service;
 
 import java.util.List;
 
-import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qifenqian.bms.basemanager.merchantincontrol.bean.MerchantInControl;
 import com.qifenqian.bms.basemanager.merchantincontrol.dao.TdMerchantInControlDao;
 import com.qifenqian.bms.basemanager.merchantincontrol.mapper.TdMerchantInControlMapper;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 @Service
 public class TdMerchantInControlService {
