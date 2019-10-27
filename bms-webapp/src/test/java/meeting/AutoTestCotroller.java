@@ -10,8 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.sevenpay.bms.basemanager.city.bean.City;
-import com.sevenpay.bms.basemanager.city.service.CityService;
+import com.qifenqian.bms.basemanager.city.bean.City;
+import com.qifenqian.bms.basemanager.city.service.CityService;
 
 @Controller
 @RequestMapping("/test")

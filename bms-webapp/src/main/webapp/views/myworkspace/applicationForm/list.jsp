@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.myworkspace.applicationForm.ApplicationFormPath"%>
+<%@page import="com.qifenqian.bms.myworkspace.applicationForm.ApplicationFormPath"%>
 <%@page import="org.sevenpay.platform.web.myWorkSpace.WorkSpacePath" %>
 <link rel="stylesheet" href='<c:url value="/static/css/iconfont.css"/>' />
 <%-- <script src='<c:url value="/static/My97DatePicker/WdatePicker.js"/>'></script> --%>

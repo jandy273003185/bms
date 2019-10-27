@@ -10,8 +10,8 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import org.gyzb.platform.common.utils.SpringUtils;
 
-import com.sevenpay.bms.basemanager.merchant.bean.Merchant;
-import com.sevenpay.bms.basemanager.merchant.dao.MerchantDao;
+import com.qifenqian.bms.basemanager.merchant.bean.Merchant;
+import com.qifenqian.bms.basemanager.merchant.dao.MerchantDao;
 
 /**
  * 商户标签

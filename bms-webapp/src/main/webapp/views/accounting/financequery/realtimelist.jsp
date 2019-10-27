@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.accounting.financequery.FinanceQueryPath"%>
-<%@page import="com.sevenpay.bms.accounting.financequery.bean.RealTimeBussBalanceWater"%>
+<%@page import="com.qifenqian.bms.accounting.financequery.FinanceQueryPath"%>
+<%@page import="com.qifenqian.bms.accounting.financequery.bean.RealTimeBussBalanceWater"%>
 <%@page import="com.sevenpay.invoke.common.type.RequestColumnValues"%>
 <%@page import="org.gyzb.platform.common.utils.ReflectUtils"%>
 <% String url = request.getScheme()+"://"+ request.getServerName()+":"+request.getServerPort(); %>

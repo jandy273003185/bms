@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@page import="com.sevenpay.bms.paymentmanager.topay.toPayCollectDailyPath" %>
-<%@page import="com.sevenpay.bms.basemanager.agency.controller.AgencyPath" %>
-<%@page import="com.sevenpay.bms.paymentmanager.PaymentManagerPath"%>
+<%@page import="com.qifenqian.bms.paymentmanager.topay.toPayCollectDailyPath" %>
+<%@page import="com.qifenqian.bms.basemanager.agency.controller.AgencyPath" %>
+<%@page import="com.qifenqian.bms.paymentmanager.PaymentManagerPath"%>
 
 <% String url = request.getScheme()+"://"+ request.getServerName()+":"+request.getServerPort(); %>
 <script src='<c:url value="/static/js/jquery-ui.min.js"/>'></script>

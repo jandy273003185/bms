@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.accounting.jgkjsevendatasource.BalJgkjSevenDataSourcePath" %> 
-<%@page import="com.sevenpay.bms.accounting.balunionpayuniondatasource.BalUnionpayUnionDataSourcePath" %> 
-<%@page import="com.sevenpay.bms.accounting.jgkjdatasource.BalJgkjDataSourcePath" %>
-<%@page import="com.sevenpay.bms.accounting.balunionpayuniondatasource.BalUnionpaySevenDataSourcePath" %>    
-<%@page import="com.sevenpay.bms.accounting.cncbdatasource.BalCncbDataSourcePath" %> 
+<%@page import="com.qifenqian.bms.accounting.jgkjsevendatasource.BalJgkjSevenDataSourcePath" %> 
+<%@page import="com.qifenqian.bms.accounting.balunionpayuniondatasource.BalUnionpayUnionDataSourcePath" %> 
+<%@page import="com.qifenqian.bms.BalJgkjDataSourcePath" %>
+<%@page import="com.qifenqian.bms.accounting.balunionpayuniondatasource.BalUnionpaySevenDataSourcePath" %>    
+<%@page import="com.qifenqian.bms.accounting.cncbdatasource.BalCncbDataSourcePath" %> 
 
 <html>
 <head>

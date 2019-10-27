@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.sevenpay.bms.merchant.channel.bean.ChannelStatus;
+import com.qifenqian.bms.merchant.channel.bean.ChannelStatus;
 /**
  * 通道状态  MyBatis 处理类, 将数据库中的 00 09 转换为 枚举
  * @author Sun Xun

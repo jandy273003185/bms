@@ -10,8 +10,8 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import org.gyzb.platform.common.utils.SpringUtils;
 
-import com.sevenpay.bms.basemanager.bank.bean.Bank;
-import com.sevenpay.bms.basemanager.bank.mapper.BankMapper;
+import com.qifenqian.bms.basemanager.bank.bean.Bank;
+import com.qifenqian.bms.basemanager.bank.mapper.BankMapper;
 
 /**
  * 选择银行下拉列表标签

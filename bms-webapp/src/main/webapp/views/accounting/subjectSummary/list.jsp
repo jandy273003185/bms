@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.accounting.subjectSummary.SubjectSummaryPath"%>
+<%@page import="com.qifenqian.bms.accounting.subjectSummary.SubjectSummaryPath"%>
 <%-- <script src='<c:url value="/static/My97DatePicker/WdatePicker.js"/>'></script>
 <script src='<c:url value="/static/My97DatePicker/AutoDatePicker.js"/>'></script> --%>
 <html>

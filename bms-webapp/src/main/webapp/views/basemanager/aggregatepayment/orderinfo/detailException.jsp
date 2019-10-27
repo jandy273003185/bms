@@ -1,5 +1,5 @@
-<%@page import="com.sevenpay.bms.basemanager.aggregatepayment.orderinfo.bean.DealOperation"%>
-<%@page import="com.sevenpay.bms.basemanager.aggregatepayment.orderinfo.controller.OrderInfoPath"%>
+<%@page import="com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.DealOperation"%>
+<%@page import="com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.controller.OrderInfoPath"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
 <%-- <script src='<c:url value="/static/js/checkRule_source.js"/>'></script>

@@ -7,7 +7,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import com.sevenpay.bms.basemanager.type.OrderStatus;
+import com.qifenqian.bms.basemanager.type.OrderStatus;
 
 /**
  * 用户状态选择标签

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.basemanager.market.controller.ManagerPath"%>
-<%@page import="com.sevenpay.bms.basemanager.market.bean.Manager"%>
+<%@page import="com.qifenqian.bms.basemanager.market.controller.ManagerPath"%>
+<%@page import="com.qifenqian.bms.basemanager.market.bean.Manager"%>
 <%@page import="com.sevenpay.invoke.common.type.RequestColumnValues"%>
 <%@page import="org.gyzb.platform.common.utils.ReflectUtils"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>

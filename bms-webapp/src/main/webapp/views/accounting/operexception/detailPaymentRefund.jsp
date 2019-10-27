@@ -1,18 +1,18 @@
-<%@page import="com.sevenpay.bms.accounting.exception.dao.transrecord.bean.TransRecord"%>
+<%@page import="com.qifenqian.bms.accounting.exception.dao.transrecord.bean.TransRecord"%>
 <%@page import="java.util.Arrays"%>
-<%@page import="com.sevenpay.bms.accounting.exception.dao.operrefund.bean.OperRefund"%>
-<%@page import="com.sevenpay.bms.accounting.exception.dao.acctseven.bean.AcctSevenTrans"%>
+<%@page import="com.qifenqian.bms.accounting.exception.dao.operrefund.bean.OperRefund"%>
+<%@page import="com.qifenqian.bms.accounting.exception.dao.acctseven.bean.AcctSevenTrans"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
-<%@page import="com.sevenpay.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkj"%>
-<%@page import="com.sevenpay.bms.accounting.exception.dao.transyl.bean.TransYl"%>
+<%@page import="com.qifenqian.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkj"%>
+<%@page import="com.qifenqian.bms.accounting.exception.dao.transyl.bean.TransYl"%>
 <%@page import="org.gyzb.platform.common.utils.DateUtils"%>
-<%@page import="com.sevenpay.bms.accounting.exception.base.bean.TransAction"%>
-<%@page import="com.sevenpay.bms.accounting.exception.base.bean.Operation"%>
-<%@page import="com.sevenpay.bms.accounting.exception.base.type.OperationStatus"%>
+<%@page import="com.qifenqian.bms.accounting.exception.base.bean.TransAction"%>
+<%@page import="com.qifenqian.bms.accounting.exception.base.bean.Operation"%>
+<%@page import="com.qifenqian.bms.accounting.exception.base.type.OperationStatus"%>
 <%@page import="org.gyzb.platform.common.utils.ReflectUtils"%>
 <%@page import="com.sevenpay.invoke.common.type.RequestColumnValues"%>
-<%@page import="com.sevenpay.bms.accounting.exception.OperationExceptionPath"%>
-<%@page import="com.sevenpay.bms.accounting.exception.service.TransDealService"%>
+<%@page import="com.qifenqian.bms.accounting.exception.OperationExceptionPath"%>
+<%@page import="com.qifenqian.bms.accounting.exception.service.TransDealService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
 <%-- <script src='<c:url value="/static/js/checkRule_source.js"/>'></script>

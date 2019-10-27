@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.expresspay.cardaccount.controller.CardAccountPath"%>
+<%@page import="com.qifenqian.bms.expresspay.cardaccount.controller.CardAccountPath"%>
 <%-- <link rel="stylesheet" href='<c:url value="/static/css/bootstrap-datetimepicker.min.css"/>' />
 <script src='<c:url value="/static/js/bootstrap-datetimepicker.min.js"/>'></script>
 <script src='<c:url value="/static/js/checkRule_source.js"/>'></script> --%>

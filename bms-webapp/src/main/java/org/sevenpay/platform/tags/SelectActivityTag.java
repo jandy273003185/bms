@@ -10,8 +10,8 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import org.gyzb.platform.common.utils.SpringUtils;
 
-import com.sevenpay.bms.meeting.activity.bean.ActivityBean;
-import com.sevenpay.bms.meeting.activity.service.ActivityService;
+import com.qifenqian.bms.meeting.activity.bean.ActivityBean;
+import com.qifenqian.bms.meeting.activity.service.ActivityService;
 
 /**
  * 

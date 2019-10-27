@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="com.sevenpay.bms.accounting.utils.CommonConfig"%>
+<%@page import="com.qifenqian.bms.accounting.utils.CommonConfig"%>
 <%@page import="org.gyzb.platform.web.admin.user.bean.User"%>
 <%@page import="org.gyzb.platform.web.admin.utils.WebUtils"%>
 <%@page import="org.gyzb.platform.web.Constants"%>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.merchant.settle.MerchantSettlePath"%>
-<%@page import="com.sevenpay.bms.merchant.settle.type.MerchantSettleStatus"%>
+<%@page import="com.qifenqian.bms.merchant.settle.MerchantSettlePath"%>
+<%@page import="com.qifenqian.bms.merchant.settle.type.MerchantSettleStatus"%>
 
 <%-- <script src='<c:url value="/static/js/checkRule_source.js"/>'></script>
 <script src='<c:url value="/static/My97DatePicker/WdatePicker.js"/>'></script>

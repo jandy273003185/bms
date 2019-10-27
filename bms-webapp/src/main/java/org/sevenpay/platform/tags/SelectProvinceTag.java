@@ -10,8 +10,8 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import org.gyzb.platform.common.utils.SpringUtils;
 
-import com.sevenpay.bms.basemanager.city.bean.City;
-import com.sevenpay.bms.basemanager.city.service.CityService;
+import com.qifenqian.bms.basemanager.city.bean.City;
+import com.qifenqian.bms.basemanager.city.service.CityService;
 
 /**
  * 选择省份下拉列表标签

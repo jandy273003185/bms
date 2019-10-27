@@ -11,8 +11,8 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import org.gyzb.platform.common.utils.SpringUtils;
 import org.springframework.stereotype.Component;
 
-import com.sevenpay.bms.basemanager.agency.dao.AgencyDao;
-import com.sevenpay.bms.basemanager.merchant.bean.Merchant;
+import com.qifenqian.bms.basemanager.agency.dao.AgencyDao;
+import com.qifenqian.bms.basemanager.merchant.bean.Merchant;
 
 /**
  * 代理商信息

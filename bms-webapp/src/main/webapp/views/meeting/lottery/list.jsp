@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@page import="com.sevenpay.bms.meeting.prizewin.PrizeWinPath"%>
+<%@page import="com.qifenqian.bms.meeting.prizewin.PrizeWinPath"%>
 <script src='<c:url value="/static/laydate/laydate.js"/>'></script>
 <script src='<c:url value="/static/My97DatePicker/WdatePicker.js"/>'></script>
 <html>

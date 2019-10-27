@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.basemanager.aggregatepayment.orderinfo.controller.OrderRefundPath" %> 
+<%@page import="com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.controller.OrderRefundPath" %> 
 <html>
 <script src='<c:url value="/static/js/layer/layer.js"/>'></script>
 <script src='<c:url value="/static/laydate/laydate.js"/>'></script>

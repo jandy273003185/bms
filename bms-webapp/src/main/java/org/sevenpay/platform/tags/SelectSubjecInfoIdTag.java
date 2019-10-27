@@ -8,9 +8,10 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import com.sevenpay.bms.accounting.subjectInfo.bean.SubjectInfo;
-import com.sevenpay.bms.accounting.subjectInfo.mapper.SubjectInfoMapper;
 import org.gyzb.platform.common.utils.SpringUtils;
+
+import com.qifenqian.bms.accounting.subjectInfo.bean.SubjectInfo;
+import com.qifenqian.bms.accounting.subjectInfo.mapper.SubjectInfoMapper;
 
 public class SelectSubjecInfoIdTag extends SimpleTagSupport {
 	/** 默认值 */

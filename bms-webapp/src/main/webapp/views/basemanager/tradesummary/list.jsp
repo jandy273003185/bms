@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.basemanager.tradesummary.TransSummaryPath" %> 
-<%@page import="com.sevenpay.bms.basemanager.trade.TradeBillMainPath" %> 
-<%@page import="com.sevenpay.bms.basemanager.recharge.RechargePath" %>
-<%@page import="com.sevenpay.bms.accounting.refund.RefundBillPath" %>  
-<%@page import="com.sevenpay.bms.basemanager.transfer.TransferPath" %>
-<%@page import="com.sevenpay.bms.basemanager.transferRevoke.TransferRevokePath" %>
-<%@page import="com.sevenpay.bms.basemanager.busstransfer.BussTransferPath" %>
-<%@page import="com.sevenpay.bms.accounting.withdraw.WithdrawPath"%> 
-<%@page import="com.sevenpay.bms.basemanager.merchantwithdraw.MerchantWithdrawPath"%>
-<%@page import="com.sevenpay.bms.basemanager.tradeRevoke.CustTransRevokePath"%> 
-<%@page import="com.sevenpay.bms.basemanager.rechargeRevoke.RechargeRevokePath"%>
+<%@page import="com.qifenqian.bms.basemanager.tradesummary.TransSummaryPath" %> 
+<%@page import="com.qifenqian.bms.basemanager.trade.TradeBillMainPath" %> 
+<%@page import="com.qifenqian.bms.basemanager.recharge.RechargePath" %>
+<%@page import="com.qifenqian.bms.accounting.refund.RefundBillPath" %>  
+<%@page import="com.qifenqian.bms.basemanager.transfer.TransferPath" %>
+<%@page import="com.qifenqian.bms.basemanager.transferRevoke.TransferRevokePath" %>
+<%@page import="com.qifenqian.bms.basemanager.busstransfer.BussTransferPath" %>
+<%@page import="com.qifenqian.bms.accounting.withdraw.WithdrawPath"%> 
+<%@page import="com.qifenqian.bms.basemanager.merchantwithdraw.MerchantWithdrawPath"%>
+<%@page import="com.qifenqian.bms.basemanager.tradeRevoke.CustTransRevokePath"%> 
+<%@page import="com.qifenqian.bms.basemanager.rechargeRevoke.RechargeRevokePath"%>
 
 <%
 	String url = request.getScheme()+"://"+ request.getServerName()+":"+request.getServerPort();

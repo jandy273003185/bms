@@ -7,7 +7,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import com.sevenpay.bms.accounting.utils.TransferTransType;
+import com.qifenqian.bms.accounting.utils.TransferTransType;
 
 public class SelectTransferTransTypeTag extends SimpleTagSupport{
 	/** 默认值*/	private String defaultValue;

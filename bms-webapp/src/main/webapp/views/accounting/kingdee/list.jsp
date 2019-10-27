@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.accounting.kingdee.controller.BmsClearKingdeePayPATH"%>
-<%@page import="com.sevenpay.bms.accounting.accountMaintain.controller.BmsBaseBankAccountPath"%>
-<%@page import="com.sevenpay.bms.accounting.kingdee.type.ClearKingdeeBusinessType"%>
-<%@page import="com.sevenpay.bms.accounting.kingdee.type.ClearKingdeeBusinessBalStatusType"%>
-<%@page import="com.sevenpay.bms.accounting.kingdee.type.ClearKingdeeBusinessBankStatusType"%>
+<%@page import="com.qifenqian.bms.accounting.kingdee.controller.BmsClearKingdeePayPATH"%>
+<%@page import="com.qifenqian.bms.accounting.accountMaintain.controller.BmsBaseBankAccountPath"%>
+<%@page import="com.qifenqian.bms.accounting.kingdee.type.ClearKingdeeBusinessType"%>
+<%@page import="com.qifenqian.bms.accounting.kingdee.type.ClearKingdeeBusinessBalStatusType"%>
+<%@page import="com.qifenqian.bms.accounting.kingdee.type.ClearKingdeeBusinessBankStatusType"%>
 <% String url = request.getScheme()+"://"+ request.getServerName()+":"+request.getServerPort(); %>
 <%-- <script src='<c:url value="/static/js/checkRule_source.js"/>'></script>
 <script src='<c:url value="/static/My97DatePicker/WdatePicker.js"/>'></script>

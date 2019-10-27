@@ -11,8 +11,8 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import org.gyzb.platform.common.utils.SpringUtils;
 import org.springframework.stereotype.Component;
 
-import com.sevenpay.bms.basemanager.sysuser.bean.SysUser;
-import com.sevenpay.bms.basemanager.sysuser.dao.SysUserDAO;
+import com.qifenqian.bms.basemanager.sysuser.bean.SysUser;
+import com.qifenqian.bms.basemanager.sysuser.dao.SysUserDAO;
 
 /**
  * 员工信息

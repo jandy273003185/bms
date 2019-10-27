@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.basemanager.certify.CertifyPath" %>
+<%@page import="com.qifenqian.bms.basemanager.certify.CertifyPath" %>
 <html>
 <head>
 	<meta charset="utf-8" />

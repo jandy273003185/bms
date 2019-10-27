@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.accounting.financequery.FinanceQueryPath"%>
-<%@page import="com.sevenpay.bms.accounting.withdraw.WithdrawPath"%>
-<%@page import="com.sevenpay.bms.basemanager.merchantwithdraw.MerchantWithdrawPath"%>
-<%@page import="com.sevenpay.bms.accounting.withdrawrevoke.WithdrawRevokePath"%>
+<%@page import="com.qifenqian.bms.accounting.financequery.FinanceQueryPath"%>
+<%@page import="com.qifenqian.bms.accounting.withdraw.WithdrawPath"%>
+<%@page import="com.qifenqian.bms.basemanager.merchantwithdraw.MerchantWithdrawPath"%>
+<%@page import="com.qifenqian.bms.accounting.withdrawrevoke.WithdrawRevokePath"%>
 <% String url = request.getScheme()+"://"+ request.getServerName()+":"+request.getServerPort(); %>
 <%-- <script src='<c:url value="/static/js/checkRule_source.js"/>'></script> --%>
 <script src='<c:url value="/static/js/jquery.divbox.js"/>'></script>

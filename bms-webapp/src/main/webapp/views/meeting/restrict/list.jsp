@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.meeting.restrict.RestrictPath"%>
+<%@page import="com.qifenqian.bms.meeting.restrict.RestrictPath"%>
 <html>
 <head>
 	<meta charset="utf-8" />

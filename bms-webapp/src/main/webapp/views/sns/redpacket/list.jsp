@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.sns.redpacket.RedPacketInfoPath" %> 
+<%@page import="com.qifenqian.bms.sns.redpacket.RedPacketInfoPath" %> 
 <html>
 <link rel="stylesheet" href='<c:url value="/static/css/bootstrap-datetimepicker.min.css"/>' />
 <script src='<c:url value="/static/js/bootstrap-datetimepicker.min.js"/>'></script>

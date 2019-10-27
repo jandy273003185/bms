@@ -10,8 +10,9 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import org.springframework.stereotype.Component;
 
-import com.sevenpay.bms.basemanager.protocoltemplate.bean.ProtocolTemplate;
-import com.sevenpay.bms.basemanager.protocoltemplate.mapper.ProtocolTemplateMapper;
+import com.qifenqian.bms.basemanager.protocoltemplate.bean.ProtocolTemplate;
+import com.qifenqian.bms.basemanager.protocoltemplate.mapper.ProtocolTemplateMapper;
+
 import org.gyzb.platform.common.utils.SpringUtils;
 
 /**

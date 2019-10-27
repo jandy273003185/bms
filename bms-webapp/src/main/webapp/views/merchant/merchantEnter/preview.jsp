@@ -2,12 +2,12 @@
 <%@ include file="/include/template.jsp"%>
 <%@ page import="java.util.ResourceBundle"%>
 <%ResourceBundle res = ResourceBundle.getBundle("uploadFileConfig"); %>
-<%@page import="com.sevenpay.bms.basemanager.merchant.MerchantPath" %>
-<%@page import="com.sevenpay.bms.basemanager.merchant.MerchantEnterPath" %>
-<%@page import="com.sevenpay.bms.basemanager.merchant.StoreManagePath" %>
-<%@page import="com.sevenpay.bms.basemanager.merchant.AuditorPath"%>
-<%@page import="com.sevenpay.bms.basemanager.merchant.TinyMerchantPath" %>
-<%@page import="com.sevenpay.bms.basemanager.agency.controller.AgentRegisterPath" %>
+<%@page import="com.qifenqian.bms.basemanager.merchant.MerchantPath" %>
+<%@page import="com.qifenqian.bms.basemanager.merchant.MerchantEnterPath" %>
+<%@page import="com.qifenqian.bms.basemanager.merchant.StoreManagePath" %>
+<%@page import="com.qifenqian.bms.basemanager.merchant.AuditorPath"%>
+<%@page import="com.qifenqian.bms.basemanager.merchant.TinyMerchantPath" %>
+<%@page import="com.qifenqian.bms.basemanager.agency.controller.AgentRegisterPath" %>
 <script src='<c:url value="/static/js/ajaxfileupload.js"/>'></script>
 <script src='<c:url value="/static/js/comm.js"/>'></script>
 <script src='<c:url value="/static/js/upload.js"/>'></script>

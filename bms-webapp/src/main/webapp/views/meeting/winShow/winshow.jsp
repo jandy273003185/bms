@@ -3,7 +3,7 @@
 <%@ include file="/include/template.jsp"%>
 <script src='<c:url value="/static/js/angular.min.js"/>'></script>
 <script src='<c:url value="/static/js/jquery.liMarquee.js"/>'></script>
-<%@page import="com.sevenpay.bms.meeting.winShow.controller.WinShowPath"%>
+<%@page import="com.qifenqian.bms.meeting.winShow.controller.WinShowPath"%>
 
 <head>
 	<meta charset="UTF-8">

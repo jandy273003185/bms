@@ -3,7 +3,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@page import="com.sevenpay.bms.bal.filereceive.controller.FileReceivePath"%>
+<%@page import="com.qifenqian.bms.bal.filereceive.controller.FileReceivePath"%>
 <base target="_self">  
 <script src='<c:url value="/static/js/ajaxfileupload.js"/>'></script>
 <%-- <script src='<c:url value="/static/My97DatePicker/WdatePicker.js"/>'></script>

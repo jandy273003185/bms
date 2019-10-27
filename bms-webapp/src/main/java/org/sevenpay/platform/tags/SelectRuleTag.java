@@ -10,7 +10,7 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import org.springframework.stereotype.Component;
 
-import com.sevenpay.bms.basemanager.rule.bean.Rule;
+import com.qifenqian.bms.basemanager.rule.bean.Rule;
 
 /**
  * 选择费率下拉列表标签

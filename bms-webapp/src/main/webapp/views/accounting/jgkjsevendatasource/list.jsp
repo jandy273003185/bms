@@ -1,15 +1,15 @@
 <%@page import="org.gyzb.platform.common.utils.ReflectUtils"%>
-<%@page import="com.sevenpay.bms.accounting.jgkjsevendatasource.bean.BalJgkjSevenDataSource"%>
+<%@page import="com.qifenqian.bms.accounting.jgkjsevendatasource.bean.BalJgkjSevenDataSource"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.accounting.jgkjsevendatasource.BalJgkjSevenDataSourcePath" %> 
-<%@page import="com.sevenpay.bms.accounting.jgkjsevendatasource.bean.BalJgkjSevenDataSource" %> 
-<%@page import="com.sevenpay.bms.accounting.balunionpayuniondatasource.BalUnionpayUnionDataSourcePath" %> 
-<%@page import="com.sevenpay.bms.accounting.jgkjdatasource.BalJgkjDataSourcePath" %>
-<%@page import="com.sevenpay.bms.accounting.balunionpayuniondatasource.BalUnionpaySevenDataSourcePath" %>  
+<%@page import="com.qifenqian.bms.BalJgkjSevenDataSourcePath" %> 
+<%@page import="com.qifenqian.bms.accounting.jgkjsevendatasource.bean.BalJgkjSevenDataSource" %> 
+<%@page import="com.qifenqian.bms.accounting.balunionpayuniondatasource.BalUnionpayUnionDataSourcePath" %> 
+<%@page import="com.qifenqian.bms.BalJgkjDataSourcePath" %>
+<%@page import="com.qifenqian.bms.accounting.balunionpayuniondatasource.BalUnionpaySevenDataSourcePath" %>  
 <%@page import="org.gyzb.platform.common.utils.ReflectUtils"%>
 <%@page import="com.sevenpay.invoke.common.type.RequestColumnValues"%>
-<%@page import="com.sevenpay.bms.accounting.cncbdatasource.BalCncbDataSourcePath" %> 
+<%@page import="com.qifenqian.bms.accounting.cncbdatasource.BalCncbDataSourcePath" %> 
 <html>
 <head>
 	<meta charset="utf-8" />

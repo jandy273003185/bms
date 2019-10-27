@@ -7,10 +7,10 @@ import org.sevenpay.platform.type.SequenceType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import redis.clients.jedis.Jedis;
+import com.qifenqian.bms.basemanager.utils.DatetimeUtils;
+import com.qifenqian.bms.common.util.RedisUtil;
 
-import com.sevenpay.bms.basemanager.utils.DatetimeUtils;
-import com.sevenpay.bms.common.util.RedisUtil;
+import redis.clients.jedis.Jedis;
 
 /**
  * 序号获取器

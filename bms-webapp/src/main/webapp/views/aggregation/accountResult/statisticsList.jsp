@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.bal.accountResult.controller.AccountResultPath"%>
-<%@page import="com.sevenpay.bms.common.BalResultStatus"%>
+<%@page import="com.qifenqian.bms.bal.accountResult.controller.AccountResultPath"%>
+<%@page import="com.qifenqian.bms.common.BalResultStatus"%>
 <% String url = request.getScheme()+"://"+ request.getServerName()+":"+request.getServerPort(); %>
 <%-- <script src='<c:url value="/static/js/checkRule_source.js"/>'></script>
 <script src='<c:url value="/static/My97DatePicker/WdatePicker.js"/>'></script>

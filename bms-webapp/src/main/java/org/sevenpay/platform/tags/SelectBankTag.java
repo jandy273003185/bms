@@ -6,7 +6,8 @@ import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
-import com.sevenpay.bms.basemanager.bank.bean.Bank;
+
+import com.qifenqian.bms.basemanager.bank.bean.Bank;
 
 /**
  * 选择银行下拉列表标签

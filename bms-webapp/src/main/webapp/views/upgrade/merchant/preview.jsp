@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.upgrade.merchant.MerchantListPath" %>
+<%@page import="com.qifenqian.bms.upgrade.merchant.MerchantListPath" %>
 
 <% String url = request.getScheme()+"://"+ request.getServerName()+":"+request.getServerPort(); %>
 

@@ -8,7 +8,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import com.sevenpay.bms.basemanager.merchant.bean.Merchant;
+import com.qifenqian.bms.basemanager.merchant.bean.Merchant;
 
 /**
  * 选择银行下拉列表标签

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.accounting.acctingworkdate.AcctWorkDatePath"%>
+<%@page import="com.qifenqian.bms.accounting.acctingworkdate.AcctWorkDatePath"%>
 <%-- <link rel="stylesheet" href='<c:url value="/static/css/bootstrap-datetimepicker.min.css?v=${_cssVersion}"/>' />
 <script src='<c:url value="/static/js/bootstrap-datetimepicker.min.js?v=${_jsVersion}"/>'></script>
 <script src='<c:url value="/static/js/checkRule_source.js?v=${_jsVersion}"/>'></script> --%>

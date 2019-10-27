@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.basemanager.toPay.controller.TopayPath"%>
+<%@page import="com.qifenqian.bms.basemanager.toPay.controller.TopayPath"%>
 <% String url = request.getScheme()+"://"+ request.getServerName()+":"+request.getServerPort(); %>
 <script src='<c:url value="/static/topayProfit/js/jquery-1.9.1.min.js"/>'></script>
 <script src='<c:url value="/static/topayProfit/js/bootstrap.min.js"/>'></script>

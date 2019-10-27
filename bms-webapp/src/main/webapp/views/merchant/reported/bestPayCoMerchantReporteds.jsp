@@ -3,8 +3,8 @@
 <%@page import="com.seven.micropay.channel.enums.MerchantApplyType"%>
 <%@page import="com.seven.micropay.channel.enums.CertificateType"%>
 <%@page import="com.seven.micropay.channel.enums.CardType"%>
-<%@page import="com.sevenpay.bms.merchant.reported.MerchantReportedPath"%>
-<%@page import="com.sevenpay.bms.basemanager.merchant.AuditorPath"%>
+<%@page import="com.qifenqian.bms.merchant.reported.MerchantReportedPath"%>
+<%@page import="com.qifenqian.bms.basemanager.merchant.AuditorPath"%>
 
 <%@ include file="/include/template.jsp"%>
 <script src='<c:url value="/static/js/jquery-ui.min.js"/>'></script>

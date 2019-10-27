@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.basemanager.agency.controller.AgentRegisterPath" %>
-<%@page import="com.sevenpay.bms.basemanager.agency.controller.AgencyPath" %>
+<%@page import="com.qifenqian.bms.basemanager.agency.controller.AgentRegisterPath" %>
+<%@page import="com.qifenqian.bms.basemanager.agency.controller.AgencyPath" %>
 <script src='<c:url value="/static/js/checkRule_source.js"/>'></script>
 <script src='<c:url value="/static/js/ajaxfileupload.js"/>'></script>
 <script src='<c:url value="/static/My97DatePicker/WdatePicker.js"/>'></script>

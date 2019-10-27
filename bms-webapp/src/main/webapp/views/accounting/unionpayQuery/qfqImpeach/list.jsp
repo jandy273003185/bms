@@ -2,7 +2,7 @@
 <%@ include file="/include/template.jsp"%>
 <% String url = request.getScheme()+"://"+ request.getServerName()+":"+request.getServerPort(); %>
 
-<%@page import="com.sevenpay.bms.accounting.unionpayQuery.UnionpayQueryPath"%>
+<%@page import="com.qifenqian.bms.accounting.unionpayQuery.UnionpayQueryPath"%>
 
 <%-- <link rel="stylesheet" href='<c:url value="/static/css/bootstrap-datetimepicker.min.css"/>' />
 <script src='<c:url value="/static/js/bootstrap-datetimepicker.min.js"/>'></script>

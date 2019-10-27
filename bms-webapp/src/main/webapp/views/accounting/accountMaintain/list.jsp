@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.accounting.kingdee.controller.BmsClearKingdeePayPATH"%>
-<%@page import="com.sevenpay.bms.accounting.accountMaintain.controller.BmsBaseBankAccountPath"%>
+<%@page import="com.qifenqian.bms.accounting.kingdee.controller.BmsClearKingdeePayPATH"%>
+<%@page import="com.qifenqian.bms.accounting.accountMaintain.controller.BmsBaseBankAccountPath"%>
 <% String url = request.getScheme()+"://"+ request.getServerName()+":"+request.getServerPort(); %>
 <%-- <script src='<c:url value="/static/My97DatePicker/WdatePicker.js?v=${_jsVersion}"/>'></script>
 <script src='<c:url value="/static/My97DatePicker/AutoDatePicker.js?v=${_jsVersion}"/>'></script> --%>

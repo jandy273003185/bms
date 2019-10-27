@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
 <%@page
-import="com.sevenpay.bms.accounting.financequery.FinanceQueryPath"%>
-<%@page import="com.sevenpay.bms.basemanager.agency.controller.AgenReportPath" %>
-<%@page import="com.sevenpay.bms.paymentmanager.PaymentManagerPath"%>
-<%@page import="com.sevenpay.bms.basemanager.toPay.controller.TopayPath"%>
+import="com.qifenqian.bms.accounting.financequery.FinanceQueryPath"%>
+<%@page import="com.qifenqian.bms.basemanager.agency.controller.AgenReportPath" %>
+<%@page import="com.qifenqian.bms.paymentmanager.PaymentManagerPath"%>
+<%@page import="com.qifenqian.bms.basemanager.toPay.controller.TopayPath"%>
 <%
 	String url = request.getScheme()+"://"+ request.getServerName()+":"+request.getServerPort();
 %>

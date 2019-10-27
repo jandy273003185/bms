@@ -3,8 +3,8 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@page import="com.sevenpay.bms.bal.filereceive.controller.FileReceivePath"%>
-<%@page import="com.sevenpay.bms.merchant.reported.MerchantReportedPath"%>
+<%@page import="com.qifenqian.bms.bal.filereceive.controller.FileReceivePath"%>
+<%@page import="com.qifenqian.bms.merchant.reported.MerchantReportedPath"%>
 
 <base target="_self">  
 <script src='<c:url value="/static/js/ajaxfileupload.js"/>'></script>

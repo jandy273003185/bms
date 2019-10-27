@@ -31,16 +31,16 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.alibaba.fastjson.JSONObject;
-import com.sevenpay.bms.basemanager.bank.bean.Bank;
-import com.sevenpay.bms.basemanager.bank.mapper.BankMapper;
-import com.sevenpay.bms.basemanager.city.bean.ProvinceCityBean;
-import com.sevenpay.bms.basemanager.city.service.CityService;
-import com.sevenpay.bms.basemanager.merchant.bean.MerchantVo;
-import com.sevenpay.bms.basemanager.merchant.service.AuditorService;
-import com.sevenpay.bms.basemanager.merchant.service.MerchantService;
-import com.sevenpay.bms.basemanager.rule.bean.Rule;
-import com.sevenpay.bms.basemanager.rule.service.RuleService;
-import com.sevenpay.bms.myworkspace.WorkFlowHelper;
+import com.qifenqian.bms.basemanager.bank.bean.Bank;
+import com.qifenqian.bms.basemanager.bank.mapper.BankMapper;
+import com.qifenqian.bms.basemanager.city.bean.ProvinceCityBean;
+import com.qifenqian.bms.basemanager.city.service.CityService;
+import com.qifenqian.bms.basemanager.merchant.bean.MerchantVo;
+import com.qifenqian.bms.basemanager.merchant.service.AuditorService;
+import com.qifenqian.bms.basemanager.merchant.service.MerchantService;
+import com.qifenqian.bms.basemanager.rule.bean.Rule;
+import com.qifenqian.bms.basemanager.rule.service.RuleService;
+import com.qifenqian.bms.myworkspace.WorkFlowHelper;
 
 @Controller
 @RequestMapping(WorkSpacePath.BASE)

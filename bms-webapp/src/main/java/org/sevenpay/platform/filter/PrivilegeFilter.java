@@ -20,10 +20,12 @@ import org.gyzb.platform.web.admin.utils.WebUtils;
 import org.sevenpay.platform.utils.CommonData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
 import com.alibaba.fastjson.JSONObject;
-import com.sevenpay.bms.meeting.luckdraw.LuckDrawPath;
-import com.sevenpay.bms.meeting.winShow.controller.WinShowPath;
-import com.sevenpay.bms.task.TaskPath;
+import com.qifenqian.bms.meeting.luckdraw.LuckDrawPath;
+import com.qifenqian.bms.meeting.winShow.controller.WinShowPath;
+import com.qifenqian.bms.task.TaskPath;
 
 /**
  * 权限验证过滤器
@@ -34,6 +36,7 @@ import com.sevenpay.bms.task.TaskPath;
  * @date 2015年5月12日
  * @memo
  */
+@Component
 public class PrivilegeFilter implements Filter {
 
   private static Logger logger = LoggerFactory.getLogger(PrivilegeFilter.class);

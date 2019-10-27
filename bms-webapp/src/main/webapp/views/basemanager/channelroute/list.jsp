@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="com.seven.micropay.channel.enums.PaychannelType"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.basemanager.channelroute.countroller.ChannelRouteControlPath"%>
+<%@page import="com.qifenqian.bms.basemanager.channelroute.countroller.ChannelRouteControlPath"%>
 <%@page import="com.seven.micropay.channel.enums.PaychannelType"%>
 <%@page import="com.seven.micropay.channel.enums.FeeType"%>
 <%@page import="com.seven.micropay.channel.enums.GatewayType"%>

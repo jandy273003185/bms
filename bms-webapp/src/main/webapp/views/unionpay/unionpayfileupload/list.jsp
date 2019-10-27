@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@page import="com.sevenpay.bms.unionPay.unionpayfileupload.UnionpayFilePath"%>
+<%@page import="com.qifenqian.bms.unionPay.unionpayfileupload.UnionpayFilePath"%>
 <base target="_self">  
 <script src='<c:url value="/static/laydate/laydate.js?v=${_jsVersion}"/>'></script>
 <script src='<c:url value="/static/js/ajaxfileupload.js?v=${_jsVersion}"/>'></script>

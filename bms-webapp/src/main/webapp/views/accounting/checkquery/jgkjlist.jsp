@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.accounting.checkquery.ResultStatisticPath"%>
-<%@page import="com.sevenpay.bms.accounting.checkquery.JgkjResultExceptionPath"%>
+<%@page import="com.qifenqian.bms.accounting.checkquery.ResultStatisticPath"%>
+<%@page import="com.qifenqian.bms.accounting.checkquery.JgkjResultExceptionPath"%>
 <% String url = request.getScheme()+"://"+ request.getServerName()+":"+request.getServerPort(); %>
-<%@page import="com.sevenpay.bms.accounting.checkquery.QfqexceptionPath"%>
+<%@page import="com.qifenqian.bms.accounting.checkquery.QfqexceptionPath"%>
 
 <%-- <link rel="stylesheet" href='<c:url value="/static/css/bootstrap-datetimepicker.min.css"/>' />
 <script src='<c:url value="/static/js/bootstrap-datetimepicker.min.js"/>'></script>

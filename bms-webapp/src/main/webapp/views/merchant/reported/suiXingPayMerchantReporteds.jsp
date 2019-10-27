@@ -3,8 +3,8 @@
 <%@page import="com.seven.micropay.channel.enums.MerUpdateType"%>
 <%@page import="com.seven.micropay.channel.enums.suixinpay.SuixinBankType"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.merchant.reported.MerchantReportedPath"%>
-<%@page import="com.sevenpay.bms.basemanager.merchant.AuditorPath"%>
+<%@page import="com.qifenqian.bms.merchant.reported.MerchantReportedPath"%>
+<%@page import="com.qifenqian.bms.basemanager.merchant.AuditorPath"%>
 <script src='<c:url value="/static/js/jquery-ui.min.js"/>'></script>
 <script src='<c:url value="/static/js/jquery.divbox.js"/>'></script>
 <script src='<c:url value="/static/js/ajaxfileupload.js"/>'></script>

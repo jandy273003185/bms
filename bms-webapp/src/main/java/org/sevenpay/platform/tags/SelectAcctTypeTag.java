@@ -7,7 +7,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import com.sevenpay.bms.basemanager.type.AcctType;
+import com.qifenqian.bms.basemanager.type.AcctType;
 
 /**
  * 账户类型选择标签

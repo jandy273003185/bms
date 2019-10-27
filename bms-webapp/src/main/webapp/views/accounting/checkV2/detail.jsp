@@ -1,4 +1,4 @@
-<%@page import="com.sevenpay.bms.accounting.checkV2.CheckV2Path"%>
+<%@page import="com.qifenqian.bms.accounting.checkV2.CheckV2Path"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="UserStatus.tradeType"%>
 <%@ include file="/include/template.jsp"%>

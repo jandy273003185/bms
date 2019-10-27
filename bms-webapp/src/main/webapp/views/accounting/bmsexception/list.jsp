@@ -1,7 +1,7 @@
-<%@page import="com.sevenpay.bms.accounting.bmsexception.BmsExceptionPath"%>
-<%@page import="com.sevenpay.bms.accounting.bmsexception.type.BusType"%>
+<%@page import="com.qifenqian.bms.accounting.bmsexception.BmsExceptionPath"%>
+<%@page import="com.qifenqian.bms.accounting.bmsexception.type.BusType"%>
 <%@page import="org.gyzb.platform.common.utils.ReflectUtils"%>
-<%@page import="com.sevenpay.bms.accounting.bmsexception.bean.BmsException"%>
+<%@page import="com.qifenqian.bms.accounting.bmsexception.bean.BmsException"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
 <html>

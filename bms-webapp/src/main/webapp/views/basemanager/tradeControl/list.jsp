@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.basemanager.fee.FeePath" %> 
+<%@page import="com.qifenqian.bms.basemanager.fee.FeePath" %> 
 
-<%@page import="com.sevenpay.bms.basemanager.tradeControl.TradeControlPath" %> 
+<%@page import="com.qifenqian.bms.basemanager.tradeControl.TradeControlPath" %> 
 <html>
 <head>
 	<meta charset="utf-8" />

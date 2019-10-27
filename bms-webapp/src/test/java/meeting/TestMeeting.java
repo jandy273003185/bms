@@ -8,19 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.sevenpay.bms.accounting.utils.DictionaryUtils;
-import com.sevenpay.bms.meeting.MeetingConstant;
-import com.sevenpay.bms.meeting.helper.JPushService;
-import com.sevenpay.bms.meeting.prize.bean.PrizeBean;
-import com.sevenpay.bms.meeting.prize.mapper.PrizeMapper;
-import com.sevenpay.bms.meeting.prize.service.PrizeService;
-import com.sevenpay.bms.meeting.prize.type.AmountType;
-import com.sevenpay.bms.meeting.prize.type.CustScope;
-import com.sevenpay.bms.meeting.prize.type.IsRepeatWin;
-import com.sevenpay.bms.meeting.prize.type.LimitSex;
-import com.sevenpay.bms.meeting.prize.type.OverallControlType;
-import com.sevenpay.bms.meeting.prize.type.PrizeStatus;
-import com.sevenpay.bms.meeting.prize.type.PrizeType;
+import com.qifenqian.bms.accounting.utils.DictionaryUtils;
+import com.qifenqian.bms.meeting.MeetingConstant;
+import com.qifenqian.bms.meeting.helper.JPushService;
+import com.qifenqian.bms.meeting.prize.bean.PrizeBean;
+import com.qifenqian.bms.meeting.prize.mapper.PrizeMapper;
+import com.qifenqian.bms.meeting.prize.service.PrizeService;
+import com.qifenqian.bms.meeting.prize.type.AmountType;
+import com.qifenqian.bms.meeting.prize.type.CustScope;
+import com.qifenqian.bms.meeting.prize.type.IsRepeatWin;
+import com.qifenqian.bms.meeting.prize.type.LimitSex;
+import com.qifenqian.bms.meeting.prize.type.OverallControlType;
+import com.qifenqian.bms.meeting.prize.type.PrizeStatus;
+import com.qifenqian.bms.meeting.prize.type.PrizeType;
 
 /**
  * @project sevenpay-bms-web

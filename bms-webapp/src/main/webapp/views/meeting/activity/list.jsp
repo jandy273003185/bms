@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.meeting.activity.ActivityPath" %> 
-<%@page import="com.sevenpay.bms.meeting.luckdraw.LuckDrawPath" %> 
+<%@page import="com.qifenqian.bms.meeting.activity.ActivityPath" %> 
+<%@page import="com.qifenqian.bms.meeting.luckdraw.LuckDrawPath" %> 
 <html>
 <link rel="stylesheet" href='<c:url value="/static/css/bootstrap-datetimepicker.min.css"/>' />
 <script src='<c:url value="/static/My97DatePicker/WdatePicker.js"/>'></script>

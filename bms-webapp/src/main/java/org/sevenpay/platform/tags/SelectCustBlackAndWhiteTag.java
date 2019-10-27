@@ -8,9 +8,10 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import com.sevenpay.bms.basemanager.BlackAndWhite.bean.PrivilegeInfo;
-import com.sevenpay.bms.basemanager.BlackAndWhite.dao.PrivilegeInfoDao;
 import org.gyzb.platform.common.utils.SpringUtils;
+
+import com.qifenqian.bms.basemanager.BlackAndWhite.bean.PrivilegeInfo;
+import com.qifenqian.bms.basemanager.BlackAndWhite.dao.PrivilegeInfoDao;
 
 public class SelectCustBlackAndWhiteTag extends SimpleTagSupport{
 	/** 默认值*/	private String defaultValue;

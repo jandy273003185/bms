@@ -7,7 +7,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import com.sevenpay.bms.accounting.utils.AcountCustType;
+import com.qifenqian.bms.accounting.utils.AcountCustType;
 
 public class SelectAcountCustTypeTag extends SimpleTagSupport{
 	/** 默认值*/	private String defaultValue;

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
 <%@page import="org.sevenpay.platform.web.myWorkSpace.WorkSpacePath" %>
-<%@page import="com.sevenpay.bms.basemanager.merchant.AuditorPath"%>
+<%@page import="com.qifenqian.bms.basemanager.merchant.AuditorPath"%>
 
 <link rel="stylesheet"  href='<c:url value="/static/css/bootstrap-datetimepicker.min.css"/>' />
 

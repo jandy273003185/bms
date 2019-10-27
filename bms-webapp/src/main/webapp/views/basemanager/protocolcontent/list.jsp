@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page import="com.sevenpay.bms.basemanager.protocolcontent.ProtocolContentPath"%>
+<%@ page import="com.qifenqian.bms.basemanager.protocolcontent.ProtocolContentPath"%>
 <script src='<c:url value="/static/js/checkRule_source.js"/>'></script>
 <script src='<c:url value="/static/js/ajaxfileupload.js"/>'></script>
 <script src='<c:url value="/static/laydate/laydate.js"/>'></script>

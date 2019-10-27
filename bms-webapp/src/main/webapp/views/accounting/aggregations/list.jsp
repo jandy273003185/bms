@@ -1,8 +1,8 @@
-<%@page import="com.sevenpay.bms.accounting.checkquery.type.BalResultStatus"%>
-<%@page import="com.sevenpay.bms.accounting.checkquery.type.ChannelId"%>
+<%@page import="com.qifenqian.bms.accounting.checkquery.type.BalResultStatus"%>
+<%@page import="com.qifenqian.bms.accounting.checkquery.type.ChannelId"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.accounting.aggregations.controller.AggregationPath"%>
+<%@page import="com.qifenqian.bms.accounting.aggregations.controller.AggregationPath"%>
 <%
 	String url = request.getScheme()+"://"+ request.getServerName()+":"+request.getServerPort();
 %>

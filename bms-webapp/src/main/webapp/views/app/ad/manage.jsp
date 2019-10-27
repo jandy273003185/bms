@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.app.ad.AdManagePath" %> 
+<%@page import="com.qifenqian.bms.app.ad.AdManagePath" %> 
 <script src='<c:url value="/static/js/ajaxfileupload.js"/>'></script>
 <html>
 <head>

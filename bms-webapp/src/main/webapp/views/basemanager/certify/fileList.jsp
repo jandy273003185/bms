@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.basemanager.certify .CertifyPath" %>
-<%@page import="com.sevenpay.bms.basemanager.merchant.AuditorPath"%>
-<%@page import="com.sevenpay.bms.basemanager.merchant.MerchantPath"%>
+<%@page import="com.qifenqian.bms.basemanager.certify .CertifyPath" %>
+<%@page import="com.qifenqian.bms.basemanager.merchant.AuditorPath"%>
+<%@page import="com.qifenqian.bms.basemanager.merchant.MerchantPath"%>
 <base target="_self">  
 <script src='<c:url value="/static/laydate/laydate.js"/>'></script>
 <script src='<c:url value="/static/js/ajaxfileupload.js"/>'></script>

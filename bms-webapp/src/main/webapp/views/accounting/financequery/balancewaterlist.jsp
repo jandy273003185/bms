@@ -2,8 +2,8 @@
 <%@ include file="/include/template.jsp"%>
 <%@page import="com.sevenpay.invoke.common.type.RequestColumnValues"%>
 <%@page import="org.gyzb.platform.common.utils.ReflectUtils"%>
-<%@page import="com.sevenpay.bms.accounting.financequery.FinanceQueryPath"%>
-<%@page import="com.sevenpay.bms.accounting.financequery.bean.RealTimeCustBalanceWater"%>
+<%@page import="com.qifenqian.bms.accounting.financequery.FinanceQueryPath"%>
+<%@page import="com.qifenqian.bms.accounting.financequery.bean.RealTimeCustBalanceWater"%>
 
 <% String url = request.getScheme()+"://"+ request.getServerName()+":"+request.getServerPort(); %>
 <%-- <link rel="stylesheet" href='<c:url value="/static/css/bootstrap-datetimepicker.min.css"/>' />

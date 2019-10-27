@@ -23,17 +23,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSONObject;
-import com.sevenpay.bms.basemanager.Constant;
-import com.sevenpay.bms.basemanager.merchant.bean.CustScan;
-import com.sevenpay.bms.basemanager.merchant.bean.MerchantVo;
-import com.sevenpay.bms.basemanager.merchant.mapper.CustScanMapper;
-import com.sevenpay.bms.basemanager.merchant.mapper.MerchantMapper;
-import com.sevenpay.bms.basemanager.merchant.mapper.TdLoginUserInfoMapper;
-import com.sevenpay.bms.basemanager.merchant.service.AuditorService;
-import com.sevenpay.bms.basemanager.merchant.service.MerchantService;
-import com.sevenpay.bms.basemanager.rule.mapper.RuleMapper;
-import com.sevenpay.bms.common.util.PropertiesUtil;
-import com.sevenpay.bms.myworkspace.WorkFlowHelper;
+import com.qifenqian.bms.basemanager.Constant;
+import com.qifenqian.bms.basemanager.merchant.bean.CustScan;
+import com.qifenqian.bms.basemanager.merchant.bean.MerchantVo;
+import com.qifenqian.bms.basemanager.merchant.mapper.CustScanMapper;
+import com.qifenqian.bms.basemanager.merchant.mapper.MerchantMapper;
+import com.qifenqian.bms.basemanager.merchant.mapper.TdLoginUserInfoMapper;
+import com.qifenqian.bms.basemanager.merchant.service.AuditorService;
+import com.qifenqian.bms.basemanager.merchant.service.MerchantService;
+import com.qifenqian.bms.basemanager.rule.mapper.RuleMapper;
+import com.qifenqian.bms.common.util.PropertiesUtil;
+import com.qifenqian.bms.myworkspace.WorkFlowHelper;
 
 @Service
 public class WorkSpaceService {

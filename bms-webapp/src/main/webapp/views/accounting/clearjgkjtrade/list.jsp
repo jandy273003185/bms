@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.accounting.unnamedProcessing.clearjgkjtrade.ClearJgkjTradePath" %> 
+<%@page import="com.qifenqian.bms.accounting.unnamedProcessing.clearjgkjtrade.ClearJgkjTradePath" %> 
 <html>
 <head>
 	<meta charset="utf-8" />

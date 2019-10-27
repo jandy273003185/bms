@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.basemanager.merchant.MerchantPath" %>
-<%@page import="com.sevenpay.bms.basemanager.merchant.MerchantEnterPath" %>
-<%@page import="com.sevenpay.bms.basemanager.merchant.AuditorPath"%>
-<%@page import="com.sevenpay.bms.basemanager.merchant.TinyMerchantPath" %>
-<%@page import="com.sevenpay.bms.basemanager.agency.controller.AgentRegisterPath" %>
+<%@page import="com.qifenqian.bms.basemanager.merchant.MerchantPath" %>
+<%@page import="com.qifenqian.bms.basemanager.merchant.MerchantEnterPath" %>
+<%@page import="com.qifenqian.bms.basemanager.merchant.AuditorPath"%>
+<%@page import="com.qifenqian.bms.basemanager.merchant.TinyMerchantPath" %>
+<%@page import="com.qifenqian.bms.basemanager.agency.controller.AgentRegisterPath" %>
 <% String url = request.getScheme()+"://"+ request.getServerName()+":"+request.getServerPort(); %>
 <link rel="stylesheet" href="/static/css/font-awesome.min.css">
 <!-- page specific plugin styles -->

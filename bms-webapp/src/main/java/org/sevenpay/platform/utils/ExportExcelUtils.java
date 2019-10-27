@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.stereotype.Service;
 
-import com.sevenpay.bms.accounting.utils.ExportExcel;
-import com.sevenpay.bms.common.util.PropertiesUtil;
+import com.qifenqian.bms.accounting.utils.ExportExcel;
+import com.qifenqian.bms.common.util.PropertiesUtil;
 
 
 @Service

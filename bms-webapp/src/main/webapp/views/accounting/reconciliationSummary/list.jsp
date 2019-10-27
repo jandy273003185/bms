@@ -2,7 +2,7 @@
 <%@page import="com.seven.micropay.channel.enums.PaychannelType"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.accounting.reconciliationSummary.controller.ReconciliationSummaryPath"%>
+<%@page import="com.qifenqian.bms.accounting.reconciliationSummary.controller.ReconciliationSummaryPath"%>
 <%
 	String url = request.getScheme()+"://"+ request.getServerName()+":"+request.getServerPort();
 %>

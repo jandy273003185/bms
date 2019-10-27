@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@page import="com.sevenpay.bms.basemanager.photo.PhotoPath"%>
+<%@page import="com.qifenqian.bms.basemanager.photo.PhotoPath"%>
 <script src='<c:url value="/static/js/checkRule_source.js"/>'></script>
 <script src='<c:url value="/static/js/ajaxfileupload.js"/>'></script>
 <html>

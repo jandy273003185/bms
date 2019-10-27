@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.sevenpay.bms.accounting.refund.RefundBillPath" %> 
+<%@page import="com.qifenqian.bms.accounting.refund.RefundBillPath" %> 
 <html>
 <script src='<c:url value="/static/laydate/laydate.js"/>'></script>
 <%-- <link rel="stylesheet" href='<c:url value="/static/css/bootstrap-datetimepicker.min.css"/>' />
