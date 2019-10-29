@@ -10,7 +10,7 @@
 	</settings>
 	
 	<!-- 别名 -->
-	<typeAliases>
+	<!-- <typeAliases>
 		<typeAlias alias="bank" type="com.qifenqian.bms.basemanager.bank.bean.Bank" />
 		<typeAlias alias="certify" type="com.qifenqian.bms.basemanager.certify.bean.Certify" />
 		<typeAlias alias="city" type="com.qifenqian.bms.basemanager.city.bean.City" />
@@ -42,15 +42,8 @@
  		<typeAlias alias="clearJgkjRegister" type="com.qifenqian.bms.accounting.unnamedProcessing.clearJgkjregister.bean.ClearJgkjRegister"/>
 		<typeAlias alias="clearJgkjTrade" type="com.qifenqian.bms.accounting.unnamedProcessing.clearjgkjtrade.bean.ClearJgkjTrade"/>
 		<typeAlias alias="merchantInControl" type="com.qifenqian.bms.basemanager.merchantincontrol.bean.MerchantInControl"/>
-		<typeAlias alias="channleAgentMerInfo" type="com.qifenqian.bms.merchant.channel.bean.AgentMerInfo"/>
-		
-		
-
-
-		
-
-		
-	</typeAliases>
+		<typeAlias alias="channleAgentMerInfo" type="com.qifenqian.bms.merchant.channel.bean.AgentMerInfo"/>		
+	</typeAliases> -->
 	
 	<!-- 分页插件 -->
 	<plugins>
