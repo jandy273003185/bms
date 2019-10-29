@@ -116,7 +116,7 @@
 		
 	</select>
 	
-	<select id="selectManageUserInfo"  resultType="org.gyzb.platform.web.admin.user.bean.User" >
+	<select id="selectManageUserInfo"  resultType="com.qifenqian.bms.platform.web.admin.user.bean.User" >
 	
 		SELECT 
 			R.USER_ID,

@@ -11,7 +11,7 @@
 
 	<tag>
 		<name>submitToken</name>
-		<tag-class>org.gyzb.platform.web.tags.SubmitTokenTag</tag-class>
+		<tag-class>com.qifenqian.bms.platform.web.tags.SubmitTokenTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>type</name>
@@ -23,7 +23,7 @@
 	<!-- el函数 -->
 	<function>
 		<name>toJSONString</name>
-		<function-class>org.gyzb.platform.web.tags.JSONUtilsTag</function-class>
+		<function-class>com.qifenqian.bms.platform.web.tags.JSONUtilsTag</function-class>
 		<!-- 转json字符串 -->
 		<function-signature>
 			java.lang.String toJSONString(java.lang.Object)

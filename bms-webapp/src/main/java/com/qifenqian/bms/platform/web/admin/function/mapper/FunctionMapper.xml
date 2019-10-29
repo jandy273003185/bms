@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.gyzb.platform.web.admin.function.mapper.FunctionMapper">
+<mapper namespace="com.qifenqian.bms.platform.web.admin.function.mapper.FunctionMapper">
 
 	<!-- condition条件 -->
 	<sql id="whereCondition">
@@ -11,7 +11,7 @@
 	</sql>
 
 	<!-- 根据用户编号查询菜单列表 -->
-	<select id="selectFunctionListByUserId" parameterType="java.lang.Integer" resultType="org.gyzb.platform.web.admin.function.bean.Function">
+	<select id="selectFunctionListByUserId" parameterType="java.lang.Integer" resultType="com.qifenqian.bms.platform.web.admin.function.bean.Function">
 		SELECT F.* 
 		  FROM SYS_FUNCTION F
 		WHERE 
@@ -26,7 +26,7 @@
 	</select>
 	
 	<!-- 根据用户编号查询菜单列表(登陆) -->
-	<select id="selectFunctionListByLogin" parameterType="java.lang.Integer" resultType="org.gyzb.platform.web.admin.function.bean.Function">
+	<select id="selectFunctionListByLogin" parameterType="java.lang.Integer" resultType="com.qifenqian.bms.platform.web.admin.function.bean.Function">
 		SELECT F.* 
 		  FROM SYS_FUNCTION F
 		WHERE 
@@ -42,7 +42,7 @@
 	</select>
 	
 	<!-- 选择某个角色查询下面的功能ID -->
-	<select id="selectFunctionListByRoleId" parameterType="java.lang.Integer" resultType="org.gyzb.platform.web.admin.function.bean.Function">
+	<select id="selectFunctionListByRoleId" parameterType="java.lang.Integer" resultType="com.qifenqian.bms.platform.web.admin.function.bean.Function">
 		SELECT F.* 
 		  FROM SYS_FUNCTION F
 		  INNER JOIN SYS_ROLE_FUNCTION RF ON RF.FUNCTION_ID = F.FUNCTION_ID
@@ -51,7 +51,7 @@
 	</select>
 	
 	<!-- 根据功能编号查询下一级的子功能列表 -->
-	<select id="selectFunctionSubListById" parameterType="java.lang.Integer" resultType="org.gyzb.platform.web.admin.function.bean.Function">
+	<select id="selectFunctionSubListById" parameterType="java.lang.Integer" resultType="com.qifenqian.bms.platform.web.admin.function.bean.Function">
 		SELECT SF.* 
 		  FROM SYS_FUNCTION F
 		  INNER JOIN SYS_FUNCTION SF ON SF.PARENT_FUNCTION_ID = F.FUNCTION_ID
@@ -70,7 +70,7 @@
 	</select>
 	
 	<!-- 根据功能编号查询下一级的子功能列表 -->
-	<select id="selectFunctionSubListByLogin" parameterType="java.lang.Integer" resultType="org.gyzb.platform.web.admin.function.bean.Function">
+	<select id="selectFunctionSubListByLogin" parameterType="java.lang.Integer" resultType="com.qifenqian.bms.platform.web.admin.function.bean.Function">
 		SELECT SF.* 
 		  FROM SYS_FUNCTION F
 		  INNER JOIN SYS_FUNCTION SF ON SF.PARENT_FUNCTION_ID = F.FUNCTION_ID
@@ -90,7 +90,7 @@
 	</select>
 	
 	<!-- 根据条件查询单个功能菜单 -->
-	<select id="selectFunctionSingle" parameterType="org.gyzb.platform.web.admin.function.bean.Function" resultType="org.gyzb.platform.web.admin.function.bean.Function">
+	<select id="selectFunctionSingle" parameterType="com.qifenqian.bms.platform.web.admin.function.bean.Function" resultType="com.qifenqian.bms.platform.web.admin.function.bean.Function">
 		SELECT F.*
 		  FROM SYS_FUNCTION F
 		 <where>
@@ -99,7 +99,7 @@
 	</select>
 	
 	<!-- 根据功能编号查询上层功能菜单 -->
-	<select id="selectFunctionParentById" resultType="org.gyzb.platform.web.admin.function.bean.Function">
+	<select id="selectFunctionParentById" resultType="com.qifenqian.bms.platform.web.admin.function.bean.Function">
 		SELECT PF.*
 		  FROM SYS_FUNCTION PF
 		  INNER JOIN SYS_FUNCTION SF ON SF.PARENT_FUNCTION_ID = PF.FUNCTION_ID
@@ -107,7 +107,7 @@
 	</select>
 	
 	<!-- 查找所有菜单 -->
-	<select id="selectAllFunctions" resultType="org.gyzb.platform.web.admin.function.bean.Function">
+	<select id="selectAllFunctions" resultType="com.qifenqian.bms.platform.web.admin.function.bean.Function">
 		SELECT 
 		  FUNCTION_ID,
 		  FUNCTION_CODE,
@@ -128,7 +128,7 @@
 		FROM SYS_FUNCTION
 	</select>
 	
-	<select id="selectFunctionsByIdAndName" resultType="org.gyzb.platform.web.admin.function.bean.Function" parameterType="org.gyzb.platform.web.admin.function.bean.Function">
+	<select id="selectFunctionsByIdAndName" resultType="com.qifenqian.bms.platform.web.admin.function.bean.Function" parameterType="com.qifenqian.bms.platform.web.admin.function.bean.Function">
 		SELECT F.* ,
 		(select U.user_name from sys_user U where u.user_id = F.inst_user) instUserName,
 		(select U.user_name from sys_user U where u.user_id = F.lupd_user) lupdUserName
@@ -142,7 +142,7 @@
 		ORDER BY F.FUNCTION_ID
 	</select>
 	
-	<insert id="insertFunction" parameterType="org.gyzb.platform.web.admin.function.bean.Function">
+	<insert id="insertFunction" parameterType="com.qifenqian.bms.platform.web.admin.function.bean.Function">
 		INSERT INTO SYS_FUNCTION (
 			FUNCTION_CODE,
 		  	FUNCTION_NAME,
@@ -173,7 +173,7 @@
 		  	now()
 		)
 	</insert>
-	<update id="updateFunction" parameterType="org.gyzb.platform.web.admin.function.bean.Function">
+	<update id="updateFunction" parameterType="com.qifenqian.bms.platform.web.admin.function.bean.Function">
 		UPDATE SYS_FUNCTION
 		<set>
 			<if test="functionName != null">
@@ -226,7 +226,7 @@
 		F.FUNCTION_CODE = #{functionCode,jdbcType=VARCHAR}
 	</select>
 	
-	<select id="functionCodeAndIdIsExists" parameterType="org.gyzb.platform.web.admin.function.bean.Function" resultType="string" >
+	<select id="functionCodeAndIdIsExists" parameterType="com.qifenqian.bms.platform.web.admin.function.bean.Function" resultType="string" >
 		SELECT 
 		COUNT(*) 
 		FROM 

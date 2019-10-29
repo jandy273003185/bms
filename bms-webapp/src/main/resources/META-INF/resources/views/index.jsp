@@ -22,7 +22,7 @@
 </style>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.qifenqian.platform.web.admin.login.LoginPath"%>
+<%@page import="com.qifenqian.bms.platform.web.admin.login.LoginPath"%>
 </head>
 
 <body id="login-layout" onLoad="fnSetDefault();">

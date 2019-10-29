@@ -10,7 +10,7 @@
 		Q.CUST_ID=#{custId,jdbcType=VARCHAR}
 	</select>
 	
-	<select id="queryBankCardList" parameterType="string" resultType="com.qifenqian.invoke.transaction.querybankcard.bean.BankCard">
+	<select id="queryBankCardList" parameterType="string" resultType="com.sevenpay.invoke.transaction.querybankcard.bean.BankCard">
 		SELECT 
 			CUST_ID,
 			BANK_CARD_NO,

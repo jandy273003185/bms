@@ -25,6 +25,7 @@
 	<import resource="classpath*:spring/ApplicationContext-mybatis-combinedslave.xml" />
 	<import resource="classpath*:spring/ApplicationContext-mybatis-sabs.xml" />
 	<import resource="classpath*:spring/ApplicationContext-mybatis-combinedmaster.xml" />
+	<import resource="classpath*:spring/web-servlet.xml" />
 
 	<import resource="classpath*:activiti.cfg.xml" />
 

@@ -26,7 +26,7 @@
 		<typeAlias alias="privilege" type="com.qifenqian.bms.basemanager.privilegeControl.bean.Privilege"/>
 		<typeAlias alias="subjectInfo" type="com.qifenqian.bms.accounting.subjectInfo.bean.SubjectInfo"/>	
 		<typeAlias alias="subjectConfig" type="com.qifenqian.bms.accounting.subjectConfig.bean.SubjectConfig"/>	
-		<typeAlias alias="scheduler" type="org.sevenpay.platform.web.scheduler.bean.SchedulerJob"/>
+		<typeAlias alias="scheduler" type="com.qifenqian.bms.platform.web.scheduler.bean.SchedulerJob"/>
 		<typeAlias alias="balResultStatistic" type="com.qifenqian.bms.accounting.checkquery.bean.BalResultStatistic"/>
 		<typeAlias alias="resultException" type="com.qifenqian.bms.accounting.checkquery.bean.BalSevenResultException"/>
 		<typeAlias alias="subjectSummary" type="com.qifenqian.bms.accounting.subjectSummary.bean.SubjectSummary"/>
@@ -38,7 +38,7 @@
 		 <typeAlias alias="changeBalance" type="com.qifenqian.bms.accounting.financequery.bean.ChangeBalance"/>
 		 <typeAlias alias="commerciaBalance" type="com.qifenqian.bms.accounting.financequery.bean.CommerciaBalance"/>
 		<typeAlias alias="userBalance" type="com.qifenqian.bms.accounting.financequery.bean.UserBalance"/>
-		<typeAlias alias="schedulerLog" type="org.sevenpay.platform.web.schedulerLog.bean.SchedulerLog"/>
+		<typeAlias alias="schedulerLog" type="com.qifenqian.bms.platform.web.schedulerLog.bean.SchedulerLog"/>
  		<typeAlias alias="clearJgkjRegister" type="com.qifenqian.bms.accounting.unnamedProcessing.clearJgkjregister.bean.ClearJgkjRegister"/>
 		<typeAlias alias="clearJgkjTrade" type="com.qifenqian.bms.accounting.unnamedProcessing.clearjgkjtrade.bean.ClearJgkjTrade"/>
 		<typeAlias alias="merchantInControl" type="com.qifenqian.bms.basemanager.merchantincontrol.bean.MerchantInControl"/>
@@ -54,7 +54,7 @@
 	
 	<!-- 分页插件 -->
 	<plugins>
-		<plugin interceptor="org.gyzb.platform.web.page.plugin.MybatisPagePluginMysql" />
+		<plugin interceptor="com.qifenqian.bms.platform.web.page.plugin.MybatisPagePluginMysql" />
 	</plugins>
 
 </configuration>
