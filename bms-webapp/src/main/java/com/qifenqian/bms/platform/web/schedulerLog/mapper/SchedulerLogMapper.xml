@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.sevenpay.platform.web.schedulerLog.mapper.SchedulerLogMapper">
+<mapper namespace="com.qifenqian.bms.platform.web.schedulerLog.mapper.SchedulerLogMapper">
   <select id="selectSchedulerLogList"  resultType="schedulerLog"  parameterType="schedulerLog">
 	    SELECT
 			J.JOB_NAME,
@@ -61,7 +61,7 @@
   <!--   where LOG_ID = #{logId,jdbcType=VARCHAR} -->
   </select>
   
-  <insert id="addSchedulerLog" parameterType="org.sevenpay.platform.web.schedulerLog.bean.SchedulerLog">
+  <insert id="addSchedulerLog" parameterType="com.qifenqian.bms.platform.web.schedulerLog.bean.SchedulerLog">
 		INSERT INTO BMS_SCHEDULER_LOG (LOG_ID,
 		  	JOB_CODE,
 		  	EXECUTE_DATE,
@@ -87,7 +87,7 @@
 		)
 	</insert>
 	
-	<update id="updateSchedulerLog" parameterType="org.sevenpay.platform.web.schedulerLog.bean.SchedulerLog">
+	<update id="updateSchedulerLog" parameterType="com.qifenqian.bms.platform.web.schedulerLog.bean.SchedulerLog">
 		UPDATE BMS_SCHEDULER_LOG 
 		<set>
 			<if test="executeFlag != null">

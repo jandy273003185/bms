@@ -11,7 +11,7 @@
 	
 	<tag>
 		<name>selectDept</name>
-		<tag-class>org.gyzb.platform.web.admin.tags.SelectDeptTag</tag-class>
+		<tag-class>com.qifenqian.bms.platform.web.admin.tags.SelectDeptTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>id</name>
@@ -42,7 +42,7 @@
 	
 	<tag>
 		<name>selectUserStatus</name>
-		<tag-class>org.gyzb.platform.web.admin.tags.SelectUserStatusTag</tag-class>
+		<tag-class>com.qifenqian.bms.platform.web.admin.tags.SelectUserStatusTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>id</name>
@@ -74,7 +74,7 @@
 	<!-- 控制操作 -->
 	<tag>
 		<name>function</name>
-		<tag-class>org.gyzb.platform.web.admin.tags.FunctionAuthorityTag</tag-class>
+		<tag-class>com.qifenqian.bms.platform.web.admin.tags.FunctionAuthorityTag</tag-class>
 		<attribute>
 			<name>url</name>
 			<required>true</required>
@@ -83,7 +83,7 @@
 	</tag>
 	<tag>
 		<name>selectRoleTag</name>
-		<tag-class>org.gyzb.platform.web.admin.tags.SelectRoleTag</tag-class>
+		<tag-class>com.qifenqian.bms.platform.web.admin.tags.SelectRoleTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>id</name>
@@ -108,7 +108,7 @@
 	</tag>
 	<tag>
 		<name>selectUserTag</name>
-		<tag-class>org.gyzb.platform.web.admin.tags.SelectUserTag</tag-class>
+		<tag-class>com.qifenqian.bms.platform.web.admin.tags.SelectUserTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>id</name>
@@ -134,10 +134,10 @@
 	
 	<function>  
         <name>pathHasFunc</name>  
-        <function-class>org.gyzb.platform.web.admin.tags.FunctionUtilsTag</function-class>  
+        <function-class>com.qifenqian.bms.platform.web.admin.tags.FunctionUtilsTag</function-class>  
         <!-- 源功能路径是否包含目标功能菜单 -->  
         <function-signature>  
-            java.lang.Boolean pathHasFunc(org.gyzb.platform.web.admin.function.bean.Function, org.gyzb.platform.web.admin.function.bean.Function)  
+            java.lang.Boolean pathHasFunc(com.qifenqian.bms.platform.web.admin.function.bean.Function, com.qifenqian.bms.platform.web.admin.function.bean.Function)  
         </function-signature>  
     </function>  
 </taglib>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.gyzb.platform.web.admin.userRole.mapper.UserRoleMapper">
+<mapper namespace="com.qifenqian.bms.platform.web.admin.userRole.mapper.UserRoleMapper">
 
-	<insert id="insertUserRole" parameterType="org.gyzb.platform.web.admin.userRole.bean.UserRole">
+	<insert id="insertUserRole" parameterType="com.qifenqian.bms.platform.web.admin.userRole.bean.UserRole">
 		INSERT INTO SYS_USER_ROLE (
 			USER_ID,
 			ROLE_ID,
@@ -15,7 +15,7 @@
 		)
 	</insert>
 	
-	<select id="selectUserRoleByUserId" parameterType="java.lang.Integer" resultType="org.gyzb.platform.web.admin.role.bean.Role">
+	<select id="selectUserRoleByUserId" parameterType="java.lang.Integer" resultType="com.qifenqian.bms.platform.web.admin.role.bean.Role">
 		SELECT 
 			R.ROLE_ID,
 			R.ROLE_NAME 
@@ -25,7 +25,7 @@
 		AND R.IS_VALID ='Y'
 	</select>
 
-	<update id="updateUserRole" parameterType="org.gyzb.platform.web.admin.userRole.bean.UserRole">
+	<update id="updateUserRole" parameterType="com.qifenqian.bms.platform.web.admin.userRole.bean.UserRole">
 		UPDATE SYS_USER_ROLE 
 		   SET ROLE_ID = #{roleId, 		jdbcType=INTEGER} 
 		 WHERE USER_ID = #{userId, 		jdbcType=INTEGER}

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.sevenpay.platform.web.myWorkSpace.mapper.MyWorkSpaceMapper">
+<mapper namespace="com.qifenqian.bms.platform.web.myWorkSpace.mapper.MyWorkSpaceMapper">
 
-	<select id="getMyTasks" parameterType="org.sevenpay.platform.web.myWorkSpace.bean.WaitTaskBean" resultType="org.sevenpay.platform.web.myWorkSpace.bean.WaitTaskBean">
+	<select id="getMyTasks" parameterType="com.qifenqian.bms.platform.web.myWorkSpace.bean.WaitTaskBean" resultType="com.qifenqian.bms.platform.web.myWorkSpace.bean.WaitTaskBean">
 		  SELECT 
 		 	T.*,P.NAME_ proName , U.REAL_NAME startUser , V.URL url
 		 FROM
