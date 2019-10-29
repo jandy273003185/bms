@@ -1713,7 +1713,7 @@
 		LEFT JOIN TD_CUST_FEE_RULE F ON C.CUST_ID=F.CUST_ID
 		left join tb_sp_province p ON P.PROVINCE_ID = C.province
 		left join tb_sp_city B ON B.city_id = C.city
-        left join tb_bank_code Q ON Q.BANK_CODE = C.COMP_ACCT_BANK
+        left join tb_bank_code Q ON Q.BANK_TYPE = C.COMP_ACCT_BANK
 		WHERE c.CUST_ID = #{custId,jdbcType=VARCHAR}
 	</select>
 	
@@ -1848,6 +1848,116 @@
 		</set>
 		WHERE CUST_ID = #{custId,jdbcType=VARCHAR}
 	</update>
+
+    <update id="updateMerchantEnter"  parameterType="merchantVo">
+        UPDATE TD_CUST_INFO
+        <set>
+            <if test="custName != null">
+                CUST_NAME = #{custName,jdbcType=VARCHAR},
+            </if>
+            <if test="custType != null">
+                CUST_TYPE = #{custType,jdbcType=VARCHAR},
+            </if>
+            <if test="certifyType != null">
+                CERTIFY_TYPE = #{certifyType,jdbcType=VARCHAR},
+            </if>
+            <if test="certifyNo != null">
+                CERTIFY_NO =#{certifyNo,jdbcType=VARCHAR},
+            </if>
+            <if test="businessLicense != null">
+                BUSINESS_LICENSE = #{businessLicense,jdbcType=VARCHAR},
+            </if>
+            <if test="businessRegAddr!=null">
+                BUSINESS_REG_ADDR=#{businessRegAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="businessTerm!=null">
+                BUSINESS_TERM=#{businessTerm,jdbcType=DATE},
+            </if>
+            <if test="businessTermStart!=null">
+                BUSINESS_TERM_START=#{businessTermStart,jdbcType=VARCHAR},
+            </if>
+            <if test="businessTermEnd!=null">
+                BUSINESS_TERM_END=#{businessTermEnd,jdbcType=VARCHAR},
+            </if>
+            <if test="custAdd!=null">
+                CUST_ADD=#{custAdd,jdbcType=VARCHAR},
+            </if>
+            <if test="fcontactunitNumber!=null">
+                FCONTACTUNIT_NUMBER = #{fcontactunitNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="contactPhone!=null">
+                CONTACT_PHONE=#{contactPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="orgInstCode!=null">
+                ORG_INST_CODE=#{orgInstCode,jdbcType=VARCHAR},
+            </if>
+            <if test="representativeName!=null">
+                REPRESENTATIVE_NAME=#{representativeName,jdbcType=VARCHAR},
+            </if>
+            <if test="representativeCertNo!=null">
+                REPRESENTATIVE_CERT_NO=#{representativeCertNo,jdbcType=VARCHAR},
+            </if>
+            <if test="representativeMobile!=null">
+                REPRESENTATIVE_MOBILE=#{representativeMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="compMainAcct!=null">
+                COMP_MAIN_ACCT=#{compMainAcct,jdbcType=VARCHAR},
+            </if>
+            <if test="compAcctBank!=null">
+                COMP_ACCT_BANK=#{compAcctBank,jdbcType=VARCHAR},
+            </if>
+            <if test="branchBank!=null">
+                BRANCH_BANK=#{branchBank,jdbcType=VARCHAR},
+            </if>
+            <if test="bankAcctName!=null">
+                BANK_ACCT_NAME=#{bankAcctName,jdbcType=VARCHAR},
+            </if>
+            <if test="comment !=null">
+                COMMENT = #{comment,jdbcType=VARCHAR},
+            </if>
+            <if test="qfqAccId !=null">
+                QFQ_ACC_ID = #{qfqAccId,jdbcType=VARCHAR},
+            </if>
+            <if test="merchantCode !=null">
+                MERCHANT_CODE = #{merchantCode,jdbcType=VARCHAR},
+            </if>
+            <if test="custAdd !=null">
+                CUST_ADD = #{custAdd,jdbcType=VARCHAR},
+            </if>
+            <if test="agentName !=null">
+                AGENT_NAME = #{agentName,jdbcType=VARCHAR},
+            </if>
+            <if test="agentMobile !=null">
+                MERCHANT_MOBILE = #{agentMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="categoryType !=null">
+                categoryType = #{categoryType,jdbcType=VARCHAR},
+            </if>
+            <if test="mchRole !=null">
+                mchRole = #{mchRole,jdbcType=VARCHAR},
+            </if>
+            <if test="isClear !=null  and  isClear!='' ">
+                IS_CLEAR = #{isClear,jdbcType=VARCHAR},
+            </if>
+            <if test="province !=null">
+                province = #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city !=null">
+                city = #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="country !=null">
+                country = #{country,jdbcType=VARCHAR},
+            </if>
+            <if test="filingAuditStatus != null">
+                filing_audit_status =  #{filingAuditStatus , jdbcType = VARCHAR}
+            </if>
+            <if test="merchantState != null">
+                STATE =  #{merchantState , jdbcType = VARCHAR}
+            </if>
+
+        </set>
+        WHERE CUST_ID = #{custId,jdbcType=VARCHAR}
+    </update>
 	
 	<update id="updateAcctNameByCustName" parameterType="merchantVo">
 		UPDATE 
@@ -2120,7 +2230,7 @@
 		FROM TD_CUST_INFO C 
 		INNER JOIN TD_LOGIN_USER_INFO U 
 		ON C.CUST_ID=U.CUST_ID  	
-		LEFT JOIN TD_CUST_FEE_RULE F ON C.CUST_ID=F.CUST_ID		
+		LEFT JOIN TD_CUST_FEE_RULE F ON C.CUST_ID=F.CUST_ID
 		WHERE c.CUST_ID = #{custId,jdbcType=VARCHAR}
 	</select>
  	

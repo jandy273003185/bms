@@ -181,4 +181,5 @@ public interface MerchantMapper {
 	List<MerchantVo> auditList2(MerchantVo merchantVo);
 
 
+	void updateMerchantEnter(MerchantVo merchantVo);
 }

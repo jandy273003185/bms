@@ -189,11 +189,14 @@ function selCustType(){
 	if($("#custType").val() =='0'  ){
 		$("#businessCodeId").text("营业执照编号：");
         $("#businessTimeId").text("营业执照有效期：");
+        $("#businessPhotoId").text("营业执照照片");
 	}
 	//企业 个体户
 	if($("#custType").val() =='1' ||$("#custType").val() =='2'){
         $("#businessCodeId").text("营业执照编号：（必填)");
         $("#businessTimeId").text("营业执照有效期：（必填)");
+        $("#businessPhotoId").text("营业执照照片：（必填)");
+
 	}
 }
 
@@ -343,10 +346,10 @@ function addMerchantBtn(){
 			return false;
 		}
 
-		/*if(!checkAttach($("#businessPhoto")[0])){
+		if(!checkAttach($("#businessPhoto")[0])){
 			$.gyzbadmin.alertFailure("必须提交营业执照扫描件");
 			return false;
-		}*/
+		}
 
 		/*if(!checkAttach($("#openAccount")[0])){
 			$.gyzbadmin.alertFailure("必须提交开户许可证");
@@ -499,6 +502,7 @@ function addMerchantBtn(){
 	var custAdd = $("#custAdd").val().trim();
 	var businessLicense = $("#businessLicense").val().trim();
 	var businessTermStart = $("#businessTermStart").val().trim();
+	var businessTermEnd = $("#businessTermEnd").val().trim();
 	var custManager = $("#custManager").val().trim();
 	var agentName = $("#agentName").val().trim();
 	var representativeName = $("#representativeName").val().trim();
@@ -514,64 +518,55 @@ function addMerchantBtn(){
 	var cnaps =  $("#cnaps").val().trim();
 	var compMainAcctType = $("#compMainAcctType").val().trim();
 
-	$.blockUI();
- 	$.ajax({
-		type : "POST",
-		url : window.Constants.ContextPath +'<%=TinyMerchantPath.BASE + TinyMerchantPath.FILEUPLOAD%>',
-		data :{
-			businessPhoto  : $('#businessPhototemp').val(), //营业执照
-			certAttribute1 : $('#certAttribute1temp').val(), //身份证正
-			certAttribute2 : $('#certAttribute2temp').val(), //身份证反
-			openAccount    : $('#openAccounttemp').val(), // kai
-			bankCardPhoto  : $('#bankCardPhototemp').val()
-		},
-		dataType : "json",
-		success : function(data) {
-			if(data.result=='SUCCESS'){
-				$.post(window.Constants.ContextPath +'<%=MerchantEnterPath.BASE + MerchantEnterPath.ADD%>',{
-        			"custId":                data.custId,						// 回传custId
-        			"merchantAccount":       merchantAccount, 					// 商户账号
-        			"custType":              custType,							// 商户类型
-        			"custName":              custName, 							// 客户姓名
-        			"shortName":             shortName,                         // 客户简称
-        			"merchantEmail":         merchantEmail,						// 邮箱
-        			"contactPhone":          contactPhone,						// 客服电话
-        			"province":              province,							// 省份
-        			"city":                  city,								// 城市
-        			"country" :              country,							// 县区
-        			"custAdd" :              custAdd,							// 详细地址
-        			"businessLicense":       businessLicense,                   // 营业执照注册号
-        			"businessTermStart":     businessTermStart,					// 营业执照有限期
-        			"businessTermEnd" :      businessTermEnd,					// 营业执照有限截止期
-        			"custManager":           custManager,						// 客户经理
-        			"agentName":             agentName,							// 代理商
-        			"representativeName":    representativeName,				// 法人姓名
-        			"representativeCertNo":  representativeCertNo,				// 法人身份证号
-        			"contactName":           contactName,						// 联系人姓名
-        			"contactMobile":         contactMobile,						// 联系人电话
-        			"compMainAcct":          compMainAcct,						// 银行号
-        			"compAcctBank":          compAcctBank,						// 开户行
-        			"branchBank":            branchBank,						// 开户支行
-        			"bankAcctName":          bankAcctName,						// 开户人
-        			"bankProvinceName":      bankProvinceName,					// 开户行省份
-        			"bankCityName":          bankCityName,						// 开户行城市
-        			"cnaps":                 cnaps,								// 联行号
-        			"compMainAcctType":      compMainAcctType					// 结算类型
-        		},function(data){
-    				if(data.result=="SUCCESS"){
-    					$.gyzbadmin.alertSuccess("注册申请成功",null,function(){
-    						window.location.href = window.Constants.ContextPath + '<%=MerchantEnterPath.BASE + MerchantEnterPath.LIST %>';
-    					});
-    				}else {
-    					$.gyzbadmin.alertFailure("服务器内部错误，请联系相关技术人员，错误原因是：" + data.message);
-    				}
-        		},'json')
-        	}else{
-        		$.gyzbadmin.alertFailure("服务器内部错误，请联系相关技术人员，错误原因是：" + data.message);
 
-        	}
-		}
-	});
+	$.blockUI();
+
+
+    $.ajax({
+        type : "POST",
+        url : window.Constants.ContextPath +'<%=MerchantEnterPath.BASE + MerchantEnterPath.ADD%>',
+        data :{
+            "merchantAccount":       merchantAccount, 					// 商户账号
+            "custType":              custType,							// 商户类型
+            "custName":              custName, 							// 客户姓名
+            "shortName":             shortName,                         // 客户简称
+            "merchantEmail":         merchantEmail,						// 邮箱
+            "contactPhone":          contactPhone,						// 客服电话
+            "province":              province,							// 省份
+            "city":                  city,								// 城市
+            "country" :              country,							// 县区
+            "custAdd" :              custAdd,							// 详细地址
+            "businessLicense":       businessLicense,                   // 营业执照注册号
+            "businessTermStart":     businessTermStart,					// 营业执照有限期
+            "businessTermEnd" :      businessTermEnd,					// 营业执照有限截止期
+            "custManager":           custManager,						// 客户经理
+            "agentName":             agentName,							// 代理商
+            "representativeName":    representativeName,				// 法人姓名
+            "representativeCertNo":  representativeCertNo,				// 法人身份证号
+            "contactName":           contactName,						// 联系人姓名
+            "contactMobile":         contactMobile,						// 联系人电话
+            "compMainAcct":          compMainAcct,						// 银行号
+            "compAcctBank":          $("#compAcctBank").val(),						// 开户行
+            "branchBank":            branchBank,						// 开户支行
+            "bankAcctName":          bankAcctName,						// 开户人
+            "bankProvinceName":      bankProvinceName,					// 开户行省份
+            "bankCityName":          bankCityName,						// 开户行城市
+            "cnaps":                 cnaps,								// 联行号
+            "compMainAcctType":      compMainAcctType					// 结算类型
+        },
+        dataType : "json",
+        success : function(data) {
+            if (data.result == 'SUCCESS') {
+                $.gyzbadmin.alertSuccess("注册申请成功", null, function () {
+                    window.location.href = window.Constants.ContextPath + '<%=MerchantEnterPath.BASE + MerchantEnterPath.LIST %>';
+                });
+            } else {
+                $.gyzbadmin.alertFailure("服务器内部错误，请联系相关技术人员，错误原因是：" + data.message);
+            }
+        }
+    });
+
+
 
 }
 
@@ -831,7 +826,7 @@ $(function(){
 
 						</tr>
 						<tr>
-							<td class="td-left">营业执照照片<span style="color:red" class="businessPhotoImageSpan"></span></td>
+							<td class="td-left" id="businessPhotoId">营业执照照片<span style="color:red" class="businessPhotoImageSpan"></span></td>
 							<td class="td-right">
 								<a data-toggle='modal' class="tooltip-success businessPhotoClick"  data-target="#previewImageModal">
 									<label id="businessPhotoDiv" class="uploadImage">
@@ -936,7 +931,7 @@ $(function(){
                                 <c:if test="${not empty banklist }">
                                    <option value="">--请选择--</option>
 					               <c:forEach items="${banklist }" var="bank">
-					                   <option value="${bank.bankCode}">${bank.bankName}</option>
+					                   <option value="${bank.bankCode }">${bank.bankName }</option>
 					               </c:forEach>
 	               				</c:if>
                                 </select>
@@ -1111,6 +1106,13 @@ $(function(){
                     }
                 }});
         });
+
+      /*  //代理商
+        $("#compAcctBank").on('blur',function () {
+            alert($("#compAcctBank").val())
+        });*/
+
+
 
        /* //所属业务人员
         $('#agentName').on('change', function (e) {

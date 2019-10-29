@@ -75,6 +75,16 @@
         if ("onfocus=\"WdatePicker({minDate:'%y-%M-%d'})\"" == document.getElementById("businessTermStart").value){
             $("#businessTermStart").attr("value","");
         }
+        if ("onfocus=\"WdatePicker({minDate:'%y-%M-%d'})\"" == document.getElementById("businessTermEnd").value){
+            $("#businessTermEnd").attr("value","");
+        }
+        if ("onfocus=\"WdatePicker({skin:'whyGreen'})\"" == document.getElementById("businessTermStart").value){
+            $("#businessTermStart").attr("value","");
+        }
+        if ("onfocus=\"WdatePicker({skin:'whyGreen'})\"" == document.getElementById("businessTermEnd").value){
+            $("#businessTermEnd").attr("value","");
+        }
+
 
         $(function(){
             $('#compMainAcctType').on('change', function (e) {
@@ -88,7 +98,21 @@
                     $('#openAccount_').hide();
                 }
             });
-        })
+        });
+
+        /**商户类型 **/
+        //个人
+        if($("#custType").val() =='0'  ){
+            $("#businessCodeId").text("营业执照编号：");
+            $("#businessTimeId").text("营业执照有效期：");
+            $("#businessPhotoId").text("营业执照照片");
+        }
+        //企业 个体户
+        if($("#custType").val() =='1' ||$("#custType").val() =='2'){
+            $("#businessCodeId").text("营业执照编号：（必填)");
+            $("#businessTimeId").text("营业执照有效期：（必填)");
+            $("#businessPhotoId").text("营业执照照片：（必填)");
+        }
 
 
     });
@@ -128,7 +152,7 @@
 
     function updateMerchantBtn(){
 
-        var businessTermEnd = "forever";
+        /* var businessTermEnd = "forever";*/
         /*账号校验*/
         /* if(isNull($("#merchantAccount")[0])){
             $("#merchantAccountLab").text("请设置商户账户");
@@ -173,12 +197,12 @@
             $("#custAdd").focus();
             return false;
         }
-        /*营业执照号*/
-        if(isNull($("#businessLicense")[0])){
-            $("#businessLicenseLab").text("请填写营业执照注册号");
-            $("#businessLicense").focus();
-            return false;
-        }
+        /* /!*营业执照号*!/
+         if(isNull($("#businessLicense")[0])){
+             $("#businessLicenseLab").text("请填写营业执照注册号");
+             $("#businessLicense").focus();
+             return false;
+         }*/
 
         var businessLicense =$("#businessLicense").val();
         //校验营业执照注册号唯一性
@@ -202,7 +226,7 @@
         } --%>
 
         /*营业执照有限期 */
-        if(isNull($("#businessTermStart")[0])){
+        /*if(isNull($("#businessTermStart")[0])){
             $("#businessTermStartLab").text("请选择日期");
             $("#businessTermStart").focus();
             return false;
@@ -211,22 +235,79 @@
             $("#businessTermEndLab").text("请选择日期");
             $("#businessTermEnd").focus();
             return false;
-        }
+        }*/
 
         /*起始日期判断 */
-        var startDate = $("#businessTermStart").val();
+        /*var startDate = $("#businessTermStart").val();
         var endDate= $("#businessTermEnd").val();
         if("" != startDate && "" != endDate && startDate > endDate)
         {
             $.gyzbadmin.alertFailure("结束日期不能小于开始日期");
             return false;
-        }
+        }*/
         var custType =$("#custType").val();
         /*个人*/
         if(custType=='0'){
         }
         /*企业*/
-        if(custType=='1'){
+        if(custType=='1' || custType=='2'){
+
+            //校验营业执照注册号唯一性
+            var businessLicense =$("#businessLicense").val();
+            var validateLicense =true ;
+
+            if ($("#businessLicense").val() == $("#businessLicenseNumber").val() ) {
+                //相等不去校验
+			}else {
+                $.ajax({
+                    async:false,
+                    dataType:"json",
+                    url:window.Constants.ContextPath +'<%=MerchantPath.BASE+MerchantPath.VALIDATELICENSE%>',
+                    data:{businessLicense:businessLicense},
+                    success:function(data){
+                        if(data.result=="FAIL"){
+                            $("#businessLicenseLab").text("该营业执照注册号已经被使用");
+                            validateLicense = false;
+                        }else{
+                            validateLicense = true;
+                        }
+                    }});
+                if(!validateLicense){
+                    return false;
+                }
+			};
+
+
+            /*营业执照号*/
+            if(isNull($("#businessLicense")[0])){
+                $("#businessLicenseLab").text("请填写营业执照注册号");
+                $("#businessLicense").focus();
+                return false;
+            }
+
+            /*营业执照有限期 */
+            if(isNull($("#businessTermStart")[0])){
+                $("#businessTermLabStart").text("请选择日期");
+                $("#businessTermStart").focus();
+                return false;
+            }
+
+            if(isNull($("#businessTermEnd")[0])){
+                $("#businessTermLabEnd").text("请选择日期");
+                $("#businessTermEnd").focus();
+                return false;
+            }
+
+            /*起始日期判断 */
+            var startDate = $("#businessTermStart").val();
+            var endDate= $("#businessTermEnd").val();
+            if("" != startDate && "" != endDate && startDate > endDate)
+            {
+                $.gyzbadmin.alertFailure("结束日期不能小于开始日期");
+                return false;
+            }
+
+
             // 校验营业时间
             if(!Register.validateBusinessTerm($("#businessTermStart").val().trim(),$("#businessTermStartLabel"))){return false;}
             if($("input:radio[name='end']:checked").val()=='sel'){
@@ -238,18 +319,18 @@
 
             if(!flag){return false;}
 
-            /*if(!checkAttach($("#businessPhoto")[0])){
+            if(!checkAttach($("#businessPhoto")[0])){
                 $.gyzbadmin.alertFailure("必须提交营业执照扫描件");
                 return false;
             }
 
-            if(!checkAttach($("#openAccount")[0])){
+            /*if(!checkAttach($("#openAccount")[0])){
                 $.gyzbadmin.alertFailure("必须提交开户许可证");
                 return false;
             }*/
         }
         /*个体户*/
-        if(custType=='2'){
+        /*if(custType=='2'){
             if(checkAttach($("#businessPhoto")[0])){
                 if(isNull($("#businessLicense")[0])){
                     $("#businessLicenseLab").text("必须填写营业执照注册号");
@@ -270,7 +351,7 @@
                     return false;
                 }
             }
-        }
+        }*/
 
         /*法人姓名*/
         if(isNull($("#representativeName")[0])){
@@ -360,6 +441,7 @@
         var custAdd = $("#custAdd").val();
         var businessLicense = $("#businessLicense").val();
         var businessTermStart = $("#businessTermStart").val();
+        var businessTermEnd = $("#businessTermEnd").val();
         var custManager = $("#custManager").val();
         var agentName = $("#agentName").val();
         var representativeName = $("#representativeName").val();
@@ -541,6 +623,8 @@
 						<input type="hidden" name="merchantCode" id="merchantCode" value="${merchantVo.merchantCode}">
 						<input type="hidden" name="authId" id="authId" value="${merchantVo.authId}">
 						<input type="hidden" name="custType" id="custType" value="${merchantVo.custType}">
+
+						<input type="hidden" id="businessLicenseNumber" value="${merchantVo.businessLicense }"/>
 						<table id="merchant_table" class="list-table">
 							<tbody>
 							<tr>
@@ -603,14 +687,16 @@
 								</td>
 							</tr>
 							<tr>
-								<td class="td-left">营业执照编号：</td>
+								<td class="td-left" id="businessCodeId">营业执照编号：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
 									<input type="text" id="businessLicense" name="businessLicense"  placeholder="请输入营业执照" value=${merchantVo.businessLicense } style="width:90%">
+									<i class="icon-leaf blue"></i>
+									<label class="label-tips" id="businessLicenseLab"></label>
 								</td>
-								<td class="td-left">营业执照有效期：</td>
+								<td class="td-left" id="businessTimeId">营业执照有效期：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
 
-									<input type="text" id="businessTermStart" name="businessTermStart" value = ${merchantVo.businessTermStart }  onfocus="WdatePicker({minDate:'%y-%M-%d'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
+									<input type="text" id="businessTermStart" name="businessTermStart" value = ${merchantVo.businessTermStart } onfocus="WdatePicker({skin:'whyGreen'})" onfocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
 									<label class="label-tips" id="businessTermLabStart"></label>
 									-
 									<input type="text" id="businessTermEnd" name="businessTermEnd" value =
@@ -622,7 +708,7 @@
 												${merchantVo.businessTermEnd }
 											</c:otherwise>
 									</c:choose>
-										   onfocus="WdatePicker({minDate:'%y-%M-%d'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
+										   onfocus="WdatePicker({skin:'whyGreen'})" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
 									<label class="label-tips" id="businessTermLabEnd"></label>
 
 									<input type="button" onclick="fun()" value="长期" />
@@ -635,7 +721,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td class="td-left">营业执照扫描件：</td>
+								<td class="td-left" id="businessPhotoId">营业执照扫描件：</td>
 								<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success businessPhotoClick" data-target="#previewImageModal" >
 										<label id="businessPhotoDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
@@ -736,10 +822,12 @@
 										<c:if test="${not empty banklist }">
 											<option value=${merchantVo.bankName }>${merchantVo.bankName }</option>
 											<c:forEach items="${banklist }" var="bank">
-												<option value="${bank.bankCode}">${bank.bankName}</option>
+												<option value="${bank.bankCode }">${bank.bankName }</option>
 											</c:forEach>
 										</c:if>
 									</select>
+									<i class="icon-leaf blue"></i>
+									<label class="label-tips" id="compMainAcctLab"></label>
 								</td>
 							</tr>
 							<tr>
