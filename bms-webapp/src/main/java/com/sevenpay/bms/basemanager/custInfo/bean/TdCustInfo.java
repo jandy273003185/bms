@@ -195,8 +195,39 @@ public class TdCustInfo implements java.io.Serializable {
 	private String businessTermStart;
 	/**营业范围*/
 	private String businessScope;
+	/**联系人名称**/
+	private String contactName;
+	/**联系人电话**/
+	private String contactMobile;
+	/**客户简称**/
+	private String shortName;
 	
 	
+	
+	public String getShortName() {
+		return shortName;
+	}
+
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
+	}
+
+	public String getContactName() {
+		return contactName;
+	}
+
+	public void setContactName(String contactName) {
+		this.contactName = contactName;
+	}
+
+	public String getContactMobile() {
+		return contactMobile;
+	}
+
+	public void setContactMobile(String contactMobile) {
+		this.contactMobile = contactMobile;
+	}
+
 	public String getBusinessScope() {
 		return businessScope;
 	}

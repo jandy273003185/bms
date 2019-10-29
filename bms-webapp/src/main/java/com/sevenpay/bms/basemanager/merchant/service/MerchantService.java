@@ -49,6 +49,11 @@ import com.sevenpay.bms.basemanager.bank.service.BankService;
 import com.sevenpay.bms.basemanager.custInfo.bean.TdCustInfo;
 import com.sevenpay.bms.basemanager.custInfo.mapper.TdCustInfoMapper;
 import com.sevenpay.bms.basemanager.merchant.dao.MerchantDao;
+import com.sevenpay.bms.basemanager.merchant.mapper.BmsProtocolContentMapper;
+import com.sevenpay.bms.basemanager.merchant.mapper.CustScanMapper;
+import com.sevenpay.bms.basemanager.merchant.mapper.MerchantMapper;
+import com.sevenpay.bms.basemanager.merchant.mapper.StoreManageMapper;
+import com.sevenpay.bms.basemanager.merchant.mapper.TdLoginUserInfoMapper;
 import com.sevenpay.bms.basemanager.photo.bean.CertificateAuth;
 import com.sevenpay.bms.basemanager.utils.DatetimeUtils;
 import com.sevenpay.bms.basemanager.utils.GenSN;
@@ -238,6 +243,7 @@ public class MerchantService {
       // requestMessage.setReqSysId(RequestColumnValues.ReqSysId.BMS);
       requestMessage.setRequest(request);
       response = sevenpayCoreServiceInterface.bindBankCard(requestMessage);
+      response.setRtnResult(RequestColumnValues.RtnResult.SUCCESS);
       return response;
     } catch (Exception e) {
       logger.error("创建七分钱账户异常", e);
@@ -854,6 +860,18 @@ public class MerchantService {
 				nameType.put("signature", filename);
 				imgString = ov.split(",")[1];
 				break;
+			case "bankCardBackPhoto"://银行卡反面照
+				filename ="bankCardBackPhoto"+GenSN.getMerchantPictureNo()+ov.split(",")[0];
+				cf_path = cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_BANKCARDBACK + File.separator + custId;
+				nameType.put("bankCardBackPhoto", filename);
+				imgString = ov.split(",")[1];
+				break;
+			case "settleIdCard"://手持身份证
+				filename ="settleIdCard"+GenSN.getMerchantPictureNo()+ov.split(",")[0];
+				cf_path = cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_HANDIDCARD + File.separator + custId;
+				nameType.put("settleIdCard", filename);
+				imgString = ov.split(",")[1];
+				break;
             default:
               continue;
           }
@@ -1075,8 +1093,8 @@ public class MerchantService {
   }
 
   public MerchantVo findMerchantInfo(String custId) {
-    MerchantVo merchantVo  = merchantMapper.findMerchantInfo(custId);
-    return merchantVo;
+	MerchantVo merchantVo  = merchantMapper.findMerchantInfo(custId);
+	return merchantVo;
 
   }
 
@@ -1529,8 +1547,8 @@ public class MerchantService {
     }
 
     try {
-        MerchantVo merchantInfo = merchantMapper.findMerchantInfo(merchantVo.getCustId());
-        if (null != merchantVo.getCustName()) {
+      MerchantVo merchantInfo = merchantMapper.findMerchantInfo(merchantVo.getCustId());
+      if (null != merchantVo.getCustName()) {
         merchantMapper.updateAcctNameByCustName(merchantVo);
       }
       if (StringUtils.isEmpty(merchantVo.getMerchantCode())) {
@@ -1538,13 +1556,16 @@ public class MerchantService {
       }
 
       merchantMapper.updateMerchantLoginInfo(merchantVo);
+//      merchantMapper.updateByPrimaryKeySelective(merchantVo);
 
       merchantMapper.updateMerchant(merchantVo);
-        TdCertificateAuth tdCertificateAuth = new TdCertificateAuth();
-        tdCertificateAuth.setCertificateState("1");
-        tdCertificateAuth.setAuthId(Integer.parseInt(merchantInfo.getAuthId()));
-        tdCertificateAuth.setCustId(merchantVo.getCustId());
-        tdCertificateAuthMapper.updateByPrimaryKeySelective(tdCertificateAuth);
+      
+      TdCertificateAuth tdCertificateAuth = new TdCertificateAuth();
+      tdCertificateAuth.setCertificateState("1");
+      tdCertificateAuth.setAuthId(Integer.parseInt(merchantInfo.getAuthId()));
+      tdCertificateAuth.setCustId(merchantVo.getCustId());
+      tdCertificateAuthMapper.updateByPrimaryKeySelective(tdCertificateAuth);
+
     } catch (Exception e) {
       logger.error("修改异常", e);
       throw e;
@@ -1592,7 +1613,7 @@ public class MerchantService {
       // 更新商户信息
       //updateMerchant(merchantVo);
       updateMerchantEnter(merchantVo);
-      //workSpaceService.updateCustScanInfo(merchantVo.getCustId(), merchantVo, filePath);
+      workSpaceService.updateCustScanInfo(merchantVo.getCustId(), merchantVo, filePath);
       workSpaceService.updateEnterCustScanInfo(merchantVo.getCustId(), merchantVo, filePath);
 
     } catch (Exception e) {

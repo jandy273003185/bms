@@ -71,7 +71,7 @@ public class Constant {
 	public static final String CERTIFY_AUDIT_STATE_NOPASS = "32";
 
 	/**
-	 * 商户证件类型 扫描件类型： 00 个人身份证  01 税务登记证  02 营业执照 03 开户证件 04商户身份信息 05 银行卡扫描件 06 其他证件 18店内照  11行业资质照  12电子签名照
+	 * 商户证件类型 扫描件类型： 00 个人身份证  01 税务登记证  02 营业执照 03 开户证件 04商户身份信息 05 银行卡扫描件 06 其他证件 18店内照  11行业资质照  12电子签名照   15合作证明函
 	 */
 	public static final String CERTIFY_TYPE_PERSON_IDCARD = "00";
 
@@ -103,6 +103,11 @@ public class Constant {
 	
 	public static final String CERTIFY_TYPE_MERCHANT_SIGNATURE = "12";
 	
+	public static final String CERTIFY_TYPE_MERCHANT_HANDIDCARD = "13";
+	
+	public static final String CERTIFY_TYPE_MERCHANT_BANKCARDBACK = "14";
+	
+	public static final String CERTIFY_TYPE_MERCHANT_COOPERATE = "15";
 	/**
 	 * 结算银行卡号
 	 */
