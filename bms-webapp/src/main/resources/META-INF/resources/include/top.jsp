@@ -1,7 +1,7 @@
-<%@page import="com.qifenqian.platform.web.admin.filter.GeneralFilter"%>
-<%@page import="com.qifenqian.platform.common.config.SystemInfo"%>
-<%@page import="com.qifenqian.platform.common.utils.SpringUtils"%>
-<%@page import="com.qifenqian.platform.web.admin.login.LoginPath"%>
+<%@page import="com.qifenqian.bms.platform.web.admin.filter.GeneralFilter"%>
+<%@page import="com.qifenqian.bms.platform.common.config.SystemInfo"%>
+<%@page import="com.qifenqian.bms.platform.common.utils.SpringUtils"%>
+<%@page import="com.qifenqian.bms.platform.web.admin.login.LoginPath"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <style type="text/css">

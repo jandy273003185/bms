@@ -1,9 +1,9 @@
 <%@page import="com.alibaba.fastjson.JSONArray"%>
 <%@page import="com.alibaba.fastjson.JSONObject"%>
 <%@page import="java.util.Map"%>
-<%@page import="com.qifenqian.platform.web.Constants"%>
-<%@page import="com.qifenqian.platform.common.utils.ThreadUtils"%>
-<%@page import="com.qifenqian.platform.web.page.bean.PageInfo"%>
+<%@page import="com.qifenqian.bms.platform.web.Constants"%>
+<%@page import="com.qifenqian.bms.platform.common.utils.ThreadUtils"%>
+<%@page import="com.qifenqian.bms.platform.web.page.bean.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
