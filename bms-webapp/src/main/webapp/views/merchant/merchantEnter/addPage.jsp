@@ -186,21 +186,21 @@ function getAreaList(){
 function selCustType(){
 	/**商户类型 **/
 	//个人
-	if($("#custType").val() =='0' ||$("#custType").val() =='2' ){
-		$("#bankCardPhoto_").attr("style","display:");
-		$("#openAccount_").attr("style","display:none");
+	if($("#custType").val() =='0'  ){
+		$("#businessCodeId").text("营业执照编号：");
+        $("#businessTimeId").text("营业执照有效期：");
 	}
-	//企业
-	if($("#custType").val() =='1'){
-		$("#bankCardPhoto_").attr("style","display:none");
-		$("#openAccount_").attr("style","display:");
+	//企业 个体户
+	if($("#custType").val() =='1' ||$("#custType").val() =='2'){
+        $("#businessCodeId").text("营业执照编号：（必填)");
+        $("#businessTimeId").text("营业执照有效期：（必填)");
 	}
 }
 
 
 function addMerchantBtn(){
 	console.log("点击保存")
-	var businessTermEnd = "forever";
+	/*var businessTermEnd = "forever";*/
 	/*账号校验*/
 	if(isNull($("#merchantAccount")[0])){
 		$("#merchantAccountLab").text("请设置商户账户");
@@ -221,11 +221,11 @@ function addMerchantBtn(){
 		return false;
 	}
 
-	if(!verifyEmailAddress($("#merchantEmail")[0])){
+	/*if(!verifyEmailAddress($("#merchantEmail")[0])){
 		$("#merchantEmailLab").text("邮箱格式不对,可使用字母、数字、下划线 ");
 		$("#merchantEmail").focus();
 		return false;
-	}
+	}*/
 
 	/*客服号码校验*/
 	if(isNull($("#contactPhone")[0])){
@@ -244,34 +244,6 @@ function addMerchantBtn(){
 	if(isNull($("#custAdd")[0])){
 		$("#custAddLab").text("请填写地址");
 		$("#custAdd").focus();
-		return false;
-	}
-
-	/*营业执照号*/
-	if(isNull($("#businessLicense")[0])){
-		$("#businessLicenseLab").text("请填写营业执照注册号");
-		$("#businessLicense").focus();
-		return false;
-	}
-
-	//校验营业执照注册号唯一性
-	var businessLicense =$("#businessLicense").val();
-	var validateLicense =true ;
-
-	$.ajax({
-		async:false,
-		dataType:"json",
-		url:window.Constants.ContextPath +'<%=MerchantPath.BASE+MerchantPath.VALIDATELICENSE%>',
-        data:{businessLicense:businessLicense},
-        success:function(data){
-        	if(data.result=="FAIL"){
-        		$("#businessLicenseLab").text("该营业执照注册号已经被使用");
-        		validateLicense = false;
-			}else{
-				validateLicense = true;
-			}
-			 }});
-	if(!validateLicense){
 		return false;
 	}
 
@@ -300,7 +272,35 @@ function addMerchantBtn(){
 	if(custType=='0'){
 	}
 	/*企业*/
-	if(custType=='1'){
+	if(custType=='1' || custType=='2' ){
+
+        //校验营业执照注册号唯一性
+        var businessLicense =$("#businessLicense").val();
+        var validateLicense =true ;
+
+        $.ajax({
+            async:false,
+            dataType:"json",
+            url:window.Constants.ContextPath +'<%=MerchantPath.BASE+MerchantPath.VALIDATELICENSE%>',
+            data:{businessLicense:businessLicense},
+            success:function(data){
+                if(data.result=="FAIL"){
+                    $("#businessLicenseLab").text("该营业执照注册号已经被使用");
+                    validateLicense = false;
+                }else{
+                    validateLicense = true;
+                }
+            }});
+        if(!validateLicense){
+            return false;
+        }
+
+        /*营业执照号*/
+        if(isNull($("#businessLicense")[0])){
+            $("#businessLicenseLab").text("请填写营业执照注册号");
+            $("#businessLicense").focus();
+            return false;
+        }
 
 		/*营业执照有限期 */
 		if(isNull($("#businessTermStart")[0])){
@@ -401,12 +401,12 @@ function addMerchantBtn(){
 				return false;
 			}
 		}
-		if(!kong.test($("#businessLicense").val().trim())){
+		/*if(!kong.test($("#businessLicense").val().trim())){
 			if(!checkAttach($("#businessPhoto")[0])){
 				$.gyzbadmin.alertFailure("必须上传营业执照扫描件");
 				return false;
 			}
-		}
+		}*/
 	}
 
 	/*法人姓名*/
@@ -794,13 +794,13 @@ $(function(){
 							</td>
 					    </tr>
 						<tr>
-							<td class="td-left">营业执照编号：<span style="color:red;">（必填)</span></td>
+							<td class="td-left" id="businessCodeId">营业执照编号：</td>
 							<td class="td-right">
 								<input type="text" id="businessLicense" name="businessLicense"  placeholder="请输入营业执照" style="width:90%">
 								<i class="icon-leaf blue"></i>
 								<label class="label-tips" id="businessLicenseLab"></label>
 							</td>
-							<td class="td-left">营业执照有效期：</td>
+							<td class="td-left" id="businessTimeId">营业执照有效期：</td>
 							<%--<td class="td-right">
 								<input type="text" name="businessTermStart"   id="businessTermStart" readonly="readonly"   onfocus="WdatePicker({skin:'whyGreen',minDate:'#F{$dp.$D(\'businessTermEnd\')}'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
 								-
@@ -847,11 +847,13 @@ $(function(){
 						<tr>
 							<td class="td-left">所属业务人员：</td>
 							<td class="td-right">
-								<input type="text" id="custManager" name="custManager"  placeholder="请输入所属业务人员" style="width:90%">
+								<input type="text" id="custManager" name="custManager"  placeholder="请输入所属业务人员" value=${sysUser.userName } style="width:90%">
+								<label class="label-tips" id="custManagerLab"></label>
 							</td>
 							<td class="td-left">所属代理商：</td>
 							<td class="td-right">
-								<input type="text" name="agentName" id="agentName" placeholder="请输入所属代理商" style="width:90%">
+								<input type="text" name="agentName" id="agentName" placeholder="请输入所属代理商" value=${sysUser.deptName } style="width:90%">
+								<label class="label-tips" id="agentNameLab"></label>
 							</td>
 						</tr>
                         <tr>
@@ -988,7 +990,22 @@ $(function(){
                                 </select>
 							</td>
 						</tr>
-						<tr id="openAccount_" style="display: none" class="tab-pane active">
+						<tr id="bankCardPhoto_"  style="display: none" class="tab-pane active">
+							<td class="td-left" id="cnm">银行卡照<span style="color:red"></span></td>
+							<td class="td-right" >
+								<a data-toggle='modal' class="tooltip-success bankCardPhotoClick"  data-target="#previewImageModal" >
+									<label id="bankCardPhotoDiv" class="uploadImage">
+										<img  id="bankCardPhotoImage" style="width:100%;height:100%;display:none"/>
+									</label>
+								</a>
+								<div style="float:left;margin-top:75" >
+									<input type="file" name="bankCardPhoto" id="bankCardPhoto" onChange="showBankCardPhotoImage(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+								</div>
+								<label class="label-tips" id="bankCardPhotoLabel" style="float:left;margin-top:88"></label>
+							</td>
+						</tr>
+
+						<tr id="openAccount_" class="tab-pane " >
 							<td class="td-left" >
                                 开户许可证
                             </td>
@@ -1005,20 +1022,7 @@ $(function(){
 							</td>
 						</tr>
 
-						<tr id="bankCardPhoto_" class="tab-pane">
-							<td class="td-left" id="cnm">银行卡照<span style="color:red"></span></td>
-							<td class="td-right" >
-								<a data-toggle='modal' class="tooltip-success bankCardPhotoClick"  data-target="#previewImageModal" >
-									<label id="bankCardPhotoDiv" class="uploadImage">
-									        <img  id="bankCardPhotoImage" style="width:100%;height:100%;display:none"/>
-									</label>
-								</a>
-								<div style="float:left;margin-top:75" >
-								<input type="file" name="bankCardPhoto" id="bankCardPhoto" onChange="showBankCardPhotoImage(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-								</div>
-								<label class="label-tips" id="bankCardPhotoLabel" style="float:left;margin-top:88"></label>
-							</td>
-						</tr>
+
 					</tbody>
 					</table>
                         <div style="margin:50px 0 0 0;text-align:center">
@@ -1074,6 +1078,75 @@ $(function(){
                 return false;
             }
         });
+
+        $("#custManager").on('blur',function () {
+            $.ajax({
+                async:false,
+                dataType:"json",
+                url:window.Constants.ContextPath +'<%=MerchantEnterPath.BASE+MerchantEnterPath.VERIFYBUSINESSPERSONNEL%>',
+                data:{custManager:$('#custManager').val()},
+                success:function(data){
+                    if(data.result=="FAIL"){
+                        $("#custManagerLab").text("");
+                    }else{
+                        $("#custManagerLab").text("未查询到该业务员");
+                        return false;
+                    }
+                }});
+        });
+
+        //代理商
+        $("#agentName").on('blur',function () {
+            $.ajax({
+                async:false,
+                dataType:"json",
+                url:window.Constants.ContextPath +'<%=MerchantEnterPath.BASE+MerchantEnterPath.VERIFICATIONAGENT%>',
+                data:{deptName:$('#agentName').val()},
+                success:function(data){
+                    if(data.result=="FAIL"){
+                        $("#agentNameLab").text("");
+                    }else{
+                        $("#agentNameLab").text("未查询到代理商");
+                        return false;
+                    }
+                }});
+        });
+
+       /* //所属业务人员
+        $('#agentName').on('change', function (e) {
+            alert("aaaa")
+            $.ajax({
+                async:false,
+                dataType:"json",
+
+                data:{custManager:$('#custManager').val()},
+                success:function(data){
+                    if(data.result=="FAIL"){
+                        $("#custManagerLab").text("未查询到该业务人员");
+                        validateLicense = false;
+                    }else{
+                        validateLicense = true;
+                    }
+                }});
+        });
+
+        //所属代理商
+        $('#agentName').on('change', function (e) {
+            alert("所属代理商")
+            $.ajax({
+                async:false,
+                dataType:"json",
+
+                data:{deptName:$('#agentName').val()},
+                success:function(data){
+                    if(data.result=="FAIL"){
+                        $("#agentNameLab").text("未查询到代理商");
+                        validateLicense = false;
+                    }else{
+                        validateLicense = true;
+                    }
+                }});
+        });*/
 
 </script>
 </html>

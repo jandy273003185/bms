@@ -249,25 +249,10 @@ function aduitMerchantEntry(obj){
            +',top='+iTop
            +',left='+iLeft;
   	winChild = window.open(url, name,params);
-}
-/** 跳转产品页面  **/
-function productMerchantEntry(obj){
-	var merchantCode = $(obj).parent().find('input[name="merchantCode"]').val();
-	var custId = $(obj).parent().find('input[name="custId"]').val();
-	var url=window.Constants.ContextPath+"<%=MerchantEnterPath.BASE + MerchantEnterPath.PRODUCT%>?merchantCode="+merchantCode;
-    var name="newwindow";
-    var iWidth=1500;
-    var iHeight=600;
-    var iTop = (window.screen.availHeight-30-iHeight)/2;
-    var iLeft = (window.screen.availWidth-10-iWidth)/2;
-    var params='width='+iWidth
-           +',height='+iHeight
-           +',top='+iTop
-           +',left='+iLeft;
-  	winChild = window.open(url, name,params);
-}
+};
+
 </script>
-<body  onload="loadMerchant()">
+<body>
 	<%@ include file="/include/top.jsp"%>
 
 	<div class="main-container" id="main-container">
@@ -402,7 +387,7 @@ function productMerchantEntry(obj){
 							<table id="sample-table-2" class="list-table">
 								<thead>
 									<tr>
-                                        <th><input name="" type="checkbox" value=""></th>
+                                        <%--<th><input name="" type="checkbox" value=""></th>--%>
 										<th>商户名称</th>
 										<th>商户简称</th>
 										<th>商户编号</th>
@@ -420,7 +405,7 @@ function productMerchantEntry(obj){
 								<tbody>
 								<c:forEach items="${merchantList }" var="merchant">
 									<tr class="merchant" id="merchant">
-										<td><input name="" type="checkbox" value=""></td>
+										<%--<td><input name="" type="checkbox" value=""></td>--%>
                                         <td>${merchant.custName }</td>
 										<td>${merchant.shortName }</td>
 										<td>${merchant.merchantCode }</td>

@@ -183,7 +183,6 @@ public class MerchantWorkFlowAuditService {
 			}
 			ActWorkflowMerchantAudit audit =  actWorkflowMerchantAuditMapper.selectListByMerchantId(custId);
 			if(audit!= null){
-				actWorkflowMerchantAuditHistoryMapper.insert(audit);
 				actWorkflowMerchantAuditMapper.updateByPrimaryKey(auditBean);
 			}else{
 				actWorkflowMerchantAuditMapper.insert(auditBean);

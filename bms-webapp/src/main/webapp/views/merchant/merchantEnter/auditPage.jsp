@@ -19,7 +19,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<style type="text/css">
 	table tr td{word-wrap:break-word;word-break:break-all;}
-	.uploadImage{ float:left; 
+	.uploadImage{ float:left;
 			background:url(<%=request.getContextPath() %>/static/images/upload.jpg);
 			background-size:120px 100px;
 			width:120px;
@@ -41,7 +41,7 @@ $(function() {
 		$("#bankCardPhoto_").attr("style","display:none");
 		$("#openAccount_").attr("style","display:");
 	}
-	
+
 	var custId = $("#custId").val().trim();
 	var authId = $("#authId").val().trim();
 
@@ -56,7 +56,7 @@ $(function() {
 	$("#updateMerchant #certAttribute2ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=1&authId="+authId);
 	$("#updateMerchant #openAccountImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=03&authId="+authId);
 
-	
+
 });
 
 /** 点击预览大图 **/
@@ -78,48 +78,48 @@ function bigImg(obj){
 
 
 //图片预览
-function showBusinessPhotoImage(obj){  
-	 var divObj = document.getElementById("businessPhotoDiv");  
-	 var imageObj = document.getElementById("businessPhotoImageDiv");  
-	 return previewImage(divObj,imageObj,obj);  
+function showBusinessPhotoImage(obj){
+	 var divObj = document.getElementById("businessPhotoDiv");
+	 var imageObj = document.getElementById("businessPhotoImageDiv");
+	 return previewImage(divObj,imageObj,obj);
 }
 
-function showopenAccountImage(obj){  
-	 var divObj = document.getElementById("openAccountDiv");  
-	 var imageObj = document.getElementById("openAccountImageDiv");  
-	 return previewImage(divObj,imageObj,obj);  
+function showopenAccountImage(obj){
+	 var divObj = document.getElementById("openAccountDiv");
+	 var imageObj = document.getElementById("openAccountImageDiv");
+	 return previewImage(divObj,imageObj,obj);
 }
 
-function showCertAttribute1Image(obj){  
-	 var divObj = document.getElementById("certAttribute1Div");  
-	 var imageObj = document.getElementById("certAttribute1ImageDiv");  
-	 return previewImage(divObj,imageObj,obj);  
+function showCertAttribute1Image(obj){
+	 var divObj = document.getElementById("certAttribute1Div");
+	 var imageObj = document.getElementById("certAttribute1ImageDiv");
+	 return previewImage(divObj,imageObj,obj);
 }
 
-function showCertAttribute2Image(obj){  
-	 var divObj = document.getElementById("certAttribute2Div");  
-	 var imageObj = document.getElementById("certAttribute2ImageDiv");  
-	 return previewImage(divObj,imageObj,obj);  
+function showCertAttribute2Image(obj){
+	 var divObj = document.getElementById("certAttribute2Div");
+	 var imageObj = document.getElementById("certAttribute2ImageDiv");
+	 return previewImage(divObj,imageObj,obj);
 }
 
 /** 银行卡预览 **/
-function showBankCardPhotoImage(obj){  
-	 var divObj = document.getElementById("bankCardPhotoDiv");  
-	 var imageObj = document.getElementById("bankCardPhotoImage");  
+function showBankCardPhotoImage(obj){
+	 var divObj = document.getElementById("bankCardPhotoDiv");
+	 var imageObj = document.getElementById("bankCardPhotoImage");
 	 var result1 = previewImage(divObj,imageObj,obj);
-	 return result1;  
+	 return result1;
 }
 /** 银行卡点击预览 **/
 $('.bankCardPhotoClick').click(function(){
 	var divObj = document.getElementById("showImageDiv");
 	var imageObj = document.getElementById("showImage");
 	var obj = document.getElementById("bankCardPhoto");
-	return previewImage(divObj,imageObj,obj); 
+	return previewImage(divObj,imageObj,obj);
 });
 
 
 function pass(){
-	
+
 	var isPass="1";
 	var merchantCode = $("#merchantCode").val();
 	var message = "";
@@ -130,7 +130,7 @@ function pass(){
 		data:
 		{
 			"merchantCode" 	: merchantCode,
-		 	"isPass" : isPass, 
+		 	"isPass" : isPass,
 			"message" : message
 		},
 		success:function(data){
@@ -157,7 +157,7 @@ function notPass(){
 		data:
 		{
 			"merchantCode" 	: merchantCode,
-		 	"isPass" : isPass, 
+		 	"isPass" : isPass,
 			"message" : message
 		},
 		success:function(data){
@@ -176,9 +176,9 @@ function notPass(){
 function exit() {
 	if (confirm("您确定要关闭吗？")) {
 		window.opener=null;
-	
+
 		window.open("","_self");
-	
+
 		window.close();
 	}
 };
@@ -194,11 +194,11 @@ function exit() {
 		<div class="main-container-inner">
 			<!-- 菜单 -->
 			<%@ include file="/include/left.jsp"%>
-			
+
 			<div class="main-content">
 				<!-- 路径 -->
 				<%@ include file="/include/path.jsp"%>
-				
+
 				<!-- 主内容 -->
 				<div class="page-content">
 					<div class="row">
@@ -244,16 +244,16 @@ function exit() {
 					     <tr>
 							<td class="td-left">商户地址：</td>
 							<td class="td-right"  style="color:#666;padding:10px 8px">${merchantVo.custAdd }</td>
-						 </tr>	
+						 </tr>
 						 <tr>
 							<td class="td-left">营业执照编号：</td>
 							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.businessLicense }</td>
 							<td class="td-left">营业执照有限期：</td>
 							<td class="td-right" style="color:#666;padding:10px 8px">
 								${merchantVo.businessTermStart } -
-                                   <c:choose>   
-			                        <c:when test="${merchantVo.businessTermEnd =='forever'}">  									  
-			                            	长期  								  
+                                   <c:choose>
+			                        <c:when test="${merchantVo.businessTermEnd =='forever'}">
+			                            	长期
 			                        </c:when>
 									<c:otherwise>
 			                            ${merchantVo.businessTermEnd }
@@ -266,15 +266,15 @@ function exit() {
 							<td class="td-right" colspan="3">
 								<a data-toggle='modal' class="tooltip-success businessPhotoClick" data-target="#previewImageModal" >
 									<label id="businessPhotoDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
-									  <img  id="businessPhotoImageDiv" onclick="bigImg(this);"  style="width:100%;height:100%;display:none"  />										  
+									  <img  id="businessPhotoImageDiv" onclick="bigImg(this);"  style="width:100%;height:100%;display:none"  />
 									</label>
 								</a>
 								<%--<div class="updateImageDiv" style="float:left; margin-top:75 " >
-									<input type="hidden" id="businessPhotoImageVal02"  />  
+									<input type="hidden" id="businessPhotoImageVal02"  />
 									<input type="file" name="businessPhoto" id="businessPhoto" onchange="showBusinessPhotoImage(this)" />
 								 	<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 								</div>--%>
-								
+
 							</td>
 						 </tr>
 						 <tr>
@@ -297,32 +297,32 @@ function exit() {
 							<td class="td-left" >法人身份证正面：</td>
 							<td class="td-right" colspan="3">
 								<a data-toggle='modal' class="tooltip-success certAttribute1Click"   data-target="#previewImageModal" >
-								<label id="certAttribute1Div"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
+								<label id="certAttribute1Div"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">
 								        <img  id="certAttribute1ImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none"/>
 								</label>
 								</a>
 								<%--<div class="updateImageDiv" style="float:left; margin-top:75" >
-									<input type="hidden" id="certAttribute1Val02"  />  
-									<input type="file" name="certAttribute1" id="certAttribute1"  onchange="showCertAttribute1Image(this)"/> 
+									<input type="hidden" id="certAttribute1Val02"  />
+									<input type="file" name="certAttribute1" id="certAttribute1"  onchange="showCertAttribute1Image(this)"/>
 									<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 								</div>--%>
-								
+
 							</td>
 						 </tr>
 						 <tr>
 							<td class="td-left" >法人身份证背面：</td>
-							<td class="td-right" colspan="3"> 
+							<td class="td-right" colspan="3">
 								<a data-toggle='modal' class="tooltip-success certAttribute2Click"  data-target="#previewImageModal"  >
-									<label id="certAttribute2Div"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
+									<label id="certAttribute2Div"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">
 									        <img  id="certAttribute2ImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none" />
 									</label>
 								</a>
 								<%--<div class="updateImageDiv" style="float:left; margin-top:75" >
-									<input type="hidden" id="certAttribute2Val02"  />  
-									<input type="file" name="certAttribute2" id="certAttribute2" onchange="showCertAttribute2Image(this)"/> 
+									<input type="hidden" id="certAttribute2Val02"  />
+									<input type="file" name="certAttribute2" id="certAttribute2" onchange="showCertAttribute2Image(this)"/>
 									<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 								</div>--%>
-								
+
 							</td>
 						 </tr>
                          <tr>
@@ -340,7 +340,7 @@ function exit() {
 						 <tr>
 							<td class="td-left">银行卡号</td>
 							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.compMainAcct }</td>
-						
+
 							<td class="td-left">银行类型：</td>
 							<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.bankName }</td>
 						 </tr>
@@ -371,32 +371,32 @@ function exit() {
 						 </tr>
                          <tr id="openAccount_" style="display: none">
 							<td class="td-left" >开户许可证：</td>
-							<td class="td-right" colspan="3"> 
+							<td class="td-right" colspan="3">
 								<a data-toggle='modal' class="tooltip-success openAccountClick"  data-target="#previewImageModal" >
-									<label id="openAccountDiv"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
+									<label id="openAccountDiv"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">
 									        <img  id="openAccountImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none"/>
 									</label>
 								</a>
 								<%--<div class="updateImageDiv" style="float:left; margin-top:75" >
-									<input type="hidden" id="openAccountVal02"  />  
+									<input type="hidden" id="openAccountVal02"  />
 									<input type="file" name="openAccount" id="openAccount" onchange="showopenAccountImage(this)"/>
 									<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 								</div>--%>
-																		
+
 							</td>
 						 </tr>
 						 <tr id="bankCardPhoto_">
 							<td class="td-left" >银行卡照<span style="color:red"></span></td>
-							<td class="td-right" > 
+							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success bankCardPhotoClick"  data-target="#previewImageModal" >
-									<label id="bankCardPhotoDiv" class="uploadImage">  
+									<label id="bankCardPhotoDiv" class="uploadImage">
 									        <img  id="bankCardPhotoImageDiv" style="width:100%;height:100%;display:none"/>
 									</label>
 								</a>
 								<%--<div style="float:left;margin-top:75" >
 								<input type="file" name="bankCardPhoto" id="bankCardPhoto" onChange="showBankCardPhotoImage(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 								</div>--%>
-								
+
 								<label class="label-tips" id="bankCardPhotoLabel" style="float:left;margin-top:88"></label>
 							</td>
 						 </tr>
@@ -413,9 +413,9 @@ function exit() {
 					</tbody>
 					</table>
                         <div style="margin:50px 0 0 0;text-align:center">
-                        	<button type="button"  class="btn btn-primary" onclick="pass()">审核通过</button> 
+                        	<button type="button"  class="btn btn-primary" onclick="pass()">审核通过</button>
                         	<button type="button" class="btn btn-primary auditNotPassBtn" data-toggle='modal'  data-target="#auditMessageModel" >审核不通过</button>
-                        	<button type="button"  class="btn btn-default" onclick="exit()">关闭</button> 
+                        	<button type="button"  class="btn btn-default" onclick="exit()">关闭</button>
 					</div>
 					</div>
 				</div>
@@ -426,7 +426,7 @@ function exit() {
 				           <img id="showImage" style="width:100%;height:100%;">
 				        </div>
 				     </div>
-				</div>	
+				</div>
 				<!-- 审核不通过弹框 -->
 				<div class="modal fade" style="z-index:1043;" id="auditMessageModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				   <div class="modal-dialog" style="width:30%;z-index:99;">
@@ -437,10 +437,10 @@ function exit() {
 				         </div>
 				         <div class="modal-body">
 				            <table 	 >
-								<tr>	
+								<tr>
 									<td >请输入审核不通过理由：</td>
 								</tr>
-								<tr>	
+								<tr>
 									<td>
 										<textarea rows="5" cols="40" id="auditMessage" maxlength="50"  >请输入小于50字的审核意见</textarea>
 									</td>
@@ -454,12 +454,12 @@ function exit() {
 				      </div><!-- /.modal-content -->
 				   </div>
 				</div><!-- /.modal -->
-				
+
 				</div><!-- /.page-content -->
-				
+
 				<!-- 底部-->
 				<%@ include file="/include/bottom.jsp"%>
-			
+
 			</div><!-- /.main-content -->
 			<!-- 设置 -->
 			<%@ include file="/include/setting.jsp"%>
@@ -468,11 +468,11 @@ function exit() {
 		<!-- 向上置顶 -->
 		<%@ include file="/include/up.jsp"%>
 	</div><!-- /.main-container -->
-	
+
 </body>
 
 
 <script type="text/javascript">
 
 </script>
-</html>	
+</html>

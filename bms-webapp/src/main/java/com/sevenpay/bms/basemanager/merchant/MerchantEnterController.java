@@ -1,5 +1,7 @@
 package com.sevenpay.bms.basemanager.merchant;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sevenpay.bms.basemanager.merchant.bean.*;
+import com.sevenpay.bms.basemanager.sysuser.bean.SysUser;
+import com.sevenpay.bms.basemanager.sysuser.mapper.SysUserMapper;
+import com.sevenpay.bms.upgrade.merchant.bean.TdAuditRecodeInfo;
+import com.sevenpay.bms.upgrade.merchant.service.MerchantListService;
 import org.gyzb.platform.web.admin.user.bean.User;
 import org.gyzb.platform.web.admin.user.service.UserService;
 import org.gyzb.platform.web.admin.utils.WebUtils;
@@ -72,6 +78,13 @@ public class MerchantEnterController {
 	private TdCustInfoMapper tdCustInfoMapper;
 	@Autowired
 	private TradeBillService tradeBillService;
+	@Autowired
+	private MerchantListService merchantListService;
+
+	@Autowired
+	public SysUserMapper sysUserMapper;
+
+
 	/**
 	 * 显示商户列表
 	 * @param merchantVo
@@ -134,6 +147,11 @@ public class MerchantEnterController {
 		Rule rule = new Rule();
 		User user = new User();
 		rule.setStatus("VALID");
+		String userId  = String.valueOf(WebUtils.getUserInfo().getUserId());
+
+		SysUser sysUser = sysUserMapper.selectUserById(userId);
+
+		mv.addObject("sysUser", sysUser);
 		mv.addObject("taskId", request.getParameter("taskId"));
 		mv.addObject("banklist", bankMapper.selectBanks(bank));
 		mv.addObject("rulelist", ruleMapper.selectRules(rule));
@@ -143,6 +161,8 @@ public class MerchantEnterController {
 		return mv;
 		
 	}
+
+
 
 	/**
 	 * 商户新增
@@ -167,16 +187,25 @@ public class MerchantEnterController {
 		}
 
 		try {
-			// 邮箱
-			//String email = request.getParameter("email");
-			//String feeCode = request.getParameter("feeCode");
-
 			// 设置商户custId
-			String merchantCode = BusinessUtils.getMerchantId(merchant.getBusinessLicense());
+			String merchantCode ;
+			if ("0".equals(merchant.getCustType())){
+				//个人
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+				String format = simpleDateFormat.format(new Date());
+				merchantCode = "P"+format+GenSN.getRandomNum(3);
+			}else {
+				merchantCode = BusinessUtils.getMerchantId(merchant.getBusinessLicense());
+			}
+
+
+
 			String custId = GenSN.getSN();
 
 			merchant.setMerchantCode(merchantCode);
 			merchant.setCustId(custId);
+			//联系人手机赋值法人 contactMobile
+			merchant.setRepresentativeMobile(merchant.getContactMobile());
 			// 任务ID
 			String taskId = request.getParameter("taskId");
 			this.saveMerchant(custId, merchant, null);
@@ -336,9 +365,13 @@ public class MerchantEnterController {
 		return mv;
     }
 
-    /**
-     * 一级审核通过
-     */
+	/**
+	 * 商户审核
+	 * @param merchantCode
+	 * @param message
+	 * @param isPass
+	 * @return
+	 */
     @RequestMapping(MerchantEnterPath.AUDIT)
     @ResponseBody
     public String firstPass(String merchantCode,String message,String isPass){
@@ -361,7 +394,7 @@ public class MerchantEnterController {
     }
 
 
-    private JSONObject pass(String merchantCode, String message, String isPass) {
+    private JSONObject pass(String merchantCode, String message, String isPass)  throws Exception{
         /**
          * 启动流程完成任务
          */
@@ -369,7 +402,6 @@ public class MerchantEnterController {
         logger.info("启动流程完成任务");
         TdCustInfo tdCustInfo = tdCustInfoService.selectByMerchantCode(merchantCode);
         merchantWorkFlowAuditService.startProcessAndCompleteTaskEnter(tdCustInfo.getCustId(),isPass,message);
-        ob.put("result", "SUCCESS");
 
         //二级审核
         //TdCustInfo custInfo = tdCustInfoService.selectById(custId);
@@ -384,12 +416,50 @@ public class MerchantEnterController {
         //merchantWorkFlowAuditService.secondAudit(tdCustInfo.getCustId(),number, true, tdCustInfo.getAuthId(), message, "30", "0","3","notEmpty");
         merchantWorkFlowAuditService.secondAuditEnter(tdCustInfo.getCustId(), true, tdCustInfo.getAuthId(), message, "30", "0","3","notEmpty");
 
+/*
+发送信息
+ */
+		JSONObject json = new JSONObject();
+		String result = null;
+
+
+		TdAuditRecodeInfo auditResult = new TdAuditRecodeInfo();
+		//设置审核者的id
+		auditResult.setUserId(String.valueOf(String.valueOf(WebUtils.getUserInfo().getUserId())));
+		//设置审核信息
+		auditResult.setAuditInfo(message);
+		auditResult.setAuditTime(new Date());
+		//将审核类型01代表注册
+		auditResult.setAuditType("01");
+		//将id设置32位的UUID
+		auditResult.setId(GenSN.getSN());
+		auditResult.setMerchantCode(merchantCode);
+		if("0".equals(isPass)) {
+			auditResult.setStatus("99");
+			result = "noPass";
+		}else if("1".equals(isPass)) {
+			auditResult.setStatus("00");
+			result = "pass";
+		}
+
+		try {
+			String updateResult = merchantListService.updateResultOfAudit(result, merchantCode, auditResult);
+
+			if("success".equals(updateResult)) {
+				json.put("result",updateResult);
+			}
+
+		}catch(Exception e) {
+			json.put("result","false");
+			json.put("message", e.toString());
+			logger.error("写入商户编号为"+merchantCode+"的审核结果："+result+",审核信息："+message+"发生异常,异常信息为:"+e.toString());
+		}
+
+
         ob.put("result", "SUCCESS");
 
-        /**
-         * 发送邮件
-         */
 
+/*
         MerchantVo merchant = merchantMapper.findMerchantInfo(tdCustInfo.getCustId());
 
         String content = "<html><body><div style=\"width:700px;margin:0 auto;\">"
@@ -411,7 +481,7 @@ public class MerchantEnterController {
         boolean flag = merchantService.sendInfo(merchant.getEmail(), content, subject, MessageColumnValues.MsgType.EMAIL, MessageColumnValues.busType.REGISTER_VERIFY);
         if(flag){
             logger.info("{}审核通过发送邮件成功(审核通过)!",tdCustInfo.getCustId());
-        }
+        }*/
         return ob;
     }
 
@@ -420,16 +490,51 @@ public class MerchantEnterController {
         JSONObject ob = new JSONObject();
         TdCustInfo custInfo = tdCustInfoService.selectByMerchantCode(merchantCode);
         merchantWorkFlowAuditService.firstNotPass(custInfo.getCustId(), message, false, "35", custInfo.getAuthId(), "2");//35  实名认证不通过        2：审核不通过
-        ob.put("result", "SUCCESS");
+
+		JSONObject json = new JSONObject();
+		String result = null;
+
+
+		TdAuditRecodeInfo auditResult = new TdAuditRecodeInfo();
+		//设置审核者的id
+		auditResult.setUserId(String.valueOf(String.valueOf(WebUtils.getUserInfo().getUserId())));
+		//设置审核信息
+		auditResult.setAuditInfo(message);
+		auditResult.setAuditTime(new Date());
+		//将审核类型01代表注册
+		auditResult.setAuditType("01");
+		//将id设置32位的UUID
+		auditResult.setId(GenSN.getSN());
+		auditResult.setMerchantCode(merchantCode);
+		if("0".equals(isPass)) {
+			auditResult.setStatus("99");
+			result = "noPass";
+		}else if("1".equals(isPass)) {
+			auditResult.setStatus("00");
+			result = "pass";
+		}
+
+		try {
+			String updateResult = merchantListService.updateResultOfAudit(result, merchantCode, auditResult);
+			if("success".equals(updateResult)) {
+				json.put("result",updateResult);
+			}
+
+		}catch(Exception e) {
+			json.put("result","false");
+			json.put("message", e.toString());
+			logger.error("写入商户编号为"+merchantCode+"的审核结果："+result+",审核信息："+message+"发生异常,异常信息为:"+e.toString());
+		}
+
+
+		ob.put("result", "SUCCESS");
 
 
         //二级审核不通过
        /* merchantWorkFlowAuditService.secondAuditEnter(custInfo.getCustId(),false, custInfo.getAuthId(), message, "35", "2",null,"");
         ob.put("result", "SUCCESS");*/
 
-        /**
-         * 发送邮件
-         */
+      /*
         MerchantVo merchant = merchantMapper.findMerchantInfo(custInfo.getCustId());
         String content = "<html><body><div style=\"width:700px;margin:0 auto;\">"
                 + "<div style=\"margin-bottom:10px;\">"
@@ -450,7 +555,7 @@ public class MerchantEnterController {
         boolean flag = merchantService.sendInfo(merchant.getEmail(), content, subject, MessageColumnValues.MsgType.EMAIL, MessageColumnValues.busType.REGISTER_VERIFY);
         if(flag){
             logger.info("{}发送邮件成功(二级审核不通过)!",custInfo.getCustId());
-        }
+        }*/
         return ob;
     }
 
@@ -574,6 +679,59 @@ public class MerchantEnterController {
 			}
 		} catch (Exception e) {
 			logger.error("校验商户账户出现问题" + e);
+			object.put("result", "FAIL");
+			object.put("message", e.getMessage());
+		}
+		return object.toJSONString();
+	}
+
+
+	/**
+	 * 校验所属业务人员否已经存在
+	 *
+	 * @return
+	 */
+	@RequestMapping(MerchantEnterPath.VERIFYBUSINESSPERSONNEL)
+	@ResponseBody
+	public String verifyBusinessPersonnel(String custManager) {
+		logger.info("校验所属业务人员否已经存在");
+		JSONObject object = new JSONObject();
+		try {
+			SysUser sysUser = sysUserMapper.selectUserByUserName(custManager);
+
+			if (null == sysUser) {
+				object.put("result", "SUCCESS");
+			} else {
+				object.put("result", "FAIL");
+			}
+		} catch (Exception e) {
+			logger.error("校验所属业务人员否已经存在" + e);
+			object.put("result", "FAIL");
+			object.put("message", e.getMessage());
+		}
+		return object.toJSONString();
+	}
+
+	/**
+	 * 校验供应商否已经存在
+	 *
+	 * @return
+	 */
+	@RequestMapping(MerchantEnterPath.VERIFICATIONAGENT)
+	@ResponseBody
+	public String verificationAgent(String deptName) {
+		logger.info("校验所属代理商否已经存在");
+		JSONObject object = new JSONObject();
+		try {
+			SysUser sysUser = sysUserMapper.selectDeptByAgentName(deptName);
+
+			if (null == sysUser) {
+				object.put("result", "SUCCESS");
+			} else {
+				object.put("result", "FAIL");
+			}
+		} catch (Exception e) {
+			logger.error("校验所属代理商否已经存在" + e);
 			object.put("result", "FAIL");
 			object.put("message", e.getMessage());
 		}

@@ -238,7 +238,6 @@ public class MerchantService {
       // requestMessage.setReqSysId(RequestColumnValues.ReqSysId.BMS);
       requestMessage.setRequest(request);
       response = sevenpayCoreServiceInterface.bindBankCard(requestMessage);
-      response.setRtnResult(RequestColumnValues.RtnResult.SUCCESS);
       return response;
     } catch (Exception e) {
       logger.error("创建七分钱账户异常", e);
