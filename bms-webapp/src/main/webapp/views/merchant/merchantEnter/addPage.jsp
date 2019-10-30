@@ -489,6 +489,21 @@ function addMerchantBtn(){
 		return false;
 	}
 
+    if(isNull($("#custName")[0])){
+        $("#custNameLab").text("请填写商户名称");
+        $("#custName").focus();
+        return false;
+    }
+
+    if(isNull($("#shortName")[0])){
+        $("#shortNameLab").text("请填写商户简称");
+        $("#shortName").focus();
+        return false;
+    }
+
+
+
+
 	// 提交前清空所有错误提示栏
 
 	var merchantAccount = $("#merchantAccount").val().trim();

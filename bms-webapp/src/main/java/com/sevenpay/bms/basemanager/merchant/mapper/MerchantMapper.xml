@@ -936,6 +936,10 @@
 			<if test="merchantCode != null and merchantCode != '' ">
 				AND C.MERCHANT_CODE = #{merchantCode, jdbcType=VARCHAR}
 			</if>
+
+            <if test="userId != null and userId != '' ">
+                AND C.CREATE_ID = #{userId, jdbcType=VARCHAR}
+            </if>
 		</where>
 		ORDER BY C.CREATE_TIME    DESC
 	</select>

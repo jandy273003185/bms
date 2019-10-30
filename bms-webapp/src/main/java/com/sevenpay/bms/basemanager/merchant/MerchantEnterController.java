@@ -105,14 +105,15 @@ public class MerchantEnterController {
 		ModelAndView mv = new ModelAndView(MerchantEnterPath.BASE + MerchantEnterPath.LIST);
 		List<MerchantVo> list = null;
 		String userId  = String.valueOf(WebUtils.getUserInfo().getUserId());
-		merchantVo.setUserId(userId);
-		merchantVo.setUserName(WebUtils.getUserInfo().getUserName());
+
 		//是否有权限查看所有订单
 		boolean isAllList = tdCustInfoService.isAllList(userId);
 		if(isAllList){
 			//list = merchantService.selectAuditMerchants(merchantVo);
 			list = merchantEnterService.selectAuditMerchants(merchantVo);
 		}else{
+			merchantVo.setUserId(userId);
+			merchantVo.setUserName(WebUtils.getUserInfo().getUserName());
 			//list = merchantService.selectMyAuditMerchants(merchantVo);
 			list = merchantEnterService.selectAuditMerchants(merchantVo);
 		}
