@@ -806,21 +806,30 @@
 										  <option value="2">  审核通过     </option>
 									 </select>
 								</td>
-							</tr>
-                            <tr>
 								<td class="td-left">报备时间：</td>
 								<td class="td-right">								   
 									<input type="text" name="startModifyTime" id="startModifyTime" readonly value="" onFocus="WdatePicker({skin:&#39;whyGreen&#39;,maxDate:&#39;%y-%M-%d&#39;})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> 
 									-
 									<input type="text" name="endModifyTime" id="endModifyTime" readonly value="" onFocus="WdatePicker({skin:&#39;whyGreen&#39;,maxDate:&#39;%y-%M-%d&#39;})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> 
 								</td>
-                                <!-- <td class="td-left">报备成功时间：</td>
+							</tr>
+							<!-- 
+                            <tr>
+                            	
+								<td class="td-left">报备时间：</td>
+								<td class="td-right">								   
+									<input type="text" name="startModifyTime" id="startModifyTime" readonly value="" onFocus="WdatePicker({skin:&#39;whyGreen&#39;,maxDate:&#39;%y-%M-%d&#39;})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> 
+									-
+									<input type="text" name="endModifyTime" id="endModifyTime" readonly value="" onFocus="WdatePicker({skin:&#39;whyGreen&#39;,maxDate:&#39;%y-%M-%d&#39;})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> 
+								</td>
+                                <td class="td-left">报备成功时间：</td>
 								<td class="td-right">								   
 									<input type="text" name="startCreateTime" id="startCreateTime" readonly value="" onFocus="WdatePicker({skin:&#39;whyGreen&#39;,maxDate:&#39;%y-%M-%d&#39;})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> 
 									-
 									<input type="text" name="endCreateTime" id="endCreateTime" readonly value="" onFocus="WdatePicker({skin:&#39;whyGreen&#39;,maxDate:&#39;%y-%M-%d&#39;})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> 
-								</td> -->
+								</td>
 							</tr>
+							 -->
 							<tr>
 								<td colspan="6" align="center">
 									<span class="input-group-btn">
