@@ -7,6 +7,7 @@
 <%@page import="com.sevenpay.bms.merchant.reported.MerchantReportedPath"%>
 <%@page import="com.sevenpay.bms.merchant.merchantReported.MerchantEnterReportedPath"%>
 <%@page import="com.sevenpay.bms.basemanager.merchant.AuditorPath"%>
+<%@page import="com.seven.micropay.channel.enums.MerUpdateType"%>
 <%@ include file="/include/template.jsp"%>
 <script src='<c:url value="/static/js/jquery-ui.min.js"/>'></script>
 <script src='<c:url value="/static/js/jquery.divbox.js"/>'></script>
@@ -68,8 +69,20 @@
 					        <tr>
 							<td colspan="4" class="headlerPreview" style="background:#7ebde1;">进件选择</td>
 							</tr>
-						    <tr></tr>
+						    <tr>
+						    </tr>
                             <tr>
+                            	<td class="td-left">更新类型：</td>
+                            	<td class="td-right"> 
+									<select name="updateType" id="updateType" style="width:250px;" onchange="getUpdateType();">
+										<option value="">--请选择--</option>
+										<c:forEach items="<%=MerUpdateType.values()%>" var="status">
+											<option value="${status}" <c:if test="${status == queryBean.merUpdateType}">selected</c:if>>
+												${status.text}
+											</option>
+										</c:forEach>
+									</select>
+								</td>
 								<td class="td-left">进件类型：</td>
 								<td class="td-right"> 
 									<select class="width-90" id="merchantType" onchange = "getMerchantType();">
@@ -78,8 +91,23 @@
 								   </select>	
 								</td>
 							</tr>
+							<tr id="updateFileType" style = "display:none">
+								<td>更新纸质类型</td>
+								<td>
+		                            <select name="qualificationType" id="qualificationType" style="width:250px;"  >
+										<option value="">--请选择--</option>
+										<option value="IDCard">--身份证正面--</option>
+										<option value="IDCardBack">--身份证反面--</option>
+										<option value="businessLicense">--营业执照--</option>
+										<option value="storeInterior">--店铺内景--</option>
+										<option value="doorPhoto">--店铺招牌照--</option>
+									</select>
+				                    <label id="qualificationTypeLab" class="label-tips"></label>
+					             </td>
+					        </tr>
                             <tr>
-							<td colspan="4" class="headlerPreview" style="background:#7ebde1;">商户信息</td></tr>
+							<td colspan="4" class="headlerPreview" style="background:#7ebde1;">商户信息</td>
+							</tr>
 						    <tr></tr>
                             <tr>
 								<td class="td-left" width="18%">商户编号：</td>
@@ -94,7 +122,7 @@
 	                        <tr>
 								<td colspan="4" class="headlerPreview" style="background:#7ebde1">基本信息</td>
 							</tr>
-							<tr>
+							<tr id="industryType" style = "display:">
                                 <td class="td-left">商户行业信息：</td>
 								<td class="td-right">
 								 	<span>
@@ -114,7 +142,7 @@
 									<input type="text" id="createdBy" name="createdBy" placeholder="请输入创建人" maxlength=""  value="" style="width:90%">
 								</td>
 							</tr>
-	                        <tr>
+	                        <tr id="merchantApplyType1" style="display:">
 	                        	<td class="td-left">商户申请类型：</td>
 								<td class="td-right"> 
 									<select name="merchantApplyType" id="merchantApplyType" style="width:width-90;"  >
@@ -139,7 +167,7 @@
 								</td>
                                 
 							</tr>
-	                        <tr>
+	                        <tr id="businessScopeType" style="display:">
 							    <td class="td-left">经营范围：</td>
 								<td class="td-right"> 
 									 <input type="text" id="businessScope" name="businessScope" placeholder="请输入经营范围" maxlength=""  value="${custInfo.businessScope }" style="width:90%">
@@ -150,7 +178,7 @@
 									<label class="label-tips" id="registrationNumberLabel"></label>
 								</td>
 							</tr>
-							<tr>
+							<tr id="addressType" style="display:">
 								<td class="td-left">注册地址：</td>
 								<td class="td-right" colspan="3">
 									<div class="col-xs-2 pd0" style="padding:0;">
@@ -185,7 +213,7 @@
 	                                <label class="label-tips" id="countryLab"></label>
 								</td>
 							</tr>	
-							<tr>
+							<tr id="businessPhotoType" style = "display:">
 								<td class="td-left">营业执照照片：</td>
 								<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success businessPhotoClick"  data-target="#previewImageModal"  >
@@ -200,7 +228,7 @@
 									</div>
 								</td>
 							</tr>
-							<tr>
+							<tr id="shopInteriorType" style = "display:">
 								<td class="td-left">店内照：</td>
 								<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success shopInteriorClick"  data-target="#previewImageModal"  >
@@ -215,7 +243,7 @@
 									</div>
 								</td>
 							</tr>
-							<tr>
+							<tr id="doorPhotoType" style = "display:">
 								<td class="td-left">门头照：</td>
 								<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success doorPhotoClick"  data-target="#previewImageModal"  >
@@ -234,7 +262,7 @@
 								<td colspan="4" class="headlerPreview" style="background:#7ebde1;">法人信息</td>
 							</tr>
 							<tr></tr>
-                            <tr>
+                            <tr id="mobileNoType" style = "display:">
 								<td class="td-left">法人真实姓名：</td>
 								<td class="td-right"> 
 									<input type="text" id="representativeName" name="representativeName" placeholder="请输入法人真实姓名"  value="张老板" maxlength="50" style="width:90%">
@@ -244,7 +272,7 @@
 									<input type="text" name="mobileNo" id="mobileNo" placeholder="请输入手机号码"  value="${custInfo.merchantMobile }" style="width:90%">
 								</td>
 							</tr>
-                            <tr>
+                            <tr id="certifyNoType" style = "display:">
 								<td class="td-left">法人证件类型：</td>
 								<td class="td-right"> 
 									<select name="representativeCertType" id="representativeCertType" style="width-90;"  >
@@ -260,7 +288,7 @@
 									<input type="text" name="representativeCertNo" id="representativeCertNo" placeholder="请输入法人身份证号码"  value="5255456685555" style="width:90%">
 								</td>
 							</tr>
-                            <tr>
+                            <tr id="residentCityType" style = "display:">
 								<td class="td-left">户口所在地：</td>
 								<td class="td-right">
 									<input type="text" id="residentCity" name="residentCity"  placeholder="请输入户口所在地"  value="" style="width:90%">
@@ -271,7 +299,7 @@
                                     <input type="text" name="validDate" id="validDate" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> <input name="" type="radio" value=""> 长期
 								</td>
 							</tr>
-							<tr>
+							<tr id="idCardType" style = "display:">
 								<td class="td-left">法人身份证正面：</td>
 								<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success certAttribute1Click"  data-target="#previewImageModal"  >
@@ -286,7 +314,7 @@
 									</div>
 								</td>
 							</tr>
-							<tr>
+							<tr id="idCardBackType" style = "display:">
 								<td class="td-left">法人身份证背面：</td>
 								<td class="td-right" colspan="3"> 
 									<a data-toggle='modal' class="tooltip-success certAttribute2Click"  data-target="#previewImageModal"  >
@@ -304,7 +332,7 @@
 							<tr id="next_id">
 								<td colspan="4" class="headlerPreview" style="background:#7ebde1;">结算信息</td>
 							</tr>
-	                        <tr>
+	                        <tr id="bankAcctNameType" style="dsplay:">
 								<td class="td-left">银行账户名称：</td>
 								<td class="td-right"> 
 									<input type="text" id="bankAcctName" name="bankAcctName" maxlength="100" placeholder="请输入结算账户名称"  value="" style="width-90;">
@@ -314,7 +342,7 @@
 									<input type="text" id="bankCardNo" name="bankCardNo" maxlength="100" placeholder="请输入银行卡号"  value="${custInfo.compMainAcct }" style="width-90;">
 								</td>
 							</tr>
-							<tr>
+							<tr id="bestBankType" style = "display:">
 								<td class="td-left">开户银行：</td>
 								<td class="td-right"> 
 									<span class="input-icon">	
@@ -335,7 +363,7 @@
 									<input type="text" id="interBankName" name="interBankName" maxlength="100" placeholder="请输入开户支行名称"  value="${custInfo.branchBANK }" style="width-90">
 								</td>
 							</tr>
-							<tr>
+							<tr id="bankCardType1" style = "display:">
 								<td class="td-left">结算类型：</td>
 								<td class="td-right"> 
 									<select class="width-90" id="perEntFlag">
@@ -356,7 +384,7 @@
 								</td>
 							</tr>
 							
-							<tr>
+							<tr id="merchantType" style="display:">
 								<td class="td-left">是否有证商户：</td>
 								<td class="td-right"> 
 									<select name="bestMerchantType" id="bestMerchantType" style="width-90;"  >
@@ -370,7 +398,7 @@
 									<input type="text" id="rate" name="rate" maxlength="100" placeholder="请输入费率"  value="" style="width-90">
 								</td>
 							</tr>
-							<tr>
+							<tr id="openType" style = "display:">
 								<td class="td-left">开户许可证照片：</td>
 								<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success openClick"  data-target="#previewImageModal"  >
@@ -589,14 +617,21 @@
 				$("#intoType").attr("style","display:");
 				$("#merchantCodeType").attr("style","display:");
 				$("#custNameType").attr("style","display:");
-				$("#mobileNoType").attr("style","display:");
-				$("#addressType").attr("style","display:");
-				$("#certifyNoType").attr("style","display:");
+				
+				
+				
+				
 				$("#industryType").attr("style","display:");
-				$("#infoType").attr("style","display:");
-				$("#interNameType").attr("style","display:");
-				$("#bankCardType").attr("style","display:");
+				$("#merchantApplyType1").attr("style","display:");
+				$("#businessScopeType").attr("style","display:");
+				$("#addressType").attr("style","display:");
+				$("#mobileNoType").attr("style","display:");
+				$("#certifyNoType").attr("style","display:");
+				$("#bankAcctNameType").attr("style","display:");
+				$("#bankCardType1").attr("style","display:");
 				$("#bestBankType").attr("style","display:");
+				
+				
 				$("#interBankNameType").attr("style","display:");
 				$("#merchantType").attr("style","display:");
 				$("#rateType").attr("style","display:");
@@ -606,18 +641,23 @@
 				$("#idCardType").attr("style","display:none");
 				$("#idCardBackType").attr("style","display:none");
 				$("#businessPhotoType").attr("style","display:none");
+				$("#openType").attr("style","display:none");
+				
+				
 				
 			}else if("FILE_INFO" == updateType){
 				$("#intoType").attr("style","display:");
 				$("#merchantCodeType").attr("style","display:none");
 				$("#custNameType").attr("style","display:none");
 				$("#mobileNoType").attr("style","display:none");
+				$("#businessScopeType").attr("style","display:none");
 				$("#addressType").attr("style","display:none");
 				$("#certifyNoType").attr("style","display:none");
+				$("#bankAcctNameType").attr("style","display:none");
 				$("#industryType").attr("style","display:none");
 				$("#infoType").attr("style","display:none");
-				$("#interNameType").attr("style","display:none");
-				$("#bankCardType").attr("style","display:none");
+				$("#residentCityType").attr("style","display:none");
+				$("#bankCardType1").attr("style","display:none");
 				$("#bestBankType").attr("style","display:none");
 				$("#interBankNameType").attr("style","display:none");
 				$("#merchantType").attr("style","display:");
@@ -628,6 +668,8 @@
 				$("#idCardType").attr("style","display:");
 				$("#idCardBackType").attr("style","display:");
 				$("#businessPhotoType").attr("style","display:");
+				$("#openType").attr("style","display:none");
+				$("#merchantApplyType1").attr("style","display:none");
 			}else{
 				$("#intoType").attr("style","display:");
 				$("#merchantCodeType").attr("style","display:");
@@ -637,8 +679,8 @@
 				$("#certifyNoType").attr("style","display:");
 				$("#industryType").attr("style","display:");
 				$("#infoType").attr("style","display:");
-				$("#interNameType").attr("style","display:");
-				$("#bankCardType").attr("style","display:");
+				$("#residentCityType").attr("style","display:");
+				$("#bankCardType1").attr("style","display:");
 				$("#bestBankType").attr("style","display:");
 				$("#interBankNameType").attr("style","display:");
 				$("#merchantType").attr("style","display:");
@@ -649,6 +691,7 @@
 				$("#idCardType").attr("style","display:");
 				$("#idCardBackType").attr("style","display:");
 				$("#businessPhotoType").attr("style","display:");
+				$("#openType").attr("style","display:");
 			}
 		}
     	
