@@ -4,6 +4,7 @@
 <%@page import="com.sevenpay.bms.basemanager.merchant.MerchantEnterPath" %>
 <%@page import="com.sevenpay.bms.basemanager.merchant.TinyMerchantPath" %>
 <%@page import="com.sevenpay.bms.basemanager.agency.controller.AgentRegisterPath" %>
+<%@ page import="com.sevenpay.bms.basemanager.merchant.bean.Merchant" %>
 <script src='<c:url value="/static/js/ajaxfileupload.js"/>'></script>
 <script src='<c:url value="/static/js/comm.js"/>'></script>
 <script src='<c:url value="/static/js/upload.js"/>'></script>
@@ -557,9 +558,32 @@ function addMerchantBtn(){
         dataType : "json",
         success : function(data) {
             if (data.result == 'SUCCESS') {
-                $.gyzbadmin.alertSuccess("注册申请成功", null, function () {
-                    window.location.href = window.Constants.ContextPath + '<%=MerchantEnterPath.BASE + MerchantEnterPath.LIST %>';
+                //ajax
+                $.ajax({
+                    type : "POST",
+                    url : window.Constants.ContextPath + '<%=MerchantPath.BASE+MerchantPath.FILEUPLOAD%>?custId='+data.custId,
+                    data : {
+                        businessPhoto : $('#businessPhototemp').val(),         //商户营业执照
+                        certAttribute1 : $('#certAttribute1temp').val(),               //身份证正面照
+                        certAtrribute2 : $('#certAttribute2temp').val(),              //身份证背面照
+                        openAccount : $('#openAccounttemp').val(),                   //开户银行
+                        bankCardPhoto : $('#bankCardPhototemp').val(),                   //开户银行
+                    },
+                    dataType : "json",
+                    success : function (data) {
+                        if(data.result=='SUCCESS'){
+                            $.gyzbadmin.alertSuccess("注册申请成功,请等待审批！",null,function(){
+                                window.location.href = window.Constants.ContextPath + '<%=MerchantEnterPath.BASE + MerchantEnterPath.LIST %>';
+                            });
+                        }else{
+                            $.gyzbadmin.alertFailure("扫描件上传失败,请选择合适的类型");
+
+                        }
+                    }
                 });
+               /* $.gyzbadmin.alertSuccess("注册申请成功", null, function () {
+                    ;
+                });*/
             } else {
                 $.gyzbadmin.alertFailure("服务器内部错误，请联系相关技术人员，错误原因是：" + data.message);
             }
@@ -767,7 +791,7 @@ $(function(){
                                        <c:if test="${not empty provincelist_ }">
                                         	<option value="">--请选择--</option>
 						               <c:forEach items="${provincelist_ }" var="prov">
-						                   <option value="${prov.provinceId}">${prov.provinceName}</option>
+						                   <option value="${prov.provinceId }">${prov.provinceName }</option>
 						               </c:forEach>
 		               				</c:if>
                                    </select>

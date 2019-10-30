@@ -406,7 +406,7 @@
 							<tr></tr>
 							<tr>
 								<td class="td-left">录入人：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.createId }</td>
+								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.createName }</td>
 								<td class="td-left">录入时间：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.createTime }</td>
 							</tr>

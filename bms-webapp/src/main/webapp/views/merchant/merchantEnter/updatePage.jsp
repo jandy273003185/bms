@@ -396,7 +396,7 @@
             return false;
         }
         /*开户银行*/
-        var compAcctBank = $("#compAcctBank").val().trim();
+        var compAcctBank = $("#compAcctBank").val();
         if ("" == compAcctBank || compAcctBank.length == 0) {
             $("#compMainAcctLab").text("请填写开户银行");
             return false;
