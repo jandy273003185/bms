@@ -167,7 +167,7 @@
 								</td>
                                 
 							</tr>
-	                        <tr id="businessScopeType" style="display:">
+ 	                        <tr id="businessScopeType" style="display:">
 							    <td class="td-left">经营范围：</td>
 								<td class="td-right"> 
 									 <input type="text" id="businessScope" name="businessScope" placeholder="请输入经营范围" maxlength=""  value="${custInfo.businessScope }" style="width:90%">
@@ -384,7 +384,7 @@
 								</td>
 							</tr>
 							
-							<tr id="merchantType" style="display:">
+							<tr id="merchantType1" style="display:">
 								<td class="td-left">是否有证商户：</td>
 								<td class="td-right"> 
 									<select name="bestMerchantType" id="bestMerchantType" style="width-90;"  >
@@ -393,9 +393,17 @@
 										<option value="Licensed">--有证商户--</option>
 									</select>
 								</td>
-								<td class="td-left">费率：</td>
+								<td class="td-left"></td>
+								<td class="td-right"></td>
+							</tr>
+							<tr id="rateType" style="display:">	
+								<td class="td-left" >费率：</td>
 								<td class="td-right"> 
 									<input type="text" id="rate" name="rate" maxlength="100" placeholder="请输入费率"  value="" style="width-90">
+								</td>
+								<td>
+								</td>
+								<td>
 								</td>
 							</tr>
 							<tr id="openType" style = "display:">
@@ -617,10 +625,6 @@
 				$("#intoType").attr("style","display:");
 				$("#merchantCodeType").attr("style","display:");
 				$("#custNameType").attr("style","display:");
-				
-				
-				
-				
 				$("#industryType").attr("style","display:");
 				$("#merchantApplyType1").attr("style","display:");
 				$("#businessScopeType").attr("style","display:");
@@ -630,10 +634,8 @@
 				$("#bankAcctNameType").attr("style","display:");
 				$("#bankCardType1").attr("style","display:");
 				$("#bestBankType").attr("style","display:");
-				
-				
 				$("#interBankNameType").attr("style","display:");
-				$("#merchantType").attr("style","display:");
+				$("#merchantType1").attr("style","display:");
 				$("#rateType").attr("style","display:");
 				$("#updateFileType").attr("style","display:none");
 				$("#shopInteriorType").attr("style","display:none");
@@ -642,8 +644,6 @@
 				$("#idCardBackType").attr("style","display:none");
 				$("#businessPhotoType").attr("style","display:none");
 				$("#openType").attr("style","display:none");
-				
-				
 				
 			}else if("FILE_INFO" == updateType){
 				$("#intoType").attr("style","display:");
@@ -660,7 +660,7 @@
 				$("#bankCardType1").attr("style","display:none");
 				$("#bestBankType").attr("style","display:none");
 				$("#interBankNameType").attr("style","display:none");
-				$("#merchantType").attr("style","display:");
+				$("#merchantType1").attr("style","display:");
 				$("#rateType").attr("style","display:none");
 				$("#updateFileType").attr("style","display:");
 				$("#shopInteriorType").attr("style","display:");
@@ -677,13 +677,16 @@
 				$("#mobileNoType").attr("style","display:");
 				$("#addressType").attr("style","display:");
 				$("#certifyNoType").attr("style","display:");
+				$("#bankAcctNameType").attr("style","display:");
 				$("#industryType").attr("style","display:");
+				$("#merchantApplyType1").attr("style","display:");
+				$("#businessScopeType").attr("style","display:");
 				$("#infoType").attr("style","display:");
 				$("#residentCityType").attr("style","display:");
 				$("#bankCardType1").attr("style","display:");
 				$("#bestBankType").attr("style","display:");
 				$("#interBankNameType").attr("style","display:");
-				$("#merchantType").attr("style","display:");
+				$("#merchantType1").attr("style","display:");
 				$("#rateType").attr("style","display:");
 				$("#updateFileType").attr("style","display:none");
 				$("#shopInteriorType").attr("style","display:");
