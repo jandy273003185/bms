@@ -492,12 +492,12 @@
 												</a>
 											</gyzbadmin:function>
 											<!-- 报备链接未建 -->
-												<%--<gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.PRODUCT %>">
+												<gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.PRODUCT %>">
                                                     <a href="#" class="" onclick="productMerchantEntry(this)" data-rel="tooltip" title="Query" data-toggle='modal'>
                                                         <button type="submit" class="btn btn-purple btn-sm">报备</button>
                                                     </a>
                                                 </gyzbadmin:function>
-                                                <gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.PRODUCT %>">
+                                                <%--<gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.PRODUCT %>">
                                                     <a href="#" class="" onclick="productMerchantEntry(this)" data-rel="tooltip" title="Query" data-toggle='modal'>
                                                         <button type="submit" class="btn btn-purple btn-sm">产品查看</button>
                                                     </a>
