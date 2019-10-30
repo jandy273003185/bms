@@ -39,7 +39,6 @@ import com.sevenpay.bms.merchant.reported.bean.Province;
 import com.sevenpay.bms.merchant.reported.bean.TbFmTradeInfo;
 import com.sevenpay.bms.merchant.reported.bean.TdMerchantDetailInfo;
 import com.sevenpay.bms.merchant.reported.dao.FmIncomeMapperDao;
-import com.sevenpay.bms.merchant.reported.mapper.FmIncomeMapper;
 import com.sevenpay.bms.merchant.reported.service.CrIncomeService;
 import com.sevenpay.bms.merchant.reported.service.FmIncomeService;
 
@@ -64,9 +63,6 @@ public class MerchantReportsController {
    @Autowired
    private IMerChantIntoService iMerChantIntoServic;
    
-   @Autowired
-   private FmIncomeMapper fmIncomeMapper;
-
    /**
     * 商户报备入口
     */
@@ -588,6 +584,11 @@ public class MerchantReportsController {
 				channelMerNo =  rtnResultMap.get("merchantId") == null?"":(String)rtnResultMap.get("merchantId");
 				object.put("result", "SUCCESS");
 				object.put("message", "商户审核成功");
+			}else if("KFT_PAY".equals(detail.getChannelNo())){
+				
+				channelMerNo =  rtnResultMap.get("merchantNo") == null?"":(String)rtnResultMap.get("merchantNo");
+				object.put("result", "SUCCESS");
+				object.put("message", "商户审核成功");
 			}
 			
 			//报备表中状态改变
@@ -615,6 +616,8 @@ public class MerchantReportsController {
 				channelMerNo = detail.getOutMerchantCode();
 			}else if("YQB".equals(detail.getChannelNo())){
 				channelMerNo =  rtnResultMap.get("merchantId") == null?"":(String)rtnResultMap.get("merchantId");
+			}else if("KFT_PAY".equals(detail.getChannelNo())){
+				channelMerNo =  rtnResultMap.get("merchantNo") == null?"":(String)rtnResultMap.get("merchantNo");
 			}
 			detail.setReportStatus("E");
 			detail.setOutMerchantCode(channelMerNo);

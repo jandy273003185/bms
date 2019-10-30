@@ -803,8 +803,6 @@
 			$("#bankCardPhotoType").attr("style","display:");
 			$("#bankCardBackPhotoType").attr("style","display:");
 			$("#settleIdCardType").attr("style","display:");
-			
-			
 		}else if("3" == merchantProperty ){
 			$("#openPhotoType").attr("style","display:none");
 			$("#businessPhotoType").attr("style","display:");
@@ -870,24 +868,24 @@
   	function getMerchantCity(){
   		var provinceName = $("#merchantProvince").val();
   		$.post(window.Constants.ContextPath +"<%=MerchantEnterReportedPath.BASE + MerchantEnterReportedPath.SELKFTCITY %>",
-  	    		{
-  	    			"provinceName":provinceName
-  	    		},
-  	    		function(data){
-  	    			if(data.result=="SUCCESS"){
-  	    				var kftCityList = data.kftCityList;
-  	    				$("#merchantCity").html("");
-  	           			for ( var city in kftCityList) {
-  	           				$("#merchantCity").append(
-  	           						"<option value='"+ kftCityList[city].cityName +"'>"
-  	           								+ kftCityList[city].cityName + "</option>"); 
-  	           			}
-  	           			getMerchantArea();;
-  	    			}else{
-  	    				alert("省份不能为空");
-  	    			}
-  	    		},'json'
-  	    		);	
+   		{
+   			"provinceName":provinceName
+   		},
+   		function(data){
+   			if(data.result=="SUCCESS"){
+   				var kftCityList = data.kftCityList;
+   				$("#merchantCity").html("");
+          			for ( var city in kftCityList) {
+          				$("#merchantCity").append(
+          						"<option value='"+ kftCityList[city].cityName +"'>"
+          								+ kftCityList[city].cityName + "</option>"); 
+          			}
+          			getMerchantArea();;
+   			}else{
+   				alert("省份不能为空");
+   			}
+   		},'json'
+   		);	
     }
   	/***获取商户注册所在地区县区***/
   	function getMerchantArea(){
