@@ -33,18 +33,21 @@ public class MerchantEnterReportedPath {
 	/**商户报备列表**/
 	public static final String LIST = "/reportedList";
 	/**随行付资料详情**/
-	public static final String SUIXINGMERCHANTINFO = "/suiXingMerchantInfo";
+	public static final String SUIXINGMERCHANTREPORTINFO = "/suiXingMerchantReportInfo";
 	/**随行付更新报备**/
 	public static final String UPDATESUNXINGREPORT = "/updateSuiXingReport";
 	/**平安付资料详情**/
-	public static final String YQBMERCHANTINFO = "/yqbMerchantInfo";
+	public static final String YQBMERCHANTREPORTINFO = "/yqbMerchantReportInfo";
 	/**平安付更新报备**/
 	public static final String UPDATEYQBREPORT ="/updateYqbReport";
 	/**翼支付资料详情**/
-	public static final String BESTPAYMERCHANTINFO = "/bestPayMerchantInfo";
+	public static final String BESTPAYMERCHANTREPORTINFO = "/bestPayMerchantReportInfo";
 	/**翼支付更新报备**/
 	public static final String UPDATEBESTPAYREPORT = "/updateBestPayReport";
-	
+	/**快付通资料详情**/
+	public static final String KFTMERCHANTREPORTINFO = "/kftMerchantReportInfo";
+	/**快付通更新报备**/
+	public static final String UPDATEKFTREPORT = "/updateKftReport";
 	
 	/**快付通二级行业类目**/
 	public static final String KFTSELINDUSTRYTWO = "/kftSelIndustryTwo";
@@ -55,6 +58,8 @@ public class MerchantEnterReportedPath {
 	/**快付通区县**/
 	public static final String SELKFTAREA = "/selKftArea";
 	
+	/**报备资料详细**/
+	public static final String MERCHANTREPORTINFO = "/merchantReportInfo";
 }
 
 

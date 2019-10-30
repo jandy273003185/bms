@@ -65,6 +65,11 @@ public List<KFTArea> selKftAreaList(KFTArea kftArea) {
 	return kftIncomeMapper.selKftAreaList(kftArea);
 }
 
+public TdMerchantDetailInfo selInfo(TdMerchantDetailInfo detailInfo) {
+	// TODO Auto-generated method stub
+	return kftIncomeMapper.selInfo(detailInfo);
+}
+
   
 
 }

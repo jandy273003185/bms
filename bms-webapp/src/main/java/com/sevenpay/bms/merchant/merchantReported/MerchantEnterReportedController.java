@@ -452,4 +452,238 @@ public class MerchantEnterReportedController {
 		return mv;
 	}	   
 	
+	
+	
+	 /**
+    * 翼支付商户更新报备入口
+    */
+	@RequestMapping(MerchantEnterReportedPath.UPDATEBESTPAYREPORT)
+	public ModelAndView  updateMerchantReported(HttpServletRequest request,HttpServletResponse response,TdMerchantDetailInfo detail,String merchantCode,String channlCode,String status){
+		ModelAndView mv = new ModelAndView();
+		if(null == detail || null == detail.getMerchantCode() ){
+			detail.setMerchantCode(merchantCode);
+		}
+		if(null ==detail || null == detail.getChannelNo()){
+			detail.setChannelNo(channlCode);
+		}
+		/***查询渠道***/
+		List<ChannlInfo> channlInfoList = crIncomeService.getChannlInfoList();
+		/***查询报备信息***/
+		List<TdMerchantDetailInfo> reportedList = fmIncomeService.getMerchantDetailInfoList(detail);
+		/***查询省份信息***/
+		List<Province> proviceList = fmIncomeService.getprovinceList();
+		/***查询银行信息***/
+		List<Bank> bankList = fmIncomeService.getBankList();
+		/***查询支付功能Id***/
+		List<TbFmTradeInfo> powerIdList = fmIncomeService.getPowerIdList();
+		/***查询翼支付商户行业信息***/
+		List<Industry> industryList = fmIncomeService.getIndustryList();
+		merchantCode = detail.getMerchantCode();
+		TdCustInfo custInfo = new TdCustInfo();
+		if(null != merchantCode){
+			custInfo = fmIncomeMapperDao.getInComeInfo(merchantCode);
+			if(null != custInfo){
+				mv.addObject("custInfo", custInfo);
+			}else{
+				logger.info("--------------商户未通过审核，请查看商户状态----------------");
+				status = "商户未通过审核，请查看商户状态";
+				mv.addObject("status",status);
+				return mv;
+			}
+		}
+		if(null!=reportedList && reportedList.size()>0){
+			mv.addObject("reportedList", reportedList);
+		}
+		if(null!=channlInfoList && channlInfoList.size()>0){
+			mv.addObject("infoList", channlInfoList);
+		}
+		if(null!=proviceList && proviceList.size()>0){
+			mv.addObject("provinceList", proviceList);
+		}
+		if(null!=bankList && bankList.size()>0){
+			mv.addObject("bankList", bankList);
+		}
+		if(null!=powerIdList && powerIdList.size()>0){
+			mv.addObject("powerIdList", powerIdList);
+		}
+		if(null!=industryList && industryList.size()>0){
+			mv.addObject("industryList", industryList);
+		}
+		mv.addObject("status",status);
+			return mv;
+	}	
+		
+	
+   /**
+    * 随行付更新报备
+    */
+	@RequestMapping(MerchantEnterReportedPath.UPDATESUNXINGREPORT)
+	public ModelAndView  updateSuiXingMerchantReported(HttpServletRequest request,HttpServletResponse response,String merchantCode,String channlCode,String status){
+		ModelAndView mv = new ModelAndView();
+		/***查询渠道***/
+		List<ChannlInfo> channlInfoList = crIncomeService.getChannlInfoList();
+		/***查询报备信息***/
+//		List<TdMerchantDetailInfo> reportedList = fmIncomeService.getMerchantDetailInfoList(detail);
+		/***查询随行付银行地区信息***/
+		List<Province> proviceList = fmIncomeService.getSuiXingProvinceList();
+		/***查询银行信息***/
+		List<Bank> bankList = fmIncomeService.getBankList();
+		/***查询随行付商户行业信息***/
+		List<Industry> industryList = fmIncomeService.getSuiXingIndustryList();
+		/***查询随行付商户注册地区信息***/
+		String areaType ="2";
+		List<MerchantCity> merchantProvinceList = fmIncomeService.getSuiXingMerchantCityList(areaType);
+		TdCustInfo custInfo = new TdCustInfo();
+		if(null != merchantCode){
+			custInfo = fmIncomeMapperDao.getInComeInfo(merchantCode);
+			if(null != custInfo){
+				mv.addObject("custInfo", custInfo);
+			}else{
+				logger.info("--------------商户未通过审核，请查看商户状态----------------");
+				status = "商户未通过审核，请查看商户状态";
+				mv.addObject("status",status);
+				return mv;
+			}
+		}
+		/*if(null!=reportedList && reportedList.size()>0){
+			mv.addObject("reportedList", reportedList);
+			String remark =  reportedList.get(0).getRemark();
+			mv.addObject("remark", remark);
+		}*/
+		if(null!=channlInfoList && channlInfoList.size()>0){
+			mv.addObject("infoList", channlInfoList);
+		}
+		if(null!=proviceList && proviceList.size()>0){
+			mv.addObject("provinceList", proviceList);
+		}
+		if(null!=bankList && bankList.size()>0){
+			mv.addObject("bankList", bankList);
+		}
+		if(null!=merchantProvinceList && merchantProvinceList.size()>0){
+			mv.addObject("merchantProvinceList", merchantProvinceList);
+		}
+		if(null!=industryList && industryList.size()>0){
+			mv.addObject("industryList", industryList);
+		}
+		
+		mv.addObject("status",status);
+		return mv;
+	}
+
+	
+	/**
+    * 平安付更新报备入口
+    */
+	@RequestMapping(MerchantEnterReportedPath.UPDATEYQBREPORT)
+	public ModelAndView  updateYQBMerchantReported(HttpServletRequest request,HttpServletResponse response,String channlCode,String merchantCode,String status){
+		ModelAndView mv = new ModelAndView();
+//		String channlCode = "YQB";
+		/*if(null == detail || null == detail.getMerchantCode() ){
+			detail.setMerchantCode(merchantCode);
+		}
+		if(null ==detail || null == detail.getChannelNo()){
+			detail.setChannelNo(channlCode);
+		}*/
+		/***查询渠道***/
+		List<ChannlInfo> channlInfoList = crIncomeService.getChannlInfoList();
+		/***查询报备信息***/
+//		List<TdMerchantDetailInfo> reportedList = fmIncomeService.getMerchantDetailInfoList(detail);
+		/***查询省份信息***/
+		List<YQBArea> proviceList = fmIncomeService.getYQBProvinceList();
+		/***查询行业信息***/
+		List<YQBIndustry> industryList = fmIncomeService.getYQBIndustryList();
+		/***查询银行信息***/
+		Bank bank = new Bank();
+		List<Bank> bankIdList = fmIncomeService.getYQBBankList(bank);
+		
+		TdCustInfo custInfo = new TdCustInfo();
+		if(null != merchantCode){
+			custInfo = fmIncomeMapperDao.getInComeInfo(merchantCode);
+			if(null != custInfo){
+				mv.addObject("custInfo", custInfo);
+			}else{
+				logger.info("--------------商户未通过审核，请查看商户状态----------------");
+				status = "商户未通过审核，请查看商户状态";
+				mv.addObject("status",status);
+				return mv;
+			}
+		}
+		/*if(null!=reportedList && reportedList.size()>0){
+			mv.addObject("reportedList", reportedList);
+		}*/
+		if(null!=channlInfoList && channlInfoList.size()>0){
+			mv.addObject("infoList", channlInfoList);
+		}
+		if(null!=proviceList && proviceList.size()>0){
+			mv.addObject("provinceList", proviceList);
+		}
+		if(null!=bankIdList && bankIdList.size()>0){
+			mv.addObject("bankIdList", bankIdList);
+		}
+		if(null!=industryList && industryList.size()>0){
+			mv.addObject("industryList", industryList);
+		}
+		
+		mv.addObject("status",status);
+		return mv;
+	}	
+		
+	
+	/**
+    * 快付通更新报备入口
+    */
+	@RequestMapping(MerchantEnterReportedPath.UPDATEKFTREPORT)
+	public ModelAndView  updateKFTMerchantReported(HttpServletRequest request,HttpServletResponse response,String channlCode,String merchantCode,String status){
+		ModelAndView mv = new ModelAndView();
+		/*if(null == detail || null == detail.getMerchantCode() ){
+			detail.setMerchantCode(merchantCode);
+		}
+		if(null ==detail || null == detail.getChannelNo()){
+			detail.setChannelNo(channlCode);
+		}*/
+		/***查询渠道***/
+		List<ChannlInfo> channlInfoList = crIncomeService.getChannlInfoList();
+		/***查询报备信息***/
+//				List<TdMerchantDetailInfo> reportedList = fmIncomeService.getMerchantDetailInfoList(detail);
+		/***查询快付通地区信息***/
+		List<KFTArea> provinceList = kFTIncomeService.getKftProvinceList();
+		/***查询银行信息***/
+		List<Bank> bankList = fmIncomeService.getBankList();
+		/***查询快付通行业信息***/
+		List<KFTMccBean> industryList = kFTIncomeService.getKftIndustryList();
+//				merchantCode = detail.getMerchantCode();
+		TdCustInfo custInfo = new TdCustInfo();
+		if(null != merchantCode){
+			custInfo = fmIncomeMapperDao.getInComeInfo(merchantCode);
+			if(null != custInfo){
+				mv.addObject("custInfo", custInfo);
+			}else{
+				logger.info("--------------商户未通过审核，请查看商户状态----------------");
+				status = "商户未通过审核，请查看商户状态";
+				mv.addObject("status",status);
+				return mv;
+			}
+		}
+		/*if(null!=reportedList && reportedList.size()>0){
+			mv.addObject("reportedList", reportedList);
+			String remark =  reportedList.get(0).getRemark();
+			mv.addObject("remark", remark);
+		}*/
+		if(null!=channlInfoList && channlInfoList.size()>0){
+			mv.addObject("infoList", channlInfoList);
+		}
+		if(null!=provinceList && provinceList.size()>0){
+			mv.addObject("provinceList", provinceList);
+		}
+		if(null!=bankList && bankList.size()>0){
+			mv.addObject("bankList", bankList);
+		}
+		if(null!=industryList && industryList.size()>0){
+			mv.addObject("industryList", industryList);
+		}
+		mv.addObject("status",status);
+		return mv;
+	}
+			
+	
 }

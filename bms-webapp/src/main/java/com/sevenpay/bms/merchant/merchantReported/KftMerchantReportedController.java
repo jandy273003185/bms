@@ -2,8 +2,10 @@ package com.sevenpay.bms.merchant.merchantReported;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,15 +13,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.alibaba.fastjson.JSONObject;
 import com.seven.micropay.channel.domain.merchant.KftProductFeeInfo;
+import com.sevenpay.bms.basemanager.custInfo.bean.TdCustInfo;
+import com.sevenpay.bms.basemanager.merchant.bean.MerchantVo;
+import com.sevenpay.bms.basemanager.merchant.service.MerchantService;
 import com.sevenpay.bms.basemanager.toPayProduct.bean.ToPayProduct;
 import com.sevenpay.bms.basemanager.toPayProduct.mapper.ToPayProductMapper;
 import com.sevenpay.bms.basemanager.utils.GenSN;
 import com.sevenpay.bms.merchant.merchantReported.bean.KFTCoBean;
+import com.sevenpay.bms.merchant.merchantReported.bean.KFTMccBean;
 import com.sevenpay.bms.merchant.merchantReported.service.KFTIncomeService;
+import com.sevenpay.bms.merchant.reported.bean.Bank;
 import com.sevenpay.bms.merchant.reported.bean.CrInComeBean;
+import com.sevenpay.bms.merchant.reported.bean.MerchantCity;
+import com.sevenpay.bms.merchant.reported.bean.Province;
 import com.sevenpay.bms.merchant.reported.bean.TdMerchantDetailInfo;
+import com.sevenpay.bms.merchant.reported.dao.FmIncomeMapperDao;
 import com.sevenpay.bms.merchant.reported.service.FmIncomeService;
 
 
@@ -37,6 +49,12 @@ public class KftMerchantReportedController {
    
    @Autowired
    private ToPayProductMapper toPayProductMapper;
+   
+   @Autowired
+   private FmIncomeMapperDao fmIncomeMapperDao;
+   
+   @Autowired
+   private MerchantService merchantService;
    
 	/**
 	 * 快付通提交报备
@@ -144,7 +162,7 @@ public class KftMerchantReportedController {
 	}
 	
 	/**
-	 * 报备查询
+	 * 报备查询 SELECTMERCHANTREPORTSTATUS
 	 */
 	
 	@RequestMapping(MerchantEnterReportedPath.MERQUERYREPORT)
@@ -171,4 +189,47 @@ public class KftMerchantReportedController {
 		
 	}
 	
+	@RequestMapping(MerchantEnterReportedPath.MERCHANTREPORTINFO)
+	@ResponseBody
+	@Transactional
+	public ModelAndView reportInfo(HttpServletRequest request,HttpServletResponse response,String merchantCode,String channlCode){
+	
+		ModelAndView mv = new ModelAndView();
+		TdMerchantDetailInfo detailInfo = new TdMerchantDetailInfo();
+		// 查询商户报备信息
+	    TdCustInfo custInfo = fmIncomeMapperDao.getInComeInfo(merchantCode);
+		
+		MerchantVo merchant = merchantService.findMerchantInfo(custInfo.getCustId());
+		detailInfo.setChannelCode(channlCode);
+		detailInfo.setMerchantCode(merchantCode);
+		
+		/***查询随行付银行地区信息***/
+		List<Province> proviceList = fmIncomeService.getSuiXingProvinceList();
+		/***查询银行信息***/
+		List<Bank> bankList = fmIncomeService.getBankList();
+		/***查询快付通行业信息***/
+		List<KFTMccBean> industryList = kftIncomeService.getKftIndustryList();
+		/***查询随行付商户注册地区信息***/
+		String areaType ="2";
+		List<MerchantCity> merchantProvinceList = fmIncomeService.getSuiXingMerchantCityList(areaType);
+		
+		mv.addObject("merchantVo", merchant);
+		
+		mv.addObject("custInfo", custInfo);
+		
+		if(null!=proviceList && proviceList.size()>0){
+			mv.addObject("provinceList", proviceList);
+		}
+		if(null!=bankList && bankList.size()>0){
+			mv.addObject("bankList", bankList);
+		}
+		if(null!=merchantProvinceList && merchantProvinceList.size()>0){
+			mv.addObject("merchantProvinceList", merchantProvinceList);
+		}
+		if(null!=industryList && industryList.size()>0){
+			mv.addObject("industryList", industryList);
+		}
+		
+		return mv;
+	}
 }

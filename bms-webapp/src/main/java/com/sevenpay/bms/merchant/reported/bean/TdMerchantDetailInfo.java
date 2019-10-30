@@ -69,8 +69,28 @@ public class TdMerchantDetailInfo implements Serializable{
 	
 	private String email;
 	
+	private String startModifyTime;
+
+	private String endModifyTime;
 	
 	
+	
+	public String getStartModifyTime() {
+		return startModifyTime;
+	}
+
+	public void setStartModifyTime(String startModifyTime) {
+		this.startModifyTime = startModifyTime;
+	}
+
+	public String getEndModifyTime() {
+		return endModifyTime;
+	}
+
+	public void setEndModifyTime(String endModifyTime) {
+		this.endModifyTime = endModifyTime;
+	}
+
 	public String getShortName() {
 		return shortName;
 	}

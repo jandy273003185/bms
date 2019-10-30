@@ -22,7 +22,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>翼支付进件</title>
+	<title>翼支付更新进件</title>
 	<meta name="keywords" content="七分钱后台管理系统" />
 	<meta name="description" content="七分钱后台管理" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />

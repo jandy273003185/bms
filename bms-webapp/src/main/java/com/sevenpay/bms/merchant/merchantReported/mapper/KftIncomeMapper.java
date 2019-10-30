@@ -7,6 +7,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import com.sevenpay.bms.merchant.merchantReported.bean.KFTArea;
 import com.sevenpay.bms.merchant.merchantReported.bean.KFTMccBean;
 import com.sevenpay.bms.merchant.reported.bean.Industry;
+import com.sevenpay.bms.merchant.reported.bean.TdMerchantDetailInfo;
 
 @MapperScan
 public interface KftIncomeMapper {
@@ -22,6 +23,8 @@ public interface KftIncomeMapper {
 	public List<KFTArea> selKftCityList(KFTArea kftArea);
 	
 	public List<KFTArea> selKftAreaList(KFTArea kftArea);
+
+	public TdMerchantDetailInfo selInfo(TdMerchantDetailInfo detailInfo);
 
 	
 }

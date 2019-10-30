@@ -614,6 +614,10 @@ public class KFTIncomeService {
 		return fktIncomeMapperDao.selKftAreaList(kftArea);
 	}
 
-	
+	public TdMerchantDetailInfo getInfo(TdMerchantDetailInfo detailInfo){
+		
+		return fktIncomeMapperDao.selInfo(detailInfo);
+		
+	}
 	
 }

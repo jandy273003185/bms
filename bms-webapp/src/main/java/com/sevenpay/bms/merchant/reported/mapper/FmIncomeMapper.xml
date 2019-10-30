@@ -40,6 +40,19 @@
 			<if test="channelCode != null and channelCode != '' ">
 			 and r.channel_no = #{channelCode,jdbcType=VARCHAR}
 			</if>
+			<if test="reportStatus != null and reportStatus != '' ">
+			 and t.report_status = #{reportStatus,jdbcType=VARCHAR}
+			</if>
+			<if test="startModifyTime != null and '' != startModifyTime">
+				<![CDATA[
+	              AND DATE_FORMAT(t.modify_time,'%Y-%m-%d')>= #{startModifyTime}
+	            ]]>
+			</if>
+			<if test="endModifyTime !=null and '' !=endModifyTime">
+				<![CDATA[
+	              AND DATE_FORMAT(t.modify_time,'%Y-%m-%d')<= #{endModifyTime}
+	            ]]>
+			</if>
 		</where>
 		ORDER BY t.create_time DESC
     </select>

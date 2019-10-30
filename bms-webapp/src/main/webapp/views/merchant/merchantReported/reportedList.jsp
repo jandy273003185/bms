@@ -21,13 +21,111 @@
 </head>
 <script type="text/javascript">
 
-	
-
 	$('.buttonSearch').click(function(){
 		
 		var form = $('#merchantForm');
 		form.submit();
 	});
+	//查看报备信息
+	function getInfo(obj){
+		var merchantCode=$(obj).parent().find('#merchantCode_').val();
+		var patchNo = $(obj).parent().find("#patchNo_").val();
+		var channlCode =$(obj).parent().find('#channelNo_').val();
+		var bestMerchantType = $(obj).parent().find('#bestMerchantType_').val();
+		var loginNo = $(obj).parent().find('#loginNo_').val();
+		var outMerchantCode = $(obj).parent().find('#outMerchantCode_').val();
+		
+		var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.MERCHANTREPORTINFO%>?merchantCode="+merchantCode+"&channlCode="+channlCode; 
+     	var name="window";                        //网页名称，可为空;
+     	var iWidth=1200;                          //弹出窗口的宽度;
+     	var iHeight=600;                       //弹出窗口的高度;
+     	//获得窗口的垂直位置
+     	var iTop = (window.screen.availHeight-30-iHeight)/2; 
+     	//获得窗口的水平位置
+     	var iLeft = (window.screen.availWidth-10-iWidth)/2;
+     	var params='width='+iWidth
+            +',height='+iHeight
+            +',top='+iTop
+            +',left='+iLeft; 
+     	/*  $.blockUI();  */
+      	winChild =  window.open(url, name,params);
+     	
+      	window.location.reload();
+		<%-- 
+		if("BEST_PAY" == channlCode){
+	   	   	
+	   		var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.BESTPAYMERCHANTINFO%>?merchantCode="+merchantCode+"&channlCode="+channlCode; 
+	     	var name="window";                        //网页名称，可为空;
+	     	var iWidth=1200;                          //弹出窗口的宽度;
+	     	var iHeight=600;                       //弹出窗口的高度;
+	     	//获得窗口的垂直位置
+	     	var iTop = (window.screen.availHeight-30-iHeight)/2; 
+	     	//获得窗口的水平位置
+	     	var iLeft = (window.screen.availWidth-10-iWidth)/2;
+	     	var params='width='+iWidth
+	            +',height='+iHeight
+	            +',top='+iTop
+	            +',left='+iLeft; 
+	     	/*  $.blockUI();  */
+	      	winChild =  window.open(url, name,params);
+	   		 
+   	   	}
+   	   	if("SUIXING_PAY" == channlCode){
+   	   	   	
+   	   		var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.SUIXINGMERCHANTINFO%>?merchantCode="+merchantCode+"&channlCode="+channlCode; 
+	     	var name="window";                        //网页名称，可为空;
+	     	var iWidth=1200;                          //弹出窗口的宽度;
+	     	var iHeight=600;                       //弹出窗口的高度;
+	     	//获得窗口的垂直位置
+	     	var iTop = (window.screen.availHeight-30-iHeight)/2; 
+	     	//获得窗口的水平位置
+	     	var iLeft = (window.screen.availWidth-10-iWidth)/2;
+	     	var params='width='+iWidth
+	            +',height='+iHeight
+	            +',top='+iTop
+	            +',left='+iLeft; 
+	     	/*  $.blockUI();  */
+	      	winChild =  window.open(url, name,params);
+   	   	}
+		 
+		if("YQB" == channlCode){
+	   	   	
+	   		var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.YQBMERCHANTINFO%>?merchantCode="+merchantCode+"&channlCode="+channlCode; 
+	     	var name="window";                        //网页名称，可为空;
+	     	var iWidth=1200;                          //弹出窗口的宽度;
+	     	var iHeight=600;                       //弹出窗口的高度;
+	     	//获得窗口的垂直位置
+	     	var iTop = (window.screen.availHeight-30-iHeight)/2; 
+	     	//获得窗口的水平位置
+	     	var iLeft = (window.screen.availWidth-10-iWidth)/2;
+	     	var params='width='+iWidth
+	            +',height='+iHeight
+	            +',top='+iTop
+	            +',left='+iLeft; 
+	     	/*  $.blockUI();  */
+	      	winChild =  window.open(url, name,params);
+	   	}
+		
+		if("KFT_PAY" == channlCode){
+	   	   	
+	   		var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.KFTMERCHANTINFO%>?merchantCode="+merchantCode+"&channlCode="+channlCode; 
+	     	var name="window";                        //网页名称，可为空;
+	     	var iWidth=1200;                          //弹出窗口的宽度;
+	     	var iHeight=600;                       //弹出窗口的高度;
+	     	//获得窗口的垂直位置
+	     	var iTop = (window.screen.availHeight-30-iHeight)/2; 
+	     	//获得窗口的水平位置
+	     	var iLeft = (window.screen.availWidth-10-iWidth)/2;
+	     	var params='width='+iWidth
+	            +',height='+iHeight
+	            +',top='+iTop
+	            +',left='+iLeft; 
+	     	/*  $.blockUI();  */
+	      	winChild =  window.open(url, name,params);
+	   	}
+		window.location.reload(); --%>
+	}
+	
 	//商户进件状态查询
 	function getStatus(obj){
 	  	
@@ -77,6 +175,88 @@
 		});
 	}	
 
+	//商户更新进件
+	function getUpdate(obj){
+		var status ="reported";
+		var merchantCode=$(obj).parent().find('#merchantCode_').val();
+		var patchNo = $(obj).parent().find("#patchNo_").val();
+		var channlCode =$(obj).parent().find('#channelNo_').val();
+		var bestMerchantType = $(obj).parent().find('#bestMerchantType_').val();
+		var loginNo = $(obj).parent().find('#loginNo_').val();
+		var outMerchantCode = $(obj).parent().find('#outMerchantCode_').val();
+		
+		if("BEST_PAY" == channlCode){
+	   	   	
+	   		var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.UPDATEBESTPAYREPORT%>?merchantCode="+merchantCode+"&status="+status+"&channlCode="+channlCode; 
+	     	var name="window";                        //网页名称，可为空;
+	     	var iWidth=1200;                          //弹出窗口的宽度;
+	     	var iHeight=600;                       //弹出窗口的高度;
+	     	//获得窗口的垂直位置
+	     	var iTop = (window.screen.availHeight-30-iHeight)/2; 
+	     	//获得窗口的水平位置
+	     	var iLeft = (window.screen.availWidth-10-iWidth)/2;
+	     	var params='width='+iWidth
+	            +',height='+iHeight
+	            +',top='+iTop
+	            +',left='+iLeft; 
+	     	/*  $.blockUI();  */
+	      	winChild =  window.open(url, name,params);
+	   		 
+   	   	}
+   	   	if("SUIXING_PAY" == channlCode){
+   	   	   	
+   	   		var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.UPDATESUNXINGREPORT%>?merchantCode="+merchantCode+"&status="+status+"&channlCode="+channlCode; 
+	     	var name="window";                        //网页名称，可为空;
+	     	var iWidth=1200;                          //弹出窗口的宽度;
+	     	var iHeight=600;                       //弹出窗口的高度;
+	     	//获得窗口的垂直位置
+	     	var iTop = (window.screen.availHeight-30-iHeight)/2; 
+	     	//获得窗口的水平位置
+	     	var iLeft = (window.screen.availWidth-10-iWidth)/2;
+	     	var params='width='+iWidth
+	            +',height='+iHeight
+	            +',top='+iTop
+	            +',left='+iLeft; 
+	     	/*  $.blockUI();  */
+	      	winChild =  window.open(url, name,params);
+   	   	}
+		if("YQB" == channlCode){
+	   	   	
+	   		var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.UPDATEYQBREPORT%>?merchantCode="+merchantCode+"&status="+status+"&channlCode="+channlCode; 
+	     	var name="window";                        //网页名称，可为空;
+	     	var iWidth=1200;                          //弹出窗口的宽度;
+	     	var iHeight=600;                       //弹出窗口的高度;
+	     	//获得窗口的垂直位置
+	     	var iTop = (window.screen.availHeight-30-iHeight)/2; 
+	     	//获得窗口的水平位置
+	     	var iLeft = (window.screen.availWidth-10-iWidth)/2;
+	     	var params='width='+iWidth
+	            +',height='+iHeight
+	            +',top='+iTop
+	            +',left='+iLeft; 
+	     	/*  $.blockUI();  */
+	      	winChild =  window.open(url, name,params);
+	   	}
+		if("KFT_PAY" == channlCode){
+	   	   	
+	   		var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.UPDATEKFTREPORT%>?merchantCode="+merchantCode+"&status="+status+"&channlCode="+channlCode; 
+	     	var name="window";                        //网页名称，可为空;
+	     	var iWidth=1200;                          //弹出窗口的宽度;
+	     	var iHeight=600;                       //弹出窗口的高度;
+	     	//获得窗口的垂直位置
+	     	var iTop = (window.screen.availHeight-30-iHeight)/2; 
+	     	//获得窗口的水平位置
+	     	var iLeft = (window.screen.availWidth-10-iWidth)/2;
+	     	var params='width='+iWidth
+	            +',height='+iHeight
+	            +',top='+iTop
+	            +',left='+iLeft; 
+	     	/*  $.blockUI();  */
+	      	winChild =  window.open(url, name,params);
+	   	}
+		window.location.reload();
+		
+	}
 
    	var winChild
    	function bottonSearch() {
@@ -606,7 +786,7 @@
 							<tr>
 								<td class="td-left">报备渠道：</td>
 								<td class="td-right">
-                                   <select name="merchantState" id="merchantState">
+                                   <select name="channelNo" id="channelNo">
 									  <option value="">请选择报备渠道 </option>
 									  <c:if test="${not empty infoList }">
 			                            <c:forEach items="${infoList }" var="info">
@@ -617,7 +797,7 @@
 								</td>
 								<td class="td-left">报备状态：</td>
 								<td class="td-right"> 
-									<select name="auditState" id="auditState">
+									<select name="reportStatus" id="reportStatus">
 									  <option value="">请选择 </option>
 									  	  <option value="00"> 报备成功     </option>
 										  <option value="99"> 报备失败     </option>
@@ -628,18 +808,18 @@
 								</td>
 							</tr>
                             <tr>
-								<td class="td-left">提交报备时间：</td>
+								<td class="td-left">报备时间：</td>
+								<td class="td-right">								   
+									<input type="text" name="startModifyTime" id="startModifyTime" readonly value="" onFocus="WdatePicker({skin:&#39;whyGreen&#39;,maxDate:&#39;%y-%M-%d&#39;})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> 
+									-
+									<input type="text" name="endModifyTime" id="endModifyTime" readonly value="" onFocus="WdatePicker({skin:&#39;whyGreen&#39;,maxDate:&#39;%y-%M-%d&#39;})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> 
+								</td>
+                                <!-- <td class="td-left">报备成功时间：</td>
 								<td class="td-right">								   
 									<input type="text" name="startCreateTime" id="startCreateTime" readonly value="" onFocus="WdatePicker({skin:&#39;whyGreen&#39;,maxDate:&#39;%y-%M-%d&#39;})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> 
 									-
 									<input type="text" name="endCreateTime" id="endCreateTime" readonly value="" onFocus="WdatePicker({skin:&#39;whyGreen&#39;,maxDate:&#39;%y-%M-%d&#39;})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> 
-								</td>
-                                   <td class="td-left">报备成功时间：</td>
-								<td class="td-right">								   
-									<input type="text" name="startCreateTime" id="startCreateTime" readonly value="" onFocus="WdatePicker({skin:&#39;whyGreen&#39;,maxDate:&#39;%y-%M-%d&#39;})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> 
-									-
-									<input type="text" name="endCreateTime" id="endCreateTime" readonly value="" onFocus="WdatePicker({skin:&#39;whyGreen&#39;,maxDate:&#39;%y-%M-%d&#39;})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> 
-								</td>
+								</td> -->
 							</tr>
 							<tr>
 								<td colspan="6" align="center">
@@ -671,7 +851,7 @@
 											<th>渠道商户号</th>
 											<th>商户报备状态</th>
 											<th>返回信息</th>
-											<th>创建时间</th>
+											<th>报备时间</th>
 											<th>操作</th>
 										</tr>
 									</thead>
@@ -767,15 +947,18 @@
 											    <input type="hidden" id="bestMerchantType_" value="${reported.bestMerchantType }">
 											    <input type="hidden" id="loginNo_" value="${reported.loginNo }">
 											    <input type="hidden" id="outMerchantCode_" value="${reported.outMerchantCode }">
-	                                            <button type="button"  class="btn btn-primary btn-xs">查看</button>
+	                                            
+	                                            <button type="button"  class="btn btn-primary btn-xs" onclick="getInfo(this);">查看</button>
+	                                            
 	                                            <c:if test="${reported.detailStatus =='Y' }">
 	                                            	<button type="button"  class="btn btn-primary btn-xs" onclick="getStatus(this);">刷新状态</button>
 	                                            </c:if>
 	                                            <c:if test="${reported.detailStatus !='Y' }">
 	                                            	<button type="button"  class="btn btn-primary btn-xs" disabled>刷新状态</button>
 	                                            </c:if>
+	                                            
 	                                            <c:if test="${reported.reportStatus =='99' }">
-	                                            	<button type="button"  class="btn btn-primary btn-xs">报备更新</button>
+	                                            	<button type="button"  class="btn btn-primary btn-xs" onclick ="getUpdate(this);">报备更新</button>
                                             	</c:if>
                                             	<c:if test="${reported.reportStatus !='99' }">
 	                                            	<button type="button"  class="btn btn-primary btn-xs" disabled>报备更新</button>
@@ -833,7 +1016,7 @@
 										</tr>
 									   </c:forEach> 
 										<c:if test="${empty reportedList}">
-											<tr><td colspan="8" align="center"><font style="color: red; font-weight: bold;font-size: 15px;">暂无数据</font></td></tr>
+											<tr><td colspan="10" align="center"><font style="color: red; font-weight: bold;font-size: 15px;">暂无数据</font></td></tr>
 										</c:if> 
 									</tbody>
 								</table>
