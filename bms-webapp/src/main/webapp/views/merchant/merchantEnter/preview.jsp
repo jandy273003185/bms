@@ -53,16 +53,16 @@
 		var custId = $("#custId").val();
 		var authId = $("#authId").val();
 
-		$("#updateMerchant #businessPhotoImageDiv").show();
-		$("#updateMerchant #bankCardPhotoImageDiv").show();
-		$("#updateMerchant #certAttribute1ImageDiv").show();
-		$("#updateMerchant #certAttribute2ImageDiv").show();
-		$("#updateMerchant #openAccountImageDiv").show();
-		$("#updateMerchant #businessPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=02&authId="+authId); //07
-		$("#updateMerchant #bankCardPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=07&authId="+authId); //08
-		$("#updateMerchant #certAttribute1ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=0&authId="+authId); //04
-		$("#updateMerchant #certAttribute2ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=1&authId="+authId); //04
-		$("#updateMerchant #openAccountImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=10&authId="+authId); //03
+		$("#businessPhotoImageDiv").show();
+		$("#bankCardPhotoImageDiv").show();
+		$("#certAttribute1ImageDiv").show();
+		$("#certAttribute2ImageDiv").show();
+		$("#openAccountImageDiv").show();
+		$("#businessPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=02&authId="+authId); //07
+		$("#bankCardPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=07&authId="+authId); //08
+		$("#certAttribute1ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=0&authId="+authId); //04
+		$("#certAttribute2ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=1&authId="+authId); //04
+		$("#openAccountImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=10&authId="+authId); //03
 
 
 		var cust_url = $("#url").val();
