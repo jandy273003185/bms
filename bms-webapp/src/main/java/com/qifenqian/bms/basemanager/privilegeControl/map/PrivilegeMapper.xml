@@ -3,7 +3,7 @@
 
 <mapper namespace="com.qifenqian.bms.basemanager.privilegeControl.map.PrivilegeMapper">
 
-	<insert id="insertPrivilege" parameterType="privilege" >
+	<insert id="insertPrivilege" parameterType="com.qifenqian.bms.basemanager.privilegeControl.bean.Privilege" >
 			INSERT INTO td_privilege_controller (
 			CUST_ID,
 			PRIVILEGE_CODE,
@@ -21,7 +21,7 @@
 		)
 	</insert>
 
-	<update id="updatePrivilege" parameterType="privilege">
+	<update id="updatePrivilege" parameterType="com.qifenqian.bms.basemanager.privilegeControl.bean.Privilege">
 		update td_privilege_controller
 		<set>
 			<if test="privilegeCode != null">
@@ -41,7 +41,7 @@
 			where CUST_ID = #{custId,jdbcType=VARCHAR}
 	</update>
 	
-	<delete id="deletePrivilege" parameterType="privilege">
+	<delete id="deletePrivilege" parameterType="com.qifenqian.bms.basemanager.privilegeControl.bean.Privilege">
 	DELETE FROM TD_PRIVILEGE_CONTROLLER WHERE  CUST_ID = #{custId,jdbcType=VARCHAR}
 	</delete>
 

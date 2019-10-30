@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.qifenqian.bms.basemanager.merchantincontrol.mapper.TdMerchantInControlMapper">
 
-	<select id="selectMerchantInControlList" resultType="merchantInControl" parameterType="merchantInControl">
+	<select id="selectMerchantInControlList" resultType="com.qifenqian.bms.basemanager.merchantincontrol.bean.MerchantInControl" parameterType="com.qifenqian.bms.basemanager.merchantincontrol.bean.MerchantInControl">
 		SELECT
 			D.CUST_NAME,
 			D.CUST_ID,
@@ -31,24 +31,24 @@
 		ORDER BY T.CREATER_TIME DESC
 	</select>
 
-	<select id="verify" resultType="int" parameterType="merchantInControl">
+	<select id="verify" resultType="int" parameterType="com.qifenqian.bms.basemanager.merchantincontrol.bean.MerchantInControl">
 		SELECT COUNT(*)
 		FROM TD_MERCHANT_IN_CONTROL
 		WHERE CUST_ID = #{custId,jdbcType=VARCHAR}
 	</select>
 	
-	<select id="exists" resultType="int" parameterType="merchantInControl">
+	<select id="exists" resultType="int" parameterType="com.qifenqian.bms.basemanager.merchantincontrol.bean.MerchantInControl">
 		SELECT COUNT(*)
 		FROM TD_CUST_INFO
 		WHERE CUST_ID = #{custId,jdbcType=VARCHAR}
 	</select>
 
-	<delete id="delete" parameterType="merchantInControl">
+	<delete id="delete" parameterType="com.qifenqian.bms.basemanager.merchantincontrol.bean.MerchantInControl">
 		DELETE FROM TD_MERCHANT_IN_CONTROL
 		WHERE CUST_ID = #{custId,jdbcType=VARCHAR}
 	</delete>
 
-	<update id="update" parameterType="merchantInControl">
+	<update id="update" parameterType="com.qifenqian.bms.basemanager.merchantincontrol.bean.MerchantInControl">
 		UPDATE TD_MERCHANT_IN_CONTROL
 		<set>
 			<if test="tradeType != null">
@@ -78,7 +78,7 @@
 		WHERE CUST_ID = #{custId,jdbcType=VARCHAR}
 	</update>
 
-	<insert id="insert" parameterType="merchantInControl">
+	<insert id="insert" parameterType="com.qifenqian.bms.basemanager.merchantincontrol.bean.MerchantInControl">
 		INSERT INTO TD_MERCHANT_IN_CONTROL(
 		CUST_ID,
 		TRADE_TYPE,

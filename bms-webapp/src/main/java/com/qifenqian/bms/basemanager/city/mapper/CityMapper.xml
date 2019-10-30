@@ -3,7 +3,7 @@
 
 <mapper namespace="com.qifenqian.bms.basemanager.city.mapper.CityMapper">
 
-	<select id="selectCitys" resultType="city" parameterType="city">
+	<select id="selectCitys" resultType="com.qifenqian.bms.basemanager.city.bean.City" parameterType="com.qifenqian.bms.basemanager.city.bean.City">
 		SELECT
 			PRO.PROVINCE_ID,
 			PRO.PROVINCE_NAME,
@@ -33,7 +33,7 @@
 		ORDER BY PRO.PROVINCE_ID
 	</select>
 	
-	<select id="selectAllProvince" resultType="city">
+	<select id="selectAllProvince" resultType="com.qifenqian.bms.basemanager.city.bean.City">
 	SELECT 
 		P.PROVINCE_ID,
 		P.PROVINCE_NAME 
@@ -47,7 +47,7 @@
 	FROM 
 		tb_sp_province P
 	</select>
-	<select id="getCityByProvinceId" parameterType="string" resultType="city">
+	<select id="getCityByProvinceId" parameterType="string" resultType="com.qifenqian.bms.basemanager.city.bean.City">
 		SELECT 
 			C.CITY_ID,
 			C.CITY_NAME 
@@ -67,7 +67,7 @@
 			C.PROVINCE_ID = #{provinceId,jdbcType = VARCHAR}  
 	</select>
 	
-	<select id="getAreaByCityId" parameterType="string" resultType="city">
+	<select id="getAreaByCityId" parameterType="string" resultType="com.qifenqian.bms.basemanager.city.bean.City">
 		SELECT 
 			A.AREA_ID,
 			A.AREA_NAME 
@@ -87,7 +87,7 @@
 			A.CITY_ID = #{cityId,jdbcType = VARCHAR}
 	</select>
 	
-	<select id="getAreaByAreaId" parameterType="string" resultType="city">
+	<select id="getAreaByAreaId" parameterType="string" resultType="com.qifenqian.bms.basemanager.city.bean.City">
 		SELECT
 			P.PROVINCE_ID,
 			P.PROVINCE_NAME,
@@ -105,7 +105,7 @@
 		AND A.AREA_ID = #{areaId,jdbcType = VARCHAR}
 	</select>
 	
-	<insert id="addProvince" parameterType="city">
+	<insert id="addProvince" parameterType="com.qifenqian.bms.basemanager.city.bean.City">
 			INSERT INTO TB_PROVINCE (
 			PROVINCE_ID,
 		  	PROVINCE_NAME
@@ -116,7 +116,7 @@
 		  	FROM TB_PROVINCE P
 	</insert>
 	
-	<insert id="addCity" parameterType="city">
+	<insert id="addCity" parameterType="com.qifenqian.bms.basemanager.city.bean.City">
 			INSERT INTO TB_CITY (
 			CITY_ID,
 		  	CITY_NAME,
@@ -128,7 +128,7 @@
 		  	FROM TB_CITY C
 	</insert>
 	
-	<insert id="addArea" parameterType="city">
+	<insert id="addArea" parameterType="com.qifenqian.bms.basemanager.city.bean.City">
 		INSERT INTO TB_AREA_INFO (
 			AREA_ID,
 		  	AREA_CODE,
@@ -146,7 +146,7 @@
 		FROM TB_AREA_INFO T
 	</insert>
 	
-	<update id="updateProvince" parameterType="city">
+	<update id="updateProvince" parameterType="com.qifenqian.bms.basemanager.city.bean.City">
 		UPDATE TB_PROVINCE P
 		<set>
 			<if test="provinceName!=''">
@@ -156,7 +156,7 @@
 		WHERE P.PROVINCE_ID = #{provinceId, jdbcType = INTEGER}
 	</update>
 	
-	<update id="updateCity" parameterType="city">
+	<update id="updateCity" parameterType="com.qifenqian.bms.basemanager.city.bean.City">
 		UPDATE TB_CITY C
 		<set>
 			<if test="cityName!=''">
@@ -166,7 +166,7 @@
 		WHERE C.CITY_ID = #{cityId, jdbcType = INTEGER}
 	</update>
 	
-	<update id="updateArea" parameterType="city">
+	<update id="updateArea" parameterType="com.qifenqian.bms.basemanager.city.bean.City">
 		UPDATE TB_AREA_INFO A
 		<set>
 			<if test="areaCode>0">
@@ -179,17 +179,17 @@
 		WHERE A.AREA_ID = #{areaId, jdbcType = INTEGER}
 	</update>
 	
-	<delete id="deleteProvince" parameterType="city">
+	<delete id="deleteProvince" parameterType="com.qifenqian.bms.basemanager.city.bean.City">
 		DELETE FROM TB_PROVINCE 
 		WHERE PROVINCE_ID = #{provinceId,jdbcType = VARCHAR}
 	</delete>
 	
-	<delete id="deleteCity" parameterType="city">
+	<delete id="deleteCity" parameterType="com.qifenqian.bms.basemanager.city.bean.City">
 		DELETE FROM TB_CITY 
 		WHERE CITY_ID = #{cityId,jdbcType = VARCHAR}
 	</delete>
 	
-	<delete id="deleteArea" parameterType="city">
+	<delete id="deleteArea" parameterType="com.qifenqian.bms.basemanager.city.bean.City">
 		DELETE FROM TB_AREA_INFO 
 		WHERE AREA_ID = #{areaId,jdbcType = VARCHAR}
 	</delete>
@@ -214,7 +214,7 @@
 		WHERE C.PROVINCE_ID = #{provinceId,jdbcType=INTEGER}
 	</select>
 	
-	<select id="findCityName" parameterType="city" resultType="string">
+	<select id="findCityName" parameterType="com.qifenqian.bms.basemanager.city.bean.City" resultType="string">
 		SELECT C.CITY_NAME 
 		FROM TB_CITY C 
 		WHERE C.CITY_ID = #{cityId,jdbcType=INTEGER} 

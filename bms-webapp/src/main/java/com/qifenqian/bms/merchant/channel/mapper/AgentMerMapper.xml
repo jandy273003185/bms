@@ -4,7 +4,7 @@
 <mapper namespace="com.qifenqian.bms.merchant.channel.mapper.AgentMerMapper">
 
 	<!-- 写入商户通道信息 -->
-	<insert id="insertAgentMerInfo" parameterType="channleAgentMerInfo">
+	<insert id="insertAgentMerInfo" parameterType="com.qifenqian.bms.merchant.channel.bean.AgentMerInfo">
 		INSERT INTO
 		COMBINEDPAYMENT.td_channel_agent_mer_info (
 		CHANNEL_CODE,
@@ -37,8 +37,7 @@
 	</insert>
 	
 	<!-- 删除详情 -->
-	<delete id="deleteChannleAgentMerInfoBymerCustId"
-		parameterType="channleAgentMerInfo">
+	<delete id="deleteChannleAgentMerInfoBymerCustId"	parameterType="com.qifenqian.bms.merchant.channel.bean.AgentMerInfo">
 		UPDATE COMBINEDPAYMENT.td_channel_agent_mer_info
 		<set>STATUS=#{status}</set>
 		WHERE MER_CUST_ID =
@@ -46,8 +45,7 @@
 	</delete>
 
 	<!-- 更新详情信息 -->
-	<update id="updateChannleAgentMerInfo"
-		parameterType="channleAgentMerInfo">
+	<update id="updateChannleAgentMerInfo"	parameterType="com.qifenqian.bms.merchant.channel.bean.AgentMerInfo">
 		update COMBINEDPAYMENT.td_channel_agent_mer_info
 		<set>
 			<if test="channelCode != null">
@@ -85,14 +83,14 @@
 	</update>
 	
 	<!-- 查询所有 -->
-	<select id="selectAllChannleAgentMerInfo" resultType="channleAgentMerInfo">
+	<select id="selectAllChannleAgentMerInfo" resultType="com.qifenqian.bms.merchant.channel.bean.AgentMerInfo">
 		SELECT C.*
 		FROM COMBINEDPAYMENT.td_channel_agent_mer_info C
 		ORDER BY C.CREATE_TIME
 	</select>
 	
 	<!-- 根据主键查询数据 -->
-	<select id="selectChannleAgentMerInfoByPrimaryKey" resultType="channleAgentMerInfo">
+	<select id="selectChannleAgentMerInfoByPrimaryKey" resultType="com.qifenqian.bms.merchant.channel.bean.AgentMerInfo">
 		SELECT C.*
 		FROM COMBINEDPAYMENT.td_channel_agent_mer_info C
 		<where>
@@ -110,7 +108,7 @@
 	</select>
 	
 	<!-- 根据ChannlCode查询对象 -->
-	<select id="selectAgentMerInfoByChannlCode" resultType="channleAgentMerInfo">
+	<select id="selectAgentMerInfoByChannlCode" resultType="com.qifenqian.bms.merchant.channel.bean.AgentMerInfo">
 		SELECT C.*
 		FROM COMBINEDPAYMENT.td_channel_agent_mer_info C
 		WHERE MER_CUST_ID = #{channlCode,jdbcType=VARCHAR}

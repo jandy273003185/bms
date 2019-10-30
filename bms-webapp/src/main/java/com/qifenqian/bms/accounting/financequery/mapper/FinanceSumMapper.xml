@@ -6,7 +6,7 @@
 	<sql id="Base_Column_List">
 		F.SUBJECT_CODE,F.SUBJECT_NAME,S.FINAL_AMOUNT,S.SUBJECT_ID,S.WORK_DATE
 	</sql>
-	<select id="selectFinanceList" resultType="financeSum" parameterType="string">
+	<select id="selectFinanceList" resultType="com.qifenqian.bms.accounting.financequery.bean.FinanceSum" parameterType="string">
 		SELECT
 		<include refid="Base_Column_List" />
 		FROM ACCTING_SUBJECT_INFO F

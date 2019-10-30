@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qifenqian.bms.basemanager.advertisement.mapper.AdMapper">
-	<select id="selectAdList" resultType="ad" parameterType="ad">
+	<select id="selectAdList" resultType="com.qifenqian.bms.basemanager.advertisement.bean.Ad" parameterType="com.qifenqian.bms.basemanager.advertisement.bean.Ad">
 		SELECT 
 		  A.AD_ID,
 		  A.AD_NAME,
@@ -28,7 +28,7 @@
 		ORDER BY A.CREATE_TIME DESC
 	</select>
 	
-	<insert id="insertAd"  parameterType="ad">
+	<insert id="insertAd"  parameterType="com.qifenqian.bms.basemanager.advertisement.bean.Ad">
 		INSERT INTO TD_INDEX_SLIDE_AD (
 			AD_ID,
 			AD_NAME,
@@ -50,7 +50,7 @@
 		)
 	</insert>
 
-	<update id="updateAd" parameterType="ad">
+	<update id="updateAd" parameterType="com.qifenqian.bms.basemanager.advertisement.bean.Ad">
 		UPDATE TD_INDEX_SLIDE_AD
 		<set>
 			<if test="adName != null">
@@ -73,7 +73,7 @@
 			WHERE AD_ID = #{adId,jdbcType = VARCHAR}
 	</update>
 	
-	<select id="selectAdById" resultType="ad" parameterType="string">
+	<select id="selectAdById" resultType="com.qifenqian.bms.basemanager.advertisement.bean.Ad" parameterType="string">
 		SELECT U.* 
 	    FROM TD_INDEX_SLIDE_AD U 
 	    WHERE AD_ID = #{adId,jdbcType = VARCHAR}

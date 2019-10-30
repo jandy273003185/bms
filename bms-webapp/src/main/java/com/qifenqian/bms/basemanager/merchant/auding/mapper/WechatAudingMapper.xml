@@ -258,7 +258,7 @@ UPDATE
    
 </update>
 
-<select id="tinyMerchantExport" resultType="com.qifenqian.bms.basemanager.merchant.auding.bean.WechatExport" parameterType="merchantVo">
+<select id="tinyMerchantExport" resultType="com.qifenqian.bms.basemanager.merchant.auding.bean.WechatExport" parameterType="com.qifenqian.bms.basemanager.merchant.auding.bean.MerchantVo">
 	SELECT
 	t.MERCHANT_CODE,
 	t.`CUST_NAME`,

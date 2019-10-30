@@ -3,7 +3,7 @@
 
 <mapper namespace="com.qifenqian.bms.accounting.unnamedProcessing.clearjgkjtrade.mapper.ClearJgkjTradeMapper" >
   
-  <select id="selectClearJgkjTradeList" resultType="clearJgkjTrade"  parameterType="clearJgkjTrade" >
+  <select id="selectClearJgkjTradeList" resultType="com.qifenqian.bms.accounting.unnamedProcessing.clearjgkjtrade.bean.ClearJgkjTrade"  parameterType="com.qifenqian.bms.accounting.unnamedProcessing.clearjgkjtrade.bean.ClearJgkjTrade" >
 	   	SELECT
 			  ID,
 			  TRANS_FLOW_ID,

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.qifenqian.bms.platform.web.schedulerLog.mapper.SchedulerLogMapper">
-  <select id="selectSchedulerLogList"  resultType="schedulerLog"  parameterType="schedulerLog">
+  <select id="selectSchedulerLogList"  resultType="com.qifenqian.bms.platform.web.schedulerLog.bean.SchedulerLog"  parameterType="com.qifenqian.bms.platform.web.schedulerLog.bean.SchedulerLog">
 	    SELECT
 			J.JOB_NAME,
 			L.EXECUTE_DATE,

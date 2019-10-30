@@ -3,7 +3,7 @@
 
 <mapper namespace="com.qifenqian.bms.accounting.financequery.mapper.QueryWaterMapper">
 
-	<select id="selectQueryWaterList" resultType="queryWaterVo" parameterType="queryWaterVo">
+	<select id="selectQueryWaterList" resultType="com.qifenqian.bms.accounting.financequery.bean.QueryWaterVo" parameterType="com.qifenqian.bms.accounting.financequery.bean.QueryWaterVo">
 		SELECT
 		A.WORK_DATE,
 		C.SUBJECT_CODE, 

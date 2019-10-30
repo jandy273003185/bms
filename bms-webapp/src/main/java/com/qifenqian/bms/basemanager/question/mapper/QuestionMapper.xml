@@ -3,7 +3,7 @@
 
 <mapper namespace="com.qifenqian.bms.basemanager.question.mapper.QuestionMapper">
 
-    <select id="selectQuestions" resultType="question" parameterType="question">
+    <select id="selectQuestions" resultType="com.qifenqian.bms.basemanager.question.bean.Question"  parameterType="com.qifenqian.bms.basemanager.question.bean.Question">
 		SELECT U.* 
 	    FROM TB_SECURITY_QUESTION U 
 	    <where>
@@ -13,7 +13,7 @@
 		ORDER BY U.QUEST_NO
 	</select>
 	
-	<insert id="insertQuestion" parameterType="question">
+	<insert id="insertQuestion" parameterType="com.qifenqian.bms.basemanager.question.bean.Question">
 	INSERT INTO TB_SECURITY_QUESTION (
 			QUEST_NO,
 			STATUS,
@@ -26,7 +26,7 @@
 	</insert>
 	
 	<!-- 更新城市信息 -->
-	<update id="updateQuestion" parameterType="question">
+	<update id="updateQuestion" parameterType="com.qifenqian.bms.basemanager.question.bean.Question">
 		update TB_SECURITY_QUESTION
 		<set>
 			<if test="questContent != null">

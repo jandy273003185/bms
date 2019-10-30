@@ -3,7 +3,7 @@
 
 <mapper namespace="com.qifenqian.bms.basemanager.merchant.mapper.MerchantEnterMapper">
 
-	<select id="exportlist" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantExport" parameterType="merchantVo">
+	<select id="exportlist" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantExport" parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">
 		SELECT
 			C.MERCHANT_CODE,
 			C.CUST_NAME,
@@ -97,7 +97,7 @@
 	</select>
 	
 	
-	<select id="proExportlist" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantExport" parameterType="merchantVo">
+	<select id="proExportlist" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantExport" parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">
 		SELECT
 			C.MERCHANT_CODE,
 			C.CUST_NAME,
@@ -190,7 +190,7 @@
 		ORDER BY C.CREATE_TIME DESC	    		
 	</select>
 	
-	<select id="backExportlist" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantExport" parameterType="merchantVo">
+	<select id="backExportlist" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantExport" parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">
 		SELECT
 			C.MERCHANT_CODE,
 			C.CUST_NAME,
@@ -284,7 +284,7 @@
 	</select>
 	
 	<!-- 微商户列表查询 -->
-	<select id="exportTinyMerchantsList" resultType="com.qifenqian.bms.basemanager.merchant.bean.TinyMerchantExport" parameterType="merchantVo">
+	<select id="exportTinyMerchantsList" resultType="com.qifenqian.bms.basemanager.merchant.bean.TinyMerchantExport" parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">
 		<!-- select 
 		c.MERCHANT_CODE,
 		c.CUST_NAME,
@@ -354,7 +354,7 @@
 	</select>
 	
 	<!-- 新商户列表导出 -->
-	<select id="newExportlist" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantExport" parameterType="merchantVo">
+	<select id="newExportlist" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantExport" parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">
 		SELECT
 			C.AUTH_ID,
 			C.CUST_ID,

@@ -670,7 +670,7 @@
 		</where>
 	</select>
  
-	<select id="list" resultType="merchantVo" parameterType="merchantVo">
+	<select id="list" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo" parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">
 		SELECT 
 			C.*,
 			DATE_FORMAT(C.CREATE_TIME,'%Y-%m-%d %H:%i:%s') createTime,
@@ -719,7 +719,7 @@
 		ORDER BY C.CREATE_TIME    DESC	    		
 	</select>
 
-	<select id="auditList" resultType="merchantVo" parameterType="merchantVo">
+	<select id="auditList" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo" parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">
 		SELECT
 			C.AUTH_ID,
 			C.CUST_ID,
@@ -824,7 +824,7 @@
 		ORDER BY C.CREATE_TIME    DESC	    		
 	</select>
 
-	<select id="auditList2" resultType="merchantVo" parameterType="merchantVo">
+	<select id="auditList2" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo" parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">
 		SELECT
 		C.AUTH_ID,
 		C.CUST_ID,
@@ -940,7 +940,7 @@
 		ORDER BY C.CREATE_TIME    DESC
 	</select>
 
-	<select id="myAuditList" resultType="merchantVo" parameterType="merchantVo">
+	<select id="myAuditList" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo" parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">
 		SELECT
 			C.AUTH_ID,
 			C.CUST_ID,
@@ -1081,7 +1081,7 @@
 	
 	
 	<!-- 微商户列表查询 -->
-	<select id="tinyMerchantsList" resultType="merchantVo" parameterType="merchantVo">
+	<select id="tinyMerchantsList" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo" parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">
 		select 	
 			C.CUST_ID,
 			C.CUST_NAME,
@@ -1178,7 +1178,7 @@
 		</where>
 		order by c.create_time desc
 	</select>
-	<select id="tinyMyMerchantsList" resultType="merchantVo" parameterType="merchantVo">
+	<select id="tinyMyMerchantsList" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo" parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">
 	select c.*, 
 		u.email,
 		u.MOBILE,
@@ -1255,7 +1255,7 @@
 		order by c.create_time desc
 	</select>
 	<!-- 微商户列表查询 -->
-	<select id="exportTinyMerchantsList" resultType="com.qifenqian.bms.basemanager.merchant.bean.TinyMerchantExport" parameterType="merchantVo">
+	<select id="exportTinyMerchantsList" resultType="com.qifenqian.bms.basemanager.merchant.bean.TinyMerchantExport" parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">
 		<!-- select 
 		c.MERCHANT_CODE,
 		c.CUST_NAME,
@@ -1324,7 +1324,7 @@
 		order by c.create_time desc
 	</select>
 	
-	<select id="backList" resultType="merchantVo" parameterType="merchantVo">
+	<select id="backList" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo" parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">
 		SELECT 
 			C.*,
 			U.EMAIL,
@@ -1363,7 +1363,7 @@
 		</where>
 		ORDER BY C.CREATE_TIME    DESC	    		
 	</select>
-	<select id="backExportlist" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantExport" parameterType="merchantVo">
+	<select id="backExportlist" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantExport" parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">
 		SELECT
 			C.MERCHANT_CODE,
 			C.CUST_NAME,
@@ -1455,7 +1455,7 @@
 		 </where>
 		ORDER BY C.CREATE_TIME DESC	    		
 	</select>
-	<select id="proExportlist" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantExport" parameterType="merchantVo">
+	<select id="proExportlist" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantExport" parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">
 		SELECT
 			C.MERCHANT_CODE,
 			C.CUST_NAME,
@@ -1548,7 +1548,7 @@
 		ORDER BY C.CREATE_TIME DESC	    		
 	</select>
 	
-	<select id="exportlist" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantExport" parameterType="merchantVo">
+	<select id="exportlist" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantExport" parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">
 		SELECT
 			C.MERCHANT_CODE,
 			C.CUST_NAME,
@@ -1641,7 +1641,7 @@
 		ORDER BY C.CREATE_TIME DESC	    		
 	</select>
 	
-	<select id="listAuditor" resultType="merchantVo" parameterType="merchantVo">
+	<select id="listAuditor" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo" parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">
 		SELECT 
 			C.*,
 			U.EMAIL
@@ -1669,7 +1669,7 @@
 		 	ORDER BY C.CREATE_TIME  DESC	
 	</select>
 	
-	<update id="updateEmail"  parameterType="merchantVo">
+	<update id="updateEmail"  parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">
 		UPDATE TD_LOGIN_USER_INFO
 		<set>
 			<if test="email != null">
@@ -1687,7 +1687,7 @@
 		U.CUST_ID= #{custId, jdbcType=VARCHAR}
 	</update>
 	
-	<select id="findMerchantInfo" resultType="merchantVo" parameterType="string">
+	<select id="findMerchantInfo" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo" parameterType="string">
 		SELECT
 			C.*,
 			C.MERCHANT_MOBILE agentMobile,
@@ -1718,7 +1718,7 @@
 	</select>
 	
 	<!-- 根据id查找微商户信息 -->
-	<select id="findTinyMerchantInfo" resultType="merchantVo" parameterType="string">
+	<select id="findTinyMerchantInfo" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo" parameterType="string">
 		select 
 		u.EMAIL,
 		c.MERCHANT_CODE,
@@ -1742,7 +1742,7 @@
 		where cust_id = #{custId,jdbcType=VARCHAR} and certify_type = #{certifyType,jdbcType=VARCHAR}
 	</select>
 	
-	<update id="updateMerchant"  parameterType="merchantVo">
+	<update id="updateMerchant"  parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">
 		UPDATE TD_CUST_INFO
 		<set>
 			<if test="custName != null">
@@ -1849,7 +1849,7 @@
 		WHERE CUST_ID = #{custId,jdbcType=VARCHAR}
 	</update>
 	
-	<update id="updateAcctNameByCustName" parameterType="merchantVo">
+	<update id="updateAcctNameByCustName" parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">
 		UPDATE 
 			STCS.ACCT_SEVEN_BUSS 
 		SET 
@@ -1858,7 +1858,7 @@
 		CUST_ID = #{custId,jdbcType=VARCHAR}
 	</update>
 	
-	<update id="updateMerchantLoginInfo" parameterType="merchantVo">
+	<update id="updateMerchantLoginInfo" parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">
 		UPDATE
 			TD_LOGIN_USER_INFO 	T
 		<set>
@@ -1927,7 +1927,7 @@
 		AND l.STATE = '00'
 		ORDER BY t.CREATE_TIME DESC
 	</select>
-	<update id="updateLoginInfo"  parameterType="merchantVo">
+	<update id="updateLoginInfo"  parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">
 		update
 			TD_LOGIN_USER_INFO 	T
 		<set>
@@ -1939,7 +1939,7 @@
 			t.CUST_ID = #{custId,jdbcType = VARCHAR}
 	</update>
 
-	<update id="updateByPrimaryKeySelective" parameterType="merchantVo" >
+	<update id="updateByPrimaryKeySelective" parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo" >
 		update td_login_user_info
 		<set >
 			<if test="roleId != null" >
@@ -2001,7 +2001,7 @@
 	</update>
 	
 	<!-- 新商户列表查询 -->
-	<select id="newMerchantList" resultType="merchantVo" parameterType="merchantVo">
+	<select id="newMerchantList" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo" parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">
 		SELECT
 			C.AUTH_ID,
 			C.CUST_ID,
@@ -2111,7 +2111,7 @@
 		ORDER BY C.CREATE_TIME    DESC	    		
 	</select>
 	<!-- 新版查找商户信息 -->
- 	<select id="newFindMerchantInfo" resultType="merchantVo" parameterType="string">
+ 	<select id="newFindMerchantInfo" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo" parameterType="string">
 		SELECT 
 			C.*,
 			U.EMAIL,
@@ -2125,7 +2125,7 @@
 	</select>
  	
  	<!-- 新商户列表导出 -->
-	<select id="newExportlist" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantExport" parameterType="merchantVo">
+	<select id="newExportlist" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantExport" parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">
 		SELECT
 			C.AUTH_ID,
 			C.CUST_ID,

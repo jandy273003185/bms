@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qifenqian.bms.accounting.unnamedProcessing.clearJgkjregister.mapper.ClearJgkjRegisterMapper">
 
-  <select id="selectClearJgkjRegisterByList" resultType="clearJgkjRegister"  parameterType="clearJgkjRegister" >
+  <select id="selectClearJgkjRegisterByList" resultType="com.qifenqian.bms.accounting.unnamedProcessing.clearJgkjregister.bean.ClearJgkjRegister"  parameterType="com.qifenqian.bms.accounting.unnamedProcessing.clearJgkjregister.bean.ClearJgkjRegister" >
 	   SELECT
 			  ID,
 			  TRANS_FLOW_ID,

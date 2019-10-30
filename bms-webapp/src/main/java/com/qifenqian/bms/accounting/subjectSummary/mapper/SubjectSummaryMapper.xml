@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.qifenqian.bms.accounting.subjectSummary.mapper.SubjectSummaryMapper">
-	<select id="selectSubjectSummary" resultType="subjectSummary" parameterType="subjectSummary">
+	<select id="selectSubjectSummary" resultType="com.qifenqian.bms.accounting.subjectSummary.bean.SubjectSummary" parameterType="com.qifenqian.bms.accounting.subjectSummary.bean.SubjectSummary">
 	SELECT
 	S.ID,
 	S.SUBJECT_ID,

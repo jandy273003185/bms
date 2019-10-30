@@ -149,7 +149,7 @@
 	</select>
 	
 	
-	<select id="myAgencyList" resultType="merchantVo" parameterType="merchantVo">
+	<select id="myAgencyList" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo" parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">
 	select 
 		c.MERCHANT_CODE,
 		c.CUST_NAME,
@@ -267,7 +267,7 @@
 		</select>
 		
 		<!-- 代理商列表查询 -->
-	<select id="exportAgencysList" resultType="com.qifenqian.bms.basemanager.agency.bean.AgencyExport" parameterType="merchantVo">
+	<select id="exportAgencysList" resultType="com.qifenqian.bms.basemanager.agency.bean.AgencyExport" parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">
 		select 
 		c.MERCHANT_CODE,
 		c.CUST_NAME,

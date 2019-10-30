@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.qifenqian.bms.basemanager.rule.mapper.RuleMapper">
- <select id="selectRules" resultType="rule" parameterType="rule">
+ <select id="selectRules" resultType="com.qifenqian.bms.basemanager.rule.bean.Rule" parameterType="com.qifenqian.bms.basemanager.rule.bean.Rule">
 		SELECT 
 			F.FEE_CODE,
 			F.FEE_TYPE,
@@ -26,13 +26,13 @@
 		ORDER BY F.FEE_CODE
 	</select>
 	
-	<select id="selectRuleByFeeCode" resultType="rule" parameterType="string">
+	<select id="selectRuleByFeeCode" resultType="com.qifenqian.bms.basemanager.rule.bean.Rule" parameterType="string">
 		SELECT F.* 
 	    FROM TB_FEE_RULE F
 	    WHERE
 	    	F.FEE_CODE = #{feeCode,jdbcType=VARCHAR}
 	</select>
-	<select id="selectRules02" resultType="rule" parameterType="rule">
+	<select id="selectRules02" resultType="com.qifenqian.bms.basemanager.rule.bean.Rule" parameterType="com.qifenqian.bms.basemanager.rule.bean.Rule">
 		SELECT F.* 
 	    FROM TB_FEE_RULE F
 	    where 1=1
@@ -40,7 +40,7 @@
 		ORDER BY F.FEE_CODE
 	</select>
 	
-	<insert id="insertRule" parameterType="rule">
+	<insert id="insertRule" parameterType="com.qifenqian.bms.basemanager.rule.bean.Rule">
 	INSERT INTO TB_FEE_RULE (
 		FEE_CODE,
 		FEE_NAME,
@@ -67,7 +67,7 @@
 	</insert>
 	
 	<!-- 更新城市信息 -->
-	<update id="updateRule" parameterType="rule">
+	<update id="updateRule" parameterType="com.qifenqian.bms.basemanager.rule.bean.Rule">
 		update TB_FEE_RULE
 		<set>
 			<if test="feeName != null">
@@ -102,7 +102,7 @@
 	SELECT MAX(F.FEE_CODE) FROM TB_FEE_RULE F
 	</select>
 	
-	<insert id="saveFee" parameterType="rule">
+	<insert id="saveFee" parameterType="com.qifenqian.bms.basemanager.rule.bean.Rule">
 		INSERT INTO TD_CUST_FEE_RULE (
 			MAPPING_ID,
 			CUST_ID,

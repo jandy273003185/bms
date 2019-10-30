@@ -3,7 +3,7 @@
 
 <mapper namespace="com.qifenqian.bms.platform.web.scheduler.mapper.SchedulerJobMapper">
 
-	<insert id="addSchedulerJob" parameterType="scheduler">
+	<insert id="addSchedulerJob" parameterType="com.qifenqian.bms.platform.web.scheduler.bean.SchedulerJob">
 		INSERT INTO BMS_SCHEDULER_JOB (
 		  	JOB_NAME,
 		  	CLASS_PATH,
@@ -31,7 +31,7 @@
 		)
 	</insert>
 	
-	<select id="seleteSchedulerJob" parameterType="scheduler" resultType="scheduler">
+	<select id="seleteSchedulerJob" parameterType="com.qifenqian.bms.platform.web.scheduler.bean.SchedulerJob" resultType="com.qifenqian.bms.platform.web.scheduler.bean.SchedulerJob">
 		SELECT J.*,
 			(SELECT U.USER_NAME FROM SYS_USER U WHERE U.USER_ID =J.CREATOR) instUserName,
 			(SELECT U.USER_NAME FROM SYS_USER U WHERE U.USER_ID =J.LASTUPDATE_USER) lastUpdateUser
@@ -43,7 +43,7 @@
 	    ORDER BY J.ID DESC
 	</select>
 	
-	<update id="deleteSchedulerJob" parameterType="scheduler">
+	<update id="deleteSchedulerJob" parameterType="com.qifenqian.bms.platform.web.scheduler.bean.SchedulerJob">
 		UPDATE BMS_SCHEDULER_JOB J SET 
 		J.DELETE_FLAG='Y' ,
 		J.LASTUPDATE_USER= #{lastUpdateUser, jdbcType=VARCHAR}, 
@@ -51,7 +51,7 @@
 		WHERE J.ID = #{id, jdbcType=INTEGER}
 	</update>
 	
-	<update id="updateSchedulerJob" parameterType="scheduler" >
+	<update id="updateSchedulerJob" parameterType="com.qifenqian.bms.platform.web.scheduler.bean.SchedulerJob" >
 		UPDATE BMS_SCHEDULER_JOB 
 		<set>
 			<if test="jobName != null">

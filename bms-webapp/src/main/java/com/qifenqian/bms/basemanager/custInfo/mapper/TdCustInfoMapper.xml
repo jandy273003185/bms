@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qifenqian.bms.basemanager.custInfo.mapper.TdCustInfoMapper">
-	<select id="selectCustInfos" parameterType="custInfo" resultType="custInfo">
+	<select id="selectCustInfos" parameterType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo" resultType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo">
 		SELECT
 			U.CUST_ID,
 			U.CUST_NAME,
@@ -64,7 +64,7 @@
 		ORDER BY U.CREATE_TIME DESC
 	</select>
 	
-	<select id="exportCustInfos" parameterType="custInfo" resultType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfoExcel">
+	<select id="exportCustInfos" parameterType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo" resultType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfoExcel">
 		SELECT
 			U.CUST_ID,
 			U.CUST_NAME,
@@ -142,20 +142,20 @@
 		WHERE T.CUST_ID = #{custId}
 	</select>
 	
-	<select id="selectLoginAndcustInfo" parameterType="string" resultType="custInfo">
+	<select id="selectLoginAndcustInfo" parameterType="string" resultType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo">
 		SELECT T.*,A.MOBILE
 		FROM TD_CUST_INFO T  
 		JOIN TD_LOGIN_USER_INFO A
 		ON 	 T.CUST_ID = A.CUST_ID
 		WHERE T.CUST_ID=#{custId,jdbcType=VARCHAR}
 	</select>
-	<select id="selectById" parameterType="string" resultType="custInfo">
+	<select id="selectById" parameterType="string" resultType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo">
 		SELECT T.* FROM
 		TD_CUST_INFO T
 		WHERE T.CUST_ID = #{id,jdbcType=VARCHAR}
 	</select>
 
-	<update id="updateCustInfo" parameterType="custInfo">
+	<update id="updateCustInfo" parameterType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo">
 		UPDATE TD_CUST_INFO
 		<set>
 			<if test="certifyType != null">
@@ -178,13 +178,13 @@
 		WHERE CUST_ID = #{custId,jdbcType=VARCHAR}
 	</update>
 
-	<select id="validateMobile" resultType="custInfo" parameterType="string">
+	<select id="validateMobile" resultType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo" parameterType="string">
 		SELECT c.*
 		FROM TD_LOGIN_USER_INFO c
 		WHERE c.MOBILE = #{mobile,jdbcType=VARCHAR}
 	</select>
 
-	<update id="updateCustLoginInfo" parameterType="custInfo">
+	<update id="updateCustLoginInfo" parameterType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo">
 		UPDATE TD_LOGIN_USER_INFO
 		<set>
 			<if test="mobile!= null and mobile!= '' ">
@@ -207,7 +207,7 @@
 		WHERE CUST_ID = #{custId,jdbcType=VARCHAR}
 	</update>
 	
-	<update id="updateInfo" parameterType="custInfo">
+	<update id="updateInfo" parameterType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo">
 		UPDATE TD_CUST_INFO
 		<set>
 			<if test="custName != null">
@@ -318,7 +318,7 @@
 		</set>
 			WHERE CUST_ID = #{custId,jdbcType=VARCHAR}
 	</update>
-<update id="updateTdCustInfo" parameterType="custInfo">
+<update id="updateTdCustInfo" parameterType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo">
 	 UPDATE TD_CUST_INFO
 	 <set>
 		

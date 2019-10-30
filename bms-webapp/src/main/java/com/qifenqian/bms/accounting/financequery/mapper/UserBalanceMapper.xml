@@ -3,7 +3,7 @@
 
 <mapper namespace="com.qifenqian.bms.accounting.financequery.mapper.UserBalanceMapper">
 
-	<select id="selectUserBalanceList" resultType="userBalance" parameterType="userBalance">
+	<select id="selectUserBalanceList" resultType="com.qifenqian.bms.accounting.financequery.bean.UserBalance" parameterType="com.qifenqian.bms.accounting.financequery.bean.UserBalance">
 		SELECT
 			U.MOBILE,
 			A.CUST_ID,
@@ -29,7 +29,7 @@
 		ORDER BY A.USABLE_AMT DESC
 	</select>	
 	
-	<select id="selectSumBalance" resultType="userBalance" parameterType="userBalance">
+	<select id="selectSumBalance" resultType="com.qifenqian.bms.accounting.financequery.bean.UserBalance" parameterType="com.qifenqian.bms.accounting.financequery.bean.UserBalance">
 		SELECT
 			SUM(A.BALANCE) BALANCE_COUNT,
 			SUM(A.USABLE_AMT) USABLE_AMT_COUNT,

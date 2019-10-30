@@ -200,7 +200,7 @@ LEFT JOIN td_certificate_auth h ON t.AUTH_ID = h.AUTH_ID
    
 </update>
 
-<select id="agentExportMerchantInfo" resultType="com.qifenqian.bms.basemanager.merchant.auding.bean.agencyExport" parameterType="merchantVo">
+<select id="agentExportMerchantInfo" resultType="com.qifenqian.bms.basemanager.merchant.auding.bean.agencyExport" parameterType="com.qifenqian.bms.basemanager.merchant.auding.bean.MerchantVo">
 	SELECT
 	t.MERCHANT_CODE,
 	t.`CUST_NAME`,

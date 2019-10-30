@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.qifenqian.bms.accounting.checkquery.mapper.BalSevenResultExceptionMapper">
 
-	<select id="selectErrorList" resultType="resultException" parameterType="resultException">
+	<select id="selectErrorList" resultType="com.qifenqian.bms.accounting.checkquery.bean.BalSevenResultException" parameterType="com.qifenqian.bms.accounting.checkquery.bean.BalSevenResultException">
 		SELECT
 			T.BAL_DATE,
 			CONCAT(B.SEND_DATE,'',B.SEND_TIME) AS sendTime,

@@ -3,7 +3,7 @@
 
 <mapper namespace="com.qifenqian.bms.accounting.subjectConfig.mapper.SubjectConfigMapper">
 
-	<select id="selectSubjectConfig" resultType="subjectConfig" parameterType="subjectConfig">
+	<select id="selectSubjectConfig" resultType="com.qifenqian.bms.accounting.subjectConfig.bean.SubjectConfig" parameterType="com.qifenqian.bms.accounting.subjectConfig.bean.SubjectConfig">
 		SELECT
 			S.ID, 
 			S.SUBJECT_D, 
@@ -52,7 +52,7 @@
 		ORDER BY S.ID DESC
 	</select>
 
-	<insert id="insertSubjectConfig" parameterType="subjectConfig">
+	<insert id="insertSubjectConfig" parameterType="com.qifenqian.bms.accounting.subjectConfig.bean.SubjectConfig">
 		INSERT INTO ACCTING_SUBJECT_CONFIG (
 		SUBJECT_D,
 		SUBJECT_C,
@@ -77,7 +77,7 @@
 		)
 	</insert>
 
-	<update id="updateSubjectConfig" parameterType="subjectConfig">
+	<update id="updateSubjectConfig" parameterType="com.qifenqian.bms.accounting.subjectConfig.bean.SubjectConfig">
 		UPDATE ACCTING_SUBJECT_CONFIG
 			<set>
 		   	<if test="subjectD != null and subjectD !=''">
@@ -106,7 +106,7 @@
 		WHERE ID =#{id,jdbcType=VARCHAR}
 	</update>
 
-	<delete id="deleteSubjectConfig" parameterType="subjectConfig">
+	<delete id="deleteSubjectConfig" parameterType="com.qifenqian.bms.accounting.subjectConfig.bean.SubjectConfig">
 		UPDATE ACCTING_SUBJECT_CONFIG
 		SET STATE			='DISABLE',
 			LASTUPDATE_USER = #{lastupdateUser,jdbcType=VARCHAR},

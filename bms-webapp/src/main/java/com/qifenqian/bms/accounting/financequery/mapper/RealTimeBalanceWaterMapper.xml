@@ -3,7 +3,7 @@
 
 <mapper namespace="com.qifenqian.bms.accounting.financequery.mapper.RealTimeBalanceWaterMapper">
 
-	<select id="selectCustBalanceWaterList" resultType="realTimeCustBalanceWater" parameterType="realTimeCustBalanceWater">
+	<select id="selectCustBalanceWaterList" resultType="com.qifenqian.bms.accounting.financequery.bean.RealTimeCustBalanceWater" parameterType="com.qifenqian.bms.accounting.financequery.bean.RealTimeCustBalanceWater">
 		SELECT
 		S.CUST_ID,
 		S.ACCT_NAME,
@@ -103,7 +103,7 @@
 		ORDER BY F.INST_DATETIME DESC, SUBSTRING(F.ID,13)  DESC
 	</select>
 
-	<select id="selectBussBalanceWaterList" resultType="realTimeBussBalanceWater" parameterType="realTimeBussBalanceWater">
+	<select id="selectBussBalanceWaterList" resultType="com.qifenqian.bms.accounting.financequery.bean.RealTimeBussBalanceWater" parameterType="com.qifenqian.bms.accounting.financequery.bean.RealTimeBussBalanceWater">
 		SELECT
 		S.CUST_ID,
 		S.ACCT_NAME,

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.qifenqian.bms.basemanager.custInfo.mapper.QueryAccountMapper">
-	<select id="getActSevenCustList" parameterType="custInfo" resultType="custInfo">
+	<select id="getActSevenCustList" parameterType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo" resultType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo">
 		SELECT Q.ACCT_ID as qfqAccId, Q.BALANCE as qfqTotalAmt
 		FROM
 		ACCT_SEVEN_CUST Q

@@ -14,7 +14,7 @@
 	</resultMap>  
 	
 	<!-- 查询用户列表 -->
-	<select id="selectCertifys" resultType="certify" parameterType="certify">
+	<select id="selectCertifys" resultType="com.qifenqian.bms.basemanager.certify.bean.Certify" parameterType="com.qifenqian.bms.basemanager.certify.bean.Certify">
 		SELECT U.* 
 	    FROM TB_CERTIFY_TYPE U 
 	    <where>
@@ -29,7 +29,7 @@
 	 	WHERE CERTIFY_TYPE = #{certifyType,jdbcType=VARCHAR}
 	 </delete>
 	 
-	 <insert id="insertCertify" parameterType="certify">
+	 <insert id="insertCertify" parameterType="com.qifenqian.bms.basemanager.certify.bean.Certify">
 	 	INSERT INTO TB_CERTIFY_TYPE (
 			CERTIFY_TYPE,
 		  	CERTIFY_NAME
@@ -40,7 +40,7 @@
 	 </insert>
 	 
 	 	<!-- 更新角色信息 -->
-	<update id="updateCertify" parameterType="certify">
+	<update id="updateCertify" parameterType="com.qifenqian.bms.basemanager.certify.bean.Certify">
 		UPDATE TB_CERTIFY_TYPE
 		<set>
 			<if test="certifyName != null">

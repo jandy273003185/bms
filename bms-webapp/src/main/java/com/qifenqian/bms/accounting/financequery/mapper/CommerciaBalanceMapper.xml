@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.qifenqian.bms.accounting.financequery.mapper.CommerciaBalanceMapper">
-	<select id="selectCommerciaBalanceList" resultType="commerciaBalance"  parameterType="commerciaBalance">
+	<select id="selectCommerciaBalanceList" resultType="com.qifenqian.bms.accounting.financequery.bean.CommerciaBalance"  parameterType="com.qifenqian.bms.accounting.financequery.bean.CommerciaBalance">
 		SELECT
 				B.ACCT_ID,
 				T.CUST_ID,
@@ -43,7 +43,7 @@
 		ORDER BY B.USABLE_AMT DESC
 	</select>	
 	
-	<select id="selectCommerciaBalanceCount" resultType="commerciaBalance"  parameterType="commerciaBalance">
+	<select id="selectCommerciaBalanceCount" resultType="com.qifenqian.bms.accounting.financequery.bean.CommerciaBalance"  parameterType="com.qifenqian.bms.accounting.financequery.bean.CommerciaBalance">
 		SELECT
 			SUM(B.USABLE_AMT) USABLE_AMT_COUNT,
 			SUM(B.BALANCE) BALANCE_COUNT,
@@ -58,7 +58,7 @@
 			WHERE A.CERTIFICATE_STATE = '0'
 	</select>
 	
-	<select id="selectCommerciaBalance" resultType="commerciaBalance"  parameterType="string">
+	<select id="selectCommerciaBalance" resultType="com.qifenqian.bms.accounting.financequery.bean.CommerciaBalance"  parameterType="string">
 		SELECT
 			B.ACCT_ID,
 			C.CUST_ID,

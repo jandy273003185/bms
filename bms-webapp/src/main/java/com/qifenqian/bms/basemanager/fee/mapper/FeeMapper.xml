@@ -4,7 +4,7 @@
 <mapper namespace="com.qifenqian.bms.basemanager.fee.mapper.FeeMapper">
 
 	<!-- 查询手续费列表 -->
-	<select id="selectFees" resultType="fee" parameterType="fee">
+	<select id="selectFees" resultType="com.qifenqian.bms.basemanager.fee.bean.Fee" parameterType="com.qifenqian.bms.basemanager.fee.bean.Fee">
 		SELECT U.* 
 	    FROM TB_FEE_CODE U 
 	    <where>
@@ -14,7 +14,7 @@
 		ORDER BY U.FEE_CODE
 	</select>
 	
-	<select id="validateFeeCode" resultType="fee" parameterType="string">
+	<select id="validateFeeCode" resultType="com.qifenqian.bms.basemanager.fee.bean.Fee" parameterType="string">
 		SELECT U.* 
 	    FROM TB_FEE_CODE U 
 	    where 1=1 and
@@ -24,7 +24,7 @@
 	    </where> -->
 	</select>
 	
-	<insert id="insertFee" parameterType="fee">
+	<insert id="insertFee" parameterType="com.qifenqian.bms.basemanager.fee.bean.Fee">
 			INSERT INTO TB_FEE_CODE (
 			FEE_CODE,
 		  	FEE_NAME,
@@ -37,7 +37,7 @@
 	</insert>
 	
 	<!-- 更新城市信息 -->
-	<update id="updateFee" parameterType="fee">
+	<update id="updateFee" parameterType="com.qifenqian.bms.basemanager.fee.bean.Fee">
 		update TB_FEE_CODE
 		<set>
 			<if test="feeName != null">

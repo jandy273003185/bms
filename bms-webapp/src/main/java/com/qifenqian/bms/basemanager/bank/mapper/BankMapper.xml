@@ -4,7 +4,7 @@
 <mapper namespace="com.qifenqian.bms.basemanager.bank.mapper.BankMapper">
 
 	<!-- 写入单个用户 -->
-	<insert id="insertBank" parameterType="bank">
+	<insert id="insertBank" parameterType="com.qifenqian.bms.basemanager.bank.bean.Bank">
 		INSERT INTO TB_BANK_CODE (
 			BANK_CODE,
 		  	BANK_TYPE,
@@ -30,14 +30,14 @@
 		WHERE BANK_CODE = #{bankCode,jdbcType=VARCHAR}
 	</delete>
 	<!-- 根据角色编号查询角色信息 -->
-	<select id="selectBankByBankCode" parameterType="string" resultType="bank">
+	<select id="selectBankByBankCode" parameterType="string" resultType="com.qifenqian.bms.basemanager.bank.bean.Bank">
 		SELECT U.*
 		  FROM TB_BANK_CODE U
 		WHERE U.BANK_CODE = #{bankCode, jdbcType=VARCHAR}
 	</select>
 	
 	<!-- 更新角色信息 -->
-	<update id="updateBank" parameterType="bank">
+	<update id="updateBank" parameterType="com.qifenqian.bms.basemanager.bank.bean.Bank">
 		update TB_BANK_CODE
 		<set>
 			<if test="bankType != null">
@@ -63,7 +63,7 @@
 	</update>
 	
 	<!-- 查询用户列表 -->
-	<select id="selectBanks" resultType="bank" parameterType="bank">
+	<select id="selectBanks" resultType="com.qifenqian.bms.basemanager.bank.bean.Bank" parameterType="com.qifenqian.bms.basemanager.bank.bean.Bank">
 		SELECT U.* 
 	    FROM TB_BANK_CODE U 
 	    <where>

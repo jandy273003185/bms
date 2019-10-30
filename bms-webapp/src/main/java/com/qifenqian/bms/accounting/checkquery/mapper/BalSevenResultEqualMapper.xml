@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.qifenqian.bms.accounting.checkquery.mapper.BalSevenResultEqualMapper">
 
-	<select id="selectFitList" resultType="resultEqual" parameterType="resultEqual">
+	<select id="selectFitList" resultType="com.qifenqian.bms.accounting.checkquery.bean.BalSevenResultEqual" parameterType="com.qifenqian.bms.accounting.checkquery.bean.BalSevenResultEqual">
 		SELECT
 			T.BAL_DATE,
 			CONCAT(B.RTN_DATE,'',B.RTN_TIME) AS channelTime,
