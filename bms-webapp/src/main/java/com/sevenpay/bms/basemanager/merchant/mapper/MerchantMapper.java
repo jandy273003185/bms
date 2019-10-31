@@ -182,4 +182,6 @@ public interface MerchantMapper {
 
 
 	void updateMerchantEnter(MerchantVo merchantVo);
+
+	String findAreaNameByAreaId(String areaId);
 }

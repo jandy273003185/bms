@@ -593,11 +593,6 @@
             window.close();
         }
     };
-    
-    function fun(){
-        /* $("input[name='businessTermEnd']").val("2099-12-31").focus(); */
-        $("#businessTermEnd").attr("value","2099-12-31");
-    }
 </script>
 <body>
 <%@ include file="/include/top.jsp"%>
@@ -685,12 +680,43 @@
 									<input type="text" id="contactPhone" name="contactPhone" placeholder="请输入客服号码" value =${merchantVo.contactPhone } style="width:90%">
 								</td>
 							</tr>
+
+
 							<tr>
+								<td class="td-left">商户地址：<span style="color:red;">（必填)</span></td>
+								<td class="td-right" colspan="3">
+									<div class="col-xs-2 pd0" style="padding:0">
+										<select class="form-control" id="province" onchange="getCityList();">
+											<c:if test="${not empty provincelist_ }">
+												<option value="">${merchantVo.provinceName }</option>
+												<c:forEach items="${provincelist_ }" var="prov">
+													<option value="${prov.provinceId }">${prov.provinceName }</option>
+												</c:forEach>
+											</c:if>
+										</select>
+									</div>
+									<div class="col-xs-2 pd0" style="margin:0 1%;padding:0;">
+										<select class="form-control" id="city" onchange="getAreaList();">
+											<option value="" id="cityDef">${merchantVo.cityName }</option>
+										</select>
+									</div>
+									<div class="col-xs-2 pd0" style="padding:0">
+										<select class="form-control" id="country">
+											<option value="" id="areaDef">${areaName }</option>
+										</select>
+									</div>
+									<div class="col-xs-5 pd0" style="padding:0;margin-left:1%">
+										<input type="text" id="custAdd" name="custAdd"  placeholder="详细地址" value =${merchantVo.custAdd }  style="width:100%">
+										<label class="label-tips" id="custAddLab"></label>
+									</div>
+								</td>
+							</tr>
+							<%--<tr>
 								<td class="td-left">商户地址：</td>
 								<td class="td-right"  style="color:#666;padding:10px 8px">
 									<input type="text" id="custAdd" name="custAdd"  placeholder="详细地址" value =${merchantVo.custAdd } style="width:100%">
 								</td>
-							</tr>
+							</tr>--%>
 							<tr>
 								<td class="td-left" id="businessCodeId">营业执照编号：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
@@ -701,7 +727,7 @@
 								<td class="td-left" id="businessTimeId">营业执照有效期：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
 
-									<input type="text" id="businessTermStart" name="businessTermStart" value = ${merchantVo.businessTermStart } onfocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
+									<input type="text" id="businessTermStart" name="businessTermStart" value = ${merchantVo.businessTermStart } onfocus="WdatePicker({skin:'whyGreen'})" onfocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
 									<label class="label-tips" id="businessTermLabStart"></label>
 									-
 									<input type="text" id="businessTermEnd" name="businessTermEnd" value =
@@ -713,10 +739,16 @@
 												${merchantVo.businessTermEnd }
 											</c:otherwise>
 									</c:choose>
-										    onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
+										   onfocus="WdatePicker({skin:'whyGreen'})" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
 									<label class="label-tips" id="businessTermLabEnd"></label>
 
 									<input type="button" onclick="fun()" value="长期" />
+									<script>
+                                        function fun(){
+                                            $("input[name='businessTermEnd']").val("2099-12-31").focus();
+                                            $("#businessTermEnd").attr("value","2099-12-31");
+                                        }
+									</script>
 								</td>
 							</tr>
 							<tr>

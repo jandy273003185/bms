@@ -241,10 +241,44 @@
 								<td class="td-left">客服号码：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.contactPhone }</td>
 							</tr>
+
+
+
 							<tr>
+								<td class="td-left">商户地址：<span style="color:red;">（必填)</span></td>
+								<td class="td-right" colspan="3">
+									<div class="col-xs-2 pd0" style="padding:0">
+										<select class="form-control" id="province" onchange="getCityList();">
+											<%--<c:if test="${not empty provincelist_ }">
+												<option value="">${merchantVo.provinceName }</option>
+												<c:forEach items="${provincelist_ }" var="prov">
+													<option value="${prov.provinceId }">${prov.provinceName }</option>
+												</c:forEach>
+											</c:if>--%>
+											<option value="" id="proDef"> ${merchantVo.provinceName }</option>
+										</select>
+									</div>
+									<div class="col-xs-2 pd0" style="margin:0 1%;padding:0;">
+										<select class="form-control" id="city1" onchange="getAreaList();">
+											<option value="" id="cityDef">${merchantVo.cityName }</option>
+										</select>
+									</div>
+									<div class="col-xs-2 pd0" style="padding:0">
+										<select class="form-control" id="country">
+											<option value="" id="areaDef"> ${merchantVo.areaName }</option>
+										</select>
+									</div>
+									<div class="col-xs-5 pd0" style="padding:0;margin-left:1%">
+										<input type="text" id="custAdd" name="custAdd"  placeholder="详细地址" value =${merchantVo.custAdd } style="width:100%">
+										<label class="label-tips" id="custAddLab"></label>
+									</div>
+								</td>
+							</tr>
+
+							<%--<tr>
 								<td class="td-left">商户地址：</td>
 								<td class="td-right"  style="color:#666;padding:10px 8px">${merchantVo.custAdd }</td>
-							</tr>
+							</tr>--%>
 							<tr>
 								<td class="td-left">营业执照编号：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.businessLicense }</td>

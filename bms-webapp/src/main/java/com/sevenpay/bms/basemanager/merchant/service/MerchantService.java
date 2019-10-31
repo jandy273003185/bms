@@ -810,7 +810,7 @@ public class MerchantService {
               filename = "openAccount" + GenSN.getMerchantPictureNo() + ov.split(",")[0];
               cf_path = cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_ACCTID
                   + File.separator + custId;
-              nameType.put("openAccountType", filename);
+              nameType.put("openAccount", filename);
               imgString = ov.split(",")[1];
               break;
             case "bankCardPhoto":// 银行卡照片
@@ -845,37 +845,31 @@ public class MerchantService {
               filename = "shopInterior" + GenSN.getMerchantPictureNo() + ov.split(",")[0];
               cf_path = cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_SHOPINTERIOR
                   + File.separator + custId;
-              nameType.put("shopInteriorType", filename);
+              nameType.put("shopInterior", filename);
               imgString = ov.split(",")[1];
               break;
 			case "qualification"://行业资质图片
 				filename ="qualification"+GenSN.getMerchantPictureNo()+ov.split(",")[0];
 				cf_path = cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_QUALIFICATION + File.separator + custId;
-				nameType.put("qualificationType", filename);
+				nameType.put("qualification", filename);
 				imgString = ov.split(",")[1];
 				break;
 			case "signature"://电子签名照
 				filename ="signature"+GenSN.getMerchantPictureNo()+ov.split(",")[0];
 				cf_path = cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_SIGNATURE + File.separator + custId;
-				nameType.put("signatureType", filename);
+				nameType.put("signature", filename);
 				imgString = ov.split(",")[1];
 				break;
 			case "bankCardBackPhoto"://银行卡反面照
 				filename ="bankCardBackPhoto"+GenSN.getMerchantPictureNo()+ov.split(",")[0];
 				cf_path = cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_BANKCARDBACK + File.separator + custId;
-				nameType.put("bankCardBackPhotoType", filename);
+				nameType.put("bankCardBackPhoto", filename);
 				imgString = ov.split(",")[1];
 				break;
 			case "settleIdCard"://手持身份证
 				filename ="settleIdCard"+GenSN.getMerchantPictureNo()+ov.split(",")[0];
 				cf_path = cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_HANDIDCARD + File.separator + custId;
-				nameType.put("settleIdCardType", filename);
-				imgString = ov.split(",")[1];
-				break;
-			case "cooperate"://合作证明函
-				filename ="cooperate"+GenSN.getMerchantPictureNo()+ov.split(",")[0];
-				cf_path = cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_COOPERATE + File.separator + custId;
-				nameType.put("cooperateType", filename);
+				nameType.put("settleIdCard", filename);
 				imgString = ov.split(",")[1];
 				break;
             default:
@@ -1020,7 +1014,7 @@ public class MerchantService {
                 filename = "openAccount" + type;
                 cf_path = cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_ACCTID
                     + File.separator + custId;
-                nameType.put("openAccountType", filename);
+                nameType.put("openAccount", filename);
                 break;
               case "bankCardPhoto":// 银行卡照片
                 filename = "bankCardPhoto" + type;
@@ -1050,33 +1044,18 @@ public class MerchantService {
                 filename = "shopInterior" + type;
                 cf_path = cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_SHOPINTERIOR
                     + File.separator + custId;
-                nameType.put("shopInteriorType", filename);
+                nameType.put("shopInterior", filename);
                 break;
   			case "qualification"://行业资质图片
   				filename ="qualification" + type;
   				cf_path = cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_QUALIFICATION + File.separator + custId;
-  				nameType.put("qualificationType", filename);
+  				nameType.put("qualification", filename);
   				break;
   			case "signature"://电子签名照
   				filename ="signature" + type;
   				cf_path = cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_SIGNATURE + File.separator + custId;
   				nameType.put("signature", filename);
   				break;
-  			case "bankCardBackPhoto"://银行卡反面照
-				filename ="bankCardBackPhoto" + type;
-				cf_path = cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_BANKCARDBACK + File.separator + custId;
-				nameType.put("bankCardBackPhotoType", filename);
-				break;
-			case "settleIdCard"://手持身份证
-				filename ="settleIdCard" + type;
-				cf_path = cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_HANDIDCARD + File.separator + custId;
-				nameType.put("settleIdCardType", filename);
-				break;
-			case "cooperate"://合作证明函
-				filename ="cooperate" + type;
-				cf_path = cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_COOPERATE + File.separator + custId;
-				nameType.put("cooperateType", filename);
-				break;
             default:
               break;
           }
@@ -1374,94 +1353,6 @@ public class MerchantService {
       // doorPhoto.setCertifyNo(tdCustInfo.getBusinessLicense()); // 证件号码
       custScanMapper.insertCustScan(netWorkPhoto);
 
-      /** 开户许可证 **/
-      CustScan openPhotoBean = new CustScan();
-      openPhotoBean.setCustId(custId);
-      openPhotoBean.setAuthId(info.getAuthId());
-      openPhotoBean.setCertifyType(Constant.CERTIFY_TYPE_MERCHANT_ACCTID);
-      openPhotoBean.setScanCopyPath(cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_ACCTID
-          + File.separator + custId + File.separator + fileNames.get("openAccountType"));
-      openPhotoBean.setCustName(info.getCustName());
-      openPhotoBean.setCreateId(createId);
-      openPhotoBean.setCertifyNo(info.getCompMainAcct());
-      custScanMapper.insertCustScan(openPhotoBean);
-      
-      /** 店内照 **/
-      CustScan shopInteriorBean = new CustScan();
-      shopInteriorBean.setCustId(custId);
-      shopInteriorBean.setAuthId(info.getAuthId());
-      shopInteriorBean.setCertifyType(Constant.CERTIFY_TYPE_MERCHANT_SHOPINTERIOR);
-      shopInteriorBean.setScanCopyPath(cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_SHOPINTERIOR
-          + File.separator + custId + File.separator + fileNames.get("shopInteriorType"));
-      shopInteriorBean.setCustName(info.getCustName());
-      shopInteriorBean.setCreateId(createId);
-      shopInteriorBean.setCertifyNo(info.getCompMainAcct());
-      custScanMapper.insertCustScan(shopInteriorBean);
-      
-      /** 行业资质照 **/
-      CustScan qualificationBean = new CustScan();
-      qualificationBean.setCustId(custId);
-      qualificationBean.setAuthId(info.getAuthId());
-      qualificationBean.setCertifyType(Constant.CERTIFY_TYPE_MERCHANT_QUALIFICATION);
-      qualificationBean.setScanCopyPath(cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_QUALIFICATION
-          + File.separator + custId + File.separator + fileNames.get("qualificationType"));
-      qualificationBean.setCustName(info.getCustName());
-      qualificationBean.setCreateId(createId);
-      qualificationBean.setCertifyNo(info.getCompMainAcct());
-      custScanMapper.insertCustScan(qualificationBean);
-      
-      
-      /** 电子签名照 **/
-      CustScan signatureBean = new CustScan();
-      signatureBean.setCustId(custId);
-      signatureBean.setAuthId(info.getAuthId());
-      signatureBean.setCertifyType(Constant.CERTIFY_TYPE_MERCHANT_SIGNATURE);
-      signatureBean.setScanCopyPath(cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_SIGNATURE
-          + File.separator + custId + File.separator + fileNames.get("signatureType"));
-      signatureBean.setCustName(info.getCustName());
-      signatureBean.setCreateId(createId);
-      signatureBean.setCertifyNo(info.getCompMainAcct());
-      custScanMapper.insertCustScan(signatureBean);
-      
-      /** 电子签名照 **/
-      CustScan bankCardBackPhotoBean = new CustScan();
-      bankCardBackPhotoBean.setCustId(custId);
-      bankCardBackPhotoBean.setAuthId(info.getAuthId());
-      bankCardBackPhotoBean.setCertifyType(Constant.CERTIFY_TYPE_MERCHANT_BANKCARDBACK);
-      bankCardBackPhotoBean.setScanCopyPath(cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_BANKCARDBACK
-          + File.separator + custId + File.separator + fileNames.get("bankCardBackPhotoType"));
-      bankCardBackPhotoBean.setCustName(info.getCustName());
-      bankCardBackPhotoBean.setCreateId(createId);
-      bankCardBackPhotoBean.setCertifyNo(info.getCompMainAcct());
-      custScanMapper.insertCustScan(bankCardBackPhotoBean);
-      
-      
-      /** 手持身份证 **/
-      CustScan settleIdCardBean = new CustScan();
-      settleIdCardBean.setCustId(custId);
-      settleIdCardBean.setAuthId(info.getAuthId());
-      settleIdCardBean.setCertifyType(Constant.CERTIFY_TYPE_MERCHANT_HANDIDCARD);
-      settleIdCardBean.setScanCopyPath(cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_HANDIDCARD
-          + File.separator + custId + File.separator + fileNames.get("settleIdCardType"));
-      settleIdCardBean.setCustName(info.getCustName());
-      settleIdCardBean.setCreateId(createId);
-      settleIdCardBean.setCertifyNo(info.getCompMainAcct());
-      custScanMapper.insertCustScan(settleIdCardBean);
-      
-      /** 合作证明函 **/
-      CustScan cooperateBean = new CustScan();
-      cooperateBean.setCustId(custId);
-      cooperateBean.setAuthId(info.getAuthId());
-      cooperateBean.setCertifyType(Constant.CERTIFY_TYPE_MERCHANT_COOPERATE);
-      cooperateBean.setScanCopyPath(cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_COOPERATE
-          + File.separator + custId + File.separator + fileNames.get("cooperateType"));
-      cooperateBean.setCustName(info.getCustName());
-      cooperateBean.setCreateId(createId);
-      cooperateBean.setCertifyNo(info.getCompMainAcct());
-      custScanMapper.insertCustScan(cooperateBean);
-      
-      
-      
     } catch (Exception e) {
       logger.error("商户证件信息保存异常", e);
     }
@@ -2265,4 +2156,7 @@ public class MerchantService {
     return merchantMapper.newExportlist(merchantVo);
   }
 
+    public String findAreaNameByAreaId(String country) {
+        return merchantMapper.findAreaNameByAreaId(country);
+    }
 }

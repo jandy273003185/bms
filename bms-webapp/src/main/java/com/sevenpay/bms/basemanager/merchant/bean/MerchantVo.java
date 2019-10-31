@@ -12,7 +12,7 @@ public class MerchantVo implements Serializable {
 	private static final long serialVersionUID = -1977088279003048575L;
 
 	/**
-	 * 客户账号， main9
+	 * 客户账号
 	 */
 	private String merchantAccount;
 
@@ -31,7 +31,7 @@ public class MerchantVo implements Serializable {
 	private String custName;
 
 	/**
-	 * 客户简称. mian9
+	 * 客户简称
 	 */
 	private String shortName;
 
@@ -39,22 +39,22 @@ public class MerchantVo implements Serializable {
 
 	private String cityName;
 	/**
-	 * 商户邮箱，1mian9
+	 * 商户邮箱
 	 */
 	private String merchantEmail;
 
 	/**
-	 * 所属业务人员 客户经理 mian9
+	 * 所属业务人员 客户经理 
 	 */
 	private String custManager;
 
 	/**
-	 * 联系人姓名 1 mian 9
+	 * 联系人姓名 
 	 */
 	private String contactName;
 
 	/**
-	 *联系人电话 1 mian9 新加字段
+	 *联系人电话 
 	 */
 	private String contactMobile;
 
@@ -65,7 +65,7 @@ public class MerchantVo implements Serializable {
 
 
 	/**
-	 * 结算类型 mian 新加字段
+	 * 结算类型 
 	 */
 	private String compMainAcctType;
 
@@ -358,12 +358,12 @@ public class MerchantVo implements Serializable {
 	private String workFlowStatus;
 	
 	/**
-	 * 审核信息 1
+	 * 审核信息 
 	 */
 	private String aduitMessage;
 	
 	/**
-	 * 审核人  1
+	 * 审核人  
 	 */
 	private String aduitUserName;
 	
@@ -422,45 +422,7 @@ public class MerchantVo implements Serializable {
 	//创建人名称
 	private String createName;
 
-	public String getCityName() {
-		return cityName;
-	}
-
-	public void setCityName(String cityName) {
-		this.cityName = cityName;
-	}
-
-	public String getProvinceName() {
-		return provinceName;
-	}
-
-	public void setProvinceName(String provinceName) {
-		this.provinceName = provinceName;
-	}
-
-	public String getCreateName() {
-		return createName;
-	}
-
-	public void setCreateName(String createName) {
-		this.createName = createName;
-	}
-
-	public String getBankProvinceName() {
-		return bankProvinceName;
-	}
-
-	public void setBankProvinceName(String bankProvinceName) {
-		this.bankProvinceName = bankProvinceName;
-	}
-
-	public String getBankCityName() {
-		return bankCityName;
-	}
-
-	public void setBankCityName(String bankCityName) {
-		this.bankCityName = bankCityName;
-	}
+	private String areaName;
 
 	public String getMerchantAccount() {
 		return merchantAccount;
@@ -468,6 +430,30 @@ public class MerchantVo implements Serializable {
 
 	public void setMerchantAccount(String merchantAccount) {
 		this.merchantAccount = merchantAccount;
+	}
+
+	public String getCustId() {
+		return custId;
+	}
+
+	public void setCustId(String custId) {
+		this.custId = custId;
+	}
+
+	public String getMerchantCode() {
+		return merchantCode;
+	}
+
+	public void setMerchantCode(String merchantCode) {
+		this.merchantCode = merchantCode;
+	}
+
+	public String getCustName() {
+		return custName;
+	}
+
+	public void setCustName(String custName) {
+		this.custName = custName;
 	}
 
 	public String getShortName() {
@@ -478,12 +464,36 @@ public class MerchantVo implements Serializable {
 		this.shortName = shortName;
 	}
 
+	public String getProvinceName() {
+		return provinceName;
+	}
+
+	public void setProvinceName(String provinceName) {
+		this.provinceName = provinceName;
+	}
+
+	public String getCityName() {
+		return cityName;
+	}
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+
 	public String getMerchantEmail() {
 		return merchantEmail;
 	}
 
 	public void setMerchantEmail(String merchantEmail) {
 		this.merchantEmail = merchantEmail;
+	}
+
+	public String getCustManager() {
+		return custManager;
+	}
+
+	public void setCustManager(String custManager) {
+		this.custManager = custManager;
 	}
 
 	public String getContactName() {
@@ -518,270 +528,6 @@ public class MerchantVo implements Serializable {
 		this.compMainAcctType = compMainAcctType;
 	}
 
-	public String getFacilitatorName() {
-		return facilitatorName;
-	}
-
-	public void setFacilitatorName(String facilitatorName) {
-		this.facilitatorName = facilitatorName;
-	}
-
-	public String getCustManagerName() {
-		return custManagerName;
-	}
-
-	public void setCustManagerName(String custManagerName) {
-		this.custManagerName = custManagerName;
-	}
-
-	public String getFilingStatus() {
-		return filingStatus;
-	}
-
-	public void setFilingStatus(String filingStatus) {
-		this.filingStatus = filingStatus;
-	}
-
-	public String getFilingAuditStatus() {
-		return filingAuditStatus;
-	}
-
-	public void setFilingAuditStatus(String filingAuditStatus) {
-		this.filingAuditStatus = filingAuditStatus;
-	}
-
-	public String getCategoryType() {
-		return categoryType;
-	}
-
-	public void setCategoryType(String categoryType) {
-		this.categoryType = categoryType;
-	}
-
-	public String getMchRole() {
-		return mchRole;
-	}
-
-	public void setMchRole(String mchRole) {
-		this.mchRole = mchRole;
-	}
-
-	public String getProvince() {
-		return province;
-	}
-
-	public void setProvince(String province) {
-		this.province = province;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
-	public String getBusinessTermEnd() {
-		return businessTermEnd;
-	}
-
-	public void setBusinessTermEnd(String businessTermEnd) {
-		this.businessTermEnd = businessTermEnd;
-	}
-
-	public String getBusinessTermStart() {
-		return businessTermStart;
-	}
-
-	public void setBusinessTermStart(String businessTermStart) {
-		this.businessTermStart = businessTermStart;
-	}
-
-	public String getMobile() {
-		return mobile;
-	}
-
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-
-	public String getValidDate() {
-		return validDate;
-	}
-
-	public void setValidDate(String validDate) {
-		this.validDate = validDate;
-	}
-
-	public String getDisableDate() {
-		return disableDate;
-	}
-
-	public void setDisableDate(String disableDate) {
-		this.disableDate = disableDate;
-	}
-
-	public String getProtocolState() {
-		return protocolState;
-	}
-
-	public void setProtocolState(String protocolState) {
-		this.protocolState = protocolState;
-	}
-
-	public String getAgentRate() {
-		return agentRate;
-	}
-
-	public void setAgentRate(String agentRate) {
-		this.agentRate = agentRate;
-	}
-
-	public String getBankCardName() {
-		return bankCardName;
-	}
-
-	public void setBankCardName(String bankCardName) {
-		this.bankCardName = bankCardName;
-	}
-
-	public String getBankCardNo() {
-		return bankCardNo;
-	}
-
-	public void setBankCardNo(String bankCardNo) {
-		this.bankCardNo = bankCardNo;
-	}
-
-	public String getCustManager() {
-		return custManager;
-	}
-
-	public void setCustManager(String custManager) {
-		this.custManager = custManager;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getAduitUserName() {
-		return aduitUserName;
-	}
-
-	public void setAduitUserName(String aduitUserName) {
-		this.aduitUserName = aduitUserName;
-	}
-
-	public String getMerchantCode() {
-		return merchantCode;
-	}
-
-	public void setMerchantCode(String merchantCode) {
-		this.merchantCode = merchantCode;
-	}
-
-	public String getAuthId() {
-		return authId;
-	}
-
-	public void setAuthId(String authId) {
-		this.authId = authId;
-	}
-
-	public String getAduitMessage() {
-		return aduitMessage;
-	}
-
-	public void setAduitMessage(String aduitMessage) {
-		this.aduitMessage = aduitMessage;
-	}
-
-	public String getAuditState() {
-		return auditState;
-	}
-
-	public void setAuditState(String auditState) {
-		this.auditState = auditState;
-	}
-
-	public String getWorkFlowStatus() {
-		return workFlowStatus;
-	}
-
-	public void setWorkFlowStatus(String workFlowStatus) {
-		this.workFlowStatus = workFlowStatus;
-	}
-
-	public String getComment() {
-		return comment;
-	}
-
-	public String getLoginState() {
-		return loginState;
-	}
-
-	public void setLoginState(String loginState) {
-		this.loginState = loginState;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-
-	public String getBankName() {
-		return bankName;
-	}
-
-	public void setBankName(String bankName) {
-		this.bankName = bankName;
-	}
-
-	public String getFeeCode() {
-		return feeCode;
-	}
-
-	public void setFeeCode(String feeCode) {
-		this.feeCode = feeCode;
-	}
-
-	public String getCustId() {
-		return custId;
-	}
-
-	public void setCustId(String custId) {
-		this.custId = custId;
-	}
-
-	public String getCustName() {
-		return custName;
-	}
-
-	public void setCustName(String custName) {
-		this.custName = custName;
-	}
-
 	public String getTradePwd() {
 		return tradePwd;
 	}
@@ -804,6 +550,14 @@ public class MerchantVo implements Serializable {
 
 	public void setCertifyNo(String certifyNo) {
 		this.certifyNo = certifyNo;
+	}
+
+	public String getAuthId() {
+		return authId;
+	}
+
+	public void setAuthId(String authId) {
+		this.authId = authId;
 	}
 
 	public String getCustType() {
@@ -908,6 +662,14 @@ public class MerchantVo implements Serializable {
 
 	public void setContactPhone(String contactPhone) {
 		this.contactPhone = contactPhone;
+	}
+
+	public String getDoorPhoto() {
+		return doorPhoto;
+	}
+
+	public void setDoorPhoto(String doorPhoto) {
+		this.doorPhoto = doorPhoto;
 	}
 
 	public String getOrgInstCode() {
@@ -1070,6 +832,14 @@ public class MerchantVo implements Serializable {
 		this.state = state;
 	}
 
+	public String getMerchantState() {
+		return merchantState;
+	}
+
+	public void setMerchantState(String merchantState) {
+		this.merchantState = merchantState;
+	}
+
 	public String getIsUseCertification() {
 		return isUseCertification;
 	}
@@ -1094,13 +864,28 @@ public class MerchantVo implements Serializable {
 		this.createId = createId;
 	}
 
-
 	public String getCreateTime() {
 		return createTime;
 	}
 
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
+	}
+
+	public String getStartCreateTime() {
+		return startCreateTime;
+	}
+
+	public void setStartCreateTime(String startCreateTime) {
+		this.startCreateTime = startCreateTime;
+	}
+
+	public String getEndCreateTime() {
+		return endCreateTime;
+	}
+
+	public void setEndCreateTime(String endCreateTime) {
+		this.endCreateTime = endCreateTime;
 	}
 
 	public String getModifyId() {
@@ -1151,28 +936,20 @@ public class MerchantVo implements Serializable {
 		this.email = email;
 	}
 
-	public String getMerchantState() {
-		return merchantState;
+	public String getFeeCode() {
+		return feeCode;
 	}
 
-	public void setMerchantState(String merchantState) {
-		this.merchantState = merchantState;
+	public void setFeeCode(String feeCode) {
+		this.feeCode = feeCode;
 	}
 
-	public String getStartCreateTime() {
-		return startCreateTime;
+	public String getBankName() {
+		return bankName;
 	}
 
-	public void setStartCreateTime(String startCreateTime) {
-		this.startCreateTime = startCreateTime;
-	}
-
-	public String getEndCreateTime() {
-		return endCreateTime;
-	}
-
-	public void setEndCreateTime(String endCreateTime) {
-		this.endCreateTime = endCreateTime;
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
 	}
 
 	public String getBranchBank() {
@@ -1191,12 +968,60 @@ public class MerchantVo implements Serializable {
 		this.bankAcctName = bankAcctName;
 	}
 
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public String getLoginState() {
+		return loginState;
+	}
+
+	public void setLoginState(String loginState) {
+		this.loginState = loginState;
+	}
+
+	public String getAuditState() {
+		return auditState;
+	}
+
+	public void setAuditState(String auditState) {
+		this.auditState = auditState;
+	}
+
 	public String getFcontactunitNumber() {
 		return fcontactunitNumber;
 	}
 
 	public void setFcontactunitNumber(String fcontactunitNumber) {
 		this.fcontactunitNumber = fcontactunitNumber;
+	}
+
+	public String getWorkFlowStatus() {
+		return workFlowStatus;
+	}
+
+	public void setWorkFlowStatus(String workFlowStatus) {
+		this.workFlowStatus = workFlowStatus;
+	}
+
+	public String getAduitMessage() {
+		return aduitMessage;
+	}
+
+	public void setAduitMessage(String aduitMessage) {
+		this.aduitMessage = aduitMessage;
+	}
+
+	public String getAduitUserName() {
+		return aduitUserName;
+	}
+
+	public void setAduitUserName(String aduitUserName) {
+		this.aduitUserName = aduitUserName;
 	}
 
 	public String getOpenAddressRec() {
@@ -1207,12 +1032,148 @@ public class MerchantVo implements Serializable {
 		this.openAddressRec = openAddressRec;
 	}
 
-	public String getDoorPhoto() {
-		return doorPhoto;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setDoorPhoto(String doorPhoto) {
-		this.doorPhoto = doorPhoto;
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getBankCardName() {
+		return bankCardName;
+	}
+
+	public void setBankCardName(String bankCardName) {
+		this.bankCardName = bankCardName;
+	}
+
+	public String getBankCardNo() {
+		return bankCardNo;
+	}
+
+	public void setBankCardNo(String bankCardNo) {
+		this.bankCardNo = bankCardNo;
+	}
+
+	public String getAgentRate() {
+		return agentRate;
+	}
+
+	public void setAgentRate(String agentRate) {
+		this.agentRate = agentRate;
+	}
+
+	public String getProtocolState() {
+		return protocolState;
+	}
+
+	public void setProtocolState(String protocolState) {
+		this.protocolState = protocolState;
+	}
+
+	public String getDisableDate() {
+		return disableDate;
+	}
+
+	public void setDisableDate(String disableDate) {
+		this.disableDate = disableDate;
+	}
+
+	public String getValidDate() {
+		return validDate;
+	}
+
+	public void setValidDate(String validDate) {
+		this.validDate = validDate;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getBusinessTermEnd() {
+		return businessTermEnd;
+	}
+
+	public void setBusinessTermEnd(String businessTermEnd) {
+		this.businessTermEnd = businessTermEnd;
+	}
+
+	public String getBusinessTermStart() {
+		return businessTermStart;
+	}
+
+	public void setBusinessTermStart(String businessTermStart) {
+		this.businessTermStart = businessTermStart;
+	}
+
+	public String getCategoryType() {
+		return categoryType;
+	}
+
+	public void setCategoryType(String categoryType) {
+		this.categoryType = categoryType;
+	}
+
+	public String getMchRole() {
+		return mchRole;
+	}
+
+	public void setMchRole(String mchRole) {
+		this.mchRole = mchRole;
+	}
+
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getFilingStatus() {
+		return filingStatus;
+	}
+
+	public void setFilingStatus(String filingStatus) {
+		this.filingStatus = filingStatus;
+	}
+
+	public String getFilingAuditStatus() {
+		return filingAuditStatus;
+	}
+
+	public void setFilingAuditStatus(String filingAuditStatus) {
+		this.filingAuditStatus = filingAuditStatus;
 	}
 
 	public String getIsClear() {
@@ -1223,4 +1184,158 @@ public class MerchantVo implements Serializable {
 		this.isClear = isClear;
 	}
 
+	public String getCustManagerName() {
+		return custManagerName;
+	}
+
+	public void setCustManagerName(String custManagerName) {
+		this.custManagerName = custManagerName;
+	}
+
+	public String getFacilitatorName() {
+		return facilitatorName;
+	}
+
+	public void setFacilitatorName(String facilitatorName) {
+		this.facilitatorName = facilitatorName;
+	}
+
+	public String getBankProvinceName() {
+		return bankProvinceName;
+	}
+
+	public void setBankProvinceName(String bankProvinceName) {
+		this.bankProvinceName = bankProvinceName;
+	}
+
+	public String getBankCityName() {
+		return bankCityName;
+	}
+
+	public void setBankCityName(String bankCityName) {
+		this.bankCityName = bankCityName;
+	}
+
+	public String getCreateName() {
+		return createName;
+	}
+
+	public void setCreateName(String createName) {
+		this.createName = createName;
+	}
+
+	public String getAreaName() {
+		return areaName;
+	}
+
+	public void setAreaName(String areaName) {
+		this.areaName = areaName;
+	}
+
+	@Override
+	public String toString() {
+		return "MerchantVo{" +
+				"merchantAccount='" + merchantAccount + '\'' +
+				", custId='" + custId + '\'' +
+				", merchantCode='" + merchantCode + '\'' +
+				", custName='" + custName + '\'' +
+				", shortName='" + shortName + '\'' +
+				", provinceName='" + provinceName + '\'' +
+				", cityName='" + cityName + '\'' +
+				", merchantEmail='" + merchantEmail + '\'' +
+				", custManager='" + custManager + '\'' +
+				", contactName='" + contactName + '\'' +
+				", contactMobile='" + contactMobile + '\'' +
+				", cnaps='" + cnaps + '\'' +
+				", compMainAcctType='" + compMainAcctType + '\'' +
+				", tradePwd='" + tradePwd + '\'' +
+				", certifyType='" + certifyType + '\'' +
+				", certifyNo='" + certifyNo + '\'' +
+				", authId='" + authId + '\'' +
+				", custType='" + custType + '\'' +
+				", merchantFlag='" + merchantFlag + '\'' +
+				", custScore=" + custScore +
+				", custLvl='" + custLvl + '\'' +
+				", trustCertifyLvl=" + trustCertifyLvl +
+				", trustCertifyAuditState='" + trustCertifyAuditState + '\'' +
+				", custInfoLvl='" + custInfoLvl + '\'' +
+				", custAdd='" + custAdd + '\'' +
+				", custPostCode='" + custPostCode + '\'' +
+				", businessLicense='" + businessLicense + '\'' +
+				", businessRegAddr='" + businessRegAddr + '\'' +
+				", businessTerm='" + businessTerm + '\'' +
+				", contactPhone='" + contactPhone + '\'' +
+				", doorPhoto='" + doorPhoto + '\'' +
+				", orgInstCode='" + orgInstCode + '\'' +
+				", taxRegCert='" + taxRegCert + '\'' +
+				", representativeCertType='" + representativeCertType + '\'' +
+				", representativeCertNo='" + representativeCertNo + '\'' +
+				", representativeName='" + representativeName + '\'' +
+				", representativeMobile='" + representativeMobile + '\'' +
+				", representativeAddr='" + representativeAddr + '\'' +
+				", agentName='" + agentName + '\'' +
+				", agentCertType='" + agentCertType + '\'' +
+				", agentCertCode='" + agentCertCode + '\'' +
+				", agentMobile='" + agentMobile + '\'' +
+				", compMainAcct='" + compMainAcct + '\'' +
+				", compAcctBank='" + compAcctBank + '\'' +
+				", compVerifyAmt='" + compVerifyAmt + '\'' +
+				", regCapital=" + regCapital +
+				", entType='" + entType + '\'' +
+				", industryBelong='" + industryBelong + '\'' +
+				", yearTurnover=" + yearTurnover +
+				", merchantWebSite='" + merchantWebSite + '\'' +
+				", state='" + state + '\'' +
+				", merchantState='" + merchantState + '\'' +
+				", isUseCertification='" + isUseCertification + '\'' +
+				", isUseMsg='" + isUseMsg + '\'' +
+				", createId='" + createId + '\'' +
+				", createTime='" + createTime + '\'' +
+				", startCreateTime='" + startCreateTime + '\'' +
+				", endCreateTime='" + endCreateTime + '\'' +
+				", modifyId='" + modifyId + '\'' +
+				", modifyTime=" + modifyTime +
+				", attachStr='" + attachStr + '\'' +
+				", qfqAccId='" + qfqAccId + '\'' +
+				", qfbAccId='" + qfbAccId + '\'' +
+				", email='" + email + '\'' +
+				", feeCode='" + feeCode + '\'' +
+				", bankName='" + bankName + '\'' +
+				", branchBank='" + branchBank + '\'' +
+				", bankAcctName='" + bankAcctName + '\'' +
+				", comment='" + comment + '\'' +
+				", loginState='" + loginState + '\'' +
+				", auditState='" + auditState + '\'' +
+				", fcontactunitNumber='" + fcontactunitNumber + '\'' +
+				", workFlowStatus='" + workFlowStatus + '\'' +
+				", aduitMessage='" + aduitMessage + '\'' +
+				", aduitUserName='" + aduitUserName + '\'' +
+				", openAddressRec='" + openAddressRec + '\'' +
+				", userId='" + userId + '\'' +
+				", userName='" + userName + '\'' +
+				", bankCardName='" + bankCardName + '\'' +
+				", bankCardNo='" + bankCardNo + '\'' +
+				", agentRate='" + agentRate + '\'' +
+				", protocolState='" + protocolState + '\'' +
+				", disableDate='" + disableDate + '\'' +
+				", validDate='" + validDate + '\'' +
+				", mobile='" + mobile + '\'' +
+				", businessTermEnd='" + businessTermEnd + '\'' +
+				", businessTermStart='" + businessTermStart + '\'' +
+				", categoryType='" + categoryType + '\'' +
+				", mchRole='" + mchRole + '\'' +
+				", province='" + province + '\'' +
+				", city='" + city + '\'' +
+				", country='" + country + '\'' +
+				", filingStatus='" + filingStatus + '\'' +
+				", filingAuditStatus='" + filingAuditStatus + '\'' +
+				", isClear='" + isClear + '\'' +
+				", custManagerName='" + custManagerName + '\'' +
+				", facilitatorName='" + facilitatorName + '\'' +
+				", bankProvinceName='" + bankProvinceName + '\'' +
+				", bankCityName='" + bankCityName + '\'' +
+				", createName='" + createName + '\'' +
+				", areaName='" + areaName + '\'' +
+				'}';
+	}
 }

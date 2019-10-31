@@ -282,6 +282,8 @@ public class MerchantEnterController {
         JSONObject jsonObject = new JSONObject();
 		ModelAndView mv = new ModelAndView(MerchantEnterPath.BASE + MerchantEnterPath.UPDATEPAGE);
 		MerchantVo merchant = merchantService.findMerchantInfo(merchantVo.getCustId());
+		String areaName = merchantService.findAreaNameByAreaId(merchant.getCountry());
+		merchantVo.setAreaName(areaName);
         List<BmsProtocolContent> contents = merchantService.selectContentByCustId(merchantVo.getCustId());
 
         if (null != contents && contents.size() > 0) {
@@ -292,6 +294,7 @@ public class MerchantEnterController {
 		Rule rule = new Rule();
 		User user = new User();
 		rule.setStatus("VALID");
+		mv.addObject("areaName", areaName);
 		mv.addObject("banklist", bankMapper.selectBanks(bank));
 		mv.addObject("rulelist", ruleMapper.selectRules(rule));
 		mv.addObject("userlist", userService.getUserList(user));

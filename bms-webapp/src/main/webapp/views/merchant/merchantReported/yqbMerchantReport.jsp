@@ -74,12 +74,12 @@
 								</tr>
 						   		<tr></tr>
                             	<tr>
-									<td class="td-left" width="18%">商户编号：</td>
+									<td class="td-left" width="18%">商户编号：<span style="color:red;">(必填)</span></td>
 									<td class="td-right" width="32%"> 
 										<input type="text" id="merchantCode" name="merchantCode" placeholder="请输入商户编号" maxlength=""  value="${custInfo.merchantCode }" style="width:90%">
 										<label class="label-tips" id="merchantCodeLab"></label>
 									</td>
-	                                <td class="td-left" width="18%">商户简称：</td>
+	                                <td class="td-left" width="18%">商户简称：<span style="color:red;">(必填)</span></td>
 									<td class="td-right" width="32%"> 
 										<input type="text" id="custName" name="custName" placeholder="请输入商户简称" maxlength=""  value="${custInfo.custName }" style="width:90%">
 										<label class="label-tips" id="custNameLab"></label>
@@ -89,7 +89,7 @@
 									<td colspan="4" class="headlerPreview" style="background:#7ebde1">基本信息</td>
 								</tr>
 								<tr id="merchantType1" style = "display:">
-								    <td class="td-left">商户类型：</td>
+								    <td class="td-left">商户类型：<span style="color:red;">(必填)</span></td>
 									<td class="td-right"> 
 									   <select name="merchantType" id="merchantType" style="width:250px;" onchange="getType();" >
 											<option value="">--请选择--</option>
@@ -103,7 +103,7 @@
 									</td>
 								</tr>
 								<tr id="industryType" style = "display:">
-	                                <td class="td-left">商户行业信息:</td>
+	                                <td class="td-left">商户行业信息:<span style="color:red;">(必填)</span></td>
 									<td class="td-right"> 
 		                                <select name="levelOne" id="levelOne" class="width-80" onchange="getLevel();">
 		                                    <option value="">--请选择商户行业--</option>
@@ -114,7 +114,7 @@
 				                 		  	</c:if>
 		                                </select>
 		                             </td>
-		                             <td class="td-left">行业信息:</td>
+		                             <td class="td-left">行业信息:<span style="color:red;">(必填)</span></td>
 		                             <td class="td-right">
 		                                <label id="levelOneLabel" class="label-tips"></label>
 		                                <select name="levelTwo" id="levelTwo" class="width-80" >
@@ -124,12 +124,12 @@
 									</td>
 								</tr>
 		                        <tr>
-								    <td class="td-left">营业执照：</td>
+								    <td class="td-left">营业执照：<span style="color:red;">(必填)</span></td>
 									<td class="td-right"> 
 										<input type="text" id="businessLicense" name="businessLicense" placeholder="请输入营业执照" maxlength=""  value="${custInfo.businessLicense }" style="width:90%">
 										<label id="businessLicenseLab" class="label-tips"></label>	
 									</td>
-	                                <td class="td-left">营业执照有效期：</td>
+	                                <td class="td-left">营业执照有效期：<span style="color:red;">(必填)</span></td>
 									<td class="td-right">
 										<input type="text" name="businessEffectiveTerm" id="businessEffectiveTerm" value="${custInfo.businessTermStart }" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> ——
 	                                    <input type="text" name="businessTerm" id="businessTerm" value="${custInfo.businessTermEnd }" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
@@ -137,14 +137,14 @@
 									</td>
 								</tr>
                         		<tr id="establishDateType" style = "display:">
-								    <td class="td-left">成立时间：</td>
+								    <td class="td-left">成立时间：<span style="color:red;">(必填)</span></td>
 									<td class="td-right"> 
 										 <input type="text" name="establishDate" id="establishDate" placeholder="日期选择" onfocus="WdatePicker({skin:'whyGreen'})"  style="width:90%;background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;" >
 										 <label id="establishDateLab" class="label-tips"></label>
 									</td>
 								</tr>
 								<tr id="addressType" style = "display:">
-									<td class="td-left">注册地址：</td>
+									<td class="td-left">注册地址：<span style="color:red;">(必填)</span></td>
 									<td class="td-right" colspan="3">
 										<div class="col-xs-2 pd0" style="padding:0;">
 											<select name="province" id="province" class="form-control" onchange="getCity();">
@@ -179,7 +179,7 @@
 									</td>
 								</tr>	
 							<tr id="businessPhotoType" style = "display:">
-								<td class="td-left">营业执照照片：</td>
+								<td class="td-left">营业执照照片：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success businessPhotoClick"  data-target="#previewImageModal"  >
 										<label id="businessPhotoDiv"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
@@ -195,7 +195,7 @@
 								</td>
 							</tr>
                             <tr id="qualificationType" style = "display:">
-								<td class="td-left">特殊行业资质照：</td>
+								<td class="td-left">特殊行业资质照：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success qualificationClick"  data-target="#previewImageModal"  >
 										<label id="qualificationDiv"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
@@ -211,7 +211,7 @@
 								</td>
 							</tr>
                             <tr id="doorPhotoType" style = "display:">
-								<td class="td-left">门头照照片：</td>
+								<td class="td-left">门头照照片：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success doorPhotoClick"  data-target="#previewImageModal"  >
 										<label id="doorPhotoDiv"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
@@ -227,7 +227,7 @@
 								</td>
 							</tr>
                             <tr id="shopInteriorType" style = "display:">
-								<td class="td-left">店内照照片：</td>
+								<td class="td-left">店内照照片：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success shopInteriorClick"  data-target="#previewImageModal"  >
 										<label id="shopInteriorDiv"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
@@ -243,7 +243,7 @@
 								</td>
 							</tr>
                             <tr id="signatureType" style = "display:">
-								<td class="td-left">电子签名照：</td>
+								<td class="td-left">电子签名照：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success signatureClick"  data-target="#previewImageModal"  >
 										<label id="signatureDiv"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
@@ -259,7 +259,7 @@
 								</td>
 							</tr>
 							<tr id="otherMaterialType" style = "display:none">
-								<td class="td-left">其他材料照：</td>
+								<td class="td-left">其他材料照：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success otherMaterialClick"  data-target="#previewImageModal"  >
 										<label id="otherMaterialDiv"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
@@ -279,19 +279,19 @@
 							</tr>
 							<tr></tr>
                            	<tr>
-								<td class="td-left">法人真实姓名：</td>
+								<td class="td-left">法人真实姓名：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									<input type="text" id="InterName" name="InterName" placeholder="请输入法人真实姓名"  value="${custInfo.representativeName }" maxlength="50" style="width:90%">
 									<label id="interNameLab" class="label-tips"></label>
 								</td>
 							</tr>
                             <tr>
-								<td class="td-left">法人身份证号码：</td>
+								<td class="td-left">法人身份证号码：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									<input type="text" name="certifyNo" id="certifyNo" placeholder="请输入法人身份证号码"  value="${custInfo.representativeCertNo }" style="width:90%">
 									<label id="certifyNoLab" class="label-tips"></label>
 								</td>
-								<td class="td-left">法人身份证有效期：</td>
+								<td class="td-left">法人身份证有效期：<span style="color:red;">(必填)</span></td>
 								<td class="td-right">
 									<input type="text" name="identityEffDate" id="identityEffDate" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> ——
                                     <input type="text" name="identityValDate" id="identityValDate" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> 
@@ -299,7 +299,7 @@
 								</td>
 							</tr>
 							<tr id="idCardType" style = "display:">
-								<td class="td-left">法人身份证正面：</td>
+								<td class="td-left">法人身份证正面：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success certAttribute1Click"  data-target="#previewImageModal"  >
 										<label id="certAttribute1Div"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
@@ -315,7 +315,7 @@
 								</td>
 							</tr>
 							<tr id="idCardBackType" style = "display:">
-								<td class="td-left">法人身份证背面：</td>
+								<td class="td-left">法人身份证背面：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3"> 
 									<a data-toggle='modal' class="tooltip-success certAttribute2Click"  data-target="#previewImageModal"  >
 										<label id="certAttribute2Div"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
@@ -334,28 +334,28 @@
 								<td colspan="4" class="headlerPreview" style="background:#7ebde1;">结算信息</td>
 							</tr>
 	                        <tr>
-								<td class="td-left">银行账户名称：</td>
+								<td class="td-left">银行账户名称：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									<input type="text" id="accountNm" name="accountNm" maxlength="100" placeholder="请输入结算账户名称"  value="" style="width:90%">
 								</td>
-                                  <td class="td-left">银行卡号：</td>
+                                  <td class="td-left">银行卡号：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									<input type="text" id="accountNo" name="accountNo" maxlength="100" placeholder="请输入银行卡号"  value="${custInfo.compMainAcct }" style="width:90%">
 								</td>
 							</tr>
 						   	<tr>
-								<td class="td-left">开户支行：</td>
+								<td class="td-left">开户支行：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									  <input type="text" id="interBankName" name="interBankName" maxlength="100" placeholder="请输入开户支行"  value="${custInfo.branchBANK }" style="width:90%">
 									  <label id="interBankNameLabel" class="label-tips"></label>
 								</td>
-								<td class="td-left">银行预留号码：</td>
+								<td class="td-left">银行预留号码：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									  <input type="text" id="mobile" name="mobile" maxlength="100" placeholder="请输入银行预留号码"  value="${custInfo.merchantMobile }" style="width:90%">
 								</td>
 							</tr>
 							<tr>
-								<td class="td-left">银行：</td>
+								<td class="td-left">银行：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 								  	<select name="bank" id="bank" class="col-xs-11 aui-form-control-two" >
 	                                    <option value="">--请选择银行--</option>
@@ -366,21 +366,21 @@
 	                                    </c:if>
 	                                </select>
 								</td>
-								<td class="td-left">开户联行号：</td>
+								<td class="td-left">开户联行号：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									  <input type="text" id="bankCode" name="bankCode" maxlength="100" placeholder="请输入联行号"  value="" style="width:90%">
 									  <label id="bankCodeLabel" class="label-tips"></label>
 								</td>
 							</tr>
                           	<tr>
-								<td class="td-left">结算费率：</td>
+								<td class="td-left">结算费率：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									  <input type="text" id="rate" name="rate" maxlength="100" placeholder="请输入结算费率"  value="" style="width:90%"> %
 									  <label id="rateLab" class="label-tips"></label>
 								</td>
 							</tr>
 							<tr id="openType" style = "display:">
-								<td class="td-left">开户许可证照片：</td>
+								<td class="td-left">开户许可证照片：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3"> 
 									<a data-toggle='modal' class="tooltip-success openClick"  data-target="#previewImageModal"  >
 										<label id="openDiv"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
@@ -396,7 +396,7 @@
 								</td>
 							</tr>
 							<tr id="bankCardPhotoType" style = "display:none">
-								<td class="td-left">银行卡正面照：</td>
+								<td class="td-left">银行卡正面照：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3"> 
 									<a data-toggle='modal' class="tooltip-success bankCardPhotoClick"  data-target="#previewImageModal"  >
 										<label id="bankCardPhotoDiv"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
@@ -415,12 +415,12 @@
 								<td colspan="4" class="headlerPreview" style="background:#7ebde1;">管理员信息</td>
 							</tr>
 	                        <tr>
-								<td class="td-left">管理员名字：</td>
+								<td class="td-left">管理员名字：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									<input type="text" id="attentionName" name="attentionName" maxlength="100" placeholder="请输入管理员名字"  value="${custInfo.contactName }" style="width:90%">
 									<label id="attentionNameLab" class="label-tips"></label>
 								</td>
-                                  <td class="td-left">管理员手机：</td>
+                                  <td class="td-left">管理员手机：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									<input type="text" id="attentionMobile" name="attentionMobile" maxlength="100" placeholder="请输入管理员手机"  value="${custInfo.contactMobile }" style="width:90%">
 									<label id="attentionMobileLab" class="label-tips"></label>

@@ -1703,7 +1703,9 @@
 		    Y.USER_NAME createName,
 		    P.PROVINCE_NAME,
 		    Q.BANK_NAME bankName,
-		    B.city_name
+		    B.city_name,
+		    M.area_name as areaName,
+		    P.PROVINCE_NAME provinceName
 		FROM TD_CUST_INFO C
 		INNER JOIN TD_LOGIN_USER_INFO U
 		ON C.CUST_ID=U.CUST_ID
@@ -1715,11 +1717,21 @@
 		left JOIN SYS_USER Y
 		ON Y.USER_ID = C.CREATE_ID
 		LEFT JOIN TD_CUST_FEE_RULE F ON C.CUST_ID=F.CUST_ID
-		left join tb_sp_province p ON P.PROVINCE_ID = C.province
+		left join tb_sp_province P ON P.PROVINCE_ID = C.province
 		left join tb_sp_city B ON B.city_id = C.city
         left join tb_bank_code Q ON Q.BANK_TYPE = C.COMP_ACCT_BANK
+        left join tb_sp_area M ON M.area_id = C.country
 		WHERE c.CUST_ID = #{custId,jdbcType=VARCHAR}
 	</select>
+
+    <select id="findAreaNameByAreaId" resultType="string" parameterType="string">
+		SELECT
+			C.area_name
+		FROM tb_sp_area C
+		where C.area_id = #{areaId,jdbcType=VARCHAR}
+
+	</select>
+
 	
 	<!-- 根据id查找微商户信息 -->
 	<select id="findTinyMerchantInfo" resultType="merchantVo" parameterType="string">

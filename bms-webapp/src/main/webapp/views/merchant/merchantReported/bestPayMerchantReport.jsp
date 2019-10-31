@@ -70,7 +70,7 @@
 							</tr>
 						    <tr></tr>
                             <tr>
-								<td class="td-left">进件类型：</td>
+								<td class="td-left">进件类型：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									<select class="width-90" id="merchantType" onchange = "getMerchantType();">
 											<option value="0">企业</option>
@@ -82,11 +82,11 @@
 							<td colspan="4" class="headlerPreview" style="background:#7ebde1;">商户信息</td></tr>
 						    <tr></tr>
                             <tr>
-								<td class="td-left" width="18%">商户编号：</td>
+								<td class="td-left" width="18%">商户编号：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" width="32%"> 
 									<input type="text" id="merchantCode" name="merchantCode" readonly="readonly" value="${custInfo.merchantCode }" style="width:90%">
 								</td>
-                                <td class="td-left" width="18%">商户简称：</td>
+                                <td class="td-left" width="18%">商户简称：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" width="32%"> 
 									<input type="text" id="custName" name="custName" placeholder="请输入商户简称" maxlength=""  value="${custInfo.custName }" style="width:90%">
 								</td>
@@ -95,7 +95,7 @@
 								<td colspan="4" class="headlerPreview" style="background:#7ebde1">基本信息</td>
 							</tr>
 							<tr>
-                                <td class="td-left">商户行业信息：</td>
+                                <td class="td-left">商户行业信息：<span style="color:red;">(必填)</span></td>
 								<td class="td-right">
 								 	<span>
 									   <select name="industry" id="industry" style="width-90;" >
@@ -109,13 +109,13 @@
 									   <label id="industryLabel" class="label-tips"></label>
 								   </span> 
 								</td>
-								<td class="td-left">创建人：</td>
+								<td class="td-left">创建人：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									<input type="text" id="createdBy" name="createdBy" placeholder="请输入创建人" maxlength=""  value="" style="width:90%">
 								</td>
 							</tr>
 	                        <tr>
-	                        	<td class="td-left">商户申请类型：</td>
+	                        	<td class="td-left">商户申请类型：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									<select name="merchantApplyType" id="merchantApplyType" style="width:width-90;"  >
 										<option value="">--请选择--</option>
@@ -126,7 +126,7 @@
 										</c:forEach>
 									</select>
 								</td>
-							    <td class="td-left">证件类型：</td>
+							    <td class="td-left">证件类型：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									<select name="certificateType" id="certificateType" style="width-90;"  >
 										<option value="LICENSE">营业执照</option>
@@ -140,18 +140,18 @@
                                 
 							</tr>
 	                        <tr>
-							    <td class="td-left">经营范围：</td>
+							    <td class="td-left">经营范围：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									 <input type="text" id="businessScope" name="businessScope" placeholder="请输入经营范围" maxlength=""  value="${custInfo.businessScope }" style="width:90%">
 								</td>
-                                <td class="td-left">工商注册号：</td>
+                                <td class="td-left">工商注册号：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									<input type="text" id="registrationNumber" name="registrationNumber" placeholder="请输入工商注册号"  value="${custInfo.businessLicense }" style="width:90%">
 									<label class="label-tips" id="registrationNumberLabel"></label>
 								</td>
 							</tr>
 							<tr>
-								<td class="td-left">注册地址：</td>
+								<td class="td-left">注册地址：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3">
 									<div class="col-xs-2 pd0" style="padding:0;">
 										<select name="province" id="province" class="form-control" onchange="getCity();">
@@ -186,7 +186,7 @@
 								</td>
 							</tr>	
 							<tr>
-								<td class="td-left">营业执照照片：</td>
+								<td class="td-left">营业执照照片：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success businessPhotoClick"  data-target="#previewImageModal"  >
 										<label id="businessPhotoDiv"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
@@ -201,7 +201,7 @@
 								</td>
 							</tr>
 							<tr id="shopInteriorType" style="display:">
-								<td class="td-left">店内照：</td>
+								<td class="td-left">店内照：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success shopInteriorClick"  data-target="#previewImageModal"  >
 										<label id="shopInteriorDiv"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
@@ -216,7 +216,7 @@
 								</td>
 							</tr>
 							<tr id="doorPhotoType" style="display:">
-								<td class="td-left">门头照：</td>
+								<td class="td-left">门头照：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success doorPhotoClick"  data-target="#previewImageModal"  >
 										<label id="doorPhotoDiv"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
@@ -235,17 +235,17 @@
 							</tr>
 							<tr></tr>
                             <tr>
-								<td class="td-left">法人真实姓名：</td>
+								<td class="td-left">法人真实姓名：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									<input type="text" id="representativeName" name="representativeName" placeholder="请输入法人真实姓名"  value="${custInfo.representativeName }" maxlength="50" style="width:90%">
 								</td>
-								<td class="td-left">手机号码：</td>
+								<td class="td-left">手机号码：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									<input type="text" name="mobileNo" id="mobileNo" placeholder="请输入手机号码"  value="${custInfo.merchantMobile }" style="width:90%">
 								</td>
 							</tr>
                             <tr>
-								<td class="td-left">法人证件类型：</td>
+								<td class="td-left">法人证件类型：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									<select name="representativeCertType" id="representativeCertType" style="width-90;"  >
 										<option value="ID">--身份证--</option>
@@ -254,17 +254,17 @@
 										<option value="PASSPORT">--护照--</option>
 									</select>
 								</td>
-								<td class="td-left">法人身份证号码：</td>
+								<td class="td-left">法人身份证号码：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									<input type="text" name="representativeCertNo" id="representativeCertNo" placeholder="请输入法人身份证号码"  value="5255456685555" style="width:90%">
 								</td>
 							</tr>
                             <tr>
-								<td class="td-left">户口所在地：</td>
+								<td class="td-left">户口所在地：<span style="color:red;">(必填)</span></td>
 								<td class="td-right">
 									<input type="text" id="residentCity" name="residentCity"  placeholder="请输入户口所在地"  value="" style="width:90%">
 								</td>
-								<td class="td-left">法人身份证有效期：</td>
+								<td class="td-left">法人身份证有效期：<span style="color:red;">(必填)</span></td>
 								<td class="td-right">		 
 									<input type="text" name="" id="" onfocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> -
                                     <input type="text" name="validDate" id="validDate" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> 
@@ -272,7 +272,7 @@
 								</td>													
 							</tr>
 							<tr>
-								<td class="td-left">法人身份证正面：</td>
+								<td class="td-left">法人身份证正面：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success certAttribute1Click"  data-target="#previewImageModal"  >
 										<label id="certAttribute1Div"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
@@ -287,7 +287,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td class="td-left">法人身份证背面：</td>
+								<td class="td-left">法人身份证背面：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3"> 
 									<a data-toggle='modal' class="tooltip-success certAttribute2Click"  data-target="#previewImageModal"  >
 										<label id="certAttribute2Div"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
@@ -305,17 +305,17 @@
 								<td colspan="4" class="headlerPreview" style="background:#7ebde1;">结算信息</td>
 							</tr>
 	                        <tr>
-								<td class="td-left">银行账户名称：</td>
+								<td class="td-left">银行账户名称：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									<input type="text" id="bankAcctName" name="bankAcctName" maxlength="100" placeholder="请输入结算账户名称"  value="" style="width-90;">
 								</td>
-                                 <td class="td-left">银行卡号：</td>
+                                 <td class="td-left">银行卡号：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									<input type="text" id="bankCardNo" name="bankCardNo" maxlength="100" placeholder="请输入银行卡号"  value="${custInfo.compMainAcct }" style="width-90;">
 								</td>
 							</tr>
 							<tr>
-								<td class="td-left">开户银行：</td>
+								<td class="td-left">开户银行：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									<span class="input-icon">	
 										<select name="bestBank" id="bestBank" style="width-90">
@@ -330,20 +330,20 @@
 									<!-- <input type="text" class="aui-form-control-two" style="width:90%;" name="interBankName"  required id="interBankName" placeholder="请输入银行名称">
 					                <label class="label-tips" id="interBankNameLabel"></label> -->
 								</td>
-                                <td class="td-left">开户支行名称：</td>
+                                <td class="td-left">开户支行名称：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									<input type="text" id="interBankName" name="interBankName" maxlength="100" placeholder="请输入开户支行名称"  value="${custInfo.branchBANK }" style="width-90">
 								</td>
 							</tr>
 							<tr>
-								<td class="td-left">结算类型：</td>
+								<td class="td-left">结算类型：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									<select class="width-90" id="perEntFlag">
 	                                    <option value="" id="0">对公</option>
                                         <option value="" id="1">对私</option>
 	                                </select>
 								</td>
-								<td class="td-left">银行账户类型 ：</td>
+								<td class="td-left">银行账户类型 ：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									<select name="bankCardType" id="bankCardType" style="width-90">
 										<option value="">--请选择--</option>
@@ -357,7 +357,7 @@
 							</tr>
 							
 							<tr>
-								<td class="td-left">是否有证商户：</td>
+								<td class="td-left">是否有证商户：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									<select name="bestMerchantType" id="bestMerchantType" style="width-90;"  >
 										<option value="">--请选择--</option>
@@ -365,13 +365,13 @@
 										<option value="Licensed">--有证商户--</option>
 									</select>
 								</td>
-								<td class="td-left">费率：</td>
+								<td class="td-left">费率：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									<input type="text" id="rate" name="rate" maxlength="100" placeholder="请输入费率"  value="" style="width-90">
 								</td>
 							</tr>
 							<tr id="openType" style="display:">
-								<td class="td-left">开户许可证照片：</td>
+								<td class="td-left">开户许可证照片：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success openClick"  data-target="#previewImageModal"  >
 										<label id="openDiv"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
