@@ -695,7 +695,7 @@
     	
     	
    		$("#submitData").click(function(){
-   			
+   			var merchantType = $("merchantType").val();
    			var channelNo = $("#channlCode").val();
    			var merchantCode = $("#merchantCode").val();
    			var custName = $("#custName").val();
@@ -858,8 +858,9 @@
   	   					},
   	   					dataType : "json",
   	   					success : function(data) {
-  	   						if(data.result=='SUCCESS')							
-  	   							$.post(window.Constants.ContextPath +"<%=MerchantReportedPath.BASE + MerchantReportedPath.BESTPAYSUBMITREPORT %>",
+  	   						if(data.result=='SUCCESS')	//翼支付企业报备	
+  	   						if("0" == merchantType){
+  	   							$.post(window.Constants.ContextPath +"<%=MerchantReportedPath.BASE + MerchantReportedPath.BESTPAYCOSUBMITREPORT %>",
   	   							{
   	   								"channelNo":channelNo,
 	   								"merchantCode":merchantCode,
@@ -908,7 +909,40 @@
   	   									alert(data.message);
   	   								}
   	   							},'json'
+  	   						  );
+  	   					}else{
+  	   					$.post(window.Constants.ContextPath +"<%=MerchantReportedPath.BASE + MerchantReportedPath.BESTPAYSUBMITREPORT %>",
+  	   							{
+  	   								"merchantCode":merchantCode,
+  	   								"province":province,
+  	   								"city":city,
+  	   								"country":country,
+  	   								"bankCode":bankCode,
+  	   								"interBank":interBank,
+  	   								"interBankName":interBankName,
+  	   								"channelNo":channelNo,
+  	   								"mobileNo":mobileNo,
+  	   								"rate":rate,
+  	   								"bankCardNo":bankCardNo,
+  	   								"certifyNo":certifyNo,
+  	   								"industryCode":industryCode,
+  	   								"bestMerchantType":bestMerchantType,
+  	   								"interName":interName
+  	   							},
+  	   							function(data){
+  	   								if(data.result=="SUCCESS"){
+  	   									$.gyzbadmin.alertSuccess("提交报备成功！",function(){
+  	   									},function(){
+  	   										this.location.reload();
+  	   									});
+  	   								}else{
+  	   									alert(data.message);
+  	   								}
+  	   							},'json'
   	   						  );	
+  	   					}
+  	   						
+  	   						
   	   					}
   	   				});
   	  			}else{
