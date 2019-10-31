@@ -146,7 +146,7 @@
 								</td>
                                 <td class="td-left">工商注册号：</td>
 								<td class="td-right"> 
-									<input type="text" id="registrationNumber" name="registrationNumber" placeholder="请输入工商注册号"  value="" style="width:90%">
+									<input type="text" id="registrationNumber" name="registrationNumber" placeholder="请输入工商注册号"  value="${custInfo.businessLicense }" style="width:90%">
 									<label class="label-tips" id="registrationNumberLabel"></label>
 								</td>
 							</tr>
@@ -911,7 +911,7 @@
   	   							},'json'
   	   						  );
   	   					}else{
-  	   					$.post(window.Constants.ContextPath +"<%=MerchantReportedPath.BASE + MerchantReportedPath.BESTPAYSUBMITREPORT %>",
+  	   						$.post(window.Constants.ContextPath +"<%=MerchantReportedPath.BASE + MerchantReportedPath.BESTPAYSUBMITREPORT %>",
   	   							{
   	   								"merchantCode":merchantCode,
   	   								"province":province,
