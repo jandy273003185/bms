@@ -58,7 +58,7 @@ public class MerchantEnterReportedController {
    private KftIncomeMapper kftIncomeMapper;
 	 
    /**
-    * 商户报备入口
+    * 商户报备查询
     */
 	@RequestMapping(MerchantEnterReportedPath.QUERYSTATUS)
 	@ResponseBody

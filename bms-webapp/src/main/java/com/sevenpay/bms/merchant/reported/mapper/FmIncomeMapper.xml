@@ -18,7 +18,7 @@
 			f.cust_name,
 			f.short_name,
 			r.report_status as detail_status,
-			l.email,
+			f.merchant_email as email,
 			r.channel_no,
 			DATE_FORMAT(t.modify_time,'%Y-%m-%d %H:%i:%s') modify_time,
 			DATE_FORMAT(t.create_time,'%Y-%m-%d %H:%i:%s') reportTime
