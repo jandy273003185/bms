@@ -19,8 +19,7 @@
 <%@ taglib prefix="sevenpay" uri="http://bms.sevenpay.org/taglib/1.0"		%>
 
 <%
-
-CommonConfig commonConfig=CommonConfig.getInstance();
+	CommonConfig commonConfig=CommonConfig.getInstance();
      String _jsVersion=commonConfig.getValue("VERSION");
      String _cssVersion=commonConfig.getValue("VERSION");
 	// 登陆对象
@@ -33,12 +32,12 @@ CommonConfig commonConfig=CommonConfig.getInstance();
 		requestUrl = requestUrl.replaceAll(request.getContextPath(), "");
 		List<Function> functionList = user.getFunctionList();
 		if(null != functionList && !functionList.isEmpty()) {
-			for(Function function : functionList) {
-				if(requestUrl.equals(null == function.getFunctionUrl() ? null : function.getFunctionUrl().replaceAll("\\?.*", ""))) {
-					requestFunction = function;
-					break;
-				}
-			}
+	for(Function function : functionList) {
+		if(requestUrl.equals(null == function.getFunctionUrl() ? null : function.getFunctionUrl().replaceAll("\\?.*", ""))) {
+	requestFunction = function;
+	break;
+		}
+	}
 		}
 	}
 	pageContext.setAttribute("requestFunction", requestFunction);

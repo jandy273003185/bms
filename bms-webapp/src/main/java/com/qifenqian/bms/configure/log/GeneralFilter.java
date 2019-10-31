@@ -18,11 +18,10 @@ import org.springframework.web.util.NestedServletException;
 
 import com.qifenqian.bms.platform.common.utils.ThreadUtils;
 import com.qifenqian.bms.platform.web.Constants;
-import com.qifenqian.bms.platform.web.admin.filter.GeneralFilter;
 import com.qifenqian.bms.platform.web.admin.user.bean.User;
 import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
-public class LogFilter implements Filter {
+public class GeneralFilter implements Filter {
   private static final Logger LOGGER = LoggerFactory.getLogger(GeneralFilter.class);
 
   /** 过滤 */
