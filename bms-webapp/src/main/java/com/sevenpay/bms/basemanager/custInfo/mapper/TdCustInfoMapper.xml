@@ -418,7 +418,7 @@
 					ur.user_id = #{userId,jdbcType=VARCHAR}
 			) t
 		WHERE
-			t.role_code = 'MarketPresident' or t.role_code = 'MarketVicePresident'
+			t.role_code = 'MarketPresident' or t.role_code = 'MarketVicePresident' or t.role_code = 'test'
 	</select>
 
 	<select id="selectByMerchantCode" resultType="com.sevenpay.bms.basemanager.custInfo.bean.TdCustInfo" parameterType="java.lang.String" >

@@ -580,8 +580,8 @@ function addMerchantBtn(){
                     data : {
                         businessPhoto : $('#businessPhototemp').val(),         //商户营业执照
                         certAttribute1 : $('#certAttribute1temp').val(),               //身份证正面照
-                        certAtrribute2 : $('#certAttribute2temp').val(),              //身份证背面照
-                        openAccount : $('#openAccounttemp').val(),                   //开户银行
+                        certAttribute2 : $('#certAttribute2temp').val(),              //身份证背面照
+                        certAttribute0 : $('#openAccounttemp').val(),                   //开户银行
                         bankCardPhoto : $('#bankCardPhototemp').val(),                   //开户银行
                     },
                     dataType : "json",
@@ -926,7 +926,7 @@ $(function(){
 							<td class="td-left" >法人身份证背面<span style="color:red">*</span></td>
 							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success certAttribute2Click"  data-target="#previewImageModal" >
-									<label id="certAttribute2Div2" class="uploadImage">
+									<label id="certAttribute2Div" class="uploadImage">
 									        <img  id="certAttribute2Image" style="width:100%;height:100%;display:none"/>
 									</label>
 								</a>

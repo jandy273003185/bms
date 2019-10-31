@@ -5,6 +5,8 @@
 <%@page import="com.sevenpay.bms.basemanager.merchant.AuditorPath"%>
 <%@page import="com.sevenpay.bms.basemanager.merchant.TinyMerchantPath" %>
 <%@page import="com.sevenpay.bms.basemanager.agency.controller.AgentRegisterPath" %>
+<%@page import="com.sevenpay.bms.merchant.merchantReported.MerchantEnterReportedPath"%>
+<%@page import="com.sevenpay.bms.merchant.reported.MerchantReportedPath"%>
 <% String url = request.getScheme()+"://"+ request.getServerName()+":"+request.getServerPort(); %>
 <link rel="stylesheet" href="/static/css/font-awesome.min.css">
 <!-- page specific plugin styles -->
@@ -151,6 +153,111 @@
                     }
                 });
             });
+
+
+        /**判断商户是否已经报备 **/
+        $("#choiceChannel").click(function(){
+            var channlCode = $("#channlCode").val();
+            var merchantCode= $("#merchantCode_1").val();
+            if(kong.test($("#channlCode").val())){
+                $("#channlCodeLab").text("请选择渠道提交");
+                return false;
+            }
+            var status ="unReported";
+            //查询出是否已报备
+            $.ajax({
+                type:"POST",
+                dataType:"json",
+                url:window.Constants.ContextPath+'<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.QUERYSTATUS %>',
+                data:
+                    {
+                        "merchantCode" 	: merchantCode,
+                        "channlNo"    : channlCode
+                    },
+                success:function(data){
+                    if(data.result=="SUCCESS"){
+                        $("#choiceChannelLab").text("该渠道已报备");
+                        return false;
+                        //已报备则显示出弹框
+                        /* $('#channelListModel').modal('hide');
+                        $('#confirmModel').modal('show'); */
+                    }else{
+                        if("BEST_PAY" == channlCode){
+
+                            var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.BESTPAYMERCHANTREPORT%>?merchantCode="+merchantCode+"&status="+status+"&channlCode="+channlCode;
+                            var name="window";                        //网页名称，可为空;
+                            var iWidth=1200;                          //弹出窗口的宽度;
+                            var iHeight=600;                       //弹出窗口的高度;
+                            //获得窗口的垂直位置
+                            var iTop = (window.screen.availHeight-30-iHeight)/2;
+                            //获得窗口的水平位置
+                            var iLeft = (window.screen.availWidth-10-iWidth)/2;
+                            var params='width='+iWidth
+                                +',height='+iHeight
+                                +',top='+iTop
+                                +',left='+iLeft;
+                            /*  $.blockUI();  */
+                            winChild =  window.open(url, name,params);
+
+                        }
+                        if("SUIXING_PAY" == channlCode){
+
+                            var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.SUIXINGMERCHANTREPORT%>?merchantCode="+merchantCode+"&status="+status+"&channlCode="+channlCode;
+                            var name="window";                        //网页名称，可为空;
+                            var iWidth=1200;                          //弹出窗口的宽度;
+                            var iHeight=600;                       //弹出窗口的高度;
+                            //获得窗口的垂直位置
+                            var iTop = (window.screen.availHeight-30-iHeight)/2;
+                            //获得窗口的水平位置
+                            var iLeft = (window.screen.availWidth-10-iWidth)/2;
+                            var params='width='+iWidth
+                                +',height='+iHeight
+                                +',top='+iTop
+                                +',left='+iLeft;
+                            /*  $.blockUI();  */
+                            winChild =  window.open(url, name,params);
+                        }
+
+                        if("YQB" == channlCode){
+
+                            var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.YQBMERCHANTREPORT%>?merchantCode="+merchantCode+"&status="+status+"&channlCode="+channlCode;
+                            var name="window";                        //网页名称，可为空;
+                            var iWidth=1200;                          //弹出窗口的宽度;
+                            var iHeight=600;                       //弹出窗口的高度;
+                            //获得窗口的垂直位置
+                            var iTop = (window.screen.availHeight-30-iHeight)/2;
+                            //获得窗口的水平位置
+                            var iLeft = (window.screen.availWidth-10-iWidth)/2;
+                            var params='width='+iWidth
+                                +',height='+iHeight
+                                +',top='+iTop
+                                +',left='+iLeft;
+                            /*  $.blockUI();  */
+                            winChild =  window.open(url, name,params);
+                        }
+
+                        if("KFT_PAY" == channlCode){
+
+                            var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.KFTMERCHANTREPORT%>?merchantCode="+merchantCode+"&status="+status+"&channlCode="+channlCode;
+                            var name="window";                        //网页名称，可为空;
+                            var iWidth=1200;                          //弹出窗口的宽度;
+                            var iHeight=600;                       //弹出窗口的高度;
+                            //获得窗口的垂直位置
+                            var iTop = (window.screen.availHeight-30-iHeight)/2;
+                            //获得窗口的水平位置
+                            var iLeft = (window.screen.availWidth-10-iWidth)/2;
+                            var params='width='+iWidth
+                                +',height='+iHeight
+                                +',top='+iTop
+                                +',left='+iLeft;
+                            /*  $.blockUI();  */
+                            winChild =  window.open(url, name,params);
+                        }
+                        window.location.reload();
+                    }
+                }
+            });
+        });
     })
 
 
@@ -251,6 +358,11 @@
         winChild = window.open(url, name,params);
     };
 
+    function channelMerchantEntry(obj){
+        var merchantCode = $(obj).parent().find('input[name="merchantCode"]').val();
+        $("#channelListModel #merchantCode_1").val(merchantCode);
+
+    }
 </script>
 <body>
 <%@ include file="/include/top.jsp"%>
@@ -491,13 +603,13 @@
 													<button type="submit" class="btn btn-purple btn-sm">商户审核</button>
 												</a>
 											</gyzbadmin:function>
-											<!-- 报备链接未建 -->
-												<gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.PRODUCT %>">
-                                                    <a href="#" class="" onclick="productMerchantEntry(this)" data-rel="tooltip" title="Query" data-toggle='modal'>
-                                                        <button type="submit" class="btn btn-purple btn-sm">报备</button>
-                                                    </a>
-                                                </gyzbadmin:function>
-                                                <%--<gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.PRODUCT %>">
+												<%-- <gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.PRODUCT %>">
+        <a href="#" class="" onclick="productMerchantEntry(this)" data-rel="tooltip" title="Query" data-toggle='modal'>
+            <button type="submit" class="btn btn-purple btn-sm">报备</button>
+        </a>
+    </gyzbadmin:function> --%>
+											<button type="hidden" type="button" onclick="channelMerchantEntry(this)" data-toggle='modal'  data-target="#channelListModel"  class="btn btn-purple btn-sm" >报备</button>
+												<%--<gyzbadmin:function url="<%=MerchantEnterPath.BASE + MerchantEnterPath.PRODUCT %>">
                                                     <a href="#" class="" onclick="productMerchantEntry(this)" data-rel="tooltip" title="Query" data-toggle='modal'>
                                                         <button type="submit" class="btn btn-purple btn-sm">产品查看</button>
                                                     </a>
@@ -545,6 +657,39 @@
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default messageDefault" data-dismiss="modal">取消</button>
 								<button type="button" class="btn btn-primary addadBtn" onclick="notPass()">确定</button>
+							</div>
+						</div><!-- /.modal-content -->
+					</div>
+				</div><!-- /.modal -->
+
+
+
+				<!-- 渠道弹框 -->
+				<div class="modal fade" style="z-index:1043;" id="channelListModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog" style="width:30%;z-index:99;">
+						<div class="modal-content" >
+							<div class="modal-header" style="background-color:0099CC">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="myModalLabel">报备渠道选择</h4>
+							</div>
+							<div class="modal-body">
+								<input  type="hidden"  name="merchantCode_1" id="merchantCode_1" value="">
+								<select name="channlCode" id="channlCode" style="width:300px;text-align: center;">
+									<option value="">--请选择报备渠道--</option>
+									<c:if test="${not empty channlInfoList }">
+										<c:forEach items="${channlInfoList }" var="info">
+											<option id="${info.channlId}" value="${info.channlCode}">${info.channlName}</option>
+										</c:forEach>
+									</c:if>
+
+								</select>
+								<label class="label-tips" id="channlCodeLab"></label>
+							</div>
+							<div class="modal-footer">
+								<button type="button" id="choiceChannel" class="btn btn-primary addadBtn">确定</button>
+								<label class="label-tips" id="choiceChannelLab"></label>
+								<button type="button" class="btn btn-default messageDefault" data-dismiss="modal">取消</button>
+
 							</div>
 						</div><!-- /.modal-content -->
 					</div>

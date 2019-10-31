@@ -1287,6 +1287,19 @@ public class MerchantService {
       bankAccountBean.setCertifyNo(info.getCompMainAcct());
       custScanMapper.insertCustScan(bankAccountBean);
 
+      /** 银行卡照 **/
+      CustScan bankCardBean = new CustScan();
+      bankCardBean.setCustId(custId);
+      bankCardBean.setAuthId(info.getAuthId());
+      bankCardBean.setCertifyType(Constant.CERTIFY_TYPE_MERCHANT_BANKCARD);
+      bankCardBean.setScanCopyPath(cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_BANKCARD
+              + File.separator + custId + File.separator + fileNames.get("bankCardPhoto"));
+      bankCardBean.setCustName(info.getCustName());
+      bankCardBean.setCreateId(createId);
+      bankCardBean.setCertifyNo(info.getCompMainAcct());
+      custScanMapper.insertCustScan(bankCardBean);
+
+
       /** 身份证 **/
       CustScan certifyCardBean = new CustScan();
       certifyCardBean.setCustId(custId);
