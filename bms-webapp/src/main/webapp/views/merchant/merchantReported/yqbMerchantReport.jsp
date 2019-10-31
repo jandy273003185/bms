@@ -131,10 +131,9 @@
 									</td>
 	                                <td class="td-left">营业执照有效期：</td>
 									<td class="td-right">
-										<input type="text" name="businessEffectiveTerm" id="businessEffectiveTerm" value="${custInfo.businessTermStart }" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> -
-	                                    <input type="radio" checked="checked" name="end1" value="sel1"/>
+										<input type="text" name="businessEffectiveTerm" id="businessEffectiveTerm" value="${custInfo.businessTermStart }" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> ——
 	                                    <input type="text" name="businessTerm" id="businessTerm" value="${custInfo.businessTermEnd }" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
-	                                    <input name="end1" type="radio" value="forever1" id="end1"> 长期
+	                                    <input type="button" onclick="businessForever()" value="长期" />
 									</td>
 								</tr>
                         		<tr id="establishDateType" style = "display:">
@@ -294,10 +293,9 @@
 								</td>
 								<td class="td-left">法人身份证有效期：</td>
 								<td class="td-right">
-									<input type="text" name="identityEffDate" id="identityEffDate" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> -
-                                    <input type="radio" checked="checked" name="end" value="sel"/>
-                                    <input type="text" name="identityValDate" id="identityValDate" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> 
-                                    <input name="end" type="radio" value="forever"> 长期
+									<input type="text" name="identityEffDate" id="identityEffDate" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> ——
+                                    <input type="text" name="identityValDate" id="identityValDate" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> 
+                                    <input type="button" onclick="identityForever()" value="长期" />
 								</td>
 							</tr>
 							<tr id="idCardType" style = "display:">
@@ -468,7 +466,17 @@
 		$(function(){
 			$("#bank").comboSelect();
 		})
-
+		
+		function businessForever(){
+		    /* $("input[name='businessTerm']").val("2099-12-31").focus(); */
+		    $("#businessTerm").attr("value","2099-12-31");
+		}
+		function identityForever(){
+		    /* $("input[name='businessTerm']").val("2099-12-31").focus(); */
+		    $("#identityValDate").attr("value","2099-12-31");
+		}
+		
+		
 		function exit() {
 	   		if (confirm("您确定要关闭吗？")) {
 	   			window.opener=null;
@@ -1110,16 +1118,11 @@
 	   		    		$("#interNameLab").text("");
 	   		    	}
 			  	  	//营业执照时间单选是否选中
-			  	 	var val=$('input:radio[value="forever1"]:checked').val();
 			  	 	//alert(businessTerm);
-			  	  	if("" == businessEffectiveTerm || "" == businessTerm && val == null){
+			  	  	if("" == businessEffectiveTerm || "" == businessTerm){
 	   		    		$("#businessEffectiveTermLab").text("营业执照时间不能为空");
 	   		    		$("#businessEffectiveTerm").focus();
 	   		    		return false;
-	   		    	}else if(val != null){
-	   		    		//$("#businessTerm").val("长期");
-	   		    		businessTerm = "长期";
-	   		    		//alert(businessTerm);
 	   		    	}else{
 	   		    		$("#businessEffectiveTermLab").text("");
 	   		    	}
@@ -1151,16 +1154,11 @@
 	   		    	}
 	   		    	
 	   		   		//身份证时间单选是否选中
-			  	 	var val1=$('input:radio[value="forever"]:checked').val();
 			  	 	//alert(identityValDate);
-	   		    	if("" == identityEffDate || "" == identityValDate && val1 == null){
+	   		    	if("" == identityEffDate || "" == identityValDate){
 	   		    		$("#identityEffDateLab").text("法人身份证有效时间不能为空");
 	   		    		$("#identityEffDate").focus();
 	   		    		return false;
-	   		    	}else if(val1 != null){
-	   		    		//$("#identityValDate").val("长期");
-	   		    		identityValDate = "长期";
-	   		    		//alert(identityValDate);
 	   		    	}else{
 	   		    		$("#identityEffDateLab").text("");
 	   		    	}
@@ -1265,7 +1263,7 @@
   	   						shopInterior : $('#shopInteriortemp').val(),//商户经营场所或仓库照	
   	   						qualification :$('#qualificationtemp').val(),//特殊行业资质图片
   	   						signature : $('#signaturetemp').val(), //电子签名照
-  	   						open : $('#opentemp').val(),//企业：开户许可证
+  	   						certAttribute0 : $('#opentemp').val(),//企业：开户许可证
   	   						bankCardPhoto : $('#bankCardPhototemp').val(),//结算卡照片  个体/个人：银行卡正面照片("");
   	   						doorPhoto : imgDoor,//店铺门面照
 	   						doorSrc : imgSrc	

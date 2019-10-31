@@ -267,8 +267,9 @@
 								<td class="td-left">法人身份证有效期：</td>
 								<td class="td-right">		 
 									<input type="text" name="" id="" onfocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> -
-                                    <input type="text" name="validDate" id="validDate" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> <input name="" type="radio" value=""> 长期
-								</td>
+                                    <input type="text" name="validDate" id="validDate" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> 
+                                    <input type="button" onclick="forever()" value="长期" />
+								</td>													
 							</tr>
 							<tr>
 								<td class="td-left">法人身份证正面：</td>
@@ -415,6 +416,10 @@
 	     </div>
 	</div>   
 <script type="text/javascript">
+	function forever(){
+	   /*  $("input[name='validDate']").val("2099-12-31").focus(); */
+	    $("#validDate").attr("value","2099-12-31");
+	}
 	
 	function getMerchantType(){
 		var merchantType = $("merchantType").val();
@@ -842,7 +847,7 @@
   	   					type : "POST",
   	   					url : window.Constants.ContextPath +'<%=MerchantReportedPath.BASE + MerchantReportedPath.FILEUPLOAD%>?merchantCode='+merchantCode,
   	   					data :{
-  	   						open : $('#opentemp').val(),
+  	   						openAccount : $('#opentemp').val(),
   	   						shopInterior : $('#shopInteriortemp').val(),
   	   						businessPhoto : $('#businessPhototemp').val(),
   	   						certAttribute0 : $('#certAttribute0temp').val(),

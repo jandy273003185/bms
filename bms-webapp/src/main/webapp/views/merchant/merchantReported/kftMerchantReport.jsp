@@ -1388,11 +1388,11 @@
 				type : "POST",
 				url : window.Constants.ContextPath +'<%=MerchantReportedPath.BASE + MerchantReportedPath.FILEUPLOAD%>?merchantCode='+merchantCode,
 				data :{
-						cooperate  : $('#cooperatetemp').val(),
+						cooperate  : $('#cooperatetemp').val(),//合作证明函
  						businessPhoto : $('#businessPhototemp').val(),//营业执照
   	   					certAttribute1 : $('#certAttribute1temp').val(),//法人身份证正面照路径
    						certAttribute2 : $('#certAttribute2temp').val(),//法人身份证反面照路径
-   						open : $('#openPhototemp').val(),//企业：开户许可证
+   						openAccount : $('#openPhototemp').val(),//企业：开户许可证
    						bankCardPhoto : $('#bankCardPhototemp').val(),//结算卡照片  个体/个人：银行卡正面照片("");
    						bankCardBackPhoto : $('#bankCardBackPhototemp').val(),//结算卡照片  个体/个人：银行卡反面照片("");
    						settleIdCard : $('#settleIdCardtemp').val(),//手持身份证照片;

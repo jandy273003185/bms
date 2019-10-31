@@ -593,6 +593,11 @@
             window.close();
         }
     };
+    
+    function fun(){
+        /* $("input[name='businessTermEnd']").val("2099-12-31").focus(); */
+        $("#businessTermEnd").attr("value","2099-12-31");
+    }
 </script>
 <body>
 <%@ include file="/include/top.jsp"%>
@@ -696,7 +701,7 @@
 								<td class="td-left" id="businessTimeId">营业执照有效期：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
 
-									<input type="text" id="businessTermStart" name="businessTermStart" value = ${merchantVo.businessTermStart } onfocus="WdatePicker({skin:'whyGreen'})" onfocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
+									<input type="text" id="businessTermStart" name="businessTermStart" value = ${merchantVo.businessTermStart } onfocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
 									<label class="label-tips" id="businessTermLabStart"></label>
 									-
 									<input type="text" id="businessTermEnd" name="businessTermEnd" value =
@@ -708,16 +713,10 @@
 												${merchantVo.businessTermEnd }
 											</c:otherwise>
 									</c:choose>
-										   onfocus="WdatePicker({skin:'whyGreen'})" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
+										    onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
 									<label class="label-tips" id="businessTermLabEnd"></label>
 
 									<input type="button" onclick="fun()" value="长期" />
-									<script>
-                                        function fun(){
-                                            $("input[name='businessTermEnd']").val("2099-12-31").focus();
-                                            $("#businessTermEnd").attr("value","2099-12-31");
-                                        }
-									</script>
 								</td>
 							</tr>
 							<tr>

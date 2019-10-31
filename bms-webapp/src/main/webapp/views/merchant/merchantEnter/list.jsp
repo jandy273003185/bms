@@ -182,6 +182,7 @@
     					/* $('#channelListModel').modal('hide');
     					$('#confirmModel').modal('show'); */
     				}else if(data.status =="01" && data.result =="FAIL"){
+    					alert("商户未审核通过，请先审核");
     					var custId = data.custId;
     					var url=window.Constants.ContextPath+"<%=MerchantEnterPath.BASE + MerchantEnterPath.AUDITPAGE%>?custId="+custId;
     			        var name="newwindow";
