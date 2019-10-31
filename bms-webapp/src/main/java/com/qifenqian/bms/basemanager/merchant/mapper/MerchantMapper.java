@@ -4,10 +4,9 @@ package com.qifenqian.bms.basemanager.merchant.mapper;
 import java.util.List;
 import java.util.Map;
 
+import com.qifenqian.bms.basemanager.merchant.bean.*;
 import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.annotation.MapperScan;
-
-import com.qifenqian.bms.basemanager.merchant.bean.*;
 
 @MapperScan
 public interface MerchantMapper {
@@ -182,4 +181,7 @@ public interface MerchantMapper {
 	List<MerchantVo> auditList2(MerchantVo merchantVo);
 
 
+	void updateMerchantEnter(MerchantVo merchantVo);
+
+	String findAreaNameByAreaId(String areaId);
 }

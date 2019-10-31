@@ -53,4 +53,16 @@ public final class MerchantEnterPath {
 	 * 验证商户账号唯一性
 	 */
 	public final static String VALIDATEMERCHANTACCOUNT ="/validateMerchantAccount";
+
+	/**
+	 * 验证业务员
+	 */
+	public final static String VERIFYBUSINESSPERSONNEL ="/verifyBusinessPersonnel";
+
+	/**
+	 * 验证代理商
+	 */
+	public final static String VERIFICATIONAGENT ="/verificationAgent";
+
+
 }

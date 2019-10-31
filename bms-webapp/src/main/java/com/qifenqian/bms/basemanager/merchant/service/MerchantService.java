@@ -15,10 +15,11 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import com.qifenqian.bms.basemanager.merchant.bean.*;
+import com.qifenqian.bms.basemanager.merchant.mapper.*;
 import org.activiti.engine.IdentityService;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
@@ -30,12 +31,15 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.lang3.StringUtils;
+import com.qifenqian.bms.platform.common.utils.SpringUtils;
+import com.qifenqian.bms.platform.web.admin.user.bean.User;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
+import com.qifenqian.bms.platform.web.myWorkSpace.service.WorkSpaceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.Constant;
 import com.qifenqian.bms.basemanager.acctsevenbuss.bean.AcctSevenBuss;
@@ -44,21 +48,11 @@ import com.qifenqian.bms.basemanager.bank.bean.Bank;
 import com.qifenqian.bms.basemanager.bank.service.BankService;
 import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
 import com.qifenqian.bms.basemanager.custInfo.mapper.TdCustInfoMapper;
-import com.qifenqian.bms.basemanager.merchant.bean.BmsProtocolContent;
-import com.qifenqian.bms.basemanager.merchant.bean.CustScan;
-import com.qifenqian.bms.basemanager.merchant.bean.Merchant;
-import com.qifenqian.bms.basemanager.merchant.bean.MerchantExport;
-import com.qifenqian.bms.basemanager.merchant.bean.MerchantVo;
-import com.qifenqian.bms.basemanager.merchant.bean.StoreManage;
-import com.qifenqian.bms.basemanager.merchant.bean.TdCertificateAuth;
-import com.qifenqian.bms.basemanager.merchant.bean.TdLoginUserInfo;
-import com.qifenqian.bms.basemanager.merchant.bean.TinyMerchantExport;
 import com.qifenqian.bms.basemanager.merchant.dao.MerchantDao;
 import com.qifenqian.bms.basemanager.merchant.mapper.BmsProtocolContentMapper;
 import com.qifenqian.bms.basemanager.merchant.mapper.CustScanMapper;
 import com.qifenqian.bms.basemanager.merchant.mapper.MerchantMapper;
 import com.qifenqian.bms.basemanager.merchant.mapper.StoreManageMapper;
-import com.qifenqian.bms.basemanager.merchant.mapper.TdCertificateAuthMapper;
 import com.qifenqian.bms.basemanager.merchant.mapper.TdLoginUserInfoMapper;
 import com.qifenqian.bms.basemanager.photo.bean.CertificateAuth;
 import com.qifenqian.bms.basemanager.utils.DatetimeUtils;
@@ -66,10 +60,6 @@ import com.qifenqian.bms.basemanager.utils.GenSN;
 import com.qifenqian.bms.common.util.PropertiesUtil;
 import com.qifenqian.bms.common.util.RedisUtil;
 import com.qifenqian.bms.expresspay.CommonService;
-import com.qifenqian.bms.platform.common.utils.SpringUtils;
-import com.qifenqian.bms.platform.web.admin.user.bean.User;
-import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
-import com.qifenqian.bms.platform.web.myWorkSpace.service.WorkSpaceService;
 import com.sevenpay.invoke.SevenpayCoreServiceInterface;
 import com.sevenpay.invoke.common.message.request.RequestMessage;
 import com.sevenpay.invoke.common.message.response.ResponseMessage;
@@ -82,7 +72,6 @@ import com.sevenpay.invoke.transaction.createbuss.CreateAcctSevenBussResponse;
 import com.sevenpay.plugin.IPlugin;
 import com.sevenpay.plugin.message.bean.MessageBean;
 import com.sevenpay.plugin.message.bean.MessageColumnValues;
-
 import redis.clients.jedis.Jedis;
 
 /**
@@ -871,6 +860,18 @@ public class MerchantService {
 				nameType.put("signature", filename);
 				imgString = ov.split(",")[1];
 				break;
+			case "bankCardBackPhoto"://银行卡反面照
+				filename ="bankCardBackPhoto"+GenSN.getMerchantPictureNo()+ov.split(",")[0];
+				cf_path = cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_BANKCARDBACK + File.separator + custId;
+				nameType.put("bankCardBackPhoto", filename);
+				imgString = ov.split(",")[1];
+				break;
+			case "settleIdCard"://手持身份证
+				filename ="settleIdCard"+GenSN.getMerchantPictureNo()+ov.split(",")[0];
+				cf_path = cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_HANDIDCARD + File.separator + custId;
+				nameType.put("settleIdCard", filename);
+				imgString = ov.split(",")[1];
+				break;
             default:
               continue;
           }
@@ -1092,8 +1093,8 @@ public class MerchantService {
   }
 
   public MerchantVo findMerchantInfo(String custId) {
-    MerchantVo merchantVo  = merchantMapper.findMerchantInfo(custId);
-    return merchantVo;
+	MerchantVo merchantVo  = merchantMapper.findMerchantInfo(custId);
+	return merchantVo;
 
   }
 
@@ -1285,6 +1286,19 @@ public class MerchantService {
       bankAccountBean.setCreateId(createId);
       bankAccountBean.setCertifyNo(info.getCompMainAcct());
       custScanMapper.insertCustScan(bankAccountBean);
+
+      /** 银行卡照 **/
+      CustScan bankCardBean = new CustScan();
+      bankCardBean.setCustId(custId);
+      bankCardBean.setAuthId(info.getAuthId());
+      bankCardBean.setCertifyType(Constant.CERTIFY_TYPE_MERCHANT_BANKCARD);
+      bankCardBean.setScanCopyPath(cf_path + File.separator + Constant.CERTIFY_TYPE_MERCHANT_BANKCARD
+              + File.separator + custId + File.separator + fileNames.get("bankCardPhoto"));
+      bankCardBean.setCustName(info.getCustName());
+      bankCardBean.setCreateId(createId);
+      bankCardBean.setCertifyNo(info.getCompMainAcct());
+      custScanMapper.insertCustScan(bankCardBean);
+
 
       /** 身份证 **/
       CustScan certifyCardBean = new CustScan();
@@ -1546,8 +1560,8 @@ public class MerchantService {
     }
 
     try {
-        MerchantVo merchantInfo = merchantMapper.findMerchantInfo(merchantVo.getCustId());
-        if (null != merchantVo.getCustName()) {
+      MerchantVo merchantInfo = merchantMapper.findMerchantInfo(merchantVo.getCustId());
+      if (null != merchantVo.getCustName()) {
         merchantMapper.updateAcctNameByCustName(merchantVo);
       }
       if (StringUtils.isEmpty(merchantVo.getMerchantCode())) {
@@ -1555,13 +1569,16 @@ public class MerchantService {
       }
 
       merchantMapper.updateMerchantLoginInfo(merchantVo);
+//      merchantMapper.updateByPrimaryKeySelective(merchantVo);
 
       merchantMapper.updateMerchant(merchantVo);
-        TdCertificateAuth tdCertificateAuth = new TdCertificateAuth();
-        tdCertificateAuth.setCertificateState("1");
-        tdCertificateAuth.setAuthId(Integer.parseInt(merchantInfo.getAuthId()));
-        tdCertificateAuth.setCustId(merchantVo.getCustId());
-        tdCertificateAuthMapper.updateByPrimaryKeySelective(tdCertificateAuth);
+      
+      TdCertificateAuth tdCertificateAuth = new TdCertificateAuth();
+      tdCertificateAuth.setCertificateState("1");
+      tdCertificateAuth.setAuthId(Integer.parseInt(merchantInfo.getAuthId()));
+      tdCertificateAuth.setCustId(merchantVo.getCustId());
+      tdCertificateAuthMapper.updateByPrimaryKeySelective(tdCertificateAuth);
+
     } catch (Exception e) {
       logger.error("修改异常", e);
       throw e;
@@ -1609,7 +1626,7 @@ public class MerchantService {
       // 更新商户信息
       //updateMerchant(merchantVo);
       updateMerchantEnter(merchantVo);
-      //workSpaceService.updateCustScanInfo(merchantVo.getCustId(), merchantVo, filePath);
+      workSpaceService.updateCustScanInfo(merchantVo.getCustId(), merchantVo, filePath);
       workSpaceService.updateEnterCustScanInfo(merchantVo.getCustId(), merchantVo, filePath);
 
     } catch (Exception e) {
@@ -2139,4 +2156,7 @@ public class MerchantService {
     return merchantMapper.newExportlist(merchantVo);
   }
 
+    public String findAreaNameByAreaId(String country) {
+        return merchantMapper.findAreaNameByAreaId(country);
+    }
 }

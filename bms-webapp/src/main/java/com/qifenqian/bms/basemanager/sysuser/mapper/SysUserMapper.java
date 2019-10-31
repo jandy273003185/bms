@@ -21,4 +21,9 @@ public interface SysUserMapper {
 	
 	public List<SysUser> selectSysUser();
 
+	SysUser selectUserById(String userId);
+
+	SysUser selectUserByUserName(String custManager);
+
+	SysUser selectDeptByAgentName(String deptName);
 }

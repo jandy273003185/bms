@@ -18,6 +18,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.seven.micropay.base.domain.ChannelResult;
+import com.seven.micropay.base.enums.ReStatus;
+import com.seven.micropay.channel.domain.merchant.suixinpayInfo.SxPayRequestInfo;
+import com.seven.micropay.channel.enums.ChannelMerRegist;
+import com.seven.micropay.channel.service.IMerChantIntoService;
+import com.seven.micropay.commons.util.DateUtil;
 import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
 import com.qifenqian.bms.basemanager.merchant.service.MerchantService;
 import com.qifenqian.bms.basemanager.utils.GenSN;
@@ -33,15 +39,8 @@ import com.qifenqian.bms.merchant.reported.bean.Province;
 import com.qifenqian.bms.merchant.reported.bean.TbFmTradeInfo;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
 import com.qifenqian.bms.merchant.reported.dao.FmIncomeMapperDao;
-import com.qifenqian.bms.merchant.reported.mapper.FmIncomeMapper;
 import com.qifenqian.bms.merchant.reported.service.CrIncomeService;
 import com.qifenqian.bms.merchant.reported.service.FmIncomeService;
-import com.seven.micropay.base.domain.ChannelResult;
-import com.seven.micropay.base.enums.ReStatus;
-import com.seven.micropay.channel.domain.merchant.suixinpayInfo.SxPayRequestInfo;
-import com.seven.micropay.channel.enums.ChannelMerRegist;
-import com.seven.micropay.channel.service.IMerChantIntoService;
-import com.seven.micropay.commons.util.DateUtil;
 
 @Controller
 @RequestMapping(MerchantReportedPath.BASE)
@@ -64,9 +63,6 @@ public class MerchantReportsController {
    @Autowired
    private IMerChantIntoService iMerChantIntoServic;
    
-   @Autowired
-   private FmIncomeMapper fmIncomeMapper;
-
    /**
     * 商户报备入口
     */
@@ -158,7 +154,7 @@ public class MerchantReportsController {
 	}
 	
 	/**
-	 * 查询区
+	 * 查询开户支行号
 	 * @param request
 	 * @param response
 	 * @return
@@ -181,7 +177,7 @@ public class MerchantReportsController {
 		return object.toString();
 	}
 	/**
-	 * 查询区
+	 * 查询行目类别
 	 * @param request
 	 * @param response
 	 * @return
@@ -487,12 +483,19 @@ public class MerchantReportsController {
 	
 
 	
-	// 根据商户号查找进件商户状态
+	// 根据商户号查询商户进件状态
 	@RequestMapping(MerchantReportedPath.SELECTMERCHANTREPORTSTATUS)
 	@ResponseBody
 	public String getMerchantStatus(HttpServletRequest request,HttpServletResponse response,TdMerchantDetailInfo detail) {
 		JSONObject object = new JSONObject();
 		Map<String, Object> req = new HashMap<String, Object>();
+		
+		String merchantCode = detail.getMerchantCode();
+		TdCustInfo custInfo = new TdCustInfo();
+		if(null != merchantCode){
+			custInfo = fmIncomeMapperDao.getInComeInfo(merchantCode);
+		}
+		
 		if("BEST_PAY".equals(detail.getChannelNo())){
 			// 翼支付企业进件查询
 			if("02".equals(detail.getBestMerchantType())){
@@ -507,6 +510,7 @@ public class MerchantReportsController {
 			}
 			
 		}else if("SUIXING_PAY".equals(detail.getChannelNo())){
+			
 			List<TdMerchantDetailInfo> reportedList = fmIncomeService.getMerchantDetailInfoList(detail);
 			String taskCode = reportedList.get(0).getRemark();
 			SxPayRequestInfo requestInfo = new SxPayRequestInfo();
@@ -515,7 +519,9 @@ public class MerchantReportsController {
 			requestInfo.setTimestamp(DateUtil.format(new Date(), DateUtil.YYYYMMDDHHMMSS));
 			req.put("merList", requestInfo);
 			req.put("channelType", ChannelMerRegist.SUIXING_PAY);
+			
 		}else if("SUM_PAY".equals(detail.getChannelNo())){
+			
 			if(null != detail.getOutMerchantCode()){
 				req.put("mchntId", detail.getOutMerchantCode());
 				req.put("channelType", ChannelMerRegist.SUM_PAY);
@@ -524,9 +530,22 @@ public class MerchantReportsController {
 				object.put("message", "外部商户号为空");
 				return  object.toString();
 			}
+			
 		}else if("YQB".equals(detail.getChannelNo())){
-				req.put("paltformMerNo", detail.getMerchantCode());
-				req.put("channelType", ChannelMerRegist.YQB);
+			
+			req.put("paltformMerNo", detail.getMerchantCode());
+			req.put("channelType", ChannelMerRegist.YQB);
+			
+		}else if("KFT_PAY".equals(detail.getChannelNo())){
+			
+			req.put("merchantId",detail.getMerchantCode());
+			req.put("merchantProperty",custInfo.getCustType());
+			if("1".equals(custInfo.getCustType())){
+				req.put("certNo",custInfo.getCertifyNo());
+			}else{
+				req.put("merchantId",custInfo.getBusinessLicense());
+			}
+			req.put("channelType", ChannelMerRegist.KFT_PAY);
 		}
 			
 		ChannelResult channelResult = iMerChantIntoServic.merQuery(req);
@@ -549,15 +568,25 @@ public class MerchantReportsController {
 				}
 				
 			}else if("SUIXING_PAY".equals(detail.getChannelNo())){
+				
 				channelMerNo = rtnResultMap.get("mno")==null?"":(String)rtnResultMap.get("mno");
 				object.put("result", "SUCCESS");
 				object.put("message", "商户审核成功");
+				
 			}else if("SUM_PAY".equals(detail.getChannelNo())){
+				
 				channelMerNo = detail.getOutMerchantCode();
 				object.put("result", "SUCCESS");
 				object.put("message", "商户审核成功");
+				
 			}else if("YQB".equals(detail.getChannelNo())){
+				
 				channelMerNo =  rtnResultMap.get("merchantId") == null?"":(String)rtnResultMap.get("merchantId");
+				object.put("result", "SUCCESS");
+				object.put("message", "商户审核成功");
+			}else if("KFT_PAY".equals(detail.getChannelNo())){
+				
+				channelMerNo =  rtnResultMap.get("merchantNo") == null?"":(String)rtnResultMap.get("merchantNo");
 				object.put("result", "SUCCESS");
 				object.put("message", "商户审核成功");
 			}
@@ -587,6 +616,8 @@ public class MerchantReportsController {
 				channelMerNo = detail.getOutMerchantCode();
 			}else if("YQB".equals(detail.getChannelNo())){
 				channelMerNo =  rtnResultMap.get("merchantId") == null?"":(String)rtnResultMap.get("merchantId");
+			}else if("KFT_PAY".equals(detail.getChannelNo())){
+				channelMerNo =  rtnResultMap.get("merchantNo") == null?"":(String)rtnResultMap.get("merchantNo");
 			}
 			detail.setReportStatus("E");
 			detail.setOutMerchantCode(channelMerNo);

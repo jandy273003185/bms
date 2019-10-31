@@ -25,6 +25,16 @@ public class SysUser {
 	/** 初始写入时间*/        	private String instDatetime;
 	/** 最后更改人*/         	private String lupdUser;
 	/** 最后更改时间*/        	private String lupdDatetime;
+	/** 用户部门*/        	private String deptName;
+
+	public String getDeptName() {
+		return deptName;
+	}
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+
 	public String getUserId() {
 		return userId;
 	}

@@ -318,7 +318,7 @@
 		</set>
 			WHERE CUST_ID = #{custId,jdbcType=VARCHAR}
 	</update>
-<update id="updateTdCustInfo" parameterType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo">
+<update id="updateTdCustInfo" parameterType="com.qifenqian.bms.basemanager.custInfo.bean.TdLoginUserInfo">
 	 UPDATE TD_CUST_INFO
 	 <set>
 		
@@ -418,7 +418,7 @@
 					ur.user_id = #{userId,jdbcType=VARCHAR}
 			) t
 		WHERE
-			t.role_code = 'MarketPresident' or t.role_code = 'MarketVicePresident'
+			t.role_code = 'MarketPresident' or t.role_code = 'MarketVicePresident' or t.role_code = 'test'
 	</select>
 
 	<select id="selectByMerchantCode" resultType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo" parameterType="java.lang.String" >

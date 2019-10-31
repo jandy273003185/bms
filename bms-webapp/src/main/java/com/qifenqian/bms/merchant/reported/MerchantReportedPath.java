@@ -56,7 +56,7 @@ public class MerchantReportedPath {
 	/**翼支付更新进件*/
 	public static final String UPDATESUBMITREPORT="/reported/updateSubmitReport";
 	
-	/**翼支付进件状态*/
+	/**进件状态查询*/
 	public static final String SELECTMERCHANTREPORTSTATUS="/reported/merchantReportStatus";
 	
 	

@@ -47,7 +47,7 @@ public class TdMerchantDetailInfo implements Serializable{
 	
 	private String qq;//联系人QQ
 	
-	private String detailStatus;//详细表状态
+	private String detailStatus;//商户报备状态
 	
 	private String powerId;//支付功能id
 	
@@ -65,8 +65,48 @@ public class TdMerchantDetailInfo implements Serializable{
 	
 	private String resultMsg; //返回信息
 	
-
+	private String shortName;
 	
+	private String email;
+	
+	private String startModifyTime;
+
+	private String endModifyTime;
+	
+	
+	
+	public String getStartModifyTime() {
+		return startModifyTime;
+	}
+
+	public void setStartModifyTime(String startModifyTime) {
+		this.startModifyTime = startModifyTime;
+	}
+
+	public String getEndModifyTime() {
+		return endModifyTime;
+	}
+
+	public void setEndModifyTime(String endModifyTime) {
+		this.endModifyTime = endModifyTime;
+	}
+
+	public String getShortName() {
+		return shortName;
+	}
+
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public String getResultMsg() {
 		return resultMsg;
 	}

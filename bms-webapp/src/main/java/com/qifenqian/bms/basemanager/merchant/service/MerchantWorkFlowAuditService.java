@@ -9,12 +9,16 @@ import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
+import com.qifenqian.bms.platform.web.admin.user.bean.User;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
+
+import cn.jpush.api.utils.StringUtils;
 
 import com.qifenqian.bms.basemanager.Constant;
 import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
@@ -29,10 +33,6 @@ import com.qifenqian.bms.basemanager.merchant.mapper.ActWorkflowMerchantAuditMap
 import com.qifenqian.bms.basemanager.merchant.mapper.TdCertificateAuthMapper;
 import com.qifenqian.bms.basemanager.merchant.mapper.TdLoginUserInfoMapper;
 import com.qifenqian.bms.basemanager.rule.mapper.RuleMapper;
-import com.qifenqian.bms.platform.web.admin.user.bean.User;
-import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
-
-import cn.jpush.api.utils.StringUtils;
 
 @Service
 public class MerchantWorkFlowAuditService {
@@ -183,7 +183,6 @@ public class MerchantWorkFlowAuditService {
 			}
 			ActWorkflowMerchantAudit audit =  actWorkflowMerchantAuditMapper.selectListByMerchantId(custId);
 			if(audit!= null){
-				actWorkflowMerchantAuditHistoryMapper.insert(audit);
 				actWorkflowMerchantAuditMapper.updateByPrimaryKey(auditBean);
 			}else{
 				actWorkflowMerchantAuditMapper.insert(auditBean);

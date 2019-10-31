@@ -1,12 +1,22 @@
 package com.qifenqian.bms.basemanager.merchant;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.qifenqian.bms.basemanager.merchant.bean.*;
+import com.qifenqian.bms.basemanager.sysuser.bean.SysUser;
+import com.qifenqian.bms.basemanager.sysuser.mapper.SysUserMapper;
+import com.qifenqian.bms.upgrade.merchant.bean.TdAuditRecodeInfo;
+import com.qifenqian.bms.upgrade.merchant.service.MerchantListService;
+import com.qifenqian.bms.platform.web.admin.user.bean.User;
+import com.qifenqian.bms.platform.web.admin.user.service.UserService;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
+import com.qifenqian.bms.platform.utils.BusinessUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +24,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.bank.bean.Bank;
 import com.qifenqian.bms.basemanager.bank.mapper.BankMapper;
@@ -27,7 +36,6 @@ import com.qifenqian.bms.basemanager.merchant.bean.CustScan;
 import com.qifenqian.bms.basemanager.merchant.bean.Merchant;
 import com.qifenqian.bms.basemanager.merchant.bean.MerchantExport;
 import com.qifenqian.bms.basemanager.merchant.bean.MerchantVo;
-import com.qifenqian.bms.basemanager.merchant.bean.TdLoginUserInfo;
 import com.qifenqian.bms.basemanager.merchant.mapper.CustScanMapper;
 import com.qifenqian.bms.basemanager.merchant.mapper.MerchantMapper;
 import com.qifenqian.bms.basemanager.merchant.service.MerchantEnterService;
@@ -39,10 +47,8 @@ import com.qifenqian.bms.basemanager.trade.service.DownLoadUtil;
 import com.qifenqian.bms.basemanager.trade.service.TradeBillService;
 import com.qifenqian.bms.basemanager.utils.DatetimeUtils;
 import com.qifenqian.bms.basemanager.utils.GenSN;
-import com.qifenqian.bms.platform.utils.BusinessUtils;
-import com.qifenqian.bms.platform.web.admin.user.bean.User;
-import com.qifenqian.bms.platform.web.admin.user.service.UserService;
-import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
+import com.qifenqian.bms.merchant.reported.bean.ChannlInfo;
+import com.qifenqian.bms.merchant.reported.service.CrIncomeService;
 import com.sevenpay.invoke.common.message.response.ResponseMessage;
 import com.sevenpay.invoke.common.type.RequestColumnValues;
 import com.sevenpay.invoke.transaction.bindbankcard.BindBankCardResponse;
@@ -79,6 +85,14 @@ public class MerchantEnterController {
 	private TdCustInfoMapper tdCustInfoMapper;
 	@Autowired
 	private TradeBillService tradeBillService;
+	@Autowired
+	private CrIncomeService crIncomeService;
+
+	@Autowired
+	private MerchantListService merchantListService;
+
+	@Autowired
+	private SysUserMapper sysUserMapper;
 	/**
 	 * 显示商户列表
 	 * @param merchantVo
@@ -91,25 +105,33 @@ public class MerchantEnterController {
 		ModelAndView mv = new ModelAndView(MerchantEnterPath.BASE + MerchantEnterPath.LIST);
 		List<MerchantVo> list = null;
 		String userId  = String.valueOf(WebUtils.getUserInfo().getUserId());
-		merchantVo.setUserId(userId);
-		merchantVo.setUserName(WebUtils.getUserInfo().getUserName());
+
 		//是否有权限查看所有订单
 		boolean isAllList = tdCustInfoService.isAllList(userId);
 		if(isAllList){
 			//list = merchantService.selectAuditMerchants(merchantVo);
 			list = merchantEnterService.selectAuditMerchants(merchantVo);
 		}else{
+			merchantVo.setUserId(userId);
+			merchantVo.setUserName(WebUtils.getUserInfo().getUserName());
 			//list = merchantService.selectMyAuditMerchants(merchantVo);
 			list = merchantEnterService.selectAuditMerchants(merchantVo);
+		}
+		/***查询渠道***/
+		List<ChannlInfo> channlInfoList = crIncomeService.getChannlInfoList();
+		
+		if(null!=channlInfoList && channlInfoList.size()>0){
+			mv.addObject("channlInfoList", channlInfoList);
 		}
 		mv.addObject("banklist", bankMapper.selectBanks(bank));
 		mv.addObject("merchantList", JSONObject.toJSON(list));
 		mv.addObject("rulelist", ruleMapper.selectRules02(rule));
 		mv.addObject("provincelist", cityService.selectAllProvince());
 		mv.addObject("queryBean", merchantVo);
+		
 		return mv;
 	}
-
+	
 	/**
 	 * 显示后台商户待审核列表
 	 * @param merchantVo
@@ -129,7 +151,7 @@ public class MerchantEnterController {
 		mv.addObject("queryBean", merchantVo);
 		return mv;
 	}
-
+	
 	/**
 	 * 跳转到相应的页面
 	 */
@@ -141,6 +163,10 @@ public class MerchantEnterController {
 		Rule rule = new Rule();
 		User user = new User();
 		rule.setStatus("VALID");
+		//获取用户信息
+		String userId  = String.valueOf(WebUtils.getUserInfo().getUserId());
+		SysUser  sysUser = sysUserMapper.selectUserById(userId);
+		mv.addObject("sysUser", sysUser);
 		mv.addObject("taskId", request.getParameter("taskId"));
 		mv.addObject("banklist", bankMapper.selectBanks(bank));
 		mv.addObject("rulelist", ruleMapper.selectRules(rule));
@@ -179,7 +205,15 @@ public class MerchantEnterController {
 			//String feeCode = request.getParameter("feeCode");
 
 			// 设置商户custId
-			String merchantCode = BusinessUtils.getMerchantId(merchant.getBusinessLicense());
+			String merchantCode = null;
+			if (merchant.getBusinessLicense() == null || "".equals(merchant.getBusinessLicense())){
+				//表示个人
+				merchantCode = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + GenSN.getRandomNum(3);
+			}else{
+				merchantCode = BusinessUtils.getMerchantId(merchant.getBusinessLicense());
+			}
+
+
 			String custId = GenSN.getSN();
 
 			merchant.setMerchantCode(merchantCode);
@@ -230,10 +264,10 @@ public class MerchantEnterController {
         //查询商户门头照信息
         //String path = auditorService.findScanPath(merchantVo.getCustId(), "08",merchantVo.getAuthId());
         //获取二维码
-		//String qrCode = getQrCode(merchantVo);
+		String qrCode = getQrCode(merchantVo);
 		mv.addObject("merchantVo", merchant);
 		//预览返回的二维码信息
-		mv.addObject("qrCode", null);
+		mv.addObject("qrCode", qrCode);
 		//mv.addObject("path", path);
 		return mv;
     }
@@ -248,6 +282,8 @@ public class MerchantEnterController {
         JSONObject jsonObject = new JSONObject();
 		ModelAndView mv = new ModelAndView(MerchantEnterPath.BASE + MerchantEnterPath.UPDATEPAGE);
 		MerchantVo merchant = merchantService.findMerchantInfo(merchantVo.getCustId());
+		String areaName = merchantService.findAreaNameByAreaId(merchant.getCountry());
+		merchantVo.setAreaName(areaName);
         List<BmsProtocolContent> contents = merchantService.selectContentByCustId(merchantVo.getCustId());
 
         if (null != contents && contents.size() > 0) {
@@ -258,6 +294,7 @@ public class MerchantEnterController {
 		Rule rule = new Rule();
 		User user = new User();
 		rule.setStatus("VALID");
+		mv.addObject("areaName", areaName);
 		mv.addObject("banklist", bankMapper.selectBanks(bank));
 		mv.addObject("rulelist", ruleMapper.selectRules(rule));
 		mv.addObject("userlist", userService.getUserList(user));
@@ -296,7 +333,7 @@ public class MerchantEnterController {
 		filePath.put("businessType", businessType);
 		filePath.put("doorPhoto", doorPhoto);
 		filePath.put("doorFlag", doorFlag);
-		filePath.put("certAttributeType1", certAttributeType1); //开户证件
+		filePath.put("certAttributeType1", certAttributeType1);
 		filePath.put("idCardType_1", idCardType_1);
 		filePath.put("idCardType_2", idCardType_2);
 		filePath.put("bankCard", bankCard);
@@ -344,20 +381,23 @@ public class MerchantEnterController {
     }
 
     /**
-     * 一级审核通过
+     * 审核
      */
     @RequestMapping(MerchantEnterPath.AUDIT)
     @ResponseBody
     public String firstPass(String merchantCode,String message,String isPass){
         logger.info("开始商户{}一级审核通过流程",merchantCode);
 
-        JSONObject ob = null;
+        JSONObject ob = new JSONObject();
+
+
         try {
-            if ("1".equals(isPass)){
+			ob = this.audit(merchantCode,message,isPass);
+            /*if ("1".equals(isPass)){
                 ob = this.pass(merchantCode,message,isPass);
             }else {
                 ob = this.unPass(merchantCode,message,isPass);
-            }
+            }*/
 
         } catch (Exception e) {
             logger.error("审核异常",e);
@@ -367,8 +407,66 @@ public class MerchantEnterController {
         return ob.toJSONString();
     }
 
+	/**
+	 * 审核
+	 * @param merchantCode
+	 * @param message
+	 * @param isPass
+	 * @return
+	 */
+	private JSONObject audit(String merchantCode, String message, String isPass) {
+		String result = null;
+		if ("1".equals(isPass)){
+			//审核通过
+			result = "pass";
+		}else {
+			result = "noPass";
+		}
+        String auditInfo = message;
+		logger.info("开始写入商户编号为"+merchantCode+"的审核结果："+result+",审核信息："+auditInfo);
+		JSONObject json = new JSONObject();
 
-    private JSONObject pass(String merchantCode, String message, String isPass) {
+		TdAuditRecodeInfo auditResult = new TdAuditRecodeInfo();
+		//设置审核者的id
+		auditResult.setUserId(String.valueOf(String.valueOf(WebUtils.getUserInfo().getUserId())));
+		//设置审核信息
+		auditResult.setAuditInfo(auditInfo);
+		auditResult.setAuditTime(new Date());
+		//将审核类型01代表注册
+		auditResult.setAuditType("01");
+		//将id设置32位的UUID
+		auditResult.setId(GenSN.getSN());
+		auditResult.setMerchantCode(merchantCode);
+
+		TdCustInfo tdCustInfo = tdCustInfoMapper.selectByMerchantCode(merchantCode);
+
+		if("noPass".equals(result)) {
+			auditResult.setStatus("99");
+			//更改审核状态
+			merchantWorkFlowAuditService.updateAuditStatus(tdCustInfo.getAuthId(), message, "2");
+		}else if("pass".equals(result)) {
+			auditResult.setStatus("00");
+			merchantWorkFlowAuditService.updateAuditStatus(tdCustInfo.getAuthId(), message, "0");
+		}
+
+		try {
+			String updateResult = merchantListService.updateResultOfAudit(result, merchantCode, auditResult);
+			if("success".equals(updateResult)) {
+				json.put("result","SUCCESS");
+			}
+
+		}catch(Exception e) {
+			json.put("result","false");
+			json.put("message", e.toString());
+			logger.error("写入商户编号为"+merchantCode+"的审核结果："+result+",审核信息："+auditInfo+"发生异常,异常信息为:"+e.toString());
+		}
+
+		return json;
+
+	}
+
+
+	private JSONObject pass(String merchantCode, String message, String isPass) {
         /**
          * 启动流程完成任务
          */
@@ -376,8 +474,8 @@ public class MerchantEnterController {
         logger.info("启动流程完成任务");
         TdCustInfo tdCustInfo = tdCustInfoService.selectByMerchantCode(merchantCode);
         merchantWorkFlowAuditService.startProcessAndCompleteTaskEnter(tdCustInfo.getCustId(),isPass,message);
-        ob.put("result", "SUCCESS");
-
+        //赋值给
+        tdCustInfo.setRepresentativeMobile(tdCustInfo.getContactMobile());
         //二级审核
         //TdCustInfo custInfo = tdCustInfoService.selectById(custId);
         ResponseMessage<BindBankCardResponse> response = merchantService.requestBindBank(tdCustInfo);
@@ -415,7 +513,8 @@ public class MerchantEnterController {
                 + "<p>此为系统邮件，请勿回复；Copyright ©2015-2016七分钱（国银证保旗下支付平台）  版权所有</p></div></div></body></html>";
         String subject = "七分钱--亲爱的" + merchant.getCustName() + "，你的七分钱商户账号已经审核通过，欢迎登录！";
         logger.info("{}发送邮件(审核通过)!",tdCustInfo.getCustId());
-        boolean flag = merchantService.sendInfo(merchant.getEmail(), content, subject, MessageColumnValues.MsgType.EMAIL, MessageColumnValues.busType.REGISTER_VERIFY);
+        boolean flag = false;
+        flag = merchantService.sendInfo(merchant.getEmail(), content, subject, MessageColumnValues.MsgType.EMAIL, MessageColumnValues.busType.REGISTER_VERIFY);
         if(flag){
             logger.info("{}审核通过发送邮件成功(审核通过)!",tdCustInfo.getCustId());
         }
@@ -561,7 +660,8 @@ public class MerchantEnterController {
 			throw new RuntimeException(e);
 		}
 	}
-
+	
+	
 	/**
 	 * 校验商户账户否已经存在
 	 *
