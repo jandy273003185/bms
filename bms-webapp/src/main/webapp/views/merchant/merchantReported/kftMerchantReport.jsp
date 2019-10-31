@@ -1623,7 +1623,12 @@
 										},function(){
 											window.location.reload();
 										}); */
-										alert(data.message);
+										if("" == data.message || null ==data.message){
+											alert("进件失败 ");
+										}else{
+											alert(data.message);
+										}
+										
 									}
 	  	   					}
 	  	   				});
