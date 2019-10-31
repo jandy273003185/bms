@@ -319,7 +319,7 @@
 								</td>
                                 <td class="td-left">结算费率：</td>
 							  <td class="td-right"> 
-									<input type="text" id="rate" name="rate" placeholder="请输入结算费率"  value="0.38" style="width:90%"> %
+									<input type="text" id="rate" name="rate" placeholder="请输入结算费率"  value="" style="width:90%"> %
 							  </td>
 							</tr>
                             <tr>

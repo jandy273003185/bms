@@ -74,7 +74,7 @@
 								<td class="td-right"> 
 									<select class="width-90" id="merchantType" onchange = "getMerchantType();">
 											<option value="0">企业</option>
-											<option value="1">个人</option>
+											<option value="1">微小型商户</option>
 								   </select>	
 								</td>
 							</tr>
@@ -129,7 +129,7 @@
 							    <td class="td-left">证件类型：</td>
 								<td class="td-right"> 
 									<select name="certificateType" id="certificateType" style="width-90;"  >
-										<option value="">--请选择--</option>
+										<option value="LICENSE">营业执照</option>
 										<c:forEach items="<%=CertificateType.values()%>" var="status">
 											<option value="${status}" <c:if test="${status == queryBean.certificateType}">selected</c:if>>
 												${status.text}
@@ -200,7 +200,7 @@
 									</div>
 								</td>
 							</tr>
-							<tr>
+							<tr id="shopInteriorType" style="display:">
 								<td class="td-left">店内照：</td>
 								<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success shopInteriorClick"  data-target="#previewImageModal"  >
@@ -215,7 +215,7 @@
 									</div>
 								</td>
 							</tr>
-							<tr>
+							<tr id="doorPhotoType" style="display:">
 								<td class="td-left">门头照：</td>
 								<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success doorPhotoClick"  data-target="#previewImageModal"  >
@@ -237,7 +237,7 @@
                             <tr>
 								<td class="td-left">法人真实姓名：</td>
 								<td class="td-right"> 
-									<input type="text" id="representativeName" name="representativeName" placeholder="请输入法人真实姓名"  value="张老板" maxlength="50" style="width:90%">
+									<input type="text" id="representativeName" name="representativeName" placeholder="请输入法人真实姓名"  value="${custInfo.representativeName }" maxlength="50" style="width:90%">
 								</td>
 								<td class="td-left">手机号码：</td>
 								<td class="td-right"> 
@@ -248,7 +248,6 @@
 								<td class="td-left">法人证件类型：</td>
 								<td class="td-right"> 
 									<select name="representativeCertType" id="representativeCertType" style="width-90;"  >
-										<option value="">--请选择--</option>
 										<option value="ID">--身份证--</option>
 										<option value="HMPASS">--港澳居民往来内地通行证--</option>
 										<option value="MTPS">--台湾居民来往大陆通行证--</option>
@@ -266,9 +265,9 @@
 									<input type="text" id="residentCity" name="residentCity"  placeholder="请输入户口所在地"  value="" style="width:90%">
 								</td>
 								<td class="td-left">法人身份证有效期：</td>
-								<td class="td-right">
-									<input type="text" name="" id="" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> -
-                                    <input type="text" name="validDate" id="validDate" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> <input name="" type="radio" value=""> 长期
+								<td class="td-right">		 
+									<input type="text" name="" id="" onfocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> -
+                                    <input type="text" name="validDate" id="validDate" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> <input name="" type="radio" value=""> 长期
 								</td>
 							</tr>
 							<tr>
@@ -370,7 +369,7 @@
 									<input type="text" id="rate" name="rate" maxlength="100" placeholder="请输入费率"  value="" style="width-90">
 								</td>
 							</tr>
-							<tr>
+							<tr id="openType" style="display:">
 								<td class="td-left">开户许可证照片：</td>
 								<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success openClick"  data-target="#previewImageModal"  >
@@ -420,9 +419,14 @@
 	function getMerchantType(){
 		var merchantType = $("merchantType").val();
 		if("0" == merchantType){
+			$("#openType").attr("style","display:");
+			$("#shopInteriorType").attr("style","display:none");
+			$("#doorPhotoType").attr("style","display:none");
 			
 		}else{
-			
+			$("#openType").attr("style","display:none");
+			$("#shopInteriorType").attr("style","display:");
+			$("#doorPhotoType").attr("style","display:");
 		}
 		
 	}
@@ -686,22 +690,33 @@
     	
     	
    		$("#submitData").click(function(){
-   	   		
+   			
    			var channelNo = $("#channlCode").val();
    			var merchantCode = $("#merchantCode").val();
-   			var mchName = $("#custName").val();
+   			var custName = $("#custName").val();
+   			var merchantApplyType = $("#merchantApplyType").val();
+			var certificateType = $("#certificateType").val();
+			var registrationNumber = $("#registrationNumber").val();
+   			var industryCode = $("#industry").val(); 
+   			var businessScope = $("#businessScope").val(); 
    			var mobileNo = $("#mobileNo").val();
    			var province = $("#province").val();
    			var city = $("#city").val();
    			var country = $("#area").val();
-   			var certifyNo = $("#certifyNo").val();
-   			var industryCode = $("#industry").val();
-
-   			var interName= $("#InterName").val();
+   			var cprRegAddr = $("#cprRegAddr").val();
+   			var createdBy = $("#createdBy").val();
    			var bankCardNo = $("#bankCardNo").val();
    			var bankCode = $("#bestBank").val();
-   			var interBank = $("#InterBankCode").val();
    			var interBankName = $("#interBankName").val();
+			var bankAcctName = $("#bankAcctName").val();
+			var perEntFlag = $("#perEntFlag").val();
+			var bankCardType = $("#bankCardType").val();
+			var interName = $("#InterName").val();
+			var representativeCertType = $("#representativeCertType").val();
+   			var certifyNo = $("#certifyNo").val();
+   			var validDate = $("#validDate").val();
+			var residentCity = $("#residentCity").val(); 
+   			var interBank = $("#InterBankCode").val();
    			var bestMerchantType = $("#bestMerchantType").val();
    			var rate = $("#rate").val();
    			var updateType = $("#updateType").val();
@@ -841,21 +856,34 @@
   	   						if(data.result=='SUCCESS')							
   	   							$.post(window.Constants.ContextPath +"<%=MerchantReportedPath.BASE + MerchantReportedPath.BESTPAYSUBMITREPORT %>",
   	   							{
-  	   								"merchantCode":merchantCode,
-  	   								"province":province,
-  	   								"city":city,
-  	   								"country":country,
-  	   								"bankCode":bankCode,
-  	   								"interBank":interBank,
-  	   								"interBankName":interBankName,
   	   								"channelNo":channelNo,
-  	   								"mobileNo":mobileNo,
+	   								"merchantCode":merchantCode,
+	   								"custName" : custName,
+	   								"merchantApplyType":merchantApplyType,
+	   								"certificateType": certificateType,
+	   								"registrationNumber" : registrationNumber,
+	   								"industryCode" : industryCode,
+									"businessScope" : businessScope,
+									"mobileNo":mobileNo,
+	   								"province":province,
+	   								"city":city,
+	   								"country":country,
+									"cprRegAddr" : cprRegAddr,
+									"createdBy" : createdBy,
+									"bankCardNo" : bankCardNo,
+	   								"bankCode":bankCode,
+	   								"interBankName":interBankName,
+	   								"bankAcctName" : bankAcctName,
+	   								"perEntFlag" : perEntFlag,
+	   								"bankCardType" : bankCardType,
+	   								"interName":interName,
+	   								"representativeCertType" :representativeCertType,
+	   								"validDate" : validDate,
+	   								"certifyNo":certifyNo,
+									"residentCity" : residentCity,
+  	   								"interBank":interBank,
   	   								"rate":rate,
-  	   								"bankCardNo":bankCardNo,
-  	   								"certifyNo":certifyNo,
-  	   								"industryCode":industryCode,
-  	   								"bestMerchantType":bestMerchantType,
-  	   								"interName":interName
+  	   								"bestMerchantType":bestMerchantType
   	   							},
   	   							function(data){
   	   								if(data.result=="SUCCESS"){

@@ -74,4 +74,15 @@
 			</if>
 		</where>
     </select>
+    
+    <select id="selInComeInfo" parameterType="String"  resultType="com.sevenpay.bms.basemanager.custInfo.bean.TdCustInfo">
+		SELECT
+			c.*, 
+  			t.*
+		FROM
+			td_cust_info c
+		INNER JOIN td_login_user_info t ON c.cust_id = t.cust_id
+		WHERE
+			c.MERCHANT_CODE = #{merchantCode,jdbcType = VARCHAR}
+	</select>
 </mapper>

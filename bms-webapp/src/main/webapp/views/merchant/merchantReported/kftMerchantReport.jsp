@@ -458,10 +458,10 @@
 							    </td>
 							    <td >
 							    	<select id="wxsmType" style="width:50%;"  >
-										<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
+										<option value="3">T1</option>
+										<option value="1">S0</option>
+										<option value="2">T0</option>
+										
 									</select>
 							    </td>
 							</tr>
@@ -475,10 +475,9 @@
 							    </td>
 							    <td >
 							    	<select id="wxgzhType" style="width:50%;"  >
-										<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
+										<option value="3">T1</option>
+										<option value="1">S0</option>
+										<option value="2">T0</option>
 									</select>
 							    </td>
 							</tr>
@@ -492,10 +491,9 @@
 							    </td>
 							    <td >
 							    	<select id="wxappType" style="width:50%;"  >
-										<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
+										<option value="3">T1</option>
+										<option value="1">S0</option>
+										<option value="2">T0</option>
 									</select>
 							    </td>
 							</tr>
@@ -509,10 +507,9 @@
 							    </td>
 							    <td >
 							    	<select id="wxsmS0Type" style="width:50%;"  >
-							    		<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
+							    		<option value="3">T1</option>
+										<option value="1">S0</option>
+										<option value="2">T0</option>
 									</select>
 							    </td>
 							</tr>
@@ -526,10 +523,9 @@
 							    </td>
 							    <td >
 							    	<select id="wxgzhS0Type" style="width:50%;"  >
-							    		<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
+							    		<option value="3">T1</option>
+										<option value="1">S0</option>
+										<option value="2">T0</option>
 									</select>
 							    </td>
 							</tr>
@@ -543,10 +539,9 @@
 							    </td>
 							    <td >
 							    	<select id="wxappS0Type" style="width:50%;"  >
-							    		<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
+							    		<option value="3">T1</option>
+										<option value="1">S0</option>
+										<option value="2">T0</option>
 									</select>
 							    </td>
 							</tr>
@@ -560,10 +555,9 @@
 							    </td>
 							    <td >
 							    	<select id="zfbsmType" style="width:50%;"  >
-										<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
+										<option value="3">T1</option>
+										<option value="1">S0</option>
+										<option value="2">T0</option>
 									</select>
 							    </td>
 							</tr>
@@ -577,10 +571,9 @@
 							    </td>
 							    <td >
 							    	<select id="zfbfwcType" style="width:50%;"  >
-										<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
+										<option value="3">T1</option>
+										<option value="1">S0</option>
+										<option value="2">T0</option>
 									</select>
 							    </td>
 							</tr>		
@@ -595,10 +588,9 @@
 							    </td>
 							    <td >
 							    	<select id="zfbappType" style="width:50%;"  >
-										<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
+										<option value="3">T1</option>
+										<option value="1">S0</option>
+										<option value="2">T0</option>
 									</select>
 							    </td>
 							</tr>
@@ -612,10 +604,9 @@
 							    </td>
 							    <td >
 							    	<select id="zfbsmS0Type" style="width:50%;"  >
-										<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
+										<option value="3">T1</option>
+										<option value="1">S0</option>
+										<option value="2">T0</option>
 									</select>
 							    </td>
 							</tr>	
@@ -629,10 +620,9 @@
 							    </td>
 							    <td >
 							    	<select id="zfbfwcS0Type" style="width:50%;"  >
-										<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
+										<option value="3">T1</option>
+										<option value="1">S0</option>
+										<option value="2">T0</option>
 									</select>
 							    </td>
 							</tr>	
@@ -646,10 +636,9 @@
 							    </td>
 							    <td >
 							    	<select id="zfbappS0Type" style="width:50%;"  >
-										<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
+										<option value="3">T1</option>
+										<option value="1">S0</option>
+										<option value="2">T0</option>
 									</select>
 							    </td>
 							</tr>	
@@ -663,10 +652,9 @@
 							    </td>
 							    <td >
 							    	<select id="ylsmType" style="width:50%;"  >
-										<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
+										<option value="3">T1</option>
+										<option value="1">S0</option>
+										<option value="2">T0</option>
 									</select>
 							    </td>
 							</tr>	
@@ -680,10 +668,9 @@
 							    </td>
 							    <td >
 							    	<select id="dxkjType" style="width:50%;"  >
-										<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
+										<option value="3">T1</option>
+										<option value="1">S0</option>
+										<option value="2">T0</option>
 									</select>
 							    </td>
 							</tr>	
@@ -697,10 +684,9 @@
 							    </td>
 							    <td >
 							    	<select id="dxkjS0Type" style="width:50%;"  >
-										<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
+										<option value="3">T1</option>
+										<option value="1">S0</option>
+										<option value="2">T0</option>
 									</select>
 							    </td>
 							</tr>	
@@ -714,10 +700,9 @@
 							    </td>
 							    <td >
 							    	<select id="wyzxType" style="width:50%;"  >
-										<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
+										<option value="3">T1</option>
+										<option value="1">S0</option>
+										<option value="2">T0</option>
 									</select>
 							    </td>
 							</tr>					           

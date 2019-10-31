@@ -14,8 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.sevenpay.bms.basemanager.custInfo.bean.TdCustInfo;
+import com.sevenpay.bms.basemanager.merchant.bean.StoreManage;
+import com.sevenpay.bms.basemanager.merchant.mapper.StoreManageMapper;
 import com.sevenpay.bms.merchant.merchantReported.bean.KFTArea;
 import com.sevenpay.bms.merchant.merchantReported.bean.KFTMccBean;
+import com.sevenpay.bms.merchant.merchantReported.mapper.KftIncomeMapper;
 import com.sevenpay.bms.merchant.merchantReported.service.KFTIncomeService;
 import com.sevenpay.bms.merchant.reported.MerchantReportedPath;
 import com.sevenpay.bms.merchant.reported.bean.Bank;
@@ -50,6 +53,9 @@ public class MerchantEnterReportedController {
    
    @Autowired
    private FmIncomeMapperDao fmIncomeMapperDao;
+   
+   @Autowired
+   private KftIncomeMapper kftIncomeMapper;
 	 
    /**
     * 商户报备入口
@@ -64,15 +70,29 @@ public class MerchantEnterReportedController {
 		/***查询报备信息***/
 		List<TdMerchantDetailInfo> reportedList = fmIncomeService.getMerchantDetailInfoList(detail);
 		logger.info("reportedList:"+reportedList);
-		if(null!=reportedList && reportedList.size()>0){
-			for(int i=0;i<reportedList.size();i++){
-				if("00".equals(reportedList.get(i).getReportStatus())){
-					object.put("result", "SUCCESS");
+		TdCustInfo custInfo = new TdCustInfo();
+		if(null != detail.getMerchantCode()){
+			custInfo = fmIncomeMapperDao.getInComeInfo(detail.getMerchantCode());
+			if(null != custInfo){
+				object.put("custInfo", custInfo);
+				//审核通过再判断是否已经报备
+				if(null!=reportedList && reportedList.size()>0){
+					for(int i=0;i<reportedList.size();i++){
+						if("00".equals(reportedList.get(i).getReportStatus())){
+							object.put("result", "SUCCESS");
+						}
+					}
+					object.put("result", "FAIL");
+				}else{
+					object.put("result", "FAIL");
 				}
+			}else{
+				logger.info("--------------商户未通过审核，请查看商户状态----------------");
+				custInfo = kftIncomeMapper.selInComeInfo(detail.getMerchantCode());
+				object.put("custId", custInfo.getCustId());
+				object.put("status","01");
+				object.put("result", "FAIL");
 			}
-			object.put("result", "FAIL");
-		}else{
-			object.put("result", "FAIL");
 		}
 		
 		return object.toString();
