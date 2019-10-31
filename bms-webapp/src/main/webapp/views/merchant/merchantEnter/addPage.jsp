@@ -347,7 +347,7 @@ function addMerchantBtn(){
 			return false;
 		}
 
-		if(!checkAttach($("#businessPhoto")[0])){
+		if(!isNull($("#businessPhoto")[0])){
 			$.gyzbadmin.alertFailure("必须提交营业执照扫描件");
 			return false;
 		}
