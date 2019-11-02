@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util"
-	xmlns:oxm="http://www.springframework.org/schema/oxm" xmlns:jee="http://www.springframework.org/schema/jee"
-	xmlns:p="http://www.springframework.org/schema/p" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:oxm="http://www.springframework.org/schema/oxm"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.1.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
@@ -14,55 +19,48 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
 
 	<!--邮件发送 邮件接口 -->
-	<!-- <bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host">
-			<value>smtp.exmail.qq.com</value>
-		</property>
-		<property name="javaMailProperties">
-			<props>
-				<prop key="mail.smtp.auth">true</prop>
-				<prop key="mail.smtp.timeout">25000</prop>
+	<!-- <bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 
+		<property name="host"> <value>smtp.exmail.qq.com</value> </property> <property 
+		name="javaMailProperties"> <props> <prop key="mail.smtp.auth">true</prop> 
+		<prop key="mail.smtp.timeout">25000</prop> </props> </property> <property 
+		name="username"> <value>webmaster@szgyzb.com</value> </property> <property 
+		name="password"> <value>wm123456</value> </property> </bean> -->
 
-			</props>
-		</property>
-		<property name="username">
-			<value>webmaster@szgyzb.com</value>
-		</property>
-		<property name="password">
-			<value>wm123456</value>
-		</property>
-	</bean> -->
-	
-	
-	
-	 <!-- 配置JMS连接工厂 -->
-	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+
+
+	<!-- 配置JMS连接工厂 -->
+	<bean id="connectionFactory"
+		class="org.apache.activemq.ActiveMQConnectionFactory">
 		<property name="brokerURL" value="${MQ_URL}" />
-		<property name="userName"  value="admin" />
-		<property name="password"  value="admin" />
+		<property name="userName" value="admin" />
+		<property name="password" value="admin" />
 	</bean>
-
-   <!--  定义消息队列（Queue） -->
-	<bean id="queueDestination" class="org.apache.activemq.command.ActiveMQQueue">
-        <!-- 设置消息队列的名字 -->
+	<!-- 定义消息队列（Queue） -->
+	<bean id="queueDestination"
+		class="org.apache.activemq.command.ActiveMQQueue">
+		<!-- 设置消息队列的名字 -->
 		<constructor-arg>
 			<value>OFFICIALMSG.IMQ</value>
 		</constructor-arg>
 	</bean>
-
 	<!-- 配置JMS模板（Queue），Spring提供的JMS工具类，它发送、接收消息。 -->
-	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+	<bean id="jmsTemplate"
+		class="org.springframework.jms.core.JmsTemplate">
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="defaultDestination" ref="queueDestination" />
 		<property name="receiveTimeout" value="10000" />
 	</bean>
-	
-<!-- 	<bean id="BaseMailSender" class="com.qifenqian.bms.basemanager.mail.BaseMailSender" scope="prototype">
+
+
+	<!-- <bean id="BaseMailSender"
+		class="com.qifenqian.bms.basemanager.mail.BaseMailSender"
+		scope="prototype">
 		<property name="javaMailSender">
 			<ref bean="javaMailSender" />
 		</property>
 	</bean> -->
-<!-- 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">   -->
-<!--     <property name="maxUploadSize" value="10485760" />  
-</bean> -->
-</beans>
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10485760" />
+	</bean>
+</beans> 
