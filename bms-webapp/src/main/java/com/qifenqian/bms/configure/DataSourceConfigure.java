@@ -9,6 +9,11 @@ import org.springframework.stereotype.Component;
 
 import com.alibaba.druid.pool.DruidDataSource;
 
+/**
+ * 数据源配置， 暂时不使用
+ * @author xun.sun
+ *
+ */
 @Component
 public class DataSourceConfigure {
   /*@Bean(name = "dataSourceCombinedmaster", initMethod = "init", destroyMethod = "close")
