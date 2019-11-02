@@ -11,7 +11,7 @@ import com.alibaba.druid.pool.DruidDataSource;
 
 @Component
 public class DataSourceConfigure {
-  @Bean(name = "dataSourceCombinedmaster", initMethod = "init", destroyMethod = "close")
+  /*@Bean(name = "dataSourceCombinedmaster", initMethod = "init", destroyMethod = "close")
   public DataSource dataSourceCombinedmaster() throws SQLException {
     DruidDataSource ds = new DruidDataSource();
     ds.setDriverClassName("com.mysql.jdbc.Driver");
@@ -37,5 +37,5 @@ public class DataSourceConfigure {
     ds.setUseUnfairLock(true);
 
     return ds;
-  }
+  }*/
 }
