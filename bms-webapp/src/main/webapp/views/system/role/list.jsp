@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="org.gyzb.platform.web.admin.role.RolePath" %>
+<%@page import="com.qifenqian.bms.platform.web.admin.role.RolePath" %>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
