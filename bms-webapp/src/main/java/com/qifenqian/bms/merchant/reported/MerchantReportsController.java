@@ -227,7 +227,6 @@ public class MerchantReportsController {
 	 */
 	@RequestMapping(MerchantReportedPath.SUBMITREPORT)
 	@ResponseBody
-	@Transactional
 	public String list(HttpServletRequest request,HttpServletResponse response,CrInComeBean cr){
 		JSONObject object = new JSONObject();
 		JSONObject bestResult = new JSONObject();

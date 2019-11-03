@@ -141,7 +141,6 @@ public class bestPayMerchantReportsController {
 	 */
 	@RequestMapping(MerchantReportedPath.BESTPAYSUBMITREPORT)
 	@ResponseBody
-	@Transactional
 	public String list(HttpServletRequest request,HttpServletResponse response,CrInComeBean cr){
 		JSONObject object = new JSONObject();
 		JSONObject bestResult = new JSONObject();
@@ -314,7 +313,6 @@ public class bestPayMerchantReportsController {
 	 */
 	@RequestMapping(MerchantReportedPath.UPDATESUBMITREPORT)
 	@ResponseBody
-	@Transactional
 	public String updateList(HttpServletRequest request,HttpServletResponse response,CrInComeBean cr,MerUpdateType updateType,String qualificationType){
 		JSONObject object = new JSONObject();
 		

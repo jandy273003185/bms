@@ -3,8 +3,8 @@
 <%@page import="com.seven.micropay.channel.enums.MerUpdateType"%>
 <%@page import="com.sevenpay.bms.merchant.reported.MerchantReportedPath"%>
 <%@page import="com.qifenqian.bms.merchant.merchantReported.MerchantEnterReportedPath"%>
-<%@page import="com.sevenpay.bms.basemanager.merchant.AuditorPath"%>
-<%@page import="com.sevenpay.bms.basemanager.agency.controller.AgentRegisterPath" %>
+<%@page import="com.qifenqian.bms.basemanager.merchant.AuditorPath"%>
+<%@page import="com.qifenqian.bms.basemanager.agency.controller.AgentRegisterPath" %>
 <%@ page import="java.util.*" %>
 <%@ include file="/include/template.jsp"%>
 

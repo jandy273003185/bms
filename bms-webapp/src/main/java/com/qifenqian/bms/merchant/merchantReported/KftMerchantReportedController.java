@@ -10,22 +10,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
-import com.qifenqian.bms.merchant.merchantReported.bean.KFTCoBean;
-import com.qifenqian.bms.merchant.merchantReported.bean.KFTMccBean;
-import com.qifenqian.bms.merchant.merchantReported.service.KFTIncomeService;
-import com.seven.micropay.channel.domain.merchant.KftProductFeeInfo;
 import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
 import com.qifenqian.bms.basemanager.merchant.bean.MerchantVo;
 import com.qifenqian.bms.basemanager.merchant.service.MerchantService;
 import com.qifenqian.bms.basemanager.toPayProduct.bean.ToPayProduct;
 import com.qifenqian.bms.basemanager.toPayProduct.mapper.ToPayProductMapper;
 import com.qifenqian.bms.basemanager.utils.GenSN;
+import com.qifenqian.bms.merchant.merchantReported.bean.KFTCoBean;
+import com.qifenqian.bms.merchant.merchantReported.bean.KFTMccBean;
+import com.qifenqian.bms.merchant.merchantReported.service.KFTIncomeService;
 import com.qifenqian.bms.merchant.reported.bean.Bank;
 import com.qifenqian.bms.merchant.reported.bean.CrInComeBean;
 import com.qifenqian.bms.merchant.reported.bean.MerchantCity;
@@ -33,6 +31,7 @@ import com.qifenqian.bms.merchant.reported.bean.Province;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
 import com.qifenqian.bms.merchant.reported.dao.FmIncomeMapperDao;
 import com.qifenqian.bms.merchant.reported.service.FmIncomeService;
+import com.seven.micropay.channel.domain.merchant.KftProductFeeInfo;
 
 
 @Controller
@@ -62,7 +61,6 @@ public class KftMerchantReportedController {
 	
 	@RequestMapping(MerchantEnterReportedPath.KFTSUBMITREPORT)
 	@ResponseBody
-	@Transactional
 	public String list(HttpServletRequest request,HttpServletResponse response,KFTCoBean cr){
 		JSONObject object = new JSONObject();
 		JSONObject kftResult = new JSONObject();
@@ -167,7 +165,6 @@ public class KftMerchantReportedController {
 	
 	@RequestMapping(MerchantEnterReportedPath.MERQUERYREPORT)
 	@ResponseBody
-	@Transactional
 	public String merQuery(HttpServletRequest request,HttpServletResponse response,KFTCoBean cr){
 		JSONObject object = new JSONObject();
 		JSONObject kftResult = new JSONObject();
@@ -191,7 +188,6 @@ public class KftMerchantReportedController {
 	
 	@RequestMapping(MerchantEnterReportedPath.MERCHANTREPORTINFO)
 	@ResponseBody
-	@Transactional
 	public ModelAndView reportInfo(HttpServletRequest request,HttpServletResponse response,String merchantCode,String channlCode){
 	
 		ModelAndView mv = new ModelAndView();

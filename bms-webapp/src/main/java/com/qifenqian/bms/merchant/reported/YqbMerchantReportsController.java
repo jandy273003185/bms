@@ -197,7 +197,6 @@ public class YqbMerchantReportsController {
 	 */
 	@RequestMapping(MerchantReportedPath.YQBINFOMERCHANTREPORT)
 	@ResponseBody
-	@Transactional
 	public String list(HttpServletRequest request,HttpServletResponse response,YQBCoBean cr){
 		JSONObject object = new JSONObject();
 		JSONObject bestResult = new JSONObject();

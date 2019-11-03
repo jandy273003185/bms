@@ -1,15 +1,12 @@
 package com.qifenqian.bms.merchant.reported;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +22,10 @@ import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
 import com.qifenqian.bms.basemanager.merchant.service.MerchantService;
 import com.qifenqian.bms.basemanager.utils.GenSN;
 import com.qifenqian.bms.merchant.reported.bean.Bank;
-import com.qifenqian.bms.merchant.reported.bean.BestPayCoBean;
 import com.qifenqian.bms.merchant.reported.bean.ChannlInfo;
-import com.qifenqian.bms.merchant.reported.bean.City;
 import com.qifenqian.bms.merchant.reported.bean.CrInComeBean;
 import com.qifenqian.bms.merchant.reported.bean.Industry;
 import com.qifenqian.bms.merchant.reported.bean.PicPath;
-import com.qifenqian.bms.merchant.reported.bean.Province;
 import com.qifenqian.bms.merchant.reported.bean.SumPayArea;
 import com.qifenqian.bms.merchant.reported.bean.SumPayCoBean;
 import com.qifenqian.bms.merchant.reported.bean.SumpayMcc;
@@ -44,17 +38,9 @@ import com.qifenqian.bms.merchant.reported.service.FmIncomeService;
 import com.qifenqian.bms.platform.utils.FormTokenUtil;
 import com.seven.micropay.base.domain.ChannelResult;
 import com.seven.micropay.base.enums.ReStatus;
-import com.seven.micropay.channel.domain.merchant.BestCoMerOpenProdct;
-import com.seven.micropay.channel.domain.merchant.BestPayBankInfo;
-import com.seven.micropay.channel.domain.merchant.BestUpdateMerChantInfo;
 import com.seven.micropay.channel.domain.merchant.SumpayOpenProduInfo;
-import com.seven.micropay.channel.domain.merchant.BestCoProdAuthInfo.RateList;
-import com.seven.micropay.channel.enums.BestBankCode;
-import com.seven.micropay.channel.enums.BestMerchantType;
 import com.seven.micropay.channel.enums.ChannelMerRegist;
-import com.seven.micropay.channel.enums.MerUpdateType;
 import com.seven.micropay.channel.service.IMerChantIntoService;
-import com.seven.micropay.commons.util.DateUtil;
 
 @Controller
 @RequestMapping(MerchantReportedPath.BASE)
@@ -146,7 +132,6 @@ public class SumPayMerchantReportsController {
 	 */
 	@RequestMapping(MerchantReportedPath.SUMPAYINFOMERCHANTREPORT)
 	@ResponseBody
-	@Transactional
 	public String list(HttpServletRequest request,HttpServletResponse response,SumPayCoBean cr){
 		JSONObject object = new JSONObject();
 		JSONObject bestResult = new JSONObject();
@@ -284,7 +269,6 @@ public class SumPayMerchantReportsController {
 	 */
 	@RequestMapping(MerchantReportedPath.OPENPRODUCT)
 	@ResponseBody
-	@Transactional
 	public String openProduct(HttpServletRequest request,HttpServletResponse response,SumpayMcc sumpayMcc,String merchantCode,String outMerchantCode){
 		JSONObject object = new JSONObject();
 		if(!FormTokenUtil.validateToken(request)){
@@ -420,7 +404,6 @@ public class SumPayMerchantReportsController {
 		 */
 		@RequestMapping(MerchantReportedPath.SUMPAYPHOTOINFOMERCHANTREPORT)
 		@ResponseBody
-		@Transactional
 		public String photoList(HttpServletRequest request,HttpServletResponse response,SumPayCoBean cr){
 			JSONObject object = new JSONObject();
 			JSONObject sumpayResult = new JSONObject();
