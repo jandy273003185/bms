@@ -184,6 +184,12 @@
 		var bestMerchantType = $(obj).parent().find('#bestMerchantType_').val();
 		var loginNo = $(obj).parent().find('#loginNo_').val();
 		var outMerchantCode = $(obj).parent().find('#outMerchantCode_').val();
+		var remark = $(obj).parent().find('#remark_').val();
+		var reportStatus = $(obj).parent().find('#reportStatus_').val();
+		var resultMsg =  $(obj).parent().find('#resultMsg_').val();
+		if(null != resultMsg){
+			alert("进件失败原因" + resultMsg);
+		}
 		
 		if("BEST_PAY" == channlCode){
 	   	   	
@@ -204,21 +210,40 @@
 	   		 
    	   	}
    	   	if("SUIXING_PAY" == channlCode){
-   	   	   	
-   	   		var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.UPDATESUNXINGREPORT%>?merchantCode="+merchantCode+"&status="+status+"&channlCode="+channlCode; 
-	     	var name="window";                        //网页名称，可为空;
-	     	var iWidth=1200;                          //弹出窗口的宽度;
-	     	var iHeight=600;                       //弹出窗口的高度;
-	     	//获得窗口的垂直位置
-	     	var iTop = (window.screen.availHeight-30-iHeight)/2; 
-	     	//获得窗口的水平位置
-	     	var iLeft = (window.screen.availWidth-10-iWidth)/2;
-	     	var params='width='+iWidth
-	            +',height='+iHeight
-	            +',top='+iTop
-	            +',left='+iLeft; 
-	     	/*  $.blockUI();  */
-	      	winChild =  window.open(url, name,params);
+   	   	   	if(null == outMerchantCode){
+   	   	   		
+	   	   	  	var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.SUIXINGMERCHANTREPORT%>?merchantCode="+merchantCode+"&status="+status+"&channlCode="+channlCode; 
+		     	var name="window";                        //网页名称，可为空;
+		     	var iWidth=1200;                          //弹出窗口的宽度;
+		     	var iHeight=600;                       //弹出窗口的高度;
+		     	//获得窗口的垂直位置
+		     	var iTop = (window.screen.availHeight-30-iHeight)/2; 
+		     	//获得窗口的水平位置
+		     	var iLeft = (window.screen.availWidth-10-iWidth)/2;
+		     	var params='width='+iWidth
+		            +',height='+iHeight
+		            +',top='+iTop
+		            +',left='+iLeft; 
+		     	/*  $.blockUI();  */
+		      	winChild =  window.open(url, name,params);
+   	   	   	}else{
+   	   	   		
+	   	   	    var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.UPDATESUNXINGREPORT%>?merchantCode="+merchantCode+"&status="+status+"&reportStatus="+reportStatus+"&remark="+remark+"&channlCode="+channlCode; 
+		     	var name="window";                        //网页名称，可为空;
+		     	var iWidth=1200;                          //弹出窗口的宽度;
+		     	var iHeight=600;                       //弹出窗口的高度;
+		     	//获得窗口的垂直位置
+		     	var iTop = (window.screen.availHeight-30-iHeight)/2; 
+		     	//获得窗口的水平位置
+		     	var iLeft = (window.screen.availWidth-10-iWidth)/2;
+		     	var params='width='+iWidth
+		            +',height='+iHeight
+		            +',top='+iTop
+		            +',left='+iLeft; 
+		     	/*  $.blockUI();  */
+		      	winChild =  window.open(url, name,params);
+   	   	   	}
+   	   		
    	   	}
 		if("YQB" == channlCode){
 	   	   	
@@ -957,17 +982,19 @@
 											    <input type="hidden" id="bestMerchantType_" value="${reported.bestMerchantType }">
 											    <input type="hidden" id="loginNo_" value="${reported.loginNo }">
 											    <input type="hidden" id="outMerchantCode_" value="${reported.outMerchantCode }">
-	                                            
+	                                            <input type="hidden" id="reportStatus_" value="${reported.reportStatus }">
+	                                            <input type="hidden" id="remark_" value="${reported.remark }">
+	                                            <input type="hidden" id="resultMsg_" value="${reported.resultMsg }">
 	                                            <button type="button"  class="btn btn-primary btn-xs" onclick="getInfo(this);">查看</button>
 	                                            
-	                                            <c:if test="${reported.detailStatus =='Y' }">
+	                                            <c:if test="${reported.reportStatus =='0' ||reported.reportStatus =='00' }">
 	                                            	<button type="button"  class="btn btn-primary btn-xs" onclick="getStatus(this);">刷新状态</button>
 	                                            </c:if>
-	                                            <c:if test="${reported.detailStatus !='Y' }">
+	                                            <c:if test="${reported.reportStatus !='0' && reported.reportStatus !='00'  }">
 	                                            	<button type="button"  class="btn btn-primary btn-xs" disabled>刷新状态</button>
 	                                            </c:if>
 	                                            
-	                                            <c:if test="${reported.reportStatus =='99' }">
+	                                            <c:if test="${reported.reportStatus =='99'}">
 	                                            	<button type="button"  class="btn btn-primary btn-xs" onclick ="getUpdate(this);">报备更新</button>
                                             	</c:if>
                                             	<c:if test="${reported.reportStatus !='99' }">

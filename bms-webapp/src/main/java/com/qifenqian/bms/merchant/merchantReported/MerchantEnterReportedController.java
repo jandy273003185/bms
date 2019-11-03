@@ -538,7 +538,7 @@ public class MerchantEnterReportedController {
     * 随行付更新报备
     */
 	@RequestMapping(MerchantEnterReportedPath.UPDATESUNXINGREPORT)
-	public ModelAndView  updateSuiXingMerchantReported(HttpServletRequest request,HttpServletResponse response,String merchantCode,String channlCode,String status){
+	public ModelAndView  updateSuiXingMerchantReported(HttpServletRequest request,HttpServletResponse response,String merchantCode,String channlCode,String remark,String reportStatus,String status){
 		ModelAndView mv = new ModelAndView();
 		/***查询渠道***/
 		List<ChannlInfo> channlInfoList = crIncomeService.getChannlInfoList();
@@ -585,7 +585,8 @@ public class MerchantEnterReportedController {
 		if(null!=industryList && industryList.size()>0){
 			mv.addObject("industryList", industryList);
 		}
-		
+		mv.addObject("remark",remark);
+		mv.addObject("reportStatus",reportStatus);
 		mv.addObject("status",status);
 		return mv;
 	}

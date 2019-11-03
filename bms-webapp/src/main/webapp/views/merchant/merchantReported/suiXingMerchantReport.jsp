@@ -2,8 +2,8 @@
 <%@page import="com.seven.micropay.channel.enums.BestBankCode"%>
 <%@page import="com.seven.micropay.channel.enums.MerUpdateType"%>
 <%@page import="com.seven.micropay.channel.enums.suixinpay.SuixinBankType"%>
-<%@page import="com.sevenpay.bms.merchant.reported.MerchantReportedPath"%>
-<%@page import="com.sevenpay.bms.basemanager.merchant.AuditorPath"%>
+<%@page import="com.qifenqian.bms.merchant.reported.MerchantReportedPath"%>
+<%@page import="com.qifenqian.bms.basemanager.merchant.AuditorPath"%>
 <%@ include file="/include/template.jsp"%>
 
 <script src='<c:url value="/static/js/jquery-ui.min.js"/>'></script>
@@ -799,7 +799,7 @@
 			});  */
 			$.ajax({
 				type : "POST",
-				url : window.Constants.ContextPath +'<%=MerchantReportedPath.BASE + MerchantReportedPath.SELSUIXINGFILEUPLOAD %>?merchantCode='+merchantCode+'&status='+status,
+				url : window.Constants.ContextPath +'<%=MerchantReportedPath.BASE + MerchantReportedPath.SELSUIXINGFILEUPLOAD %>?status='+status,
 				data :merchantData,
                 dataType : "json",
                 cache: false,

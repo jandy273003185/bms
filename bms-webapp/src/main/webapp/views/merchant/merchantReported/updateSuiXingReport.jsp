@@ -2,8 +2,8 @@
 <%@page import="com.seven.micropay.channel.enums.BestBankCode"%>
 <%@page import="com.seven.micropay.channel.enums.MerUpdateType"%>
 <%@page import="com.seven.micropay.channel.enums.suixinpay.SuixinBankType"%>
-<%@page import="com.sevenpay.bms.merchant.reported.MerchantReportedPath"%>
-<%@page import="com.sevenpay.bms.basemanager.merchant.AuditorPath"%>
+<%@page import="com.qifenqian.bms.merchant.reported.MerchantReportedPath"%>
+<%@page import="com.qifenqian.bms.basemanager.merchant.AuditorPath"%>
 <%@ include file="/include/template.jsp"%>
 
 <script src='<c:url value="/static/js/jquery-ui.min.js"/>'></script>
@@ -44,6 +44,7 @@
 			<div class="page-content">
 				<div class="row">
 					<div class="col-xs-12">
+					<input type="hidden" id="reportStatus" name="reportStatus" value="${reportStatus}"/>
 					<input type="hidden" id="taskCode" name="taskCode" value ="${remark}"/>
 					<input type="hidden" id="status" name="status" value="${status}"/>
 					<input type="hidden" id="channlCode" name="channlCode" value="SUIXING_PAY"/>
@@ -176,14 +177,14 @@
                             <tr id="doorPhotoType" style = "display:">
 								<td class="td-left">门头照照片：</td>
 								<td class="td-right" colspan="3">
-									<a data-toggle="modal" class="tooltip-success businessPhotoClick" data-target="#previewImageModal">
-										<label id="businessPhotoDiv" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
-										  <img id="businessPhotoImageDiv" onClick="bigImg(this);" style="width: 100%; height: 100%;">										  
+									<a data-toggle="modal" class="tooltip-success doorPhotoClick" data-target="#previewImageModal">
+										<label id="doorPhotoDiv" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+										  <img id="doorPhotoImageDiv" onClick="bigImg(this);" style="width: 100%; height: 100%;">										  
 										</label>
 									</a>
 									<div class="updateImageDiv" style="float: left; margin-top: 75px; display: block;">
 										<input type="hidden" id="businessPhotoImageVal02">  
-										<input type="file" name="businessPhoto" id="businessPhoto" onChange="showBusinessPhotoImage(this)">
+										<input type="file" name="doorPhoto" id="doorPhoto" onChange="showDoorPhotoImage(this)">
 									 	<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
 								</td>
@@ -333,7 +334,7 @@
 								<td class="td-right" colspan="3"> 
 									<a data-toggle="modal" class="tooltip-success certAttribute0Click" data-target="#previewImageModal">
 										<label id="certAttribute0Div" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
-										        <img id="certAttribute0ImageDiv" onClick="bigImg(this);" style="width: 100%; height: 100%;" src="./后台商户注册审核列表_files/image(1)">
+										        <img id="certAttribute0ImageDiv" onClick="bigImg(this);" style="width: 100%; height: 100%;">
 										</label>
 									</a>
 									<div class="updateImageDiv" style="float: left; margin-top: 75px; display: block;">
@@ -625,9 +626,9 @@
     		 return previewImage(divObj,imageObj,obj);  
     	}
 
-    	function showOpenPhotoImage(obj){  
-   		 var divObj = document.getElementById("openPhotoDiv");  
-   		 var imageObj = document.getElementById("openPhotoImageDiv");  
+    	function showCertAttribute0Image(obj){  
+   		 var divObj = document.getElementById("certAttribute0Div");  
+   		 var imageObj = document.getElementById("certAttribute0ImageDiv");  
    		 return previewImage(divObj,imageObj,obj);  
    		}
 
@@ -724,6 +725,7 @@
    			var channelNo = $("#channlCode").val();
 			//商户号
    			var merchantCode = $("#merchantCode").val();
+			
 			//客户简称
    			var custName = $("#custName").val();
    			//手机号
@@ -771,6 +773,7 @@
    			//rate
    			var rate = $("#rate").val();
 
+   			var reportStatus = $("#reportStatus");
    			var taskCode = $("#taskCode").val();
    			if("" == suiXingMerchantType){
    	    		$("#suiXingMerchantLab").text("资质类型不能为空");
@@ -799,7 +802,7 @@
 			});  */
 			$.ajax({
 				type : "POST",
-				url : window.Constants.ContextPath +'<%=MerchantReportedPath.BASE + MerchantReportedPath.SELSUIXINGFILEUPLOAD %>?merchantCode='+merchantCode+'&status='+status,
+				url : window.Constants.ContextPath +'<%=MerchantReportedPath.BASE + MerchantReportedPath.SELSUIXINGFILEUPLOAD %>?status='+status,
 				data :merchantData,
                 dataType : "json",
                 cache: false,
@@ -809,271 +812,36 @@
 				if(data.result=="SUCCESS"){
 					if("" != data.message){
 						taskCode = $("#taskCode").val(data.message);
-						
-						//随行付渠道
-			   			if("SUIXING_PAY" == channelNo){
-			   		    	//上传照片
-			   				var imgDoor = [];
-			   				var imgSrc = [];
-			   				$("#door_temp input[type='hidden']").each(function(){
-			   					if($(this).attr('id').indexOf('Src')>=0){
-			   						imgSrc.push($(this).attr('id')+"="+$(this).val());
-			   					}else{
-			   						if($(this).val()==""){
-			   							imgDoor.push($(this).attr('id')+"="+"无");
-			   						}else{
-			   							imgDoor.push($(this).attr('id')+"="+$(this).val());
-			   						}
-			   					}
-			   				});
-
-		  					if("" == merchantCode){
-		  	   	   	    		$("#merchantCodeLab").text("商户编号不能为空");
-		  	   	   	    		$("#merchantCode").focus();
-		  	   	   	    		return false;
-		  	   	   	    	}else{
-		  	   	   	    		$("#merchantCodeLab").text('');
-		  	   	   	    	}
-				  	   	   	if("" == custName){
-			 	   	    		$("#custNameLab").text("商户名不能为空");
-			 	   	    		$("#custName").focus();
-			 	   	    		return false;
-			 	   	    	}else{
-			 	   	    		$("#custNameLab").text('');
-			 	   	    	}
-				 	   	    if("" == mobileNo){
-			 	   	    		$("#mobileNoLab").text("手机号不能为空");
-			 	   	    		$("#mobileNo").focus();
-			 	   	    		return false;
-			 	   	    	}else{
-			 	   	    		$("#mobileNoLab").text('');
-			 	   	    	}
-					 	   	if("" == suiXingMerchantType){
-			 	   	    		$("#suiXingMerchantLab").text("资质类型不能为空");
-			 	   	    		$("#suiXingMerchantType").focus();
-			 	   	    		return false;
-			 	   	    	}else{
-			 	   	    		$("#suiXingMerchantLab").text('');
-			 	   	    	}
-					 	    if("" == mecTypeFlag){
-			 	   	    		$("#mecTypeFlagLab").text("商户类型不能为空");
-			 	   	    		$("#mecTypeFlag").focus();
-			 	   	    		return false;
-			 	   	    	}else{
-			 	   	    		$("#mecTypeFlagLab").text('');
-			 	   	    	}
-			 	   	    	if("01" == mecTypeFlag){
-				 	   	    	if("" == cprRegNmCn){
-				 	   	    		$("#cprRegNmCnLab").text("营业执照注册名称不能为空");
-				 	   	    		$("#cprRegNmCn").focus();
-				 	   	    		return false;
-				 	   	    	}else{
-				 	   	    		$("#cprRegNmCnLab").text('');
-				 	   	    	}
-					 	   	    if("" == registCode){
-				 	   	    		$("#registCodeLab").text("营业执照注册号不能为空");
-				 	   	    		$("#registCode").focus();
-				 	   	    		return false;
-				 	   	    	}else{
-				 	   	    		$("#registCodeLab").text('');
-				 	   	    	}
-				 	   	    }
-					 	   	if("" == merchantProvince){
-			   	   	    		$("#merchantProvinceLabel").text("注册地址省份不能为空");
-			   	   	    		return false;
-			   	   	    	}else{
-			   	   	    		$("#merchantProvinceLabel").text("");
-			   	   	    	}
-					 	   if("" == merchantCity){
-			   	   	    		$("#merchantCityLabel").text("注册地址城市不能为空");
-			   	   	    		return false;
-			   	   	    	}else{
-			   	   	    		$("#merchantCityLabel").text("");
-			   	   	    	}
-					 	    if("" == merchantArea){
-			   	   	    		$("#merchantAreaLabel").text("注册地址地区不能为空");
-			   	   	    		return false;
-			   	   	    	}else{
-			   	   	    		$("#merchantAreaLabel").text("");
-			   	   	    	}
-				   	   	    if("" == cprRegAddr){
-			 	   	    		$("#cprRegAddrLabel").text("注册详细地址不能为空");
-			 	   	    		return false;
-			 	   	    	}else{
-			 	   	    		$("#cprRegAddrLabel").text("");
-			 	   	    	}
-				 	   	    if("" == industryCode){
-			 	   	    		$("#industryCodeLabel").text("行业信息不能为空");
-			 	   	    	    $("#industryCode").focus();
-			 	   	    		return false;
-			 	   	    	}else{
-			 	   	    		$("#industryCodeLabel").text("");
-			 	   	    	}
-				 	   	    if("" == representativeName){
-			 	   	    		$("#representativeNameLabel").text("法人姓名不能为空");
-			 	   	    	    $("#representativeName").focus();
-			 	   	    		return false;
-			 	   	    	}else{
-			 	   	    		$("#representativeNameLabel").text("");
-			 	   	    	}
-				 	   	    if("" == representativeCertType){
-			 	   	    		$("#representativeCertTypeLabel").text("法人证件类型不能为空");
-			 	   	    	    $("#representativeCertType").focus();
-			 	   	    		return false;
-			 	   	    	}else{
-			 	   	    		$("#representativeCertTypeLabel").text("");
-			 	   	    	}
-				 	   	    if("" == representativeCertNo){
-			 	   	    		$("#representativeCertNoLabel").text("法人证件号不能为空");
-			 	   	    	    $("#representativeCertNo").focus();
-			 	   	    		return false;
-			 	   	    	}else{
-			 	   	    		$("#representativeCertNoLabel").text("");
-			 	   	    	}
-				 	   	    if("" == actNm){
-			 	   	    		$("#actNmLabel").text("结算姓名不能为空");
-			 	   	    	    $("#actNm").focus();
-			 	   	    		return false;
-			 	   	    	}else{
-			 	   	    		$("#actNmLabel").text("");
-			 	   	    	}
-					 	   	if("" == actType){
-			 	   	    		$("#actLabel").text("结算账号不能为空");
-			 	   	    	    $("#actType").focus();
-			 	   	    		return false;
-			 	   	    	}else{
-			 	   	    		$("#actLabel").text("");
-			 	   	    	}
-				 	   	    if("" == certifyNo){
-			 	   	    		$("#certifyNoLabel").text("结算身份证号不能为空");
-			 	   	    	    $("#certifyNo").focus();
-			 	   	    		return false;
-			 	   	    	}else{
-			 	   	    		$("#certifyNoLabel").text("");
-			 	   	    	}
-				 	   	    if("" == bankCardNo){
-			 	   	    		$("#bankCardNoLabel").text("结算开户行卡号不能为空");
-			 	   	    	    $("#bankCardNo").focus();
-			 	   	    		return false;
-			 	   	    	}else{
-			 	   	    		$("#bankCardNoLabel").text("");
-			 	   	    	}
-				 	   	    if("" == suiXinBank){
-			 	   	    		$("#suiXinBankLabel").text("结算开户行不能为空");
-			 	   	    	    $("#suiXinBank").focus();
-			 	   	    		return false;
-			 	   	    	}else{
-			 	   	    		$("#suiXinBankLabel").text("");
-			 	   	    	}
-					 	   	if("" == bankProvince){
-			   	   	    		$("#bankProvinceLabel").text("开户行所在省份不能为空");
-			   	   	    		return false;
-			   	   	    	}else{
-			   	   	    		$("#bankProvinceLabel").text("");
-			   	   	    	}
-					 	    if("" == bankCity){
-			   	   	    		$("#bankCityLabel").text("开户行所在城市不能为空");
-			   	   	    		return false;
-			   	   	    	}else{
-			   	   	    		$("#bankCityLabel").text("");
-			   	   	    	}
-				   	   	    if("" == interBankName){
-			 	   	    		$("#interBankNameLabel").text("开户支行名称不能为空");
-			 	   	    		return false;
-			 	   	    	}else{
-			 	   	    		$("#interBankNameLabel").text("");
-			 	   	    	}
-			   		    	if("" == rate){
-			   		    		$("#rateLabel").text("费率不能为空");
-			   		    		$("#rate").focus();
-			   		    		return false;
-			   		    	}else{
-			   		    		$("#rateLabel").text("");
-			   		    	}
-		  	   		    	
-		  	   	   	    
-		  	   				$.ajax({
-		  	   					type : "POST",
-		  	   					url : window.Constants.ContextPath +'<%=MerchantReportedPath.BASE + MerchantReportedPath.SUXINGPAYSUBMITREPORT%>',
-		  	   					data :{
-		  	   						channelNo : channelNo,
-		  	   						merchantCode : merchantCode,
-		  	   					 	custName : custName,
-		  	   						mobileNo : mobileNo,
-		  	   						suiXingMerchantType : suiXingMerchantType,
-		  	   						mecTypeFlag : mecTypeFlag,
-		  	   						cprRegNmCn : cprRegNmCn,
-		  	   						registCode : registCode,
-		  	   						merchantProvince : merchantProvince,
-		  	   						merchantCity : merchantCity,
-		  	   						merchantArea : merchantArea,
-		  	   						cprRegAddr : cprRegAddr,
-		  	   						industryCode : industryCode,
-		  	   						representativeName : representativeName,
-		  	   						representativeCertType : representativeCertType,
-		  	   					    representativeCertNo : representativeCertNo,
-		  	   					    actNm : actNm,
-		  	   						actType : actType,
-		  	   						certifyNo : certifyNo,
-		  	   						bankCardNo : bankCardNo,
-		  	   						suiXinBank : suiXinBank,
-		  	   						bankProvince : bankProvince,
-		  	   						bankCity : bankCity,
-		  	   						interBankName : interBankName,
-		  	   						rate : rate,
-		  	   						taskCode : taskCode
-		  	   					},
-		  	   					dataType : "json",
-		  	   					success : function(data) {
-		  	   						if(data.result=='SUCCESS'){							
-		  	   							$.gyzbadmin.alertSuccess("提交报备成功！",function(){
-												//$("#updateAccountModal").modal("hide");
-											},function(){
-												this.location.reload();
-											});
-										}else{
-											/* $.gyzbadmin.alertFailure(data.message);
-											window.location.reload(); */
-											/* $.gyzbadmin.alertFailure('提交报备失败:' + data.message,function(){
-												//$("#updateAccountModal").modal("hide");
-											},function(){
-												window.location.reload();
-											}); */
-											alert(data.message);
-										}
-		  	   					}
-		  	   				});
-		   			
-		   					//照片
-		   		 			$("input[type=file]").each(
-			   					function() {
-			   						var _this = $(this);
-			   						_this.localResizeIMG({
-			   							quality : 0.8,
-			   							success : function(result,file) {
-			   								var att = pre.substr(pre.lastIndexOf("."));
-			   								//压缩后图片的base64字符串
-			   								var base64_string = result.clearBase64;
-			   								$('#'+_this.attr('id')+'temp').val(att+","+base64_string);
-			   								//图片预览
-			   					             var imgObj = $('#'+_this.attr('id')+'Image');
-			   					             imgObj.attr("src", "data:image/jpeg;base64," + base64_string).show(); 
-			   					             
-			   					             var width = result.width;
-			   					             var height = result.height;
-			   					             
-			   					             var scale =  width/height;
-			   						     	 if(width >800){
-			   						     		width = 800;
-			   						     		height = width / scale;
-			   						     	 }
-			   					             $(".showDiv").width(width+"px");
-			   					             $(".showDiv").height(height+"px");
-			   							}
-			   						});
-			   					}
-		   		 			) 
-			   	 		}
+						alert("更新进件成功");
+	   					//照片
+	   		 			$("input[type=file]").each(
+		   					function() {
+		   						var _this = $(this);
+		   						_this.localResizeIMG({
+		   							quality : 0.8,
+		   							success : function(result,file) {
+		   								var att = pre.substr(pre.lastIndexOf("."));
+		   								//压缩后图片的base64字符串
+		   								var base64_string = result.clearBase64;
+		   								$('#'+_this.attr('id')+'temp').val(att+","+base64_string);
+		   								//图片预览
+		   					             var imgObj = $('#'+_this.attr('id')+'Image');
+		   					             imgObj.attr("src", "data:image/jpeg;base64," + base64_string).show(); 
+		   					             
+		   					             var width = result.width;
+		   					             var height = result.height;
+		   					             
+		   					             var scale =  width/height;
+		   						     	 if(width >800){
+		   						     		width = 800;
+		   						     		height = width / scale;
+		   						     	 }
+		   					             $(".showDiv").width(width+"px");
+		   					             $(".showDiv").height(height+"px");
+		   							}
+		   						});
+		   					}
+	   		 			) 
 					}else{
 						alert("上传图片返回码异常");
 					}

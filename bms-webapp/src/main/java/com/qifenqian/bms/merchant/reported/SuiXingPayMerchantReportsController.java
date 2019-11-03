@@ -187,6 +187,13 @@ public class SuiXingPayMerchantReportsController {
 		JSONObject object = new JSONObject();
 		SuiXingBean cr = new SuiXingBean();
 		cr.setMerchantCode(merchantCode);
+		TdMerchantDetailInfo detail = new TdMerchantDetailInfo();
+		detail.setMerchantCode(merchantCode);
+		detail.setChannelNo("SUIXING_PAY");
+		TdMerchantDetailInfo detailInfo = fmIncomeMapperDao.selMerchantDetailInfo(detail);
+		if("" != detailInfo.getRemark() && null != detailInfo.getRemark()){
+			cr.setTaskCode(detailInfo.getRemark());
+		}
 		/*TdCustInfo custInfo = new TdCustInfo();
 		
 		if(null != cr.getMerchantCode()){
@@ -211,19 +218,27 @@ public class SuiXingPayMerchantReportsController {
 				logger.info("+++++++++++" + path + "------------------------------");
 				
 				SxPayUploadFileInfo uploadFileInfo = new SxPayUploadFileInfo();
-				if("" != cr.getTaskCode() && null != cr.getTaskCode()){
-					uploadFileInfo.setTaskCode(cr.getTaskCode());
-				}
+				
 				uploadFileInfo.setReqId(DateUtil.format(new Date(), DateUtil.YYYYMMDDHHMMSS));
 				uploadFileInfo.setFilePath(path);
 				Map<String, Object> req = new HashMap<>();
-				req.put("merList", uploadFileInfo);
-				req.put("channelType", ChannelMerRegist.SUIXING_PAY);
+				ChannelResult result = new ChannelResult();
+				if("" != cr.getTaskCode() && null != cr.getTaskCode()){
+					uploadFileInfo.setTaskCode(cr.getTaskCode());
+					req.put("merList", uploadFileInfo);
+					req.put("channelType", ChannelMerRegist.SUIXING_PAY);
+					logger.info("文件更新至随行付" + "------------------------------");
+					result = iMerChantIntoService.updataMerchatAdd(req);
+				}else {
+					req.put("merList", uploadFileInfo);
+					req.put("channelType", ChannelMerRegist.SUIXING_PAY);
+					
+					logger.info("文件上传至随行付" + "------------------------------");
+					result = iMerChantIntoService.fileUpload(req);
+				}
 				
-				logger.info("文件上传至随行付" + "------------------------------");
-				ChannelResult result = iMerChantIntoService.fileUpload(req);
 				if("00".equals(result.getChannelCode())){
-					String taskCode = (String) result.getData().get("taskCode");
+				    String taskCode = (String) result.getData().get("taskCode");
 					if("reported".equals(status)){
 						CrInComeBean cc =new CrInComeBean();
 						cc.setMerchantCode(cr.getMerchantCode());
@@ -233,7 +248,11 @@ public class SuiXingPayMerchantReportsController {
 						tdInfo.setRemark(taskCode);
 						tdInfo.setMerchantCode(merchantCode);
 						tdInfo.setPatchNo(td.getPatchNo());
-						fmIncomeMapper.updateTdMerchantDetailInfo(tdInfo);	
+						tdInfo.setReportStatus("Y");
+						tdInfo.setFileStatus("Y");
+						String mchntStatus = "0";
+						fmIncomeService.UpdateMerReportAndMerDetailInfo(tdInfo, mchntStatus);
+//						fmIncomeMapper.updateTdMerchantDetailInfo(tdInfo);	
 					}
 					object.put("result", "SUCCESS");
 					object.put("message", taskCode);

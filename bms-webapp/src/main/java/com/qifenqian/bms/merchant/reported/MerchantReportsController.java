@@ -621,6 +621,7 @@ public class MerchantReportsController {
 			}
 			detail.setReportStatus("E");
 			detail.setOutMerchantCode(channelMerNo);
+			detail.setResultMsg(channelResult.getReMsg());
 			fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"2");
 			object.put("result", "FAIL");
 			object.put("message", StringUtils.isBlank(channelResult.getReMsg())?"审核失败":channelResult.getReMsg());

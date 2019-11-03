@@ -211,7 +211,7 @@
 		<dependency>
 			<groupId>com.seven.module</groupId>
 			<artifactId>seven-skeleton</artifactId>
-			<version>5.0.8</version>
+			<version>${version.channel}</version>
 		</dependency>
 		<!-- 优图 -->
 		<dependency>
