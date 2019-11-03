@@ -183,13 +183,14 @@ public class SuiXingPayMerchantReportsController {
 	 */
 	@RequestMapping(MerchantReportedPath.SELSUIXINGFILEUPLOAD)
 	@ResponseBody
-	public String  fileUpload(HttpServletRequest request,HttpServletResponse response,String merchantCode,String status) {
+	public String  fileUpload(HttpServletRequest request,HttpServletResponse response,String merchantCode,String status,String patchNo) {
 		JSONObject object = new JSONObject();
 		SuiXingBean cr = new SuiXingBean();
 		cr.setMerchantCode(merchantCode);
 		TdMerchantDetailInfo detail = new TdMerchantDetailInfo();
 		detail.setMerchantCode(merchantCode);
 		detail.setChannelNo("SUIXING_PAY");
+		detail.setPatchNo(patchNo);
 		TdMerchantDetailInfo detailInfo = fmIncomeMapperDao.selMerchantDetailInfo(detail);
 		if("" != detailInfo.getRemark() && null != detailInfo.getRemark()){
 			cr.setTaskCode(detailInfo.getRemark());
@@ -243,6 +244,7 @@ public class SuiXingPayMerchantReportsController {
 						CrInComeBean cc =new CrInComeBean();
 						cc.setMerchantCode(cr.getMerchantCode());
 						cc.setChannelNo("SUIXING_PAY");
+						cc.setPatchNo(patchNo);
 						TdMerchantDetailInfo td = fmIncomeService.getTdMerchantReport(cc);
 						TdMerchantDetailInfo tdInfo = new TdMerchantDetailInfo();
 						tdInfo.setRemark(taskCode);
@@ -282,6 +284,7 @@ public class SuiXingPayMerchantReportsController {
 	
 	@RequestMapping(MerchantReportedPath.SUXINGPAYSUBMITREPORT)
 	@ResponseBody
+	@Transactional
 	public String list(HttpServletRequest request,HttpServletResponse response,SuiXingBean cr){
 		
 		JSONObject object = new JSONObject();

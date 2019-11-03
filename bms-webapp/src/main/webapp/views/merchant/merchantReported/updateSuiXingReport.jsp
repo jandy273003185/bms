@@ -47,6 +47,7 @@
 					<input type="hidden" id="reportStatus" name="reportStatus" value="${reportStatus}"/>
 					<input type="hidden" id="taskCode" name="taskCode" value ="${remark}"/>
 					<input type="hidden" id="status" name="status" value="${status}"/>
+					<input type="hidden" id="patchNo" name="patchNo" value="${patchNo}"/>
 					<input type="hidden" id="channlCode" name="channlCode" value="SUIXING_PAY"/>
 					<input type="hidden" id="custId" name="custId" value="${custInfo.custId }"/>
 					<input type="hidden" id="authId" name="authId" value="${custInfo.authId }"/>
@@ -772,7 +773,7 @@
    			var interBankName = $("#interBankName").val();
    			//rate
    			var rate = $("#rate").val();
-
+			var patchNo = $("#patchNo").val();
    			var reportStatus = $("#reportStatus");
    			var taskCode = $("#taskCode").val();
    			if("" == suiXingMerchantType){
@@ -802,7 +803,7 @@
 			});  */
 			$.ajax({
 				type : "POST",
-				url : window.Constants.ContextPath +'<%=MerchantReportedPath.BASE + MerchantReportedPath.SELSUIXINGFILEUPLOAD %>?status='+status,
+				url : window.Constants.ContextPath +'<%=MerchantReportedPath.BASE + MerchantReportedPath.SELSUIXINGFILEUPLOAD %>?patchNo='+patchNo+'&status='+status,
 				data :merchantData,
                 dataType : "json",
                 cache: false,

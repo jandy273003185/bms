@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
-import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
 import com.qifenqian.bms.merchant.merchantReported.bean.KFTArea;
 import com.qifenqian.bms.merchant.merchantReported.bean.KFTMccBean;
 import com.qifenqian.bms.merchant.merchantReported.mapper.KftIncomeMapper;
 import com.qifenqian.bms.merchant.merchantReported.service.KFTIncomeService;
+import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
+import com.qifenqian.bms.basemanager.merchant.bean.StoreManage;
+import com.qifenqian.bms.basemanager.merchant.mapper.StoreManageMapper;
+import com.qifenqian.bms.merchant.reported.MerchantReportedPath;
 import com.qifenqian.bms.merchant.reported.bean.Bank;
 import com.qifenqian.bms.merchant.reported.bean.ChannlInfo;
 import com.qifenqian.bms.merchant.reported.bean.Industry;
@@ -535,7 +538,7 @@ public class MerchantEnterReportedController {
     * 随行付更新报备
     */
 	@RequestMapping(MerchantEnterReportedPath.UPDATESUNXINGREPORT)
-	public ModelAndView  updateSuiXingMerchantReported(HttpServletRequest request,HttpServletResponse response,String merchantCode,String channlCode,String remark,String reportStatus,String status){
+	public ModelAndView  updateSuiXingMerchantReported(HttpServletRequest request,HttpServletResponse response,String merchantCode,String channlCode,String remark,String patchNo,String reportStatus,String status){
 		ModelAndView mv = new ModelAndView();
 		/***查询渠道***/
 		List<ChannlInfo> channlInfoList = crIncomeService.getChannlInfoList();
@@ -582,6 +585,8 @@ public class MerchantEnterReportedController {
 		if(null!=industryList && industryList.size()>0){
 			mv.addObject("industryList", industryList);
 		}
+		
+		mv.addObject("patchNo",patchNo);
 		mv.addObject("remark",remark);
 		mv.addObject("reportStatus",reportStatus);
 		mv.addObject("status",status);
