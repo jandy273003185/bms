@@ -38,13 +38,15 @@
         </encoder>
     </appender>
 
-	<root level="info">
+	<logger name="druid" level="debug" additivity="false" /> 
+	<root level="debug">
 		<!-- <appender-ref ref="FILE" /> -->
 		<appender-ref ref="STDOUT" />
 	</root>
 	<!-- <logger name="org.springframework" level="debug" additivity="false" /> -->
 	<!-- <logger name="org.apache" level="info" additivity="false" />
-	<logger name="org.activiti" level="info" additivity="false" />
-	<logger name="org.mybatis" level="info" additivity="false" /> -->
+	<logger name="org.activiti" level="info" additivity="false" />-->
+	<logger name="org.mybatis" level="debug" additivity="false" /> 
+	
 	
 </configuration>
