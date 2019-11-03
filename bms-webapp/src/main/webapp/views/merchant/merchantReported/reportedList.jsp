@@ -228,7 +228,7 @@
 		      	winChild =  window.open(url, name,params);
    	   	   	}else{
    	   	   		
-	   	   	    var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.UPDATESUNXINGREPORT%>?merchantCode="+merchantCode+"&status="+status+"&reportStatus="+reportStatus+"&remark="+remark+"&channlCode="+channlCode; 
+	   	   	    var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.UPDATESUNXINGREPORT%>?merchantCode="+merchantCode+"&status="+status+"&reportStatus="+reportStatus+"&patchNo="+patchNo+"&remark="+remark+"&channlCode="+channlCode; 
 		     	var name="window";                        //网页名称，可为空;
 		     	var iWidth=1200;                          //弹出窗口的宽度;
 		     	var iHeight=600;                       //弹出窗口的高度;
