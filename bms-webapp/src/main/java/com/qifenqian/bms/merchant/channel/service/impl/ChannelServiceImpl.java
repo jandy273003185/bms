@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
 import com.qifenqian.bms.basemanager.custInfo.service.TdCustInfoService;
@@ -13,6 +14,7 @@ import com.qifenqian.bms.merchant.channel.dao.ChannelDAO;
 import com.qifenqian.bms.merchant.channel.service.ChannelService;
 
 @Service
+@Transactional
 public class ChannelServiceImpl implements ChannelService {
 
 	@Autowired

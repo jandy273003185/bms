@@ -994,10 +994,10 @@
 	                                            	<button type="button"  class="btn btn-primary btn-xs" disabled>刷新状态</button>
 	                                            </c:if>
 	                                            
-	                                            <c:if test="${reported.reportStatus =='99'}">
+	                                            <c:if test="${reported.reportStatus =='99' || reported.detailStatus =='E' || reported.detailStatus =='F'}">
 	                                            	<button type="button"  class="btn btn-primary btn-xs" onclick ="getUpdate(this);">报备更新</button>
                                             	</c:if>
-                                            	<c:if test="${reported.reportStatus !='99' }">
+                                            	<c:if test="${reported.reportStatus !='99' && reported.detailStatus !='E' && reported.detailStatus !='F'}">
 	                                            	<button type="button"  class="btn btn-primary btn-xs" disabled>报备更新</button>
                                             	</c:if>
                                             	<%-- 

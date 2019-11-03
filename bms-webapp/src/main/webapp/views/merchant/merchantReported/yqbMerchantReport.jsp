@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="com.qifenqian.bms.merchant.reported.MerchantReportedPath"%>
-<%@page import="com.qifenqian.bms.basemanager.merchant.AuditorPath"%>
+<%@page import="com.sevenpay.bms.basemanager.merchant.AuditorPath"%>
 <%@page import="com.seven.micropay.channel.enums.SumpayMerchantType"%>
 <%@page import="com.seven.micropay.channel.enums.BestBankCode"%>
 <%@page import="com.seven.micropay.channel.enums.YqbMerchantType"%>

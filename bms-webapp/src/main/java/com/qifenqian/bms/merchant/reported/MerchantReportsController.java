@@ -227,6 +227,7 @@ public class MerchantReportsController {
 	 */
 	@RequestMapping(MerchantReportedPath.SUBMITREPORT)
 	@ResponseBody
+	@Transactional
 	public String list(HttpServletRequest request,HttpServletResponse response,CrInComeBean cr){
 		JSONObject object = new JSONObject();
 		JSONObject bestResult = new JSONObject();
@@ -618,7 +619,7 @@ public class MerchantReportsController {
 			}else if("KFT_PAY".equals(detail.getChannelNo())){
 				channelMerNo =  rtnResultMap.get("merchantNo") == null?"":(String)rtnResultMap.get("merchantNo");
 			}
-			detail.setReportStatus("E");
+			detail.setReportStatus("F");
 			detail.setOutMerchantCode(channelMerNo);
 			detail.setResultMsg(channelResult.getReMsg());
 			fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"2");
