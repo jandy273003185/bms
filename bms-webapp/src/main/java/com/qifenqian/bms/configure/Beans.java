@@ -14,7 +14,7 @@ public class Beans {
 	private String host = "smtp.exmail.qq.com";
 
 	private String username = "webmaster@szgyzb.com";
-	private String password = "Dgxdl012";
+	private String password = "wm123456";
 
 	private String mail_smtp_auth = "true";
 	private String mail_smtp_timeout = "2500";
