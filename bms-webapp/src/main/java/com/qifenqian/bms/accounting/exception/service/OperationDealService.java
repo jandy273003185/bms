@@ -334,7 +334,6 @@ public class OperationDealService {
 	 * 
 	 * @param operation
 	 */
-	@Transactional
 	public void closureOperation(Operation operation) {
 		try {
 			Map<String, String> recordMap = new HashMap<String, String>();

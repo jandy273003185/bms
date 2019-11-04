@@ -112,7 +112,6 @@ public class AdjustServiceSupport {
 	 * @return 业务编号
 	 * 
 	 */
-	@Transactional
 	public void handle(AccountingAdjustMain mBean, List<AccountingAdjustDetail> dlist) {
 
 		logger.info("保存调账业务数据 opId[{}]", mBean.getOpId());
@@ -152,7 +151,6 @@ public class AdjustServiceSupport {
 	 * @param mBean
 	 * @param dlist
 	 */
-	@Transactional
 	public void handleSingle(AccountingAdjustMain mBean, List<AccountingSingleAdjustDetail> dlist) {
 
 		logger.info("保存调账业务数据 opId[{}]", mBean.getOpId());
@@ -354,7 +352,6 @@ public class AdjustServiceSupport {
 	 * @param mBean
 	 * @param dlist
 	 */
-	@Transactional
 	public void update4Recheck(AccountingAdjustMain mBean, List<AccountingAdjustDetail> dlist) {
 
 		logger.debug("更新业务数据");
@@ -385,7 +382,6 @@ public class AdjustServiceSupport {
 	 * @param mBean
 	 * @param dlist
 	 */
-	@Transactional
 	public void update4RecheckSingle(AccountingAdjustMain mBean, List<AccountingSingleAdjustDetail> dlist) {
 
 		logger.debug("更新业务数据");
@@ -415,7 +411,6 @@ public class AdjustServiceSupport {
 	 * 
 	 * @param opId
 	 */
-	@Transactional
 	public void delete(String opId) {
 
 		AccountingAdjustMain mBean = accountingAdjustMainMapper.selectByPrimaryKey(opId);
@@ -444,7 +439,6 @@ public class AdjustServiceSupport {
 	 * @param opId
 	 * @param checkerUid
 	 */
-	@Transactional
 	public void claim4Check(String opId, String checkerUid) {
 		AccountingAdjustMain mBean = accountingAdjustMainMapper.selectByPrimaryKey4Lock(opId);
 		Task task = taskService.createTaskQuery().processInstanceId(mBean.getProcessInstanceId()).taskDefinitionKey("usertask2").singleResult();
@@ -469,7 +463,6 @@ public class AdjustServiceSupport {
 	 * @param checkerUid
 	 *            复核人员UID
 	 */
-	@Transactional
 	public void check(String opId, boolean checkResult, boolean approve, String memo, String checkerUid) {
 
 		logger.info("复核调账业务 opId[{}], checkResult[{}]", opId, checkResult);
@@ -498,7 +491,6 @@ public class AdjustServiceSupport {
 		taskService.complete(task.getId(), variables);
 	}
 
-	@Transactional
 	public void claim4Approve(String opId, String checkerUid) {
 		AccountingAdjustMain mBean = accountingAdjustMainMapper.selectByPrimaryKey4Lock(opId);
 		Task task = taskService.createTaskQuery().processInstanceId(mBean.getProcessInstanceId()).taskDefinitionKey("usertask3").singleResult();
@@ -523,7 +515,6 @@ public class AdjustServiceSupport {
 	 * @param checkerUid
 	 *            总经理UID
 	 */
-	@Transactional
 	public void approve(String opId, boolean checkResult, String memo, String checkerUid) {
 
 		logger.info("总经理审批调账业务 opId[{}], checkResult[{}]", opId, checkResult);

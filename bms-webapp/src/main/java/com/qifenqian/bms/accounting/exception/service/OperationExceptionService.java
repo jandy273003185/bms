@@ -70,7 +70,6 @@ public class OperationExceptionService {
 	 * 
 	 * @param operationException
 	 */
-	@Transactional
 	public void insertOperationException(OperationException operationException) {
 		if (null == operationException) {
 			throw new UnsupportedOperationException("业务异常处理对象为空");
@@ -117,7 +116,6 @@ public class OperationExceptionService {
 	 * 
 	 * @param operation
 	 */
-	@Transactional
 	public void insertOperationExceptionFlow(OperationExceptionFlow operationFlow) {
 		if (null == operationFlow) {
 			throw new UnsupportedOperationException("业务异常处理流水对象为空");

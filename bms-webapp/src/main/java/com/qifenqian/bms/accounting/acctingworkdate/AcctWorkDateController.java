@@ -53,7 +53,6 @@ public class AcctWorkDateController {
 	 * @param updateBean
 	 * @return
 	 */
-	@Transactional
 	@RequestMapping(AcctWorkDatePath.EDIT)
 	@ResponseBody
 	public String eidt(AcctWorkDate updateBean) {

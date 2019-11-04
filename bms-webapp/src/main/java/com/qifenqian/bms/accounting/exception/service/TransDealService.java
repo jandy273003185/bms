@@ -129,7 +129,6 @@ public class TransDealService {
 	 * 
 	 * @param transAction
 	 */
-	@Transactional
 	public void confirmSuccess(TransAction transAction) {
 
 		/** 确认成功修改记录 **/
