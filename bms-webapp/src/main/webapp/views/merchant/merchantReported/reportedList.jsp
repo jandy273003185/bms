@@ -26,6 +26,21 @@
 		var form = $('#merchantForm');
 		form.submit();
 	});
+	
+	 $(document).ready(function(){
+		$('.clearMerchantSearch').click(function(){
+	        $('.search-table #merchantCode').val('');
+	        $('.search-table #custName').val('');
+	        $('.search-table #email').val('');
+	        $('.search-table #channelNo').val('');
+	        $('.search-table #reportStatus').val('');
+	        $('.search-table #startModifyTime').val('');
+	        $('.search-table #endModifyTime').val('');
+	        /* $('.search-table #filingStatus').val('');
+	        $('.search-table #filingAuditStatus').val(''); */
+	
+	    })
+	 })
 	//查看报备信息
 	function getInfo(obj){
 		var merchantCode=$(obj).parent().find('#merchantCode_').val();
