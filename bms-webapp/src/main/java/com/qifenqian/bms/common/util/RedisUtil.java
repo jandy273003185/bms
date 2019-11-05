@@ -62,7 +62,7 @@ public final class RedisUtil {
   }
 
   private void loadParam() {
-    ResourceBundle rb = ResourceBundle.getBundle("com/sevenpay/bms/common/util/redisUtil");
+    ResourceBundle rb = ResourceBundle.getBundle("com/qifenqian/bms/common/util/redisUtil");
     this.serverIp = rb.getString("serverIp");
     this.serverPort = Integer.valueOf(rb.getString("serverPort"));
     this.auth = rb.getString("auth");
