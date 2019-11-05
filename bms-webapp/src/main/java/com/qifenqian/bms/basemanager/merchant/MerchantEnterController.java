@@ -17,6 +17,8 @@ import com.qifenqian.bms.platform.web.admin.user.bean.User;
 import com.qifenqian.bms.platform.web.admin.user.service.UserService;
 import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 import com.qifenqian.bms.platform.utils.BusinessUtils;
+import com.qifenqian.bms.platform.utils.SequenceUtils;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -210,13 +212,16 @@ public class MerchantEnterController {
 				//表示个人
 				merchantCode = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + GenSN.getRandomNum(3);
 			}else{
-				merchantCode = BusinessUtils.getMerchantId(merchant.getBusinessLicense());
+				merchant.setMerchantCode(SequenceUtils.getMerchantSeqNo("P"));
+//				merchantCode = BusinessUtils.getMerchantId(merchant.getBusinessLicense());
 			}
-
+			if("".equals(merchant.getMerchantCode()) || null == merchant.getMerchantCode()) {
+				merchant.setMerchantCode(GenSN.getRandomNum(19));
+			}
 
 			String custId = GenSN.getSN();
 
-			merchant.setMerchantCode(merchantCode);
+//			merchant.setMerchantCode(merchantCode);
 			merchant.setCustId(custId);
 			// 任务ID
 			String taskId = request.getParameter("taskId");
