@@ -3,7 +3,7 @@
 <%@page import="java.util.Arrays"%>
 <%@page import="com.qifenqian.bms.accounting.exception.base.bean.Operation"%>
 <%@page import="com.qifenqian.bms.accounting.exception.base.type.OperationStatus"%>
-<%@page import="org.gyzb.platform.common.utils.ReflectUtils"%>
+<%@page import="com.qifenqian.bms.platform.common.utils.ReflectUtils"%>
 <%@page import="com.sevenpay.invoke.common.type.RequestColumnValues"%>
 <%@page import="com.qifenqian.bms.accounting.exception.OperationExceptionPath"%>
 

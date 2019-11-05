@@ -43,6 +43,12 @@
 			<if test="reportStatus != null and reportStatus != '' ">
 			 and t.report_status = #{reportStatus,jdbcType=VARCHAR}
 			</if>
+			<if test="custName != null and custName != '' ">
+			 and r.cust_name = #{custName,jdbcType=VARCHAR}
+			</if>
+			<if test="email != null and email != '' ">
+			 and r.merchant_email = #{email,jdbcType=VARCHAR}
+			</if>
 			<if test="startModifyTime != null and '' != startModifyTime">
 				<![CDATA[
 	              AND DATE_FORMAT(t.modify_time,'%Y-%m-%d')>= #{startModifyTime}

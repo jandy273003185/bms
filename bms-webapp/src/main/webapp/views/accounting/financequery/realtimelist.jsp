@@ -3,7 +3,7 @@
 <%@page import="com.qifenqian.bms.accounting.financequery.FinanceQueryPath"%>
 <%@page import="com.qifenqian.bms.accounting.financequery.bean.RealTimeBussBalanceWater"%>
 <%@page import="com.sevenpay.invoke.common.type.RequestColumnValues"%>
-<%@page import="org.gyzb.platform.common.utils.ReflectUtils"%>
+<%@page import="com.qifenqian.bms.platform.common.utils.ReflectUtils"%>
 <% String url = request.getScheme()+"://"+ request.getServerName()+":"+request.getServerPort(); %>
 <%-- <link rel="stylesheet" href='<c:url value="/static/css/bootstrap-datetimepicker.min.css"/>' />
 <script src='<c:url value="/static/js/checkRule_source.js"/>'></script> --%>

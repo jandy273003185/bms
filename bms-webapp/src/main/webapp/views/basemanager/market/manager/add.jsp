@@ -3,7 +3,7 @@
 <%@page import="com.qifenqian.bms.basemanager.market.controller.ManagerPath"%>
 <%@page import="com.qifenqian.bms.basemanager.market.bean.Manager"%>
 <%@page import="com.sevenpay.invoke.common.type.RequestColumnValues"%>
-<%@page import="org.gyzb.platform.common.utils.ReflectUtils"%>
+<%@page import="com.qifenqian.bms.platform.common.utils.ReflectUtils"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <% String url = request.getScheme()+"://"+ request.getServerName()+":"+request.getServerPort(); %>
 <%-- <link rel="stylesheet" href='<c:url value="/static/css/bootstrap-datetimepicker.min.css"/>' />

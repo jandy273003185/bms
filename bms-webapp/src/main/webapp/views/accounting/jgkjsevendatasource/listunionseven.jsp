@@ -2,7 +2,7 @@
 <%@ include file="/include/template.jsp"%>
 <%@page import="com.qifenqian.bms.accounting.jgkjsevendatasource.BalJgkjSevenDataSourcePath" %> 
 <%@page import="com.qifenqian.bms.accounting.balunionpayuniondatasource.BalUnionpayUnionDataSourcePath" %> 
-<%@page import="com.qifenqian.bms.BalJgkjDataSourcePath" %> 
+<%@page import="com.qifenqian.bms.accounting.jgkjdatasource.BalJgkjDataSourcePath" %> 
 <%@page import="com.qifenqian.bms.accounting.balunionpayuniondatasource.BalUnionpaySevenDataSourcePath" %> 
 <%@page import="com.qifenqian.bms.accounting.cncbdatasource.BalCncbDataSourcePath" %> 
 

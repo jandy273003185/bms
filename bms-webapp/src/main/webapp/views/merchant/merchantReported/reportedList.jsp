@@ -828,7 +828,7 @@
 										  <option value="99"> 报备失败     </option>
 										  <option value="0">  提交审核中 </option>
 										  <option value="1">  审核通过     </option>
-										  <option value="2">  审核通过     </option>
+										  <option value="2">  审核不通过     </option>
 									 </select>
 								</td>
 								<td class="td-left">报备时间：</td>

@@ -203,7 +203,6 @@ function selCustType(){
 
 
 function addMerchantBtn(){
-	console.log("点击保存")
 	/*var businessTermEnd = "forever";*/
 	/*账号校验*/
 	if(isNull($("#merchantAccount")[0])){
@@ -347,7 +346,7 @@ function addMerchantBtn(){
 			return false;
 		}
 
-		if(!isNull($("#businessPhoto")[0])){
+		if(!checkAttach($("#businessPhoto")[0])){
 			$.gyzbadmin.alertFailure("必须提交营业执照扫描件");
 			return false;
 		}
@@ -358,9 +357,9 @@ function addMerchantBtn(){
 		}*/
 	}
 	/*个体户*/
-	if(custType=='2'){
+	/*if(custType=='2'){
 
-		/*营业执照有限期 */
+		/!*营业执照有限期 *!/
 		if(isNull($("#businessTermStart")[0])){
 			$("#businessTermStartLab").text("请选择日期");
 			$("#businessTermStart").focus();
@@ -373,7 +372,7 @@ function addMerchantBtn(){
 			return false;
 		}
 
-		/*起始日期判断 */
+		/!*起始日期判断 *!/
 		var startDate = $("#businessTermStart").val();
 		var endDate= $("#businessTermEnd").val();
 		if("" != startDate && "" != endDate && startDate > endDate)
@@ -405,13 +404,13 @@ function addMerchantBtn(){
 				return false;
 			}
 		}
-		/*if(!kong.test($("#businessLicense").val().trim())){
+		/!*if(!kong.test($("#businessLicense").val().trim())){
 			if(!checkAttach($("#businessPhoto")[0])){
 				$.gyzbadmin.alertFailure("必须上传营业执照扫描件");
 				return false;
 			}
-		}*/
-	}
+		}*!/
+	}*/
 
 	/*法人姓名*/
 	if(isNull($("#representativeName")[0])){
@@ -999,14 +998,14 @@ $(function(){
 	                                   <c:if test="${not empty provincelist_ }">
                                         	<option value="">--请选择--</option>
 						               <c:forEach items="${provincelist_ }" var="prov">
-						                   <option value="${prov.provinceId}">${prov.provinceName}</option>
+						                   <option value="${prov.provinceId }">${prov.provinceName }</option>
 						               </c:forEach>
 		               				</c:if>
 	                               </select>
 							</td>
 							<td class="td-left">开户城市：<span style="color:red;">（必填)</span></td>
 							<td class="td-right">
-							   <select class="width-90" id="bankCityName" onchange="getAreaList()">
+							   <select class="width-90" id="bankCityName">
                                   <option value="" id="backCityDef">--请选择--</option>
                                </select>
 							</td>

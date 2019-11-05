@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.qifenqian.bms.AgencyPath" %>
+<%@page import="com.qifenqian.bms.basemanager.agency.controller.AgencyPath" %>
 <%@page import="com.qifenqian.bms.basemanager.merchant.AuditorPath"%>
-<%@page import="com.qifenqian.bms.AgentRegisterPath" %>
+<%@page import="com.qifenqian.bms.basemanager.agency.controller.AgentRegisterPath" %>
 
 <% String url = request.getScheme()+"://"+ request.getServerName()+":"+request.getServerPort(); %>
 

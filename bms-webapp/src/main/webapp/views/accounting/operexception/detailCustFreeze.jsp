@@ -5,11 +5,11 @@
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="com.qifenqian.bms.accounting.exception.dao.clearjgkj.bean.ClearJgkj"%>
 <%@page import="com.qifenqian.bms.accounting.exception.dao.transyl.bean.TransYl"%>
-<%@page import="com.qifenqian.platform.common.utils.DateUtils"%>
+<%@page import="com.qifenqian.bms.platform.common.utils.DateUtils"%>
 <%@page import="com.qifenqian.bms.accounting.exception.base.bean.TransAction"%>
 <%@page import="com.qifenqian.bms.accounting.exception.base.bean.Operation"%>
 <%@page import="com.qifenqian.bms.accounting.exception.base.type.OperationStatus"%>
-<%@page import="com.qifenqian.platform.common.utils.ReflectUtils"%>
+<%@page import="com.qifenqian.bms.platform.common.utils.ReflectUtils"%>
 <%@page import="com.sevenpay.invoke.common.type.RequestColumnValues"%>
 <%@page import="com.qifenqian.bms.accounting.exception.OperationExceptionPath"%>
 <%@page import="com.qifenqian.bms.accounting.exception.service.TransDealService"%>
