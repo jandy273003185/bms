@@ -514,7 +514,7 @@
 								<thead>
 								<tr>
 									<%--<th><input name="" type="checkbox" value=""></th>--%>
-									<th>商户名称</th>
+									<th width="10%">商户名称</th>
 									<th>商户简称</th>
 									<th>商户编号</th>
 									<th>邮箱账号</th>
