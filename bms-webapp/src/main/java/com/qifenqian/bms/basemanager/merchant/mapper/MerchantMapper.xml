@@ -901,7 +901,7 @@
 		left JOIN SYS_USER S
 		ON S.USER_ID = T.CERTIFY_USER
 		<where>
-			C.MERCHANT_FLAG = '0' AND  C.TRUST_CERTIFY_AUDIT_STATE in('01','30','34','35')
+			C.MERCHANT_FLAG in ('0','1' '2') AND  C.TRUST_CERTIFY_AUDIT_STATE in('01','30','34','35')
 			<if test="startCreateTime != null and '' != startCreateTime">
 				<![CDATA[
 	              AND DATE_FORMAT(C.CREATE_TIME   ,'%Y-%m-%d')>= #{startCreateTime}

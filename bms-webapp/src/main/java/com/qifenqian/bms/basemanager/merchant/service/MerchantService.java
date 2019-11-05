@@ -1129,7 +1129,6 @@ public class MerchantService {
     return merchantMapper.validateOrgInstCode(orgInstCode, custId);
   }
 
-  @Transactional
   public void saveRegist(String email, String custId, Merchant merchant, String paths) {
 
     this.saveLoginMerchant(email, custId, merchant);
@@ -1138,7 +1137,7 @@ public class MerchantService {
     this.saveCertificateAuth(custId);
   }
 
-  @Transactional
+
   public void addMerchant(String custId, Merchant merchant, String paths) {
     this.saveLoginMerchant2(custId, merchant);
     // ruleService.saveFee(custId, feeCode);
@@ -1146,7 +1145,7 @@ public class MerchantService {
     this.saveCertificateAuth(custId);
   }
   /** 微商户注册，带事务操作 */
-  @Transactional
+
   public void saveTinyMerchantRegist(String email, String custId, Merchant merchant,
       Map<String, String> custScanMap) {
     this.insertStore(merchant); /** 插入门店信息 */
