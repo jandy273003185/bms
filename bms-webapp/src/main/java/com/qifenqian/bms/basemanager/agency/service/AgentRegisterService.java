@@ -736,7 +736,6 @@ public class AgentRegisterService {
 		return merchantMapper.validateOrgInstCode(orgInstCode, custId);
 	}
 
-	@Transactional
 	public void saveRegist(String email, String custId, Merchant merchant, String paths) {
 
 		this.saveLoginMerchant(email, custId);
@@ -746,7 +745,6 @@ public class AgentRegisterService {
 	}
 
 	/** 代理商注册，带事务操作 */
-	@Transactional
 	public void saveAgentRegist(String email, String custId, Merchant merchant,Map<String, String> custScanMap) {
 		this.saveLoginAgent(email, custId,merchant.getRoleId(),merchant.getRepresentativeMobile()); 				/** 保存代理商登录信息 */
 		this.saveAgent(merchant); 								/** 保存代理商信息(客户信息表) */ 
@@ -953,7 +951,6 @@ public class AgentRegisterService {
 
 	}
 
-	@Transactional
 	public void updateMerchantAndFeeRule(MerchantVo merchantVo, Map<String, String> filePath) {
 
 		try {
@@ -987,7 +984,6 @@ public class AgentRegisterService {
 	}
 
 	/** 修改微商户信息，带事务 **/
-	@Transactional
 	public void updateTinyMerchantInfo(MerchantVo merchantVo, Map<String, String> filePath) {
 		if (null == merchantVo) {
 			throw new IllegalArgumentException("微商户对象为空");
@@ -1014,7 +1010,6 @@ public class AgentRegisterService {
 	}
 	
 	/** 修改客户扫描件审核表 **/
-	@Transactional
 	private void updateCustScanInfo(String custId ,MerchantVo merchant,Map<String,String> fileNames){
 		if(StringUtils.isEmpty(custId)){
 			throw new IllegalArgumentException("商户ID为空");

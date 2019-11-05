@@ -270,7 +270,6 @@ public class WorkSpaceService {
 	 * @param isChange
 	 * @param taskId
 	 */
-	@Transactional
 	public void updateRegist(String custId,MerchantVo merchant,Map<String,String> fileNames){
 		
 		this.updateCustScanInfo( custId,merchant,fileNames);

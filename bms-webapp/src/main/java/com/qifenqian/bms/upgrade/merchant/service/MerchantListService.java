@@ -79,7 +79,6 @@ public class MerchantListService {
 	 * @param AuditInfo	审核信息
 	 * @return
 	 */
-	@Transactional(rollbackFor=Exception.class)
 	public String updateResultOfAudit(String result,String merchantId,TdAuditRecodeInfo AuditInfo) {
 		String applyStatus = null;
 		String custStatus = null;

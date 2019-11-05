@@ -34,7 +34,6 @@ public class BussWithdrawBillService {
 	@Autowired
 	private SevenpayCoreServiceInterface coreServiceInterface;
 
-	@Transactional
 	public void insertWithdrawBill(TdBussWithdrawBill withdrawBill) {
 		mapper.insertWithdrawBill(withdrawBill);
 	}

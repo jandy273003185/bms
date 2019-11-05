@@ -340,7 +340,6 @@ public class TransDealService {
 	 * 
 	 * @param transAction
 	 */
-	@Transactional
 	public void confirmFailure(TransAction transAction) {
 
 		/** 确认失败修改记录 **/

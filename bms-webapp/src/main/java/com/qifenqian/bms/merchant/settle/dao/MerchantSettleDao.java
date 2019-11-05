@@ -51,7 +51,6 @@ public class MerchantSettleDao {
 	 * @param updateBean
 	 * @throws Exception
 	 */
-	@Transactional("oper")
 	public void dealAfterAudit(MerchantSettle updateBean) throws Exception {
 		// 若是结算金额为0，不需要核销
 		if(updateBean.getSettleAmt().compareTo(BigDecimal.ZERO) == 0 && MerchantSettleStatus.AUDIT_PASS == updateBean.getStatus()) {
@@ -80,7 +79,6 @@ public class MerchantSettleDao {
 	 * @param updateBean
 	 * @throws Exception
 	 */
-	@Transactional("oper")
 	public void dealAfterVerified(MerchantSettle updateBean) throws Exception {
 		
 		logger.info("核销事后处理Bean : {}",JSONObject.toJSONString(updateBean,true));

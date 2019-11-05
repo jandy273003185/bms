@@ -109,7 +109,6 @@ public class UserService {
 	 * @param user
 	 * @return
 	 */
-	@Transactional
 	public void saveAddUser(User user, String role) {
 		// 检查
 		if (null == user) {

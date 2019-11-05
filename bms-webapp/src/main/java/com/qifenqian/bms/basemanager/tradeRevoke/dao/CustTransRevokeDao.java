@@ -21,17 +21,14 @@ public class CustTransRevokeDao {
 		return custTransRevokeMapper.selectTransRevokeList(queryBean);
 	};
 
-	@Transactional
 	public void insert(CustTransRevoke insertBean) {
 		custTransRevokeMapper.insert(insertBean);
 	}
 
-	@Transactional
 	public void updateByAudit(CustTransRevoke updateBean) {
 		custTransRevokeMapper.updateByAudit(updateBean);
 	}
 	
-	@Transactional
 	public void updateByRevoke(CustTransRevoke updateBean) {
 		custTransRevokeMapper.updateByRevoke(updateBean);
 	}

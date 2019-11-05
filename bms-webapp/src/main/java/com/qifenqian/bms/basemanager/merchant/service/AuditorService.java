@@ -65,7 +65,6 @@ public class AuditorService {
 	 * 后台商户注册审核不通过
 	 * @param custId
 	 */
-	@Transactional
 	public void failPassAndUpdateStatus(String custId){
 		
 		TdCustInfo custInfo = tdCustInfoService.selectById(custId);
@@ -96,7 +95,6 @@ public class AuditorService {
 	 * @param merchantVo
 	 * @param loginPwd_02
 	 */
-	@Transactional 
 	public void saveAndUpdate(MerchantVo merchantVo,String loginPwd_02) {
 		
 			try {

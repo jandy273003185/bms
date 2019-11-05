@@ -132,7 +132,6 @@ public class MarketAuthoService {
 	 * @param marketRole
 	 * @return
 	 */
-	@Transactional(rollbackFor=Exception.class)
 	public String updateInfo(UpdateMarketRole marketRole) {
 		
 		String message ;

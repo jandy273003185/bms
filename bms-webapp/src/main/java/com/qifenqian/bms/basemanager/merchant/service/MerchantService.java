@@ -1585,7 +1585,6 @@ public class MerchantService {
 
   }
 
-  @Transactional
   public void updateMerchantAndFeeRule(MerchantVo merchantVo, Map<String, String> filePath) {
 
     try {
@@ -1618,7 +1617,7 @@ public class MerchantService {
     }
   }
 
-  @Transactional
+  
   public void updateMerchantEnterAndFeeRule(MerchantVo merchantVo, Map<String, String> filePath) {
 
     try {
@@ -1634,7 +1633,7 @@ public class MerchantService {
   }
 
   /** 修改微商户信息，带事务 **/
-  @Transactional
+  
   public void updateTinyMerchantInfo(MerchantVo merchantVo, Map<String, String> filePath) {
     if (null == merchantVo) {
       throw new IllegalArgumentException("微商户对象为空");
@@ -1691,7 +1690,7 @@ public class MerchantService {
   }
 
   /** 修改客户扫描件审核表 **/
-  @Transactional
+  
   private void updateCustScanInfo(String custId, MerchantVo merchant,
       Map<String, String> fileNames) {
     if (StringUtils.isEmpty(custId)) {

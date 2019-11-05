@@ -112,7 +112,6 @@ public class MerchantSettleService {
 	 * 
 	 * @param togetherIds
 	 */
-	@Transactional("oper")
 	public void together(String togetherIds) {
 		if (StringUtils.isBlank(togetherIds)) {
 			throw new IllegalArgumentException("联合的编号集合为空");
@@ -195,7 +194,6 @@ public class MerchantSettleService {
 	 * 
 	 * @param togetherId
 	 */
-	@Transactional("oper")
 	public void separate(String togetherId) {
 		if (StringUtils.isBlank(togetherId)) {
 			throw new IllegalArgumentException("联合编号为空");

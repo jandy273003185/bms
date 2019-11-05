@@ -222,7 +222,6 @@ public class TopayService {
 	/**
 	 * 审核不通过
 	 */
-	@Transactional(rollbackFor=Exception.class)
 	public JSONObject auditNopass(String orderNo,String reason){
 		logger.info("<<<<<<<操作订单号为" + orderNo + "代付审核不通过,原因为:" + reason);		
 		JSONObject json = new JSONObject();

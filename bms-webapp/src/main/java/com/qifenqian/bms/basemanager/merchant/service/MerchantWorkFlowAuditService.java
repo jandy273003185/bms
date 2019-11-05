@@ -447,7 +447,7 @@ public class MerchantWorkFlowAuditService {
 	 * @param authId
 	 * @param auditStatus
 	 */
-	@Transactional
+	
 	public void firstNotPass(String custId,
 							 String message,
 							 boolean isPass,
@@ -482,7 +482,7 @@ public class MerchantWorkFlowAuditService {
 	 * @param certifiyStatus
 	 * @param auditStatus
 	 */
-	@Transactional
+	
 	public void secondAudit(String custId,String number,boolean isPass,String authId,String message,String certifiyStatus,String auditStatus,String trustCertifyLvl,String empty, String isClear){
 		/**
 		 * 完成流程任务
@@ -517,7 +517,6 @@ public class MerchantWorkFlowAuditService {
 	 * @param certifiyStatus
 	 * @param auditStatus
 	 */
-	@Transactional
 	public void secondAuditEnter(String custId,
 								 boolean isPass,
 								 String authId,

@@ -83,7 +83,7 @@ public class PhotoService {
    * @param request
    * @return
    */
-  @Transactional
+  
   public String auditYes(CertificateAuth certificate) {
     logger.info("正在通过审核用户编号[{}]", certificate.getCustId());
     TdCustInfo custInfo = new TdCustInfo();

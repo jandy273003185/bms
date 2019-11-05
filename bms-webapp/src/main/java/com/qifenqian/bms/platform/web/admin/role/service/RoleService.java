@@ -105,7 +105,6 @@ public class RoleService {
 	 * @param role
 	 * @return
 	 */
-	@Transactional
 	public void saveAddRole(Role role, String checkValue) {
 		if (null == role) {
 			throw new IllegalArgumentException("新增角色对象为空");
@@ -201,7 +200,6 @@ public class RoleService {
 	 * @param roleId
 	 */
 
-	@Transactional
 	public void deleteRoleByRoleId(int roleId) {
 		if (roleId < 1) {
 			throw new IllegalArgumentException("角色ID为空");

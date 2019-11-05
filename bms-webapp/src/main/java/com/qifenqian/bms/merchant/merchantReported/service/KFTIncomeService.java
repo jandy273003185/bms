@@ -62,7 +62,6 @@ public class KFTIncomeService {
 	@Autowired
 	private ToPayProductMapper toPayProductMapper;
 	
-	@Transactional
 	public JSONObject merQuery(KFTCoBean cr){
 		JSONObject object = new JSONObject();
 		Map<String, Object> req = new HashMap<String, Object>();
@@ -115,7 +114,6 @@ public class KFTIncomeService {
 		
 	}
 
-	@Transactional
 	public JSONObject kftReported(KFTCoBean cr,List<KftProductFeeInfo> kftProductFeeInfo) {
 		JSONObject object = new JSONObject();
 		KftUploadFileBean kftId0Bean = new KftUploadFileBean();

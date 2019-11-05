@@ -222,7 +222,6 @@ public class ProtocolContentService {
 	 * @param insertBean
 	 * @return
 	 */
-	@Transactional
 	public void insert(ProtocolContent insertBean) {
 
 		if (null == insertBean) {

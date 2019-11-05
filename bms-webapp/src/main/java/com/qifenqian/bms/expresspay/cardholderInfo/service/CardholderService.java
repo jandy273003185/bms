@@ -97,7 +97,6 @@ public class CardholderService {
 	 * @param cardNo
 	 * @return
 	 */
-	@Transactional
 	public Cardholder updateJgkjCard(Cardholder card) {
 		Cardholder cardholder = null;
 		try {

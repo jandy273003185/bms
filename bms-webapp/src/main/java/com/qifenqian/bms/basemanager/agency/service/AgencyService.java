@@ -95,7 +95,6 @@ public class AgencyService {
 	}
 	
 	/** 修改代理商信息，带事务 **/
-	@Transactional
 	public void updateAgencyInfo(MerchantVo merchantVo, Map<String, String> filePath) {
 		if (null == merchantVo) {
 			throw new IllegalArgumentException("代理商对象为空");
@@ -122,7 +121,6 @@ public class AgencyService {
 	}
 	
 	/** 修改客户扫描件审核表 **/
-	@Transactional
 	private void updateCustScanInfo(String custId ,MerchantVo merchant,Map<String,String> fileNames){
 		if(StringUtils.isEmpty(custId)){
 			throw new IllegalArgumentException("商户ID为空");

@@ -88,7 +88,6 @@ public class TdCustInfoService {
 	 * 
 	 * @param tdCustInfo
 	 */
-	@Transactional
 	public void updateCustInfo(TdCustInfo tdCustInfo) {
 		if (null == tdCustInfo) {
 			throw new IllegalArgumentException("客户对象为空");
@@ -158,7 +157,6 @@ public class TdCustInfoService {
 	 * 修改客服信息
 	 * @param tdCustInfo
 	 */
-	@Transactional
 	public void editTdCustInfo(TdCustInfo tdCustInfo){
 		if(null == tdCustInfo){
 			throw new IllegalArgumentException("修改客服信息对象为空");
@@ -208,7 +206,6 @@ public class TdCustInfoService {
 	 * @param custInfo
 	 * @return
 	 */
-	@Transactional("core")
 	public TdCustInfo queryAccount(String custId) {
 		TdCustInfo info = new TdCustInfo();
 		String qfqTotalAmt = "";

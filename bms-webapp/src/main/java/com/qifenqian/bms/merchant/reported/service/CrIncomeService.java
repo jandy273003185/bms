@@ -60,7 +60,6 @@ public class CrIncomeService {
 	/**
 	 * 调用进件接口 和 资料上传接口
 	 */
-	@Transactional
 	public void excuteCr(Map<String,Object> inMap,Map<String,Object> fileMap,List<CrInComeBean> beans){
 		
 		try {

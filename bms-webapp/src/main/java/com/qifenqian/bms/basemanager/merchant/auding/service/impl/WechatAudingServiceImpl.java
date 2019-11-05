@@ -142,7 +142,6 @@ public class WechatAudingServiceImpl implements WechatAudingService{
 	 * 代理商审核不通过
 	 */
 	@Override
-	@Transactional
 	public void secondAudit(String custId, String number, boolean isPass,
 			String authId, String message, String certifiyStatus,
 			String auditStatus, String trustCertifyLvl, String empty) {
@@ -329,7 +328,6 @@ public class WechatAudingServiceImpl implements WechatAudingService{
 		
 	}
 	
-	@Transactional
 	public void startPass(String custId, boolean isPass, String message,String number,HttpServletRequest request,Map<String,Object> parameterMap,String authId,String isClear) {
 		
 		if(StringUtils.isEmpty(custId)){
@@ -407,7 +405,6 @@ public class WechatAudingServiceImpl implements WechatAudingService{
 		
 	   }
 
-	@Transactional
 	public void updateColumn(HttpServletRequest request, String custId,
 			Map<String, Object> parameterMap) {
 

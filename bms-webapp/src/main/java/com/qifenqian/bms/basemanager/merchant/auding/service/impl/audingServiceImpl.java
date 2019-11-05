@@ -103,7 +103,6 @@ public class audingServiceImpl implements audingService{
 	 * custId,null, false, custInfo.getAuthId(), message, "35", "2",null,""
 	 */
 	@Override
-	@Transactional
 	public void secondAudit(String custId, String number, boolean isPass,
 			String authId, String message, String certifiyStatus,
 			String auditStatus, String trustCertifyLvl, String empty) {
@@ -354,7 +353,6 @@ public void updateCertifiyStatus(String custId,String status,String trustCertify
 	}
 }
 
-@Transactional
 public void updatetdCertificateAuth(String custId,String message,String status,String authId){
 	if(StringUtils.isEmpty(custId)){
 		throw new IllegalArgumentException("商户custid空");
@@ -402,7 +400,6 @@ public void updatebmsprotocolContent(bmsProtocolContent bmsProtocolContent) {
 	audingDao.updatebmsprotocolContent(bmsProtocolContent);
 }
 
-@Transactional
 public void startPass(String custId, boolean isPass, String message,String number,String authId) {
 	if(StringUtils.isEmpty(custId)){
 		throw new IllegalArgumentException("商户ID为空！");
@@ -524,7 +521,6 @@ public void addbmsProtocolColumn(bmsProtocolColumn protocolColumn) {
 	audingDao.addbmsProtocolColumn(protocolColumn);
 }
 
-@Transactional
 public  void updateColumn(HttpServletRequest request,String custId,Map<String,Object> parameterMap){
 List<bmsProtocolColumn> protocolColumnList = this.getbmsProtocolColumnList(custId);
 	

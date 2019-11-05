@@ -341,7 +341,6 @@ public class PaymentService {
     return list;
   }
 
-  @Transactional
   public Map<String, String> paymentManage(List<TdPaymentBatDetail> list, String paerAcctNo) {
     Map<String, String> result = new HashMap<String, String>();
 
@@ -910,7 +909,6 @@ public class PaymentService {
     return responseMessage;
   }
 
-  @Transactional
   public Map undoTopay(TdPaymentBatInfo td) throws Exception {
     // 查询核心账户ID
     TdCustInfo cust = new TdCustInfo();
@@ -1204,7 +1202,6 @@ public class PaymentService {
    * }
    */
 
-  @Transactional
   public String payMentAudit(String id, String message, String auditFlag) throws Exception {
     String status = null;
     String result = null;
@@ -1240,7 +1237,6 @@ public class PaymentService {
     return result;
   }
 
-  @Transactional
   public void AuditRecharge(String id, String message, String auditFlag) {
     if (auditFlag.equals("Clste")) { // 清结算
       // 代付审核记录表 插入
@@ -1273,7 +1269,6 @@ public class PaymentService {
     }
   }
 
-  @Transactional
   public void RechargeFristPass(String id, String sumMoney) {
     // 代付审核记录表 插入
     this.InsertTdPayCreditAuditInfo(id, "清洁算审核通过", "02", sumMoney); // 02清洁算审核通过;
