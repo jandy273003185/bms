@@ -218,11 +218,11 @@ function addMerchantBtn(){
 	}  */
 
 	/*邮箱校验*/
-	if(isNull($("#merchantEmail")[0])){
+	/* if(isNull($("#merchantEmail")[0])){
 		$("#merchantEmailLab").text("请设置邮箱账户");
 		$("#merchantEmail").focus();
 		return false;
-	}
+	} */
 
 	/*if(!verifyEmailAddress($("#merchantEmail")[0])){
 		$("#merchantEmailLab").text("邮箱格式不对,可使用字母、数字、下划线 ");
