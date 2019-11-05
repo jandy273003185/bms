@@ -1109,11 +1109,11 @@ public class MerchantService {
    * @param businessLicense
    * @return
    */
-  public Merchant validateLicense(String businessLicense) {
+  public Merchant validateLicense(String businessLicense,String custId) {
     if (StringUtils.isEmpty(businessLicense)) {
       throw new IllegalArgumentException("营业执照注册号为空");
     }
-    return merchantMapper.validateLicense(businessLicense);
+    return merchantMapper.validateLicense(businessLicense, custId);
   }
 
   /**

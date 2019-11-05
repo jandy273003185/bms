@@ -27,7 +27,8 @@ public interface MerchantMapper {
 	 * @param businessLicense
 	 * @return
 	 */
-	public Merchant validateLicense(@Param("businessLicense") String businessLicense);
+	public Merchant validateLicense(@Param("businessLicense") String businessLicense,
+			@Param("custId") String custId);
 	
 	/**
 	 * 验证组织机构代码
