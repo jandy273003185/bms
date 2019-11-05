@@ -789,21 +789,21 @@
 								<td class="td-left">商户编号：</td>
 								<td class="td-right"> 
 									<span class="input-icon">
-										<input type="text" name="merchantCode" id="merchantCode" value="">
+										<input type="text" name="merchantCode" id="merchantCode" value="${queryBean.merchantCode}">
 										<i class="icon-leaf blue"></i>
 									</span>
 								</td>
 								<td class="td-left">商户名称：</td>
 								<td class="td-right">
                                    <span class="input-icon">
-										<input type="text" name="custName" id="custName" value="">
+										<input type="text" name="custName" id="custName" value="${queryBean.custName}">
 										<i class="icon-leaf blue"></i>
 									</span>
 								</td>
 								<td class="td-left">邮箱账号：</td>
 								<td class="td-right">
                                         <span class="input-icon">
-										<input type="text" name="email" id="email" value="">
+										<input type="text" name="email" id="email" value="${queryBean.email}">
 										<i class="icon-leaf blue"></i>
 									</span>								   
 								</td>

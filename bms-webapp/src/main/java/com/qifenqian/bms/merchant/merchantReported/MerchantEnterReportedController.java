@@ -432,7 +432,7 @@ public class MerchantEnterReportedController {
 		/***查询商盟微信产品行业信息***/
 		List<SumpayMcc> sumpayMccZFBList = fmIncomeService.getSumpayMccZFBList();
 		
-		
+		mv.addObject("queryBean", detail);
 		String merchantCode = detail.getMerchantCode();
 		TdCustInfo custInfo = new TdCustInfo();
 		if(null != merchantCode){
