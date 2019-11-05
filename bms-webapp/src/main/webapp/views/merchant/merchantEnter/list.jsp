@@ -461,8 +461,8 @@
                                          <td class="td-right">
                                              <select name="filingStatus" id="filingStatus">
                                                <option value="">请选择 </option>
-                                               <option value="00"> 未报备 </option>
-                                               <option value="01"> 已报备 </option>
+                                               <option value="00">未报备</option>
+                                               <option value="01">已报备</option>
                                               </select>
                                              <label class="label-tips" id="businessRegAddrLab"></label>
                                          </td>

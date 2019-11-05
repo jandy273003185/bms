@@ -405,20 +405,27 @@
 	</select>
 
 	<select id="isAddMerchant" parameterType="string" resultType="string">
+	select
+		*
+		
+		from
+		(
 		SELECT
-			*
-		FROM
-			(
-				SELECT
-					s.role_code
-				FROM
-					stcdb.sys_user_role ur
-				LEFT JOIN stcdb.sys_role s ON ur.role_id = s.role_id
-				WHERE
-					ur.user_id = #{userId,jdbcType=VARCHAR}
-			) t
-		WHERE
-			t.role_code = 'MarketPresident' or t.role_code = 'MarketVicePresident' or t.role_code = 'test'
+			s.role_id
+			FROM
+				stcdb.sys_user_role ur
+			LEFT JOIN stcdb.sys_role s ON ur.role_id = s.role_id
+			WHERE
+				ur.user_id = '1'
+		) t
+		where t.role_id in(
+		SELECT 
+			f.ROLE_ID
+			from
+		 sys_role_function f
+		 where
+		 f.FUNCTION_ID ='874'
+		);
 	</select>
 
 	<select id="selectByMerchantCode" resultType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo" parameterType="java.lang.String" >
