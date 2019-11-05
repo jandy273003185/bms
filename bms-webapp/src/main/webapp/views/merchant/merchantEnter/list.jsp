@@ -535,15 +535,7 @@
 										<td>${merchant.custName }</td>
 										<td>${merchant.shortName }</td>
 										<td>${merchant.merchantCode }</td>
-										<td>
-											<c:if test="${merchant.email == null}">
-										    	${merchant.merchantEmail }
-										    </c:if>
-										    <c:if test="${reported.channelNo != null}">
-										    	${merchant.email }
-										    </c:if>
-										
-										</td>
+										<td>${merchant.email }</td>
 										<td>${merchant.createTime }</td>
 										<td>
 											<c:choose>
