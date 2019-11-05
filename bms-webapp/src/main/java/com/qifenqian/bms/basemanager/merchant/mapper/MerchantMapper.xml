@@ -632,7 +632,7 @@
             </if>
         </trim>
   </insert>
-
+ 
 	<select id="validateLicense" resultType="com.qifenqian.bms.basemanager.merchant.bean.Merchant" parameterType="string">
 		select t.BUSINESS_LICENSE from td_cust_info t 
 		<where>

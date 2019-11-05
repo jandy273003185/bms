@@ -249,7 +249,7 @@ function addMerchantBtn(){
 		$("#custAdd").focus();
 		return false;
 	}
-
+		 
 	var merchantAccount =$("#merchantAccount").val();
 	var validateLicense =true ;
 	//验证商户账户唯一性
@@ -260,7 +260,7 @@ function addMerchantBtn(){
 		data:{merchantAccount:merchantAccount},
 		success:function(data){
 			if(data.result=="FAIL"){
-				$("#merchantAccountLab").text("该营业执照注册号已经被使用");
+				$("#merchantAccountLab").text("该账号已经被使用");
 				validateLicense = false;
 			}else{
 				validateLicense = true;
@@ -268,7 +268,7 @@ function addMerchantBtn(){
 		}});
 	if(!validateLicense){
 		return false;
-	}
+	} 
 
 	var custType =$("#custType").val();
 	/*个人*/
@@ -276,7 +276,7 @@ function addMerchantBtn(){
 	}
 	/*企业*/
 	if(custType=='1' || custType=='2' ){
-
+	<%--
         //校验营业执照注册号唯一性
         var businessLicense =$("#businessLicense").val();
         var validateLicense =true ;
@@ -296,7 +296,7 @@ function addMerchantBtn(){
             }});
         if(!validateLicense){
             return false;
-        }
+        } --%>
 
         /*营业执照号*/
         if(isNull($("#businessLicense")[0])){

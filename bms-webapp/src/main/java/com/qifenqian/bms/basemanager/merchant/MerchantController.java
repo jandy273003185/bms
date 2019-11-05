@@ -266,14 +266,14 @@ public class MerchantController {
 	 */
 	@RequestMapping(MerchantPath.VALIDATELICENSE)
 	@ResponseBody
-	public String validateLicense(String businessLicense, String custId) {
+	public String validateLicense(String businessLicense) {
 
 		logger.info("校验营业执照注册号是否已经存在");
 
 		JSONObject object = new JSONObject();
 
 		try {
-			Merchant merchant = merchantService.validateLicense(businessLicense, custId);
+			Merchant merchant = merchantService.validateLicense(businessLicense);
 
 			if (null == merchant) {
 				object.put("result", "SUCCESS");
