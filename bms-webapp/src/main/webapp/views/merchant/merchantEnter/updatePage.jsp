@@ -319,10 +319,10 @@
 
             if(!flag){return false;}
 
-            if(!checkAttach($("#businessPhoto")[0])){
+            /* if(!checkAttach($("#businessPhoto")[0])){
                 $.gyzbadmin.alertFailure("必须提交营业执照扫描件");
                 return false;
-            }
+            } */
 
             /*if(!checkAttach($("#openAccount")[0])){
                 $.gyzbadmin.alertFailure("必须提交开户许可证");

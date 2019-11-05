@@ -784,7 +784,7 @@ $(function(){
 							</td>
 						</tr>
 						<tr>
-							<td class="td-left">商户邮箱：<span style="color:red;">非常重要，请填写正确（必填)</span></td>
+							<td class="td-left">商户邮箱：</td>
 							<td class="td-right">
 								<input type="text" id="merchantEmail" name="merchantEmail" placeholder="请输入商户邮箱" style="width:90%">
 								<i class="icon-leaf blue"></i>
@@ -867,7 +867,7 @@ $(function(){
 							<td class="td-left" id="businessPhotoId">营业执照照片<span style="color:red" class="businessPhotoImageSpan"></span></td>
 							<td class="td-right">
 								<a data-toggle='modal' class="tooltip-success businessPhotoClick"  data-target="#previewImageModal">
-									<label id="businessPhotoDiv" class="uploadImage">
+									<label id="businessPhotoDiv" onClick="bigImg(this);" class="uploadImage">
 										<img  id="businessPhotoImage" style="width:100%;height:100%; display: none" >
 									</label>
 								</a>
