@@ -351,7 +351,10 @@ public class MerchantEnterController {
 			//审核状态：0 审核通过；1 待审核；2 审核不通过
 			merchantVo.setState("1");
 			merchantService.updateMerchantEnterAndFeeRule(merchantVo,filePath);
-			object.put("merchantVo", merchantVo);
+			MerchantVo merchant = merchantService.findMerchantInfo(merchantVo.getCustId());
+			String areaName = merchantService.findAreaNameByAreaId(merchant.getCountry());
+			merchantVo.setAreaName(areaName);
+			object.put("merchantVo", merchant);
 			object.put("result", "SUCCESS");
 			object.put("message", "修改商户信息成功");
 		} catch (Exception e) {
