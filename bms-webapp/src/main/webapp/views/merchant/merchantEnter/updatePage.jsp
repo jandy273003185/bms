@@ -116,6 +116,67 @@
 
 
     });
+    
+    function getCityList(){
+
+    	var provVal = $("#province").val().trim();
+    	$("#cityDef").siblings().remove();
+    	$("#areaDef").siblings().remove();
+    	if ("" == provVal || provVal.length == 0) {
+    		return false;
+    	}
+    	$.ajax({
+    		type:"POST",
+    		dataType:"json",
+    		url:window.Constants.ContextPath +'<%=MerchantPath.BASE+MerchantPath.GRTCITYLIST %>',
+    		data:
+    		{
+    			"province" 	: provVal,
+    			"choiceType" : "city"
+    		},
+    		success:function(data){
+    			if(data.result=="SUCCESS"){
+    				var cityList = data.cityList;
+    				for ( var city in cityList) {
+    					$("#city").append(
+    						"<option value='"+ cityList[city].cityId +"'>" + cityList[city].cityName + "</option>");
+    				}
+    			}else{
+    			}
+    		}
+    	})
+    }
+
+    function getAreaList(){
+
+    	var city = $("#city").val().trim();
+    	$("#areaDef").siblings().remove();
+    	if ("" == city || city.length == 0) {
+    		return false;
+    	}
+
+    	$.ajax({
+    		type:"POST",
+    		dataType:"json",
+    		url:window.Constants.ContextPath +'<%=MerchantPath.BASE+MerchantPath.GRTCITYLIST %>',
+    		data:
+    		{
+    			"city" 	: city,
+    			"choiceType" : "area"
+    		},
+    		success:function(data){
+    			if(data.result=="SUCCESS"){
+    				var areaList = data.areaList;
+    				for ( var area in areaList) {
+    					$("#country").append(
+    						"<option value='"+ areaList[area].areaId +"'>" + areaList[area].areaName + "</option>");
+    				}
+    			}else{
+    			}
+    		}
+    	})
+    }
+
 
     function getBankCityList()
     {
@@ -697,7 +758,7 @@
 									</div>
 									<div class="col-xs-2 pd0" style="margin:0 1%;padding:0;">
 										<select class="form-control" id="city" onchange="getAreaList();">
-											<option value="" id="cityDef">${merchantVo.cityName }</option>
+											<option value="${merchantVo.cityName }" id="cityDef">${merchantVo.cityName }</option>
 										</select>
 									</div>
 									<div class="col-xs-2 pd0" style="padding:0">
@@ -888,7 +949,7 @@
 								<td class="td-right" style="color:#666;padding:10px 8px">
 									<select class="width-90" id="bankProvinceName" onchange="getBankCityList();">
 										<c:if test="${not empty provincelist_ }">
-											<option value=${merchantVo.provinceName }>${merchantVo.provinceName }</option>
+											<option value=${merchantVo.bankProvinceName }>${merchantVo.bankProvinceName }</option>
 											<c:forEach items="${provincelist_ }" var="prov">
 												<option value="${prov.provinceId}">${prov.provinceName}</option>
 											</c:forEach>
@@ -898,7 +959,7 @@
 								<td class="td-left">开户城市：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
 									<select class="width-90" id="bankCityName">
-										<option value="" id="cityDef">${merchantVo.cityName }</option>
+										<option value=${merchantVo.bankCityName } id="cityDef">${merchantVo.bankCityName }</option>
 									</select>
 								</td>
 							</tr>

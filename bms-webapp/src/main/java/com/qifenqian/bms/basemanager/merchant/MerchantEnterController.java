@@ -319,7 +319,7 @@ public class MerchantEnterController {
 		return mv;
     }
 	/**
-	 * 跟新
+	 * 更新
 	 * @param merchantVo
 	 * @param request
 	 * @return

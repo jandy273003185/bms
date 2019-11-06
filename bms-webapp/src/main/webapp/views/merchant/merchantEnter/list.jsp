@@ -519,9 +519,9 @@
 									<th>商户编号</th>
 									<th>邮箱账号</th>
 									<th width="12%">录入时间</th>
-									<th>商户状态</th>
-									<th>审核状态</th>
-									<th>报备状态</th>
+									<th width="10%">商户状态</th>
+									<th width="10%">审核状态</th>
+									<th width="10%">报备状态</th>
 									<!--
                                     <th>报备审核状态</th> -->
 									<th width="10%">审核人</th>
