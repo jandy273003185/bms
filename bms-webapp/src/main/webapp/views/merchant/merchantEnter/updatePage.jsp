@@ -770,11 +770,23 @@
 							<tr>
 								<td class="td-left">所属业务人员：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
-									<input type="text" id="custManager" name="custManager"  placeholder="请输入所属业务人员" value=${merchantVo.custManager } style="width:90%">
+									<select id="custManager" name="custManager">
+										<option value="${merchantVo.custManager }">${merchantVo.custManager }</option>
+										<c:forEach items="${userlist }" var="bean">
+											<option value="${bean.userName }">${bean.userName }</option>
+										</c:forEach>
+									</select>
+									<%-- <input type="text" id="custManager" name="custManager"  placeholder="请输入所属业务人员" value=${merchantVo.custManager } style="width:90%"> --%>
 								</td>
 								<td class="td-left">所属代理商：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
-									<input type="text" name="agentName" id="agentName" placeholder="请输入所属代理商" value=${merchantVo.agentName } style="width:90%">
+									<select id="agentName" name="agentName">
+										<option value="">请输入所属代理商</option>
+										<c:forEach items="${agentList }" var="bean">
+											<option value="${bean.custName }">${bean.custName }</option>
+										</c:forEach>
+									</select>
+									<%-- <input type="text" name="agentName" id="agentName" placeholder="请输入所属代理商" value=${merchantVo.agentName } style="width:90%"> --%>
 								</td>
 							</tr>
 							<tr>

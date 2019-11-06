@@ -307,6 +307,7 @@ public class MerchantEnterController {
 		mv.addObject("userlist", userService.getUserList(user));
 		mv.addObject("provincelist", cityService.selectAllProvince());
 		mv.addObject("provincelist_", cityService.selAllProvince());
+		mv.addObject("agentList", merchantMapper.selectAgent());
         //查询商户门头照信息
         //String path = auditorService.findScanPath(merchantVo.getCustId(), "08",merchantVo.getAuthId());
         //获取二维码
@@ -350,6 +351,7 @@ public class MerchantEnterController {
 			//审核状态：0 审核通过；1 待审核；2 审核不通过
 			merchantVo.setState("1");
 			merchantService.updateMerchantEnterAndFeeRule(merchantVo,filePath);
+			object.put("merchantVo", merchantVo);
 			object.put("result", "SUCCESS");
 			object.put("message", "修改商户信息成功");
 		} catch (Exception e) {
