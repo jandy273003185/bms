@@ -31,8 +31,11 @@
 	</style>
 </head>
 <script type="text/javascript">
-$(function(){
 
+$(function(){
+	$("#custManager").comboSelect();
+
+	$("#agentName").comboSelect();
 	$("input[type=file]").each(
 		function() {
 			var _this = $(this);
@@ -880,13 +883,25 @@ $(function(){
 						<tr>
 							<td class="td-left">所属业务人员：</td>
 							<td class="td-right">
-								<input type="text" id="custManager" name="custManager"  placeholder="请输入所属业务人员" value=${sysUser.userName } style="width:90%">
-								<label class="label-tips" id="custManagerLab"></label>
+								<select id="custManager" name="custManager">
+									<option value="">输入所属业务人员或所属业务人员查询</option>
+									<c:forEach items="${userlist }" var="bean">
+										<option value="${bean.userName }">${bean.userName }</option>
+									</c:forEach>
+								</select>
+								<%-- <input type="text" id="" name="custManager"  placeholder="请输入" value=${sysUser.userName } style="width:90%">
+								<label class="label-tips" id="custManagerLab"></label> --%>
 							</td>
 							<td class="td-left">所属代理商：</td>
 							<td class="td-right">
-								<input type="text" name="agentName" id="agentName" placeholder="请输入所属代理商" value=${sysUser.deptName } style="width:90%">
-								<label class="label-tips" id="agentNameLab"></label>
+								<select id="agentName" name="agentName">
+									<option value="">请输入所属代理商</option>
+									<c:forEach items="${agentList }" var="bean">
+										<option value="${bean.custName }">${bean.custName }</option>
+									</c:forEach>
+								</select>
+								<%-- <input type="text" name="" id="agentName" placeholder="请输入所属代理商" value=${sysUser.deptName } style="width:90%">
+								<label class="label-tips" id="agentNameLab"></label> --%>
 							</td>
 						</tr>
                         <tr>
