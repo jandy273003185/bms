@@ -718,7 +718,10 @@ $(function(){
 		}
 	});
 })
-
+function fun(){
+	$("input[name='businessTermEnd']").val("2099-12-31").focus();
+	$("#businessTermEnd").attr("value","2099-12-31");
+}
 
 </script>
 <body>
@@ -852,34 +855,41 @@ $(function(){
 								-
 								<input type="text" id="businessTermEnd" name="businessTermEnd" readonly="readonly" onfocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
 								<label class="label-tips" id="businessTermLabEnd"></label>
-
 								<input type="button" onclick="fun()" value="长期" />
-								<script>
-									function fun(){
-										$("input[name='businessTermEnd']").val("2099-12-31").focus();
-										$("#businessTermEnd").attr("value","2099-12-31");
-									}
-								</script>
-
-
-
 							</td>
 
 						</tr>
 						<tr>
-							<td class="td-left" id="businessPhotoId">营业执照照片<span style="color:red" class="businessPhotoImageSpan"></span></td>
-							<td class="td-right">
-								<a data-toggle='modal' class="tooltip-success businessPhotoClick"  data-target="#previewImageModal">
-									<label id="businessPhotoDiv" onClick="bigImg(this);" class="uploadImage">
-										<img  id="businessPhotoImage" style="width:100%;height:100%; display: none" >
+							<td class="td-left" id="businessPhotoId">营业执照扫描件：</td>
+							<td class="td-right" colspan="3">
+								<a data-toggle='modal' class="tooltip-success businessPhotoClick" data-target="#previewImageModal" >
+									<label id="businessPhotoDiv" class="uploadImage" >
+										<img  id="businessPhotoImage" onclick="bigImg(this);"  style="width:100%;height:100%;display:none"  />
 									</label>
 								</a>
-								<div style="float:left;margin-top:75" >
-									<input type="file" name="businessPhoto" id="businessPhoto" onChange="showBusinessPhotoImage(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+								<div class="updateImageDiv" style="float:left; margin-top:75 " >
+									<input type="hidden" id="businessPhotoImageVal02"  />
+									<input type="file" name="businessPhoto" id="businessPhoto" onchange="showBusinessPhotoImage(this)" />
+									<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 								</div>
 								<label class="label-tips" id="businessPhotoLabel" style="float:left;margin-top:88" ></label>
 							</td>
 						</tr>
+						<!-- <tr>
+							<td class="td-left" id="businessPhotoId">营业执照照片</td>
+							<td class="td-right">
+								<a data-toggle='modal' class="tooltip-success businessPhotoClick"  data-target="#previewImageModal">
+									<label id="businessPhotoDiv" class="uploadImage">
+										<img  id="businessPhotoImage" onClick="bigImg(this);"  style="width:100%;height:100%; display: none" >
+									</label>
+								</a>
+								<div class="updateImageDiv" style="float:left;margin-top:75" >
+									<input type="hidden" id="businessPhotoImageVal02"  />
+									<input type="file" name="businessPhoto" id="businessPhoto" onChange="showBusinessPhotoImage(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+								</div>
+								<label class="label-tips" id="businessPhotoLabel" style="float:left;margin-top:88" ></label>
+							</td>
+						</tr> -->
 						<tr>
 							<td class="td-left">所属业务人员：</td>
 							<td class="td-right">
@@ -927,7 +937,7 @@ $(function(){
 							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success certAttribute1Click"  data-target="#previewImageModal" >
 								<label id="certAttribute1Div" class="uploadImage">
-								        <img  id="certAttribute1Image" style="width:100%;height:100%;display:none"/>
+								        <img  id="certAttribute1Image" onClick="bigImg(this);"   style="width:100%;height:100%;display:none"/>
 								</label>
 								</a>
 								<div style="float:left;margin-top:75" >
@@ -941,7 +951,7 @@ $(function(){
 							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success certAttribute2Click"  data-target="#previewImageModal" >
 									<label id="certAttribute2Div" class="uploadImage">
-									        <img  id="certAttribute2Image" style="width:100%;height:100%;display:none"/>
+									        <img  id="certAttribute2Image" onClick="bigImg(this);"  style="width:100%;height:100%;display:none"/>
 									</label>
 								</a>
 								<div style="float:left;margin-top:75" >
@@ -1043,7 +1053,7 @@ $(function(){
 							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success bankCardPhotoClick"  data-target="#previewImageModal" >
 									<label id="bankCardPhotoDiv" class="uploadImage">
-										<img  id="bankCardPhotoImage" style="width:100%;height:100%;display:none"/>
+										<img  id="bankCardPhotoImage" onClick="bigImg(this);"  style="width:100%;height:100%;display:none"/>
 									</label>
 								</a>
 								<div style="float:left;margin-top:75" >
@@ -1054,13 +1064,11 @@ $(function(){
 						</tr>
 
 						<tr id="openAccount_" class="tab-pane " >
-							<td class="td-left" >
-                                开户许可证
-                            </td>
+							<td class="td-left" >开户许可证</td>
 							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success openAccountClick"  data-target="#previewImageModal" >
 									<label id="openAccountDiv" class="uploadImage">
-									        <img  id="openAccountImage" style="width:100%;height:100%;display:none"/>
+									        <img  id="openAccountImage" onClick="bigImg(this);"  style="width:100%;height:100%;display:none"/>
 									</label>
 								</a>
 								<div style="float:left;margin-top:75" >
