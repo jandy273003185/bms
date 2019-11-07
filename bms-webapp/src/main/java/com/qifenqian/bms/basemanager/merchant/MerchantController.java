@@ -332,10 +332,9 @@ public class MerchantController {
 	 */
 	@RequestMapping(MerchantPath.FILEUPLOAD)
 	@ResponseBody
-	public String fileUpload(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public String fileUpload(HttpServletRequest request, HttpServletResponse response,String custId) throws IOException {
 
 		JSONObject object = new JSONObject();
-		String custId = request.getParameter("custId");
 		Map<String,String> result = merchantService.compressUpload(request,custId);
 		object.put("result", result.get("result"));
 		object.put("message", result.get("message"));
