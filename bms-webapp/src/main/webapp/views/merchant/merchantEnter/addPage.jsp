@@ -33,9 +33,6 @@
 <script type="text/javascript">
 
 $(function(){
-	$("#custManager").comboSelect();
-
-	$("#agentName").comboSelect();
 	$("input[type=file]").each(
 		function() {
 			var _this = $(this);
@@ -1210,6 +1207,8 @@ function fun(){
                     }
                 }});
         });*/
+        $("#custManager").comboSelect();
 
+        $("#agentName").comboSelect();
 </script>
 </html>
