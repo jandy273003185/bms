@@ -949,7 +949,7 @@
 								<td class="td-right" style="color:#666;padding:10px 8px">
 									<select class="width-90" id="bankProvinceName" onchange="getBankCityList();">
 										<c:if test="${not empty provincelist_ }">
-											<option value=${merchantVo.bankProvinceName }>${merchantVo.bankProvinceName }</option>
+											<option value=${merchantVo.bankProvinceName }>${merchantVo.bankProName }</option>
 											<c:forEach items="${provincelist_ }" var="prov">
 												<option value="${prov.provinceId}">${prov.provinceName}</option>
 											</c:forEach>
@@ -959,7 +959,7 @@
 								<td class="td-left">开户城市：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
 									<select class="width-90" id="bankCityName">
-										<option value=${merchantVo.bankCityName } id="cityDef">${merchantVo.bankCityName }</option>
+										<option value=${merchantVo.bankCityName } id="cityDef">${merchantVo.bankCitName }</option>
 									</select>
 								</td>
 							</tr>

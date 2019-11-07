@@ -386,9 +386,9 @@
 							</tr>
 							<tr>
 								<td class="td-left">开户省份：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.provinceName }</td>
+								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.bankProName }</td>
 								<td class="td-left">开户城市：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.cityName }</td>
+								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.bankCitName }</td>
 							</tr>
 							<tr>
 								<td class="td-left">网点号：</td>

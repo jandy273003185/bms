@@ -338,6 +338,7 @@
             +',top='+iTop
             +',left='+iLeft;
         winChild = window.open(url, name,params);
+        window.location.reload();
     }
     /** 跳转修改页面 **/
     function upadteMerchantEntry(obj){
@@ -354,6 +355,7 @@
             +',top='+iTop
             +',left='+iLeft;
         winChild = window.open(url, name,params);
+        window.location.reload();
     }
     /** 跳转审核页面  **/
     function aduitMerchantEntry(obj){
@@ -370,6 +372,7 @@
             +',top='+iTop
             +',left='+iLeft;
         winChild = window.open(url, name,params);
+        window.location.reload();
     };
 
     function channelMerchantEntry(obj){
