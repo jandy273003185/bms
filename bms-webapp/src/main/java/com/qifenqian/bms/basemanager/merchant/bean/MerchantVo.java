@@ -423,6 +423,27 @@ public class MerchantVo implements Serializable {
 	private String createName;
 
 	private String areaName;
+	
+	private String bankProName;
+	
+	private String bankCitName;
+
+	
+	public String getBankProName() {
+		return bankProName;
+	}
+
+	public void setBankProName(String bankProName) {
+		this.bankProName = bankProName;
+	}
+
+	public String getBankCitName() {
+		return bankCitName;
+	}
+
+	public void setBankCitName(String bankCitName) {
+		this.bankCitName = bankCitName;
+	}
 
 	public String getMerchantAccount() {
 		return merchantAccount;
