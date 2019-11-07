@@ -228,13 +228,13 @@
         } */
 
         /*邮箱校验*/
-        if(isNull($("#merchantEmail")[0])){
+        /* if(isNull($("#merchantEmail")[0])){
             $("#merchantEmailLab").text("请设置邮箱账户");
             $("#merchantEmail").focus();
             return false;
-        }
+        } */
 
-        if(!verifyEmailAddress($("#merchantEmail")[0])){
+        if(!(isNull($("#merchantEmail")[0])) && (!verifyEmailAddress($("#merchantEmail")[0]))){
             $("#merchantEmailLab").text("邮箱格式不对,可使用字母、数字、下划线 ");
             $("#merchantEmail").focus();
             return false;
@@ -439,11 +439,11 @@
             $("#contactMobile").focus();
             return false;
         }
-        if(!isMobilePhone($("#contactMobile")[0])){
+        /* if(!isMobilePhone($("#contactMobile")[0])){
             $("#contactMobileLab").text("账号需用手机号 ");
             $("#contactMobile").focus();
             return false;
-        }
+        } */
         /*银行卡号*/
         if(isNull($("#compMainAcct")[0])){
             $("#compMainAcctLab").text("请填写银行卡号");
@@ -724,21 +724,21 @@
 							<tr>
 								<td class="td-left"  width="18%">商户名称：</td>
 								<td class="td-right"  width="32%" style="color:#666;padding:10px 8px">
-									<input type="text" id="custName" name="custName" maxlength="100"  value=${merchantVo.custName } style="width:90%">
+									<input type="text" id="custName" name="custName" maxlength="100" style="width:90%" value="${merchantVo.custName }" >
 								</td>
 								<td class="td-left"  width="18%">商户简称：</td>
 								<td class="td-right"  width="32%" style="color:#666;padding:10px 8px">
-									<input type="text" id="shortName" name="shortName" value=${merchantVo.shortName } style="width:90%">
+									<input type="text" id="shortName" name="shortName" style="width:90%" value="${merchantVo.shortName }" >
 								</td>
 							</tr>
 							<tr>
 								<td class="td-left">商户邮箱：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
-									<input type="text" id="merchantEmail" name="merchantEmail" placeholder="请输入商户邮箱" value=${merchantVo.merchantEmail } style="width:90%">
+									<input type="text" id="merchantEmail" name="merchantEmail" placeholder="请输入商户邮箱" style="width:90%" value="${merchantVo.merchantEmail }" >
 								</td>
 								<td class="td-left">客服号码：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
-									<input type="text" id="contactPhone" name="contactPhone" placeholder="请输入客服号码" value =${merchantVo.contactPhone } style="width:90%">
+									<input type="text" id="contactPhone" name="contactPhone" placeholder="请输入客服号码" style="width:90%" value ="${merchantVo.contactPhone }" >
 								</td>
 							</tr>
 
@@ -749,7 +749,7 @@
 									<div class="col-xs-2 pd0" style="padding:0">
 										<select class="form-control" id="province" onchange="getCityList();">
 											<c:if test="${not empty provincelist_ }">
-												<option value="">${merchantVo.provinceName }</option>
+												<option value="${merchantVo.provinceName }">${merchantVo.provinceName }</option>
 												<c:forEach items="${provincelist_ }" var="prov">
 													<option value="${prov.provinceId }">${prov.provinceName }</option>
 												</c:forEach>
@@ -763,11 +763,11 @@
 									</div>
 									<div class="col-xs-2 pd0" style="padding:0">
 										<select class="form-control" id="country">
-											<option value="" id="areaDef">${areaName }</option>
+											<option value="${merchantVo.areaName }" id="areaDef">${merchantVo.areaName }</option>
 										</select>
 									</div>
 									<div class="col-xs-5 pd0" style="padding:0;margin-left:1%">
-										<input type="text" id="custAdd" name="custAdd"  placeholder="详细地址" value =${merchantVo.custAdd }  style="width:100%">
+										<input type="text" id="custAdd" name="custAdd"  placeholder="详细地址" style="width:100%" value =${merchantVo.custAdd }  >
 										<label class="label-tips" id="custAddLab"></label>
 									</div>
 								</td>
@@ -781,7 +781,7 @@
 							<tr>
 								<td class="td-left" id="businessCodeId">营业执照编号：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
-									<input type="text" id="businessLicense" name="businessLicense"  placeholder="请输入营业执照" value=${merchantVo.businessLicense } style="width:90%">
+									<input type="text" id="businessLicense" name="businessLicense" style="width:90%" placeholder="请输入营业执照" value=${merchantVo.businessLicense } >
 									<i class="icon-leaf blue"></i>
 									<label class="label-tips" id="businessLicenseLab"></label>
 								</td>
@@ -842,7 +842,7 @@
 								<td class="td-left">所属代理商：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
 									<select id="agentName" name="agentName">
-										<option value="">请输入所属代理商</option>
+										<option value="${merchantVo.agentName }">${merchantVo.agentName }</option>
 										<c:forEach items="${agentList }" var="bean">
 											<option value="${bean.custName }">${bean.custName }</option>
 										</c:forEach>
@@ -903,12 +903,12 @@
 							<tr>
 								<td class="td-left">联系人姓名：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
-									<input type="text" id="contactName" name="contactName" placeholder="请输入联系人姓名" value=${merchantVo.contactName } maxlength="50" style="width:90%">
+									<input type="text" id="contactName" name="contactName" placeholder="请输入联系人姓名" maxlength="50" style="width:90%" value=${merchantVo.contactName } >
 
 								</td>
 								<td class="td-left">联系人手机号码：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
-									<input type="text" name="contactMobile" id="contactMobile" placeholder="请输入联系人手机号码" value=${merchantVo.contactMobile } style="width:90%">
+									<input type="text" name="contactMobile" id="contactMobile" placeholder="请输入联系人手机号码"  style="width:90%" value=${merchantVo.contactMobile }>
 								</td>
 							</tr>
 							<tr id="next_id">
@@ -917,7 +917,7 @@
 							<tr>
 								<td class="td-left">银行卡号</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
-									<input type="text" id="compMainAcct" name="compMainAcct" maxlength="100" placeholder="请输入银行卡号" value=${merchantVo.compMainAcct } style="width:90%">
+									<input type="text" id="compMainAcct" name="compMainAcct" maxlength="100" placeholder="请输入银行卡号" style="width:90%" value=${merchantVo.compMainAcct } >
 								</td>
 
 								<td class="td-left">银行类型：</td>
@@ -937,11 +937,11 @@
 							<tr>
 								<td class="td-left">开户行：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
-									<input type="text" id="branchBank" name="branchBank" placeholder="请输入开户行" value=${merchantVo.branchBank } style="width:90%">
+									<input type="text" id="branchBank" name="branchBank" placeholder="请输入开户行" value="${merchantVo.branchBank }" style="width:90%">
 								</td>
 								<td class="td-left">开户人：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
-									<input type="text" id="bankAcctName" name="bankAcctName" placeholder="请输入开户人" value=${merchantVo.bankAcctName } style="width:90%">
+									<input type="text" id="bankAcctName" name="bankAcctName" placeholder="请输入开户人" value="${merchantVo.bankAcctName }" style="width:90%">
 								</td>
 							</tr>
 							<tr>
@@ -966,7 +966,7 @@
 							<tr>
 								<td class="td-left">网点号：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
-									<input type="text" id="cnaps" name="cnaps" placeholder="请输入网点号" value =${merchantVo.cnaps } style="width:90%"> <a href="http://www.lianhanghao.com" target="_blank">[查找]</a>
+									<input type="text" id="cnaps" name="cnaps" style="width:90%" placeholder="请输入网点号" value ="${merchantVo.cnaps }" > <a href="http://www.lianhanghao.com" target="_blank">[查找]</a>
 								</td>
 								<td class="td-left">结算类型：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
