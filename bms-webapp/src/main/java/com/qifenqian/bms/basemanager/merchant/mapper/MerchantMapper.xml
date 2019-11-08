@@ -1858,12 +1858,16 @@
 			<if test="country !=null">
 				country = #{country,jdbcType=VARCHAR},
 			</if>
+            <if test="merchantEmail !=null">
+                merchant_email = #{merchantEmail,jdbcType=VARCHAR},
+            </if>
 			<if test="filingAuditStatus != null">
-				filing_audit_status =  #{filingAuditStatus , jdbcType = VARCHAR}
+				filing_audit_status =  #{filingAuditStatus , jdbcType = VARCHAR},
 			</if>
             <if test="merchantState != null">
                 STATE =  #{merchantState , jdbcType = VARCHAR}
             </if>
+
 		
 		</set>
 		WHERE CUST_ID = #{custId,jdbcType=VARCHAR}

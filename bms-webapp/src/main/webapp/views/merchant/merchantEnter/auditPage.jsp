@@ -245,7 +245,7 @@
 
 
 							<tr>
-								<td class="td-left">商户地址：<span style="color:red;">（必填)</span></td>
+								<td class="td-left">商户地址：</span></td>
 								<td class="td-right" colspan="3">
 									<div class="col-xs-2 pd0" style="padding:0">
 										<select class="form-control" id="province" onchange="getCityList();">

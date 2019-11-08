@@ -243,6 +243,26 @@ function addMerchantBtn(){
 		return false;
 	}
 
+    /*省*/
+    if(isNull($("#province")[0])){
+        $("#provinceLab").text("请填写地址");
+        $("#province").focus();
+        return false;
+    }
+    /*市*/
+    if(isNull($("#city")[0])){
+        $("#cityLab").text("请填写地址");
+        $("#city").focus();
+        return false;
+    }
+    /*区*/
+    if(isNull($("#country")[0])){
+        $("#countryLab").text("请填写地址");
+        $("#country").focus();
+        return false;
+    }
+
+
 	/*商户地址*/
 	if(isNull($("#custAdd")[0])){
 		$("#custAddLab").text("请填写地址");
@@ -812,16 +832,19 @@ function fun(){
 						               </c:forEach>
 		               				</c:if>
                                    </select>
+									<label class="label-tips" id="provinceLab"></label>
                                 </div>
                                 <div class="col-xs-2 pd0" style="margin:0 1%;padding:0;">
                                 <select class="form-control" id="city" onchange="getAreaList();">
                                     <option value="" id="cityDef">--请选择--</option>
                                 </select>
+									<label class="label-tips" id="cityLab"></label>
                                 </div>
                                 <div class="col-xs-2 pd0" style="padding:0">
                                 <select class="form-control" id="country">
                                     <option value="" id="areaDef">--请选择--</option>
                                 </select>
+									<label class="label-tips" id="countryLab"></label>
                                 </div>
                                 <div class="col-xs-5 pd0" style="padding:0;margin-left:1%">
                                     <input type="text" id="custAdd" name="custAdd"  placeholder="详细地址" style="width:100%">
@@ -890,19 +913,26 @@ function fun(){
 						<tr>
 							<td class="td-left">所属业务人员：</td>
 							<td class="td-right">
-								<select id="custManager" name="custManager">
+								<%--<select id="custManager" name="custManager">
 									<option value="">输入所属业务人员或所属业务人员查询</option>
 									<c:forEach items="${userlist }" var="bean">
 										<option value="${bean.userName }">${bean.userName }</option>
 									</c:forEach>
+								</select>--%>
+
+								<select id="custManager" name="custManager">
+									<option value=${sysUser.userName }>${sysUser.userName }</option>
+									<c:forEach items="${userlist }" var="bean">
+										<option value="${bean.userName }">${bean.userName }</option>
+									</c:forEach>
 								</select>
-								<%-- <input type="text" id="" name="custManager"  placeholder="请输入" value=${sysUser.userName } style="width:90%">
-								<label class="label-tips" id="custManagerLab"></label> --%>
+								 <%--<input type="text" id="" name="custManager"  placeholder="请输入" value=${sysUser.userName } style="width:90%">
+								<label class="label-tips" id="custManagerLab"></label>--%>
 							</td>
 							<td class="td-left">所属代理商：</td>
 							<td class="td-right">
 								<select id="agentName" name="agentName">
-									<option value="">请输入所属代理商</option>
+									<option value=${sysUser.deptName }>${sysUser.deptName }</option>
 									<c:forEach items="${agentList }" var="bean">
 										<option value="${bean.custName }">${bean.custName }</option>
 									</c:forEach>
@@ -1165,48 +1195,49 @@ function fun(){
                 }});
         });
 
-      /*  //代理商
-        $("#compAcctBank").on('blur',function () {
-            alert($("#compAcctBank").val())
-        });*/
 
-
-
-       /* //所属业务人员
-        $('#agentName').on('change', function (e) {
-            alert("aaaa")
+        /*商户账号*/
+        $("#merchantAccount").on('blur',function () {
             $.ajax({
                 async:false,
                 dataType:"json",
-
-                data:{custManager:$('#custManager').val()},
+                url:window.Constants.ContextPath +'<%=MerchantEnterPath.BASE+MerchantEnterPath.VALIDATEMERCHANTACCOUNT%>',
+                data:{deptName:$('#merchantAccount').val()},
                 success:function(data){
                     if(data.result=="FAIL"){
-                        $("#custManagerLab").text("未查询到该业务人员");
-                        validateLicense = false;
+                        $("#merchantAccountLab").text("");
                     }else{
-                        validateLicense = true;
+                        $("#merchantAccountLab").text("未查询到代理商");
+                        return false;
                     }
                 }});
         });
-
-        //所属代理商
-        $('#agentName').on('change', function (e) {
-            alert("所属代理商")
-            $.ajax({
-                async:false,
-                dataType:"json",
-
-                data:{deptName:$('#agentName').val()},
-                success:function(data){
-                    if(data.result=="FAIL"){
-                        $("#agentNameLab").text("未查询到代理商");
-                        validateLicense = false;
-                    }else{
-                        validateLicense = true;
-                    }
-                }});
-        });*/
+		/*商户名称*/
+        $("#custName").on('blur',function () {
+            $("#custNameLab").text("");
+        });
+		/*商户简称 */
+        $("#shortName").on('blur',function () {
+            $("#shortNameLab").text("");
+        });
+		/*客服号码*/
+        $("#contactPhone").on('blur',function () {
+            $("#contactPhoneLab").text("");
+        });
+		/*商户地址*/
+        $("#province").on('blur',function () {
+            $("#provinceLab").text("");
+        });
+        $("#city").on('blur',function () {
+            $("#cityLab").text("");
+        });
+        $("#country").on('blur',function () {
+            $("#countryLab").text("");
+        });
+		/*联系人手机号码*/
+        $("#contactMobile").on('blur',function () {
+            $("#contactMobileLab").text("");
+        });
         $("#custManager").comboSelect();
 
         $("#agentName").comboSelect();

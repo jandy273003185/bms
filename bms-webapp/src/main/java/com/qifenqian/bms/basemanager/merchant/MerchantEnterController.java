@@ -346,6 +346,7 @@ public class MerchantEnterController {
 		filePath.put("idCardType_2", idCardType_2);
 		filePath.put("bankCard", bankCard);
 		try {
+
 			//客户状态：00 有效；01 待审核；02 注销；03 冻结；04 审核不通过'
 			merchantVo.setMerchantState("01"); //merchantState
 			//审核状态：0 审核通过；1 待审核；2 审核不通过

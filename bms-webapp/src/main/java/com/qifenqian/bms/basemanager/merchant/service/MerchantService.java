@@ -1569,7 +1569,7 @@ public class MerchantService {
 
       merchantMapper.updateMerchantLoginInfo(merchantVo);
 //      merchantMapper.updateByPrimaryKeySelective(merchantVo);
-
+      merchantVo.setMerchantCode(null);
       merchantMapper.updateMerchant(merchantVo);
       
       TdCertificateAuth tdCertificateAuth = new TdCertificateAuth();
