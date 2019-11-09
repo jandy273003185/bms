@@ -566,7 +566,7 @@
                     },function(data){
                         if(data.result=="SUCCESS"){
                             $.gyzbadmin.alertSuccess("注册申请成功",null,function(){
-                                window.location.href = window.Constants.ContextPath + '<%=MerchantEnterPath.BASE + MerchantEnterPath.LIST %>';
+                            	window.close();
                             });
                         }else {
                             $.gyzbadmin.alertFailure("服务器内部错误，请联系相关技术人员，错误原因是：" + data.message);
