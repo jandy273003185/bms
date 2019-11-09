@@ -1,8 +1,8 @@
-package com.qifenqian.bms.materiel;
+package com.qifenqian.bms.merchant.product;
 
-public class MaterielPath {
+public class MerchantProductPath {
 
-	public static final String BASE="/materiel";
+	public static final String BASE="/merchant/product";
 	
 	public static final String ADD="/add";
 
@@ -12,5 +12,4 @@ public class MaterielPath {
 	
 	public static final String DELETE = "/delete";
 	
-	public static final String FILEUPLOAD = "/upload";
 }

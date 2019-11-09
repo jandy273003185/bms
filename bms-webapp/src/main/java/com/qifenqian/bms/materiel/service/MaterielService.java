@@ -249,9 +249,16 @@ public class MaterielService {
                 		throw new IllegalArgumentException("第"+i+"行机器编号："+machineId+"已存在");
                 	}
                 }
-                //领取人                               
+                
+                //设备类型                
                 if(row.getCell(1) !=null) {
-                	String receiver = row.getCell(1).getStringCellValue();
+                	String machineType = row.getCell(1).getStringCellValue();                    
+                    materiel.setMachineType(machineType);
+                }
+                
+                //领取人                               
+                if(row.getCell(2) !=null) {
+                	String receiver = row.getCell(2).getStringCellValue();
                     if (StringUtils.isEmpty(receiver)) {
             			throw new IllegalArgumentException("第"+i+"行领取人为空");
             		}
@@ -261,25 +268,20 @@ public class MaterielService {
                 }
                 
                 //所用商户                
-                if(row.getCell(2) !=null) {
-                	String usedMerchant = row.getCell(2).getStringCellValue();
-                    if (StringUtils.isEmpty(usedMerchant)) {
-            			throw new IllegalArgumentException("第"+i+"行所用商户为空");
-            		}
+                if(row.getCell(3) !=null) {
+                	String usedMerchant = row.getCell(3).getStringCellValue();                    
                     materiel.setUsedMerchant(usedMerchant);
-                }else {
-                	throw new IllegalArgumentException("第"+i+"行所用商户为空");
                 }
                 
                 //所用门店
-                if(row.getCell(3) !=null) {
-                	String usedStores = row.getCell(3).getStringCellValue();                
+                if(row.getCell(4) !=null) {
+                	String usedStores = row.getCell(4).getStringCellValue();                
                     materiel.setUsedStores(usedStores);
                 }
                                
                 //供应商
-                if(row.getCell(4) !=null) {
-                	String supplier = row.getCell(4).getStringCellValue();
+                if(row.getCell(5) !=null) {
+                	String supplier = row.getCell(5).getStringCellValue();
                     if (StringUtils.isEmpty(supplier)) {
             			throw new IllegalArgumentException("第"+i+"行供应商为空");
             		}
@@ -289,8 +291,8 @@ public class MaterielService {
                 }
                                 
                 //机器状态
-                if(row.getCell(5) !=null) {
-                	String machineState = row.getCell(5).getStringCellValue();
+                if(row.getCell(6) !=null) {
+                	String machineState = row.getCell(6).getStringCellValue();
                     if (StringUtils.isEmpty(machineState)) {
             			throw new IllegalArgumentException("第"+i+"行机器状态为空");
             		}
@@ -312,8 +314,8 @@ public class MaterielService {
                 }
                                 
                 //备注
-                if(row.getCell(6) !=null) {
-                	String memo = row.getCell(6).getStringCellValue();                
+                if(row.getCell(7) !=null) {
+                	String memo = row.getCell(7).getStringCellValue();                
                     materiel.setMemo(memo);
                 }
                                

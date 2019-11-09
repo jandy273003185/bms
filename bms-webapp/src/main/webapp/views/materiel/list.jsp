@@ -44,12 +44,16 @@ jQuery(function($){
 	//新增
 	$('.addMaterielBtn').click(function(){
 		
-		// 机器编码
+		// 设备编号
 		var machineId = $('#addMaterielModal #machineId').val();
 		if(kong.test(machineId)) {
 			$.gyzbadmin.alertFailure('机器编码不可为空');
 			return;
 		}
+		
+		// 设备类型
+		var machineType = $('#addMaterielModal #machineType').val();
+		
 		// 领取人
 		var receiver = $('#addMaterielModal #receiver').val();
 		if(kong.test(receiver)) {
@@ -89,6 +93,7 @@ jQuery(function($){
 		$.post(window.Constants.ContextPath + '<%=MaterielPath.BASE + MaterielPath.ADD %>', 
 		{
 			 'machineId'	: machineId,
+			 'machineType'	: machineType,
 			 'receiver'		: receiver,
 			 'usedMerchant'	: usedMerchant,
 			 'usedStores'	: usedStores,
@@ -115,6 +120,7 @@ jQuery(function($){
        $('#editMaterielModal').on('show.bs.modal', function () {
     	    $('#editMaterielModal #id').val(materiel.id);
 			$('#editMaterielModal #machineId').val(materiel.machineId);
+			$('#editMaterielModal #machineType').val(materiel.machineType);
 			$('#editMaterielModal #receiver').val(materiel.receiver);
 			$('#editMaterielModal #usedMerchant').val(materiel.usedMerchant);
 			$('#editMaterielModal #usedStores').val(materiel.usedStores);
@@ -126,6 +132,7 @@ jQuery(function($){
 			// 清除			
 			$('#editMaterielModal #id').val('');
 			$('#editMaterielModal #machineId').val('');
+			$('#editMaterielModal #machineType').val('');
 			$('#editMaterielModal #receiver').val('');
 			$('#editMaterielModal #usedMerchant').val('');
 			$('#editMaterielModal #usedStores').val('');
@@ -145,12 +152,15 @@ jQuery(function($){
 			return;
 		}
 		
-		// 机器编码
+		// 设备编码
 		var machineId = $('#editMaterielModal #machineId').val();
 		if(kong.test(machineId)) {
 			$.gyzbadmin.alertFailure('机器编码不可为空');
 			return;
 		}
+		
+		// 设备类型
+		var machineType = $('#editMaterielModal #machineType').val();
 		// 领取人
 		var receiver = $('#editMaterielModal #receiver').val();
 		if(kong.test(receiver)) {
@@ -191,6 +201,7 @@ jQuery(function($){
 		{ 
 			 'id'			:id,
 			 'machineId'	: machineId,
+			 'machineType'	: machineType,
 			 'receiver'		: receiver,
 			 'usedMerchant'	: usedMerchant,
 			 'usedStores'	: usedStores,
@@ -388,7 +399,8 @@ jQuery(function($){
 									<thead>
 										<tr>
 											<th>编号</th>
-											<th>机器编号</th>
+											<th>设备编号</th>
+											<th>设备类型</th>
 											<th>领取人</th>
 											<th>所用商户</th>
 											<th>所用门店</th>
@@ -407,6 +419,7 @@ jQuery(function($){
 											<tr class="materiel">
 												<td>${materiel.id}</td>
 												<td>${materiel.machineId}</td>
+												<td>${materiel.machineType}</td>
 												<td>${materiel.receiver}</td>
 												<td>${materiel.usedMerchant}</td>									
 												<td>${materiel.usedStores}</td>										
@@ -486,9 +499,15 @@ jQuery(function($){
 					         <div class="modal-body">
 					            <table class="modal-input-table">
 					            	<tr>
-										<td class="td-left" width="25%">机器编号<span style="color: red">*</span></td>
+										<td class="td-left" width="25%">设备编号<span style="color: red">*</span></td>
 										<td class="td-right" width="75%">
 												<input type="text" id="machineId" name="machineId" clasS="width-90"/>
+										</td>
+									</tr>
+									<tr>
+										<td class="td-left" width="25%">设备类型</td>
+										<td class="td-right" width="75%">
+												<input type="text" id="machineType" name="machineType" clasS="width-90"/>
 										</td>
 									</tr>
 									
@@ -505,7 +524,7 @@ jQuery(function($){
 									</tr>
 									
 									<tr>
-										<td class="td-left" >所用商户<span style="color: red">*</span></td>
+										<td class="td-left" >所用商户</td>
 										<td class="td-right" >
 												<input type="text" id="usedMerchant" name="usedMerchant" clasS="width-90"/>
 										</td>
@@ -571,12 +590,17 @@ jQuery(function($){
 									</tr>
 					            
 					            	<tr>
-										<td class="td-left" width="25%">机器编号<span style="color: red">*</span></td>
+										<td class="td-left" width="25%">设备编号<span style="color: red">*</span></td>
 										<td class="td-right" width="75%">
 												<input type="text" id="machineId" name="machineId" clasS="width-90"/>
 										</td>
 									</tr>
-									
+									<tr>
+										<td class="td-left" width="25%">设备类型</td>
+										<td class="td-right" width="75%">
+												<input type="text" id="machineType" name="machineType" clasS="width-90"/>
+										</td>
+									</tr>
 									<tr>
 										<td class="td-left" >领取人<span style="color: red">*</span></td>
 										<td class="td-right" >
@@ -590,7 +614,7 @@ jQuery(function($){
 									</tr>
 									
 									<tr>
-										<td class="td-left" >所用商户<span style="color: red">*</span></td>
+										<td class="td-left" >所用商户</td>
 										<td class="td-right" >
 												<input type="text" id="usedMerchant" name="usedMerchant" clasS="width-90"/>
 										</td>

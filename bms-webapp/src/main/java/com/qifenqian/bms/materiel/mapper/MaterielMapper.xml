@@ -5,8 +5,9 @@
 
 	<!-- 写入单个物料 -->
 	<insert id="insertMaterielSingle" useGeneratedKeys="true" keyProperty="id" parameterType="com.qifenqian.bms.materiel.bean.Materiel">
-		INSERT INTO BMS_MATERIEL (
+		INSERT INTO td_materiel (
 			MACHINE_ID,
+			MACHINE_TYPE,
 			SUPPLIER,
 			MACHINE_STATE,
 			USED_MERCHANT,
@@ -17,6 +18,7 @@
 			MEMO 
 		) VALUES (
 			#{machineId, 	    jdbcType=VARCHAR},
+			#{machineType, 	    jdbcType=VARCHAR},
 			#{supplier, 	    jdbcType=VARCHAR},
 		  	#{machineState, 	jdbcType=VARCHAR},
 		  	#{usedMerchant, 	jdbcType=VARCHAR},
@@ -31,14 +33,14 @@
 	<!-- 根据id查询物料 -->
 	<select id="selectMaterielById" parameterType="java.lang.Integer" resultType="com.qifenqian.bms.materiel.bean.Materiel">
 		SELECT *
-		FROM BMS_MATERIEL
+		FROM td_materiel
 		WHERE ID = #{id, jdbcType=INTEGER}
 	</select>
 	
 	<!-- 根据machineId查询物料 -->
 	<select id="selectMaterielByMachineId" parameterType="java.lang.String" resultType="com.qifenqian.bms.materiel.bean.Materiel">
 		SELECT *
-		FROM BMS_MATERIEL
+		FROM td_materiel
 		WHERE MACHINE_ID = #{machineId, jdbcType=INTEGER}
 	</select>
 
@@ -48,6 +50,7 @@
 		SELECT
 			ID,
 			MACHINE_ID,
+			MACHINE_TYPE,
   			INPUT_TIME,
   			SUPPLIER,
   			MACHINE_STATE,
@@ -60,7 +63,7 @@
   			LASTUPDATE_TIME,
   			MEMO
 		FROM
-			BMS_MATERIEL 		
+			td_materiel 		
 		<where>
 			<if test="machineId != null and machineId != '' "> AND MACHINE_ID =#{machineId, jdbcType=INTEGER}</if>
 			<if test="receiver != null and receiver != '' "> AND RECEIVER LIKE CONCAT('%',#{receiver, jdbcType=VARCHAR},'%')</if>
@@ -72,10 +75,13 @@
 	<!-- 修改物料信息 -->
 	<update id="updateMaterielById" parameterType="com.qifenqian.bms.materiel.bean.Materiel">
 		UPDATE 
-			   BMS_MATERIEL  
+			   td_materiel  
 	   <set>
 		   	<if test="machineId != null and machineId !=''">
 				MACHINE_ID 	= #{machineId, 	jdbcType=VARCHAR},
+			</if>
+			<if test="machineType != null and machineType !=''">
+				MACHINE_TYPE 	= #{machineType, 	jdbcType=VARCHAR},
 			</if>
 			<if test="supplier != null">
 				SUPPLIER = #{supplier, 	jdbcType=VARCHAR},
@@ -100,16 +106,17 @@
 	
 	<!-- 删除修改物料信息 -->
 	 <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    	DELETE FROM BMS_MATERIEL
+    	DELETE FROM td_materiel
     	WHERE ID = #{id,jdbcType=VARCHAR}
   	</delete>
   	
   	<!-- 批量导入删除修改物料信息 -->
   	<insert id="addBatchMateriel"  parameterType="java.util.List">
     
-        INSERT INTO BMS_MATERIEL (
+        INSERT INTO td_materiel (
         <trim suffix="" suffixOverrides=",">
             MACHINE_ID,
+            MACHINE_TYPE,
 			SUPPLIER,
 			MACHINE_STATE,
 			USED_MERCHANT,
@@ -123,6 +130,7 @@
         <foreach collection="list" item="item" index="index" separator=",">
             (
                 #{item.machineId} ,
+                #{item.machineType} ,
                 #{item.supplier} ,
                 #{item.machineState} ,
                 #{item.usedMerchant} ,

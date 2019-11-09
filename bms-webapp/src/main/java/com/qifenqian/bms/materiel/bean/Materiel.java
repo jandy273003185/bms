@@ -18,8 +18,10 @@ public class Materiel implements Serializable {
 
 	/** 物料编号 */
 	private Integer id;
-	/** 机器编号 */
+	/** 设备编号 */
 	private String machineId;
+	/** 设备类型 */
+	private String machineType;
 	/** 录入时间 */
 	private Date inputTime;
 	/** 供应商 */
@@ -121,6 +123,12 @@ public class Materiel implements Serializable {
 	}
 	public void setMemo(String memo) {
 		this.memo = memo;
+	}
+	public String getMachineType() {
+		return machineType;
+	}
+	public void setMachineType(String machineType) {
+		this.machineType = machineType;
 	}
 	
 
