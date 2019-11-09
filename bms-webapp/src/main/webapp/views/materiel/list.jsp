@@ -56,10 +56,7 @@ jQuery(function($){
 		
 		// 领取人
 		var receiver = $('#addMaterielModal #receiver').val();
-		if(kong.test(receiver)) {
-			$.gyzbadmin.alertFailure('领取人不可为空');
-			return;
-		}
+		
 		
 		// 所用商户
 		var usedMerchant = $('#addMaterielModal #usedMerchant').val();
@@ -163,10 +160,7 @@ jQuery(function($){
 		var machineType = $('#editMaterielModal #machineType').val();
 		// 领取人
 		var receiver = $('#editMaterielModal #receiver').val();
-		if(kong.test(receiver)) {
-			$.gyzbadmin.alertFailure('领取人不可为空');
-			return;
-		}
+		
 		
 		// 所用商户
 		var usedMerchant = $('#editMaterielModal #usedMerchant').val();
@@ -512,7 +506,7 @@ jQuery(function($){
 									</tr>
 									
 									<tr>
-										<td class="td-left" >领取人<span style="color: red">*</span></td>
+										<td class="td-left" >领取人</td>
 										<td class="td-right" >
 												<input type="text" id="receiver" name="receiver" clasS="width-90"/> 										
 											<%-- <select id="receiver" name="receiver">
@@ -602,7 +596,7 @@ jQuery(function($){
 										</td>
 									</tr>
 									<tr>
-										<td class="td-left" >领取人<span style="color: red">*</span></td>
+										<td class="td-left" >领取人</td>
 										<td class="td-right" >
 												<input type="text" id="receiver" name="receiver" clasS="width-90"/>									
 											<%-- <select id="receiver" name="receiver">
