@@ -343,10 +343,15 @@ jQuery(function($){
 																		
 									<tr>
 										<td class="td-left" >设备编号<span style="color:red">*</span></td>
-										<td class="td-right" >
-												<input type="text" id="terminalNo" name="terminalNo" clasS="width-90"/> 										
-											
-								        </td>
+										<td class="td-right" width="70%">	
+											<select id="terminalNo" name="terminalNo">
+												<option value="">输入设备编号查询</option>
+												<c:forEach items="${materielList }" var="bean">
+													<option value="${bean.machineId }">${bean.machineId }</option>
+												</c:forEach>
+											</select>
+										</td>
+
 									</tr>
 
 					
@@ -384,8 +389,13 @@ jQuery(function($){
 									</tr>	
 									<tr>
 										<td class="td-left" >设备编号<span style="color:red">*</span></td>
-										<td class="td-right" >
-												<input type="text" id="terminalNo" name="terminalNo" clasS="width-90"/>
+										<td class="td-right" width="70%">	
+											<select id="terminalNo" name="terminalNo">
+												<option value="">输入设备编号查询</option>
+												<c:forEach items="${materielList }" var="bean">
+													<option value="${bean.machineId }">${bean.machineId }</option>
+												</c:forEach>
+											</select>
 										</td>
 									</tr>	
 				
