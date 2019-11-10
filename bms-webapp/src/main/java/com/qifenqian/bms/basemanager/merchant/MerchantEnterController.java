@@ -165,7 +165,6 @@ public class MerchantEnterController {
 		Rule rule = new Rule();
 		User user = new User();
 		rule.setStatus("VALID");
-		user.setDeptId(1);
 		//获取用户信息
 		String userId  = String.valueOf(WebUtils.getUserInfo().getUserId());
 		SysUser  sysUser = sysUserMapper.selectUserById(userId);
