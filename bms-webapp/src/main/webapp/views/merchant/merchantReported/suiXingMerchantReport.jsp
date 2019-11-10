@@ -54,6 +54,10 @@
 					<input type="hidden" id="openPhototemp"/>
 					<input type="hidden" id="certAttribute1temp" />
 					<input type="hidden" id="certAttribute2temp" />
+					<input type="hidden" id="legalCertAttribute1temp" />
+					<input type="hidden" id="legalCertAttribute2temp" />
+					<input type="hidden" id="settleCertAttribute1temp" />
+					<input type="hidden" id="settleCertAttribute2temp" />
 					<input type="hidden" id="bankCardPhototemp"/>
 					<div id="door_temp"></div>
 					<section class="aui-content">
