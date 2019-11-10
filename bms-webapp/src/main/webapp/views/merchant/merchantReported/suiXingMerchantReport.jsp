@@ -1082,7 +1082,7 @@
 					if("" == data.message || null == data.message){
 						alert("失败");
 					}else{
-						alert(data.message);
+						alert("上传图片失败 ");
 					}
 				}
 			},
