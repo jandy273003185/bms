@@ -192,7 +192,7 @@ public class SuiXingPayMerchantReportsController {
 		detail.setChannelNo("SUIXING_PAY");
 		detail.setPatchNo(patchNo);
 		TdMerchantDetailInfo detailInfo = fmIncomeMapperDao.selMerchantDetailInfo(detail);
-		if("" != detailInfo.getRemark() && null != detailInfo.getRemark()){
+		if(StringUtils.isNotBlank(detailInfo.getRemark())){
 			cr.setTaskCode(detailInfo.getRemark());
 		}
 		/*TdCustInfo custInfo = new TdCustInfo();
