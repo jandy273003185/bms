@@ -240,6 +240,7 @@ public class SuiXingPayMerchantReportsController {
 					
 					logger.info("文件上传至随行付" + "------------------------------");
 					result = iMerChantIntoService.fileUpload(req);
+					logger.info("文件上传随行付返回信息" + result + "------------------------------");
 				}
 				
 				if("00".equals(result.getChannelCode())){

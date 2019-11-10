@@ -601,8 +601,8 @@
 				$("#bankCardPhotoType").attr("style","display:none");
 				
 			}else if("01" == actType){
-				$("#legalIdCardType").attr("style","display:");
-				$("#legalIdCardBackType").attr("style","display:");
+				$("#legalIdCardType").attr("style","display:none");
+				$("#legalIdCardBackType").attr("style","display:none");
 				$("#settleIdCardType").attr("style","display:");
 				$("#settleIdCardBackType").attr("style","display:");
 				$("#openPhotoType").attr("style","display:none");
