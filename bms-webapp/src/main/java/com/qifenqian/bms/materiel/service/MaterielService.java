@@ -44,150 +44,6 @@ public class MaterielService {
 	
 	private static final String XLS = "xls";
 	private static final String XLSK = "xlsx";
-	
-	public int importExcel(HttpServletRequest request) throws Exception {
-		List<Materiel> list = new ArrayList<Materiel>();		
-		// 转型为MultipartHttpRequest：
-        MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
-        // 获得文件：
-        MultipartFile contactFile = multiRequest.getFile("entrustFile");
-        if (null != contactFile && !contactFile.isEmpty()) {
-            //解析文档
-            POIFSFileSystem fs;
-            //获取整个文档
-            HSSFWorkbook wb;
-            // 页
-            HSSFSheet sheet;
-            
-            // 打开文件
-            try {
-
-                fs = new POIFSFileSystem(contactFile.getInputStream());
-                wb = new HSSFWorkbook(fs);
-            } catch (IOException e) {
-                e.printStackTrace();
-                wb = new HSSFWorkbook();
-            }
-            //获取第一页
-            sheet = wb.getSheetAt(0);
-            // 得到总行数
-            int rowNum = sheet.getLastRowNum();
-            if(rowNum==0) {
-                throw new Exception("请填写行数");
-            }
-          //查询出已存在的机器编号
-            List<Materiel> materielList= materielMapper.selectMaterielList(null);
-            Map<String,String> map = new HashMap<String, String>();
-            // 正文内容应该从第二行开始,第一行为表头的标题
-            for (int i = 1; i <= rowNum; i++) {
-
-            	//读取左上端单元格
-                Row row = sheet.getRow(i);
-                //行不为空
-                if(row != null) {
-                    //读取cell
-                	Materiel materiel = new Materiel();
-                    //机器编号
-                	String machineId;
-                	if(row.getCell(0) != null) {
-                		machineId = row.getCell(0).getStringCellValue();
-                		materiel.setMachineId(machineId);
-                	}else {
-                		throw new IllegalArgumentException("第"+i+"行机器编号为空");
-                	}
-                                                 
-                    //判断文件内是否有相同的机器编号
-                    if(map.containsKey(machineId)) {
-                    	throw new IllegalArgumentException("第"+i+"行文件中存在重复机器编号："+machineId);
-                    }else {
-                    	map.put(machineId, machineId);
-                    }
-                    //判断机器编号是否已经存在              
-                    for(Materiel m:materielList) {
-                    	if(machineId.equals(m.getMachineId())) {
-                    		throw new IllegalArgumentException("第"+i+"行机器编号："+machineId+"已存在");
-                    	}
-                    }
-                    //领取人                               
-                    if(row.getCell(1) !=null) {
-                    	String receiver = row.getCell(1).getStringCellValue();
-                        if (StringUtils.isEmpty(receiver)) {
-                			throw new IllegalArgumentException("第"+i+"行领取人为空");
-                		}
-                        materiel.setReceiver(receiver);
-                    }else {
-                    	throw new IllegalArgumentException("第"+i+"行领取人为空");
-                    }
-                    
-                    //所用商户                
-                    if(row.getCell(2) !=null) {
-                    	String usedMerchant = row.getCell(2).getStringCellValue();
-                        if (StringUtils.isEmpty(usedMerchant)) {
-                			throw new IllegalArgumentException("第"+i+"行所用商户为空");
-                		}
-                        materiel.setUsedMerchant(usedMerchant);
-                    }else {
-                    	throw new IllegalArgumentException("第"+i+"行所用商户为空");
-                    }
-                    
-                    //所用门店
-                    if(row.getCell(3) !=null) {
-                    	String usedStores = row.getCell(3).getStringCellValue();                
-                        materiel.setUsedStores(usedStores);
-                    }
-                                   
-                    //供应商
-                    if(row.getCell(4) !=null) {
-                    	String supplier = row.getCell(4).getStringCellValue();
-                        if (StringUtils.isEmpty(supplier)) {
-                			throw new IllegalArgumentException("第"+i+"行供应商为空");
-                		}
-                        materiel.setSupplier(supplier);
-                    }else {
-                    	throw new IllegalArgumentException("第"+i+"行供应商为空");
-                    }
-                                    
-                    //机器状态
-                    if(row.getCell(5) !=null) {
-                    	String machineState = row.getCell(5).getStringCellValue();
-                        if (StringUtils.isEmpty(machineState)) {
-                			throw new IllegalArgumentException("第"+i+"行机器状态为空");
-                		}
-                        if("已领用".equals(machineState)) {
-                        	machineState = "0";
-                        }
-                        if("未领用".equals(machineState)) {
-                        	machineState = "1";
-                        }
-                        if("已激活".equals(machineState)) {
-                        	machineState = "2";
-                        }
-                        if("未激活".equals(machineState)) {
-                        	machineState = "3";
-                        }                
-                        materiel.setMachineState(machineState);
-                    }else {
-                    	throw new IllegalArgumentException("第"+i+"行机器状态为空");
-                    }
-                                    
-                    //备注
-                    if(row.getCell(6) !=null) {
-                    	String memo = row.getCell(6).getStringCellValue();                
-                        materiel.setMemo(memo);
-                    }
-                                   
-                    //创建人
-                    materiel.setCreator(WebUtils.getUserInfo().getUserName());
-                    
-                    //把实数据放入集合里
-                    list.add(materiel);
-            }
-
-            }
-          }
-		
-		return materielMapper.addBatchMateriel(list);
-	}
 		
     public int importExcel(MultipartFile file) throws Exception {
         List<Materiel> list = new ArrayList<Materiel>();
@@ -259,12 +115,7 @@ public class MaterielService {
                 //领取人                               
                 if(row.getCell(2) !=null) {
                 	String receiver = row.getCell(2).getStringCellValue();
-                    if (StringUtils.isEmpty(receiver)) {
-            			throw new IllegalArgumentException("第"+i+"行领取人为空");
-            		}
                     materiel.setReceiver(receiver);
-                }else {
-                	throw new IllegalArgumentException("第"+i+"行领取人为空");
                 }
                 
                 //所用商户                
@@ -344,19 +195,11 @@ public class MaterielService {
 			throw new IllegalArgumentException("物料对象为空");
 		}
 		if (StringUtils.isEmpty(materiel.getMachineId())) {
-			throw new IllegalArgumentException("机器编号为空");
+			throw new IllegalArgumentException("设备编号为空");
 		}
-		if (StringUtils.isEmpty(materiel.getReceiver())) {
-			throw new IllegalArgumentException("领取人为空");
-		}
-		if (StringUtils.isEmpty(materiel.getUsedStores())) {
-			throw new IllegalArgumentException("所用门店为空");
-		}
-		if (StringUtils.isEmpty(materiel.getUsedMerchant())) {
-			throw new IllegalArgumentException("所用商户为空");
-		}
+		
 		if (StringUtils.isEmpty(materiel.getMachineState())) {
-			throw new IllegalArgumentException("机器状态为空");
+			throw new IllegalArgumentException("设备状态为空");
 		}
 		if (StringUtils.isEmpty(materiel.getSupplier())) {
 			throw new IllegalArgumentException("供应商为空");

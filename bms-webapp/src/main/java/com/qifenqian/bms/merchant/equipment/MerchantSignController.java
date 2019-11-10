@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.merchant.bean.Merchant;
 import com.qifenqian.bms.basemanager.merchant.mapper.MerchantMapper;
 import com.qifenqian.bms.materiel.bean.Materiel;
+import com.qifenqian.bms.materiel.mapper.MaterielMapper;
 import com.qifenqian.bms.materiel.service.MaterielService;
 import com.qifenqian.bms.merchant.equipment.bean.MerchantSign;
 import com.qifenqian.bms.merchant.equipment.service.MerchantSignService;
@@ -40,7 +41,8 @@ public class MerchantSignController {
 	@Autowired
 	private MaterielService materielService;
 	
-	
+	@Autowired
+	private MaterielMapper materielMapper;
 	
 	/**
 	 * 进入商户设备列表页面
@@ -56,6 +58,9 @@ public class MerchantSignController {
 		//商户信息
 		List<Merchant> merchantList = merchantMapper.selectMerchant();
 		mv.addObject("merchantList", merchantList);
+		//设备信息
+		List<Materiel> materielList = materielMapper.selectMaterielList(new Materiel());
+		mv.addObject("materielList", materielList);
 		// 返回
 		return mv;
 	}
