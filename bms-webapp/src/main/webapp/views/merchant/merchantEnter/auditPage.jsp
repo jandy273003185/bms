@@ -193,7 +193,6 @@
 
 	<div class="main-container-inner">
 		<!-- 菜单 -->
-		<%@ include file="/include/left.jsp"%>
 
 		<div class="main-content">
 			<!-- 路径 -->

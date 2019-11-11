@@ -122,7 +122,7 @@ function getBankCityList(){
 		}
 	})
 }
-
+/**注册城市**/
 function getCityList(){
 
 	var provVal = $("#province").val().trim();
@@ -152,7 +152,7 @@ function getCityList(){
 		}
 	})
 }
-
+/**注册区县**/
 function getAreaList(){
 
 	var city = $("#city").val().trim();
@@ -184,51 +184,15 @@ function getAreaList(){
 }
 
 
-function selCustType(){
-	/**商户类型 **/
-	//个人
-	if($("#custType").val() =='0'  ){
-		$("#businessCodeId").text("营业执照编号：");
-        $("#businessTimeId").text("营业执照有效期：");
-        $("#businessPhotoId").text("营业执照照片");
-	}
-	//企业 个体户
-	if($("#custType").val() =='1' ||$("#custType").val() =='2'){
-        $("#businessCodeId").text("营业执照编号：（必填)");
-        $("#businessTimeId").text("营业执照有效期：（必填)");
-        $("#businessPhotoId").text("营业执照照片：（必填)");
-
-	}
-}
 
 
 function addMerchantBtn(){
-	/*var businessTermEnd = "forever";*/
 	/*账号校验*/
 	if(isNull($("#merchantAccount")[0])){
 		$("#merchantAccountLab").text("请设置商户账户");
 		$("#merchantAccount").focus();
 		return false;
 	}
-	/*
-	if(!verifyEmailAddress($("#merchantAccount")[0]) || !isMobilePhone($("#merchantAccount")[0])){
-		$("#merchantAccountLab").text("账号需用邮箱或者手机号 ");
-		$("#merchantAccount").focus();
-		return false;
-	}  */
-
-	/*邮箱校验*/
-	/* if(isNull($("#merchantEmail")[0])){
-		$("#merchantEmailLab").text("请设置邮箱账户");
-		$("#merchantEmail").focus();
-		return false;
-	} */
-
-	/*if(!verifyEmailAddress($("#merchantEmail")[0])){
-		$("#merchantEmailLab").text("邮箱格式不对,可使用字母、数字、下划线 ");
-		$("#merchantEmail").focus();
-		return false;
-	}*/
 
 	/*客服号码校验*/
 	if(isNull($("#contactPhone")[0])){
@@ -236,7 +200,7 @@ function addMerchantBtn(){
 		$("#contactPhone").focus();
 		return false;
 	}
-
+	
 	if(!isPhoneNo($("#contactPhone")[0])){
 		$("#contactPhoneLab").text("客服号码格式不对 ");
 		$("#contactPhone").focus();
@@ -293,30 +257,10 @@ function addMerchantBtn(){
 	var custType =$("#custType").val();
 	/*个人*/
 	if(custType=='0'){
+		
 	}
 	/*企业*/
 	if(custType=='1' || custType=='2' ){
-	<%--
-        //校验营业执照注册号唯一性
-        var businessLicense =$("#businessLicense").val();
-        var validateLicense =true ;
-
-        $.ajax({
-            async:false,
-            dataType:"json",
-            url:window.Constants.ContextPath +'<%=MerchantPath.BASE+MerchantPath.VALIDATELICENSE%>',
-            data:{businessLicense:businessLicense},
-            success:function(data){
-                if(data.result=="FAIL"){
-                    $("#businessLicenseLab").text("该营业执照注册号已经被使用");
-                    validateLicense = false;
-                }else{
-                    validateLicense = true;
-                }
-            }});
-        if(!validateLicense){
-            return false;
-        } --%>
 
         /*营业执照号*/
         if(isNull($("#businessLicense")[0])){
@@ -365,72 +309,7 @@ function addMerchantBtn(){
 		if(!flag){
 			return false;
 		}
-
-		/* if(!checkAttach($("#businessPhoto")[0])){
-			$.gyzbadmin.alertFailure("必须提交营业执照扫描件");
-			return false;
-		} */
-
-		/*if(!checkAttach($("#openAccount")[0])){
-			$.gyzbadmin.alertFailure("必须提交开户许可证");
-			return false;
-		}*/
 	}
-	/*个体户*/
-	/*if(custType=='2'){
-
-		/!*营业执照有限期 *!/
-		if(isNull($("#businessTermStart")[0])){
-			$("#businessTermStartLab").text("请选择日期");
-			$("#businessTermStart").focus();
-			return false;
-		}
-
-		if(isNull($("#businessTermEnd")[0])){
-			$("#businessTermEndLab").text("请选择日期");
-			$("#businessTermEnd").focus();
-			return false;
-		}
-
-		/!*起始日期判断 *!/
-		var startDate = $("#businessTermStart").val();
-		var endDate= $("#businessTermEnd").val();
-		if("" != startDate && "" != endDate && startDate > endDate)
-		{
-			$.gyzbadmin.alertFailure("结束日期不能小于开始日期");
-			return false;
-		}
-
-		if(checkAttach($("#businessPhoto")[0])){
-			if(isNull($("#businessLicense")[0])){
-				$("#businessLicenseLab").text("必须填写营业执照注册号");
-				return false;
-			}
-
-			// 校验营业时间
-			if(!Register.validateBusinessTerm($("#businessTermStart").val().trim(), $("#businessTermStartLabel"))) {
-				return false;
-			}
-			if($("input:radio[name='end']:checked").val()=='sel'){
-				if(!Register.validateBusinessTerm($("#businessTermEnd").val().trim(),$("#businessTermStartLabel"))) {
-					return false;
-				}
-				businessTermEnd = $("#businessTermEnd").val();
-			}
-
-			var flag = Register.validateBusinessLicense($("#businessLicense").val(),$("#businessLicenseLab"));
-
-			if(!flag){
-				return false;
-			}
-		}
-		/!*if(!kong.test($("#businessLicense").val().trim())){
-			if(!checkAttach($("#businessPhoto")[0])){
-				$.gyzbadmin.alertFailure("必须上传营业执照扫描件");
-				return false;
-			}
-		}*!/
-	}*/
 
 	/*法人姓名*/
 	if(isNull($("#representativeName")[0])){
@@ -438,6 +317,7 @@ function addMerchantBtn(){
 		$("#representativeName").focus();
 		return false;
 	}
+	
 	/*法人身份证*/
 	if(isNull($("#representativeCertNo")[0])){
 		$("#representativeCertNoLab").text("请填写法人身份证");
@@ -451,27 +331,26 @@ function addMerchantBtn(){
 		$("#contactName").focus();
 		return false;
 	}
+	
 	/*联系人手机号*/
 	if(isNull($("#contactMobile")[0])){
 		$("#contactMobileLab").text("请填写联系人手机号");
 		$("#contactMobile").focus();
 		return false;
 	}
+	
 	if(!isMobilePhone($("#contactMobile")[0])){
 		$("#contactMobileLab").text("账号需用手机号 ");
 		$("#contactMobile").focus();
 		return false;
 	}
+	
 	/*银行卡号*/
 	if(isNull($("#compMainAcct")[0])){
 		$("#compMainAcctLab").text("请填写银行卡号");
 		$("#compMainAcct").focus();
 		return false;
 	}
-
-
-
-
 
     /*开户银行*/
 	var compAcctBank = $("#compAcctBank").val().trim();
@@ -520,11 +399,7 @@ function addMerchantBtn(){
         return false;
     }
 
-
-
-
 	// 提交前清空所有错误提示栏
-
 	var merchantAccount = $("#merchantAccount").val().trim();
 	var custType = $("#custType").val().trim();
 	var custName = $("#custName").val().trim();
@@ -556,7 +431,6 @@ function addMerchantBtn(){
 
 	$.blockUI();
 
-
     $.ajax({
         type : "POST",
         url : window.Constants.ContextPath +'<%=MerchantEnterPath.BASE + MerchantEnterPath.ADD%>',
@@ -581,7 +455,7 @@ function addMerchantBtn(){
             "contactName":           contactName,						// 联系人姓名
             "contactMobile":         contactMobile,						// 联系人电话
             "compMainAcct":          compMainAcct,						// 银行号
-            "compAcctBank":          $("#compAcctBank").val(),						// 开户行
+            "compAcctBank":          compAcctBank,						// 开户行
             "branchBank":            branchBank,						// 开户支行
             "bankAcctName":          bankAcctName,						// 开户人
             "bankProvinceName":      bankProvinceName,					// 开户行省份
@@ -597,11 +471,11 @@ function addMerchantBtn(){
                     type : "POST",
                     url : window.Constants.ContextPath + '<%=MerchantPath.BASE+MerchantPath.FILEUPLOAD%>?custId='+data.custId,
                     data : {
-                        businessPhoto : $('#businessPhototemp').val(),         //商户营业执照
+                        businessPhoto :  $('#businessPhototemp').val(),                //商户营业执照
                         certAttribute1 : $('#certAttribute1temp').val(),               //身份证正面照
-                        certAttribute2 : $('#certAttribute2temp').val(),              //身份证背面照
-                        certAttribute0 : $('#openAccounttemp').val(),                   //开户银行
-                        bankCardPhoto : $('#bankCardPhototemp').val(),                   //开户银行
+                        certAttribute2 : $('#certAttribute2temp').val(),               //身份证背面照
+                        certAttribute0 : $('#openAccounttemp').val(),                  //开户许可证
+                        bankCardPhoto :  $('#bankCardPhototemp').val(),                //开户银行照
                     },
                     dataType : "json",
                     success : function (data) {
@@ -615,9 +489,6 @@ function addMerchantBtn(){
                         }
                     }
                 });
-               /* $.gyzbadmin.alertSuccess("注册申请成功", null, function () {
-                    ;
-                });*/
             } else {
                 $.gyzbadmin.alertFailure("服务器内部错误，请联系相关技术人员，错误原因是：" + data.message);
             }
@@ -634,7 +505,6 @@ function addMerchantBtn(){
 
 /** 点击预览大图 **/
 function bigImg(obj){
-    /* $('#showImageDiv #showImage').attr("src",obj.src); */
     var realWidth;
 	var realHeight
 	$('#showImageDiv #showImage').attr("src",obj.src).load(function(){
@@ -722,6 +592,8 @@ $('.bankCardPhotoClick').click(function(){
 	var obj = document.getElementById("bankCardPhoto");
 	return previewImage(divObj,imageObj,obj);
 });
+
+//对公对私账户图片
 $(function(){
 	$('#compMainAcctType').on('change', function (e) {
 		//bankCardPhoto_
@@ -735,8 +607,23 @@ $(function(){
 		}
 	});
 })
+
+/**商户类型 **/
+function selCustType(){
+	//个人
+	if($("#custType").val() =='0'  ){
+		$('#businessCodeId_').hide();
+		$('#businessPhotoId_').hide();
+	}
+	//企业 个体户
+	if($("#custType").val() =='1' ||$("#custType").val() =='2'){
+		$('#businessCodeId_').show();
+		$('#businessPhotoId_').show();
+	}
+}
+
 function fun(){
-	$("input[name='businessTermEnd']").val("2099-12-31").focus();
+	$("input[name='businessTermEnd']").val("2099-12-31");
 	$("#businessTermEnd").attr("value","2099-12-31");
 }
 
@@ -776,6 +663,7 @@ function fun(){
 							<td class="td-left">商户账号：<span style="color:red;">（必填)</span></td>
 							<td class="td-right">
 								<input type="text" id="merchantAccount" name="merchantAccount" placeholder="请输入手机号或邮箱" maxlength="50" style="width:90%">
+								
 								<label class="label-tips" id="merchantAccountLab"></label>
 							</td>
 						</tr>
@@ -786,23 +674,24 @@ function fun(){
 							<td class="td-left">商户类型：<span style="color:red;">（必填)</span></td>
 							<td class="td-right">
 							   <select name="custType" class="width-90" id="custType" onchange="selCustType();">
-									<option value="0">个人</option>
 									<option value="1">企业</option>
+									<option value="0">个人</option>
 									<option value="2">个体户</option>
 								</select>
+								
 							</td>
 						</tr>
                         <tr>
 						    <td class="td-left" width="18%">商户名称：<span style="color:red;">（必填)</span></td>
 							<td class="td-right" width="32%">
 								<input type="text" id="custName" name="custName" maxlength="100"  placeholder="请输入商户名称" style="width:90%">
-								<i class="icon-leaf blue"></i>
+								
 								<label class="label-tips" id="custNameLab"></label>
 							</td>
 							<td class="td-left" width="18%">商户简称：<span style="color:red;">（必填)</span></td>
 							<td class="td-right" width="32%">
 							    <input type="text" id="shortName" name="shortName" placeholder="请输入商户简称" style="width:90%">
-								<i class="icon-leaf blue"></i>
+								
 								<label class="label-tips" id="shortNameLab"></label>
 							</td>
 						</tr>
@@ -810,13 +699,13 @@ function fun(){
 							<td class="td-left">商户邮箱：</td>
 							<td class="td-right">
 								<input type="text" id="merchantEmail" name="merchantEmail" placeholder="请输入商户邮箱" style="width:90%">
-								<i class="icon-leaf blue"></i>
+								
 								<label class="label-tips" id="merchantEmailLab"></label>
 							</td>
 							<td class="td-left">客服号码：<span style="color:red;">（必填)</span></td>
 							<td class="td-right">
 								<input type="text" id="contactPhone" name="contactPhone" placeholder="请输入客服号码" style="width:90%">
-								<i class="icon-leaf blue"></i>
+								
 								<label class="label-tips" id="contactPhoneLab"></label>
 							</td>
 						</tr>
@@ -846,29 +735,21 @@ function fun(){
                                 </select>
 									<label class="label-tips" id="countryLab"></label>
                                 </div>
-                                <div class="col-xs-5 pd0" style="padding:0;margin-left:1%">
+                                <div class="col-xs-5 pd0" >
                                     <input type="text" id="custAdd" name="custAdd"  placeholder="详细地址" style="width:100%">
                                 	<label class="label-tips" id="custAddLab"></label>
                                 </div>
+                                
 							</td>
 					    </tr>
-						<tr>
-							<td class="td-left" id="businessCodeId">营业执照编号：</td>
+						<tr id="businessCodeId_"  style="display: " class="tab-pane active">
+							<td class="td-left" id="businessCodeId">营业执照编号：<span style="color:red;">（必填)</span></td>
 							<td class="td-right">
 								<input type="text" id="businessLicense" name="businessLicense"  placeholder="请输入营业执照" style="width:90%">
-								<i class="icon-leaf blue"></i>
+								
 								<label class="label-tips" id="businessLicenseLab"></label>
 							</td>
-							<td class="td-left" id="businessTimeId">营业执照有效期：</td>
-							<%--<td class="td-right">
-								<input type="text" name="businessTermStart"   id="businessTermStart" readonly="readonly"   onfocus="WdatePicker({skin:'whyGreen',minDate:'#F{$dp.$D(\'businessTermEnd\')}'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
-								-
-								<input type="radio" checked="checked" name="end" value="sel"/>有期
-								<input type="text" name="businessTermEnd"   id="businessTermEnd" readonly="readonly"  onfocus="WdatePicker({skin:'whyGreen',minDate:'#F{$dp.$D(\'businessTermStart\')}'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
-								<input type="radio" name="end" value="forever" onclick="foreverTime()">长期
-								<label id="businessTermStartLabel" class="label-tips"></label>
-							</td>--%>
-
+							<td class="td-left" id="businessTimeId">营业执照有效期：<span style="color:red;">（必填)</span></td>
 							<td class="td-right">
 								<input type="text" id="businessTermStart" name="businessTermStart" readonly="readonly" onfocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
 								<label class="label-tips" id="businessTermLabStart"></label>
@@ -876,11 +757,11 @@ function fun(){
 								<input type="text" id="businessTermEnd" name="businessTermEnd" readonly="readonly" onfocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
 								<label class="label-tips" id="businessTermLabEnd"></label>
 								<input type="button" onclick="fun()" value="长期" />
+								
 							</td>
-
 						</tr>
-						<tr>
-							<td class="td-left" id="businessPhotoId">营业执照扫描件：</td>
+						<tr id="businessPhotoId_"  style="display: ">
+							<td class="td-left" id="businessPhotoId">营业执照扫描件：<span style="color:red">*</span></td>
 							<td class="td-right" colspan="3">
 								<a data-toggle='modal' class="tooltip-success businessPhotoClick" data-target="#previewImageModal" >
 									<label id="businessPhotoDiv" class="uploadImage" >
@@ -895,50 +776,24 @@ function fun(){
 								<label class="label-tips" id="businessPhotoLabel" style="float:left;margin-top:88" ></label>
 							</td>
 						</tr>
-						<!-- <tr>
-							<td class="td-left" id="businessPhotoId">营业执照照片</td>
-							<td class="td-right">
-								<a data-toggle='modal' class="tooltip-success businessPhotoClick"  data-target="#previewImageModal">
-									<label id="businessPhotoDiv" class="uploadImage">
-										<img  id="businessPhotoImage" onClick="bigImg(this);"  style="width:100%;height:100%; display: none" >
-									</label>
-								</a>
-								<div class="updateImageDiv" style="float:left;margin-top:75" >
-									<input type="hidden" id="businessPhotoImageVal02"  />
-									<input type="file" name="businessPhoto" id="businessPhoto" onChange="showBusinessPhotoImage(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-								</div>
-								<label class="label-tips" id="businessPhotoLabel" style="float:left;margin-top:88" ></label>
-							</td>
-						</tr> -->
 						<tr>
 							<td class="td-left">所属业务人员：</td>
 							<td class="td-right">
-								<%--<select id="custManager" name="custManager">
-									<option value="">输入所属业务人员或所属业务人员查询</option>
-									<c:forEach items="${userlist }" var="bean">
-										<option value="${bean.userName }">${bean.userName }</option>
-									</c:forEach>
-								</select>--%>
-
 								<select id="custManager" name="custManager">
 									<option value=${sysUser.userName }>${sysUser.userName }</option>
 									<c:forEach items="${userlist }" var="bean">
 										<option value="${bean.userName }">${bean.userName }</option>
 									</c:forEach>
 								</select>
-								 <%--<input type="text" id="" name="custManager"  placeholder="请输入" value=${sysUser.userName } style="width:90%">
-								<label class="label-tips" id="custManagerLab"></label>--%>
 							</td>
-							<td class="td-left">所属代理商：</td>
-							<td class="td-right">
+							<td class="td-left" width="18%">所属代理商：</td>
+							<td class="td-right" width="32%">
 								<select id="agentName" name="agentName">
 									<option value=${sysUser.deptName }>${sysUser.deptName }</option>
 									<c:forEach items="${agentList }" var="bean">
 										<option value="${bean.custName }">${bean.custName }</option>
 									</c:forEach>
 								</select>
-								<%-- <input type="text" name="" id="agentName" placeholder="请输入所属代理商" value=${sysUser.deptName } style="width:90%">
-								<label class="label-tips" id="agentNameLab"></label> --%>
 							</td>
 						</tr>
                         <tr>
@@ -949,17 +804,17 @@ function fun(){
 							<td class="td-left">法人真实姓名：<span style="color:red;">（必填)</span></td>
 							<td class="td-right">
 								<input type="text" id="representativeName" name="representativeName" placeholder="请输入法人真实姓名" maxlength="50" style="width:90%">
-								<i class="icon-leaf blue"></i>
+								
 								<label class="label-tips" id="representativeNameLab"></label>
 							</td>
 							<td class="td-left">法人身份证号码：<span style="color:red;">（必填)</span></td>
 							<td class="td-right">
 								<input type="text" name="representativeCertNo" id="representativeCertNo" placeholder="请输入法人身份证号码" style="width:90%">
-								<i class="icon-leaf blue"></i>
+								
 								<label class="label-tips" id="representativeCertNoLab"></label>
 							</td>
 						</tr>
-						<tr>
+						<tr >
 							<td class="td-left" >法人身份证正面<span style="color:red">*</span></td>
 							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success certAttribute1Click"  data-target="#previewImageModal" >
@@ -995,13 +850,13 @@ function fun(){
 							<td class="td-left">联系人姓名：<span style="color:red;">（必填)</span></td>
 							<td class="td-right">
 								<input type="text" id="contactName" name="contactName" placeholder="请输入联系人姓名" maxlength="50" style="width:90%">
-								<i class="icon-leaf blue"></i>
+								
 								<label class="label-tips" id="contactNameLab"></label>
 							</td>
 							<td class="td-left">联系人手机号码：<span style="color:red;">（必填)</span></td>
 							<td class="td-right">
 								<input type="text" name="contactMobile" id="contactMobile" placeholder="请输入联系人手机号码" style="width:90%">
-								<i class="icon-leaf blue"></i>
+								
 								<label class="label-tips" id="contactMobileLab"></label>
 							</td>
 						</tr>
@@ -1009,40 +864,21 @@ function fun(){
 							<td colspan="4" class="headlerPreview" style="background:#7ebde1;">结算信息</td>
 						</tr>
 						<tr>
-							<td class="td-left">银行卡号<span style="color:red;">（必填)</span></td>
+							<td class="td-left">结算账号<span style="color:red;">（必填)</span></td>
 							<td class="td-right">
-								<input type="text" id="compMainAcct" name="compMainAcct" maxlength="100" placeholder="请输入银行卡号" style="width:90%">
-								<i class="icon-leaf blue"></i>
+								<input type="text" id="compMainAcct" name="compMainAcct" maxlength="100" placeholder="请输入结算账号" style="width:90%">
+								
 								<label class="label-tips" id="compMainAcctLab"></label>
-							</td>
-							<td class="td-left">开户银行：<span style="color:red;">（必填)</span></td>
-							<td class="td-right">
-								<select class="width-90" id="compAcctBank" name="compAcctBank">
-                                <c:if test="${not empty banklist }">
-                                   <option value="">--请选择--</option>
-					               <c:forEach items="${banklist }" var="bank">
-					                   <option value="${bank.bankCode }">${bank.bankName }</option>
-					               </c:forEach>
-	               				</c:if>
-                                </select>
-                                <i class="icon-leaf blue"></i>
-								<label class="label-tips" id="compAcctBankLab"></label>
-							</td>
-						</tr>
-						<tr>
-							<td class="td-left">开户行：<span style="color:red;">（必填)</span></td>
-							<td class="td-right">
-								<input type="text" id="branchBank" name="branchBank" placeholder="请输入开户行" style="width:90%">
-								<i class="icon-leaf blue"></i>
-								<label class="label-tips" id="branchBankLab"></label>
 							</td>
 							<td class="td-left">开户人：<span style="color:red;">（必填)</span></td>
 							<td class="td-right">
 								<input type="text" id="bankAcctName" name="bankAcctName" placeholder="请输入开户人" style="width:90%">
-								<i class="icon-leaf blue"></i>
+								
 								<label class="label-tips" id="bankAcctNameLab"></label>
 							</td>
+							
 						</tr>
+						
                         <tr>
 							<td class="td-left">开户省份：<span style="color:red;">（必填)</span></td>
 							<td class="td-right">
@@ -1062,13 +898,33 @@ function fun(){
                                </select>
 							</td>
 						</tr>
+						<tr>
+							<td class="td-left">开户银行：<span style="color:red;">（必填)</span></td>
+							<td class="td-right">
+								<select class="width-90" id="compAcctBank" name="compAcctBank">
+                                <c:if test="${not empty banklist }">
+                                   <option value="">--请选择--</option>
+					               <c:forEach items="${banklist }" var="bank">
+					                   <option value="${bank.bankCode }">${bank.bankName }</option>
+					               </c:forEach>
+	               				</c:if>
+                                </select>
+								<label class="label-tips" id="compAcctBankLab"></label>
+							</td>
+							<td class="td-left">开户支行：<span style="color:red;">（必填)</span></td>
+							<td class="td-right">
+								<input type="text" id="branchBank" name="branchBank" placeholder="请输入开户行" style="width:90%">
+								<label class="label-tips" id="branchBankLab"></label>
+							</td>
+							
+						</tr>
                         <tr>
 							<td class="td-left">网点号：<span style="color:red;">（必填)</span></td>
 							<td class="td-right">
 								<input type="text" id="cnaps" name="cnaps" placeholder="请输入网点号" style="width:90%"> <a href="http://www.lianhanghao.com" target="_blank">[查找]</a>
 							</td>
 							<td class="td-left">结算类型：<span style="color:red;">（必填)</span></td>
-							<td class="td-right">
+							<td class="td-right" class="width-90" >
 								<select class="width-90 form-control"   id="compMainAcctType">
                                     <option  value="01">对公</option>
                                     <option  value="02">对私</option>
@@ -1076,7 +932,7 @@ function fun(){
 							</td>
 						</tr>
 						<tr id="bankCardPhoto_"  style="display: none" class="tab-pane active">
-							<td class="td-left" id="cnm">银行卡照<span style="color:red"></span></td>
+							<td class="td-left" id="cnm">银行卡照<span style="color:red">*</span></td>
 							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success bankCardPhotoClick"  data-target="#previewImageModal" >
 									<label id="bankCardPhotoDiv" class="uploadImage">
@@ -1091,7 +947,7 @@ function fun(){
 						</tr>
 
 						<tr id="openAccount_" class="tab-pane " >
-							<td class="td-left" >开户许可证</td>
+							<td class="td-left" >开户许可证<span style="color:red">*</span></td>
 							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success openAccountClick"  data-target="#previewImageModal" >
 									<label id="openAccountDiv" class="uploadImage">
@@ -1104,8 +960,6 @@ function fun(){
 								<label class="label-tips" id="openAccountLabel" style="float:left;margin-top:88"></label>
 							</td>
 						</tr>
-
-
 					</tbody>
 					</table>
                         <div style="margin:50px 0 0 0;text-align:center">
@@ -1114,8 +968,6 @@ function fun(){
                         </div>
 					</div>
 					</div>
-
-
 				</div><!-- /.page-content -->
 				<!-- 图片预览 -->
 				<div class="modal fade" id="previewImageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -1138,8 +990,6 @@ function fun(){
 	</div><!-- /.main-container -->
 
 </body>
-
-
 <script type="text/javascript">
 
         $("#compMainAcct").on('blur',function(){

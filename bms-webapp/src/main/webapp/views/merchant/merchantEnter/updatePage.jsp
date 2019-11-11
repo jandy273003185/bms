@@ -103,15 +103,14 @@
         /**商户类型 **/
         //个人
         if($("#custType").val() =='0'  ){
-            $("#businessCodeId").text("营业执照编号：");
-            $("#businessTimeId").text("营业执照有效期：");
-            $("#businessPhotoId").text("营业执照照片");
+        	$('#businessCodeId_').hide();
+    		$('#businessPhotoId_').hide();
+            
         }
         //企业 个体户
         if($("#custType").val() =='1' ||$("#custType").val() =='2'){
-            $("#businessCodeId").text("营业执照编号：（必填)");
-            $("#businessTimeId").text("营业执照有效期：（必填)");
-            $("#businessPhotoId").text("营业执照照片：（必填)");
+        	$('#businessCodeId_').show();
+    		$('#businessPhotoId_').show();
         }
 
 
@@ -213,27 +212,6 @@
 
     function updateMerchantBtn(){
 
-        /* var businessTermEnd = "forever";*/
-        /*账号校验*/
-        /* if(isNull($("#merchantAccount")[0])){
-            $("#merchantAccountLab").text("请设置商户账户");
-            $("#merchantAccount").focus();
-            return false;
-        }
-
-        if(!verifyEmailAddress($("#merchantAccount")[0]) ||!isMobilePhone($("#merchantAccount")[0])){
-            $("#merchantAccountLab").text("账号需用邮箱或者手机号 ");
-            $("#merchantAccount").focus();
-            return false;
-        } */
-
-        /*邮箱校验*/
-        /* if(isNull($("#merchantEmail")[0])){
-            $("#merchantEmailLab").text("请设置邮箱账户");
-            $("#merchantEmail").focus();
-            return false;
-        } */
-
         if(!(isNull($("#merchantEmail")[0])) && (!verifyEmailAddress($("#merchantEmail")[0]))){
             $("#merchantEmailLab").text("邮箱格式不对,可使用字母、数字、下划线 ");
             $("#merchantEmail").focus();
@@ -258,54 +236,9 @@
             $("#custAdd").focus();
             return false;
         }
-        /* /!*营业执照号*!/
-         if(isNull($("#businessLicense")[0])){
-             $("#businessLicenseLab").text("请填写营业执照注册号");
-             $("#businessLicense").focus();
-             return false;
-         }*/
 
         var businessLicense =$("#businessLicense").val();
         //校验营业执照注册号唯一性
-        <%-- var validateLicense =true ;
-
-        $.ajax({
-            async:false,
-            dataType:"json",
-            url:window.Constants.ContextPath +'<%=MerchantPath.BASE+MerchantPath.VALIDATELICENSE%>',
-            data:{businessLicense:businessLicense},
-            success:function(data){
-                if(data.result=="FAIL"){
-                    $("#businessLicenseLab").text("该营业执照注册号已经被使用");
-                    validateLicense = false;
-                }else{
-                    validateLicense = true;
-                }
-            }});
-        if(!validateLicense){
-            return false;
-        } --%>
-
-        /*营业执照有限期 */
-        /*if(isNull($("#businessTermStart")[0])){
-            $("#businessTermStartLab").text("请选择日期");
-            $("#businessTermStart").focus();
-            return false;
-        }
-        if(isNull($("#businessTermEnd")[0])){
-            $("#businessTermEndLab").text("请选择日期");
-            $("#businessTermEnd").focus();
-            return false;
-        }*/
-
-        /*起始日期判断 */
-        /*var startDate = $("#businessTermStart").val();
-        var endDate= $("#businessTermEnd").val();
-        if("" != startDate && "" != endDate && startDate > endDate)
-        {
-            $.gyzbadmin.alertFailure("结束日期不能小于开始日期");
-            return false;
-        }*/
         var custType =$("#custType").val();
         /*个人*/
         if(custType=='0'){
@@ -654,6 +587,11 @@
             window.close();
         }
     };
+    
+    function fun(){
+        $("input[name='businessTermEnd']").val("2099-12-31");
+        $("#businessTermEnd").attr("value","2099-12-31");
+    }
 </script>
 <body>
 <%@ include file="/include/top.jsp"%>
@@ -665,7 +603,6 @@
 
 	<div class="main-container-inner">
 		<!-- 菜单 -->
-		<%@ include file="/include/left.jsp"%>
 
 		<div class="main-content">
 			<!-- 路径 -->
@@ -749,7 +686,7 @@
 									<div class="col-xs-2 pd0" style="padding:0">
 										<select class="form-control" id="province" onchange="getCityList();">
 											<c:if test="${not empty provincelist_ }">
-												<option value="${merchantVo.provinceName }">${merchantVo.provinceName }</option>
+												<option value="${merchantVo.province }">${merchantVo.provinceName }</option>
 												<c:forEach items="${provincelist_ }" var="prov">
 													<option value="${prov.provinceId }">${prov.provinceName }</option>
 												</c:forEach>
@@ -758,12 +695,12 @@
 									</div>
 									<div class="col-xs-2 pd0" style="margin:0 1%;padding:0;">
 										<select class="form-control" id="city" onchange="getAreaList();">
-											<option value="${merchantVo.cityName }" id="cityDef">${merchantVo.cityName }</option>
+											<option value="${merchantVo.city }" id="cityDef">${merchantVo.cityName }</option>
 										</select>
 									</div>
 									<div class="col-xs-2 pd0" style="padding:0">
 										<select class="form-control" id="country">
-											<option value="${merchantVo.areaName }" id="areaDef">${merchantVo.areaName }</option>
+											<option value="${merchantVo.country }" id="areaDef">${merchantVo.areaName }</option>
 										</select>
 									</div>
 									<div class="col-xs-5 pd0" style="padding:0;margin-left:1%">
@@ -772,17 +709,10 @@
 									</div>
 								</td>
 							</tr>
-							<%--<tr>
-								<td class="td-left">商户地址：</td>
-								<td class="td-right"  style="color:#666;padding:10px 8px">
-									<input type="text" id="custAdd" name="custAdd"  placeholder="详细地址" value =${merchantVo.custAdd } style="width:100%">
-								</td>
-							</tr>--%>
-							<tr>
+							<tr  id="businessCodeId_"  style="display: " class="tab-pane active">
 								<td class="td-left" id="businessCodeId">营业执照编号：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
 									<input type="text" id="businessLicense" name="businessLicense" style="width:90%" placeholder="请输入营业执照" value=${merchantVo.businessLicense } >
-									<i class="icon-leaf blue"></i>
 									<label class="label-tips" id="businessLicenseLab"></label>
 								</td>
 								<td class="td-left" id="businessTimeId">营业执照有效期：</td>
@@ -802,17 +732,10 @@
 									</c:choose>
 										   onfocus="WdatePicker({skin:'whyGreen'})" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
 									<label class="label-tips" id="businessTermLabEnd"></label>
-
 									<input type="button" onclick="fun()" value="长期" />
-									<script>
-                                        function fun(){
-                                            $("input[name='businessTermEnd']").val("2099-12-31").focus();
-                                            $("#businessTermEnd").attr("value","2099-12-31");
-                                        }
-									</script>
 								</td>
 							</tr>
-							<tr>
+							<tr id="businessPhotoId_"  style="display: ">
 								<td class="td-left" id="businessPhotoId">营业执照扫描件：</td>
 								<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success businessPhotoClick" data-target="#previewImageModal" >
@@ -904,7 +827,6 @@
 								<td class="td-left">联系人姓名：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
 									<input type="text" id="contactName" name="contactName" placeholder="请输入联系人姓名" maxlength="50" style="width:90%" value=${merchantVo.contactName } >
-
 								</td>
 								<td class="td-left">联系人手机号码：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
@@ -915,34 +837,15 @@
 								<td colspan="4" class="headlerPreview" style="background:#7ebde1;">结算信息</td>
 							</tr>
 							<tr>
-								<td class="td-left">银行卡号</td>
+								<td class="td-left">结算账号</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
-									<input type="text" id="compMainAcct" name="compMainAcct" maxlength="100" placeholder="请输入银行卡号" style="width:90%" value=${merchantVo.compMainAcct } >
-								</td>
-
-								<td class="td-left">银行类型：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">
-									<select class="width-90" id="compAcctBank" name="compAcctBank">
-										<c:if test="${not empty banklist }">
-											<option value=${merchantVo.bankName }>${merchantVo.bankName }</option>
-											<c:forEach items="${banklist }" var="bank">
-												<option value="${bank.bankCode }">${bank.bankName }</option>
-											</c:forEach>
-										</c:if>
-									</select>
-									<i class="icon-leaf blue"></i>
-									<label class="label-tips" id="compMainAcctLab"></label>
-								</td>
-							</tr>
-							<tr>
-								<td class="td-left">开户行：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">
-									<input type="text" id="branchBank" name="branchBank" placeholder="请输入开户行" value="${merchantVo.branchBank }" style="width:90%">
+									<input type="text" id="compMainAcct" name="compMainAcct" maxlength="100" placeholder="请输入结算账号" style="width:90%" value=${merchantVo.compMainAcct } >
 								</td>
 								<td class="td-left">开户人：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
 									<input type="text" id="bankAcctName" name="bankAcctName" placeholder="请输入开户人" value="${merchantVo.bankAcctName }" style="width:90%">
 								</td>
+								
 							</tr>
 							<tr>
 								<td class="td-left">开户省份：</td>
@@ -961,6 +864,24 @@
 									<select class="width-90" id="bankCityName">
 										<option value=${merchantVo.bankCityName } id="cityDef">${merchantVo.bankCitName }</option>
 									</select>
+								</td>
+							</tr>
+							<tr>
+								<td class="td-left">开户银行：</td>
+								<td class="td-right" style="color:#666;padding:10px 8px">
+									<select class="width-90" id="compAcctBank" name="compAcctBank">
+										<c:if test="${not empty banklist }">
+											<option value=${merchantVo.compAcctBank }>${merchantVo.bankName }</option>
+											<c:forEach items="${banklist }" var="bank">
+												<option value="${bank.bankCode }">${bank.bankName }</option>
+											</c:forEach>
+										</c:if>
+									</select>
+									<label class="label-tips" id="compMainAcctLab"></label>
+								</td>
+								<td class="td-left">开户支行：</td>
+								<td class="td-right" style="color:#666;padding:10px 8px">
+									<input type="text" id="branchBank" name="branchBank" placeholder="请输入开户行" value="${merchantVo.branchBank }" style="width:90%">
 								</td>
 							</tr>
 							<tr>
