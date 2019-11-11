@@ -400,7 +400,7 @@
 									</div>
 								</td>
 							</tr>
-							<tr id="settleIdCardType" style = "display:">
+							<!-- <tr id="settleIdCardType" style = "display:">
 								<td class="td-left">结算人身份证正面：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3">
 									<a data-toggle="modal" class="tooltip-success certAttribute1Click" data-target="#previewImageModal">
@@ -430,8 +430,8 @@
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
 								</td>
-							</tr>
-							<!-- <tr id="settleIdCardType" style = "display:">
+							</tr> -->
+							<tr id="settleIdCardType" style = "display:">
 				                <td class="td-left"> 结算人身份证正面 <span style="color:red;">(必填)</span></td>
 		                    	<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success settleCertAttribute1Click"  data-target="#previewImageModal"  >
@@ -460,7 +460,7 @@
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
 								</td>
-							 </tr>		 -->			           
+							 </tr>		 			           
 						</tbody>
 						</table>
 					    </form>
