@@ -29,17 +29,8 @@ jQuery(function($){
 		$.data(materielList[i],"materiel",value);
 	});
 	
-	var message= $("#excelUpload").val();
-	console.log("AA="+message);
-	if(null != message && "" !=message){
-		$.gyzbadmin.alertFailure(message);
-		$("#excelUpload").val('');
-		console.log("BB="+$("#excelUpload").val());
-	}	
-	 
 		
-	
-	/*  $("#receiver").comboSelect();   */
+
 	
 	//新增
 	$('.addMaterielBtn').click(function(){
@@ -60,10 +51,7 @@ jQuery(function($){
 		
 		// 所用商户
 		var usedMerchant = $('#addMaterielModal #usedMerchant').val();
-		if(kong.test(usedMerchant)) {
-			$.gyzbadmin.alertFailure('所用商户不可为空');
-			return;
-		}
+		
 		
 		// 所用门店
 		var usedStores = $('#addMaterielModal #usedStores').val();
@@ -164,10 +152,7 @@ jQuery(function($){
 		
 		// 所用商户
 		var usedMerchant = $('#editMaterielModal #usedMerchant').val();
-		if(kong.test(usedMerchant)) {
-			$.gyzbadmin.alertFailure('所用商户不可为空');
-			return;
-		}
+		
 		
 		// 所用门店
 		var usedStores = $('#editMaterielModal #usedStores').val();

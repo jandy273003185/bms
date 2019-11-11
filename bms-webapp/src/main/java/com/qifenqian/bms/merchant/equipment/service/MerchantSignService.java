@@ -136,16 +136,6 @@ public class MerchantSignService {
 	 */
 	public MerchantSign selectMerchantSignByMerIdAndTerNo(MerchantSign merchantSign) {
 		
-		if (null == merchantSign) {
-			throw new IllegalArgumentException("商户设备对象为空");
-		}
-		
-		if (StringUtils.isEmpty(merchantSign.getMerchantId())) {
-			throw new IllegalArgumentException("商户ID为空");
-		}
-		if (StringUtils.isEmpty(merchantSign.getTerminalNo())) {
-			throw new IllegalArgumentException("设备编号为空");
-		}
 		return merchantSignMapper.selectMerchantSignByMerIdAndTerNo(merchantSign);
 	}
 
