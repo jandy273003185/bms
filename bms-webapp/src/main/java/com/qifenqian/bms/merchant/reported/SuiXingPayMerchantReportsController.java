@@ -289,7 +289,6 @@ public class SuiXingPayMerchantReportsController {
 	
 	@RequestMapping(MerchantReportedPath.SUXINGPAYSUBMITREPORT)
 	@ResponseBody
-	@Transactional
 	public String list(HttpServletRequest request,HttpServletResponse response,SuiXingBean cr){
 		
 		JSONObject object = new JSONObject();
@@ -353,14 +352,14 @@ public class SuiXingPayMerchantReportsController {
 			req.put("merList", requestInfo);
 			req.put("channelType", ChannelMerRegist.SUIXING_PAY);
 			// 获取联行号
-			ChannelResult result = iMerChantIntoService.queryBankInfo(req);
+//			ChannelResult result = iMerChantIntoService.queryBankInfo(req);
 			
-			if("00".equals(result.getChannelCode())){
-				List list = (List) result.getData().get("bankList");
-				if(list.size() != 0){
-					JSONObject a = (JSONObject) list.get(0);
-					String lbankNo = (String) a.get("lbnkNo");
-					cr.setLbnkNo(lbankNo);
+//			if("00".equals(result.getChannelCode())){
+//				List list = (List) result.getData().get("bankList");
+//				if(list.size() != 0){
+//					JSONObject a = (JSONObject) list.get(0);
+//					String lbankNo = (String) a.get("lbnkNo");
+					cr.setLbnkNo(cr.getInterBankName());
 					//商户随行付进件
 					logger.info("商户随行付开始进件："+ "--------------------");
 					bestResult = fmIncomeService.suiXingReported(cr);
@@ -377,20 +376,13 @@ public class SuiXingPayMerchantReportsController {
 							return object.toString();
 						}
 					}
-				}else{
-					object.put("result", "FAILURE");
-					object.put("message","支行信息错误");
-					return object.toString();
-				}
-			}else{
-				object.put("result", "FAILURE");
-				if("" == result.getReMsg() && null == result.getReMsg()){
-					object.put("message", "查询银行信息失败");
-				}else{
-					object.put("message", result.getReMsg());
-				}
-				return object.toString();
-			}
+			/*
+			 * }else{ object.put("result", "FAILURE"); object.put("message","支行信息错误");
+			 * return object.toString(); } }else{ object.put("result", "FAILURE"); if("" ==
+			 * result.getReMsg() && null == result.getReMsg()){ object.put("message",
+			 * "查询银行信息失败"); }else{ object.put("message", result.getReMsg()); } return
+			 * object.toString(); }
+			 */
 			
 		} catch (Exception e) {
 			logger.error("随行付进件失败",e);

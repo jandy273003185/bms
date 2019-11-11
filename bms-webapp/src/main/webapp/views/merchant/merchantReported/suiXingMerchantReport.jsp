@@ -149,17 +149,24 @@
 	                                <label class="label-tips" id="countryLab"></label>
 								</td>
 							</tr>	
-						 	<%-- <tr>
+						 	<tr>
+								<td class="td-left">营业执照名称：</td>
+								<td class="td-right">
+									<input type="text" name="cprRegNmCn" id="cprRegNmCn"  placeholder="请输入营业名称"  value="" style="width:90%">
+								</td>
+								<td class="td-left">营业执照有效期：<span style="color:red;">(必填)</span></td>
+									<td class="td-right">
+										<input type="text" name="businessEffectiveTerm" id="businessEffectiveTerm" value="${custInfo.businessTermStart }" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> ——
+	                                    <input type="text" name="businessTerm" id="businessTerm" value="${custInfo.businessTermEnd }" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
+	                                    <input type="button" onclick="businessForever()" value="长期" />
+									</td>
+							</tr>
+							<tr>
 								<td class="td-left">营业执照编号：</td>
 								<td class="td-right">
-									<input type="text" name="cprRegNmCn" id="cprRegNmCn"  placeholder="请输入营业执照"  value="${custInfo.businessLicense }" style="width:90%">
+									<input type="text" name="registCode" id="registCode"  placeholder="请输入营业编号"  value="${custInfo.businessLicense }" style="width:90%">
 								</td>
-								<td class="td-left">营业执照有限期：</td>
-								<td class="td-right">
-									<input type="text" name="" id="" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> -
-                                    <input type="text" name="" id="" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> <input name="" type="radio" value=""> 长期
-								</td>
-							</tr> --%>
+							</tr>
 							<tr id="businessPhotoType" style = "display:">
 								
 								<td class="td-left">营业执照照片：<span style="color:red;">(必填)</span></td>
@@ -257,37 +264,7 @@
 									</div>
 								</td>
 							</tr>
-							<!-- <tr id="legalIdCardType" style = "display:">
-								<td class="td-left">法人身份证正面：<span style="color:red;">(必填)</span></td>
-								<td class="td-right" colspan="3">
-									<a data-toggle="modal" class="tooltip-success certAttribute1Click" data-target="#previewImageModal">
-									<label id="certAttribute1Div" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
-									        <img id="certAttribute1ImageDiv" onClick="bigImg(this);" style="width: 100%; height: 100%;" src="./后台商户注册审核列表_files/image(2)">
-									</label>
-									</a>
-									<div class="updateImageDiv" style="float: left; margin-top: 75px; display: block;">
-										<input type="hidden" id="certAttribute1Val02">  
-										<input type="file" name="certAttribute1" id="certAttribute1" onChange="showCertAttribute1Image(this)"> 
-										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-									</div>
-									
-								</td>
-							</tr>
-							<tr id="legalIdCardBackType" style = "display:">
-								<td class="td-left">法人身份证背面：<span style="color:red;">(必填)</span></td>
-								<td class="td-right" colspan="3"> 
-									<a data-toggle="modal" class="tooltip-success certAttribute2Click" data-target="#previewImageModal">
-										<label id="certAttribute2Div" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
-										        <img id="certAttribute2ImageDiv" onClick="bigImg(this);" style="width: 100%; height: 100%;" src="./后台商户注册审核列表_files/image(3)">
-										</label>
-									</a>
-									<div class="updateImageDiv" style="float: left; margin-top: 75px; display: block;">
-										<input type="hidden" id="certAttribute2Val02">  
-										<input type="file" name="certAttribute2" id="certAttribute2" onChange="showCertAttribute2Image(this)"> 
-										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-									</div>
-								</td>
-							</tr> -->
+							
 							<tr id="next_id">
 								<td colspan="4" class="headlerPreview" style="background:#7ebde1;">结算信息</td>
 							</tr>
@@ -394,37 +371,6 @@
 								</td>
 							</tr>
 							<tr id="settleIdCardType" style = "display:">
-								<td class="td-left">结算人身份证正面：<span style="color:red;">(必填)</span></td>
-								<td class="td-right" colspan="3">
-									<a data-toggle="modal" class="tooltip-success certAttribute1Click" data-target="#previewImageModal">
-									<label id="certAttribute1Div" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
-									        <img id="certAttribute1ImageDiv" onClick="bigImg(this);" style="width: 100%; height: 100%;" src="./后台商户注册审核列表_files/image(2)">
-									</label>
-									</a>
-									<div class="updateImageDiv" style="float: left; margin-top: 75px; display: block;">
-										<input type="hidden" id="certAttribute1Val02">  
-										<input type="file" name="certAttribute1" id="certAttribute1" onChange="showCertAttribute1Image(this)"> 
-										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-									</div>
-									
-								</td>
-							</tr>
-							<tr id="settleIdCardBackType" style = "display:">
-								<td class="td-left">结算人身份证背面：<span style="color:red;">(必填)</span></td>
-								<td class="td-right" colspan="3"> 
-									<a data-toggle="modal" class="tooltip-success certAttribute2Click" data-target="#previewImageModal">
-										<label id="certAttribute2Div" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
-										        <img id="certAttribute2ImageDiv" onClick="bigImg(this);" style="width: 100%; height: 100%;" src="./后台商户注册审核列表_files/image(3)">
-										</label>
-									</a>
-									<div class="updateImageDiv" style="float: left; margin-top: 75px; display: block;">
-										<input type="hidden" id="certAttribute2Val02">  
-										<input type="file" name="certAttribute2" id="certAttribute2" onChange="showCertAttribute2Image(this)"> 
-										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-									</div>
-								</td>
-							</tr>
-							<!-- <tr id="settleIdCardType" style = "display:">
 				                <td class="td-left"> 结算人身份证正面 <span style="color:red;">(必填)</span></td>
 		                    	<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success settleCertAttribute1Click"  data-target="#previewImageModal"  >
@@ -453,7 +399,7 @@
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
 								</td>
-							 </tr>		 -->			           
+							 </tr>		 			           
 						</tbody>
 						</table>
 					    </form>
@@ -874,7 +820,7 @@
 				success : function(data){
 				if(data.result=="SUCCESS"){
 					if("" != data.message){
-						taskCode = $("#taskCode").val(data.message);
+						taskCode = data.message;
 						
 						//随行付渠道
 			   			if("SUIXING_PAY" == channelNo){
