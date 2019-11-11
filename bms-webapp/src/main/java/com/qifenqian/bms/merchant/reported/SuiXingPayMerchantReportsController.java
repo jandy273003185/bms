@@ -289,7 +289,6 @@ public class SuiXingPayMerchantReportsController {
 	
 	@RequestMapping(MerchantReportedPath.SUXINGPAYSUBMITREPORT)
 	@ResponseBody
-	@Transactional
 	public String list(HttpServletRequest request,HttpServletResponse response,SuiXingBean cr){
 		
 		JSONObject object = new JSONObject();

@@ -149,17 +149,24 @@
 	                                <label class="label-tips" id="countryLab"></label>
 								</td>
 							</tr>	
-						 	<%-- <tr>
+						 	<tr>
+								<td class="td-left">营业执照名称：</td>
+								<td class="td-right">
+									<input type="text" name="cprRegNmCn" id="cprRegNmCn"  placeholder="请输入营业名称"  value="" style="width:90%">
+								</td>
+								<td class="td-left">营业执照有效期：<span style="color:red;">(必填)</span></td>
+									<td class="td-right">
+										<input type="text" name="businessEffectiveTerm" id="businessEffectiveTerm" value="${custInfo.businessTermStart }" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> ——
+	                                    <input type="text" name="businessTerm" id="businessTerm" value="${custInfo.businessTermEnd }" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
+	                                    <input type="button" onclick="businessForever()" value="长期" />
+									</td>
+							</tr>
+							<tr>
 								<td class="td-left">营业执照编号：</td>
 								<td class="td-right">
-									<input type="text" name="cprRegNmCn" id="cprRegNmCn"  placeholder="请输入营业执照"  value="${custInfo.businessLicense }" style="width:90%">
+									<input type="text" name="registCode" id="registCode"  placeholder="请输入营业编号"  value="${custInfo.businessLicense }" style="width:90%">
 								</td>
-								<td class="td-left">营业执照有限期：</td>
-								<td class="td-right">
-									<input type="text" name="" id="" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> -
-                                    <input type="text" name="" id="" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> <input name="" type="radio" value=""> 长期
-								</td>
-							</tr> --%>
+							</tr>
 							<tr id="businessPhotoType" style = "display:">
 								
 								<td class="td-left">营业执照照片：<span style="color:red;">(必填)</span></td>
@@ -874,7 +881,7 @@
 				success : function(data){
 				if(data.result=="SUCCESS"){
 					if("" != data.message){
-						taskCode = $("#taskCode").val(data.message);
+						taskCode = data.message;
 						
 						//随行付渠道
 			   			if("SUIXING_PAY" == channelNo){
