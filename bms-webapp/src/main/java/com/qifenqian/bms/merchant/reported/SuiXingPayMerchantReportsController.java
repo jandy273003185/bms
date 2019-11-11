@@ -192,9 +192,13 @@ public class SuiXingPayMerchantReportsController {
 		detail.setChannelNo("SUIXING_PAY");
 		detail.setPatchNo(patchNo);
 		TdMerchantDetailInfo detailInfo = fmIncomeMapperDao.selMerchantDetailInfo(detail);
-		if("" != detailInfo.getRemark() && null != detailInfo.getRemark()){
-			cr.setTaskCode(detailInfo.getRemark());
+		//不为空即资料已提交
+		if(null != detailInfo && "".equals(detailInfo)) {
+			if(StringUtils.isNotBlank(detailInfo.getRemark())){
+				cr.setTaskCode(detailInfo.getRemark());
+			}
 		}
+		
 		/*TdCustInfo custInfo = new TdCustInfo();
 		
 		if(null != cr.getMerchantCode()){
@@ -236,6 +240,7 @@ public class SuiXingPayMerchantReportsController {
 					
 					logger.info("文件上传至随行付" + "------------------------------");
 					result = iMerChantIntoService.fileUpload(req);
+					logger.info("文件上传随行付返回信息" + result + "------------------------------");
 				}
 				
 				if("00".equals(result.getChannelCode())){

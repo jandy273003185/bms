@@ -54,6 +54,10 @@
 					<input type="hidden" id="openPhototemp"/>
 					<input type="hidden" id="certAttribute1temp" />
 					<input type="hidden" id="certAttribute2temp" />
+					<input type="hidden" id="legalCertAttribute1temp" />
+					<input type="hidden" id="legalCertAttribute2temp" />
+					<input type="hidden" id="settleCertAttribute1temp" />
+					<input type="hidden" id="settleCertAttribute2temp" />
 					<input type="hidden" id="bankCardPhototemp"/>
 					<div id="door_temp"></div>
 					<section class="aui-content">
@@ -176,14 +180,14 @@
                             <tr id="doorPhotoType" style = "display:">
 								<td class="td-left">门头照照片：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3">
-									<a data-toggle="modal" class="tooltip-success businessPhotoClick" data-target="#previewImageModal">
-										<label id="businessPhotoDiv" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
-										  <img id="businessPhotoImageDiv" onClick="bigImg(this);" style="width: 100%; height: 100%;">										  
+									<a data-toggle="modal" class="tooltip-success doorPhotoClick" data-target="#previewImageModal">
+										<label id="doorPhotoDiv" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+										  <img id="doorPhotoImageDiv" onClick="bigImg(this);" style="width: 100%; height: 100%;">										  
 										</label>
 									</a>
 									<div class="updateImageDiv" style="float: left; margin-top: 75px; display: block;">
-										<input type="hidden" id="businessPhotoImageVal02">  
-										<input type="file" name="businessPhoto" id="businessPhoto" onChange="showBusinessPhotoImage(this)">
+										<input type="hidden" id="doorPhotoImageVal02">  
+										<input type="file" name="doorPhoto" id="doorPhoto" onChange="showDoorPhotoImage(this)">
 									 	<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
 								</td>
@@ -225,6 +229,37 @@
 							<tr id="legalIdCardType" style = "display:">
 								<td class="td-left">法人身份证正面：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3">
+									<a data-toggle="modal" class="tooltip-success legalCertAttribute1Click" data-target="#previewImageModal">
+									<label id="legalCertAttribute1Div" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
+									        <img id="legalCertAttribute1ImageDiv" onClick="bigImg(this);" style="width: 100%; height: 100%;" >
+									</label>
+									</a>
+									<div class="updateImageDiv" style="float: left; margin-top: 75px; display: block;">
+										<input type="hidden" id="legalCertAttribute1Val02">  
+										<input type="file" name="legalCertAttribute1" id="legalCertAttribute1" onChange="showlegalCertAttribute1Image(this)"> 
+										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div>
+									
+								</td>
+							</tr>
+							<tr id="legalIdCardBackType" style = "display:">
+								<td class="td-left">法人身份证背面：<span style="color:red;">(必填)</span></td>
+								<td class="td-right" colspan="3"> 
+									<a data-toggle="modal" class="tooltip-success legalCertAttribute2Click" data-target="#previewImageModal">
+										<label id="legalCertAttribute2Div" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
+										        <img id="legalCertAttribute2ImageDiv" onClick="bigImg(this);" style="width: 100%; height: 100%;" >
+										</label>
+									</a>
+									<div class="updateImageDiv" style="float: left; margin-top: 75px; display: block;">
+										<input type="hidden" id="legalCertAttribute2Val02">  
+										<input type="file" name="legalCertAttribute2" id="legalCertAttribute2" onChange="showCertAttribute2Image(this)"> 
+										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div>
+								</td>
+							</tr>
+							<!-- <tr id="legalIdCardType" style = "display:">
+								<td class="td-left">法人身份证正面：<span style="color:red;">(必填)</span></td>
+								<td class="td-right" colspan="3">
 									<a data-toggle="modal" class="tooltip-success certAttribute1Click" data-target="#previewImageModal">
 									<label id="certAttribute1Div" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
 									        <img id="certAttribute1ImageDiv" onClick="bigImg(this);" style="width: 100%; height: 100%;" src="./后台商户注册审核列表_files/image(2)">
@@ -252,7 +287,7 @@
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
 								</td>
-							</tr>
+							</tr> -->
 							<tr id="next_id">
 								<td colspan="4" class="headlerPreview" style="background:#7ebde1;">结算信息</td>
 							</tr>
@@ -359,6 +394,37 @@
 								</td>
 							</tr>
 							<tr id="settleIdCardType" style = "display:">
+								<td class="td-left">结算人身份证正面：<span style="color:red;">(必填)</span></td>
+								<td class="td-right" colspan="3">
+									<a data-toggle="modal" class="tooltip-success certAttribute1Click" data-target="#previewImageModal">
+									<label id="certAttribute1Div" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
+									        <img id="certAttribute1ImageDiv" onClick="bigImg(this);" style="width: 100%; height: 100%;" src="./后台商户注册审核列表_files/image(2)">
+									</label>
+									</a>
+									<div class="updateImageDiv" style="float: left; margin-top: 75px; display: block;">
+										<input type="hidden" id="certAttribute1Val02">  
+										<input type="file" name="certAttribute1" id="certAttribute1" onChange="showCertAttribute1Image(this)"> 
+										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div>
+									
+								</td>
+							</tr>
+							<tr id="settleIdCardBackType" style = "display:">
+								<td class="td-left">结算人身份证背面：<span style="color:red;">(必填)</span></td>
+								<td class="td-right" colspan="3"> 
+									<a data-toggle="modal" class="tooltip-success certAttribute2Click" data-target="#previewImageModal">
+										<label id="certAttribute2Div" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
+										        <img id="certAttribute2ImageDiv" onClick="bigImg(this);" style="width: 100%; height: 100%;" src="./后台商户注册审核列表_files/image(3)">
+										</label>
+									</a>
+									<div class="updateImageDiv" style="float: left; margin-top: 75px; display: block;">
+										<input type="hidden" id="certAttribute2Val02">  
+										<input type="file" name="certAttribute2" id="certAttribute2" onChange="showCertAttribute2Image(this)"> 
+										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div>
+								</td>
+							</tr>
+							<!-- <tr id="settleIdCardType" style = "display:">
 				                <td class="td-left"> 结算人身份证正面 <span style="color:red;">(必填)</span></td>
 		                    	<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success settleCertAttribute1Click"  data-target="#previewImageModal"  >
@@ -387,7 +453,7 @@
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
 								</td>
-							 </tr>					           
+							 </tr>		 -->			           
 						</tbody>
 						</table>
 					    </form>
@@ -601,8 +667,8 @@
 				$("#bankCardPhotoType").attr("style","display:none");
 				
 			}else if("01" == actType){
-				$("#legalIdCardType").attr("style","display:");
-				$("#legalIdCardBackType").attr("style","display:");
+				$("#legalIdCardType").attr("style","display:none");
+				$("#legalIdCardBackType").attr("style","display:none");
 				$("#settleIdCardType").attr("style","display:");
 				$("#settleIdCardBackType").attr("style","display:");
 				$("#openPhotoType").attr("style","display:none");
@@ -1082,7 +1148,7 @@
 					if("" == data.message || null == data.message){
 						alert("失败");
 					}else{
-						alert(data.message);
+						alert("上传图片失败 ");
 					}
 				}
 			},

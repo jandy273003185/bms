@@ -184,7 +184,7 @@
 										</label>
 									</a>
 									<div class="updateImageDiv" style="float: left; margin-top: 75px; display: block;">
-										<input type="hidden" id="businessPhotoImageVal02">  
+										<input type="hidden" id="doorPhotoImageVal02">  
 										<input type="file" name="doorPhoto" id="doorPhoto" onChange="showDoorPhotoImage(this)">
 									 	<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
@@ -603,8 +603,8 @@
 				$("#bankCardPhotoType").attr("style","display:none");
 				
 			}else if("01" == actType){
-				$("#legalIdCardType").attr("style","display:");
-				$("#legalIdCardBackType").attr("style","display:");
+				$("#legalIdCardType").attr("style","display:none");
+				$("#legalIdCardBackType").attr("style","display:none");
 				$("#settleIdCardType").attr("style","display:");
 				$("#settleIdCardBackType").attr("style","display:");
 				$("#openPhotoType").attr("style","display:none");
