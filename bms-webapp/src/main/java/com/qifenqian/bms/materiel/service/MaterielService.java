@@ -3,11 +3,11 @@ package com.qifenqian.bms.materiel.service;
 import com.qifenqian.bms.materiel.bean.Materiel;
 import com.qifenqian.bms.materiel.dao.MaterielDAO;
 import com.qifenqian.bms.materiel.mapper.MaterielMapper;
+import com.qifenqian.bms.merchant.equipment.bean.MerchantSign;
+import com.qifenqian.bms.merchant.equipment.service.MerchantSignService;
 import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -15,10 +15,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,6 +37,8 @@ public class MaterielService {
 	private MaterielDAO materielDAO;
 	@Autowired
 	private MaterielMapper materielMapper;
+	@Autowired
+	private MerchantSignService merchantSignService;
 	
 	private static final String XLS = "xls";
 	private static final String XLSK = "xlsx";
@@ -228,6 +226,21 @@ public class MaterielService {
 	public int deleteMaterielById(int id) {
 		if (id < 1) {
 			throw new IllegalArgumentException("物料编号为空");
+		}
+		//删除物料需要查看是否已经绑定了商户
+		Materiel materiel = materielMapper.selectMaterielById(id);
+		if (null == materiel) {
+			throw new IllegalArgumentException("删除的物料信息不存在");
+		}
+		if (StringUtils.isEmpty(materiel.getMachineId())) {
+			throw new IllegalArgumentException("设备编号不存在");
+		}else {
+			MerchantSign merSign = new MerchantSign();
+			merSign.setTerminalNo(materiel.getMachineId());
+			MerchantSign merchantSign = merchantSignService.selectMerchantSignByMerIdAndTerNo(merSign);
+			if (null != merchantSign) {
+				throw new IllegalArgumentException("需要删除的物料信息与商户存在绑定关系，设备编号为："+materiel.getMachineId());
+			}
 		}
 		return materielMapper.deleteByPrimaryKey(id);
 	}
