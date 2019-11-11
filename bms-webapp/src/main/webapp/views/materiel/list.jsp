@@ -29,17 +29,8 @@ jQuery(function($){
 		$.data(materielList[i],"materiel",value);
 	});
 	
-	var message= $("#excelUpload").val();
-	console.log("AA="+message);
-	if(null != message && "" !=message){
-		$.gyzbadmin.alertFailure(message);
-		$("#excelUpload").val('');
-		console.log("BB="+$("#excelUpload").val());
-	}	
-	 
 		
-	
-	/*  $("#receiver").comboSelect();   */
+
 	
 	//新增
 	$('.addMaterielBtn').click(function(){
