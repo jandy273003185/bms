@@ -714,7 +714,7 @@ public class FmIncomeService {
             // 身份证反面照
             if ("certAttribute2".equals(typeName)) {
               String type = fileName.substring(fileName.lastIndexOf("."));
-              fileName = "settlePersonIdcard2Opposite" + type;
+              fileName = "settlePersonIdcardOpposite" + type;
             }
             // 营业执照
             if ("businessPhoto".equals(typeName)) {
@@ -739,7 +739,7 @@ public class FmIncomeService {
             // 法人身份证反面照
             if ("legalCertAttribute2".equals(typeName)) {
               String type = fileName.substring(fileName.lastIndexOf("."));
-              fileName = "legalPersonidOpposite2Pic" + type;
+              fileName = "legalPersonidOppositePic" + type;
             } 
             // 结算人身份证正面 
             if ("settleCertAttribute1".equals(typeName)) {
@@ -749,7 +749,7 @@ public class FmIncomeService {
             // 结算人身份证反面 
             if ("settleCertAttribute2".equals(typeName)) {
               String type = fileName.substring(fileName.lastIndexOf("."));
-              fileName = "settlePersonIdcard2Opposite" + type;
+              fileName = "settlePersonIdcardOpposite" + type;
             }
             File filew = new File(p.getProperty("SX_FILE_SAVE_PATH")
                 + File.separator + filePath);
