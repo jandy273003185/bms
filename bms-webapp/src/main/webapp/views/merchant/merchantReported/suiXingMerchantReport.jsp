@@ -259,7 +259,7 @@
 									</a>
 									<div class="updateImageDiv" style="float: left; margin-top: 75px; display: block;">
 										<input type="hidden" id="legalCertAttribute2Val02">  
-										<input type="file" name="legalCertAttribute2" id="legalCertAttribute2" onChange="showCertAttribute2Image(this)"> 
+										<input type="file" name="legalCertAttribute2" id="legalCertAttribute2" onChange="showlegalCertAttribute2Image(this)"> 
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
 								</td>
@@ -554,7 +554,46 @@
     		},'json'
     		);	
       	}
-
+      	/** 银行卡点击预览 **/
+      	$('.bankCardPhotoClick').click(function(){
+      		var divObj = document.getElementById("showImageDiv");
+      		var imageObj = document.getElementById("showImage");
+      		var obj = document.getElementById("bankCardPhoto");
+      		return previewImage(divObj,imageObj,obj);
+      	});
+      	
+      	/** 开户许可证背面点击预览 **/
+      	$('.openAccountClick').click(function(){
+      		var divObj = document.getElementById("showImageDiv");
+      		var imageObj = document.getElementById("showImage");
+      		var obj = document.getElementById("openAccount");
+      		return previewImage(divObj,imageObj,obj);
+      	});
+      	
+      	
+      	/** 身份证背面点击预览 **/
+      	$('.legalCertAttribute2Click').click(function(){
+      		var divObj = document.getElementById("showImageDiv");
+      		var imageObj = document.getElementById("showImage");
+      		var obj = document.getElementById("legalCertAttribute2");
+      		return previewImage(divObj,imageObj,obj);
+      	});
+      	
+      	/** 身份证正面点击预览 **/
+      	$('.legalCertAttribute1Click').click(function(){
+      		var divObj = document.getElementById("showImageDiv");
+      		var imageObj = document.getElementById("showImage");
+      		var obj = document.getElementById("legalCertAttribute2");
+      		return previewImage(divObj,imageObj,obj);
+      	});
+      	
+      	/** 营业执照点击预览 **/
+      	$('.businessPhotoClick').click(function(){
+      		var divObj = document.getElementById("showImageDiv");
+      		var imageObj = document.getElementById("showImage");
+      		var obj = document.getElementById("businessPhoto");
+      		return previewImage(divObj,imageObj,obj);
+      	});
       	/***获取开户支行***/
       	function setInterBank(){
       		var interBankName = $("#interBank_").find("option:selected").text().trim();
