@@ -131,7 +131,12 @@ public class MerchantEnterService {
     public List<MerchantExport> proExportMerchantInfo(MerchantVo merchantVo) {
       return merchantEnterMapper.newExportlist(merchantVo);
     }
-
+    /**
+     * 校验商户账号是否存在
+     * @param merchantAccount
+     * @param roleId
+     * @return
+     */
     public TdLoginUserInfo validateMerchantAccount(String merchantAccount, String roleId) {
         TdLoginUserInfo tdLoginUserInfo = null;
         if(merchantAccount.contains("@")){
