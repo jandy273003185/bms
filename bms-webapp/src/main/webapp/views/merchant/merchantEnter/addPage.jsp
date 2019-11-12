@@ -999,7 +999,7 @@ function fun(){
 <script type="text/javascript">
 
         $("#compMainAcct").on('blur',function(){
-            if($("#compMainAcct").val().length < 12 || $("#compMainAcct").val().length > 19){
+            if($("#compMainAcct").val().length < 12 || $("#compMainAcct").val().length > 25){
                 $("#compMainAcctLab").text("请填写12-19位银行卡号");
                 $("#compMainAcct").focus();
                 return false;
