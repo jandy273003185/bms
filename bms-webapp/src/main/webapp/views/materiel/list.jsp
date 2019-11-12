@@ -243,7 +243,7 @@ jQuery(function($){
 		    formData.append("file",$("#articleImageFile")[0].files[0]);
 		    formData.append("name",name);//这个地方可以传递多个参数
 		    $.ajax({
-		        url :  "/bms/materiel/upload",
+		        url :  window.Constants.ContextPath + '<%=MaterielPath.BASE + MaterielPath.FILEUPLOAD %>',
 		        type : 'POST',
 		        async : false,
 		        data : formData,
