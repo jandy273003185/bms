@@ -233,15 +233,21 @@ function addMerchantBtn(){
 		$("#custAdd").focus();
 		return false;
 	}
-		 
+	var custType =$("#custType").val();
+	var roleId = 'ent';
 	var merchantAccount =$("#merchantAccount").val();
+	if(custType =='0'){
+		roleId = 'per';
+	}else if(custType =='1' || custType =='2'){
+		roleId = 'ent';
+	}
 	var validateLicense =true ;
 	//验证商户账户唯一性
 	$.ajax({
 		async:false,
 		dataType:"json",
 		url:window.Constants.ContextPath +'<%=MerchantEnterPath.BASE+MerchantEnterPath.VALIDATEMERCHANTACCOUNT%>',
-		data:{merchantAccount:merchantAccount},
+		data:{merchantAccount:merchantAccount,roleId:roleId},
 		success:function(data){
 			if(data.result=="FAIL"){
 				$("#merchantAccountLab").text("该账号已经被使用");
@@ -254,7 +260,7 @@ function addMerchantBtn(){
 		return false;
 	} 
 
-	var custType =$("#custType").val();
+	
 	/*个人*/
 	if(custType=='0'){
 		

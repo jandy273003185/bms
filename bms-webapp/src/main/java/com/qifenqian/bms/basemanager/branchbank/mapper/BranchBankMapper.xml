@@ -22,6 +22,9 @@
 			<if test="bankAddress!=null and bankAddress!='' ">
 				AND T.BANK_ADDRESS LIKE CONCAT('%',#{bankAddress, jdbcType = VARCHAR},'%')
 			</if>
+			<if test="areaId!=null and areaId!='' ">
+				AND T.AREA_ID = #{areaId, jdbcType = VARCHAR}
+			</if>
 		</where>
 		ORDER BY T.BANK_CODE
 	</select>

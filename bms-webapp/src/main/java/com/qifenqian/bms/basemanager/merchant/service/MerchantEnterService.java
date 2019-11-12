@@ -132,13 +132,13 @@ public class MerchantEnterService {
       return merchantEnterMapper.newExportlist(merchantVo);
     }
 
-    public TdLoginUserInfo validateMerchantAccount(String merchantAccount, String custId) {
+    public TdLoginUserInfo validateMerchantAccount(String merchantAccount, String roleId) {
         TdLoginUserInfo tdLoginUserInfo = null;
         if(merchantAccount.contains("@")){
             //账号为邮箱
-            tdLoginUserInfo = tdLoginUserInfoMapper.selectByEmail(merchantAccount, null, null);
+            tdLoginUserInfo = tdLoginUserInfoMapper.selectByEmail(merchantAccount, null, roleId);
         }else {
-            tdLoginUserInfo = tdLoginUserInfoMapper.selectByPhoneEnter(merchantAccount);
+            tdLoginUserInfo = tdLoginUserInfoMapper.selectByPhone(merchantAccount,roleId);
         }
         return tdLoginUserInfo;
     }

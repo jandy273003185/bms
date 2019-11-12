@@ -681,11 +681,11 @@ public class MerchantEnterController {
 	 */
 	@RequestMapping(MerchantEnterPath.VALIDATEMERCHANTACCOUNT)
 	@ResponseBody
-	public String validateLicense(String merchantAccount, String custId) {
+	public String validateLicense(String merchantAccount, String roleId) {
 		logger.info("校验商户账户是否已经存在");
 		JSONObject object = new JSONObject();
 		try {
-			TdLoginUserInfo tdLoginUserInfo = merchantEnterService.validateMerchantAccount(merchantAccount, custId);
+			TdLoginUserInfo tdLoginUserInfo = merchantEnterService.validateMerchantAccount(merchantAccount, roleId);
 			if (null == tdLoginUserInfo) {
 				object.put("result", "SUCCESS");
 			} else {
