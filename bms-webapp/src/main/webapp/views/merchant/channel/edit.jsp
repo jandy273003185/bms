@@ -244,6 +244,7 @@ ul.add-box li:first-child {
 				+ "			<option value='WEIXIN' >微信</option>"
 				+"				<option value='BESTPAY'>翼支付</option>"
 				+ "			<option value='ALIPAY' selected='selected'>支付宝</option>"
+				+"            <option value='UNIONPAY'>云闪付</option>"
 				+ "		</select>"
 				+ "</li>"
 				+ "<li>"
