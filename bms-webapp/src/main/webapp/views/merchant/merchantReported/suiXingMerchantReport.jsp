@@ -343,14 +343,14 @@
 							<tr id="openPhotoType" style = "display:">
 								<td class="td-left">开户许可证：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3"> 
-									<a data-toggle="modal" class="tooltip-success certAttribute0Click" data-target="#previewImageModal">
-										<label id="certAttribute0Div" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
-										        <img id="certAttribute0ImageDiv" onClick="bigImg(this);" style="width: 100%; height: 100%;" src="./后台商户注册审核列表_files/image(1)">
+									<a data-toggle="modal" class="tooltip-success openPhotoClick" data-target="#previewImageModal">
+										<label id="openPhotoDiv" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
+										        <img id="openPhotoImageDiv" onClick="bigImg(this);" style="width: 100%; height: 100%;" src="./后台商户注册审核列表_files/image(1)">
 										</label>
 									</a>
 									<div class="updateImageDiv" style="float: left; margin-top: 75px; display: block;">
-										<input type="hidden" id="certAttribute0Val02">  
-										<input type="file" name="certAttribute0" id="certAttribute0" onChange="showCertAttribute0Image(this)">
+										<input type="hidden" id="openPhotoVal02">  
+										<input type="file" name="openPhoto" id="openPhoto" onChange="showOpenPhotoImage(this)">
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
 								</td>
@@ -554,6 +554,14 @@
     		},'json'
     		);	
       	}
+      	
+      	/** 门头照点击预览 **/
+      	$('.doorPhotoClick').click(function(){
+      		var divObj = document.getElementById("showImageDiv");
+      		var imageObj = document.getElementById("showImage");
+      		var obj = document.getElementById("doorPhoto");
+      		return previewImage(divObj,imageObj,obj);
+      	});
       	/** 银行卡点击预览 **/
       	$('.bankCardPhotoClick').click(function(){
       		var divObj = document.getElementById("showImageDiv");
@@ -579,11 +587,12 @@
       		return previewImage(divObj,imageObj,obj);
       	});
       	
+      	
       	/** 身份证正面点击预览 **/
       	$('.legalCertAttribute1Click').click(function(){
       		var divObj = document.getElementById("showImageDiv");
       		var imageObj = document.getElementById("showImage");
-      		var obj = document.getElementById("legalCertAttribute2");
+      		var obj = document.getElementById("legalCertAttribute1");
       		return previewImage(divObj,imageObj,obj);
       	});
       	
@@ -687,7 +696,7 @@
     		 var imageObj = document.getElementById("doorPhotoImageDiv");  
     		 return previewImage(divObj,imageObj,obj);  
     	}
-
+/* 
     	function showCertAttribute1Image(obj){  
     		 var divObj = document.getElementById("certAttribute1Div");  
     		 var imageObj = document.getElementById("certAttribute1ImageDiv");  
@@ -699,7 +708,7 @@
     		 var imageObj = document.getElementById("certAttribute2ImageDiv");  
     		 return previewImage(divObj,imageObj,obj);  
     	}
-
+ */
     	function showLegalCertAttribute1Image(obj){  
    		 var divObj = document.getElementById("legalCertAttribute1Div");  
    		 var imageObj = document.getElementById("legalCertAttribute1ImageDiv");  
