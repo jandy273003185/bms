@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSONObject;
+import com.qifenqian.bms.basemanager.agency.bean.AgenReport;
 import com.qifenqian.bms.basemanager.bank.bean.Bank;
 import com.qifenqian.bms.basemanager.bank.mapper.BankMapper;
 import com.qifenqian.bms.basemanager.city.service.CityService;
@@ -158,7 +159,7 @@ public class MerchantEnterController {
 	 * 跳转到相应的页面
 	 */
 	@RequestMapping(MerchantEnterPath.ADDPAGE)
-	public ModelAndView addview(HttpServletRequest request){
+	public ModelAndView addview(AgenReport agenReport,HttpServletRequest request){
 		ModelAndView mv = new ModelAndView(MerchantEnterPath.BASE + MerchantEnterPath.ADDPAGE);
 		
 		Bank bank = new Bank();
@@ -176,6 +177,7 @@ public class MerchantEnterController {
 		mv.addObject("provincelist", cityService.selectAllProvince());
 		mv.addObject("provincelist_", cityService.selAllProvince());
 		mv.addObject("agentList", merchantMapper.selectAgent());
+		mv.addObject("queryBean", agenReport);
 		return mv;
 		
 	}

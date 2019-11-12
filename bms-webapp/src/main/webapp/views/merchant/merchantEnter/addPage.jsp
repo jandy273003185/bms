@@ -12,6 +12,7 @@
 <script src='<c:url value="/static/js/uploadCompress.js"/>'></script>
 <script src='<c:url value="/static/js/register.js"/>'></script>
 <script src='<c:url value="/static/js/checkRule_source.js"/>'></script>
+<script src="<c:url value='/static/js/jquery.combo.select.js'/>"></script>
 <html>
 <head>
 	<meta charset="utf-8" />
@@ -19,6 +20,8 @@
 	<meta name="keywords" content="七分钱后台管理系统" />
 	<meta name="description" content="七分钱后台管理" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="<c:url value='/static/css/combo.select.css' />" />
+	<link rel="stylesheet" href="<c:url value='/static/css/combo.select.scss' />" />
 	<style type="text/css">
 	table tr td{word-wrap:break-word;word-break:break-all;}
 	.uploadImage{ float:left;
@@ -75,13 +78,14 @@ $(function(){
 	    	       	  				$("#representativeCertNo").val(json.cardId);
 	    	       	  			}else if(_this.attr('id')=="businessPhoto"){                //营业执照
 	    	       	  				$("#businessLicense").val(json.businessLicense);
-	    	       	  				$("#businessTerm").val(json.businessTermStart);
+	    	       	  				$("#businessTermStart").val(json.businessTermStart);
 	    	       	  				if("长期"==json.businessTermEnd){
-	    	       	  					$("input[value='forever']").click();
+	    	       	  					$("#businessTermEnd").val("2099-12-31");
 	    	       	  				}else{
 	    	       	  					$("#businessTermEnd").val(json.businessTermEnd);
 	    	       	  				}
 	    	       	  				$("#custAdd").val(json.legalAddress);
+	    	       	  				$("#custName").val(json.companyName);
 	    	       	  			}
 	    	   				}
 	    	   			}
@@ -91,7 +95,8 @@ $(function(){
 		}
 	);
 
-
+	$("#agentName").comboSelect();
+	$("#custManager").comboSelect();
 });
 /**开户行城市 **/
 function getBankCityList(){
@@ -357,6 +362,15 @@ function addMerchantBtn(){
 		$("#compMainAcct").focus();
 		return false;
 	}
+	
+	/**结算账号*/
+    if($("#compMainAcct").val().length < 12 || $("#compMainAcct").val().length > 25){
+        $("#compMainAcctLab").text("请填写12-19位银行卡号");
+        $("#compMainAcct").focus();
+        return false;
+    }else{
+        $("#compMainAcctLab").text('');
+    }
 
     /*开户银行*/
 	var compAcctBank = $("#compAcctBank").val().trim();
@@ -785,21 +799,25 @@ function fun(){
 						<tr>
 							<td class="td-left">所属业务人员：</td>
 							<td class="td-right">
+								<sevenpay:selectSysUserTag name="custManager" id="custManager" defaultValue="${queryBean.custManager}"/>
+							</td>
+							<%-- <td class="td-right">
 								<select id="custManager" name="custManager">
 									<option value=${sysUser.userName }>${sysUser.userName }</option>
 									<c:forEach items="${userlist }" var="bean">
 										<option value="${bean.userName }">${bean.userName }</option>
 									</c:forEach>
 								</select>
-							</td>
+							</td> --%>
 							<td class="td-left" width="18%">所属代理商：</td>
 							<td class="td-right" width="32%">
-								<select id="agentName" name="agentName">
+								<sevenpay:selectAgentMerchantTag name="agentName" id="agentName" defaultValue="${queryBean.agentCustId }"/>
+								<%-- <select id="agentName" name="agentName">
 									<option value=${sysUser.deptName }>${sysUser.deptName }</option>
 									<c:forEach items="${agentList }" var="bean">
 										<option value="${bean.custName }">${bean.custName }</option>
 									</c:forEach>
-								</select>
+								</select> --%>
 							</td>
 						</tr>
                         <tr>
@@ -998,15 +1016,6 @@ function fun(){
 </body>
 <script type="text/javascript">
 
-        $("#compMainAcct").on('blur',function(){
-            if($("#compMainAcct").val().length < 12 || $("#compMainAcct").val().length > 25){
-                $("#compMainAcctLab").text("请填写12-19位银行卡号");
-                $("#compMainAcct").focus();
-                return false;
-            }else{
-                $("#compMainAcctLab").text('');
-            }
-        });
 
         $("#representativeCertNo").on('blur',function () {
             if ($("#representativeCertNo").val().length == 18 ){
@@ -1094,8 +1103,6 @@ function fun(){
         $("#contactMobile").on('blur',function () {
             $("#contactMobileLab").text("");
         });
-        $("#custManager").comboSelect();
-
-        $("#agentName").comboSelect();
+       
 </script>
 </html>
