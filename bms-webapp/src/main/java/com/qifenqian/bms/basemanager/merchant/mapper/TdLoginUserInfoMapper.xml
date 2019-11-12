@@ -132,7 +132,8 @@
 		SELECT * FROM
 		TD_LOGIN_USER_INFO T
 		WHERE
-			T.MOBILE = #{mobile,jdbcType=VARCHAR}
+			T.ROLE_ID !='agent'
+		AND T.MOBILE = #{mobile,jdbcType=VARCHAR}
 	</select>
 	
 	<update id="updateEmail" parameterType="string">
