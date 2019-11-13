@@ -642,7 +642,7 @@ function selCustType(){
 	}
 }
 
-function fun(){
+function businessForever(){
 	$("input[name='businessTermEnd']").val("2099-12-31");
 	$("#businessTermEnd").attr("value","2099-12-31");
 }
@@ -776,7 +776,7 @@ function fun(){
 								-
 								<input type="text" id="businessTermEnd" name="businessTermEnd" readonly="readonly" onfocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
 								<label class="label-tips" id="businessTermLabEnd"></label>
-								<input type="button" onclick="fun()" value="长期" />
+								<input type="button" onclick="businessForever()" value="长期" />
 								
 							</td>
 						</tr>

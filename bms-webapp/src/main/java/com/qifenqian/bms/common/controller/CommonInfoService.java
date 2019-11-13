@@ -1,0 +1,114 @@
+package com.qifenqian.bms.common.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.qifenqian.bms.basemanager.bank.bean.Bank;
+import com.qifenqian.bms.basemanager.bank.dao.BankDAO;
+import com.qifenqian.bms.basemanager.branchbank.dao.BranchBankDao;
+import com.qifenqian.bms.basemanager.city.bean.City;
+import com.qifenqian.bms.basemanager.city.mapper.CityMapper;
+import com.qifenqian.bms.common.bean.BranchBankInfo;
+import com.qifenqian.bms.common.dao.CommonInfoDao;
+import com.qifenqian.bms.merchant.reported.bean.Province;
+import com.qifenqian.bms.merchant.reported.dao.FmIncomeMapperDao;
+
+@Service
+public class CommonInfoService {
+	
+	private Logger logger = LoggerFactory.getLogger(CommonInfoService.class);
+	
+	@Autowired
+	private BankDAO bankDAO;
+	
+	@Autowired
+	private CityMapper cityMapper;
+	
+	@Autowired
+	private CommonInfoDao commonInfoDao;
+	
+	/**
+	 * 查询所有银行信息
+	 * @return
+	 */
+	public List<Bank> selectBanks(Bank bank,String channelCode){
+		List<Bank>  bankList = new ArrayList<Bank>();
+		//七分钱
+		if(StringUtils.isBlank(channelCode)) {
+			bankList = bankDAO.selectBanks(bank);
+		}else if("SUIXING_PAY".equals(channelCode)) {
+			bankList = commonInfoDao.selectSuiXingBanks();
+		}
+		return bankList;
+	}
+	
+	/**
+	 * 查找所有省份
+	 * @param city
+	 * @return
+	 */
+	public List<Province> selectAllProvince(String channelCode) {
+		List<Province> provinceList = new ArrayList<Province>();
+		//七分钱
+		if(StringUtils.isBlank(channelCode)) {
+			provinceList = commonInfoDao.selectProvince();
+		}else if("SUIXING_PAY".equals(channelCode)) {
+			provinceList = commonInfoDao.selSuiXingProvince();
+		}
+		return provinceList;
+	}
+
+	/***
+	 * 根据provinceId查找城市
+	 * 
+	 * @param provinceId
+	 * @return
+	 */
+	public List<City> getCityByProvinceId(String provinceId,String channelCode) {
+		List<City> cityList = new ArrayList<City>();
+		//七分钱
+		if(StringUtils.isBlank(channelCode)) {
+			cityList = cityMapper.getCityByProvinceId(provinceId);
+		}else if("SUIXING_PAY".equals(channelCode)) {
+			cityList = commonInfoDao.selSuiXingCity(provinceId);
+		}
+		return cityList;
+		
+	}
+	
+	
+	/***
+	 * 根据cityId查找区/县
+	 * 
+	 * @param cityId
+	 * @return
+	 */
+	public List<City> getAreaByCityId(String cityId,String channelCode) {
+		List<City> areaList = new ArrayList<City>();
+		//七分钱
+		if(StringUtils.isBlank(channelCode)) {
+			areaList = cityMapper.getAreaByCityId(cityId);
+		}
+		return areaList;
+	}
+	
+	/**
+	 * 根据银行和城市查询渠道的分行
+	 */
+	public List<BranchBankInfo> branchBankList(BranchBankInfo queryBean,String channelCode) {
+		List<BranchBankInfo>  branchBankList = new ArrayList<BranchBankInfo>();
+		//七分钱
+		if(StringUtils.isBlank(channelCode)) {
+			branchBankList = commonInfoDao.branchBankList(queryBean);
+		}else if("SUIXING_PAY".equals(channelCode)) {
+			branchBankList = commonInfoDao.suiXingBranchBankList(queryBean);
+		}
+		return branchBankList;
+	}
+}

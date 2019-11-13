@@ -240,7 +240,7 @@ public class SuiXingPayMerchantReportsController {
 					
 					logger.info("文件上传至随行付" + "------------------------------");
 					result = iMerChantIntoService.fileUpload(req);
-					logger.info("文件上传随行付返回信息" + result + "------------------------------");
+					logger.info("文件上传随行付返回信息" + result.getChannelCode() + "------------------------------");
 				}
 				
 				if("00".equals(result.getChannelCode())){
@@ -294,7 +294,8 @@ public class SuiXingPayMerchantReportsController {
 		JSONObject object = new JSONObject();
 		JSONObject bestResult = new JSONObject();
 		request.setAttribute("merchantCode", cr.getMerchantCode().trim());
-		
+		SuixinBankType suiXing = getSuixinBankCodeByBankCode(cr.getSuiXinBank());
+		cr.setSuiXinBank(suiXing.getName());
 		try {
 			//查询商户报备表
 			CrInComeBean cc =new CrInComeBean();
@@ -337,20 +338,22 @@ public class SuiXingPayMerchantReportsController {
 			}
 			
 			//随行付查询银行信息
-			SxPayBankInfo bankInfo = new SxPayBankInfo();
-			bankInfo.setBnkCd(SuixinBankType.valueOf(cr.getSuiXinBank()).getCode());
-			bankInfo.setLbnkProv(cr.getBankProvince());
-			bankInfo.setLbnkCity(cr.getBankCity());
-			bankInfo.setLbnkNm(cr.getInterBankName());
-			
-			SxPayRequestInfo requestInfo = new SxPayRequestInfo();
-			requestInfo.setReqId(DateUtil.format(new Date(), DateUtil.YYYYMMDDHHMMSS));
-			requestInfo.setReqData(bankInfo);
-			requestInfo.setTimestamp(DateUtil.format(new Date(), DateUtil.YYYYMMDDHHMMSS));
-			
-			Map<String, Object> req = new HashMap<>();
-			req.put("merList", requestInfo);
-			req.put("channelType", ChannelMerRegist.SUIXING_PAY);
+			/*
+			 * SxPayBankInfo bankInfo = new SxPayBankInfo();
+			 * bankInfo.setBnkCd(SuixinBankType.valueOf(cr.getSuiXinBank()).getCode());
+			 * bankInfo.setLbnkProv(cr.getBankProvince());
+			 * bankInfo.setLbnkCity(cr.getBankCity());
+			 * bankInfo.setLbnkNm(cr.getInterBankName());
+			 * 
+			 * SxPayRequestInfo requestInfo = new SxPayRequestInfo();
+			 * requestInfo.setReqId(DateUtil.format(new Date(), DateUtil.YYYYMMDDHHMMSS));
+			 * requestInfo.setReqData(bankInfo);
+			 * requestInfo.setTimestamp(DateUtil.format(new Date(),
+			 * DateUtil.YYYYMMDDHHMMSS));
+			 * 
+			 * Map<String, Object> req = new HashMap<>(); req.put("merList", requestInfo);
+			 * req.put("channelType", ChannelMerRegist.SUIXING_PAY);
+			 */
 			// 获取联行号
 //			ChannelResult result = iMerChantIntoService.queryBankInfo(req);
 			
@@ -391,5 +394,14 @@ public class SuiXingPayMerchantReportsController {
 			return object.toString();
 		}
 		return object.toString();
+	}
+
+	public static SuixinBankType getSuixinBankCodeByBankCode(String bankCode){
+		for(SuixinBankType b:SuixinBankType.values()){
+			if(b.getCode().equals(bankCode) || b.getCode() == bankCode){
+				return b;
+			}
+		}
+		return null;
 	}
 }

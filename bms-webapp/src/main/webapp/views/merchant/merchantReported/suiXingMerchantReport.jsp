@@ -4,6 +4,7 @@
 <%@page import="com.seven.micropay.channel.enums.suixinpay.SuixinBankType"%>
 <%@page import="com.qifenqian.bms.merchant.reported.MerchantReportedPath"%>
 <%@page import="com.qifenqian.bms.basemanager.merchant.AuditorPath"%>
+<%@page import="com.qifenqian.bms.basemanager.agency.controller.AgentRegisterPath" %>
 <%@ include file="/include/template.jsp"%>
 
 <script src='<c:url value="/static/js/jquery-ui.min.js"/>'></script>
@@ -27,6 +28,71 @@
 		table tr td{word-wrap:break-word;word-break:break-all;}
 	</style>
 </head>
+<script type="text/javascript">
+$(function(){
+	$("input[type=file]").each(
+		function() {
+			var _this = $(this);
+			_this.localResizeIMG({
+				quality : 0.8,
+				success : function(result,file) {
+
+					var att = pre.substr(pre.lastIndexOf("."));
+					//压缩后图片的base64字符串
+					var base64_string = result.clearBase64;
+
+					$('#'+_this.attr('id')+'temp').val(att+","+base64_string);
+					//图片预览
+		            var imgObj = $('#'+_this.attr('id')+'ImageDiv');
+		            imgObj.attr("src", "data:image/jpeg;base64," + base64_string).show();
+		            var width = result.width;
+		            var height = result.height;
+		            var scale =  width/height;
+		            if(width >800){
+		            width = 800;
+		            height = width / scale;
+		            }
+		            $(".showDiv").width(width+"px");
+		            $(".showDiv").height(height+"px");
+
+		            //优图
+		            var param = "{str:\""+base64_string+"\",flag:\""+_this.attr('id')+"\"}"
+		    		$.ajax({
+	    	   			async:false,
+	    	   			type:"POST",
+	    	   			contentType:"application/json;charset=utf-8",
+	    	   			dataType:"text",
+	    	   			url:window.Constants.ContextPath +'<%=AgentRegisterPath.BASE + AgentRegisterPath.YOUTU%>',
+	    	   	        data:param,
+	    	   	        success:function(data){
+	    	   	      		var json = eval('(' + data + ')');
+	    	   	        	if(json.result=="SUCCESS"){
+	    	   	        		 if(_this.attr('id')=="legalCertAttribute1"){                    //身份证
+	    	       	  				$("#representativeName").val(json.cardName);
+	    	       	  				$("#representativeCertNo").val(json.cardId);
+	    	       	  			}else if(_this.attr('id')=="businessPhoto"){                //营业执照
+	    	       	  				$("#registCode").val(json.businessLicense);
+	    	       	  				$("#businessEffectiveTerm").val(json.businessTermStart);
+	    	       	  				if("长期"==json.businessTermEnd){
+	    	       	  					$("#businessTerm").val("2099-12-31");
+	    	       	  				}else{
+	    	       	  					$("#businessTerm").val(json.businessTermEnd);
+	    	       	  				}
+	    	       	  				$("#cprRegAddr").val(json.legalAddress);
+	    	       	  				$("#cprRegNmCn").val(json.companyName);
+	    	       	  				$("#representativeName").val(json.legalPerson);
+	    	       	  			
+	    	       	  			}
+	    	   				}
+	    	   			}
+		    	   	});
+				}
+			});
+		}
+	);
+
+});
+</script>
 <body>
 <!-- 用户信息 -->
 <%@ include file="/include/top.jsp"%>
@@ -278,24 +344,6 @@
 									<input type="text" id="bankCardNo" name="bankCardNo" maxlength="100" placeholder="请输入银行卡号"  value="${custInfo.compMainAcct }" style="width:90%">
 								</td>
 							</tr>
-							<tr>
-								<td class="td-left">开户银行：<span style="color:red;">(必填)</span></td>
-								<td class="td-right"> 
-									<select name="suiXinBank" id="suiXinBank" style="width-90;">
-										<option value="">--请选择--</option>
-										<c:forEach items="<%=SuixinBankType.values()%>" var="status">
-											<option value="${status}" <c:if test="${status == queryBean.code}">selected</c:if>>
-												${status.name}
-											</option>
-										</c:forEach>
-									</select>
-								</td>
-	                            <td class="td-left">开户支行<span style="color:red;">(必填)</span></td>
-								<td class="td-right">
-									<input type="text" id="interBankName" name="interBankName" maxlength="100" placeholder="请输入开户支行"  value="${custInfo.branchBANK }" style="width:90%">
-									<label class="label-tips" id="interBankNameLabel"></label>
-								</td>
-							</tr>
                             <tr>
 								<td class="td-left">开户省份：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
@@ -319,6 +367,30 @@
 		                                </select>
 		                               	<label id="bankCityLabel" class="label-tips"></label>
 								</td>
+							</tr>
+							<tr>
+								<td class="td-left">开户银行：<span style="color:red;">(必填)</span></td>
+								<td class="td-right"> 
+									<select name="suiXinBank" id="suiXinBank" style="width-90;" onchange="getbranchBank();">
+										<option value="">--请选择--</option>
+										<c:forEach items="<%=SuixinBankType.values()%>" var="status">
+											<option value="${status.code}" <c:if test="${status == queryBean.code}">selected</c:if>>
+												${status.name}
+											</option>
+										</c:forEach>
+									</select>
+								</td>
+	                            <td class="td-left">开户支行<span style="color:red;">(必填)</span></td>
+	                            <td class="td-right"> 
+									<select name="interBankName" id="interBankName" class="width-90" >
+	                                    <option value="">--请选择支行--</option>
+	                                </select>
+	                               	<label id="interBankNameLabel" class="label-tips"></label>
+								</td>
+								<%-- <td class="td-right">
+									<input type="text" id="interBankName" name="interBankName" maxlength="100" placeholder="请输入开户支行"  value="${custInfo.branchBANK }" style="width:90%">
+									<label class="label-tips" id="interBankNameLabel"></label>
+								</td> --%>
 							</tr>
                             <tr>
 								<td class="td-left">结算类型：<span style="color:red;">(必填)</span></td>
@@ -408,16 +480,6 @@
 					    	<button type="button"  class="btn btn-primary" id='submitData'>提交报备</button> 
 					    	<button type="button"  class="btn btn-default" onclick="exit()">关闭</button> 
 					    </div>
-					    
-					    <!-- 
-					    <div class="aui-btn-default">
-							<button class="aui-btn aui-btn-account" data-toggle='modal' id='submitFile' data-target="#submitModal" style = "display:">
-								上传文件
-							</button>
-							<button class="aui-btn aui-btn-account" data-toggle='modal' id='submitData' data-target="#submitModal" style = "display:none">
-								提交审核
-							</button>
-					    </div> -->
 					</section>
 					</div>
 				</div>
@@ -443,6 +505,12 @@
      </div>
 </div>   
 <script type="text/javascript">
+
+
+		function businessForever(){
+			$("input[name='businessTerm']").val("2099-12-31");
+			$("#businessTerm").attr("value","2099-12-31");
+		}
         /** 点击预览大图 **/
       	function bigImg(obj){
             /* $('#showImageDiv #showImage').attr("src",obj.src); */
@@ -484,30 +552,57 @@
     		},'json'
     		);	
       	}
-
+		
+      	function getbranchBank(){
+      		var city = $("#bankCity").val().trim();
+      		var suiXinBank = $("#suiXinBank").val();
+      		
+      		var channelCode ="SUIXING_PAY";
+      		$.post(window.Constants.ContextPath +"/common/info/bankCnapsInfo",
+    		{
+      			"cityCode":city,
+    			"bankCode": suiXinBank,
+    			"channelCode":channelCode
+    		},
+    		function(data){
+    			if(data.result=="SUCCESS"){
+    				var branchBankList = data.branchBankList;
+    				$("#interBankName").html("");
+           			for ( var branchBank in branchBankList) {
+           				$("#interBankName").append(
+           						"<option value='"+ branchBankList[branchBank].branchBankCode +"'>"
+           								+ branchBankList[branchBank].bankName + "</option>"); 
+           			}
+    			}
+    			else{
+    				alert("银行和开户城市不能为空");
+    			}
+    		},'json'
+    		);	
+      	}
       
       	/***获取商户注册所在地区城市***/
       	function getMerchantCity(){
       		var merchantProvinceId = $("#merchantProvince").val().trim();
       		$.post(window.Constants.ContextPath +"<%=MerchantReportedPath.BASE + MerchantReportedPath.SELSUIXINGAREA %>",
-      	    		{
-      	    			"superiorAreaCode":merchantProvinceId
-      	    		},
-      	    		function(data){
-      	    			if(data.result=="SUCCESS"){
-      	    				var areaList = data.areaList;
-      	    				$("#merchantCity").html("");
-      	           			for ( var area in areaList) {
-      	           				$("#merchantCity").append(
-      	           						"<option value='"+ areaList[area].areaId +"'>"
-      	           								+ areaList[area].areaName + "</option>"); 
-      	           			}
-      	           			getMerchantArea();;
-      	    			}else{
-      	    				alert("省份不能为空");
-      	    			}
-      	    		},'json'
-      	    		);	
+    		{
+    			"superiorAreaCode":merchantProvinceId
+    		},
+    		function(data){
+    			if(data.result=="SUCCESS"){
+    				var areaList = data.areaList;
+    				$("#merchantCity").html("");
+           			for ( var area in areaList) {
+           				$("#merchantCity").append(
+           						"<option value='"+ areaList[area].areaId +"'>"
+           								+ areaList[area].areaName + "</option>"); 
+           			}
+           			getMerchantArea();;
+    			}else{
+    				alert("省份不能为空");
+    			}
+    		},'json'
+    		);	
         }
       	/***获取商户注册所在地区县区***/
       	function getMerchantArea(){
@@ -696,19 +791,7 @@
     		 var imageObj = document.getElementById("doorPhotoImageDiv");  
     		 return previewImage(divObj,imageObj,obj);  
     	}
-/* 
-    	function showCertAttribute1Image(obj){  
-    		 var divObj = document.getElementById("certAttribute1Div");  
-    		 var imageObj = document.getElementById("certAttribute1ImageDiv");  
-    		 return previewImage(divObj,imageObj,obj);  
-    	}
 
-    	function showCertAttribute2Image(obj){  
-    		 var divObj = document.getElementById("certAttribute2Div");  
-    		 var imageObj = document.getElementById("certAttribute2ImageDiv");  
-    		 return previewImage(divObj,imageObj,obj);  
-    	}
- */
     	function showLegalCertAttribute1Image(obj){  
    		 var divObj = document.getElementById("legalCertAttribute1Div");  
    		 var imageObj = document.getElementById("legalCertAttribute1ImageDiv");  
@@ -872,20 +955,6 @@
 						
 						//随行付渠道
 			   			if("SUIXING_PAY" == channelNo){
-			   		    	//上传照片
-			   				var imgDoor = [];
-			   				var imgSrc = [];
-			   				$("#door_temp input[type='hidden']").each(function(){
-			   					if($(this).attr('id').indexOf('Src')>=0){
-			   						imgSrc.push($(this).attr('id')+"="+$(this).val());
-			   					}else{
-			   						if($(this).val()==""){
-			   							imgDoor.push($(this).attr('id')+"="+"无");
-			   						}else{
-			   							imgDoor.push($(this).attr('id')+"="+$(this).val());
-			   						}
-			   					}
-			   				});
 
 		  					if("" == merchantCode){
 		  	   	   	    		$("#merchantCodeLab").text("商户编号不能为空");
@@ -1104,35 +1173,6 @@
 		  	   					}
 		  	   				});
 		   			
-		   					//照片
-		   		 			$("input[type=file]").each(
-			   					function() {
-			   						var _this = $(this);
-			   						_this.localResizeIMG({
-			   							quality : 0.8,
-			   							success : function(result,file) {
-			   								var att = pre.substr(pre.lastIndexOf("."));
-			   								//压缩后图片的base64字符串
-			   								var base64_string = result.clearBase64;
-			   								$('#'+_this.attr('id')+'temp').val(att+","+base64_string);
-			   								//图片预览
-			   					             var imgObj = $('#'+_this.attr('id')+'Image');
-			   					             imgObj.attr("src", "data:image/jpeg;base64," + base64_string).show(); 
-			   					             
-			   					             var width = result.width;
-			   					             var height = result.height;
-			   					             
-			   					             var scale =  width/height;
-			   						     	 if(width >800){
-			   						     		width = 800;
-			   						     		height = width / scale;
-			   						     	 }
-			   					             $(".showDiv").width(width+"px");
-			   					             $(".showDiv").height(height+"px");
-			   							}
-			   						});
-			   					}
-		   		 			) 
 			   	 		}
 					}else{
 						alert("上传图片返回码异常");

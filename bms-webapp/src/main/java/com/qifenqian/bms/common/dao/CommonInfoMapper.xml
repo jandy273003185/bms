@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qifenqian.bms.common.dao.CommonInfoMapper" >
+
+	<select id="selProvinceList" resultType="com.qifenqian.bms.merchant.reported.bean.Province">
+	SELECT 
+		P.PROVINCE_ID,
+		P.PROVINCE_NAME 
+	FROM 
+		TB_PROVINCE P
+	</select>
+	
+	
+	<select id="branchBankList" parameterType="com.qifenqian.bms.common.bean.BranchBankInfo" resultType="com.qifenqian.bms.common.bean.BranchBankInfo">
+		SELECT
+			T.BANK_CNAPS branchBankCode,
+			T.BANK_CODE,
+			T.AREA_ID cityCode,
+			T.BANK_NAME,
+			T.BANK_ADDRESS
+		FROM
+			TB_BANK_INFO T
+		<where>
+			1=1
+			<if test="bankCode!=null and bankCode!='' ">
+				AND T.BANK_CODE = #{bankCode, jdbcType = VARCHAR}
+			</if>
+			<if test="cityCode!=null and cityCode!='' ">
+				AND T.AREA_ID = #{cityCode, jdbcType = VARCHAR}
+			</if>
+		</where>
+		ORDER BY T.BANK_CODE
+	</select>
+	
+	<select id="selectSuiXingBanks" resultType="com.qifenqian.bms.basemanager.bank.bean.Bank">
+	SELECT DISTINCT
+		s.bank_id as bank_code,
+		s.bank_name	as bank_name
+	FROM 
+		td_suixing_bank_info s;
+	</select>
+	
+	<select id="selSuiXingProvince" resultType="com.qifenqian.bms.merchant.reported.bean.Province">
+	SELECT DISTINCT
+		z.bank_province_code as province_id,
+		z.bank_province_name as	province_name
+	FROM 
+		td_suixing_bank_info z;
+	</select>
+	
+	<select id="selSuiXingCity" parameterType="String" resultType="com.qifenqian.bms.basemanager.city.bean.City">
+		SELECT  DISTINCT
+			z.bank_city_code,
+			z.bank_city_name
+		FROM td_suixing_bank_info z
+		WHERE z.bank_province_code = #{provinceId,jdbcType = VARCHAR};
+	</select>
+	
+	<select id="suiXingBranchBankList" parameterType="com.qifenqian.bms.common.bean.BranchBankInfo" resultType="com.qifenqian.bms.common.bean.BranchBankInfo">
+		SELECT
+			z.brnach_bank_id branchBankCode,
+			z.brnach_bank_name bankName
+		FROM
+			td_suixing_bank_info z
+		<where>
+			1=1
+			<if test="bankCode!=null and bankCode!='' ">
+				AND z.bank_id = #{bankCode, jdbcType = VARCHAR}
+			</if>
+			<if test="cityCode!=null and cityCode!='' ">
+				AND z.bank_city_code = #{cityCode, jdbcType = VARCHAR}
+			</if>
+		</where>
+		ORDER BY z.brnach_bank_id
+	</select>
+</mapper>

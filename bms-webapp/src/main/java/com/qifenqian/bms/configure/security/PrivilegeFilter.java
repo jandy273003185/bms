@@ -43,6 +43,9 @@ public class PrivilegeFilter implements Filter {
 
   /** 需要登录的公共功用 */
   private String[] commonPage = {"/common/files/upload"};
+  
+  private String[] commonInfo = {"/common/info/bankCnapsInfo"};
+  
 
   /** 过滤 */
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -136,6 +139,13 @@ public class PrivilegeFilter implements Filter {
           return;
         }
       }
+      
+      for (String info : commonInfo) {
+          if (requestURI.equals(info)) {
+            chain.doFilter(request, response);
+            return;
+          }
+        }
 
       Function func = new Function();
       func.setFunctionUrl(requestURI);
