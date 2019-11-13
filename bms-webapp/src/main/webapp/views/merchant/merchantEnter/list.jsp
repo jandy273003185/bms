@@ -286,6 +286,7 @@
             $('.search-table #merchantCode').val('');
             $('.search-table #custName').val('');
             $('.search-table #email').val('');
+            $('.search-table #mobile').val('');
             $('.search-table #state').val('');
             $('.search-table #auditState').val('');
             $('.search-table #startCreateTime').val('');
@@ -428,6 +429,13 @@
 											<i class="icon-leaf blue"></i>
 										</span>
 									</td>
+									<td class="td-left">手机号：</td>
+									<td class="td-right">
+										<span class="input-icon">
+											<input type="text" name="mobile" id="mobile" value="${queryBean.mobile }">
+											<i class="icon-leaf blue"></i>
+										</span>
+									</td>
 								</tr>
 								<tr>
 									<td class="td-left">商户状态：</td>
@@ -482,7 +490,7 @@
                                          </td>
                                      </tr> -->
 								<tr>
-									<td colspan="6" align="center">
+									<td colspan="8" align="center">
 										<span class="input-group-btn">
 											  <button type="submit" class="btn btn-purple btn-sm btn-margin  buttonSearch" >
 											  	查询

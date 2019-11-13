@@ -887,6 +887,7 @@
 		C.filing_audit_status,
 		DATE_FORMAT(C.CREATE_TIME,'%Y-%m-%d %H:%i:%s') createTime,
 		U.EMAIL,
+		U.MOBILE,
 		U.STATE merchantState,
 		T.CERTIFICATE_STATE auditState,
 		T.AUTH_RESULT_DESC aduitMessage,
@@ -936,7 +937,9 @@
 			<if test="merchantCode != null and merchantCode != '' ">
 				AND C.MERCHANT_CODE = #{merchantCode, jdbcType=VARCHAR}
 			</if>
-
+			<if test="mobile != null and mobile != '' ">
+				AND U.MOBILE = #{mobile, jdbcType=VARCHAR}
+			</if>
             <if test="userId != null and userId != '' ">
                 AND C.CREATE_ID = #{userId, jdbcType=VARCHAR}
             </if>

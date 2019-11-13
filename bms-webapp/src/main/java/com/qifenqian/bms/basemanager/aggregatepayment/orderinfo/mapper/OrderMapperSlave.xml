@@ -590,23 +590,12 @@
 					1
 				FROM
 					(
-						SELECT
-							temp.cust_id
-						FROM
-							stcdb.bms_protocol_content temp
-						WHERE
-							temp.id IN (
-								SELECT
-									bms.protocol_id
-								FROM
-									stcdb.bms_protocol_column bms
-								WHERE
-									(bms.column_value = #{userName,jdbcType=VARCHAR}
-									or
-									bms.column_value = #{userId,jdbcType=VARCHAR})
-									AND
-									bms.column_code = 'custManager'
-							)
+					SELECT
+					I.CUST_ID 
+					FROM
+						stcdb.td_cust_info I 
+					WHERE
+						I.custManager = #{userId,jdbcType=VARCHAR}
 					) TT
 				WHERE
 					TT.cust_id = T.MCH_ID
