@@ -33,7 +33,7 @@ public class OrderInfoBean extends DealOperation{
 	private String signMsg;
 	
 	private String orderState;
-	private Date createTime;
+	private String createTime;
 	private Date modifyTime;
 	private String modifyId;
 	private String payerContact;
@@ -305,10 +305,10 @@ public class OrderInfoBean extends DealOperation{
 	public void setNotifyResult(String notifyResult) {
 		this.notifyResult = notifyResult;
 	}
-	public Date getCreateTime() {
+	public String getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTime(Date createTime) {
+	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
 	public Date getFinishTime() {

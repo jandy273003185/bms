@@ -283,7 +283,7 @@
 														
 													</c:choose>
 												</td>
-												<td><fmt:formatDate value="${bean.createTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+												<td>${bean.createTime }</td>
 											</tr>
 										</c:forEach>
 										
