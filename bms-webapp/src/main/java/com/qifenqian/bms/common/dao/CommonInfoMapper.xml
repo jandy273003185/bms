@@ -21,13 +21,14 @@
 			T.BANK_ADDRESS
 		FROM
 			TB_BANK_INFO T
+		LEFT JOIN tb_area_info a ON t.AREA_ID = a.AREA_ID
 		<where>
 			1=1
 			<if test="bankCode!=null and bankCode!='' ">
 				AND T.BANK_CODE = #{bankCode, jdbcType = VARCHAR}
 			</if>
 			<if test="cityCode!=null and cityCode!='' ">
-				AND T.AREA_ID = #{cityCode, jdbcType = VARCHAR}
+				AND a.AREA_ID = #{cityCode, jdbcType = VARCHAR}
 			</if>
 		</where>
 		ORDER BY T.BANK_CODE

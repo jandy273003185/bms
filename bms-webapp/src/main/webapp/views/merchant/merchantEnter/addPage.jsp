@@ -5,6 +5,7 @@
 <%@page import="com.qifenqian.bms.basemanager.merchant.TinyMerchantPath" %>
 <%@page import="com.qifenqian.bms.basemanager.agency.controller.AgentRegisterPath" %>
 <%@ page import="com.qifenqian.bms.basemanager.merchant.bean.Merchant" %>
+<%@ page import="com.qifenqian.bms.basemanager.city.CityPath" %>
 <script src='<c:url value="/static/js/ajaxfileupload.js"/>'></script>
 <script src='<c:url value="/static/js/comm.js"/>'></script>
 <script src='<c:url value="/static/js/upload.js"/>'></script>
@@ -95,9 +96,35 @@ $(function(){
 		}
 	);
 
-	$("#agentName").comboSelect();
-	$("#custManager").comboSelect();
 });
+
+function getbranchBank(){
+	var city = $("#bankCityName").val().trim();
+	var compAcctBank = $("#compAcctBank").val();
+	
+	var channelCode ="";
+	$.post(window.Constants.ContextPath +"/common/info/bankCnapsInfo",
+	{
+			"cityCode":city,
+		"bankCode": compAcctBank,
+		"channelCode":channelCode
+	},
+	function(data){
+		if(data.result=="SUCCESS"){
+			var branchBankList = data.branchBankList;
+			$("#branchBank").html("");
+   			for ( var branchBank in branchBankList) {
+   				$("#branchBank").append(
+   						"<option value='"+ branchBankList[branchBank].branchBankCode +"'>"
+   								+ branchBankList[branchBank].bankName + "</option>"); 
+   			}
+		}
+		else{
+			alert("银行和开户城市不能为空");
+		}
+	},'json'
+	);	
+	}
 /**开户行城市 **/
 function getBankCityList(){
 
@@ -109,20 +136,16 @@ function getBankCityList(){
 	$.ajax({
 		type:"POST",
 		dataType:"json",
-		url:window.Constants.ContextPath +'<%=MerchantPath.BASE+MerchantPath.GRTCITYLIST %>',
+		url:window.Constants.ContextPath +'<%=CityPath.BASE+CityPath.GET_CITY_BY_PROVINCEID %>',
 		data:
 		{
-			"province" 	: provVal,
-			"choiceType" : "city"
+			"provinceId" 	: provVal
 		},
 		success:function(data){
-			if(data.result=="SUCCESS"){
-				var cityList = data.cityList;
-				for ( var city in cityList) {
-					$("#bankCityName").append(
-						"<option value='"+ cityList[city].cityId +"'>" + cityList[city].cityName + "</option>");
-				}
-			}else{
+			var cityList = data.cityList;
+			for ( var city in cityList) {
+				$("#bankCityName").append(
+					"<option value='"+ cityList[city].cityId +"'>" + cityList[city].cityName + "</option>");
 			}
 		}
 	})
@@ -907,9 +930,9 @@ function businessForever(){
 							<td class="td-left">开户省份：<span style="color:red;">（必填)</span></td>
 							<td class="td-right">
 								<select class="width-90" id="bankProvinceName" onchange="getBankCityList();">
-	                                   <c:if test="${not empty provincelist_ }">
+	                                   <c:if test="${not empty provincelist }">
                                         	<option value="">--请选择--</option>
-						               <c:forEach items="${provincelist_ }" var="prov">
+						               <c:forEach items="${provincelist }" var="prov">
 						                   <option value="${prov.provinceId }">${prov.provinceName }</option>
 						               </c:forEach>
 		               				</c:if>
@@ -925,7 +948,7 @@ function businessForever(){
 						<tr>
 							<td class="td-left">开户银行：<span style="color:red;">（必填)</span></td>
 							<td class="td-right">
-								<select class="width-90" id="compAcctBank" name="compAcctBank">
+								<select class="width-90" id="compAcctBank" name="compAcctBank" onchange="getbranchBank();">
                                 <c:if test="${not empty banklist }">
                                    <option value="">--请选择--</option>
 					               <c:forEach items="${banklist }" var="bank">
@@ -937,8 +960,12 @@ function businessForever(){
 							</td>
 							<td class="td-left">开户支行：<span style="color:red;">（必填)</span></td>
 							<td class="td-right">
-								<input type="text" id="branchBank" name="branchBank" placeholder="请输入开户行" style="width:90%">
-								<label class="label-tips" id="branchBankLab"></label>
+								<select name="branchBank" id="branchBank" class="width-90" >
+                                    <option value="">--请选择支行--</option>
+                                </select>
+                               	<label id="branchBankLab" class="label-tips"></label>
+								<!-- <input type="text" id="branchBank" name="branchBank" placeholder="请输入开户行" style="width:90%">
+								<label class="label-tips" id="branchBankLab"></label> -->
 							</td>
 							
 						</tr>
