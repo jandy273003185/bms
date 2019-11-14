@@ -264,6 +264,13 @@ public class MerchantEnterController {
 		Rule rule = new Rule();
 		User user = new User();
 		rule.setStatus("VALID");
+		if(merchant.getAgentName() != null) {
+			MerchantVo merchant1 = merchantService.findMerchantInfo(merchantVo.getCustId());
+			if(merchant1.getCustName() != null) {
+				merchant.setAgentName(merchant1.getCustName());
+			}
+		}
+		
 		mv.addObject("banklist", bankMapper.selectBanks(bank));
 		mv.addObject("rulelist", ruleMapper.selectRules(rule));
 		mv.addObject("userlist", userService.getUserList(user));
@@ -302,6 +309,12 @@ public class MerchantEnterController {
 		Rule rule = new Rule();
 		User user = new User();
 		rule.setStatus("VALID");
+		if(merchant.getAgentName() != null) {
+			MerchantVo merchant1 = merchantService.findMerchantInfo(merchantVo.getCustId());
+			if(merchant1.getCustName() != null) {
+				merchant.setAgentName(merchant1.getCustName());
+			}
+		}
 		mv.addObject("areaName", areaName);
 		mv.addObject("banklist", bankMapper.selectBanks(bank));
 		mv.addObject("rulelist", ruleMapper.selectRules(rule));
@@ -383,6 +396,12 @@ public class MerchantEnterController {
 
             jsonObject.put("bmsProtocolContent", contents.get(0));
         }
+        if(merchant.getAgentName() != null) {
+			MerchantVo merchant1 = merchantService.findMerchantInfo(merchantVo.getCustId());
+			if(merchant1.getCustName() != null) {
+				merchant.setAgentName(merchant1.getCustName());
+			}
+		}
         //查询商户门头照信息
         //String path = auditorService.findScanPath(merchantVo.getCustId(), "08",merchantVo.getAuthId());
         //获取二维码

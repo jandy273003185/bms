@@ -755,7 +755,7 @@
 								<td class="td-left">所属业务人员：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
 									<select id="custManager" name="custManager">
-										<option value="${merchantVo.custManager }">${merchantVo.custManager }</option>
+										<option value="${merchantVo.custManager }">${merchantVo.aduitUserName }</option>
 										<c:forEach items="${userlist }" var="bean">
 											<option value="${bean.userName }">${bean.userName }</option>
 										</c:forEach>

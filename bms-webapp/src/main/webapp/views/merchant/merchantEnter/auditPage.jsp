@@ -312,7 +312,7 @@
 							</tr>
 							<tr>
 								<td class="td-left">所属业务人员：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.custManager }</td>
+								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.aduitUserName }</td>
 								<td class="td-left">所属代理商：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.agentName }</td>
 							</tr>
