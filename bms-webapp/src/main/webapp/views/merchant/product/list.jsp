@@ -280,7 +280,7 @@ jQuery(function($){
 								</tr>
 
 								<tr>
-									<td colspan="4" align="center">
+									<td colspan="6" align="center">
 										<span class="input-group-btn">																					
 										
 											<gyzb-admin:function url="<%=MerchantProductPath.BASE + MerchantProductPath.LIST%>">

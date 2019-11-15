@@ -13,6 +13,8 @@
 <script src='<c:url value="/static/js/mobileBUGFix.mini.js"/>'></script>
 <script src='<c:url value="/static/js/uploadCompress.js"/>'></script>
 <script src='<c:url value="/static/js/register.js"/>'></script>
+<script src="<c:url value='/static/js/jquery.combo.select.js'/>"></script>
+<script src='<c:url value="/static/js/checkRule_source.js"/>'></script>
 <html>
 <head>
 	<meta charset="utf-8" />
@@ -20,6 +22,8 @@
 	<meta name="keywords" content="七分钱后台管理系统" />
 	<meta name="description" content="七分钱后台管理" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="<c:url value='/static/css/combo.select.css' />" />
+	<link rel="stylesheet" href="<c:url value='/static/css/combo.select.scss' />" />
 	<style type="text/css">
 		table tr td{word-wrap:break-word;word-break:break-all;}
 		.uploadImage{ float:left;
@@ -60,14 +64,14 @@
         $("#openAccountImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=03&authId="+authId);
 
 
-        if ("style=\"width:90%\"" == document.getElementById("custManager").value){
+        /* if ("style=\"width:90%\"" == document.getElementById("custManager").value){
             $("#custManager").attr("value","");
         }
 
         if ("style=\"width:90%\"" == document.getElementById("agentName").value){
             $("#agentName").attr("value","");
         }
-
+ */
         if ("style=\"width:90%\"" == document.getElementById("businessLicense").value){
             $("#businessLicense").attr("value","");
         }
@@ -113,7 +117,8 @@
     		$('#businessPhotoId_').show();
         }
 
-
+        $("#agentName").comboSelect();
+    	$("#custManager").comboSelect();
     });
     
     function getCityList(){
@@ -754,8 +759,9 @@
 							<tr>
 								<td class="td-left">所属业务人员：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
+									<%-- <sevenpay:selectSysUserTag name="custManager" id="custManager" defaultValue="${merchantVo.custManager}"/> --%>
 									<select id="custManager" name="custManager">
-										<option value="${merchantVo.custManager }">${merchantVo.aduitUserName }</option>
+										<option value="${merchantVo.custManager }">${merchantVo.custManager }</option>
 										<c:forEach items="${userlist }" var="bean">
 											<option value="${bean.userName }">${bean.userName }</option>
 										</c:forEach>

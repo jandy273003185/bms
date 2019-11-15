@@ -461,7 +461,9 @@ public class MerchantService {
             /** 客户类型 :企业 **/
             //merchant.setCustType(Constant.CUST_TYPE_COMPANY);
             /** 商户标识:商户 **/
-            merchant.setMerchantFlag(Constant.MERCHANT_FLAG_TRADE);
+            if(null == merchant.getMerchantFlag()) {
+            	merchant.setMerchantFlag(Constant.MERCHANT_FLAG_TRADE);	
+            }
             /** 客户状态:待审核 **/
             merchant.setState(Constant.CUST_STATE_WAITINGVERIFY);
             /** 等级 **/

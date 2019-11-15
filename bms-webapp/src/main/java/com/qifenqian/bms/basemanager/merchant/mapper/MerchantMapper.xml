@@ -1868,8 +1868,12 @@
 				filing_audit_status =  #{filingAuditStatus , jdbcType = VARCHAR},
 			</if>
             <if test="merchantState != null">
-                STATE =  #{merchantState , jdbcType = VARCHAR}
+                STATE =  #{merchantState , jdbcType = VARCHAR},
             </if>
+            <if test="custManager != null">
+                custManager =  #{custManager , jdbcType = VARCHAR}
+            </if>
+           
 
 		
 		</set>
