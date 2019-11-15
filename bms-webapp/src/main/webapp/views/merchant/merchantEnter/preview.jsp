@@ -201,7 +201,7 @@
 										</select>
 									</div>
 									<div class="col-xs-5 pd0" style="padding:0;margin-left:1%">
-										<input type="text" id="custAdd" name="custAdd"  placeholder="详细地址" value =${merchantVo.custAdd } style="width:100%">
+										<input type="text" id="custAdd" name="custAdd" readonly value =${merchantVo.custAdd } style="width:100%">
 										<label class="label-tips" id="custAddLab"></label>
 									</div>
 								</td>
@@ -309,17 +309,9 @@
 							<tr>
 								<td class="td-left">银行卡号</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.compMainAcct }</td>
-								<td class="td-left">银行类型：</td>
-
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.bankName }</td>
-							</tr>
-							<tr>
-								<td class="td-left">开户行：</td>
-
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.branchBank }</td>
 								<td class="td-left">开户人：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.bankAcctName }</td>
-							</tr>
+							</tr>	
 							<tr>
 								<td class="td-left">开户省份：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px" id="province1">${merchantVo.bankProName }</td>
@@ -327,6 +319,13 @@
 								<td class="td-right" style="color:#666;padding:10px 8px" id="city">${merchantVo.bankCitName }
 									<%--<sevenpay:selectTag id="city" name ="provincelist_"  banks="${provincelist_}"  clasS="width-90"/>--%>
 								</td>
+							</tr>
+							<tr>
+								<td class="td-left">银行类型：</td>
+								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.bankName }</td>
+								<td class="td-left">开户行：</td>
+								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.branchBank }</td>
+								
 							</tr>
 							<tr>
 								<td class="td-left">网点号：</td>

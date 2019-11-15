@@ -459,12 +459,12 @@ jQuery(function($){
 												</select>
 										</td>
 									</tr>	
-									<tr>
+									<!-- <tr>
 										<td class="td-left" >渠道</td>
 										<td class="td-right" >
 												<input type="text" id="aisle" name="aisle" clasS="width-90"/>
 										</td>
-									</tr>	
+									</tr>	 -->
 					
 					            </table>
 					         </div>
@@ -526,12 +526,12 @@ jQuery(function($){
 												</select>
 										</td>
 									</tr>	
-									<tr>
+									<!-- <tr>
 										<td class="td-left" >渠道</td>
 										<td class="td-right" >
 												<input type="text" id="aisle" name="aisle" clasS="width-90"/>
 										</td>
-									</tr>	
+									</tr> -->	
 				
 					            </table>
 					         </div>

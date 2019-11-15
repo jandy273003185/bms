@@ -31,7 +31,7 @@
 	
 	<select id="selectBankCnaps" resultType="com.qifenqian.bms.basemanager.branchbank.bean.BranchBank" parameterType="string">
 		SELECT 
-			T.BANK_CNAPS 
+			T.* 
 		FROM 
 			TB_BANK_INFO T
 		WHERE

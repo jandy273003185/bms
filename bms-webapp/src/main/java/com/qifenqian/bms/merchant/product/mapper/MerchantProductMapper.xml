@@ -28,6 +28,7 @@
 			<if test="productName != null and productName != '' "> AND mm.product_name LIKE CONCAT('%',#{productName, jdbcType=VARCHAR},'%')</if>
 			<if test="productStatus != null and productStatus != '' "> AND mm.product_status =#{productStatus, jdbcType=VARCHAR}</if>
 		</where>
+		ORDER BY mm.CREATE_TIME DESC
 	</select>
 
 	<!-- 写入单个商户产品信息 -->
@@ -38,14 +39,16 @@
 			product_rate,
 			recharge_rate,
 			product_status,
-			aisle
+			aisle,
+			id
 		) VALUES (
 			#{merchantCode, 	jdbcType=VARCHAR},
 			#{productId, 	    jdbcType=VARCHAR},
 		  	#{productRate, 		jdbcType=VARCHAR},
 		  	#{rechargeRate, 	jdbcType=VARCHAR},
 		  	#{productStatus, 	jdbcType=VARCHAR},
-		  	#{aisle, 			jdbcType=INTEGER}
+		  	#{aisle, 			jdbcType=INTEGER},
+		  	#{id, 			    jdbcType=INTEGER}
 		)
 	</insert>
 	

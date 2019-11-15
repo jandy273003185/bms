@@ -20,6 +20,16 @@ public class BranchBankInfo implements Serializable {
 	/** 支行地址 */
 	private String bankAddress;
 	
+	private int areaCode;
+	
+	
+	
+	public int getAreaCode() {
+		return areaCode;
+	}
+	public void setAreaCode(int areaCode) {
+		this.areaCode = areaCode;
+	}
 	public String getBranchBankCode() {
 		return branchBankCode;
 	}

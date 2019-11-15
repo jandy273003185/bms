@@ -3,10 +3,14 @@ package com.qifenqian.bms.merchant.product;
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.merchant.bean.Merchant;
 import com.qifenqian.bms.basemanager.merchant.mapper.MerchantMapper;
+import com.qifenqian.bms.basemanager.utils.GenSN;
 import com.qifenqian.bms.merchant.product.bean.MerchantProduct;
 import com.qifenqian.bms.merchant.product.bean.Product;
 import com.qifenqian.bms.merchant.product.mapper.MerchantProductMapper;
 import com.qifenqian.bms.merchant.product.service.MerchantProductService;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -83,6 +87,9 @@ public class MerchantProductController {
 				jsonObject.put("result", "FAILURE");
 				jsonObject.put("message", "该商户产品已经存在");
 			} else {
+				if(null == merchantProduct.getId()) {
+					merchantProduct.setId(new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + GenSN.getRandomNum(18));
+				}
 				merchantProductService.insertMaterielSingle(merchantProduct);
 				jsonObject.put("result", "SUCCESS");
 			}

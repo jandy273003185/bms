@@ -30,6 +30,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.agency.bean.AgenReport;
 import com.qifenqian.bms.basemanager.bank.bean.Bank;
 import com.qifenqian.bms.basemanager.bank.mapper.BankMapper;
+import com.qifenqian.bms.basemanager.branchbank.bean.BranchBank;
+import com.qifenqian.bms.basemanager.branchbank.mapper.BranchBankMapper;
 import com.qifenqian.bms.basemanager.city.service.CityService;
 import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
 import com.qifenqian.bms.basemanager.custInfo.mapper.TdCustInfoMapper;
@@ -96,6 +98,8 @@ public class MerchantEnterController {
 
 	@Autowired
 	private SysUserMapper sysUserMapper;
+	@Autowired
+	private BranchBankMapper branchBankMapper;
 	/**
 	 * 显示商户列表
 	 * @param merchantVo
@@ -254,6 +258,11 @@ public class MerchantEnterController {
         JSONObject jsonObject = new JSONObject();
 		ModelAndView mv = new ModelAndView(MerchantEnterPath.BASE + MerchantEnterPath.PREVIEW);
 		MerchantVo merchant = merchantService.findMerchantInfo(merchantVo.getCustId());
+		BranchBank branchBank = branchBankMapper.selectBankCnaps(merchant.getBranchBank());
+		if(null != branchBank) {
+			merchant.setBranchBank(branchBank.getBankName());
+		}
+		
         List<BmsProtocolContent> contents = merchantService.selectContentByCustId(merchantVo.getCustId());
 
         if (null != contents && contents.size() > 0) {
@@ -271,7 +280,9 @@ public class MerchantEnterController {
 		 * merchant.setAgentName(merchant1.getCustName()); } }
 		 */
 		SysUser  sysUser = sysUserMapper.selectUserById(merchant.getCustManager());
-		merchant.setCustManager(sysUser.getUserName());
+		if(null != sysUser) {
+			merchant.setCustManager(sysUser.getUserName());
+		}
 		mv.addObject("banklist", bankMapper.selectBanks(bank));
 		mv.addObject("rulelist", ruleMapper.selectRules(rule));
 		mv.addObject("userlist", userService.getUserList(user));
@@ -300,6 +311,10 @@ public class MerchantEnterController {
 		MerchantVo merchant = merchantService.findMerchantInfo(merchantVo.getCustId());
 		String areaName = merchantService.findAreaNameByAreaId(merchant.getCountry());
 		merchantVo.setAreaName(areaName);
+		BranchBank branchBank = branchBankMapper.selectBankCnaps(merchant.getBranchBank());
+		if(null != branchBank) {
+			merchant.setBranchBank(branchBank.getBankName());
+		}
         List<BmsProtocolContent> contents = merchantService.selectContentByCustId(merchantVo.getCustId());
 
         if (null != contents && contents.size() > 0) {
@@ -317,7 +332,9 @@ public class MerchantEnterController {
 		 * merchant.setAgentName(merchant1.getCustName()); } }
 		 */
 		SysUser  sysUser = sysUserMapper.selectUserById(merchant.getCustManager());
-		merchant.setCustManager(sysUser.getUserName());
+		if(null != sysUser) {
+			merchant.setCustManager(sysUser.getUserName());
+		}
 		mv.addObject("areaName", areaName);
 		mv.addObject("banklist", bankMapper.selectBanks(bank));
 		mv.addObject("rulelist", ruleMapper.selectRules(rule));
@@ -394,27 +411,18 @@ public class MerchantEnterController {
 		ModelAndView mv = new ModelAndView(MerchantEnterPath.BASE + MerchantEnterPath.AUDITPAGE);
 		MerchantVo merchant = merchantService.findMerchantInfo(merchantVo.getCustId());
         List<BmsProtocolContent> contents = merchantService.selectContentByCustId(merchantVo.getCustId());
-
         if (null != contents && contents.size() > 0) {
-
             jsonObject.put("bmsProtocolContent", contents.get(0));
         }
-		/*
-		 * if(merchant.getAgentName() != null) { MerchantVo merchant1 =
-		 * merchantService.findMerchantInfo(merchantVo.getCustId());
-		 * if(merchant1.getCustName() != null) {
-		 * merchant.setAgentName(merchant1.getCustName()); } }
-		 */
         SysUser  sysUser = sysUserMapper.selectUserById(merchant.getCustManager());
-		merchant.setCustManager(sysUser.getUserName());
-        //查询商户门头照信息
-        //String path = auditorService.findScanPath(merchantVo.getCustId(), "08",merchantVo.getAuthId());
-        //获取二维码
-//		String qrCode = getQrCode(merchantVo);
+        if(null != sysUser) {
+			merchant.setCustManager(sysUser.getUserName());
+		}
+		BranchBank branchBank = branchBankMapper.selectBankCnaps(merchant.getBranchBank());
+		if(null != branchBank) {
+			merchant.setBranchBank(branchBank.getBankName());
+		}
 		mv.addObject("merchantVo", merchant);
-		//预览返回的二维码信息
-//		mv.addObject("qrCode", qrCode);
-		//mv.addObject("path", path);
 		return mv;
     }
 

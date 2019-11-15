@@ -1726,8 +1726,8 @@
 		left join tb_sp_city B ON B.city_id = C.city
         left join tb_bank_code Q ON Q.BANK_TYPE = C.COMP_ACCT_BANK
         left join tb_sp_area M ON M.area_id = C.country
-        left join tb_sp_province SP ON SP.PROVINCE_ID = C.bank_province_name
-        left join tb_sp_city SC ON SC.city_id = C.bank_city_name
+        left join tb_province SP ON SP.PROVINCE_ID = C.bank_province_name
+        left join tb_city SC ON SC.city_id = C.bank_city_name
 		WHERE c.CUST_ID = #{custId,jdbcType=VARCHAR}
 	</select>
 
