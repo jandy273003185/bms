@@ -100,14 +100,16 @@ $(function(){
 });
 
 function getbranchBank(){
+	var provVal = $("#bankProvinceName").val().trim();
 	var city = $("#bankCityName").val().trim();
 	var compAcctBank = $("#compAcctBank").val();
 	
 	var channelCode ="";
 	$.post(window.Constants.ContextPath +"/common/info/bankCnapsInfo",
 	{
-			"cityCode":city,
-		"bankCode": compAcctBank,
+		"provinceId": provVal,
+		"cityCode":   city,
+		"bankCode":   compAcctBank,
 		"channelCode":channelCode
 	},
 	function(data){

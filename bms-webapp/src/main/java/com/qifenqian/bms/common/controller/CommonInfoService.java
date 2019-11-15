@@ -106,6 +106,10 @@ public class CommonInfoService {
 		//七分钱
 		if(StringUtils.isBlank(channelCode)) {
 			branchBankList = commonInfoDao.branchBankList(queryBean);
+			if(0 == branchBankList.size()) {
+				queryBean.setCityCode(-1);
+				branchBankList = commonInfoDao.branchBankList(queryBean);
+			}
 		}else if("SUIXING_PAY".equals(channelCode)) {
 			branchBankList = commonInfoDao.suiXingBranchBankList(queryBean);
 		}

@@ -22,8 +22,15 @@ public class BranchBankInfo implements Serializable {
 	
 	private int areaCode;
 	
+	private int provinceId;
 	
 	
+	public int getProvinceId() {
+		return provinceId;
+	}
+	public void setProvinceId(int provinceId) {
+		this.provinceId = provinceId;
+	}
 	public int getAreaCode() {
 		return areaCode;
 	}

@@ -31,8 +31,11 @@
 			<if test="areaCode!=null and areaCode!='' ">
 				AND a.AREA_ID = #{areaCode, jdbcType = VARCHAR}
 			</if>
-			<if test="cityCode!=null and cityCode!='' ">
+			<if test="cityCode!=null and cityCode!='' and cityCode !=-1">
 				AND a.CITY_ID = #{cityCode, jdbcType = VARCHAR}
+			</if>
+			<if test="provinceId!=null and provinceId!='' ">
+				AND a.PROVINCE_ID = #{provinceId, jdbcType = VARCHAR}
 			</if>
 		</where>
 		ORDER BY T.BANK_CODE
@@ -75,6 +78,9 @@
 			</if>
 			<if test="cityCode!=null and cityCode!='' ">
 				AND z.bank_city_code = #{cityCode, jdbcType = VARCHAR}
+			</if>
+			<if test="provinceId!=null and provinceId!='' ">
+				AND z.bank_province_code = #{provinceId, jdbcType = VARCHAR}
 			</if>
 		</where>
 		ORDER BY z.brnach_bank_id
