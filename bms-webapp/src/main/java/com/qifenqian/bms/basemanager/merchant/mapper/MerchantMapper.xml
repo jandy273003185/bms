@@ -1875,9 +1875,14 @@
             <if test="merchantState != null">
                 STATE =  #{merchantState , jdbcType = VARCHAR},
             </if>
-            <if test="custManager != null">
-                custManager =  #{custManager , jdbcType = VARCHAR}
+            <if test="bankProvinceName != null">
+                bank_province_name =  #{bankProvinceName , jdbcType = VARCHAR},
             </if>
+            <if test="bankCityName != null">
+                bank_city_name =  #{bankCityName , jdbcType = VARCHAR},
+            </if>
+            
+
            
 
 		
