@@ -1715,7 +1715,7 @@
 		    P.PROVINCE_NAME provinceName,
 		    SP.PROVINCE_NAME bankProName,
 		    SC.CITY_NAME bankCitName,
-		    T.CERTIFY_DATETIME aduitTime
+		    T.CERTIFY_DATETIME auditTime
 		FROM TD_CUST_INFO C
 		INNER JOIN TD_LOGIN_USER_INFO U
 		ON C.CUST_ID=U.CUST_ID
@@ -1876,13 +1876,13 @@
                 STATE =  #{merchantState , jdbcType = VARCHAR},
             </if>
             <if test="custManager != null">
-                custManager =  #{custManager , jdbcType = VARCHAR}
+                custManager =  #{custManager , jdbcType = VARCHAR},
             </if>
             <if test="bankProvinceName != null">
                 bank_province_name =  #{bankProvinceName , jdbcType = VARCHAR},
             </if>
             <if test="bankCityName != null">
-                bank_city_name =  #{bankCityName , jdbcType = VARCHAR},
+                bank_city_name =  #{bankCityName , jdbcType = VARCHAR}
             </if>
             
 
@@ -1993,10 +1993,10 @@
                 country = #{country,jdbcType=VARCHAR},
             </if>
             <if test="filingAuditStatus != null">
-                filing_audit_status =  #{filingAuditStatus , jdbcType = VARCHAR}
+                filing_audit_status =  #{filingAuditStatus , jdbcType = VARCHAR},
             </if>
             <if test="merchantState != null">
-                STATE =  #{merchantState , jdbcType = VARCHAR}
+                STATE =  #{merchantState , jdbcType = VARCHAR},
             </if>
             <if test="merchantEmail != null">
                 merchant_email =  #{merchantEmail , jdbcType = VARCHAR}

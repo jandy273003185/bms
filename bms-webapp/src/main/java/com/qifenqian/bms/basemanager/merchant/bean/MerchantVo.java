@@ -369,7 +369,7 @@ public class MerchantVo implements Serializable {
 	/**
 	 * 审核时间
 	 */
-	private Date aduitTime;
+	private String auditTime;
 
 	/** 开户行地址 */
 	private String openAddressRec;
@@ -1079,12 +1079,12 @@ public class MerchantVo implements Serializable {
 	}
 
 	
-	public Date getAduitTime() {
-		return aduitTime;
+	public String getAuditTime() {
+		return auditTime;
 	}
 
-	public void setAduitTime(Date aduitTime) {
-		this.aduitTime = aduitTime;
+	public void setAuditTime(String auditTime) {
+		this.auditTime = auditTime;
 	}
 
 	public String getOpenAddressRec() {
