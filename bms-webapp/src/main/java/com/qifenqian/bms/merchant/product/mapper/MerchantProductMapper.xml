@@ -15,12 +15,13 @@
 				SELECT
 					tp.product_name,
 					tp.product_code,
+					u.real_name,
 					tmp.*
 				FROM
-					td_product_info tp,
-					td_merchant_product_info tmp
-				WHERE
-					tp.product_id = tmp.product_id
+					td_product_info tp inner join 
+					td_merchant_product_info tmp on tp.product_id = tmp.product_id
+					left join sys_user u on tmp.audit_id = u.user_id
+					
 			) mm			
 		<where>
 			tc.MERCHANT_CODE = mm.merchant_code
@@ -83,10 +84,14 @@
 			</if>			
 			<if test="aisle != null">
 				aisle = #{aisle, 		jdbcType=VARCHAR},
-			</if>						
+			</if>
+			<if test="auditId != null and auditId !=''">
+				audit_id = #{auditId, 		jdbcType=VARCHAR},
+			</if>
+				modify_time = NOW()						
 	   </set>
-		 WHERE merchant_code = #{merchantCode, 	jdbcType=INTEGER}
-		 AND product_id = #{productId, 	jdbcType=INTEGER}
+		 WHERE merchant_code = #{merchantCode, 	jdbcType=VARCHAR}
+		 AND product_id = #{productId, 	jdbcType=VARCHAR}
 	</update>
 		
 	

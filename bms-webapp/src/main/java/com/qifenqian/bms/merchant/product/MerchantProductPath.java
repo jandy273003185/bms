@@ -10,6 +10,8 @@ public class MerchantProductPath {
 	
 	public static final String EDIT = "/update";
 	
+	public static final String AUDIT = "/audit";
+	
 	public static final String DELETE = "/delete";
 	
 }

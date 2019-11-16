@@ -8,10 +8,14 @@ import com.qifenqian.bms.merchant.product.bean.MerchantProduct;
 import com.qifenqian.bms.merchant.product.bean.Product;
 import com.qifenqian.bms.merchant.product.mapper.MerchantProductMapper;
 import com.qifenqian.bms.merchant.product.service.MerchantProductService;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +37,15 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/merchant/product")
 public class MerchantProductController {
+	
+	/**
+	 * 默认开通状态为09 开通失败,待审核
+	 */
+	private static final String DEFAULT_PRODUCT_STATUS = "09";
+	/**
+	 * 开通成功 00 审核通过
+	 */
+	private static final String SUCCESS_PRODUCT_STATUS = "00";
 
 	private Logger logger = LoggerFactory.getLogger(MerchantProductController.class);
 
@@ -79,7 +92,8 @@ public class MerchantProductController {
 	public String add(MerchantProduct merchantProduct) {
 		// 请求bean 打印
 		logger.info("请求保存MerchantProduct：[{}]", JSONObject.toJSONString(merchantProduct, true));
-		
+		//开通默认09,待审核
+		merchantProduct.setProductStatus(DEFAULT_PRODUCT_STATUS);
 		JSONObject jsonObject = new JSONObject();
 		try {
 			MerchantProduct merPro = merchantProductService.selectMerchantProductByCode(merchantProduct);
@@ -120,9 +134,7 @@ public class MerchantProductController {
 		if (StringUtils.isEmpty(merchantProduct.getMerchantCode())) {
 			throw new IllegalArgumentException("商户代码不能为空");
 		}
-		if (StringUtils.isEmpty(merchantProduct.getMachineId())) {
-			throw new IllegalArgumentException("产品代码不能为空");
-		}
+	
 		try {
 			//查询需要修改的商户产品信息是否存在
 			MerchantProduct merPro1 = merchantProductMapper.selectMerchantProductByCode(merchantProduct);
@@ -139,6 +151,43 @@ public class MerchantProductController {
 			jsonObject.put("message", e.getMessage());
 		}
 		return jsonObject.toJSONString();
+	}
+	
+	/**
+	 * 审核
+	 * @param merchantCode
+	 * @param productId
+	 * @return
+	 */
+	@RequestMapping("/audit")
+	@ResponseBody
+	public Map<String, String> audit(String merchantCode, String productId) {
+		Map<String, String> result = new HashMap<String, String>();
+		if (StringUtils.isBlank(merchantCode)) {
+			result.put("result", "FAILURE");
+			result.put("message", "商户号不能为空");
+		}
+		if (StringUtils.isBlank(productId)) {
+			result.put("result", "FAILURE");
+			result.put("message", "产品代码不能为空");
+		}
+		MerchantProduct merchantProduct = new MerchantProduct();
+		merchantProduct.setMerchantCode(merchantCode);
+		merchantProduct.setProductId(productId);
+		merchantProduct.setProductStatus(SUCCESS_PRODUCT_STATUS);
+		merchantProduct.setAuditId(String.valueOf(WebUtils.getUserInfo().getUserId()));
+		try {
+			merchantProductService.updateMerchantProduct(merchantProduct);
+			result.put("result", "SUCCESS");
+			result.put("message", "审核成功!");
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error("审核商户产品异常", e);
+			result.put("result", "FAILURE");
+			result.put("message", e.getMessage());
+		}
+		
+		return result;
 	}
 	
 	

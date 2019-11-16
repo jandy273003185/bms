@@ -52,11 +52,11 @@ jQuery(function($){
 		// 充值汇率
 		var rechargeRate = $('#addMerchantProductModal #rechargeRate').val();		
 		//产品开通状态
-		var productStatus = $('#addMerchantProductModal #productStatus').val();			
+		/* var productStatus = $('#addMerchantProductModal #productStatus').val();			
 		if(kong.test(productStatus)) {
 			$.gyzbadmin.alertFailure('产品开通状态不可为空');
 			return;
-		}	
+		}	 */
 		// 通道
 		var aisle = $('#addMerchantProductModal #aisle').val();
 		
@@ -69,7 +69,6 @@ jQuery(function($){
 			 'productId'		: productId,
 			 'productRate'		: productRate,
 			 'rechargeRate'		: rechargeRate,
-			 'productStatus'	: productStatus,
 			 'aisle'			: aisle
 		}, function(data) {
 				$.unblockUI();   
@@ -96,7 +95,7 @@ jQuery(function($){
 			$('#editMerchantProductModal #productId').val(pro);
 			$('#editMerchantProductModal #productRate').val(merchantProduct.productRate);
 			$('#editMerchantProductModal #rechargeRate').val(merchantProduct.rechargeRate);
-			$('#editMerchantProductModal #productStatus').val(merchantProduct.productStatus);
+			//$('#editMerchantProductModal #productStatus').val(merchantProduct.productStatus);
 			$('#editMerchantProductModal #aisle').val(merchantProduct.aisle);
 
 			
@@ -107,12 +106,77 @@ jQuery(function($){
 			$('#editMerchantProductModal #productId').val('');
 			$('#editMerchantProductModal #productRate').val('');
 			$('#editMerchantProductModal #rechargeRate').val('');
-			$('#editMerchantProductModal #productStatus').val('');
+			//$('#editMerchantProductModal #productStatus').val('');
 			$('#editMerchantProductModal #aisle').val('');
 			$('#editMerchantProductModal #machineId').val('');
 	   
 		});
 	}); 
+	
+	//弹出审核框
+    $('.auditMerchantProduct').click(function(){
+		var merchantProduct = $.data($(this).parent().parent()[0], 'merchantProduct');
+		var mer = merchantProduct.merchantName+'-'+merchantProduct.merchantCode
+		var pro = merchantProduct.productName+'-'+merchantProduct.productId
+		
+       $('#auditMerchantProductModal').on('show.bs.modal', function () {
+    	    $('#auditMerchantProductModal #merchantCode').val(mer);
+			$('#auditMerchantProductModal #productId').val(pro);
+			$('#auditMerchantProductModal #productRate').val(merchantProduct.productRate);
+			$('#auditMerchantProductModal #rechargeRate').val(merchantProduct.rechargeRate);
+			//$('#auditMerchantProductModal #productStatus').val(merchantProduct.productStatus);
+			$('#auditMerchantProductModal #aisle').val(merchantProduct.aisle);
+
+			
+		});
+       $('#auditMerchantProductModal').on('hide.bs.modal', function () {
+			// 清除				
+			$('#auditMerchantProductModal #merchantCode').val('');
+			$('#auditMerchantProductModal #productId').val('');
+			$('#auditMerchantProductModal #productRate').val('');
+			$('#auditMerchantProductModal #rechargeRate').val('');
+			//$('#auditMerchantProductModal #productStatus').val('');
+			$('#auditMerchantProductModal #aisle').val('');
+			$('#auditMerchantProductModal #machineId').val('');
+	   
+		});
+	}); 
+	
+	//审核
+    $('.auditMerchantProductBtn').click(function(){
+		// 商户编码
+		var merchantCode = $('#auditMerchantProductModal #merchantCode').val();		
+		merchantCode =merchantCode.split("-")[1];
+		if(kong.test(merchantCode)) {
+			$.gyzbadmin.alertFailure('商户编码不可为空');
+			return;
+		}		
+		// 产品编码
+		var productId = $('#auditMerchantProductModal #productId').val();
+		if(kong.test(productId)) {
+			$.gyzbadmin.alertFailure('产品编码不可为空');
+			return;
+		}	
+		productId =productId.split("-")[1];
+		// 保存
+		$.blockUI();
+		$.post(window.Constants.ContextPath + '<%=MerchantProductPath.BASE + MerchantProductPath.AUDIT %>', 
+		{ 
+			 'merchantCode'		: merchantCode,
+			 'productId'		: productId
+			}, function(data) {
+				$.unblockUI();
+				if(data.result == 'SUCCESS'){
+					$('#auditMerchantProductModal').modal('hide');
+					$.gyzbadmin.alertSuccess('审核成功', null, function(){
+						window.location.reload();
+					});
+				} else {
+					$.gyzbadmin.alertFailure('审核失败:' + data.message);
+				}
+			}, 'json'
+		);
+});
 	
   //保存修改
 	$('.editMerchantProductBtn').click(function(){
@@ -132,7 +196,7 @@ jQuery(function($){
 		}	
 		productId =productId.split("-")[1];
 		//产品汇率
-		var productRateStr = $('#editMerchantProductModal #rechargeRate').val() ;	
+		var productRateStr = $('#editMerchantProductModal #productRate').val() ;	
 		
 		//充值汇率
 		var rechargeRateStr = $('#editMerchantProductModal #rechargeRate').val();
@@ -319,6 +383,7 @@ jQuery(function($){
 											<th>产品汇率</th>
 											<th>充值汇率</th>
 											<th>产品开通状态</th>
+											<th>审核人</th>
 											<th>渠道</th>
 											<th>创建时间</th>
 											<th>修改时间</th>											
@@ -347,6 +412,7 @@ jQuery(function($){
 													</c:if>
 												
 												</td>
+												<td>${merchantProduct.realName}</td>	
 												<td>${merchantProduct.aisle}</td>	
 												<td>
 												<fmt:formatDate value="${merchantProduct.createTime}" pattern="yyyy-MM-dd HH:mm:ss" />
@@ -356,13 +422,23 @@ jQuery(function($){
 												</td>									
 												<td>
 													<input type="hidden" name="id" value="${materiel.id }"/>
-													<gyzbadmin:function url="<%=MerchantProductPath.BASE + MerchantProductPath.EDIT %>">
-													<a href="#" class="tooltip-success editMerchantProduct" data-rel="tooltip" data-toggle='modal' data-target="#editMerchantProductModal" title="Edit" >
-														<span class="green">
-															<i class="icon-edit bigger-120"></i>
-														</span>
-													</a>
-													</gyzbadmin:function>
+													<c:if test="${merchantProduct.productStatus !='00'}">
+														<gyzbadmin:function url="<%=MerchantProductPath.BASE + MerchantProductPath.EDIT %>">
+														<a href="#" class="tooltip-success editMerchantProduct" data-rel="tooltip" data-toggle='modal' data-target="#editMerchantProductModal" title="Edit" >
+															<span class="green">
+																<i class="icon-edit bigger-120"></i>
+															</span>
+														</a>
+														</gyzbadmin:function>
+													</c:if>
+													
+													<c:if test="${merchantProduct.productStatus !='00'}">
+														<a href="#" class="tooltip-success auditMerchantProduct" data-rel="tooltip" data-toggle='modal' data-target="#auditMerchantProductModal" title="Audit" >
+															<span class="green">
+																<i class="icon-check bigger-120"></i>
+															</span>
+														</a>
+													</c:if>
 													
 													<gyzbadmin:function url="<%=MerchantProductPath.BASE + MerchantProductPath.DELETE %>">
 													<a href="#" class="tooltip-success deleteMerchantProduct" data-rel="tooltip" data-toggle='modal' data-target="#deleteMerchantProductModal" title="Delete" >
@@ -448,7 +524,7 @@ jQuery(function($){
 										</td>
 									</tr>
 																													
-									<tr>
+									<!-- <tr>
 										<td class="td-left" >产品开通状态<span style="color: red">*</span></td>
 										<td class="td-right">
 												<select id="productStatus" name="productStatus" clasS="width-90"/>
@@ -458,7 +534,7 @@ jQuery(function($){
 													<option value="99">未开通</option>
 												</select>
 										</td>
-									</tr>	
+									</tr>	 -->
 									<!-- <tr>
 										<td class="td-left" >渠道</td>
 										<td class="td-right" >
@@ -475,7 +551,61 @@ jQuery(function($){
 					      </div><!-- /.modal-content -->
 					     </div>
 					</div><!-- /.modal -->			
-
+			
+						<div class="modal fade" id="auditMerchantProductModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					   <div class="modal-dialog">
+					      <div class="modal-content" style="width: 600px;">
+					         <div class="modal-header">
+					            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times;</button>
+					            <h4 class="modal-title" id="myModalLabel">商户产品审核</h4>
+					         </div>
+					         <div class="modal-body">
+					            <table class="modal-input-table">
+					            	<tr>	
+										<td class="td-left" width="30%">商户名称<span style="color:red">*</span></td>
+										<td class="td-right" width="70%" >											
+											<input type="text" id="merchantCode" name="merchantCode" readonly="readonly" style="background-color: #EEEEEE;" clasS="width-90"/>
+										</td>
+									</tr>
+									
+									<tr>	
+										<td class="td-left" width="30%">产品名称<span style="color:red">*</span></td>
+										<td class="td-right" width="70%" >											
+											<input type="text" id="productId" name="productId" readonly="readonly" style="background-color: #EEEEEE;" clasS="width-90"/>
+										</td>
+									</tr>
+																		
+									<tr>
+										<td class="td-left" >产品汇率</td>
+										<td class="td-right" >
+												<input type="text" id="productRate" readonly="readonly" name="productRate" clasS="width-90"/> 										
+											
+								        </td>
+									</tr>
+									
+									<tr>
+										<td class="td-left" >充值费率</td>
+										<td class="td-right" >
+												<input type="text" id="rechargeRate" readonly="readonly" name="rechargeRate" clasS="width-90"/>
+										</td>
+									</tr>
+																													
+									<!-- <tr>
+										<td class="td-left" >渠道</td>
+										<td class="td-right" >
+												<input type="text" id="aisle" name="aisle" clasS="width-90"/>
+										</td>
+									</tr> -->	
+				
+					            </table>
+					         </div>
+					         <div class="modal-footer">
+					            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					            <button type="button" class="btn btn-primary auditMerchantProductBtn">审核通过</button>
+					         </div>
+					      </div><!-- /.modal-content -->
+					     </div>
+					</div>
 			
 			<div class="modal fade" id="editMerchantProductModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					   <div class="modal-dialog">
@@ -515,7 +645,7 @@ jQuery(function($){
 										</td>
 									</tr>
 																													
-									<tr>
+									<!-- <tr>
 										<td class="td-left" >产品开通状态<span style="color: red">*</span></td>
 										<td class="td-right">
 												<select id="productStatus" name="productStatus" clasS="width-90"/>
@@ -525,7 +655,7 @@ jQuery(function($){
 													<option value="99">未开通</option>
 												</select>
 										</td>
-									</tr>	
+									</tr>	 -->
 									<!-- <tr>
 										<td class="td-left" >渠道</td>
 										<td class="td-right" >
