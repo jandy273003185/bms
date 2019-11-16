@@ -266,11 +266,17 @@ function addMerchantBtn(){
 	}
 	var custType =$("#custType").val();
 	var roleId = 'ent';
+	var merchantFlag = '0';
 	var merchantAccount =$("#merchantAccount").val();
 	if(custType =='0'){
 		roleId = 'per';
-	}else if(custType =='1' || custType =='2'){
+		merchantFlag = '1'
+	}else if(custType =='1' ){
 		roleId = 'ent';
+		merchantFlag = '0';
+	}else if(custType =='2'){
+		roleId = 'ent';
+		merchantFlag = '2';
 	}
 	var validateLicense =true ;
 	//验证商户账户唯一性
@@ -474,7 +480,7 @@ function addMerchantBtn(){
 	/* var cnaps =  $("#cnaps").val().trim(); */
 	var cnaps =  $("#branchBank").val().trim();
 	var compMainAcctType = $("#compMainAcctType").val().trim();
-	var merchantFlag = $("#merchantFlag").val();
+	
 
 	$.blockUI();
 
@@ -728,7 +734,7 @@ function businessForever(){
 								</select>
 								
 							</td>
-							<td class="td-left">商户标志：</td>
+							<!-- <td class="td-left">商户标志：</td>
 							<td class="td-right">
 							   <select name="merchantFlag" class="width-90" id="merchantFlag" >
 									<option value="0">商户</option>
@@ -737,7 +743,7 @@ function businessForever(){
 									<option value="3">代理商</option>
 								</select>
 								
-							</td>
+							</td> -->
 						</tr>
                         <tr>
 						    <td class="td-left" width="18%">商户名称：<span style="color:red;">（必填)</span></td>

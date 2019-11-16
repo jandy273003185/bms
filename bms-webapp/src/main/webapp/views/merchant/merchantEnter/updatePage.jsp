@@ -682,9 +682,6 @@
 							</tr>
 							<tr>
 								<td class="td-left">商户账号：</td>
-								<%-- <td type="hidden" class="td-right" style="color:#666;padding:10px 8px" id="custId"></td>
-								<td type="hidden" class="td-right" style="color:#666;padding:10px 8px" id="merchantCode">${merchantVo.merchantCode }</td>
-								<td type="hidden" class="td-right" style="color:#666;padding:10px 8px" id="authId">${merchantVo.authId }</td> --%>
 								<td class="td-right" style="color:#666;padding:10px 8px">
 									${merchantVo.email }
 								</td>
@@ -706,8 +703,6 @@
 										<td>个体户</td>
 									</c:when>
 								</c:choose>
-
-								<%-- <td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.custType }</td> --%>
 							</tr>
 							<tr>
 								<td class="td-left"  width="18%">商户名称：</td>
@@ -729,8 +724,6 @@
 									<input type="text" id="contactPhone" name="contactPhone" placeholder="请输入客服号码" style="width:90%" value ="${merchantVo.contactPhone }" >
 								</td>
 							</tr>
-
-
 							<tr>
 								<td class="td-left">商户地址：</span></td>
 								<td class="td-right" colspan="3">
@@ -903,9 +896,9 @@
 								<td class="td-left">开户省份：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
 									<select class="width-90" id="bankProvinceName" onchange="getBankCityList();">
-										<c:if test="${not empty provincelist_ }">
+										<c:if test="${not empty provincelist }">
 											<option value=${merchantVo.bankProvinceName }>${merchantVo.bankProName }</option>
-											<c:forEach items="${provincelist_ }" var="prov">
+											<c:forEach items="${provincelist }" var="prov">
 												<option value="${prov.provinceId}">${prov.provinceName}</option>
 											</c:forEach>
 										</c:if>
@@ -933,7 +926,11 @@
 								</td>
 								<td class="td-left">开户支行：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
-									<input type="text" id="branchBank" name="branchBank" placeholder="请输入开户行" value="${merchantVo.branchBank }" style="width:90%">
+									<select name="branchBank" id="branchBank" class="width-90" >
+	                                    <option value=${merchantVo.branchBank }>${merchantVo.branchBank }</option>
+	                                </select>
+	                               	<label id="branchBankLab" class="label-tips"></label>
+									<%-- <input type="text" id="branchBank" name="branchBank" placeholder="请输入开户行" value="${merchantVo.branchBank }" style="width:90%"> --%>
 								</td>
 							</tr>
 							<tr>
