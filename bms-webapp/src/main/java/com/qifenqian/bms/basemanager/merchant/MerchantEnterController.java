@@ -262,12 +262,14 @@ public class MerchantEnterController {
 		if(null != branchBank) {
 			merchant.setBranchBank(branchBank.getBankName());
 		}
-		
         List<BmsProtocolContent> contents = merchantService.selectContentByCustId(merchantVo.getCustId());
-
         if (null != contents && contents.size() > 0) {
 
             jsonObject.put("bmsProtocolContent", contents.get(0));
+        }
+        TdCustInfo tdCustInfo = tdCustInfoMapper.selectById(merchant.getAgentName());
+        if(null != tdCustInfo) {
+        	merchant.setAgentName(tdCustInfo.getCustName());
         }
         Bank bank = new Bank();
 		Rule rule = new Rule();
@@ -320,6 +322,10 @@ public class MerchantEnterController {
         if (null != contents && contents.size() > 0) {
 
             jsonObject.put("bmsProtocolContent", contents.get(0));
+        }
+        TdCustInfo tdCustInfo = tdCustInfoMapper.selectById(merchant.getAgentName());
+        if(null != tdCustInfo) {
+        	merchant.setAgentName(tdCustInfo.getCustName());
         }
         Bank bank = new Bank();
 		Rule rule = new Rule();
@@ -422,6 +428,10 @@ public class MerchantEnterController {
 		if(null != branchBank) {
 			merchant.setBranchBank(branchBank.getBankName());
 		}
+		TdCustInfo tdCustInfo = tdCustInfoMapper.selectById(merchant.getAgentName());
+        if(null != tdCustInfo) {
+        	merchant.setAgentName(tdCustInfo.getCustName());
+        }
 		mv.addObject("merchantVo", merchant);
 		return mv;
     }

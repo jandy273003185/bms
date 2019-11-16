@@ -428,7 +428,37 @@ public class MerchantVo implements Serializable {
 	
 	private String bankCitName;
 
+	private String referrer;
 	
+	private String serviceLevel;
+	
+	private String agentCode;
+	
+	
+	public String getReferrer() {
+		return referrer;
+	}
+
+	public void setReferrer(String referrer) {
+		this.referrer = referrer;
+	}
+
+	public String getServiceLevel() {
+		return serviceLevel;
+	}
+
+	public void setServiceLevel(String serviceLevel) {
+		this.serviceLevel = serviceLevel;
+	}
+
+	public String getAgentCode() {
+		return agentCode;
+	}
+
+	public void setAgentCode(String agentCode) {
+		this.agentCode = agentCode;
+	}
+
 	public String getBankProName() {
 		return bankProName;
 	}

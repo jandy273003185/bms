@@ -138,6 +138,7 @@
                     $.gyzbadmin.alertSuccess("审核完成！",function(){
                     },function(){
                         window.close();
+                        window.opener.location.href=window.opener.location.href;
                     });
                 }else{
                     $.gyzbadmin.alertFailure("审核失败！"+data.message);
@@ -165,6 +166,7 @@
                     $.gyzbadmin.alertSuccess("审核完成！",function(){
                     },function(){
                         window.close();
+                        window.opener.location.href=window.opener.location.href;
                     });
                 }else{
                     $.gyzbadmin.alertFailure("审核失败！"+data.message);
