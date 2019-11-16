@@ -728,7 +728,7 @@ function businessForever(){
 								</select>
 								
 							</td>
-							<td class="td-left">商户标志：<span style="color:red;">（必填)</span></td>
+							<td class="td-left">商户标志：</td>
 							<td class="td-right">
 							   <select name="merchantFlag" class="width-90" id="merchantFlag" >
 									<option value="0">商户</option>

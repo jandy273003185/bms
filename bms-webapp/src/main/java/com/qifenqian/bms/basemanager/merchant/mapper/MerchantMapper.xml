@@ -70,7 +70,9 @@
 			cnaps,
 			COMP_MAIN_ACCT_TYPE,
 			bank_province_name,
-			bank_city_name
+			bank_city_name,
+			referrer,
+			service_level
 		) VALUES(
 			#{custId, 			jdbcType=VARCHAR},
 			#{custName, 		jdbcType=VARCHAR},
@@ -138,7 +140,9 @@
 			#{cnaps, 	jdbcType=VARCHAR},
 			#{compMainAcctType, 	jdbcType=VARCHAR},
 			#{bankProvinceName, 	jdbcType=VARCHAR},
-			#{bankCityName, 	jdbcType=VARCHAR}
+			#{bankCityName, 	jdbcType=VARCHAR},
+			#{referrer, 	jdbcType=VARCHAR},
+			#{serviceLevel, 	jdbcType=VARCHAR}
 		)
 	</insert>
 
@@ -1710,11 +1714,12 @@
 		    M.area_name as areaName,
 		    P.PROVINCE_NAME provinceName,
 		    SP.PROVINCE_NAME bankProName,
-		    SC.CITY_NAME bankCitName
+		    SC.CITY_NAME bankCitName,
+		    T.CERTIFY_DATETIME aduitTime
 		FROM TD_CUST_INFO C
 		INNER JOIN TD_LOGIN_USER_INFO U
 		ON C.CUST_ID=U.CUST_ID
-
+		
 		JOIN TD_CERTIFICATE_AUTH T
 		ON C.AUTH_ID = T.AUTH_ID
 		left JOIN SYS_USER S

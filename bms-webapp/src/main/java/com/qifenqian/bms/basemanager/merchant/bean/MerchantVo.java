@@ -366,7 +366,10 @@ public class MerchantVo implements Serializable {
 	 * 审核人  
 	 */
 	private String aduitUserName;
-	
+	/**
+	 * 审核时间
+	 */
+	private Date aduitTime;
 
 	/** 开户行地址 */
 	private String openAddressRec;
@@ -1073,6 +1076,15 @@ public class MerchantVo implements Serializable {
 
 	public void setAduitUserName(String aduitUserName) {
 		this.aduitUserName = aduitUserName;
+	}
+
+	
+	public Date getAduitTime() {
+		return aduitTime;
+	}
+
+	public void setAduitTime(Date aduitTime) {
+		this.aduitTime = aduitTime;
 	}
 
 	public String getOpenAddressRec() {
