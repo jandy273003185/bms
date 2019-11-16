@@ -5,6 +5,7 @@
 <%@page import="com.qifenqian.bms.basemanager.merchant.AuditorPath"%>
 <%@page import="com.qifenqian.bms.basemanager.merchant.TinyMerchantPath" %>
 <%@page import="com.qifenqian.bms.basemanager.agency.controller.AgentRegisterPath" %>
+<%@ page import="com.qifenqian.bms.basemanager.city.CityPath" %>
 <%-- <script src='<c:url value="/static/js/checkRule_source.js"/>'></script>
 <script src='<c:url value="/static/My97DatePicker/WdatePicker.js"/>'></script> --%>
 <script src='<c:url value="/static/js/ajaxfileupload.js"/>'></script>
@@ -193,6 +194,22 @@
         }
 
         $.ajax({
+    		type:"POST",
+    		dataType:"json",
+    		url:window.Constants.ContextPath +'<%=CityPath.BASE+CityPath.GET_CITY_BY_PROVINCEID %>',
+    		data:
+    		{
+    			"provinceId" 	: provVal
+    		},
+    		success:function(data){
+    			var cityList = data.cityList;
+    			for ( var city in cityList) {
+    				$("#bankCityName").append(
+    					"<option value='"+ cityList[city].cityId +"'>" + cityList[city].cityName + "</option>");
+    			}
+    		}
+    	})
+        <%-- $.ajax({
             type:"POST",
             dataType:"json",
             url:window.Constants.ContextPath +'<%=MerchantPath.BASE+MerchantPath.GRTCITYLIST %>',
@@ -212,9 +229,38 @@
                 }else{
                 }
             }
-        })
+        }) --%>
     }
-
+	
+    function getbranchBank(){
+    	var provVal = $("#bankProvinceName").val().trim();
+    	var city = $("#bankCityName").val().trim();
+    	var compAcctBank = $("#compAcctBank").val();
+    	
+    	var channelCode ="";
+    	$.post(window.Constants.ContextPath +"/common/info/bankCnapsInfo",
+    	{
+    		"provinceId": provVal,
+    		"cityCode":   city,
+    		"bankCode":   compAcctBank,
+    		"channelCode":channelCode
+    	},
+    	function(data){
+    		if(data.result=="SUCCESS"){
+    			var branchBankList = data.branchBankList;
+    			$("#branchBank").html("");
+       			for ( var branchBank in branchBankList) {
+       				$("#branchBank").append(
+       						"<option value='"+ branchBankList[branchBank].branchBankCode +"'>"
+       								+ branchBankList[branchBank].bankName + "</option>"); 
+       			}
+    		}
+    		else{
+    			alert("银行和开户城市不能为空");
+    		}
+    	},'json'
+    	);	
+    	}
     function updateMerchantBtn(){
 
         if(!(isNull($("#merchantEmail")[0])) && (!verifyEmailAddress($("#merchantEmail")[0]))){
@@ -875,7 +921,7 @@
 							<tr>
 								<td class="td-left">开户银行：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
-									<select class="width-90" id="compAcctBank" name="compAcctBank">
+									<select class="width-90" id="compAcctBank" name="compAcctBank" onchange="getbranchBank();">
 										<c:if test="${not empty banklist }">
 											<option value=${merchantVo.compAcctBank }>${merchantVo.bankName }</option>
 											<c:forEach items="${banklist }" var="bank">
