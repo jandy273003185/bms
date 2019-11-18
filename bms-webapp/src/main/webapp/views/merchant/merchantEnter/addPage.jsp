@@ -122,9 +122,7 @@ function getbranchBank(){
    								+ branchBankList[branchBank].bankName + "</option>"); 
    			}
 		}
-		else{
-			alert("银行和开户城市不能为空");
-		}
+		
 	},'json'
 	);	
 	}

@@ -210,7 +210,7 @@ public class KftMerchantReportedController {
 		List<MerchantCity> merchantProvinceList = fmIncomeService.getSuiXingMerchantCityList(areaType);
 		
 		mv.addObject("merchantVo", merchant);
-		
+		mv.addObject("channlCode", channlCode);
 		mv.addObject("custInfo", custInfo);
 		
 		if(null!=proviceList && proviceList.size()>0){
