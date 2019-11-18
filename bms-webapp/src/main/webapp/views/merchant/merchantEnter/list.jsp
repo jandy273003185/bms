@@ -526,17 +526,16 @@
 								<tr>
 									<%--<th><input name="" type="checkbox" value=""></th>--%>
 									<th width="10%">商户名称</th>
-									<th>商户简称</th>
-									<th>商户编号</th>
-									<th>邮箱账号</th>
+									<th width="10%">商户简称</th>
+									<th width="10%">商户编号</th>
+									<th width="10%">邮箱账号</th>
 									<th width="12%">录入时间</th>
-									<th width="10%">商户状态</th>
-									<th width="10%">审核状态</th>
-									<th width="10%">报备状态</th>
-									<!--
-                                    <th>报备审核状态</th> -->
-									<th width="10%">审核人</th>
-									<th width="28%">操作</th>
+									<th width="7%">商户状态</th>
+									<th width="7%">审核状态</th>
+									<th width="7%">报备状态</th>
+									<!--<th>报备审核状态</th> -->
+									<th width="5%">审核人</th>
+									<th width="22%">操作</th>
 								</tr>
 								</thead>
 								<tbody>

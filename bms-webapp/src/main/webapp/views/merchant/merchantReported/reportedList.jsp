@@ -893,16 +893,16 @@
 								<table id="sample-table-2" class="list-table">
 									<thead>
 										<tr>
-											<th>商户名称</th>
-											<th>商户简称</th>
-											<th>商户编号</th>
-											<th>邮箱账号</th>
-											<th>报备渠道</th>
-											<th>渠道商户号</th>
-											<th>商户报备状态</th>
-											<th>返回信息</th>
-											<th>报备时间</th>
-											<th>操作</th>
+											<th width="10%">商户名称</th>
+											<th width="10%">商户简称</th>
+											<th width="10%">商户编号</th>
+											<th width="10%">邮箱账号</th>
+											<th width="5%">报备渠道</th>
+											<th width="10%">渠道商户号</th>
+											<th width="7%">商户报备状态</th>
+											<th width="14%">返回信息</th>
+											<th width="10%">报备时间</th>
+											<th width="14%">操作</th>
 										</tr>
 									</thead>
 									<tbody>

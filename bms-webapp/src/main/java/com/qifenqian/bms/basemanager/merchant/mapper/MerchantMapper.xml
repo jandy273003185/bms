@@ -1794,6 +1794,9 @@
 			<if test="businessTerm!=null">
 				BUSINESS_TERM=#{businessTerm,jdbcType=DATE},
 			</if>
+			<if test="businessTermStart!=null">
+				BUSINESS_TERM_START=#{businessTermStart,jdbcType=DATE},
+			</if>
 			<if test="businessTermEnd!=null">
 				BUSINESS_TERM_END=#{businessTermEnd,jdbcType=DATE},
 			</if>
@@ -1882,10 +1885,17 @@
                 bank_province_name =  #{bankProvinceName , jdbcType = VARCHAR},
             </if>
             <if test="bankCityName != null">
-                bank_city_name =  #{bankCityName , jdbcType = VARCHAR}
+                bank_city_name =  #{bankCityName , jdbcType = VARCHAR},
             </if>
-            
-
+            <if test="shortName != null">
+                SHORT_NAME =  #{shortName , jdbcType = VARCHAR},
+            </if>
+            <if test="contactMobile != null">
+                contact_mobile =  #{contactMobile , jdbcType = VARCHAR},
+            </if>
+			<if test="contactName != null">
+                contact_name =  #{contactName , jdbcType = VARCHAR}
+            </if>
            
 
 		
