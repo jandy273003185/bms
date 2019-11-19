@@ -139,9 +139,9 @@ $(function(){
                             <tr>
 								<td class="td-left" width="18%">商户编号：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" width="32%"> 
-									<input type="text" id="merchantCode" name="merchantCode" placeholder="请输入商户编号" maxlength=""  value="${custInfo.merchantCode }" style="width:90%">
+									<input type="text" id="merchantCode" name="merchantCode" readonly placeholder="请输入商户编号" maxlength=""  value="${custInfo.merchantCode }" style="width:90%">
 								</td>
-                                <td class="td-left" width="18%">商户简称：<span style="color:red;">(必填)</span></td>
+                                <td class="td-left" width="18%">商户名称：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" width="32%"> 
 									<input type="text" id="custName" name="custName" placeholder="请输入商户简称" maxlength=""  value="${custInfo.custName }" style="width:90%">
 								</td>
@@ -283,7 +283,7 @@ $(function(){
 								<td class="td-left">法人证件类型：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									<select name="representativeCertType" id="representativeCertType" style="width:90%;"  >
-										<option value="">--请选择--</option>
+										
 										<option value="00">--身份证--</option>
 										<option value="03">--军人证--</option>
 										<option value="04">--警察证--</option>
@@ -339,7 +339,7 @@ $(function(){
 								<td class="td-right"> 
 									<input type="text" id="actNm" name="actNm" maxlength="100" placeholder="请输入结算账户名称"  value="" style="width:90%">
 								</td>
-								<td class="td-left">银行卡号：<span style="color:red;">(必填)</span></td>
+								<td class="td-left">结算账号：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									<input type="text" id="bankCardNo" name="bankCardNo" maxlength="100" placeholder="请输入银行卡号"  value="${custInfo.compMainAcct }" style="width:90%">
 								</td>

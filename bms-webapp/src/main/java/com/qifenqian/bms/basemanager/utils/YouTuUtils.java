@@ -109,6 +109,36 @@ public class YouTuUtils {
 				object.put("result", "SUCCESS");
 				object.put("message", "图片解析成功");
 				
+			}else if(flag.equals("bankCardPhoto")){
+				respose = faceYoutu.creditCard(url, APP_ID, SECRET_ID);
+				com.alibaba.fastjson.JSONObject mapType = com.alibaba.fastjson.JSONObject.parseObject(respose.toString());
+				List<Map<String, Object>> listObjectFir = (List<Map<String, Object>>) JSONArray.parse(mapType.get("items").toString());
+				 if(listObjectFir==null||listObjectFir.size()<=0){
+					logger.error("图片解析出现问题");
+					object.put("result", "FAIL");
+					object.put("message", "图片解析出现问题,结果为null");
+				 }else{
+					 for (int i = 0; i < listObjectFir.size(); i++) {
+						 Map<String, Object> map = listObjectFir.get(i);
+						 for (int j = 0;j < map.size();j++) {
+							 if("卡号".equals(map.get("item"))){
+								 object.put("creditCardId", map.get("itemstring"));//公司名称
+								 break;
+							 }else if("银行信息".equals(map.get("item"))){
+								 String str = map.get("itemstring").toString();
+								 String cardNo = str.substring(str.indexOf("(")+1, str.lastIndexOf(")"));
+								 String regex = "(^0*)|(0*$)";//(以 零个或者多个 0 结尾)   或者(以 零个或者多个 0 开头)
+								 object.put("cardNo",cardNo.replaceAll(regex, ""));//银行编号
+								 break;
+							 }
+						 }
+					 }
+					 object.put("result", "SUCCESS");
+					 object.put("message", "图片解析成功");
+					 
+				 }
+				
+				
 			}
 		
 		} catch (Exception e) {

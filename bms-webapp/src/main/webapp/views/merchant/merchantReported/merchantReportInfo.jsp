@@ -29,6 +29,53 @@
 		table tr td{word-wrap:break-word;word-break:break-all;}
 	</style>
 </head>
+
+<script type="text/javascript">
+
+	$(function() {
+
+		if($("#custType").val() =='0' ||$("#custType").val() =='2' ){
+			//个人
+			$("#bankCardPhoto_").attr("style","display:");
+			$("#openAccount_").attr("style","display:none");
+		}
+		if($("#custType").val() =='1'){
+			//企业
+			$("#bankCardPhoto_").attr("style","display:none");
+			$("#openAccount_").attr("style","display:");
+		}
+
+		var custId = $("#custId").val();
+		var authId = $("#authId").val();
+		
+		$("#openPhotoImageDiv").show();
+    	$("#businessPhotoImageDiv").show();
+    	$("#certAttribute1ImageDiv").show();
+    	$("#certAttribute2ImageDiv").show();
+    	$("#legalCertAttribute1ImageDiv").show();
+    	$("#legalCertAttribute2ImageDiv").show();
+    	$("#bankCardBackPhotoDiv").show();
+    	$("#settleIdCardDiv").show();
+    	$("#doorPhotoImageDiv").show();
+    	$("#bankCardPhotoImageDiv").show();
+    	$("#cooperateImageDiv").show();
+    	
+    	$("#businessPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=02&authId="+authId);
+    	$("#certAttribute1ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=0&authId="+authId);
+    	$("#certAttribute2ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=1&authId="+authId);
+    	$("#doorPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=08&authId="+authId);
+    	$("#bankCardPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=05&authId="+authId);
+    	$("#openPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=03&authId="+authId);
+    	$("#legalCertAttribute1ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=0&authId="+authId);
+    	$("#legalCertAttribute2ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=1&authId="+authId);
+    	$("#bankCardBackPhotoDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=14&authId="+authId);
+    	$("#settleIdCardDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=13&authId="+authId);
+    	$("#cooperateImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=15&authId="+authId);
+
+    });
+
+
+</script>
 <body>
 <!-- 用户信息 -->
 <%@ include file="/include/top.jsp"%>
@@ -46,11 +93,10 @@
 			<div class="page-content">
 				<div class="row">
 					<div class="col-xs-12">
-					<input type="hidden" id="taskCode" name="taskCode" value ="${remark}"/>
-					<input type="hidden" id="status" name="status" value="${status}"/>
-					<input type="hidden" id="channlCode" name="channlCode" value="KFT_PAY"/>
+					<input type="hidden" id="channlCode" name="channlCode" value="${channlCode}"/>
 					<input type="hidden" id="custId" name="custId" value="${custInfo.custId }"/>
 					<input type="hidden" id="authId" name="authId" value="${custInfo.authId }"/>
+					<input type="hidden" name="custType" id="custType" value="${merchantVo.custType}">
 					<input type="hidden" id="businessPhototemp"/>
 					<input type="hidden" id="openPhototemp"/>
 					<input type="hidden" id="certAttribute1temp" />
@@ -104,103 +150,19 @@
 										<td class="td-right">个体户</td>
 									</c:when>
 								</c:choose>
-								   <!-- <select  name="merchantProperty" id="merchantProperty"  class="width-90" onchange = "getType();">
-										<option value="">--请选择商户类型--</option>
-										<option value="1">--个人--</option>
-										<option value="2">--企业--</option>
-										<option value="3">--个体工商户--</option>
-										<option value="4">--事业单位--</option>
-									</select>
-									<label class="label-tips" id="merchantPropertyLab"></label>	 -->
 							</tr>
-	                        <%-- <tr>
-							    <td class="td-left">商户行业信息：</td>
-								<td class="td-right" colspan="3"> 
-								<div class="col-xs-2 pd0" style="padding:0;">
-								   <select name="industry" id="industry" class="width-90" onchange="getLevel();">
-										<option value="">--请选择行业--</option>
-											<c:if test="${not empty industryList }">
-					                           	<c:forEach items="${industryList }" var="industry">
-					                           		<option id="${industry.levelOne}" value="${industry.levelOne}">${industry.levelOne}</option>
-					                           	</c:forEach>
-				                 		  	</c:if>
-									</select>	
-								</div>
-								<div class="col-xs-2 pd0" style="margin:0 1%;padding:0;" >
-	                                <select name="levelTwo" id="levelTwo" class="form-control" onchange="getLevelTwo();" >
-	                                    <option value="">--请选择二级类目--</option>
-	                                </select>
-	                               	<label id="levelTwoLabel" class="label-tips"></label>
-	                            </div>
-	                            <div class="col-xs-2 pd0" style="margin:0 1%;padding:0;" >
-	                                <select name="levelThree" id="levelThree" class="form-control">
-	                                    <option value="">--请选择三级类目--</option>
-	                                </select>
-	                               	<label id="levelThreeLab" class="label-tips"></label>
-	                            </div>
-								</td>
-							</tr> --%>
 							<tr>
 								<td class="td-left">注册地址：</td>
 								<td class="td-right" colspan="3">
-									<%-- <div class="col-xs-2 pd0" style="padding:0;">
-	                                    <select class="form-control" name="merchantProvince" id="merchantProvince" onchange="getMerchantCity();">
-	                                       	<option value="">--请选择省--</option>
-		                                    <c:if test="${not empty provinceList }">
-		                                        <c:forEach items="${provinceList }" var="merchantProvince">
-		                                            <option id="${merchantProvince.provinceName}"
-		                                                    value="${merchantProvince.provinceName}">
-		                                                ${merchantProvince.provinceName}
-		                                            </option>
-		                                        </c:forEach>
-		                                    </c:if>
-		                                </select>
-	                                </div>
-	                                <div class="col-xs-2 pd0" style="margin:0 1%;padding:0;">
-		                                <select class="form-control" name="merchantCity" id="merchantCity"  onchange="getMerchantArea();">
-		                                    <option value="" id="cityDef">--请选择市--</option>
-		                                </select>
-	                                </div>
-	                                <div class="col-xs-2 pd0" style="padding:0;">
-		                                <select class="form-control" name="merchantArea" id="merchantArea" >
-		                                    <option value="" id="areaDef">--请选择区--</option>
-		                                </select>
-	                                </div>
-                                    <div class="col-xs-5 pd0" style="padding:0;margin-left:1%">
-	                                    <input type="text" name="cprRegAddr" id="cprRegAddr" readonly placeholder="详细地址"  value="${custInfo.custAdd }" style="width:100%">
-	                                </div>
-	                                <label class="label-tips" id="countryLab"></label> --%>
 	                                <input type="text" name="cprRegAddr" id="cprRegAddr" readonly placeholder="详细地址"  value="${custInfo.custAdd }">
 								</td>
 							</tr>
-							<!-- <tr>
-							    <td class="td-left">商户属性：</td>
-								<td class="td-right"> 
-								   <select  name="merchantAttribute" id="merchantAttribute"  class="width-90" >
-										<option value="1">--实体特约商户--</option>
-										<option value="2">--网络特约商户--</option>
-										<option value="3">--实体兼网络特约商户--</option>
-									</select>
-									<label class="label-tips" id="merchantAttributeLab"></label>	
-								</td>
-								<td class="td-left">业务场景说明：</td>
-								<td class="td-right"> 
-								    <input type="text" id="businessScene" name="businessScene" placeholder="业务场景说明" maxlength=""  value="" style="width:90%">
-									<label class="label-tips" id="businessSceneLab"></label>
-								</td>
-                                
-							</tr> -->	
 						 	<tr>
 								<td class="td-left">营业执照编号：</td>
 								<td class="td-right">
 									<input type="text" name="businessLicense" id="businessLicense" readonly  placeholder="请输入营业执照"  value="${custInfo.businessLicense }" style="width:90%">
 									<label class="label-tips" id="businessLicenseLab"></label>
 								</td>
-								<!-- <td class="td-left">营业执照有效期：</td>
-								<td class="td-right"> 
-									<input type="text" id="businessTermEnd" name="businessTermEnd" placeholder="请输入8位营业执照有效截止期"  value="" maxlength="" style="width:90%">
-									<label class="label-tips" id="businessLicenseLab"></label>
-								</td> -->
 							</tr>
 							<tr id="businessPhotoType" style = "display:">
 								<td class="td-left">营业执照照片：</td>
@@ -233,7 +195,7 @@
 									</div>
 								</td>
 							</tr>
-							<tr id="cooperateType" style = "display:">
+							<!-- <tr id="cooperateType" style = "display:">
 								<td class="td-left">合作函：</td>
 								<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success cooperateClick"  data-target="#previewImageModal"  >
@@ -248,7 +210,7 @@
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
 								</td>
-							</tr>
+							</tr> -->
 	                        <tr>
 								<td colspan="4" class="headlerPreview" style="background:#7ebde1;">法人信息</td>
 							</tr>
@@ -266,57 +228,6 @@
 								</td>
 							</tr>
                             <tr>
-                            	<!-- <td class="td-left">法人证件类型：</td> -->
-								<%-- <c:choose>
-									<c:when test="${merchantVo.representativeCertType =='00'}">
-										<td class="td-right">身份证</td>
-									</c:when>
-									<c:when test="${merchantVo.representativeCertType =='05'}">
-										<td class="td-right">港澳居民往来内地通行证</td>
-									</c:when>
-									<c:when test="${merchantVo.representativeCertType =='03'}">
-										<td class="td-right">军人证</td>
-									</c:when>
-									<c:when test="${merchantVo.representativeCertType =='04'}">
-										<td class="td-right">警察证</td>
-									</c:when>
-									<c:when test="${merchantVo.representativeCertType =='06'}">
-										<td class="td-right">台湾居民来往大陆通行证</td>
-									</c:when>
-									<c:when test="${merchantVo.representativeCertType =='07'}">
-										<td class="td-right">护照</td>
-									</c:when>
-									<c:when test="${merchantVo.representativeCertType =='98'}">
-										<td class="td-right">单位证件</td>
-									</c:when>
-									<c:when test="${merchantVo.representativeCertType =='06'}">
-										<td class="td-right">其他证件</td>
-									</c:when>
-								</c:choose> --%>
-								<!-- <td class="td-right"> 
-									<select name="representativeCertType" id="representativeCertType" style="width:90%;"  >
-										<option value="">--请选择--</option>
-										<option value="00">--身份证--</option>
-										<option value="03">--军人证--</option>
-										<option value="04">--警察证--</option>
-										<option value="05">--港澳居民往来内地通行证--</option>
-										<option value="06">--台湾居民来往大陆通行证--</option>
-										<option value="07">--护照--</option>
-										<option value="98">--单位证件--</option>
-										<option value="06">--其他证件--</option>
-									</select>
-									<label class="label-tips" id="representativeCertTypeLab"></label>
-								</td> -->
-								<%-- <td class="td-left">手机号码：</td>
-								<td class="td-right"> 
-									<input type="text" name="mobileNo" id="mobileNo" placeholder="请输入手机号码"  value="${custInfo.mobile }" style="width:90%">
-								</td> --%>
-								
-								<!-- <td class="td-left">身份证有效期：</td>
-								<td class="td-right"> 
-									<input type="text" id="representativeTermEnd" name="representativeTermEnd" placeholder="请输入8位身份证有效截止期"  value="" maxlength="" style="width:90%">
-									<label class="label-tips" id="representativeTermEndLab"></label>
-								</td> -->
 							</tr>
 							<tr>
 								<td class="td-left">联系人姓名：</td>
@@ -396,39 +307,13 @@
 										<td class="td-right">对公</td>
 									</c:when>
 								</c:choose>
-								<!-- <td class="td-right">
-									<select name="actType" id="actType" style="width-90" >
-										<option value="">--请选择--</option>
-										<option value="1">--个人--</option>
-										<option value="2">--企业--</option>
-									</select> 
-									<label class="label-tips" id="actTypeLab"></label>
-								</td> -->
-								<!-- <td class="td-left">结算银行：</td>
+								<td class="td-left">结算费率：</td>
 								<td class="td-right"> 
-									<select name="settleBankNo" id="settleBankNo" style="width:90%;"  >
-										<option value="">--请选择--</option>
-										<option value="1041000">--中国银行--</option>
-										<option value="3135840">--平安银行--</option>
-										<option value="3011000">--交通银行--</option>
-										<option value="0025840">--邮政储蓄银行--</option>
-										<option value="3031000">--光大银行--</option>
-										<option value="3041000">--华夏银行--</option>
-										<option value="3021000">--中信银行--</option>
-										<option value="3065810">--广发银行--</option>
-										<option value="3102900">--浦东发展银行--</option>
-										<option value="3135841">--上海银行--</option>
-										<option value="1021000">--工商银行--</option>
-										<option value="1031000">--农业银行--</option>
-										<option value="1051000">--建设银行--</option>
-										<option value="3051000">--民生银行--</option>
-										<option value="3085840">--招商银行--</option>
-										<option value="3091000">--兴业银行--</option>
-									</select>
-									<label class="label-tips" id="settleBankNoLab"></label>
-								</td> -->
+									<input type="text" id="agentRate" name="agentRate" maxlength="100" readonly  value="${merchantVo.agentRate }" style="width:90%">
+									<label class="label-tips" id="agentRateLab"></label>
+								</td>
 							</tr>
-							<tr id="openPhotoType" style = "display:">
+							<tr id="openAccount_" style = "display:none">
 								<td class="td-left">开户许可证：</td>
 								<td class="td-right" colspan="3"> 
 									<a data-toggle="modal" class="tooltip-success openPhotoClick" data-target="#previewImageModal">
@@ -443,7 +328,7 @@
 									</div>
 								</td>
 							</tr>
-							<tr id="bankCardPhotoType" style = "display:">
+							<tr id="bankCardPhoto_" style = "display:">
 				                <td class="td-left">银行卡正面照：</td>
 		                    	<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success bankCardPhotoClick"  data-target="#previewImageModal"  >
@@ -488,285 +373,11 @@
 									</div>
 								</td>
 							 </tr>
-							 <!-- <tr>
-							    <td  id="wxsm" value="010101">微信扫码</td>
-							    <td >
-							        <input type="text" id="wxsmRate"  placeholder="万分比费率"  value="">
-							    </td>
-							    <td >
-							       	<input type="text" id="wxsmAttach" placeholder="附加费率(分)"  value="" style="width:90%"> 
-							    </td>
-							    <td >
-							    	<select id="wxsmType" style="width:50%;"  >
-										<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
-									</select>
-							    </td>
-							</tr>
-							<tr>
-							    <td id="wxgzh" value="010102">微信公众号/H5</td>
-							    <td >
-							        <input type="text" id="wxgzhRate"  placeholder="万分比费率"  value="">
-							    </td>
-							    <td >
-							       	<input type="text" id="wxgzhAttach" placeholder="附加费率(分)"  value="" style="width:90%"> 
-							    </td>
-							    <td >
-							    	<select id="wxgzhType" style="width:50%;"  >
-										<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
-									</select>
-							    </td>
-							</tr>
-							<tr>
-							    <td id="wxapp" value="010103">微信APP</td>
-							    <td >
-							        <input type="text" id="wxappRate"  placeholder="万分比费率"  value="">
-							    </td>
-							    <td >
-							       	<input type="text" id="wxappAttach" placeholder="附加费率(分)"  value="" style="width:90%"> 
-							    </td>
-							    <td >
-							    	<select id="wxappType" style="width:50%;"  >
-										<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
-									</select>
-							    </td>
-							</tr>
-							<tr>
-							    <td id="wxsmS0" value="010104">微信扫码—S0</td>
-							    <td >
-							        <input type="text" id="wxsmS0Rate"  placeholder="万分比费率"  value="">
-							    </td>
-							    <td >
-							       	<input type="text" id="wxsmS0Attach" placeholder="附加费率(分)"  value="" style="width:90%"> 
-							    </td>
-							    <td >
-							    	<select id="wxsmS0Type" style="width:50%;"  >
-							    		<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
-									</select>
-							    </td>
-							</tr>
-							<tr>
-							    <td id="wxgzhS0" value="010105">微信公众号/H5—S0</td>
-							    <td >
-							        <input type="text" id="wxgzhS0Rate"  placeholder="万分比费率"  value="">
-							    </td>
-							    <td >
-							       	<input type="text" id="wxgzhS0Attach" placeholder="附加费率(分)"  value="" style="width:90%"> 
-							    </td>
-							    <td >
-							    	<select id="wxgzhS0Type" style="width:50%;"  >
-							    		<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
-									</select>
-							    </td>
-							</tr>
-							<tr>
-							    <td id="wxappS0" value="010106">微信APP—S0</td>
-							    <td >
-							        <input type="text" id="wxappS0Rate"  placeholder="万分比费率"  value="">
-							    </td>
-							    <td >
-							       	<input type="text" id="wxappS0Attach" placeholder="附加费率(分)"  value="" style="width:90%"> 
-							    </td>
-							    <td >
-							    	<select id="wxappS0Type" style="width:50%;"  >
-							    		<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
-									</select>
-							    </td>
-							</tr>
-							<tr>
-							    <td id="zfbsm" value="010201">支付宝扫码</td>
-							    <td >
-							        <input type="text" id="zfbsmRate"  placeholder="万分比费率"  value="">
-							    </td>
-							    <td >
-							       	<input type="text" id="zfbsmAttach" placeholder="附加费率(分)"  value="" style="width:90%"> 
-							    </td>
-							    <td >
-							    	<select id="zfbsmType" style="width:50%;"  >
-										<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
-									</select>
-							    </td>
-							</tr>
-							<tr>
-							    <td id="zfbfwc" value="010202">支付宝服务窗</td>
-							    <td >
-							        <input type="text" id="zfbfwcRate"  placeholder="万分比费率"  value="">
-							    </td>
-							    <td >
-							       	<input type="text" id="zfbfwcAttach" placeholder="附加费率(分)"  value="" style="width:90%"> 
-							    </td>
-							    <td >
-							    	<select id="zfbfwcType" style="width:50%;"  >
-										<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
-									</select>
-							    </td>
-							</tr>		
-							
-							<tr>
-							    <td id="zfbapp" value="010203">支付宝APP</td>
-							    <td >
-							        <input type="text" id="zfbappRate"  placeholder="万分比费率"  value="">
-							    </td>
-							    <td >
-							       	<input type="text" id="zfbappAttach" placeholder="附加费率(分)"  value="" style="width:90%"> 
-							    </td>
-							    <td >
-							    	<select id="zfbappType" style="width:50%;"  >
-										<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
-									</select>
-							    </td>
-							</tr>
-							<tr>
-							    <td id="zfbsmS0" value="010204">支付宝扫码—S0</td>
-							    <td >
-							        <input type="text" id="zfbsmS0Rate"  placeholder="万分比费率"  value="">
-							    </td>
-							    <td >
-							       	<input type="text" id="zfbsmS0Attach" placeholder="附加费率(分)"  value="" style="width:90%"> 
-							    </td>
-							    <td >
-							    	<select id="zfbsmS0Type" style="width:50%;"  >
-										<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
-									</select>
-							    </td>
-							</tr>	
-							<tr>
-							    <td id="zfbfwcS0" value="010205">支付宝服务窗—S0</td>
-							    <td >
-							        <input type="text" id="zfbfwcS0Rate"  placeholder="万分比费率"  value="">
-							    </td>
-							    <td >
-							       	<input type="text" id="zfbfwcS0Attach" placeholder="附加费率(分)"  value="" style="width:90%"> 
-							    </td>
-							    <td >
-							    	<select id="zfbfwcS0Type" style="width:50%;"  >
-										<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
-									</select>
-							    </td>
-							</tr>	
-							<tr>
-							    <td id="zfbappS0" value="010206">支付宝APP—S0</td>
-							    <td >
-							        <input type="text" id="zfbappS0Rate"  placeholder="万分比费率"  value="">
-							    </td>
-							    <td >
-							       	<input type="text" id="zfbappS0Attach" placeholder="附加费率(分)"  value="" style="width:90%"> 
-							    </td>
-							    <td >
-							    	<select id="zfbappS0Type" style="width:50%;"  >
-										<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
-									</select>
-							    </td>
-							</tr>	
-							<tr>
-							    <td id="ylsm" value="010301">银联扫码</td>
-							    <td >
-							        <input type="text" id="ylsmRate"  placeholder="万分比费率"  value="">
-							    </td>
-							    <td >
-							       	<input type="text" id="ylsmAttach" placeholder="附加费率(分)"  value="" style="width:90%"> 
-							    </td>
-							    <td >
-							    	<select id="ylsmType" style="width:50%;"  >
-										<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
-									</select>
-							    </td>
-							</tr>	
-							<tr>
-							    <td id="dxkj" value="010501">短信快捷</td>
-							    <td >
-							        <input type="text" id="dxkjRate"  placeholder="万分比费率"  value="">
-							    </td>
-							    <td >
-							       	<input type="text" id="dxkjAttach" placeholder="附加费率(分)"  value="" style="width:90%"> 
-							    </td>
-							    <td >
-							    	<select id="dxkjType" style="width:50%;"  >
-										<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
-									</select>
-							    </td>
-							</tr>	
-							<tr>
-							    <td id="dxkjS0" value="010503">短信快捷-S0</td>
-							    <td >
-							        <input type="text" id="dxkjS0Rate"  placeholder="万分比费率"  value="">
-							    </td>
-							    <td>
-							       	<input type="text" id="dxkjS0Attach" placeholder="附加费率(分)"  value="" style="width:90%"> 
-							    </td>
-							    <td >
-							    	<select id="dxkjS0Type" style="width:50%;"  >
-										<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
-									</select>
-							    </td>
-							</tr>	
-							<tr>
-							    <td id="wyzx" value="010601">网银在线</td>
-							    <td >
-							        <input type="text" id="wyzxRate"  placeholder="万分比费率"  value="">
-							    </td>
-							    <td >
-							       	<input type="text" id="wyzxAttach" placeholder="附加费率(分)"  value="" style="width:90%"> 
-							    </td>
-							    <td >
-							    	<select id="wyzxType" style="width:50%;"  >
-										<option value="">--请选择费用类型--</option>
-										<option value="1">--S0--</option>
-										<option value="2">--T0--</option>
-										<option value="3">--T1--</option>
-									</select>
-							    </td>
-							</tr>		 -->			           
 						</tbody>
 						</table>
 					    </form>
 					    </div>
 					    <div style="margin:50px 0 0 0;text-align:center">
-					    	<!-- <button class="btn btn-primary" id='submitData'  data-toggle='modal' data-target="#submitModal">提交报备</button> --> 
 					    	<button type="button"  class="btn btn-default" onclick="exit()">关闭</button> 
 					    </div>
 					</section>
@@ -795,191 +406,6 @@
 </div>   
 <script type="text/javascript">
 
-	function getType(){
-		var merchantProperty = $("#merchantProperty").val();
-		if("1" == merchantProperty ){
-			$("#openPhotoType").attr("style","display:none");
-			$("#businessPhotoType").attr("style","display:none");
-			$("#bankCardPhotoType").attr("style","display:");
-			$("#bankCardBackPhotoType").attr("style","display:");
-			$("#settleIdCardType").attr("style","display:");
-		}else if("3" == merchantProperty ){
-			$("#openPhotoType").attr("style","display:none");
-			$("#businessPhotoType").attr("style","display:");
-			$("#bankCardPhotoType").attr("style","display:");
-			$("#bankCardBackPhotoType").attr("style","display:");
-			$("#settleIdCardType").attr("style","display:");
-		}else{
-			$("#openPhotoType").attr("style","display:");
-			$("#businessPhotoType").attr("style","display:");
-			$("#bankCardPhotoType").attr("style","display:none");
-			$("#bankCardBackPhotoType").attr("style","display:none");
-			$("#settleIdCardType").attr("style","display:none");
-			
-		}
-	}
-
-	/***获取行业信息***/
-	function getLevel(){
-		var levelOne = $("#levelOne").val();
-		$.post(window.Constants.ContextPath +"<%=MerchantEnterReportedPath.BASE + MerchantEnterReportedPath.KFTSELINDUSTRYTWO %>",
-		{
-			"levelOne":levelOne
-		},
-		function(data){
-			if(data.result=="SUCCESS"){
-				var kftIndustryTwoList = data.kftIndustryTwoList;
-				$("#levelTwo").html("");
-	   			for ( var kftIndustry in kftIndustryTwoList) {
-	   				$("#levelTwo").append(
-	   						"<option value='"+ kftIndustryTwoList[kftIndustry].levelTwo +"'>"
-	   								+ kftIndustryTwoList[kftIndustry].levelTwo + "</option>"); 
-	   			}
-			}
-		},'json'
-		);	
-	}
-	
-	/***获取行业信息***/
-	function getLevelTwo(){
-		var levelOne = $("#levelOne").val();
-		var levelTwo = $("#levelTwo").val();
-		$.post(window.Constants.ContextPath +"<%=MerchantEnterReportedPath.BASE + MerchantEnterReportedPath.KFTSELINDUSTRYTHREE %>",
-		{
-			"levelOne":levelOne,
-			"levelTwo":levelTwo
-		},
-		function(data){
-			if(data.result=="SUCCESS"){
-				var kftIndustryThreeList = data.kftIndustryThreeList;
-				$("#levelThree").html("");
-	   			for ( var kftIndustry in kftIndustryThreeList) {
-	   				$("#levelThree").append(
-	   						"<option value='"+ kftIndustryThreeList[kftIndustry].levelCode +"'>"
-	   								+ kftIndustryThreeList[kftIndustry].levelThree + "</option>"); 
-	   			}
-			}
-		},'json'
-		);	
-	}
-	
-	
-	/***获取商户注册所在地区城市***/
-  	function getMerchantCity(){
-  		var provinceName = $("#merchantProvince").val();
-  		$.post(window.Constants.ContextPath +"<%=MerchantEnterReportedPath.BASE + MerchantEnterReportedPath.SELKFTCITY %>",
-   		{
-   			"provinceName":provinceName
-   		},
-   		function(data){
-   			if(data.result=="SUCCESS"){
-   				var kftCityList = data.kftCityList;
-   				$("#merchantCity").html("");
-          			for ( var city in kftCityList) {
-          				$("#merchantCity").append(
-          						"<option value='"+ kftCityList[city].cityName +"'>"
-          								+ kftCityList[city].cityName + "</option>"); 
-          			}
-          			getMerchantArea();;
-   			}else{
-   				alert("省份不能为空");
-   			}
-   		},'json'
-   		);	
-    }
-  	/***获取商户注册所在地区县区***/
-  	function getMerchantArea(){
-  		var provinceName = $("#merchantProvince").val();
-  		var cityName = $("#merchantCity").val();
-  		$.post(window.Constants.ContextPath +"<%=MerchantEnterReportedPath.BASE + MerchantEnterReportedPath.SELKFTAREA %>",
-  		{
-  			"provinceName":provinceName,
-  			"cityName":cityName
-  			
-  		},
-  		function(data){
-  			if(data.result=="SUCCESS"){
-  				var kftAreaList = data.kftAreaList;
-  				$("#merchantArea").html("");
-         			for ( var area in kftAreaList) {
-         				$("#merchantArea").append(
-         						"<option value='"+ kftAreaList[area].areaId +"'>"
-         								+ kftAreaList[area].areaName + "</option>"); 
-         			}
-  			}else{
-  				alert("市不能为空");
-  			}
-  		},'json'
-  		);	
-    }
-  	
-  	
-  	$("input[type=file]").each(
-	function() {
-		var _this = $(this);
-		_this.localResizeIMG({
-			quality : 0.8,
-			success : function(result,file) {
-				
-				var att = pre.substr(pre.lastIndexOf("."));
-				//压缩后图片的base64字符串
-				var base64_string = result.clearBase64;
-				
-				$('#'+_this.attr('id')+'temp').val(att+","+base64_string);
-				//图片预览
-	             var imgObj = $('#'+_this.attr('id')+'Image');
-	             imgObj.attr("src", "data:image/jpeg;base64," + base64_string).show(); 
-	             
-	             var imgObj2 = $('#'+_this.attr('id')+'Image2');
-	             imgObj2.attr("src", "data:image/jpeg;base64," + base64_string).show(); 
-	             
-	             var width = result.width;
-	             var height = result.height;
-	             var scale =  width/height;
-	             if(width >800){
-	             width = 800;
-	             height = width / scale;
-	             }
-	             $(".showDiv").width(width+"px");
-	             $(".showDiv").height(height+"px");
-	             
-	           	 //优图
-	             var param = "{str:\""+base64_string+"\",flag:\""+_this.attr('id')+"\"}"
-	    		 $.ajax({
-    	   			async:false,
-    	   			type:"POST",
-    	   			contentType:"application/json;charset=utf-8",
-    	   			dataType:"text",
-    	   			url:window.Constants.ContextPath +'<%=AgentRegisterPath.BASE + AgentRegisterPath.YOUTU%>',
-    	   	        data:param,
-    	   	        success:function(data){
-    	   	      		var json = eval('(' + data + ')');
-    	   	        	if(json.result=="SUCCESS"){
-    	   	        		 if(_this.attr('id')=="certAttribute1"){//身份證
-    	       	  				$("#representativeName").val(json.cardName);
-    	       	  				$("#representativeCertNo").val(json.cardId);
-    	       	  			}else if(_this.attr('id')=="businessPhoto"){//营业执照
-    	       	  				$("#businessLicense").val(json.businessLicense);
-    	       	  				//$("#businessTerm").val(json.businessTermStart);
-    	       	  				if("长期"==json.businessTermEnd){
-    	       	  					//$("input[value='forever']").click();
-    	       	  				}else{
-    	       	  					alert(json.businessTermEnd);
-    	       	  				   $("#businessTerm").val(json.businessTermEnd);
-    	       	  					//$("#businessTermEnd").val(json.businessTermEnd);
-    	       	  				} 
-    	       	  				//$("#custAdd").val(json.legalAddress);
-    	       	  				$("#businessRegAddr").val(json.legalAddress);
-    	       	  			
-    	       	  			} 
-    	   				}
-    	   			}
-	    	   	});
-			}
-		});
-	});
-  	
-  	
      /** 点击预览大图 **/
    	function bigImg(obj){
         /* $('#showImageDiv #showImage').attr("src",obj.src); */
@@ -1087,71 +513,6 @@
    		}
    	};
     	
-    /* 校验渠道 */
-    $(function(){
-    	//判定是新进件还是更新进件
-		var status = $("#status").val();
-		var custId = $("#custId").val();
-		var authId = $("#authId").val();
-		if("" ==custId){
-			alert(status);
-		}else{
-	    	$("#openPhotoImageDiv").show();
-	    	$("#businessPhotoImageDiv").show();
-	    	$("#certAttribute1ImageDiv").show();
-	    	$("#certAttribute2ImageDiv").show();
-	    	$("#legalCertAttribute1ImageDiv").show();
-	    	$("#legalCertAttribute2ImageDiv").show();
-	    	$("#bankCardBackPhotoDiv").show();
-	    	$("#settleIdCardDiv").show();
-	    	$("#doorPhotoImageDiv").show();
-	    	$("#bankCardPhotoImageDiv").show();
-	    	$("#cooperateImageDiv").show();
-	    	
-	    	$("#businessPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=02&authId="+authId);
-	    	$("#certAttribute1ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=0&authId="+authId);
-	    	$("#certAttribute2ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=1&authId="+authId);
-	    	$("#doorPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=08&authId="+authId);
-	    	$("#bankCardPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=05&authId="+authId);
-	    	$("#openPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=03&authId="+authId);
-	    	$("#legalCertAttribute1ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=0&authId="+authId);
-	    	$("#legalCertAttribute2ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=1&authId="+authId);
-	    	$("#bankCardBackPhotoDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=14&authId="+authId);
-	    	$("#settleIdCardDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=13&authId="+authId);
-	    	$("#cooperateImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=15&authId="+authId);
-		} 
-    	
-		//照片
-		$("input[type=file]").each(
-		function() {
-			var _this = $(this);
-			_this.localResizeIMG({
-				quality : 0.8,
-				success : function(result,file) {
-					var att = pre.substr(pre.lastIndexOf("."));
-					//压缩后图片的base64字符串
-					var base64_string = result.clearBase64;
-					$('#'+_this.attr('id')+'temp').val(att+","+base64_string);
-					//图片预览
-		             var imgObj = $('#'+_this.attr('id')+'Image');
-		             imgObj.attr("src", "data:image/jpeg;base64," + base64_string).show(); 
-		             
-		             var width = result.width;
-		             var height = result.height;
-		             
-		             var scale =  width/height;
-			     	 if(width >800){
-			     		width = 800;
-			     		height = width / scale;
-			     	 }
-		             $(".showDiv").width(width+"px");
-		             $(".showDiv").height(height+"px");
-				}
-			});
-		}
-		) 
-    	
-   	});  
 </script>
 </body>
 </html>

@@ -893,16 +893,16 @@
 								<table id="sample-table-2" class="list-table">
 									<thead>
 										<tr>
-											<th>商户名称</th>
-											<th>商户简称</th>
-											<th>商户编号</th>
-											<th>邮箱账号</th>
-											<th>报备渠道</th>
-											<th>渠道商户号</th>
-											<th>商户报备状态</th>
-											<th>返回信息</th>
-											<th>报备时间</th>
-											<th>操作</th>
+											<th width="10%">商户名称</th>
+											<th width="10%">商户简称</th>
+											<th width="10%">商户编号</th>
+											<th width="10%">邮箱账号</th>
+											<th width="5%">报备渠道</th>
+											<th width="10%">渠道商户号</th>
+											<th width="7%">商户报备状态</th>
+											<th width="14%">返回信息</th>
+											<th width="10%">报备时间</th>
+											<th width="14%">操作</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -1015,55 +1015,6 @@
                                             	<c:if test="${reported.reportStatus !='99' && reported.detailStatus !='E' && reported.detailStatus !='F'}">
 	                                            	<button type="button"  class="btn btn-primary btn-xs" disabled>报备更新</button>
                                             	</c:if>
-                                            	<%-- 
-											    <c:if test="${reported.channelNo =='BEST_PAY' && reported.bestMerchantType =='02' }">
-											    	<c:if test="${reported.reportStatus =='00' }">
-												    	<gyzbadmin:function url="<%=MerchantReportedPath.BASE + MerchantReportedPath.CONTRACTPRODUCT %>">
-											    			<button type="button"  class="btn btn-primary btn-xs" onclick="getContarct(this);" data-target="#contractMerchantModal" data-toggle='modal' style="margin-top:5px;" >企业签约</button>
-											    		</gyzbadmin:function>
-											    	</c:if>
-											    	 <c:if  test="${reported.reportStatus !='00' }">
-											    	 	<button type="button"  class="btn btn-xs"  disabled="disabled"  style="margin-top:5px;" >企业签约</button>
-											    	 </c:if>
-											    </c:if>
-											    
-											    <c:if test="${reported.channelNo =='BEST_PAY' || reported.channelNo =='SUIXING_PAY' || reported.channelNo =='SUM_PAY' }">
-											    	<c:if test="${reported.reportStatus =='0' }">
-											    		<button type="button"  class="btn btn-primary btn-xs" onclick="getStatus(this);" data-toggle='modal' style="margin-top:5px;" >查询状态</button>
-											    	</c:if>
-											    	 <c:if  test="${reported.reportStatus !='0' }">
-											    	 	<button type="button"  class="btn btn-xs"  disabled="disabled"  style="margin-top:5px;" >查询状态</button>
-											    	 </c:if>
-											    </c:if>
-											    <c:if test="${reported.channelNo =='YQB' && reported.reportStatus =='00' }">
-											    		<button type="button"  class="btn btn-primary btn-xs" onclick="getStatus(this);" data-toggle='modal' style="margin-top:5px;" >查询状态</button>
-											    </c:if>
-											    
-											    <c:if test="${reported.channelNo =='SUM_PAY' }">
-											    	<c:if test="${reported.reportStatus =='00' || reported.reportStatus =='1'}">
-											    		<button type="button"  class="btn btn-primary btn-xs" onclick="getContarct1(this);" data-target="#contractMerchantModal1" data-toggle='modal' style="margin-top:5px;" >开通产品</button>
-											    	</c:if>
-											    	 <c:if  test="${reported.reportStatus !='00' && reported.reportStatus !='1'}">
-											    	 	<button type="button"  class="btn btn-xs"  disabled="disabled"  style="margin-top:5px;" >开通产品</button>
-											    	 </c:if>
-											    	<c:if test="${reported.reportStatus =='15' }">
-											    		<button type="button"  class="btn btn-primary btn-xs" onclick="bottonSearch1(this);" data-toggle='modal' style="margin-top:5px;" >更新图片</button>
-											    	</c:if>
-											    	 <c:if  test="${reported.reportStatus !='15' }">
-											    	 	<button type="button"  class="btn btn-xs"  disabled="disabled"  style="margin-top:5px;" >更新图片</button>
-											    	 </c:if>
-											    </c:if>
-											   
-											    <c:choose>
-											    	<c:when test="${reported.reportStatus == '99' || reported.reportStatus == '2'}">
-											    		<button type="button"  class="btn btn-primary btn-xs" onclick="updateBottonSearch(this);" data-toggle='modal' style="margin-top:5px;" >进件</button>
-											    	</c:when>
-											    	<c:otherwise>
-											    		<button type="button"  class="btn btn-xs"  disabled="disabled"  style="margin-top:5px;" >进件</button>
-											    			
-											    	</c:otherwise>
-											    </c:choose>
-											    --%>
 										    </td>
 										</tr>
 									   </c:forEach> 
