@@ -60,6 +60,7 @@ import com.qifenqian.bms.basemanager.utils.GenSN;
 import com.qifenqian.bms.common.util.PropertiesUtil;
 import com.qifenqian.bms.common.util.RedisUtil;
 import com.qifenqian.bms.expresspay.CommonService;
+import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
 import com.sevenpay.invoke.SevenpayCoreServiceInterface;
 import com.sevenpay.invoke.common.message.request.RequestMessage;
 import com.sevenpay.invoke.common.message.response.ResponseMessage;
@@ -2159,4 +2160,8 @@ public class MerchantService {
     public String findAreaNameByAreaId(String country) {
         return merchantMapper.findAreaNameByAreaId(country);
     }
+
+	public MerchantVo getMerchantInfo(TdMerchantDetailInfo detailInfo) {
+		return merchantMapper.getMerchantInfo(detailInfo);
+	}
 }

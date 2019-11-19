@@ -73,8 +73,18 @@ public class TdMerchantDetailInfo implements Serializable{
 
 	private String endModifyTime;
 	
+	private String rate;
 	
 	
+	
+	public String getRate() {
+		return rate;
+	}
+
+	public void setRate(String rate) {
+		this.rate = rate;
+	}
+
 	public String getStartModifyTime() {
 		return startModifyTime;
 	}

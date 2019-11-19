@@ -198,7 +198,8 @@
 			`category`,
 			`loginNo`,
 			`bestMerchantType`,
-			`bestpayMctNo`
+			`bestpayMctNo`,
+			`rate`
 		)
 		VALUES
 			(
@@ -224,7 +225,8 @@
 				#{category,jdbcType = VARCHAR},
 				#{loginNo,jdbcType = VARCHAR},
 				#{bestMerchantType,jdbcType = VARCHAR},
-				#{bestpayMctNo,jdbcType = VARCHAR}
+				#{bestpayMctNo,jdbcType = VARCHAR},
+				#{rate,jdbcType = VARCHAR}
 			)
 	</insert>
 	

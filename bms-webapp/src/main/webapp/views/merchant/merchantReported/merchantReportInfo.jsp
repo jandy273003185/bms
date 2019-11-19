@@ -307,6 +307,11 @@
 										<td class="td-right">对公</td>
 									</c:when>
 								</c:choose>
+								<td class="td-left">结算费率：</td>
+								<td class="td-right"> 
+									<input type="text" id="agentRate" name="agentRate" maxlength="100" readonly  value="${merchantVo.agentRate }" style="width:90%">
+									<label class="label-tips" id="agentRateLab"></label>
+								</td>
 							</tr>
 							<tr id="openAccount_" style = "display:none">
 								<td class="td-left">开户许可证：</td>

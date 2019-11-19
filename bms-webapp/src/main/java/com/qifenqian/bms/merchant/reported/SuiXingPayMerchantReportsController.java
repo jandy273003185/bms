@@ -193,7 +193,7 @@ public class SuiXingPayMerchantReportsController {
 		detail.setPatchNo(patchNo);
 		TdMerchantDetailInfo detailInfo = fmIncomeMapperDao.selMerchantDetailInfo(detail);
 		//不为空即资料已提交
-		if(null != detailInfo && "".equals(detailInfo)) {
+		if(null != detailInfo) {
 			if(StringUtils.isNotBlank(detailInfo.getRemark())){
 				cr.setTaskCode(detailInfo.getRemark());
 			}
@@ -228,7 +228,7 @@ public class SuiXingPayMerchantReportsController {
 				uploadFileInfo.setFilePath(path);
 				Map<String, Object> req = new HashMap<>();
 				ChannelResult result = new ChannelResult();
-				if("" != cr.getTaskCode() && null != cr.getTaskCode()){
+				if(null != cr.getTaskCode()){
 					uploadFileInfo.setTaskCode(cr.getTaskCode());
 					req.put("merList", uploadFileInfo);
 					req.put("channelType", ChannelMerRegist.SUIXING_PAY);
@@ -303,7 +303,7 @@ public class SuiXingPayMerchantReportsController {
 			cc.setChannelNo(cr.getChannelNo());
 			TdMerchantDetailInfo td = fmIncomeService.getTdMerchantReport(cc);
 			//该商户已报备
-			if(td!=null){
+			if(null!= td){
 				//该商户已报备成功
 				if("Y".equals(td.getReportStatus())||"O".equals(td.getReportStatus())){
 				object.put("result", "FAILURE");
@@ -332,60 +332,29 @@ public class SuiXingPayMerchantReportsController {
 				info.setBranchBankName(cr.getInterBankName());
 				info.setMobileNo(cr.getMobileNo());
 				info.setRemark(cr.getTaskCode());
+				info.setRate(cr.getRate());
 				fmIncomeService.insertTdMerchantReport(info);
 				info.setReportStatus("99");
 				fmIncomeService.inserTdMerchantDetailInfo(info);
 			}
 			
-			//随行付查询银行信息
-			/*
-			 * SxPayBankInfo bankInfo = new SxPayBankInfo();
-			 * bankInfo.setBnkCd(SuixinBankType.valueOf(cr.getSuiXinBank()).getCode());
-			 * bankInfo.setLbnkProv(cr.getBankProvince());
-			 * bankInfo.setLbnkCity(cr.getBankCity());
-			 * bankInfo.setLbnkNm(cr.getInterBankName());
-			 * 
-			 * SxPayRequestInfo requestInfo = new SxPayRequestInfo();
-			 * requestInfo.setReqId(DateUtil.format(new Date(), DateUtil.YYYYMMDDHHMMSS));
-			 * requestInfo.setReqData(bankInfo);
-			 * requestInfo.setTimestamp(DateUtil.format(new Date(),
-			 * DateUtil.YYYYMMDDHHMMSS));
-			 * 
-			 * Map<String, Object> req = new HashMap<>(); req.put("merList", requestInfo);
-			 * req.put("channelType", ChannelMerRegist.SUIXING_PAY);
-			 */
-			// 获取联行号
-//			ChannelResult result = iMerChantIntoService.queryBankInfo(req);
-			
-//			if("00".equals(result.getChannelCode())){
-//				List list = (List) result.getData().get("bankList");
-//				if(list.size() != 0){
-//					JSONObject a = (JSONObject) list.get(0);
-//					String lbankNo = (String) a.get("lbnkNo");
-					cr.setLbnkNo(cr.getInterBankName());
-					//商户随行付进件
-					logger.info("商户随行付开始进件："+ "--------------------");
-					bestResult = fmIncomeService.suiXingReported(cr);
-					if("SUCCESS".equals(bestResult.get("result"))){
-						object.put("result", "SUCCESS");
-						object.put("message", "报备成功");
-					}else{
-						object.put("result", "FAILURE");
-						if(bestResult.get("message") == "" && bestResult.get("message") == null){
-							object.put("message", "随行付进件明确失败");
-							return object.toString();
-						}else {
-							object.put("message", bestResult.get("message"));
-							return object.toString();
-						}
-					}
-			/*
-			 * }else{ object.put("result", "FAILURE"); object.put("message","支行信息错误");
-			 * return object.toString(); } }else{ object.put("result", "FAILURE"); if("" ==
-			 * result.getReMsg() && null == result.getReMsg()){ object.put("message",
-			 * "查询银行信息失败"); }else{ object.put("message", result.getReMsg()); } return
-			 * object.toString(); }
-			 */
+			cr.setLbnkNo(cr.getInterBankName());
+			//商户随行付进件
+			logger.info("商户随行付开始进件："+ "--------------------");
+			bestResult = fmIncomeService.suiXingReported(cr);
+			if("SUCCESS".equals(bestResult.get("result"))){
+				object.put("result", "SUCCESS");
+				object.put("message", "报备成功");
+			}else{
+				object.put("result", "FAILURE");
+				if(bestResult.get("message") == "" && bestResult.get("message") == null){
+					object.put("message", "随行付进件明确失败");
+					return object.toString();
+				}else {
+					object.put("message", bestResult.get("message"));
+					return object.toString();
+				}
+			}
 			
 		} catch (Exception e) {
 			logger.error("随行付进件失败",e);
