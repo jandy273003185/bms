@@ -198,7 +198,16 @@
 			`category`,
 			`loginNo`,
 			`bestMerchantType`,
-			`bestpayMctNo`
+			`bestpayMctNo`,
+			`rate`,
+			`zfb_batch_no`,
+  			`zfb_batch_status`,
+	  		`zfb_user_id`,
+	  		`zfb_auth_app_id`,
+	  		`zfb_app_auth_token`,
+	  		`zfb_app_refresh_token`,
+	  		`zfb_expires_in`,
+	  		`zfb_re_expires_in`
 		)
 		VALUES
 			(
@@ -224,7 +233,16 @@
 				#{category,jdbcType = VARCHAR},
 				#{loginNo,jdbcType = VARCHAR},
 				#{bestMerchantType,jdbcType = VARCHAR},
-				#{bestpayMctNo,jdbcType = VARCHAR}
+				#{bestpayMctNo,jdbcType = VARCHAR},
+				#{rate,jdbcType = VARCHAR},
+				#{zfbBatchNo,jdbcType = VARCHAR},
+				#{zfbBatchStatus,jdbcType = VARCHAR},
+				#{zfbUserId,jdbcType = VARCHAR},
+				#{zfbAuthAppId,jdbcType = VARCHAR},
+				#{zfbAppAuthToken,jdbcType = VARCHAR},
+				#{zfbAppRefreshToken,jdbcType = VARCHAR},
+				#{zfbExpiresIn,jdbcType = VARCHAR},
+				#{zfbReExpiresIn,jdbcType = VARCHAR}
 			)
 	</insert>
 	
