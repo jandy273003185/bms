@@ -74,6 +74,7 @@ public class TdMerchantDetailInfo implements Serializable{
 	private String endModifyTime;
 	
 	private String rate;
+<<<<<<< HEAD
 	
 	private String zfbBatchNo;
 	
@@ -90,8 +91,11 @@ public class TdMerchantDetailInfo implements Serializable{
 	private String zfbExpiresIn;
 	
 	private String zfbReExpiresIn;
+=======
+>>>>>>> branch 'springboot' of https://gitlab.qifenqian.com/qifenqian/bms.git
 	
 	
+<<<<<<< HEAD
 	public String getRate() {
 		return rate;
 	}
@@ -162,6 +166,15 @@ public class TdMerchantDetailInfo implements Serializable{
 
 	public void setZfbReExpiresIn(String zfbReExpiresIn) {
 		this.zfbReExpiresIn = zfbReExpiresIn;
+=======
+	
+	public String getRate() {
+		return rate;
+	}
+
+	public void setRate(String rate) {
+		this.rate = rate;
+>>>>>>> branch 'springboot' of https://gitlab.qifenqian.com/qifenqian/bms.git
 	}
 
 	public String getStartModifyTime() {

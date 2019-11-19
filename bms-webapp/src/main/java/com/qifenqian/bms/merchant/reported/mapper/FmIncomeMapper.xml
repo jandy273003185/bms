@@ -199,6 +199,7 @@
 			`loginNo`,
 			`bestMerchantType`,
 			`bestpayMctNo`,
+<<<<<<< HEAD
 			`rate`,
 			`zfb_batch_no`,
   			`zfb_batch_status`,
@@ -208,6 +209,9 @@
 	  		`zfb_app_refresh_token`,
 	  		`zfb_expires_in`,
 	  		`zfb_re_expires_in`
+=======
+			`rate`
+>>>>>>> branch 'springboot' of https://gitlab.qifenqian.com/qifenqian/bms.git
 		)
 		VALUES
 			(
@@ -234,6 +238,7 @@
 				#{loginNo,jdbcType = VARCHAR},
 				#{bestMerchantType,jdbcType = VARCHAR},
 				#{bestpayMctNo,jdbcType = VARCHAR},
+<<<<<<< HEAD
 				#{rate,jdbcType = VARCHAR},
 				#{zfbBatchNo,jdbcType = VARCHAR},
 				#{zfbBatchStatus,jdbcType = VARCHAR},
@@ -243,6 +248,9 @@
 				#{zfbAppRefreshToken,jdbcType = VARCHAR},
 				#{zfbExpiresIn,jdbcType = VARCHAR},
 				#{zfbReExpiresIn,jdbcType = VARCHAR}
+=======
+				#{rate,jdbcType = VARCHAR}
+>>>>>>> branch 'springboot' of https://gitlab.qifenqian.com/qifenqian/bms.git
 			)
 	</insert>
 	
