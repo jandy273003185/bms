@@ -30,7 +30,19 @@
 		</repository>
 	</repositories>
 	<dependencies>
-
+		<dependency>
+    		<groupId>com.alibaba.boot</groupId>
+    		<artifactId>dubbo-spring-boot-starter</artifactId>
+    		<version>0.2.0</version>
+		</dependency>
+		
+		<dependency>
+	        <groupId>org.apache.curator</groupId>
+	        <artifactId>curator-recipes</artifactId>
+	        <version>4.0.0</version>
+    	</dependency>
+		
+		
 		<!-- servlet 与jsp配套引入 （自定义标签） -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -174,6 +186,12 @@
 			<version>1.0.0</version>
 		</dependency>
 		<dependency>
+			<groupId>com.seven.module</groupId>
+			<artifactId>jellyfish-api</artifactId>
+			<version>5.0.10</version>
+		</dependency>
+		
+		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
 			<version>3.10-FINAL</version>
@@ -262,6 +280,7 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
+		
 	</dependencies>
 
 	<build>
