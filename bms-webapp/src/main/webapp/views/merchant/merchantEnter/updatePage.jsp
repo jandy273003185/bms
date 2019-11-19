@@ -37,6 +37,75 @@
 	</style>
 </head>
 <script type="text/javascript">
+
+
+$(function(){
+	$("input[type=file]").each(
+		function() {
+			var _this = $(this);
+			_this.localResizeIMG({
+				quality : 0.8,
+				success : function(result,file) {
+
+					var att = pre.substr(pre.lastIndexOf("."));
+					//压缩后图片的base64字符串
+					var base64_string = result.clearBase64;
+
+					$('#'+_this.attr('id')+'temp').val(att+","+base64_string);
+					//图片预览
+		            var imgObj = $('#'+_this.attr('id')+'ImageDiv');
+		            imgObj.attr("src", "data:image/jpeg;base64," + base64_string).show();
+		            var width = result.width;
+		            var height = result.height;
+		            var scale =  width/height;
+		            if(width >800){
+		            width = 800;
+		            height = width / scale;
+		            }
+		            $(".showDiv").width(width+"px");
+		            $(".showDiv").height(height+"px");
+
+		            //优图
+		            var param = "{str:\""+base64_string+"\",flag:\""+_this.attr('id')+"\"}"
+		    		$.ajax({
+	    	   			async:false,
+	    	   			type:"POST",
+	    	   			contentType:"application/json;charset=utf-8",
+	    	   			dataType:"text",
+	    	   			url:window.Constants.ContextPath +'<%=AgentRegisterPath.BASE + AgentRegisterPath.YOUTU%>',
+	    	   	        data:param,
+	    	   	        success:function(data){
+	    	   	      		var json = eval('(' + data + ')');
+	    	   	        	if(json.result=="SUCCESS"){
+	    	   	        		 if(_this.attr('id')=="certAttribute1"){                    //身份证
+	    	       	  				$("#representativeName").val(json.cardName);
+	    	       	  				$("#representativeCertNo").val(json.cardId);
+	    	       	  			}else if(_this.attr('id')=="businessPhoto"){                //营业执照
+	    	       	  				$("#businessLicense").val(json.businessLicense);
+	    	       	  				$("#businessTermStart").val(json.businessTermStart);
+	    	       	  				if("长期"==json.businessTermEnd){
+	    	       	  					$("#businessTermEnd").val("2099-12-31");
+	    	       	  				}else{
+	    	       	  					$("#businessTermEnd").val(json.businessTermEnd);
+	    	       	  				}
+	    	       	  				$("#custAdd").val(json.legalAddress);
+	    	       	  				$("#custName").val(json.companyName);
+	    	       	  			}else if(_this.attr('id')=="bankCardPhoto"){                //银行卡
+    	       	  					$("#compMainAcct").val(json.creditCardId);
+    	       	  					// $("#compAcctBank").val(json.cardNo);
+    	       	  				
+	    	       	  			}
+	    	   				}
+	    	   			}
+		    	   	});
+				}
+			});
+		}
+	);
+	$("#agentName").comboSelect();
+	$("#custManager").comboSelect();
+});
+
     $(function() {
 
         if($("#custType").val() =='0' ||$("#custType").val() =='2' ){
@@ -118,8 +187,8 @@
     		$('#businessPhotoId_').show();
         }
 
-        $("#agentName").comboSelect();
-    	$("#custManager").comboSelect();
+       /*  $("#agentName").comboSelect();
+    	$("#custManager").comboSelect(); */
     });
     
     function getCityList(){

@@ -87,6 +87,10 @@ $(function(){
 	    	       	  				}
 	    	       	  				$("#custAdd").val(json.legalAddress);
 	    	       	  				$("#custName").val(json.companyName);
+	    	       	  			}else if(_this.attr('id')=="bankCardPhoto"){                //银行卡
+    	       	  					$("#compMainAcct").val(json.creditCardId);
+    	       	  					// $("#compAcctBank").val(json.cardNo);
+    	       	  				
 	    	       	  			}
 	    	   				}
 	    	   			}
