@@ -172,11 +172,11 @@
     			data:
     			{
     				"merchantCode" 	: merchantCode,
-    				"channlNo"    : channlCode
+    				"channelNo"    : channlCode
     			},
     			success:function(data){
     				if(data.result=="SUCCESS"){
-    					$("#choiceChannelLab").text("该渠道已报备");
+    					$("#channlCodeLab").text("该商户该渠道已报备");
     					return false;
     					//已报备则显示出弹框
     					/* $('#channelListModel').modal('hide');
@@ -661,7 +661,7 @@
 							<option value="">--请选择报备渠道--</option>
 							 <c:if test="${not empty channlInfoList }">
                             <c:forEach items="${channlInfoList }" var="info">
-                            	<option id="${info.channlId}" value="${info.channlCode}">${info.channlName}</option>
+                            	<option  value="${info.channlCode}">${info.channlName}</option>
                             </c:forEach>
                    		  </c:if>
                    		  

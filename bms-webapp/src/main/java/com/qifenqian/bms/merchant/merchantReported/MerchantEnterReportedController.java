@@ -78,8 +78,9 @@ public class MerchantEnterReportedController {
 				//审核通过再判断是否已经报备
 				if(null!=reportedList && reportedList.size()>0){
 					for(int i=0;i<reportedList.size();i++){
-						if("00".equals(reportedList.get(i).getReportStatus())){
+						if("1".equals(reportedList.get(i).getReportStatus())){
 							object.put("result", "SUCCESS");
+							return object.toString();
 						}
 					}
 					object.put("result", "FAIL");
