@@ -172,11 +172,11 @@
     			data:
     			{
     				"merchantCode" 	: merchantCode,
-    				"channlNo"    : channlCode
+    				"channelNo"    : channlCode
     			},
     			success:function(data){
     				if(data.result=="SUCCESS"){
-    					$("#choiceChannelLab").text("该渠道已报备");
+    					$("#channlCodeLab").text("该商户该渠道已报备");
     					return false;
     					//已报备则显示出弹框
     					/* $('#channelListModel').modal('hide');
@@ -235,6 +235,24 @@
     					if("YQB" == channlCode){
     				   	   	
     				   		var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.YQBMERCHANTREPORT%>?merchantCode="+merchantCode+"&status="+status+"&channlCode="+channlCode; 
+    				     	var name="window";                        //网页名称，可为空;
+    				     	var iWidth=1200;                          //弹出窗口的宽度;
+    				     	var iHeight=600;                       //弹出窗口的高度;
+    				     	//获得窗口的垂直位置
+    				     	var iTop = (window.screen.availHeight-30-iHeight)/2; 
+    				     	//获得窗口的水平位置
+    				     	var iLeft = (window.screen.availWidth-10-iWidth)/2;
+    				     	var params='width='+iWidth
+    				            +',height='+iHeight
+    				            +',top='+iTop
+    				            +',left='+iLeft; 
+    				     	/*  $.blockUI();  */
+    				      	winChild =  window.open(url, name,params);
+    				   	}
+    					
+    					if("ALIPAY" == channlCode){
+    				   	   	
+    				   		var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.ALIPAY_MERCHANT_REPORTS%>?merchantCode="+merchantCode+"&status="+status+"&channlCode="+channlCode; 
     				     	var name="window";                        //网页名称，可为空;
     				     	var iWidth=1200;                          //弹出窗口的宽度;
     				     	var iHeight=600;                       //弹出窗口的高度;
