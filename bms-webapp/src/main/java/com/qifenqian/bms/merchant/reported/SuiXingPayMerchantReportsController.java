@@ -14,14 +14,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
-import com.qifenqian.bms.basemanager.merchant.service.MerchantService;
 import com.qifenqian.bms.basemanager.utils.GenSN;
 import com.qifenqian.bms.common.util.PropertiesUtil;
 import com.qifenqian.bms.merchant.reported.bean.Bank;
@@ -34,12 +32,9 @@ import com.qifenqian.bms.merchant.reported.bean.Province;
 import com.qifenqian.bms.merchant.reported.bean.SuiXingBean;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
 import com.qifenqian.bms.merchant.reported.dao.FmIncomeMapperDao;
-import com.qifenqian.bms.merchant.reported.mapper.FmIncomeMapper;
 import com.qifenqian.bms.merchant.reported.service.CrIncomeService;
 import com.qifenqian.bms.merchant.reported.service.FmIncomeService;
 import com.seven.micropay.base.domain.ChannelResult;
-import com.seven.micropay.channel.domain.merchant.suixinpayInfo.SxPayBankInfo;
-import com.seven.micropay.channel.domain.merchant.suixinpayInfo.SxPayRequestInfo;
 import com.seven.micropay.channel.domain.merchant.suixinpayInfo.SxPayUploadFileInfo;
 import com.seven.micropay.channel.enums.ChannelMerRegist;
 import com.seven.micropay.channel.enums.suixinpay.SuixinBankType;
@@ -59,16 +54,11 @@ public class SuiXingPayMerchantReportsController {
    private CrIncomeService crIncomeService;
    
    @Autowired
-   private MerchantService merchantService;
-   
-   @Autowired
    private FmIncomeMapperDao fmIncomeMapperDao;
    
    @Autowired
    private IMerChantIntoService iMerChantIntoService;
 
-   @Autowired
-   private FmIncomeMapper fmIncomeMapper;
 	
 	
    /**

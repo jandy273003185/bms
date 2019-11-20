@@ -4,38 +4,27 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
-import com.qifenqian.bms.basemanager.merchant.service.MerchantService;
 import com.qifenqian.bms.basemanager.utils.GenSN;
 import com.qifenqian.bms.merchant.reported.bean.Bank;
 import com.qifenqian.bms.merchant.reported.bean.ChannlInfo;
 import com.qifenqian.bms.merchant.reported.bean.CrInComeBean;
-import com.qifenqian.bms.merchant.reported.bean.Industry;
-import com.qifenqian.bms.merchant.reported.bean.SumPayArea;
-import com.qifenqian.bms.merchant.reported.bean.SumPayCoBean;
-import com.qifenqian.bms.merchant.reported.bean.TbFmTradeInfo;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
 import com.qifenqian.bms.merchant.reported.bean.YQBArea;
 import com.qifenqian.bms.merchant.reported.bean.YQBCoBean;
 import com.qifenqian.bms.merchant.reported.bean.YQBIndustry;
 import com.qifenqian.bms.merchant.reported.dao.FmIncomeMapperDao;
-import com.qifenqian.bms.merchant.reported.mapper.FmIncomeMapper;
 import com.qifenqian.bms.merchant.reported.service.CrIncomeService;
 import com.qifenqian.bms.merchant.reported.service.FmIncomeService;
-import com.seven.micropay.channel.service.IMerChantIntoService;
 
 @Controller
 @RequestMapping(MerchantReportedPath.BASE)
@@ -49,18 +38,10 @@ public class YqbMerchantReportsController {
    @Autowired
    private CrIncomeService crIncomeService;
    
-   @Autowired
-   private MerchantService merchantService;
    
    @Autowired
    private FmIncomeMapperDao fmIncomeMapperDao;
    
-   @Autowired
-   private IMerChantIntoService iMerChantIntoServic;
-
-   @Autowired
-   private FmIncomeMapper fmIncomeMapper;
-	
 	
    /**
     * 平安付报备入口
@@ -200,7 +181,6 @@ public class YqbMerchantReportsController {
 	public String list(HttpServletRequest request,HttpServletResponse response,YQBCoBean cr){
 		JSONObject object = new JSONObject();
 		JSONObject bestResult = new JSONObject();
-		JSONObject sumpayResult = new JSONObject();
 		request.setAttribute("merchantCode", cr.getMerchantCode().trim());
 		if("YQB".equals(cr.getChannelNo().trim())){
 			//查询该商户是否已报备
@@ -228,8 +208,9 @@ public class YqbMerchantReportsController {
 						cr.setBankName(bankIdList.get(0).getBankName());
 					}
 					//调用平安付报备接口
+					logger.info("-----------------调用平安付报备接口开始");
 					bestResult = fmIncomeService.yqbReported(cr);
-					
+					logger.info("-----------------调用平安付报备接口开始"+bestResult.get("result") +  "----------------------");
 					if("SUCCESS".equals(bestResult.get("result"))){
 						object.put("result", "SUCCESS");
 						object.put("message", "报备成功");
