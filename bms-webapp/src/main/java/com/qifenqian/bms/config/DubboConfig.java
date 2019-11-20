@@ -1,11 +1,14 @@
 package com.qifenqian.bms.config;
 
+import java.util.Properties;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.alibaba.dubbo.config.ApplicationConfig;
 import com.alibaba.dubbo.config.ConsumerConfig;
 import com.alibaba.dubbo.config.RegistryConfig;
+import com.qifenqian.bms.common.util.PropertiesUtil;
 
 @Configuration
 public class DubboConfig {
@@ -29,7 +32,9 @@ public class DubboConfig {
     @Bean
     public RegistryConfig registryConfig() {
         RegistryConfig registryConfig = new RegistryConfig();
-        registryConfig.setAddress("zookeeper://192.168.1.146:2181");
+        Properties p = PropertiesUtil.getProperties();
+        String address = p.getProperty("DUBBO_CONFIG_IP");
+        registryConfig.setAddress(address);
         registryConfig.setClient("curator");
         return registryConfig;
     }
