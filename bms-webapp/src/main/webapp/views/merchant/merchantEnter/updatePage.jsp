@@ -890,11 +890,11 @@ $(function(){
 							</tr><tr>
 								<td class="td-left">法人真实姓名：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
-									<input type="text" id="representativeName" name="representativeName" placeholder="请输入法人真实姓名" value=${merchantVo.representativeName } maxlength="50" style="width:90%">
+									<input type="text" id="representativeName" name="representativeName" placeholder="请输入法人真实姓名" value="${merchantVo.representativeName }" maxlength="50" style="width:90%">
 								</td>
 								<td class="td-left">法人身份证号码：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
-									<input type="text" name="representativeCertNo" id="representativeCertNo" placeholder="请输入法人身份证号码" value=${merchantVo.representativeCertNo } style="width:90%">
+									<input type="text" name="representativeCertNo" id="representativeCertNo" placeholder="请输入法人身份证号码" value="${merchantVo.representativeCertNo }" style="width:90%">
 								</td>
 							</tr>
 							<tr>

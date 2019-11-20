@@ -270,7 +270,7 @@
 										</select>
 									</div>
 									<div class="col-xs-5 pd0" style="padding:0;margin-left:1%">
-										<input type="text" id="custAdd" name="custAdd"  placeholder="详细地址" value =${merchantVo.custAdd } style="width:100%">
+										<input type="text" id="custAdd" name="custAdd"  placeholder="详细地址" value ="${merchantVo.custAdd }" style="width:100%">
 										<label class="label-tips" id="custAddLab"></label>
 									</div>
 								</td>

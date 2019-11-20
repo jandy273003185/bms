@@ -450,6 +450,13 @@ public class MerchantService {
         logger.info("保存商户信息[{}]", JSONObject.toJSONString(merchant));
 
         MerchantVo merchantVo = new MerchantVo();
+
+        if(merchant.getMerchantAccount().contains("@")){
+            //账号为邮箱
+        	merchant.setMerchantEmail(merchant.getMerchantAccount().toLowerCase());
+        }else {
+        	merchant.setMerchantMobile(merchant.getMerchantAccount().toLowerCase());
+        }
         merchantVo.setCustId(merchant.getCustId());
         try {
             /** 附加串，用于生成加密的交易密码 **/
