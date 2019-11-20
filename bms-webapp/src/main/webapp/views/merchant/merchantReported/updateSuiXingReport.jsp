@@ -75,17 +75,17 @@
                             <tr>
 								<td class="td-left" width="18%">商户编号：</td>
 								<td class="td-right" width="32%"> 
-									<input type="text" id="merchantCode" name="merchantCode" placeholder="请输入商户编号" maxlength=""  value="${custInfo.merchantCode }" style="width:90%">
+									<input type="text" id="merchantCode" name="merchantCode" readonly   value="${custInfo.merchantCode }" style="width:90%">
 								</td>
-                                <td class="td-left" width="18%">商户简称：</td>
+                                <td class="td-left" width="18%">商户名称：</td>
 								<td class="td-right" width="32%"> 
-									<input type="text" id="custName" name="custName" placeholder="请输入商户简称" maxlength=""  value="${custInfo.custName }" style="width:90%">
+									<input type="text" id="custName" name="custName" readonly  value="${custInfo.custName }" style="width:90%">
 								</td>
 							</tr>
 	                        <tr>
 								<td colspan="4" class="headlerPreview" style="background:#7ebde1">基本信息</td>
 							</tr>
-							<tr>
+							<%-- <tr>
 							    <td class="td-left">商户类型：</td>
 								<td class="td-right"> 
 								   <select  name="mecTypeFlag" id="mecTypeFlag"  class="width-90" >
@@ -108,7 +108,7 @@
 				                 		  	</c:if>
 									</select>	
 								</td>
-							</tr>
+							</tr> --%>
 	                        <tr>
 							    <td class="td-left">是否有证商户：</td>
 								<td class="td-right"> 
@@ -119,7 +119,7 @@
 									<label class="label-tips" id="suiXingMerchantLab"></label>
 								</td>
 							</tr>
-							<tr>
+							<%-- <tr>
 								<td class="td-left">注册地址：</td>
 								<td class="td-right" colspan="3">
 									<div class="col-xs-2 pd0" style="padding:0;">
@@ -150,18 +150,7 @@
 	                                </div>
 	                                <label class="label-tips" id="countryLab"></label>
 								</td>
-							</tr>	
-						 	<%-- <tr>
-								<td class="td-left">营业执照编号：</td>
-								<td class="td-right">
-									<input type="text" name="cprRegNmCn" id="cprRegNmCn"  placeholder="请输入营业执照"  value="${custInfo.businessLicense }" style="width:90%">
-								</td>
-								<td class="td-left">营业执照有限期：</td>
-								<td class="td-right">
-									<input type="text" name="" id="" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> -
-                                    <input type="text" name="" id="" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> <input name="" type="radio" value=""> 长期
-								</td>
-							</tr> --%>
+							</tr> --%>	
 							<tr id="businessPhotoType" style = "display:">
 								
 								<td class="td-left">营业执照照片：</td>
@@ -198,7 +187,7 @@
 								<td colspan="4" class="headlerPreview" style="background:#7ebde1;">法人信息</td>
 							</tr>
 							<tr></tr>
-                           	<tr>
+                           	<%-- <tr>
 								<td class="td-left">法人真实姓名：</td>
 								<td class="td-right"> 
 									<input type="text" id="representativeName" name="representativeName" placeholder="请输入法人真实姓名"  value="${custInfo.representativeName }" maxlength="" style="width:90%">
@@ -207,8 +196,8 @@
 								<td class="td-right"> 
 									<input type="text" name="mobileNo" id="mobileNo" placeholder="请输入手机号码"  value="${custInfo.mobile }" style="width:90%">
 								</td>
-							</tr>
-                            <tr>
+							</tr> --%>
+                            <%-- <tr>
 								<td class="td-left">法人证件类型：</td>
 								<td class="td-right"> 
 									<select name="representativeCertType" id="representativeCertType" style="width:90%;"  >
@@ -227,7 +216,7 @@
 								<td class="td-right"> 
 									<input type="text" name="representativeCertNo" id="representativeCertNo" placeholder="请输入法人身份证号码"  value="${custInfo.representativeCertNo }" style="width:90%">
 								</td>
-							</tr>
+							</tr> --%>
 							<tr id="legalIdCardType" style = "display:">
 								<td class="td-left">法人身份证正面：</td>
 								<td class="td-right" colspan="3">
@@ -262,7 +251,7 @@
 							<tr id="next_id">
 								<td colspan="4" class="headlerPreview" style="background:#7ebde1;">结算信息</td>
 							</tr>
-	                        <tr>
+	                        <%-- <tr>
 								<td class="td-left">结算账户名称：</td>
 								<td class="td-right"> 
 									<input type="text" id="actNm" name="actNm" maxlength="100" placeholder="请输入结算账户名称"  value="" style="width:90%">
@@ -271,8 +260,8 @@
 								<td class="td-right"> 
 									<input type="text" id="bankCardNo" name="bankCardNo" maxlength="100" placeholder="请输入银行卡号"  value="${custInfo.compMainAcct }" style="width:90%">
 								</td>
-							</tr>
-							<tr>
+							</tr> --%>
+							<%-- <tr>
 								<td class="td-left">开户银行：</td>
 								<td class="td-right"> 
 									<select name="suiXinBank" id="suiXinBank" style="width-90;">
@@ -289,8 +278,8 @@
 									<input type="text" id="interBankName" name="interBankName" maxlength="100" placeholder="请输入开户支行"  value="${custInfo.branchBANK }" style="width:90%">
 									<label class="label-tips" id="interBankNameLabel"></label>
 								</td>
-							</tr>
-                            <tr>
+							</tr> --%>
+                            <%-- <tr>
 								<td class="td-left">开户省份：</td>
 								<td class="td-right"> 
 									<select name="bankProvince" id="bankProvince" class="width-90" onchange="getCity();">
@@ -313,7 +302,7 @@
 		                                </select>
 		                               	<label id="bankCityLabel" class="label-tips"></label>
 								</td>
-							</tr>
+							</tr> --%>
                             <tr>
 								<td class="td-left">结算类型：</td>
 								<td class="td-right">
@@ -323,17 +312,17 @@
 										<option value="01">--对私--</option>
 									</select> 
 								</td>
-                                <td class="td-left">结算费率：</td>
-							  <td class="td-right"> 
+                                <!-- <td class="td-left">结算费率：</td>
+								<td class="td-right"> 
 									<input type="text" id="rate" name="rate" placeholder="请输入结算费率"  value="0.38" style="width:90%"> %
-							  </td>
+								</td> -->
 							</tr>
-                            <tr>
+                            <!-- <tr>
                                 <td class="td-left">账户人身份证号码：</td>
 							  	<td class="td-right"> 
 									<input type="text" id="certifyNo" name="v" placeholder="请输入账户人身份证号码"  value="" style="width:90%">
 								</td>
-							</tr>
+							</tr> -->
 							<tr id="openPhotoType" style = "display:">
 								<td class="td-left">开户许可证：</td>
 								<td class="td-right" colspan="3"> 
@@ -819,7 +808,7 @@
 						taskCode = $("#taskCode").val(data.message);
 						alert("更新进件成功");
 	   					//照片
-	   		 			$("input[type=file]").each(
+	   		 			/* $("input[type=file]").each(
 		   					function() {
 		   						var _this = $(this);
 		   						_this.localResizeIMG({
@@ -846,7 +835,7 @@
 		   							}
 		   						});
 		   					}
-	   		 			) 
+	   		 			)  */
 					}else{
 						alert("上传图片返回码异常");
 					}

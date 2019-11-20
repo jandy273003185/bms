@@ -188,4 +188,6 @@ public interface MerchantMapper {
 	String findAreaNameByAreaId(String areaId);
 
 	public MerchantVo getMerchantInfo(TdMerchantDetailInfo detailInfo);
+
+	void saveCustBelongInfo(TdCustBelongInfo tdCustBelongInfo);
 }

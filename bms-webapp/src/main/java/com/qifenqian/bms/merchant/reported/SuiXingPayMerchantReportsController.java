@@ -194,16 +194,11 @@ public class SuiXingPayMerchantReportsController {
 		TdMerchantDetailInfo detailInfo = fmIncomeMapperDao.selMerchantDetailInfo(detail);
 		//不为空即资料已提交
 		if(null != detailInfo) {
-			if(StringUtils.isNotBlank(detailInfo.getRemark())){
+			if(StringUtils.isNotBlank(detailInfo.getRemark()) && StringUtils.isNotBlank(detailInfo.getOutMerchantCode())){
 				cr.setTaskCode(detailInfo.getRemark());
 			}
 		}
 		
-		/*TdCustInfo custInfo = new TdCustInfo();
-		
-		if(null != cr.getMerchantCode()){
-			custInfo = fmIncomeMapperDao.getInComeInfo(cr.getMerchantCode());
-		}*/
 		try {
 			//文件更名压缩并上传服务器
 			logger.info("文件更名压缩并上传服务器" +  "------------------------------");

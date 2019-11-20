@@ -2455,4 +2455,26 @@
 		</where>
 	</select>
 	
+	
+	
+	<insert id="saveCustBelongInfo" parameterType="com.qifenqian.bms.basemanager.merchant.bean.TdCustBelongInfo">
+	
+		INSERT INTO TD_CUST_BELONG_INFO(
+			MANAGER_ID,
+			SERVICE_PARENTER_ID,
+			SALESMAN_ID,
+			CUST_ID,
+			STATUS,
+			CREATE_TIME,
+			MODIFY_TIME
+		)VALUES(
+			#{managerId, jdbcType=INTEGER},
+			#{servicePartnerId, jdbcType=VARCHAR},
+			#{salesmanId, jdbcType=INTEGER},
+			#{custId, jdbcType=VARCHAR},
+			#{status, jdbcType=VARCHAR},
+			#{createTime, jdbcType=VARCHAR},
+			#{modiftyTime, jdbcType=VARCHAR}
+		)
+	</insert>
 </mapper>
