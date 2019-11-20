@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -1141,13 +1142,27 @@ public class MerchantService {
   }
 
 
-  public void addMerchant(String custId, Merchant merchant, String paths) {
+  public void addMerchant(String userId,String custId, Merchant merchant, String paths) {
     this.saveLoginMerchant2(custId, merchant);
+    this.saveCustBelongInfo(userId, custId);
     // ruleService.saveFee(custId, feeCode);
     this.saveMerchant2(merchant);
     this.saveCertificateAuth(custId);
   }
-  /** 微商户注册，带事务操作 */
+  private void saveCustBelongInfo(String userId, String custId) {
+	  if(StringUtils.isEmpty(custId)) {
+			throw new IllegalArgumentException("客户号为空");
+		}
+	  TdCustBelongInfo tdCustBelongInfo = new TdCustBelongInfo();
+	  tdCustBelongInfo.setCustId(custId);
+	  tdCustBelongInfo.setManagerId(userId);
+	  Date date = new Date(); 
+	  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	  tdCustBelongInfo.setCreateTime(sdf.format(date));
+	  merchantMapper.saveCustBelongInfo(tdCustBelongInfo);
+  }
+
+/** 微商户注册，带事务操作 */
 
   public void saveTinyMerchantRegist(String email, String custId, Merchant merchant,
       Map<String, String> custScanMap) {

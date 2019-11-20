@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -135,7 +134,6 @@ public class SumPayMerchantReportsController {
 	public String list(HttpServletRequest request,HttpServletResponse response,SumPayCoBean cr){
 		JSONObject object = new JSONObject();
 		JSONObject bestResult = new JSONObject();
-		JSONObject sumpayResult = new JSONObject();
 		request.setAttribute("merchantCode", cr.getMerchantCode().trim());
 		if("SUM_PAY".equals(cr.getChannelNo().trim())){//翼支付
 			//查询该商户是否已报备

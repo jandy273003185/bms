@@ -178,7 +178,7 @@ public class ServiceParenterController {
 			merchant.setCustId(custId);
 			// 任务ID
 			String taskId = request.getParameter("taskId");
-			this.saveMerchant(custId, merchant, null);
+			this.saveMerchant(userId,custId, merchant, null);
 			// 流程到下一步
 			String auditName = request.getParameter("auditName");
 			merchantService.startProcess(custId, taskId, auditName);
@@ -296,7 +296,7 @@ public class ServiceParenterController {
 	 * @param custId
 	 * @param merchant
 	 */
-	public void saveMerchant(String custId, Merchant merchant, String paths) {
-		merchantService.addMerchant(custId, merchant, paths);
+	public void saveMerchant(String userId,String custId, Merchant merchant, String paths) {
+		merchantService.addMerchant(userId,custId, merchant, paths);
 	}
 }

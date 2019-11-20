@@ -679,7 +679,7 @@
 							<option value="">--请选择报备渠道--</option>
 							 <c:if test="${not empty channlInfoList }">
                             <c:forEach items="${channlInfoList }" var="info">
-                            	<option id="${info.channlId}" value="${info.channlCode}">${info.channlName}</option>
+                            	<option  value="${info.channlCode}">${info.channlName}</option>
                             </c:forEach>
                    		  </c:if>
                    		  
