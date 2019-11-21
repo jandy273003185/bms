@@ -63,7 +63,24 @@ public class SuiXingBean implements Serializable{
 	private String taskCode;
 	/***联行号***/
 	private String lbnkNo;
+	/***所属总店商户编号***/
+	private String parentMno;
+	/***分店是否独立结算***/
+	private String independentModel;
 	
+	
+	public String getParentMno() {
+		return parentMno;
+	}
+	public void setParentMno(String parentMno) {
+		this.parentMno = parentMno;
+	}
+	public String getIndependentModel() {
+		return independentModel;
+	}
+	public void setIndependentModel(String independentModel) {
+		this.independentModel = independentModel;
+	}
 	public String getChannelNo() {
 		return channelNo;
 	}
