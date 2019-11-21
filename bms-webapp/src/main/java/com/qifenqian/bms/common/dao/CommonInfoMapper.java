@@ -8,6 +8,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import com.qifenqian.bms.basemanager.bank.bean.Bank;
 import com.qifenqian.bms.basemanager.city.bean.City;
 import com.qifenqian.bms.common.bean.BranchBankInfo;
+import com.qifenqian.bms.merchant.reported.bean.CommonIndustry;
 import com.qifenqian.bms.merchant.reported.bean.Province;
 
 @MapperScan	
@@ -24,8 +25,12 @@ public interface CommonInfoMapper {
 	public List<City> selSuiXingCity(@Param("provinceId")String provinceId);
 
 	public List<BranchBankInfo> suiXingBranchBankList(BranchBankInfo queryBean);
-
 	
+	/**
+	 * 查询支付宝商户经营类目
+	 * @return
+	 */
+	List<CommonIndustry> ListAliPayIndustry();
 	
 
 	

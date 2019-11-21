@@ -16,6 +16,7 @@ import com.qifenqian.bms.basemanager.city.bean.City;
 import com.qifenqian.bms.basemanager.city.bean.ProvinceBean;
 import com.qifenqian.bms.basemanager.city.service.CityService;
 import com.qifenqian.bms.common.bean.BranchBankInfo;
+import com.qifenqian.bms.merchant.reported.bean.CommonIndustry;
 import com.qifenqian.bms.merchant.reported.bean.Province;
 
 
@@ -114,6 +115,19 @@ public class CommonInfoController {
 			object.put("message", "银行编号为空");
 		}
 		return object.toString();
+		
+	}
+	
+	/**
+	 * 根据渠道查询行业类目信息
+	 * @param bank
+	 * @return
+	 */
+	@RequestMapping(value = "/getIndustrieInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public List<CommonIndustry> getIndustrieInfo(String channelCode) {
+		List<CommonIndustry>  commonIndustries = commonInfoService.selectCommonIndustrys(channelCode);
+		return commonIndustries;
 		
 	}
 	

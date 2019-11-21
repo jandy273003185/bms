@@ -85,4 +85,15 @@
 		</where>
 		ORDER BY z.brnach_bank_id
 	</select>
+	
+	<select id="ListAliPayIndustry" resultType="com.qifenqian.bms.merchant.reported.bean.CommonIndustry">
+		SELECT
+			t.level_one,
+			t.level_two,
+			t.level_three,
+			t.level_code,
+			t.special_certificate 
+		FROM
+		td_alipay_mcc_info t
+	</select>
 </mapper>

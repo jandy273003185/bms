@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.common.collect.Lists;
 import com.qifenqian.bms.basemanager.bank.bean.Bank;
 import com.qifenqian.bms.basemanager.bank.dao.BankDAO;
 import com.qifenqian.bms.basemanager.branchbank.dao.BranchBankDao;
@@ -16,6 +17,7 @@ import com.qifenqian.bms.basemanager.city.bean.City;
 import com.qifenqian.bms.basemanager.city.mapper.CityMapper;
 import com.qifenqian.bms.common.bean.BranchBankInfo;
 import com.qifenqian.bms.common.dao.CommonInfoDao;
+import com.qifenqian.bms.merchant.reported.bean.CommonIndustry;
 import com.qifenqian.bms.merchant.reported.bean.Province;
 import com.qifenqian.bms.merchant.reported.dao.FmIncomeMapperDao;
 
@@ -114,5 +116,25 @@ public class CommonInfoService {
 			branchBankList = commonInfoDao.suiXingBranchBankList(queryBean);
 		}
 		return branchBankList;
+	}
+	
+	/**
+	 * 查找所有省份
+	 * @param city
+	 * @return
+	 */
+	public List<CommonIndustry> selectCommonIndustrys(String channelCode) {
+		List<CommonIndustry> industries = new ArrayList<CommonIndustry>();
+		//七分钱
+		if(StringUtils.isBlank(channelCode)) {
+			//provinceList = commonInfoDao.selectProvince();
+		}
+		else if ("ALIPAY".equals(channelCode)) {
+			industries = commonInfoDao.ListAliPayIndustry();
+		}
+		else if("SUIXING_PAY".equals(channelCode)) {
+			//provinceList = commonInfoDao.selSuiXingProvince();
+		}
+		return industries;
 	}
 }
