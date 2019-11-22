@@ -34,16 +34,25 @@
 
 	$(function() {
 
-		if($("#custType").val() =='0' ||$("#custType").val() =='2' ){
+		if($("#custType").val() =='1' ||$("#custType").val() =='2' ){
+			//个体户、企业
+			$("#businessPhotoType").attr("style","display:");
+		}
+		if($("#custType").val() =='0'){
 			//个人
+			$("#businessPhotoType").attr("style","display:none");
+		}
+		if($("#compMainAcctType").val() =='02'){
+			//对私
 			$("#bankCardPhoto_").attr("style","display:");
 			$("#openAccount_").attr("style","display:none");
 		}
-		if($("#custType").val() =='1'){
-			//企业
+		if($("#compMainAcctType").val() =='01'){
+			//对公
 			$("#bankCardPhoto_").attr("style","display:none");
 			$("#openAccount_").attr("style","display:");
 		}
+		
 
 		var custId = $("#custId").val();
 		var authId = $("#authId").val();
@@ -64,7 +73,7 @@
     	$("#certAttribute1ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=0&authId="+authId);
     	$("#certAttribute2ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=1&authId="+authId);
     	$("#doorPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=08&authId="+authId);
-    	$("#bankCardPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=05&authId="+authId);
+    	$("#bankCardPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=07&authId="+authId);
     	$("#openPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=03&authId="+authId);
     	$("#legalCertAttribute1ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=0&authId="+authId);
     	$("#legalCertAttribute2ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=1&authId="+authId);
@@ -97,6 +106,7 @@
 					<input type="hidden" id="custId" name="custId" value="${custInfo.custId }"/>
 					<input type="hidden" id="authId" name="authId" value="${custInfo.authId }"/>
 					<input type="hidden" name="custType" id="custType" value="${merchantVo.custType}">
+					<input type="hidden" name="compMainAcctType" id="compMainAcctType" value="${merchantVo.compMainAcctType}">
 					<input type="hidden" id="businessPhototemp"/>
 					<input type="hidden" id="openPhototemp"/>
 					<input type="hidden" id="certAttribute1temp" />
@@ -300,10 +310,10 @@
                             <tr>
 								<td class="td-left">结算类型：</td>
 								<c:choose>
-									<c:when test="${merchantVo.custType =='0' || merchantVo.custType =='2'}">
+									<c:when test="${merchantVo.compMainAcctType =='02'}">
 										<td class="td-right">对私</td>
 									</c:when>
-									<c:when test="${merchantVo.custType =='1'}">
+									<c:when test="${merchantVo.compMainAcctType =='01'}">
 										<td class="td-right">对公</td>
 									</c:when>
 								</c:choose>
