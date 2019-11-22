@@ -541,7 +541,7 @@
 									<th width="12%">录入时间</th>
 									<th width="7%">商户状态</th>
 									<th width="7%">审核状态</th>
-									<th width="7%">报备状态</th>
+									<!-- <th width="7%">报备状态</th> -->
 									<th width="5%">审核人</th>
 									<th width="22%">操作</th>
 								</tr>
@@ -586,7 +586,7 @@
 												</c:when>
 											</c:choose>
 										</td>
-										<td>
+										<%-- <td>
 											<c:choose>
 												<c:when test="${merchant.filingAuditStatus =='00'}">
 													商户报备成功
@@ -604,7 +604,7 @@
 													审核失败
 												</c:when>
 											</c:choose>
-										</td>
+										</td> --%>
 										<td>${merchant.aduitUserName }</td>
 										<td>
 											<input type="hidden" name="merchantCode" id = "merchantCode" value="${merchant.merchantCode }" />

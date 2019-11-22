@@ -44,7 +44,7 @@ public class PrivilegeFilter implements Filter {
   /** 需要登录的公共功用 */
   private String[] commonPage = {"/common/files/upload"};
   
-  private String[] commonInfo = {"/common/info/bankCnapsInfo"};
+  private String[] commonInfo = {"/common/info/bankCnapsInfo","/common/info/getCityInfo","/common/info/getAreaInfo"};
   
 
   /** 过滤 */
@@ -108,7 +108,9 @@ public class PrivilegeFilter implements Filter {
       skip = true;
     } else if (requestURI.startsWith("/druid")) {
       skip = true;
-    }
+    } else if (requestURI.startsWith("/common/info")) {
+	  skip = true;
+	}
 
     // 如果不跳转,那么要进行权限验证
     if (!skip) {

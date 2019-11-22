@@ -495,14 +495,19 @@ public class MerchantEnterController {
 		auditResult.setMerchantCode(merchantCode);
 
 		TdCustInfo tdCustInfo = tdCustInfoMapper.selectByMerchantCode(merchantCode);
-
+		MerchantVo merchantVo = new MerchantVo();
+		merchantVo.setCustId(tdCustInfo.getCustId());
 		if("noPass".equals(result)) {
 			auditResult.setStatus("99");
+			merchantVo.setFilingAuditStatus("99");
 			//更改审核状态
 			merchantWorkFlowAuditService.updateAuditStatus(tdCustInfo.getAuthId(), message, "2");
+			merchantMapper.updateMerchantEnter(merchantVo);
 		}else if("pass".equals(result)) {
 			auditResult.setStatus("00");
+			merchantVo.setFilingAuditStatus("00");
 			merchantWorkFlowAuditService.updateAuditStatus(tdCustInfo.getAuthId(), message, "0");
+			merchantMapper.updateMerchantEnter(merchantVo);
 		}
 
 		try {
