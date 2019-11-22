@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.Date;
 import java.util.List;
-import java.util.Properties;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -36,7 +35,6 @@ import com.qifenqian.bms.bal.accountResult.bean.BaseChannel;
 import com.qifenqian.bms.bal.accountResult.service.BatchResultStatisticService;
 import com.qifenqian.bms.bal.filereceive.bean.FileReceive;
 import com.qifenqian.bms.bal.filereceive.service.FileReceiveService;
-import com.qifenqian.bms.common.util.PropertiesUtil;
 import com.qifenqian.bms.merchant.channel.bean.AgentMerInfo;
 import com.qifenqian.bms.merchant.reported.bean.ChannlInfo;
 import com.qifenqian.bms.merchant.reported.service.CrIncomeService;
@@ -151,7 +149,7 @@ public class FileReceiveController {
 			ChannelResult result = checkService.check(checkReq);
 			long endT = System.currentTimeMillis();
 			logger.info(" bal Check cost time:{}", (endT - startT));
-			Properties p = PropertiesUtil.getProperties();
+			
 
 			// String fileDir = p.getProperty("FM_PROD_CHECK_FILE") + File.separator +
 			// fileDate;

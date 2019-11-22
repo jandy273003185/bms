@@ -13,14 +13,18 @@ import java.util.Properties;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.poi.ss.formula.functions.T;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.qifenqian.bms.accounting.utils.ExportExcel;
-import com.qifenqian.bms.common.util.PropertiesUtil;
+
 
 
 @Service
 public class ExportExcelUtils {
+	
+	@Value("${EXPORT_EXCEL}")
+	private static String EXPORT_EXCEL;
 	
 	/**
 	 * 导出excel
@@ -41,8 +45,8 @@ public class ExportExcelUtils {
 		OutputStream out = null;
 		try {
 
-			Properties p = PropertiesUtil.getProperties();
-			String exportPath = p.getProperty("EXPORT_EXCEL");
+			//Properties p = PropertiesUtil.getProperties();
+			String exportPath = EXPORT_EXCEL; //p.getProperty("EXPORT_EXCEL");
 			File saveFile = new File(exportPath);
 			if (!saveFile.exists()) {
 				saveFile.mkdirs();

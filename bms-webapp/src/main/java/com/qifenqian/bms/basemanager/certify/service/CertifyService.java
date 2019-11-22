@@ -12,7 +12,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,6 +24,7 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
@@ -34,7 +34,6 @@ import com.qifenqian.bms.basemanager.certify.bean.FileBean;
 import com.qifenqian.bms.basemanager.certify.bean.IdentityDetailBean;
 import com.qifenqian.bms.basemanager.certify.mapper.CertifyMapper;
 import com.qifenqian.bms.basemanager.dictData.mapper.DictDataMapper;
-import com.qifenqian.bms.common.util.PropertiesUtil;
 import com.qifenqian.bms.platform.common.utils.SpringUtils;
 import com.qifenqian.bms.platform.utils.BusinessUtils;
 import com.qifenqian.bms.platform.web.page.Page;
@@ -65,6 +64,9 @@ public class CertifyService {
 
 	@Autowired
 	private DictDataMapper dictDataMapper;
+	
+	@Value("${IDENTITY_FILE_SAVE_PATH}")
+	private String IDENTITY_FILE_SAVE_PATH;
 
 	/**
 	 * 查询所有证件信息
@@ -188,7 +190,6 @@ public class CertifyService {
 			upload.setHeaderEncoding(verificationFileEncoding);
 			List<FileItem> list = upload.parseRequest(request);
 			List<String> paths = new ArrayList<String>();
-			Properties p = PropertiesUtil.getProperties();
 			FileItem item = list.get(0);
 
 			if (item.isFormField()) {
@@ -203,7 +204,7 @@ public class CertifyService {
 			String workDate = name[1];
 
 			/** 读取配置文件 获取保存路径 **/
-			String identityFilePath = p.getProperty("IDENTITY_FILE_SAVE_PATH");
+			String identityFilePath = IDENTITY_FILE_SAVE_PATH;
 
 			if (fileType.equals(Constant.REQUEST_FILE_TYPE)) {
 

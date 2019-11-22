@@ -8,25 +8,27 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.qifenqian.bms.accounting.utils.ExportExcel;
 import com.qifenqian.bms.basemanager.aggregatepayment.agent.bean.AgentSettleBean;
 import com.qifenqian.bms.basemanager.aggregatepayment.agent.bean.AgentSettleDetailBean;
 import com.qifenqian.bms.basemanager.aggregatepayment.agent.dao.AgentSettleDAO;
-import com.qifenqian.bms.common.util.PropertiesUtil;
 
 @Service
 public class AgentSettleService {
 	
 	@Autowired
 	private AgentSettleDAO agentSettleDAO;
+	
+	@Value("${EXPORT_EXCEL}")
+	private String EXPORT_EXCEL;
 
 	public List<AgentSettleBean> getAgentSettleList(AgentSettleBean queryBean) {
 
@@ -44,8 +46,7 @@ public class AgentSettleService {
 		OutputStream out = null;
 		try {
 
-			Properties p = PropertiesUtil.getProperties();
-			String exportPath = p.getProperty("EXPORT_EXCEL");
+			String exportPath = EXPORT_EXCEL;
 			File saveFile = new File(exportPath);
 			if (!saveFile.exists()) {
 				saveFile.mkdirs();
@@ -78,7 +79,6 @@ public class AgentSettleService {
 	}
 
 	public List<AgentSettleBean> getAgentSettleListExport(AgentSettleBean queryBean) {
-		// TODO Auto-generated method stub
 		return agentSettleDAO.getAgentSettleListExport(queryBean);
 	}
 }

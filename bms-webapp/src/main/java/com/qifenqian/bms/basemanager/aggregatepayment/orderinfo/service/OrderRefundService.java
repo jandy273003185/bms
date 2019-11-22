@@ -8,25 +8,28 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.qifenqian.bms.accounting.utils.ExportExcel;
 import com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.RefundBean;
 import com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.RefundQueryBean;
 import com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.dao.OrderRefundDAO;
-import com.qifenqian.bms.common.util.PropertiesUtil;
+
 
 
 @Service
 public class OrderRefundService {
 	@Autowired
 	private OrderRefundDAO orderRefundDAO;
+	
+	@Value("${EXPORT_EXCEL}")
+	private String EXPORT_EXCEL;
 
 	/** 查询所有交易 */
 	public List<RefundBean> getOrderRefundList(RefundQueryBean queryBean) {
@@ -46,8 +49,7 @@ public class OrderRefundService {
 		OutputStream out = null;
 		try {
 
-			Properties p = PropertiesUtil.getProperties();
-			String exportPath = p.getProperty("EXPORT_EXCEL");
+			String exportPath = EXPORT_EXCEL;
 			File saveFile = new File(exportPath);
 			if (!saveFile.exists()) {
 				saveFile.mkdirs();

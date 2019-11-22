@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import org.activiti.engine.FormService;
 import org.activiti.engine.RuntimeService;
@@ -15,8 +14,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.Constant;
@@ -28,12 +27,11 @@ import com.qifenqian.bms.basemanager.merchant.mapper.TdLoginUserInfoMapper;
 import com.qifenqian.bms.basemanager.merchant.service.AuditorService;
 import com.qifenqian.bms.basemanager.merchant.service.MerchantService;
 import com.qifenqian.bms.basemanager.rule.mapper.RuleMapper;
-import com.qifenqian.bms.common.util.PropertiesUtil;
 import com.qifenqian.bms.myworkspace.WorkFlowHelper;
+import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 import com.qifenqian.bms.platform.web.myWorkSpace.bean.WaitTaskBean;
 import com.qifenqian.bms.platform.web.myWorkSpace.dao.WorkSpaceDAO;
 import com.qifenqian.bms.platform.web.myWorkSpace.mapper.MyWorkSpaceMapper;
-import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
 @Service
 public class WorkSpaceService {
@@ -71,6 +69,9 @@ public class WorkSpaceService {
 	
 	@Autowired
 	private MyWorkSpaceMapper myWorkSpaceMapper;
+	
+	@Value("${CF_FILE_SAVE_PATH}")
+	private String CF_FILE_SAVE_PATH;
 	
 	
 	/**
@@ -143,8 +144,7 @@ public class WorkSpaceService {
 		String idCardType_1 = fileNames.get("idCardType_1");
 		String idCardType_2 = fileNames.get("idCardType_2");
 		String bankCard = fileNames.get("bankCard");
-		Properties p = PropertiesUtil.getProperties();
-		String cf_path = p.getProperty("CF_FILE_SAVE_PATH");
+		String cf_path = CF_FILE_SAVE_PATH; //p.getProperty("CF_FILE_SAVE_PATH");
 		try {
 			/**
 			 * 更新营业执照
@@ -215,8 +215,8 @@ public class WorkSpaceService {
 		String idCardType_1 = fileNames.get("idCardType_1");
 		String idCardType_2 = fileNames.get("idCardType_2");
 
-		Properties p = PropertiesUtil.getProperties();
-		String cf_path = p.getProperty("CF_FILE_SAVE_PATH");
+		//Properties p = PropertiesUtil.getProperties();
+		String cf_path = CF_FILE_SAVE_PATH; //p.getProperty("CF_FILE_SAVE_PATH");
 		try {
 			/**
 			 * 更新营业执照

@@ -26,6 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -56,7 +57,6 @@ import com.qifenqian.bms.basemanager.rule.mapper.RuleMapper;
 import com.qifenqian.bms.basemanager.rule.service.RuleService;
 import com.qifenqian.bms.basemanager.utils.DatetimeUtils;
 import com.qifenqian.bms.basemanager.utils.GenSN;
-import com.qifenqian.bms.common.util.PropertiesUtil;
 import com.qifenqian.bms.expresspay.CommonService;
 import com.qifenqian.bms.platform.common.utils.SpringUtils;
 import com.qifenqian.bms.platform.web.admin.user.bean.User;
@@ -140,6 +140,9 @@ public class AgentRegisterService {
 	
 	@Autowired
 	private AcctSevenBussMapper acctSevenBussMapper;
+	
+	@Value("${CF_FILE_SAVE_PATH}")
+	private String CF_FILE_SAVE_PATH;
 
 	private static final Logger logger = LoggerFactory.getLogger(AgentRegisterService.class);
 
@@ -611,7 +614,6 @@ public class AgentRegisterService {
 			upload.setHeaderEncoding("UTF-8");
 			List<FileItem> list = upload.parseRequest(request);
 			InputStream in = null;
-			Properties p = PropertiesUtil.getProperties();
 			HashMap<String, String> nameType = new HashMap<String, String>();
 			for (FileItem item : list) {
 				String filename = null;
@@ -641,7 +643,7 @@ public class AgentRegisterService {
 
 					in = item.getInputStream();
 
-					String cf_path = p.getProperty("CF_FILE_SAVE_PATH");
+					String cf_path = CF_FILE_SAVE_PATH;
 
 					switch (filedName) {
 					case "businessPhoto":
@@ -842,8 +844,8 @@ public class AgentRegisterService {
 		TdCustInfo info = tdCustInfoMapper.selectById(custId);
 		/** 创建人 **/
 		String createId = String.valueOf(WebUtils.getUserInfo().getUserId());
-		Properties p = PropertiesUtil.getProperties();
-		String cf_path = p.getProperty("CF_FILE_SAVE_PATH");
+		
+		String cf_path = CF_FILE_SAVE_PATH;
 		try {
 			/** 营业执照 **/
 			CustScan businessLicenseBean = new CustScan();
@@ -894,8 +896,7 @@ public class AgentRegisterService {
 		TdCustInfo tdCustInfo = tdCustInfoMapper.selectById(custId);
 		/** 创建人 **/
 		String createId = String.valueOf(WebUtils.getUserInfo().getUserId());
-		Properties p = PropertiesUtil.getProperties();
-		String cf_path = p.getProperty("CF_FILE_SAVE_PATH");
+		String cf_path = CF_FILE_SAVE_PATH;
 		try {
 			/** 营业执照 **/
 			String str = fileNames.get("businessType");
@@ -1021,8 +1022,7 @@ public class AgentRegisterService {
 		String idCardType_2 = fileNames.get("idCardType_2"); 
 //		String bankCard = fileNames.get("bankCard");
 //		String otherPapers = fileNames.get("otherPapers");
-		Properties p = PropertiesUtil.getProperties();
-		String cf_path = p.getProperty("CF_FILE_SAVE_PATH");
+		String cf_path = CF_FILE_SAVE_PATH;
 		try {
 			/** 更新营业执照扫描件  **/
 			/** 由于营业执照注册号和营业执照扫描件不是必须提交的，所以这里做一次查询，判断 **/
@@ -1209,7 +1209,6 @@ public class AgentRegisterService {
 			upload.setHeaderEncoding("UTF-8"); // 解决上传文件名的中文乱码
 			List<FileItem> list = upload.parseRequest(request);
 			InputStream inputStream = null;
-			Properties properties = PropertiesUtil.getProperties();
 			HashMap<String, String> nameType = new HashMap<String, String>();
 			for (FileItem item : list) {
 				String filename = null; //
@@ -1235,7 +1234,7 @@ public class AgentRegisterService {
 						return result;
 					}
 					inputStream = item.getInputStream();
-					String fileUploadPath = properties.getProperty("CF_FILE_SAVE_PATH"); // 服务器上传路径
+					String fileUploadPath = CF_FILE_SAVE_PATH;
 					/** 根据文件名生成路径规则 **/
 					switch (filedName) {
 					case "businessPhoto":

@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +12,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
 import com.qifenqian.bms.basemanager.utils.GenSN;
-import com.qifenqian.bms.common.util.PropertiesUtil;
 import com.qifenqian.bms.merchant.reported.bean.Bank;
 import com.qifenqian.bms.merchant.reported.bean.ChannlInfo;
 import com.qifenqian.bms.merchant.reported.bean.City;
@@ -59,6 +58,8 @@ public class SuiXingPayMerchantReportsController {
    @Autowired
    private IMerChantIntoService iMerChantIntoService;
 
+   @Value("${SX_FILE_SAVE_PATH}")
+   private String SX_FILE_SAVE_PATH;
 	
 	
    /**
@@ -196,7 +197,6 @@ public class SuiXingPayMerchantReportsController {
 			if("SUCCESS".equals(fileResult.get("result"))){
 				
 				//文件上传至随行付
-				Properties p = PropertiesUtil.getProperties();
 //				File zipFile = new File(cr.getMerchantCode() +".zip") ;	// 定义压缩文件名称
 				
 //				String path =p.getProperty("SX_FILE_SAVE_PATH") + File.separator  + File.separator  +zipFile;
@@ -204,7 +204,7 @@ public class SuiXingPayMerchantReportsController {
 				//本地path
 //				String path = "D:"+  File.separator +  p.getProperty("SX_FILE_SAVE_PATH") + File.separator + fileResult.get("filePath") + File.separator + cr.getMerchantCode() +".zip";
 				//服务器地址
-				String path = p.getProperty("SX_FILE_SAVE_PATH") + File.separator + cr.getMerchantCode() +".zip";
+				String path = SX_FILE_SAVE_PATH + File.separator + cr.getMerchantCode() +".zip";
 				logger.info("+++++++++++" + path + "------------------------------");
 				
 				SxPayUploadFileInfo uploadFileInfo = new SxPayUploadFileInfo();

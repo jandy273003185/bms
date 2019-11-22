@@ -18,6 +18,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,7 +27,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.app.ad.bean.AdManageBean;
 import com.qifenqian.bms.app.ad.serivce.AdManageService;
-import com.qifenqian.bms.common.util.PropertiesUtil;
 
 /**
  * APP登录页广告管理控制器
@@ -35,10 +35,13 @@ import com.qifenqian.bms.common.util.PropertiesUtil;
  *
  */
 @Controller
-@RequestMapping(AdManagePath.BASE)
+@RequestMapping("/app/ad")
 public class AdManageController {
 	@Autowired
 	private AdManageService adManageService;
+	
+	@Value("${ADMANAGE_FILE_SAVE_PATH}")
+	private String updatePath;
 
 	/**
 	 * 根据查询条件返回APP登录页广告信息列表
@@ -46,9 +49,9 @@ public class AdManageController {
 	 * @param queryBean
 	 * @return
 	 */
-	@RequestMapping(AdManagePath.MANAGE)
+	@RequestMapping("/manage")
 	public ModelAndView manage(AdManageBean queryBean) {
-		ModelAndView mv = new ModelAndView(AdManagePath.BASE + AdManagePath.MANAGE);
+		ModelAndView mv = new ModelAndView("/app/ad/manage");
 		mv.addObject("adManageList", JSONObject.toJSON(adManageService.listAdManageInfo(queryBean)));
 		mv.addObject("queryBean", queryBean);
 		return mv;
@@ -57,7 +60,7 @@ public class AdManageController {
 	/**
 	 * 添加APP登录广告页信息
 	 */
-	@RequestMapping(AdManagePath.ADD)
+	@RequestMapping("/add")
 	@ResponseBody
 	public String saveAdManageInfo(AdManageBean adManageInfo) {
 		String result = adManageService.saveAdManageInfo(adManageInfo);
@@ -69,7 +72,7 @@ public class AdManageController {
 	/**
 	 * 更新APP登录页广告信息
 	 */
-	@RequestMapping(AdManagePath.UPDATE)
+	@RequestMapping("/update")
 	@ResponseBody
 	public String updateAdManageInfo(AdManageBean adManageInfo) {
 		String result = adManageService.updateAdManageInfo(adManageInfo);
@@ -84,7 +87,7 @@ public class AdManageController {
 	 * @param adId
 	 * @return
 	 */
-	@RequestMapping(AdManagePath.DELETE)
+	@RequestMapping("/delete")
 	@ResponseBody
 	public String deleteAdManageInfo(String adId) {
 		String result = adManageService.deleteAdManageInfoByAdId(adId);
@@ -100,7 +103,7 @@ public class AdManageController {
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping(AdManagePath.FILEUPLOAD)
+	@RequestMapping("/fileUpload")
 	@ResponseBody
 	public String fileUpload(HttpServletRequest request, HttpServletResponse response) {
 		JSONObject object = new JSONObject();
@@ -144,12 +147,10 @@ public class AdManageController {
 					filename = System.currentTimeMillis() + filename;
 					in = item.getInputStream();
 
-					Properties pps = PropertiesUtil.getProperties();
+				
+					pathName = updatePath + File.separator + filename;
 
-					String path = pps.getProperty("ADMANAGE_FILE_SAVE_PATH");
-					pathName = path + File.separator + filename;
-
-					File saveFile = new File(path);
+					File saveFile = new File(updatePath);
 					if (!saveFile.exists()) {
 						saveFile.mkdirs();
 					}
@@ -194,7 +195,7 @@ public class AdManageController {
 	}
 
 	// 读取服务器图片
-	@RequestMapping(AdManagePath.IMAGE)
+	@RequestMapping("/image")
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String imgPath = request.getParameter("imgPath");
