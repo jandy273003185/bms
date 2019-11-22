@@ -152,12 +152,12 @@ $(function(){
 							<tr>
 							    <td class="td-left">商户类型：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-								   <select  name="mecTypeFlag" id="mecTypeFlag"  class="width-90" >
+								   <select  name="mecTypeFlag" id="mecTypeFlag"  onchange = "getMecType();" class="width-90" >
 										<option value="00">--普通商户--</option>
 										<option value="01">--连锁总店--</option>
 										<option value="02">--连锁分店--</option>
 										<option value="03">--1+n总店--</option>
-										<option value="04">--1+n总店--</option>
+										<option value="04">--1+n分店--</option>
 									</select>
 									<label class="label-tips" id="mecTypeFlagLab"></label>	
 								</td>
@@ -171,6 +171,21 @@ $(function(){
 					                           	</c:forEach>
 				                 		  	</c:if>
 									</select>	
+								</td>
+							</tr>
+							<tr id="mecTypeFlagType" style = "display:none">
+								<td class="td-left" width="18%">所属总店商户编号：</td>
+								<td class="td-right" width="32%"> 
+									<input type="text" id="parentMno" name="parentMno" placeholder="请输入所属总店商户编号（对应随行付商户号）" value="" style="width:90%">
+								</td>
+								<td class="td-left">分店是否独立结算：</td>
+								<td class="td-right"> 
+								    <select  name="independentModel" id="independentModel" class="width-90">
+										<option value="">--结算方式--</option>
+										<option value="01"> 独立结算</option>
+										<option value="02">统一结算</option>
+									</select>
+									<label class="label-tips" id="suiXingMerchantLab"></label>
 								</td>
 							</tr>
 	                        <tr>
@@ -766,6 +781,15 @@ $(function(){
 			}
 
       	}
+      	function getMecType(){
+      		var mecTypeFlag = $("#mecTypeFlag").val()
+      		if("02" == mecTypeFlag || "04" == mecTypeFlag){
+      			$("#mecTypeFlagType").attr("style","display:");
+      		}else{
+      			$("#mecTypeFlagType").attr("style","display:none");
+      		}
+      	}
+      	
 
         //图片预览
         function shopInteriorImage(obj){  
@@ -921,7 +945,10 @@ $(function(){
    	    	}else{
    	    		$("#suiXingMerchantLab").text('');
    	    	}
-   	    	
+   	    	//所属总店商户编号
+   			var parentMno = $("#parentMno").val();
+   	    	//分店是否独立结算
+   			var	independentModel = $("#independentModel").val();
    			//上传照片
 			var imgDoor = [];
 			var imgSrc = [];
@@ -1150,6 +1177,8 @@ $(function(){
 		  	   						bankCity : bankCity,
 		  	   						interBankName : interBankName,
 		  	   						rate : rate,
+		  	   						parentMno :  parentMno,
+		  	   						independentModel : independentModel,
 		  	   						taskCode : taskCode
 		  	   					},
 		  	   					dataType : "json",

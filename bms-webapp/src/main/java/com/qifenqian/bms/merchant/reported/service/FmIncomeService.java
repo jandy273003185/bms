@@ -579,7 +579,9 @@ public class FmIncomeService {
       String merchantCode = cr.getMerchantCode().trim();
 
       SxPayMerchantInfo merchantInfo = new SxPayMerchantInfo();
-
+      
+      merchantInfo.setIndependentModel(cr.getIndependentModel());
+      merchantInfo.setParentMno(cr.getParentMno());
       merchantInfo.setRegistCode(cr.getRegistCode());
 	  merchantInfo.setCprRegNmCn(cr.getCprRegNmCn());
       merchantInfo.setMecDisNm(cr.getCustName());

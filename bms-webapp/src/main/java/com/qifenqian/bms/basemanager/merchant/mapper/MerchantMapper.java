@@ -190,4 +190,6 @@ public interface MerchantMapper {
 	public MerchantVo getMerchantInfo(TdMerchantDetailInfo detailInfo);
 
 	void saveCustBelongInfo(TdCustBelongInfo tdCustBelongInfo);
+
+	public TdMerchantDetailInfo findMerchantDetailInfo(@Param("merchantCode") String merchantCode, @Param("channlCode") String channlCode);
 }

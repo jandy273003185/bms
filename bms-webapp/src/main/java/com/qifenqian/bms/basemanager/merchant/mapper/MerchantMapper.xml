@@ -2479,4 +2479,54 @@
 			#{modiftyTime, jdbcType=VARCHAR}
 		)
 	</insert>
+	
+	<select id="findMerchantDetailInfo" parameterType="string" resultType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo">
+		select 
+		 t.patch_no,
+		 t.merchant_code,
+		 t.report_status,
+		 t.file_status,
+		 t.out_merchant_code,
+		 t.remark,
+		 t.prov_code,
+		 t.city_code,
+		 t.contry_code,
+		 t.bank_code,
+		 t.branch_bank_code,
+		 t.branch_bank_name,
+		 t.mobile_no,
+		 t.customer_Phone,
+		 t.qq,
+		 t.create_time,
+		 t.modify_time,
+		 t.power_id,
+		 t.app_id,
+		 t.loginNo,
+		 t.bestMerchantType,
+		 t.bestpayMctNo,
+		 t.result_msg,
+		 t.zfb_batch_no,
+		 t.zfb_batch_status,
+		 t.zfb_user_id,
+		 t.zfb_auth_app_id,
+		 t.zfb_app_auth_token,
+		 t.zfb_app_refresh_token,
+		 t.zfb_expires_in,
+		 t.zfb_re_expires_in,
+		 t.rate
+	from td_merchant_detail_info t
+	LEFT JOIN td_merchant_report r
+	on t.patch_no = r.patch_no
+	<where>
+		1=1
+		<if test="merchantCode != null and merchantCode !='' ">
+		 AND r.merchant_code = #{merchantCode,jdbcType=VARCHAR}
+		</if>
+		<if test="channlCode != null and channlCode !='' ">
+		 AND r.channel_no = #{channlCode,jdbcType=VARCHAR}
+		</if>
+	</where>
+	
+	
+	</select>
 </mapper>

@@ -718,7 +718,7 @@ function businessForever(){
                         <tr>
 							<td class="td-left">商户账号：<span style="color:red;">（必填)</span></td>
 							<td class="td-right">
-								<input type="text" id="merchantAccount" name="merchantAccount" placeholder="请输入手机号或邮箱" maxlength="50" style="width:90%">
+								<input type="text" id="merchantAccount" name="merchantAccount" placeholder="请输入手机号" maxlength="50" style="width:90%">
 								
 								<label class="label-tips" id="merchantAccountLab"></label>
 							</td>
@@ -1113,6 +1113,11 @@ function businessForever(){
 
         /*商户账号*/
         $("#merchantAccount").on('blur',function () {
+        	if(!isPhoneNo($("#merchantAccount")[0])){
+        		$("#merchantAccountLab").text("商户账户请用手机号 ");
+        		$("#merchantAccount").focus();
+        		return false;
+        	}
             $.ajax({
                 async:false,
                 dataType:"json",

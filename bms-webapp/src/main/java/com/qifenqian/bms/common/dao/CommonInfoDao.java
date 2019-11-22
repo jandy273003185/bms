@@ -85,6 +85,7 @@ public class CommonInfoDao {
 		// TODO Auto-generated method stub
 		return commonInfoMapper.getWxAreaByCityId(cityName);
 	}
+	
 
 
 }

@@ -309,8 +309,8 @@
 								</c:choose>
 								<td class="td-left">结算费率：</td>
 								<td class="td-right"> 
-									<input type="text" id="agentRate" name="agentRate" maxlength="100" readonly  value="${merchantVo.agentRate }" style="width:90%">
-									<label class="label-tips" id="agentRateLab"></label>
+									<input type="text" id="rate" name="rate" maxlength="100" readonly  value="${tdMerchantDetailInfo.rate }" style="width:90%">
+									<label class="label-tips" id="rateLab"></label>
 								</td>
 							</tr>
 							<tr id="openAccount_" style = "display:none">

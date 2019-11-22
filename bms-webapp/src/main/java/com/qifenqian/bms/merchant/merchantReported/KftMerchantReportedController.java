@@ -199,7 +199,8 @@ public class KftMerchantReportedController {
 		detailInfo.setMerchantCode(merchantCode);
 //		MerchantVo merchant = merchantService.getMerchantInfo(detailInfo);
 		MerchantVo merchant = merchantService.findMerchantInfo(custInfo.getCustId());
-		
+		/***报备明细***/
+		TdMerchantDetailInfo tdMerchantDetailInfo= merchantService.findMerchantDetailInfo(custInfo.getMerchantCode(),channlCode);
 		/***查询随行付银行地区信息***/
 		List<Province> proviceList = fmIncomeService.getSuiXingProvinceList();
 		/***查询银行信息***/
@@ -210,6 +211,7 @@ public class KftMerchantReportedController {
 		String areaType ="2";
 		List<MerchantCity> merchantProvinceList = fmIncomeService.getSuiXingMerchantCityList(areaType);
 		
+		mv.addObject("tdMerchantDetailInfo",tdMerchantDetailInfo);
 		mv.addObject("merchantVo", merchant);
 		mv.addObject("channlCode", channlCode);
 		mv.addObject("custInfo", custInfo);
