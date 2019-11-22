@@ -72,11 +72,17 @@ public class CommonInfoController {
 	 */
 	@RequestMapping(value = "/getCityInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public List<City> getCityInfo(ProvinceBean provinceBean,String channelCode) {
-		
-		List<City> cityList = commonInfoService.getCityByProvinceId(provinceBean.getProvinceId(),channelCode);
-		
-		return cityList;
+	public String getCityInfo(String provinceId,String channelCode) {
+		JSONObject object = new JSONObject();
+		List<City> cityList = commonInfoService.getCityByProvinceId(provinceId,channelCode);
+		if(null!=cityList &&cityList.size()>0){
+			object.put("result", "SUCCESS");
+			object.put("cityList", cityList);
+		}else{
+			object.put("result", "FAIL");
+			object.put("message", "查询城市失败");
+		}
+		return object.toString();
 		
 	}
 	
@@ -87,12 +93,18 @@ public class CommonInfoController {
 	 */
 	@RequestMapping(value = "/getAreaInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public List<City> getAreaInfo(City cityBean,String channelCode) {
+	public String getAreaInfo(City cityBean,String channelCode) {
+		JSONObject object = new JSONObject();
 		
-		String cityId = Integer.toString(cityBean.getCityId());
-		List<City> areaList = commonInfoService.getAreaByCityId(cityId,channelCode);
-		
-		return areaList;
+		List<City> areaList = commonInfoService.getAreaByCityId(cityBean,channelCode);
+		if(null!=areaList &&areaList.size()>0){
+			object.put("result", "SUCCESS");
+			object.put("areaList", areaList);
+		}else{
+			object.put("result", "FAIL");
+			object.put("message", "查询县区失败");
+		}
+		return object.toString();
 		
 	}
 	

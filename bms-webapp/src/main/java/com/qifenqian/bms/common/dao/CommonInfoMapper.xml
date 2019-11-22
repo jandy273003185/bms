@@ -96,4 +96,29 @@
 		FROM
 		td_alipay_mcc_info t
 	</select>
+	
+	<select id="selWxChatAppCity" parameterType="String" resultType="com.qifenqian.bms.basemanager.city.bean.City">
+		SELECT  DISTINCT
+			PROVINCE_NAME,
+				CITY_NAME
+		FROM 
+			WX_AREA_INFO
+		WHERE 
+			PROVINCE_NAME = #{provinceId,jdbcType = VARCHAR}
+			and CITY_NAME != '';
+	</select>
+	
+	<select id="getWxAreaByCityId" parameterType="string" resultType="com.qifenqian.bms.basemanager.city.bean.City">
+		SELECT 
+			A.AREA_ID,
+			A.AREA_NAME 
+		FROM 
+			wx_area_info A 
+		<where>
+			1=1
+			<if test="cityName != null and cityName != ''">
+			AND  A.city_name = #{cityName,jdbcType = VARCHAR} 
+			</if>
+		</where>
+	</select>
 </mapper>

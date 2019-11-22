@@ -31,6 +31,10 @@ public interface CommonInfoMapper {
 	 * @return
 	 */
 	List<CommonIndustry> ListAliPayIndustry();
+
+	public List<City> selWxChatAppCity(@Param("provinceId") String provinceId);
+
+	public List<City> getWxAreaByCityId(@Param("cityName") String cityName);
 	
 
 	
