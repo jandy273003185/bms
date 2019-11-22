@@ -17,7 +17,7 @@ public class CommonData {
 	static {
 		try {
 			Properties configProperties = new Properties();
-			configProperties.load(CommonData.class.getResourceAsStream("/config.properties"));
+			configProperties.load(CommonData.class.getResourceAsStream("/application.properties"));
 			configMessage = new HashMap<String, String>((Map) configProperties);
 		} catch (Exception e) {
 			log.error("处理配置文件config.properties失败！" + e);

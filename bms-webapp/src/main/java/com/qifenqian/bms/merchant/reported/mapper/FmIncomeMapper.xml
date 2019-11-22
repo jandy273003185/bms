@@ -291,6 +291,31 @@
 		 	<if test="resultMsg != null and resultMsg !='' ">
 		 	`result_msg` = #{resultMsg,jdbcType = VARCHAR},
 		 	</if>
+		 	
+		 	<if test="zfbBatchNo != null and zfbBatchNo !='' ">
+		 	`zfb_batch_no` = #{zfbBatchNo,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="zfbBatchStatus != null and zfbBatchStatus !='' ">
+		 	`zfb_batch_status` = #{zfbBatchStatus,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="zfbUserId != null and zfbUserId !='' ">
+		 	`zfb_user_id` = #{zfbUserId,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="zfbAuthAppId != null and zfbAuthAppId !='' ">
+		 	`zfb_auth_app_id` = #{zfbAuthAppId,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="zfbAppAuthToken != null and zfbAppAuthToken !='' ">
+		 	`zfb_app_auth_token` = #{zfbAppAuthToken,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="zfbAppRefreshToken != null and zfbAppRefreshToken !='' ">
+		 	`zfb_app_refresh_token` = #{zfbAppRefreshToken,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="zfbExpiresIn != null and zfbExpiresIn !='' ">
+		 	`zfb_expires_in` = #{zfbExpiresIn,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="zfbReExpiresIn != null and zfbReExpiresIn !='' ">
+		 	`zfb_re_expires_in` = #{zfbReExpiresIn,jdbcType = VARCHAR},
+		 	</if>
 			 `modify_time` = now()
 		 WHERE
 			`patch_no` = #{patchNo,jdbcType = VARCHAR}

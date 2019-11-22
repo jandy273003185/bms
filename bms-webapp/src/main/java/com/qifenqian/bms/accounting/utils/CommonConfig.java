@@ -32,7 +32,7 @@ public class CommonConfig {
 
 		Properties properties = new Properties();
 		try {
-			properties.load(CommonConfig.class.getResourceAsStream("/config.properties"));
+			properties.load(CommonConfig.class.getResourceAsStream("/application.properties"));
 			config = new HashMap<String, String>((Map)properties);
 			logger.info("--------init message done !config map size is ---------"+config.size());
 		} catch (IOException e) {
