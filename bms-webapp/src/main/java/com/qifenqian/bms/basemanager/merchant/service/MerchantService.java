@@ -39,6 +39,7 @@ import com.qifenqian.bms.platform.web.myWorkSpace.service.WorkSpaceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.alibaba.fastjson.JSONObject;
@@ -58,7 +59,6 @@ import com.qifenqian.bms.basemanager.merchant.mapper.TdLoginUserInfoMapper;
 import com.qifenqian.bms.basemanager.photo.bean.CertificateAuth;
 import com.qifenqian.bms.basemanager.utils.DatetimeUtils;
 import com.qifenqian.bms.basemanager.utils.GenSN;
-import com.qifenqian.bms.common.util.PropertiesUtil;
 import com.qifenqian.bms.common.util.RedisUtil;
 import com.qifenqian.bms.expresspay.CommonService;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
@@ -138,6 +138,9 @@ public class MerchantService {
 
   @Autowired
   private TdCertificateAuthMapper tdCertificateAuthMapper;
+  
+  @Value("${CF_FILE_SAVE_PATH}")
+  private String CF_FILE_SAVE_PATH;
 
   private static final Logger logger = LoggerFactory.getLogger(MerchantService.class);
 
@@ -702,7 +705,7 @@ public class MerchantService {
       HashMap<String, String> nameType = new HashMap<String, String>();
       String filename = null;
       // 绝对路径
-      Properties p = PropertiesUtil.getProperties();
+     
 
 
       Map map = request.getParameterMap();
@@ -717,7 +720,7 @@ public class MerchantService {
           continue;
         }
         String imgString = null;
-        String cf_path = p.getProperty("CF_FILE_SAVE_PATH");
+        String cf_path = CF_FILE_SAVE_PATH;
 
         if ("certNoValidDate".equals(ok)) {
           String certNoValidDate = ov;
@@ -746,7 +749,7 @@ public class MerchantService {
               } else {
                 String ov_ = door_[1];
                 filename = "doorPhotoAlert" + i + GenSN.getMerchantPictureNo() + ov_.split(",")[0];
-                cf_path = p.getProperty("CF_FILE_SAVE_PATH") + File.separator
+                cf_path = CF_FILE_SAVE_PATH + File.separator
                     + Constant.CERTIFY_TYPE_MERCHANT_DOORID + File.separator + custId;
                 if (i == door.length - 1) {
                   doorPath += cf_path + File.separator + filename;
@@ -772,7 +775,7 @@ public class MerchantService {
             for (int i = 0; i < door.length; i++) {
               String ov_ = door[i];
               filename = "doorPhoto" + i + GenSN.getMerchantPictureNo() + ov_.split(",")[0];
-              cf_path = p.getProperty("CF_FILE_SAVE_PATH") + File.separator
+              cf_path = CF_FILE_SAVE_PATH + File.separator
                   + Constant.CERTIFY_TYPE_MERCHANT_DOORID + File.separator + custId;
               nameType.put("doorPhoto" + i, filename);
               imgString = ov_.split(",")[1];
@@ -964,7 +967,6 @@ public class MerchantService {
       upload.setHeaderEncoding("UTF-8");
       List<FileItem> list = upload.parseRequest(request);
       InputStream in = null;
-      Properties p = PropertiesUtil.getProperties();
       HashMap<String, String> nameType = new HashMap<String, String>();
       for (FileItem item : list) {
         String filename = null;
@@ -994,7 +996,7 @@ public class MerchantService {
 
           in = item.getInputStream();
 
-          String cf_path = p.getProperty("CF_FILE_SAVE_PATH");
+          String cf_path = CF_FILE_SAVE_PATH;
 
           switch (filedName) {
             case "businessPhoto":
@@ -1273,8 +1275,7 @@ public class MerchantService {
     TdCustInfo info = tdCustInfoMapper.selectById(custId);
     /** 创建人 **/
     String createId = String.valueOf(WebUtils.getUserInfo().getUserId());
-    Properties p = PropertiesUtil.getProperties();
-    String cf_path = p.getProperty("CF_FILE_SAVE_PATH");
+    String cf_path = CF_FILE_SAVE_PATH;
     String startTime = "";
     String endTime = "";
     // 获取身份证有效期
@@ -1405,8 +1406,7 @@ public class MerchantService {
     TdCustInfo tdCustInfo = tdCustInfoMapper.selectById(custId);
     /** 创建人 **/
     String createId = String.valueOf(WebUtils.getUserInfo().getUserId());
-    Properties p = PropertiesUtil.getProperties();
-    String cf_path = p.getProperty("CF_FILE_SAVE_PATH");
+    String cf_path = CF_FILE_SAVE_PATH;
     try {
       /******************* 分两次存DB *******************/
       /** 营业执照 **/
@@ -1729,8 +1729,7 @@ public class MerchantService {
     String netWorkPhoto = fileNames.get("netWorkPhoto");
     String openAccount = fileNames.get("openAccount");
     String bankCardPhoto = fileNames.get("bankCardPhoto");
-    Properties p = PropertiesUtil.getProperties();
-    String cf_path = p.getProperty("CF_FILE_SAVE_PATH");
+    String cf_path = CF_FILE_SAVE_PATH;
     try {
       /** 更新营业执照扫描件 **/
       /** 由于营业执照注册号和营业执照扫描件不是必须提交的，所以这里做一次查询，判断 **/
@@ -1984,8 +1983,7 @@ public class MerchantService {
       upload.setHeaderEncoding("UTF-8"); // 解决上传文件名的中文乱码
       List<FileItem> list = upload.parseRequest(request);
       InputStream inputStream = null;
-
-      Properties properties = PropertiesUtil.getProperties();
+      
       HashMap<String, String> nameType = new HashMap<String, String>();
       for (FileItem item : list) {
         String filename = null; //
@@ -2011,7 +2009,7 @@ public class MerchantService {
             return result;
           }
           inputStream = item.getInputStream();
-          String fileUploadPath = properties.getProperty("CF_FILE_SAVE_PATH"); // 服务器上传路径
+          String fileUploadPath = CF_FILE_SAVE_PATH; // 服务器上传路径
           String name = filedName.substring(filedName.length() - 1);
           /** 根据文件名生成路径规则 **/
           switch (filedName) {

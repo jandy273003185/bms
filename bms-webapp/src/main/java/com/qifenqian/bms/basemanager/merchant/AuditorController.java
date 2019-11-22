@@ -10,7 +10,6 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -39,7 +39,6 @@ import com.qifenqian.bms.basemanager.merchant.service.MerchantWorkFlowAuditServi
 import com.qifenqian.bms.basemanager.utils.DatetimeUtils;
 import com.qifenqian.bms.basemanager.utils.GenSN;
 import com.qifenqian.bms.basemanager.utils.MD5Security;
-import com.qifenqian.bms.common.util.PropertiesUtil;
 import com.qifenqian.bms.expresspay.CommonService;
 import com.qifenqian.bms.myworkspace.WorkFlowHelper;
 import com.qifenqian.bms.platform.web.admin.user.bean.User;
@@ -81,6 +80,9 @@ public class AuditorController {
 	
 	@Autowired
 	private TdCustInfoService tdCustInfoService;
+	
+	@Value("${IMAGEIP}")
+	private String IMAGEIP;
 	
 	@RequestMapping(AuditorPath.LIST)
 	public ModelAndView list(MerchantVo merchantVo) {
@@ -181,8 +183,7 @@ public class AuditorController {
 		String createId = merchantVo.getCreateId();
 		User user = userService.selectUserSingleById(Integer.parseInt(createId));
 		String email = user.getWorkEmail();
-		Properties p =  PropertiesUtil.getProperties();
-		String ip = p.getProperty("IMAGEIP");
+		String ip = IMAGEIP;
 		String content = "<html><body><div style=\"width:700px;margin:0 auto;\">" + "<div style=\"margin-bottom:10px;\">" + "<img src=\"https://"+ip+"/images/account-img/account-logo.png\" width=\"256px\" height=\"42px\">" + "</div><div style=\"border-top: 1px solid #ccc; margin-top: 20px;\"></div>" + "<div style=\"padding:20px 10px 60px;\"><div style=\"line-height:1.5;color:#4d4d4d;\">" + "<h3 style=\"font-weight:normal;font-size:16px;\">尊敬的" + createId + "：</h3>" + "<p style=\"font-size:14px;margin-top:15px;\">您好！你提供资料不完善，审核不通过 ,赶紧跟商户核对，完善资料</br>" + "，请尽快修改好商户资料。</p></div></div>	<div style=\"border-bottom: 1px dashed #d8d8d8\"></div>" + "<div style=\"width:700px;margin:0 auto;margin-top:10px;color:#8a8a8a;\">" + "<p>此为系统邮件，请勿回复；Copyright ©2015-2016七分钱（国银证保旗下支付平台）  版权所有</p></div></div></body></html>";
 		IPlugin plugin = commonService.getIPlugin();
 		MessageBean messageBean = new MessageBean();

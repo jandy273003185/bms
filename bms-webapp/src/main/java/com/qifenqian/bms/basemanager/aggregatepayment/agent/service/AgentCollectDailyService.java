@@ -14,17 +14,21 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.qifenqian.bms.accounting.utils.ExportExcel;
 import com.qifenqian.bms.basemanager.aggregatepayment.agent.bean.AgentCollectDailyBean;
 import com.qifenqian.bms.basemanager.aggregatepayment.agent.dao.AgentCollectDAO;
-import com.qifenqian.bms.common.util.PropertiesUtil;
+
 
 @Service
 public class AgentCollectDailyService {
 	@Autowired
 	private AgentCollectDAO agentCollectDAO;
+	
+	@Value("${EXPORT_EXCEL}")
+	private String EXPORT_EXCEL;
 
 	public List<AgentCollectDailyBean> getAgentCollectDailyList(AgentCollectDailyBean queryBean) {
 
@@ -42,9 +46,7 @@ public class AgentCollectDailyService {
 		Map<String, String> fileInfo = new HashMap<String, String>();
 		OutputStream out = null;
 		try {
-
-			Properties p = PropertiesUtil.getProperties();
-			String exportPath = p.getProperty("EXPORT_EXCEL");
+			String exportPath = EXPORT_EXCEL;
 			File saveFile = new File(exportPath);
 			if (!saveFile.exists()) {
 				saveFile.mkdirs();
