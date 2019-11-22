@@ -79,6 +79,8 @@ public class CommonInfoService {
 			cityList = cityMapper.getCityByProvinceId(provinceId);
 		}else if("SUIXING_PAY".equals(channelCode)) {
 			cityList = commonInfoDao.selSuiXingCity(provinceId);
+		}else if("WX".equals(channelCode)) {
+			cityList = commonInfoDao.selWxChatAppCity(provinceId);
 		}
 		return cityList;
 		
@@ -91,11 +93,14 @@ public class CommonInfoService {
 	 * @param cityId
 	 * @return
 	 */
-	public List<City> getAreaByCityId(String cityId,String channelCode) {
+	public List<City> getAreaByCityId(City cityBean,String channelCode) {
 		List<City> areaList = new ArrayList<City>();
+		String cityId = Integer.toString(cityBean.getCityId());
 		//七分钱
 		if(StringUtils.isBlank(channelCode)) {
 			areaList = cityMapper.getAreaByCityId(cityId);
+		}else if("WX".equals(channelCode)) {
+			areaList = commonInfoDao.getWxAreaByCityId(cityBean.getCityName());
 		}
 		return areaList;
 	}
