@@ -68,8 +68,22 @@ public class CommonInfoDao {
 	 * 查询支付宝商户经营类目
 	 * @return
 	 */
-	public List<CommonIndustry> ListAliPayIndustry() {
-		return commonInfoMapper.ListAliPayIndustry();
+	public List<CommonIndustry> ListAliPayIndustry(String parentLevel, String parentText) {
+		return commonInfoMapper.ListAliPayIndustry(parentLevel, parentText);
+	}
+	
+	/**
+	 * 
+	 * @param provinceId
+	 * @return
+	 */
+	public List<City> selWxChatAppCity(String provinceId) {
+		// TODO Auto-generated method stub
+		return commonInfoMapper.selWxChatAppCity(provinceId);
+	}
+	public List<City> getWxAreaByCityId(String cityName) {
+		// TODO Auto-generated method stub
+		return commonInfoMapper.getWxAreaByCityId(cityName);
 	}
 
 

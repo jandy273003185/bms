@@ -30,7 +30,11 @@ public interface CommonInfoMapper {
 	 * 查询支付宝商户经营类目
 	 * @return
 	 */
-	List<CommonIndustry> ListAliPayIndustry();
+	List<CommonIndustry> ListAliPayIndustry(@Param("parentLevel")String parentLevel, @Param("parentText")String parentText);
+
+	public List<City> selWxChatAppCity(@Param("provinceId") String provinceId);
+
+	public List<City> getWxAreaByCityId(@Param("cityName") String cityName);
 	
 
 	

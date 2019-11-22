@@ -79,6 +79,8 @@ public class CommonInfoService {
 			cityList = cityMapper.getCityByProvinceId(provinceId);
 		}else if("SUIXING_PAY".equals(channelCode)) {
 			cityList = commonInfoDao.selSuiXingCity(provinceId);
+		}else if("WX".equals(channelCode)) {
+			cityList = commonInfoDao.selWxChatAppCity(provinceId);
 		}
 		return cityList;
 		
@@ -91,11 +93,14 @@ public class CommonInfoService {
 	 * @param cityId
 	 * @return
 	 */
-	public List<City> getAreaByCityId(String cityId,String channelCode) {
+	public List<City> getAreaByCityId(City cityBean,String channelCode) {
 		List<City> areaList = new ArrayList<City>();
+		String cityId = Integer.toString(cityBean.getCityId());
 		//七分钱
 		if(StringUtils.isBlank(channelCode)) {
 			areaList = cityMapper.getAreaByCityId(cityId);
+		}else if("WX".equals(channelCode)) {
+			areaList = commonInfoDao.getWxAreaByCityId(cityBean.getCityName());
 		}
 		return areaList;
 	}
@@ -119,18 +124,20 @@ public class CommonInfoService {
 	}
 	
 	/**
-	 * 查找所有省份
-	 * @param city
+	 * 查找商家经营类目
+	 * @param channelCode 渠道号
+	 * @param parentLevel 查询层级  levelOne 一级  levelTwo 二级  levelThree 三级
+	 * @param parentText 上一级名称或编码 
 	 * @return
 	 */
-	public List<CommonIndustry> selectCommonIndustrys(String channelCode) {
+	public List<CommonIndustry> selectCommonIndustrys(String channelCode, String parentLevel, String parentText) {
 		List<CommonIndustry> industries = new ArrayList<CommonIndustry>();
 		//七分钱
 		if(StringUtils.isBlank(channelCode)) {
 			//provinceList = commonInfoDao.selectProvince();
 		}
 		else if ("ALIPAY".equals(channelCode)) {
-			industries = commonInfoDao.ListAliPayIndustry();
+			industries = commonInfoDao.ListAliPayIndustry(parentLevel, parentText);
 		}
 		else if("SUIXING_PAY".equals(channelCode)) {
 			//provinceList = commonInfoDao.selSuiXingProvince();
