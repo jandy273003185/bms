@@ -188,7 +188,7 @@
 		<dependency>
 			<groupId>com.seven.module</groupId>
 			<artifactId>jellyfish-api</artifactId>
-			<version>5.0.10</version>
+			<version>${version.channel}</version>
 		</dependency>
 		
 		<dependency>
