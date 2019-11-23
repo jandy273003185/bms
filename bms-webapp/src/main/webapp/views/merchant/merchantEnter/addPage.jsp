@@ -291,13 +291,11 @@ function addMerchantBtn(){
 			if(data.result=="FAIL"){
 				$("#merchantAccountLab").text("该账号已经被使用");
 				validateLicense = false;
+				return false;
 			}else{
 				validateLicense = true;
 			}
 		}});
-	if(!validateLicense){
-		return false;
-	} 
 
 	
 	/*个人*/
@@ -1112,7 +1110,7 @@ function businessForever(){
  --%>
 
         /*商户账号*/
-        $("#merchantAccount").on('blur',function () {
+        <%-- $("#merchantAccount").on('blur',function () {
         	if(!isPhoneNo($("#merchantAccount")[0])){
         		$("#merchantAccountLab").text("商户账户请用手机号 ");
         		$("#merchantAccount").focus();
@@ -1131,7 +1129,7 @@ function businessForever(){
                         return false;
                     }
                 }});
-        });
+        }); --%>
 		/*商户名称*/
         $("#custName").on('blur',function () {
             $("#custNameLab").text("");
