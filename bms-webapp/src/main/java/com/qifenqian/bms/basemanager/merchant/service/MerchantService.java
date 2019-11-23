@@ -1154,6 +1154,7 @@ public class MerchantService {
   public void addMerchant(String userId,String custId, Merchant merchant, String paths) {
     this.saveLoginMerchant2(custId, merchant);
     this.saveCustBelongInfo(userId, custId);
+    this.insertStore(merchant);
     // ruleService.saveFee(custId, feeCode);
     this.saveMerchant2(merchant);
     this.saveCertificateAuth(custId);

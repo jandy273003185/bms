@@ -78,11 +78,9 @@ public class CommonInfoDao {
 	 * @return
 	 */
 	public List<City> selWxChatAppCity(String provinceId) {
-		// TODO Auto-generated method stub
 		return commonInfoMapper.selWxChatAppCity(provinceId);
 	}
 	public List<City> getWxAreaByCityId(String cityName) {
-		// TODO Auto-generated method stub
 		return commonInfoMapper.getWxAreaByCityId(cityName);
 	}
 	
