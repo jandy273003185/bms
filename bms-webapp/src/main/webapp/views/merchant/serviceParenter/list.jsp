@@ -107,9 +107,9 @@
 											<button class="btn btn-purple btn-sm btn-margin clearMerchantSearch" >
 												清空<i class=" icon-move icon-on-right bigger-110"></i>
 											</button>
-											<span class="input-group-btn" style="display:inline;">
+											<!-- <span class="input-group-btn" style="display:inline;">
 												<a class="btn btn-purple btn-sm exportBut">导出报表</a> 
-											</span> 
+											</span>  -->
 										</span>
 									</td>
 								</tr>
@@ -125,7 +125,7 @@
 									<tr >
 										<th width="10%">服务商编号</th>
 										<th width="10%">服务商名称</th>
-										<th width="10%">服务产品及费率</th>
+										<!-- <th width="10%">服务产品及费率</th> -->
 										<th width="10%">服务商类型</th>
 										<th width="10%">联系人</th>
 										<th width="10%">开户名</th>
@@ -141,7 +141,7 @@
 										<tr class="merchant" id="merchant">
 											<td>${merchant.merchantCode }</td>
 											<td>${merchant.custName }</td>
-											<td>${merchant.agentRate }</td>
+											<%-- <td>${merchant.agentRate }</td> --%>
 											<td>${merchant.custType }</td>
 											<td>${merchant.agentName }</td>
 											<td>${merchant.bankCardName }</td>

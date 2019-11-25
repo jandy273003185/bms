@@ -114,13 +114,15 @@
 	
 	<select id="selWxChatAppCity" parameterType="String" resultType="com.qifenqian.bms.basemanager.city.bean.City">
 		SELECT  DISTINCT
+				  AREA_ID,
 			PROVINCE_NAME,
 				CITY_NAME
 		FROM 
 			WX_AREA_INFO
 		WHERE 
 			PROVINCE_NAME = #{provinceId,jdbcType = VARCHAR}
-			and CITY_NAME != '';
+			and CITY_NAME != ''
+			AND AREA_NAME is NULL ;
 	</select>
 	
 	<select id="getWxAreaByCityId" parameterType="string" resultType="com.qifenqian.bms.basemanager.city.bean.City">

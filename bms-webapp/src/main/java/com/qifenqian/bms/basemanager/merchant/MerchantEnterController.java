@@ -505,7 +505,7 @@ public class MerchantEnterController {
 			merchantMapper.updateMerchantEnter(merchantVo);
 		}else if("pass".equals(result)) {
 			auditResult.setStatus("00");
-			merchantVo.setFilingAuditStatus("00");
+			merchantVo.setFilingAuditStatus("01");
 			merchantWorkFlowAuditService.updateAuditStatus(tdCustInfo.getAuthId(), message, "0");
 			merchantMapper.updateMerchantEnter(merchantVo);
 		}

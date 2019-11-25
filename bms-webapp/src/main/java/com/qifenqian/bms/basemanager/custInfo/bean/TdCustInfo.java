@@ -185,11 +185,11 @@ public class TdCustInfo implements java.io.Serializable {
 	private String businessRegAddr;
 	/**营业执照有效期*/
 	private String businessTerm;
-	/*支行信息*/
+	/**支行信息*/
 	private String branchBANK;
-	/*银行开户名*/
+	/**银行开户名*/
 	private String bankAcctName;
-	/*营业期限终止时间*/
+	/**营业期限终止时间*/
 	private String businessTermEnd;
 	/**营业期限起始时间*/
 	private String businessTermStart;
@@ -201,9 +201,29 @@ public class TdCustInfo implements java.io.Serializable {
 	private String contactMobile;
 	/**客户简称**/
 	private String shortName;
+	/**身份证有效期限终止时间*/
+	private String idTermEnd;
+	/**身份证有效期限起始时间*/
+	private String idTermStart;
 	
 	
 	
+	public String getIdTermEnd() {
+		return idTermEnd;
+	}
+
+	public void setIdTermEnd(String idTermEnd) {
+		this.idTermEnd = idTermEnd;
+	}
+
+	public String getIdTermStart() {
+		return idTermStart;
+	}
+
+	public void setIdTermStart(String idTermStart) {
+		this.idTermStart = idTermStart;
+	}
+
 	public String getShortName() {
 		return shortName;
 	}
