@@ -1,5 +1,8 @@
 package com.qifenqian.bms.merchant.reported.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,8 +35,9 @@ public class AliPayIncomeService {
 	@Autowired
 	private FmIncomeService fmIncomeService;
 	
-	public Object aliPayReported(AliPayCoBean aliPayCoBean) throws Exception {
+	public Map<String, Object> aliPayReported(AliPayCoBean aliPayCoBean) throws Exception {
 		//添加商户报备详情表（td_merchant_detail_info）和商户报备表（td_merchant_report）
+		Map<String, Object> result = new HashMap<String, Object>();
 		logger.info("支付宝商户报备start.");
 		TdMerchantDetailInfo info = new TdMerchantDetailInfo();
 		info.setId(GenSN.getSN());
@@ -114,22 +118,33 @@ public class AliPayIncomeService {
 		logger.debug("支付宝商户签约提交：{}", JSONObject.toJSONString(aliConfirmReqBean));
 		AlipayOpenAgentConfirmRes confirmRes = alipayOpenAgentConfirm(aliConfirmReqBean);
 		logger.debug("支付宝商户签约提交返回值：{}", JSONObject.toJSONString(confirmRes));
+		String reportState = null;
 		if (!"10000".equals(confirmRes.getCode())) {
-			throw new Exception();
+			//异常信息
+			info.setResultMsg(confirmRes.getSubMsg());
+			reportState = "99";
+			
+			result.put("message", "报备失败：" + confirmRes.getSubMsg());
+			result.put("code", "FAIL");
+		} else {
+			info.setReportStatus("O");
+			info.setZfbUserId(confirmRes.getUserId());
+			info.setZfbAuthAppId(confirmRes.getAuthAppId());
+			info.setZfbAppAuthToken(confirmRes.getAppAuthToken());
+			info.setZfbAppRefreshToken(confirmRes.getAppRefreshToken());
+			info.setZfbExpiresIn(confirmRes.getExpiresIn());
+			info.setZfbReExpiresIn(confirmRes.getReExpiresIn());
+			reportState = "00";
+			
+			result.put("data", confirmRes);
+			result.put("message", "报备成功");
+			result.put("code", "SUCCESS");
 		}
-		
 		//更新
-		info.setReportStatus("O");
-		info.setZfbUserId(confirmRes.getUserId());
-		info.setZfbAuthAppId(confirmRes.getAuthAppId());
-		info.setZfbAppAuthToken(confirmRes.getAppAuthToken());
-		info.setZfbAppRefreshToken(confirmRes.getAppRefreshToken());
-		info.setZfbExpiresIn(confirmRes.getExpiresIn());
-		info.setZfbReExpiresIn(confirmRes.getReExpiresIn());
 		logger.debug("更新td_merchant_report和td_merchant_detail_info表数据：{}", JSONObject.toJSONString(info));
-		fmIncomeService.UpdateMerReportAndMerDetailInfo(info, "00");
+		fmIncomeService.UpdateMerReportAndMerDetailInfo(info, reportState);
 		logger.info("支付宝商户报备end.");
-		return confirmRes;
+		return result;
 	}
 	
 	/**

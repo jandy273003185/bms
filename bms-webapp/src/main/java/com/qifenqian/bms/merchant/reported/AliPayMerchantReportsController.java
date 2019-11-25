@@ -17,6 +17,8 @@ import com.qifenqian.bms.common.controller.CommonInfoService;
 import com.qifenqian.bms.merchant.merchantReported.MerchantEnterReportedPath;
 import com.qifenqian.bms.merchant.reported.bean.AliPayCoBean;
 import com.qifenqian.bms.merchant.reported.bean.CommonIndustry;
+import com.qifenqian.bms.merchant.reported.bean.CrInComeBean;
+import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
 import com.qifenqian.bms.merchant.reported.dao.FmIncomeMapperDao;
 import com.qifenqian.bms.merchant.reported.service.AliPayIncomeService;
 
@@ -66,10 +68,19 @@ public class AliPayMerchantReportsController {
 	public Map<String, Object> aliPayReports(AliPayCoBean aliPayCoBean) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
-			Object object = aliPayIncomeService.aliPayReported(aliPayCoBean);
-			result.put("data", object);
-			result.put("message", "报备成功");
-			result.put("code", "SUCCESS");
+			//查询该商户是否已报备
+			CrInComeBean comeBean = new CrInComeBean();
+			comeBean.setMerchantCode(aliPayCoBean.getMerchantCode());
+			comeBean.setChannelNo(aliPayCoBean.getChannelNo());
+			TdMerchantDetailInfo merchantDetailInfo = fmIncomeMapperDao.selTdMerchantReport(comeBean);
+			if (null != merchantDetailInfo) {
+				if ("Y".equals(merchantDetailInfo.getReportStatus()) || "O".equals(merchantDetailInfo.getReportStatus())) {
+					result.put("message", "商户已经报备，请勿重新提交");
+					result.put("code", "FAIL");
+					return result;
+				}
+			}
+			result = aliPayIncomeService.aliPayReported(aliPayCoBean);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
