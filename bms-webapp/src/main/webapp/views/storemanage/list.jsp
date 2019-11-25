@@ -2,7 +2,7 @@
 <%@ include file="/include/template.jsp"%>
 <%@page import="com.qifenqian.bms.basemanager.merchant.StoreManagePath" %>
 <%@ page import="java.util.ResourceBundle"%>  
-<%ResourceBundle res = ResourceBundle.getBundle("uploadFileConfig"); %> 
+<%-- <%ResourceBundle res = ResourceBundle.getBundle("uploadFileConfig"); %>  --%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -488,6 +488,7 @@ $(document).ready(function(){
 		}); 
 
 	});
+	
 });
 
 
@@ -535,8 +536,8 @@ $(document).ready(function(){
    	 	    	 }
    	 	    }  
    	 	     function check(obj){
-   	 	    	var maxsize = '<%=res.getString("CERTIFY_FILE_MAX_SIZE")%>';
-   	 	    	var fileType = '<%=res.getString("CERTIFY_SUPPORT_FILE_TYPE")%>'; 
+   	 	    	var maxsize = '<%="5120000"%>';
+   	 	    	var fileType = '<%=".jpg|.jpeg|.gif|.bmp|.png"%>'; 
    	 	     	if(!checkFileSize(maxsize,fileType,obj)){
    	 	     		var prevDiv = document.getElementById('img-' + obj.id);  
    	 	     		$(prevDiv).html('<a href="javascript:;" >点击上传</a>');

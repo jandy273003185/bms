@@ -890,7 +890,7 @@
 		C.city,
 		C.country,
 		C.filing_status,
-		m.report_status filingAuditStatus,
+		C.filing_audit_status,
 		DATE_FORMAT(C.CREATE_TIME,'%Y-%m-%d %H:%i:%s') createTime,
 		U.EMAIL,
 		U.MOBILE,
@@ -907,8 +907,6 @@
 		ON C.AUTH_ID = T.AUTH_ID
 		left JOIN SYS_USER S
 		ON S.USER_ID = T.CERTIFY_USER
-		LEFT JOIN td_merchant_detail_info m
-		on c.MERCHANT_CODE = m.merchant_code
 		<where>
 			C.MERCHANT_FLAG !='3' AND C.TRUST_CERTIFY_AUDIT_STATE in('01','30','34','35')
 			<if test="startCreateTime != null and '' != startCreateTime">
