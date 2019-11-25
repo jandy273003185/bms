@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -38,6 +39,7 @@ import com.qifenqian.bms.platform.web.myWorkSpace.service.WorkSpaceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.alibaba.fastjson.JSONObject;
@@ -57,9 +59,9 @@ import com.qifenqian.bms.basemanager.merchant.mapper.TdLoginUserInfoMapper;
 import com.qifenqian.bms.basemanager.photo.bean.CertificateAuth;
 import com.qifenqian.bms.basemanager.utils.DatetimeUtils;
 import com.qifenqian.bms.basemanager.utils.GenSN;
-import com.qifenqian.bms.common.util.PropertiesUtil;
 import com.qifenqian.bms.common.util.RedisUtil;
 import com.qifenqian.bms.expresspay.CommonService;
+import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
 import com.sevenpay.invoke.SevenpayCoreServiceInterface;
 import com.sevenpay.invoke.common.message.request.RequestMessage;
 import com.sevenpay.invoke.common.message.response.ResponseMessage;
@@ -136,6 +138,9 @@ public class MerchantService {
 
   @Autowired
   private TdCertificateAuthMapper tdCertificateAuthMapper;
+  
+  @Value("${CF_FILE_SAVE_PATH}")
+  private String CF_FILE_SAVE_PATH;
 
   private static final Logger logger = LoggerFactory.getLogger(MerchantService.class);
 
@@ -448,6 +453,13 @@ public class MerchantService {
         logger.info("保存商户信息[{}]", JSONObject.toJSONString(merchant));
 
         MerchantVo merchantVo = new MerchantVo();
+
+        if(merchant.getMerchantAccount().contains("@")){
+            //账号为邮箱
+        	merchant.setMerchantEmail(merchant.getMerchantAccount().toLowerCase());
+        }else {
+        	merchant.setMerchantMobile(merchant.getMerchantAccount().toLowerCase());
+        }
         merchantVo.setCustId(merchant.getCustId());
         try {
             /** 附加串，用于生成加密的交易密码 **/
@@ -461,7 +473,9 @@ public class MerchantService {
             /** 客户类型 :企业 **/
             //merchant.setCustType(Constant.CUST_TYPE_COMPANY);
             /** 商户标识:商户 **/
-            merchant.setMerchantFlag(Constant.MERCHANT_FLAG_TRADE);
+            if(null == merchant.getMerchantFlag()) {
+            	merchant.setMerchantFlag(Constant.MERCHANT_FLAG_TRADE);	
+            }
             /** 客户状态:待审核 **/
             merchant.setState(Constant.CUST_STATE_WAITINGVERIFY);
             /** 等级 **/
@@ -691,7 +705,7 @@ public class MerchantService {
       HashMap<String, String> nameType = new HashMap<String, String>();
       String filename = null;
       // 绝对路径
-      Properties p = PropertiesUtil.getProperties();
+     
 
 
       Map map = request.getParameterMap();
@@ -706,7 +720,7 @@ public class MerchantService {
           continue;
         }
         String imgString = null;
-        String cf_path = p.getProperty("CF_FILE_SAVE_PATH");
+        String cf_path = CF_FILE_SAVE_PATH;
 
         if ("certNoValidDate".equals(ok)) {
           String certNoValidDate = ov;
@@ -735,7 +749,7 @@ public class MerchantService {
               } else {
                 String ov_ = door_[1];
                 filename = "doorPhotoAlert" + i + GenSN.getMerchantPictureNo() + ov_.split(",")[0];
-                cf_path = p.getProperty("CF_FILE_SAVE_PATH") + File.separator
+                cf_path = CF_FILE_SAVE_PATH + File.separator
                     + Constant.CERTIFY_TYPE_MERCHANT_DOORID + File.separator + custId;
                 if (i == door.length - 1) {
                   doorPath += cf_path + File.separator + filename;
@@ -761,7 +775,7 @@ public class MerchantService {
             for (int i = 0; i < door.length; i++) {
               String ov_ = door[i];
               filename = "doorPhoto" + i + GenSN.getMerchantPictureNo() + ov_.split(",")[0];
-              cf_path = p.getProperty("CF_FILE_SAVE_PATH") + File.separator
+              cf_path = CF_FILE_SAVE_PATH + File.separator
                   + Constant.CERTIFY_TYPE_MERCHANT_DOORID + File.separator + custId;
               nameType.put("doorPhoto" + i, filename);
               imgString = ov_.split(",")[1];
@@ -953,7 +967,6 @@ public class MerchantService {
       upload.setHeaderEncoding("UTF-8");
       List<FileItem> list = upload.parseRequest(request);
       InputStream in = null;
-      Properties p = PropertiesUtil.getProperties();
       HashMap<String, String> nameType = new HashMap<String, String>();
       for (FileItem item : list) {
         String filename = null;
@@ -983,7 +996,7 @@ public class MerchantService {
 
           in = item.getInputStream();
 
-          String cf_path = p.getProperty("CF_FILE_SAVE_PATH");
+          String cf_path = CF_FILE_SAVE_PATH;
 
           switch (filedName) {
             case "businessPhoto":
@@ -1138,13 +1151,28 @@ public class MerchantService {
   }
 
 
-  public void addMerchant(String custId, Merchant merchant, String paths) {
+  public void addMerchant(String userId,String custId, Merchant merchant, String paths) {
     this.saveLoginMerchant2(custId, merchant);
+    this.saveCustBelongInfo(userId, custId);
+    this.insertStore(merchant);
     // ruleService.saveFee(custId, feeCode);
     this.saveMerchant2(merchant);
     this.saveCertificateAuth(custId);
   }
-  /** 微商户注册，带事务操作 */
+  private void saveCustBelongInfo(String userId, String custId) {
+	  if(StringUtils.isEmpty(custId)) {
+			throw new IllegalArgumentException("客户号为空");
+		}
+	  TdCustBelongInfo tdCustBelongInfo = new TdCustBelongInfo();
+	  tdCustBelongInfo.setCustId(custId);
+	  tdCustBelongInfo.setManagerId(userId);
+	  Date date = new Date(); 
+	  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	  tdCustBelongInfo.setCreateTime(sdf.format(date));
+	  merchantMapper.saveCustBelongInfo(tdCustBelongInfo);
+  }
+
+/** 微商户注册，带事务操作 */
 
   public void saveTinyMerchantRegist(String email, String custId, Merchant merchant,
       Map<String, String> custScanMap) {
@@ -1248,8 +1276,7 @@ public class MerchantService {
     TdCustInfo info = tdCustInfoMapper.selectById(custId);
     /** 创建人 **/
     String createId = String.valueOf(WebUtils.getUserInfo().getUserId());
-    Properties p = PropertiesUtil.getProperties();
-    String cf_path = p.getProperty("CF_FILE_SAVE_PATH");
+    String cf_path = CF_FILE_SAVE_PATH;
     String startTime = "";
     String endTime = "";
     // 获取身份证有效期
@@ -1380,8 +1407,7 @@ public class MerchantService {
     TdCustInfo tdCustInfo = tdCustInfoMapper.selectById(custId);
     /** 创建人 **/
     String createId = String.valueOf(WebUtils.getUserInfo().getUserId());
-    Properties p = PropertiesUtil.getProperties();
-    String cf_path = p.getProperty("CF_FILE_SAVE_PATH");
+    String cf_path = CF_FILE_SAVE_PATH;
     try {
       /******************* 分两次存DB *******************/
       /** 营业执照 **/
@@ -1704,8 +1730,7 @@ public class MerchantService {
     String netWorkPhoto = fileNames.get("netWorkPhoto");
     String openAccount = fileNames.get("openAccount");
     String bankCardPhoto = fileNames.get("bankCardPhoto");
-    Properties p = PropertiesUtil.getProperties();
-    String cf_path = p.getProperty("CF_FILE_SAVE_PATH");
+    String cf_path = CF_FILE_SAVE_PATH;
     try {
       /** 更新营业执照扫描件 **/
       /** 由于营业执照注册号和营业执照扫描件不是必须提交的，所以这里做一次查询，判断 **/
@@ -1959,8 +1984,7 @@ public class MerchantService {
       upload.setHeaderEncoding("UTF-8"); // 解决上传文件名的中文乱码
       List<FileItem> list = upload.parseRequest(request);
       InputStream inputStream = null;
-
-      Properties properties = PropertiesUtil.getProperties();
+      
       HashMap<String, String> nameType = new HashMap<String, String>();
       for (FileItem item : list) {
         String filename = null; //
@@ -1986,7 +2010,7 @@ public class MerchantService {
             return result;
           }
           inputStream = item.getInputStream();
-          String fileUploadPath = properties.getProperty("CF_FILE_SAVE_PATH"); // 服务器上传路径
+          String fileUploadPath = CF_FILE_SAVE_PATH; // 服务器上传路径
           String name = filedName.substring(filedName.length() - 1);
           /** 根据文件名生成路径规则 **/
           switch (filedName) {
@@ -2157,4 +2181,12 @@ public class MerchantService {
     public String findAreaNameByAreaId(String country) {
         return merchantMapper.findAreaNameByAreaId(country);
     }
+
+	public MerchantVo getMerchantInfo(TdMerchantDetailInfo detailInfo) {
+		return merchantMapper.getMerchantInfo(detailInfo);
+	}
+
+	public TdMerchantDetailInfo findMerchantDetailInfo(String merchantCode, String channlCode) {
+		return merchantMapper.findMerchantDetailInfo(merchantCode,channlCode);
+	}
 }

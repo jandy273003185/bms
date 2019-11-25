@@ -26,6 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -35,7 +36,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
 import com.qifenqian.bms.basemanager.merchant.service.AuditorService;
 import com.qifenqian.bms.basemanager.merchant.service.MerchantService;
-import com.qifenqian.bms.common.util.PropertiesUtil;
 import com.qifenqian.bms.merchant.reported.bean.Area;
 import com.qifenqian.bms.merchant.reported.bean.Bank;
 import com.qifenqian.bms.merchant.reported.bean.BankBranch;
@@ -115,6 +115,9 @@ public class FmIncomeService {
   public static final String EXECUTE_FAILURE = "FAILURE";
   public static final String EXECUTE_FLAG = "EXECUTEFLAG";
   public static final String EXECUTE_DESC = "EXECUTEDESC";
+  
+  @Value("${SX_FILE_SAVE_PATH}")
+  private String SX_FILE_SAVE_PATH;
 
 
   /*********************************** 富民报备 **************************************/
@@ -537,32 +540,26 @@ public class FmIncomeService {
 
 
   public List<Industry> getIndustryList() {
-    // TODO Auto-generated method stub
     return fmIncomeMapperDao.selIndustryList();
   }
 
   public List<Industry> getSuiXingIndustryList() {
-    // TODO Auto-generated method stub
     return fmIncomeMapperDao.selSuiXingIndustryList();
   }
 
   public List<Province> getSuiXingProvinceList() {
-    // TODO Auto-generated method stub
     return fmIncomeMapperDao.selSuiXingProvinceList();
   }
 
   public List<City> getSuiXingCityList(String province) {
-    // TODO Auto-generated method stub
     return fmIncomeMapperDao.selSuiXingCityList(province);
   }
 
   public List<MerchantCity> getSuiXingAreaList(String superiorAreaCode) {
-    // TODO Auto-generated method stub
     return fmIncomeMapperDao.selSuiXingAreaList(superiorAreaCode);
   }
 
   public List<MerchantCity> getSuiXingMerchantCityList(String areaType) {
-    // TODO Auto-generated method stub
     return fmIncomeMapperDao.selSuiXingMerchantCityList(areaType);
   }
 
@@ -579,7 +576,9 @@ public class FmIncomeService {
       String merchantCode = cr.getMerchantCode().trim();
 
       SxPayMerchantInfo merchantInfo = new SxPayMerchantInfo();
-
+      
+      merchantInfo.setIndependentModel(cr.getIndependentModel());
+      merchantInfo.setParentMno(cr.getParentMno());
       merchantInfo.setRegistCode(cr.getRegistCode());
 	  merchantInfo.setCprRegNmCn(cr.getCprRegNmCn());
       merchantInfo.setMecDisNm(cr.getCustName());
@@ -689,7 +688,6 @@ public class FmIncomeService {
         // 获取multiRequest 中所有的文件名
         Iterator iter = multiRequest.getFileNames();
         List<File> fileList = new ArrayList<>();
-        Properties p = PropertiesUtil.getProperties();
         String filePath =
             cr.getMerchantCode() + DateUtil.format(new Date(), DateUtil.YYYYMMDDHHMMSS);
         while (iter.hasNext()) {
@@ -751,8 +749,7 @@ public class FmIncomeService {
               String type = fileName.substring(fileName.lastIndexOf("."));
               fileName = "settlePersonIdcardOpposite" + type;
             }
-            File filew = new File(p.getProperty("SX_FILE_SAVE_PATH")
-                + File.separator + filePath);
+            File filew = new File(SX_FILE_SAVE_PATH + File.separator + filePath);
             if (!filew.exists()) {
               filew.mkdirs();
             }
@@ -767,8 +764,7 @@ public class FmIncomeService {
         // p.getProperty("SX_FILE_SAVE_PATH") + File.separator + filePath + File.separator +
         // cr.getMerchantCode() +".zip"));
         // 文件压缩并上传至服务器指定地址
-        FileOutputStream fos2 = new FileOutputStream(new File(
-            p.getProperty("SX_FILE_SAVE_PATH") + File.separator + cr.getMerchantCode() + ".zip"));
+        FileOutputStream fos2 = new FileOutputStream(new File(SX_FILE_SAVE_PATH + File.separator + cr.getMerchantCode() + ".zip"));
         ZipUtils.toZip(fileList, fos2);
         result.put("filePath", filePath);
       }
@@ -777,7 +773,7 @@ public class FmIncomeService {
       List<FileItem> list = upload.parseRequest(multipartRequest);
       InputStream inputStream = null;
 
-      Properties properties = PropertiesUtil.getProperties();
+
       HashMap<String, String> nameType = new HashMap<String, String>();
       for (FileItem item : list) {
         String filename = null; //
@@ -805,7 +801,7 @@ public class FmIncomeService {
             return result;
           }
           inputStream = item.getInputStream();
-          String fileUploadPath = properties.getProperty("SX_FILE_SAVE_PATH"); // 服务器上传路径
+          String fileUploadPath =SX_FILE_SAVE_PATH; // properties.getProperty("SX_FILE_SAVE_PATH"); // 服务器上传路径
           //判断服务器路径是否存在，不存在则创建路径
           File file = new File(fileUploadPath);
           if (!file.exists()) {
@@ -1083,7 +1079,6 @@ public class FmIncomeService {
   }
 
 public List<Bank> getSumPayBankList() {
-	// TODO Auto-generated method stub
 	return fmIncomeMapperDao.selSumPayBankList();
 }
 
@@ -1483,12 +1478,10 @@ public List<SumpayMcc> getSumpayMccList() {
 }
 
 public List<SumpayMcc> getSumPayMccTwoList(String one) {
-	// TODO Auto-generated method stub
 	return fmIncomeMapperDao.selSumPayMccTwoList(one);
 }
 
 public List<SumpayMcc> getSumPayMccThreeList(SumpayMcc sumpayMcc) {
-	// TODO Auto-generated method stub
 	return fmIncomeMapperDao.selSumPayMccThreeList(sumpayMcc);
 }
 
@@ -1496,47 +1489,38 @@ public List<SumpayMcc> getSumpayMccWXList() {
 	 return fmIncomeMapperDao.selSumpayMccWXList();
 } 
 public List<SumpayMcc> getSumPayMccTwoWXList(String one) {
-	// TODO Auto-generated method stub
 	return fmIncomeMapperDao.selSumPayMccTwoWXList(one);
 }
 
 public List<SumpayMcc> getSumPayMccThreeWXList(SumpayMcc sumpayMcc) {
-	// TODO Auto-generated method stub
 	return fmIncomeMapperDao.selSumPayMccThreeWXList(sumpayMcc);
 }
 
 public List<SumpayMcc> getSumpayMccZFBList() {
-	// TODO Auto-generated method stub
 	return fmIncomeMapperDao.selSumpayMccZFBList();
 }
 
 public List<YQBArea> getYQBProvinceList() {
-	// TODO Auto-generated method stub
 	return fmIncomeMapperDao.selYQBProvinceList();
 }
 
 public List<YQBArea> getYQBCityList(YQBArea yabArea) {
-	// TODO Auto-generated method stub
 	return fmIncomeMapperDao.selYQBCityList(yabArea);
 }
 
 public List<YQBArea> getYQBAreaList(YQBArea yabArea) {
-	// TODO Auto-generated method stub
 	return fmIncomeMapperDao.selYQBAreaList(yabArea);
 }
 
 public List<YQBIndustry> getYQBIndustryList() {
-    // TODO Auto-generated method stub
     return fmIncomeMapperDao.selYQBIndustryList();
   }
 
 public List<YQBIndustry> getYQBIndustryCodeList(YQBIndustry yqbIndustry) {
-	// TODO Auto-generated method stub
 	return fmIncomeMapperDao.selYQBIndustryCodeList(yqbIndustry);
 }
 
 public List<Bank> getYQBBankList(Bank bank) {
-	// TODO Auto-generated method stub
 	return fmIncomeMapperDao.selYQBBankList(bank);
 }
 

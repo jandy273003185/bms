@@ -21,7 +21,7 @@ public class BmsMessageLog implements Serializable{
 
     private String ccTo;
 
-    private Date executeDatetime;
+    private String executeDatetime;
 
     private String content;
 
@@ -93,11 +93,11 @@ public class BmsMessageLog implements Serializable{
         this.ccTo = ccTo;
     }
 
-    public Date getExecuteDatetime() {
+    public String getExecuteDatetime() {
         return executeDatetime;
     }
 
-    public void setExecuteDatetime(Date executeDatetime) {
+    public void setExecuteDatetime(String executeDatetime) {
         this.executeDatetime = executeDatetime;
     }
 

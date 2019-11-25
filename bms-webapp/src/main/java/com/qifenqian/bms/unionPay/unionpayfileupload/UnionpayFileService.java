@@ -21,11 +21,11 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.accounting.checkquery.type.ChannelId;
-import com.qifenqian.bms.common.util.PropertiesUtil;
 import com.qifenqian.bms.expresspay.jgkjfileupload.bean.FileOffer;
 import com.qifenqian.bms.expresspay.jgkjfileupload.dao.FileOfferDao;
 import com.qifenqian.bms.expresspay.jgkjfileupload.mapper.FileOfferMapper;
@@ -51,6 +51,9 @@ public class UnionpayFileService {
 	public static final String UNIONPAY_BALANCE_FILENAME = "INN{yyMMdd}01ZM_777290058117067.txt";
 	/** 银联清算 **/
 	public static final String UNIONPAY_SETTLE_FILENAME = "RNM2000{yyMMdd}_777290058117067.txt";
+	
+	@Value("${UNIONPAY_FILE_PATH}")
+	private String UNIONPAY_FILE_PATH;
 
 	/**
 	 * 银联对账/清算文件上传
@@ -74,7 +77,7 @@ public class UnionpayFileService {
 			List<FileItem> list = upload.parseRequest(request);
 
 			List<String> paths = new ArrayList<String>();
-			Properties p = PropertiesUtil.getProperties();
+		
 
 			FileItem item = list.get(0);
 
@@ -91,7 +94,7 @@ public class UnionpayFileService {
 			String workDate = name[1];
 
 			/** 读取配置文件 获取保存路径 **/
-			String unionpay_path = p.getProperty("UNIONPAY_FILE_PATH");
+			String unionpay_path = UNIONPAY_FILE_PATH; //p.getProperty("UNIONPAY_FILE_PATH");
 			unionpay_path = unionpay_path + File.separator + workDate;
 
 			if (fileType.equals("BALANCE")) {

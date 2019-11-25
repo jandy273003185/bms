@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,7 +33,6 @@ import com.qifenqian.bms.basemanager.protocolcontent.bean.ProtocolInfo;
 import com.qifenqian.bms.basemanager.protocolcontent.dao.ProtocolContentDao;
 import com.qifenqian.bms.basemanager.protocolcontent.mapper.ProtocolContentMapper;
 import com.qifenqian.bms.basemanager.utils.GenSN;
-import com.qifenqian.bms.common.util.PropertiesUtil;
 import com.qifenqian.bms.common.util.RedisUtil;
 import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 
@@ -53,6 +53,8 @@ public class ProtocolContentService {
 	
 	@Autowired
 	private TdCustInfoService tdCustInfoService;
+	@Value("${EXPORT_EXCEL}")
+	private String EXPORT_EXCEL;
 	/***
 	 * 
 	 * @param queryBean
@@ -309,8 +311,7 @@ public class ProtocolContentService {
 		OutputStream out = null;
 		try {
 
-			Properties p = PropertiesUtil.getProperties();
-			String exportPath = p.getProperty("EXPORT_EXCEL");
+			String exportPath = EXPORT_EXCEL;
 			File saveFile = new File(exportPath);
 			if (!saveFile.exists()) {
 				saveFile.mkdirs();

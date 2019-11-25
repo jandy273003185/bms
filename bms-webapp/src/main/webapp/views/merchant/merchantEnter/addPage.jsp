@@ -87,6 +87,10 @@ $(function(){
 	    	       	  				}
 	    	       	  				$("#custAdd").val(json.legalAddress);
 	    	       	  				$("#custName").val(json.companyName);
+	    	       	  			}else if(_this.attr('id')=="bankCardPhoto"){                //银行卡
+    	       	  					$("#compMainAcct").val(json.creditCardId);
+    	       	  					// $("#compAcctBank").val(json.cardNo);
+    	       	  				
 	    	       	  			}
 	    	   				}
 	    	   			}
@@ -95,18 +99,21 @@ $(function(){
 			});
 		}
 	);
-
+	$("#agentName").comboSelect();
+	$("#custManager").comboSelect();
 });
 
 function getbranchBank(){
+	var provVal = $("#bankProvinceName").val().trim();
 	var city = $("#bankCityName").val().trim();
 	var compAcctBank = $("#compAcctBank").val();
 	
 	var channelCode ="";
 	$.post(window.Constants.ContextPath +"/common/info/bankCnapsInfo",
 	{
-			"cityCode":city,
-		"bankCode": compAcctBank,
+		"provinceId": provVal,
+		"cityCode":   city,
+		"bankCode":   compAcctBank,
 		"channelCode":channelCode
 	},
 	function(data){
@@ -119,9 +126,7 @@ function getbranchBank(){
    								+ branchBankList[branchBank].bankName + "</option>"); 
    			}
 		}
-		else{
-			alert("银行和开户城市不能为空");
-		}
+		
 	},'json'
 	);	
 	}
@@ -263,11 +268,17 @@ function addMerchantBtn(){
 	}
 	var custType =$("#custType").val();
 	var roleId = 'ent';
+	var merchantFlag = '0';
 	var merchantAccount =$("#merchantAccount").val();
 	if(custType =='0'){
 		roleId = 'per';
-	}else if(custType =='1' || custType =='2'){
+		merchantFlag = '1'
+	}else if(custType =='1' ){
 		roleId = 'ent';
+		merchantFlag = '0';
+	}else if(custType =='2'){
+		roleId = 'ent';
+		merchantFlag = '2';
 	}
 	var validateLicense =true ;
 	//验证商户账户唯一性
@@ -280,13 +291,11 @@ function addMerchantBtn(){
 			if(data.result=="FAIL"){
 				$("#merchantAccountLab").text("该账号已经被使用");
 				validateLicense = false;
+				return false;
 			}else{
 				validateLicense = true;
 			}
 		}});
-	if(!validateLicense){
-		return false;
-	} 
 
 	
 	/*个人*/
@@ -417,11 +426,11 @@ function addMerchantBtn(){
 	}
 
 	/*网点号*/
-	if(isNull($("#cnaps")[0])){
+	/* if(isNull($("#cnaps")[0])){
 		$("#cnapseLab").text("请填写银联号");
 		$("#cnaps").focus();
 		return false;
-	}
+	} */
 
 	/*结算类型*/
 	if(isNull($("#compMainAcctType")[0])){
@@ -468,9 +477,10 @@ function addMerchantBtn(){
 	var bankAcctName = $("#bankAcctName").val().trim();
 	var bankProvinceName = $("#bankProvinceName").val().trim();
 	var bankCityName = $("#bankCityName").val().trim();
-	var cnaps =  $("#cnaps").val().trim();
+	/* var cnaps =  $("#cnaps").val().trim(); */
+	var cnaps =  $("#branchBank").val().trim();
 	var compMainAcctType = $("#compMainAcctType").val().trim();
-
+	
 
 	$.blockUI();
 
@@ -504,7 +514,8 @@ function addMerchantBtn(){
             "bankProvinceName":      bankProvinceName,					// 开户行省份
             "bankCityName":          bankCityName,						// 开户行城市
             "cnaps":                 cnaps,								// 联行号
-            "compMainAcctType":      compMainAcctType					// 结算类型
+            "compMainAcctType":      compMainAcctType,					// 结算类型
+            "merchantFlag":          merchantFlag						// 商户标识
         },
         dataType : "json",
         success : function(data) {
@@ -705,7 +716,7 @@ function businessForever(){
                         <tr>
 							<td class="td-left">商户账号：<span style="color:red;">（必填)</span></td>
 							<td class="td-right">
-								<input type="text" id="merchantAccount" name="merchantAccount" placeholder="请输入手机号或邮箱" maxlength="50" style="width:90%">
+								<input type="text" id="merchantAccount" name="merchantAccount" placeholder="请输入手机号" maxlength="50" style="width:90%">
 								
 								<label class="label-tips" id="merchantAccountLab"></label>
 							</td>
@@ -723,6 +734,16 @@ function businessForever(){
 								</select>
 								
 							</td>
+							<!-- <td class="td-left">商户标志：</td>
+							<td class="td-right">
+							   <select name="merchantFlag" class="width-90" id="merchantFlag" >
+									<option value="0">商户</option>
+									<option value="1">非商户</option>
+									<option value="2">微商户</option>
+									<option value="3">代理商</option>
+								</select>
+								
+							</td> -->
 						</tr>
                         <tr>
 						    <td class="td-left" width="18%">商户名称：<span style="color:red;">（必填)</span></td>
@@ -970,10 +991,10 @@ function businessForever(){
 							
 						</tr>
                         <tr>
-							<td class="td-left">网点号：<span style="color:red;">（必填)</span></td>
+							<!-- <td class="td-left">网点号：<span style="color:red;">（必填)</span></td>
 							<td class="td-right">
 								<input type="text" id="cnaps" name="cnaps" placeholder="请输入网点号" style="width:90%"> <a href="http://www.lianhanghao.com" target="_blank">[查找]</a>
-							</td>
+							</td> -->
 							<td class="td-left">结算类型：<span style="color:red;">（必填)</span></td>
 							<td class="td-right" class="width-90" >
 								<select class="width-90 form-control"   id="compMainAcctType">
@@ -1054,7 +1075,7 @@ function businessForever(){
             }
         });
 
-        $("#custManager").on('blur',function () {
+        <%-- $("#custManager").on('blur',function () {
             $.ajax({
                 async:false,
                 dataType:"json",
@@ -1069,9 +1090,9 @@ function businessForever(){
                     }
                 }});
         });
-
+ --%>
         //代理商
-        $("#agentName").on('blur',function () {
+       <%--  $("#agentName").on('blur',function () {
             $.ajax({
                 async:false,
                 dataType:"json",
@@ -1086,10 +1107,15 @@ function businessForever(){
                     }
                 }});
         });
-
+ --%>
 
         /*商户账号*/
-        $("#merchantAccount").on('blur',function () {
+        <%-- $("#merchantAccount").on('blur',function () {
+        	if(!isPhoneNo($("#merchantAccount")[0])){
+        		$("#merchantAccountLab").text("商户账户请用手机号 ");
+        		$("#merchantAccount").focus();
+        		return false;
+        	}
             $.ajax({
                 async:false,
                 dataType:"json",
@@ -1103,7 +1129,7 @@ function businessForever(){
                         return false;
                     }
                 }});
-        });
+        }); --%>
 		/*商户名称*/
         $("#custName").on('blur',function () {
             $("#custNameLab").text("");

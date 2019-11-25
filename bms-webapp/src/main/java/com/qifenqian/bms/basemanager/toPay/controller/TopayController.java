@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,7 +42,6 @@ import com.qifenqian.bms.basemanager.toPay.bean.TopayBatDetail;
 import com.qifenqian.bms.basemanager.toPay.bean.TopaySingleDetail;
 import com.qifenqian.bms.basemanager.toPay.bean.TyyBankInfo;
 import com.qifenqian.bms.basemanager.toPay.service.TopayService;
-import com.qifenqian.bms.common.util.PropertiesUtil;
 import com.qifenqian.bms.platform.common.utils.DatetimeUtils;
 import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 import com.sevenpay.invoke.SevenpayCoreServiceInterface;
@@ -73,6 +73,13 @@ public class TopayController {
 	@Autowired
 	private TopayService topayService;
 	
+	@Value("${ACCOUNT_NUMBER}")
+	private String ACCOUNT_NUMBER;
+	
+	@Value("${CHANNEL_NAME}")
+	private String CHANNEL_NAME;
+	
+
 	@Autowired
 	@Qualifier("pluginInvokerProxy")
 	IPlugin sevenPayPlugin;
@@ -403,15 +410,8 @@ public class TopayController {
 //		System.out.println("代付手续费收入:"+todayPoundageBean.getIncomeAmt());
 //		System.out.println("代付手续费支出:"+todayPoundageBean.getExpenseAmt());
 //		System.out.println("代付手续费利润:"+todayPoundageBean.getProfitAmt());
-		Properties properties = PropertiesUtil.getProperties("/topayProfit.properties");
-		String accountNumber = properties.getProperty("ACCOUNT_NUMBER");
+		String accountNumber = ACCOUNT_NUMBER;
 		String accountName = null;
-		try {
-			accountName = new String(properties.getProperty("ACCOUNT_NAME").getBytes("iso8859-1"),"utf-8");
-		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		mv.addObject("todayRechargeProfit", todayRechargeBean.getProfitAmt());
 		mv.addObject("todayPoundageProfit", todayPoundageBean.getProfitAmt());
 		mv.addObject("todayAllProfit",todayRechargeBean.getProfitAmt().add(todayPoundageBean.getProfitAmt()));
@@ -500,9 +500,8 @@ public class TopayController {
 			QueryAcctSevenRequest request = new QueryAcctSevenRequest();
 			{
 				//String accId = sevenPayPlugin.findDictByPath("core.DF_SEVEN_INCOME_INNER_ID");
-				Properties properties = PropertiesUtil.getProperties();
-				String channelName = properties.getProperty("CHANNEL_NAME"); // 渠道名称
-				String channelCode = (String)topayService.searchProperty("/topayProfit.properties", "CHANNEL_NAME");
+				String channelName = CHANNEL_NAME;  // 渠道名称
+				String channelCode = CHANNEL_NAME; //(String)topayService.searchProperty("/topayProfit.properties", "CHANNEL_NAME");
 				if(null == channelCode && null !=channelName){
 					request.setChannelCode(channelName.toUpperCase());
 				}else{
@@ -539,7 +538,7 @@ public class TopayController {
 				BussAgentpayApplyRequest request_ = new BussAgentpayApplyRequest();
 				{
 					//String accId = sevenPayPlugin.findDictByPath("core.DF_SEVEN_INCOME_INNER_ID");
-					String channelCode = (String)topayService.searchProperty("/topayProfit.properties", "CHANNEL_NAME");
+					String channelCode = CHANNEL_NAME; //(String)topayService.searchProperty("/topayProfit.properties", "CHANNEL_NAME");
 					request_.setAcctId(this.queryInnerAcc(channelCode));
 					request_.setBrief("代付收益账户代付申请");
 					request_.setCurrCode(RequestColumnValues.CurrCode.CNY);

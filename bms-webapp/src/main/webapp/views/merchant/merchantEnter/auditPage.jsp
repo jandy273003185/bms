@@ -138,6 +138,7 @@
                     $.gyzbadmin.alertSuccess("审核完成！",function(){
                     },function(){
                         window.close();
+                        window.opener.location.href=window.opener.location.href;
                     });
                 }else{
                     $.gyzbadmin.alertFailure("审核失败！"+data.message);
@@ -165,6 +166,7 @@
                     $.gyzbadmin.alertSuccess("审核完成！",function(){
                     },function(){
                         window.close();
+                        window.opener.location.href=window.opener.location.href;
                     });
                 }else{
                     $.gyzbadmin.alertFailure("审核失败！"+data.message);
@@ -268,7 +270,7 @@
 										</select>
 									</div>
 									<div class="col-xs-5 pd0" style="padding:0;margin-left:1%">
-										<input type="text" id="custAdd" name="custAdd"  placeholder="详细地址" value =${merchantVo.custAdd } style="width:100%">
+										<input type="text" id="custAdd" name="custAdd"  placeholder="详细地址" value ="${merchantVo.custAdd }" style="width:100%">
 										<label class="label-tips" id="custAddLab"></label>
 									</div>
 								</td>
@@ -312,7 +314,7 @@
 							</tr>
 							<tr>
 								<td class="td-left">所属业务人员：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.aduitUserName }</td>
+								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.custManager }</td>
 								<td class="td-left">所属代理商：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.agentName }</td>
 							</tr>

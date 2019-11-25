@@ -139,8 +139,8 @@
 										</c:if>
 									</td>	
 									<td>${result.msgTo}</td>
-									<td>
-									<fmt:formatDate value="${result.executeDatetime}" pattern="yyyy-MM-dd HH:mm:ss"/>										
+									<td>${result.executeDatetime}
+									<%-- <fmt:formatDate value="" pattern="yyyy-MM-dd HH:mm:ss"/> --%>										
 									</td>
 									<td>${result.state }</td>	
 									<td>${result.logId }</td>	

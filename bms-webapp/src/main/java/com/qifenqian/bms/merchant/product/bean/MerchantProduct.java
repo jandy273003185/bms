@@ -59,6 +59,46 @@ public class MerchantProduct implements Serializable {
 	
 	/** 充值汇率 */
 	private String rechargeRateStr;
+	/**id*/
+	private String id;
+	/**
+	 * 审核人Id
+	 */
+	private String auditId;
+	/**
+	 * 审核人真实姓名
+	 */
+	private String realName;
+	
+	
+
+	
+
+	
+
+	public String getRealName() {
+		return realName;
+	}
+
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
+
+	public String getAuditId() {
+		return auditId;
+	}
+
+	public void setAuditId(String auditId) {
+		this.auditId = auditId;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getMerchantName() {
 		return merchantName;

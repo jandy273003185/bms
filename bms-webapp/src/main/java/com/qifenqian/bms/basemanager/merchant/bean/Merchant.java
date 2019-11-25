@@ -30,42 +30,42 @@ public class Merchant implements Serializable
 	private String merchantCode;
 
 	/** 
-	 * 客户名称. main9
+	 * 客户名称
 	 */
 	private String custName;
 	
 	/** 
-	 * 客户简称. mian9
+	 * 客户简称
 	 */
 	private String shortName;
 
     /**
-     * 商户邮箱，1mian9
+     * 商户邮箱
      */
     private String merchantEmail;
 
     /**
-     * 所属业务人员 客户经理 mian9
+     * 所属业务人员 客户经理 
      */
     private String custManager;
 
     /**
-     * 联系人姓名 1 mian 9
+     * 联系人姓名
      */
     private String contactName;
 
     /**
-     *联系人电话 1 mian9 新加字段
+     *联系人电话 
      */
     private String contactMobile;
 
 	/**
-	 * 开户省 1 mian 9
+	 * 开户省
 	 */
 	private String bankProvinceName;
 
 	/**
-	 *开户市 1 mian9 新加字段
+	 *开户市
 	 */
 	private String bankCityName;
     /**
@@ -75,7 +75,7 @@ public class Merchant implements Serializable
 
 
     /**
-     * 结算类型 mian 新加字段
+     * 结算类型 
      */
     private String compMainAcctType;
 
@@ -90,27 +90,27 @@ public class Merchant implements Serializable
 	private String certifyType;
 
 	/** 
-	 * 证件号.
+	 * 证件号
 	 */
 	private String certifyNo;
 
 	/** 
-	 * 客户类型：0 个人1 企业. mian9
+	 * 客户类型：0 个人1 企业
 	 */
 	private String custType;
 
 	/** 
-	 * 商户标志：0 商户，1 非商户.
+	 * 商户标志：0 商户，1 非商户
 	 */
 	private String merchantFlag;
 
 	/** 
-	 * 客户积分.
+	 * 客户积分
 	 */
 	private Long custScore;
 
 	/** 
-	 * 客户等级.
+	 * 客户等级
 	 */
 	private String custLvl;
 
@@ -139,17 +139,17 @@ public class Merchant implements Serializable
 	private String custInfoLvl;
 	
 	/** 
-	 * 地址. mian9
+	 * 地址
 	 */
 	private String custAdd;
 
 	/** 
-	 * 邮编.
+	 * 邮编
 	 */
 	private String custPostCode;
 
 	/** 
-	 * 营业执照编号（企业专用）. mian9
+	 * 营业执照编号（企业专用）
 	 */
 	private String businessLicense;
 	
@@ -159,12 +159,12 @@ public class Merchant implements Serializable
 	private String businessRegAddr;
 	
 	/**
-	 * 营业期限 mian9
+	 * 营业期限 
 	 */
 	private String businessTerm;
 	
 	/**
-	 * 企业联系电话 mian9
+	 * 企业联系电话
 	 */
 	private String contactPhone;
 	
@@ -184,12 +184,12 @@ public class Merchant implements Serializable
 	private String representativeCertType;
 
 	/** 
-	 * 法人证件号码（企业专用）. mian9
+	 * 法人证件号码（企业专用）
 	 */
 	private String representativeCertNo;
 
 	/** 
-	 * 法人名称（企业专用）. mian9
+	 * 法人名称（企业专用）
 	 */
 	private String representativeName;
 	
@@ -224,7 +224,7 @@ public class Merchant implements Serializable
 	private String agentMobile;
 	
 	/**
-	 * 公司对公账号 mian9
+	 * 公司对公账号
 	 */
 	private String compMainAcct;
 	
@@ -278,27 +278,27 @@ public class Merchant implements Serializable
 	private String isUseMsg;
 
 	/** 
-	 * 创建人.
+	 * 创建人
 	 */
 	private String createId;
 
 	/** 
-	 * 创建时间.
+	 * 创建时间
 	 */
 	private Date createTime;
 
 	/** 
-	 * 修改人.
+	 * 修改人
 	 */
 	private String modifyId;
 
 	/** 
-	 * 修改时间.
+	 * 修改时间
 	 */
 	private Date modifyTime;
 	
 	/** 
-	 * 附加串，用于生成加密密码.
+	 * 附加串，用于生成加密密码
 	 */
 	private String attachStr;
 	
@@ -317,11 +317,11 @@ public class Merchant implements Serializable
 	private String feeCode;
 
 	/**
-	 * 对公账号支行信息 mina9
+	 * 对公账号支行信息 
 	 */
 	private String branchBank;
 	/**
-	 * 银行开户名 mian9
+	 * 银行开户名
 	 */
 	private String bankAcctName;
 	
@@ -351,17 +351,17 @@ public class Merchant implements Serializable
 	private String mchRole;
 	
 	/**
-	 * 省份 mian9
+	 * 省份 
 	 */
 	private String province;
 	
 	/**
-	 * 城市 mian9
+	 * 城市 
 	 */
 	private String city;
 	
 	/**
-	 * 区县 mian9
+	 * 区县
 	 */
 	private String country;
 	
@@ -396,6 +396,32 @@ public class Merchant implements Serializable
 	private String merchantMobile;
 
 	private String registerWay;
+
+	/**
+	 * 服务商推荐人
+	 */
+	private String referrer;
+	/**
+	 * 服务商级别
+	 */
+	private String serviceLevel;
+	
+	
+	public String getReferrer() {
+		return referrer;
+	}
+
+	public void setReferrer(String referrer) {
+		this.referrer = referrer;
+	}
+
+	public String getServiceLevel() {
+		return serviceLevel;
+	}
+
+	public void setServiceLevel(String serviceLevel) {
+		this.serviceLevel = serviceLevel;
+	}
 
 	public String getBankProvinceName() {
 		return bankProvinceName;

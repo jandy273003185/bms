@@ -22,11 +22,11 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.accounting.checkquery.type.ChannelId;
-import com.qifenqian.bms.common.util.PropertiesUtil;
 import com.qifenqian.bms.expresspay.jgkjfileupload.bean.FileOffer;
 import com.qifenqian.bms.expresspay.jgkjfileupload.dao.FileOfferDao;
 import com.qifenqian.bms.expresspay.jgkjfileupload.mapper.FileOfferMapper;
@@ -53,6 +53,9 @@ public class JgkjFileService {
 	public static final String JGKJ_SETTLE_FILENAME = "Accountant-00000000000000000035-CUPEVE-{yyyyMMdd}";
 	/** 交广科技对账 **/
 	public static final String JGKJ_BALANCE_FILENAME = "00000000000000000035-TRANS-{yyyyMMdd}";
+	
+	@Value("${JGKJ_FILE_PATH}")
+	private String JGKJ_FILE_PATH;
 
 	/**
 	 * 交广科技文件上传
@@ -75,7 +78,6 @@ public class JgkjFileService {
 			upload.setHeaderEncoding("utf-8");
 			List<FileItem> list = upload.parseRequest(request);
 			List<String> paths = new ArrayList<String>();
-			Properties p = PropertiesUtil.getProperties();
 			FileItem item = list.get(0);
 
 			if (item.isFormField()) {
@@ -90,7 +92,7 @@ public class JgkjFileService {
 			String workDate = name[1];
 
 			/** 读取配置文件 获取保存路径 **/
-			String jgkj_path = p.getProperty("JGKJ_FILE_PATH");
+			String jgkj_path = JGKJ_FILE_PATH; //p.getProperty("JGKJ_FILE_PATH");
 
 			if (fileType.equals("BALANCE")) {
 

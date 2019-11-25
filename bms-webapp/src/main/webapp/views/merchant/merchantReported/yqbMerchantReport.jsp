@@ -76,7 +76,7 @@
                             	<tr>
 									<td class="td-left" width="18%">商户编号：<span style="color:red;">(必填)</span></td>
 									<td class="td-right" width="32%"> 
-										<input type="text" id="merchantCode" name="merchantCode" placeholder="请输入商户编号" maxlength=""  value="${custInfo.merchantCode }" style="width:90%">
+										<input type="text" id="merchantCode" name="merchantCode" readonly maxlength=""  value="${custInfo.merchantCode }" style="width:90%">
 										<label class="label-tips" id="merchantCodeLab"></label>
 									</td>
 	                                <td class="td-left" width="18%">商户简称：<span style="color:red;">(必填)</span></td>

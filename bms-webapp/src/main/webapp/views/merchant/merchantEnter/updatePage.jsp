@@ -5,6 +5,7 @@
 <%@page import="com.qifenqian.bms.basemanager.merchant.AuditorPath"%>
 <%@page import="com.qifenqian.bms.basemanager.merchant.TinyMerchantPath" %>
 <%@page import="com.qifenqian.bms.basemanager.agency.controller.AgentRegisterPath" %>
+<%@ page import="com.qifenqian.bms.basemanager.city.CityPath" %>
 <%-- <script src='<c:url value="/static/js/checkRule_source.js"/>'></script>
 <script src='<c:url value="/static/My97DatePicker/WdatePicker.js"/>'></script> --%>
 <script src='<c:url value="/static/js/ajaxfileupload.js"/>'></script>
@@ -13,6 +14,8 @@
 <script src='<c:url value="/static/js/mobileBUGFix.mini.js"/>'></script>
 <script src='<c:url value="/static/js/uploadCompress.js"/>'></script>
 <script src='<c:url value="/static/js/register.js"/>'></script>
+<script src="<c:url value='/static/js/jquery.combo.select.js'/>"></script>
+<script src='<c:url value="/static/js/checkRule_source.js"/>'></script>
 <html>
 <head>
 	<meta charset="utf-8" />
@@ -20,6 +23,8 @@
 	<meta name="keywords" content="七分钱后台管理系统" />
 	<meta name="description" content="七分钱后台管理" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="<c:url value='/static/css/combo.select.scss' />" />
+	<link rel="stylesheet" href="<c:url value='/static/css/combo.select.css' />" />
 	<style type="text/css">
 		table tr td{word-wrap:break-word;word-break:break-all;}
 		.uploadImage{ float:left;
@@ -32,6 +37,75 @@
 	</style>
 </head>
 <script type="text/javascript">
+
+
+$(function(){
+	$("input[type=file]").each(
+		function() {
+			var _this = $(this);
+			_this.localResizeIMG({
+				quality : 0.8,
+				success : function(result,file) {
+
+					var att = pre.substr(pre.lastIndexOf("."));
+					//压缩后图片的base64字符串
+					var base64_string = result.clearBase64;
+
+					$('#'+_this.attr('id')+'temp').val(att+","+base64_string);
+					//图片预览
+		            var imgObj = $('#'+_this.attr('id')+'ImageDiv');
+		            imgObj.attr("src", "data:image/jpeg;base64," + base64_string).show();
+		            var width = result.width;
+		            var height = result.height;
+		            var scale =  width/height;
+		            if(width >800){
+		            width = 800;
+		            height = width / scale;
+		            }
+		            $(".showDiv").width(width+"px");
+		            $(".showDiv").height(height+"px");
+
+		            //优图
+		            var param = "{str:\""+base64_string+"\",flag:\""+_this.attr('id')+"\"}"
+		    		$.ajax({
+	    	   			async:false,
+	    	   			type:"POST",
+	    	   			contentType:"application/json;charset=utf-8",
+	    	   			dataType:"text",
+	    	   			url:window.Constants.ContextPath +'<%=AgentRegisterPath.BASE + AgentRegisterPath.YOUTU%>',
+	    	   	        data:param,
+	    	   	        success:function(data){
+	    	   	      		var json = eval('(' + data + ')');
+	    	   	        	if(json.result=="SUCCESS"){
+	    	   	        		 if(_this.attr('id')=="certAttribute1"){                    //身份证
+	    	       	  				$("#representativeName").val(json.cardName);
+	    	       	  				$("#representativeCertNo").val(json.cardId);
+	    	       	  			}else if(_this.attr('id')=="businessPhoto"){                //营业执照
+	    	       	  				$("#businessLicense").val(json.businessLicense);
+	    	       	  				$("#businessTermStart").val(json.businessTermStart);
+	    	       	  				if("长期"==json.businessTermEnd){
+	    	       	  					$("#businessTermEnd").val("2099-12-31");
+	    	       	  				}else{
+	    	       	  					$("#businessTermEnd").val(json.businessTermEnd);
+	    	       	  				}
+	    	       	  				$("#custAdd").val(json.legalAddress);
+	    	       	  				$("#custName").val(json.companyName);
+	    	       	  			}else if(_this.attr('id')=="bankCardPhoto"){                //银行卡
+    	       	  					$("#compMainAcct").val(json.creditCardId);
+    	       	  					// $("#compAcctBank").val(json.cardNo);
+    	       	  				
+	    	       	  			}
+	    	   				}
+	    	   			}
+		    	   	});
+				}
+			});
+		}
+	);
+	$("#agentName").comboSelect();
+	$("#custManager").comboSelect();
+});
+
     $(function() {
 
         if($("#custType").val() =='0' ||$("#custType").val() =='2' ){
@@ -60,7 +134,7 @@
         $("#openAccountImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=03&authId="+authId);
 
 
-        if ("style=\"width:90%\"" == document.getElementById("custManager").value){
+        /* if ("style=\"width:90%\"" == document.getElementById("custManager").value){
             $("#custManager").attr("value","");
         }
 
@@ -85,7 +159,7 @@
             $("#businessTermEnd").attr("value","");
         }
 
-
+        */
         $(function(){
             $('#compMainAcctType').on('change', function (e) {
                 //bankCardPhoto_
@@ -113,7 +187,8 @@
     		$('#businessPhotoId_').show();
         }
 
-
+       /*  $("#agentName").comboSelect();
+    	$("#custManager").comboSelect(); */
     });
     
     function getCityList(){
@@ -188,6 +263,22 @@
         }
 
         $.ajax({
+    		type:"POST",
+    		dataType:"json",
+    		url:window.Constants.ContextPath +'<%=CityPath.BASE+CityPath.GET_CITY_BY_PROVINCEID %>',
+    		data:
+    		{
+    			"provinceId" 	: provVal
+    		},
+    		success:function(data){
+    			var cityList = data.cityList;
+    			for ( var city in cityList) {
+    				$("#bankCityName").append(
+    					"<option value='"+ cityList[city].cityId +"'>" + cityList[city].cityName + "</option>");
+    			}
+    		}
+    	})
+        <%-- $.ajax({
             type:"POST",
             dataType:"json",
             url:window.Constants.ContextPath +'<%=MerchantPath.BASE+MerchantPath.GRTCITYLIST %>',
@@ -207,9 +298,38 @@
                 }else{
                 }
             }
-        })
+        }) --%>
     }
-
+	
+    function getbranchBank(){
+    	var provVal = $("#bankProvinceName").val().trim();
+    	var city = $("#bankCityName").val().trim();
+    	var compAcctBank = $("#compAcctBank").val();
+    	
+    	var channelCode ="";
+    	$.post(window.Constants.ContextPath +"/common/info/bankCnapsInfo",
+    	{
+    		"provinceId": provVal,
+    		"cityCode":   city,
+    		"bankCode":   compAcctBank,
+    		"channelCode":channelCode
+    	},
+    	function(data){
+    		if(data.result=="SUCCESS"){
+    			var branchBankList = data.branchBankList;
+    			$("#branchBank").html("");
+       			for ( var branchBank in branchBankList) {
+       				$("#branchBank").append(
+       						"<option value='"+ branchBankList[branchBank].branchBankCode +"'>"
+       								+ branchBankList[branchBank].bankName + "</option>"); 
+       			}
+    		}
+    		else{
+    			alert("银行和开户城市不能为空");
+    		}
+    	},'json'
+    	);	
+    	}
     function updateMerchantBtn(){
 
         if(!(isNull($("#merchantEmail")[0])) && (!verifyEmailAddress($("#merchantEmail")[0]))){
@@ -408,11 +528,11 @@
             return false;
         }
         /*网点号*/
-        if(isNull($("#cnaps")[0])){
+        /* if(isNull($("#cnaps")[0])){
             $("#cnapseLab").text("请填写银联号");
             $("#cnaps").focus();
             return false;
-        }
+        } */
         /*结算类型*/
         if(isNull($("#compMainAcctType")[0])){
             $("#compMainAcctTypeLab").text("请填写结算类型");
@@ -448,7 +568,6 @@
         var bankAcctName = $("#bankAcctName").val();
         var bankProvinceName = $("#bankProvinceName").val();
         var bankCityName = $("#bankCityName").val();
-        var cnaps =  $("#cnaps").val();
         var compMainAcctType = $("#compMainAcctType").val();
         var custId = $("#custId").val();
         /*alert(custId);*/
@@ -494,12 +613,12 @@
                         "bankAcctName" :bankAcctName,
                         "bankProvinceName":bankProvinceName,
                         "bankCityName":bankCityName,
-                        "cnaps":cnaps,
                         "compMainAcctType":compMainAcctType
                     },function(data){
                         if(data.result=="SUCCESS"){
                             $.gyzbadmin.alertSuccess("注册申请成功",null,function(){
                             	window.close();
+                            	window.opener.location.href=window.opener.location.href;
                             });
                         }else {
                             $.gyzbadmin.alertFailure("服务器内部错误，请联系相关技术人员，错误原因是：" + data.message);
@@ -631,9 +750,6 @@
 							</tr>
 							<tr>
 								<td class="td-left">商户账号：</td>
-								<%-- <td type="hidden" class="td-right" style="color:#666;padding:10px 8px" id="custId"></td>
-								<td type="hidden" class="td-right" style="color:#666;padding:10px 8px" id="merchantCode">${merchantVo.merchantCode }</td>
-								<td type="hidden" class="td-right" style="color:#666;padding:10px 8px" id="authId">${merchantVo.authId }</td> --%>
 								<td class="td-right" style="color:#666;padding:10px 8px">
 									${merchantVo.email }
 								</td>
@@ -655,8 +771,6 @@
 										<td>个体户</td>
 									</c:when>
 								</c:choose>
-
-								<%-- <td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.custType }</td> --%>
 							</tr>
 							<tr>
 								<td class="td-left"  width="18%">商户名称：</td>
@@ -678,8 +792,6 @@
 									<input type="text" id="contactPhone" name="contactPhone" placeholder="请输入客服号码" style="width:90%" value ="${merchantVo.contactPhone }" >
 								</td>
 							</tr>
-
-
 							<tr>
 								<td class="td-left">商户地址：</span></td>
 								<td class="td-right" colspan="3">
@@ -754,13 +866,13 @@
 							<tr>
 								<td class="td-left">所属业务人员：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
+									<%-- <sevenpay:selectSysUserTag name="custManager" id="custManager" defaultValue="${merchantVo.custManager}"/> --%>
 									<select id="custManager" name="custManager">
-										<option value="${merchantVo.custManager }">${merchantVo.aduitUserName }</option>
+										<option value="${merchantVo.custManager }">${merchantVo.custManager }</option>
 										<c:forEach items="${userlist }" var="bean">
 											<option value="${bean.userName }">${bean.userName }</option>
 										</c:forEach>
 									</select>
-									<%-- <input type="text" id="custManager" name="custManager"  placeholder="请输入所属业务人员" value=${merchantVo.custManager } style="width:90%"> --%>
 								</td>
 								<td class="td-left">所属代理商：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
@@ -770,7 +882,6 @@
 											<option value="${bean.custName }">${bean.custName }</option>
 										</c:forEach>
 									</select>
-									<%-- <input type="text" name="agentName" id="agentName" placeholder="请输入所属代理商" value=${merchantVo.agentName } style="width:90%"> --%>
 								</td>
 							</tr>
 							<tr>
@@ -779,11 +890,11 @@
 							</tr><tr>
 								<td class="td-left">法人真实姓名：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
-									<input type="text" id="representativeName" name="representativeName" placeholder="请输入法人真实姓名" value=${merchantVo.representativeName } maxlength="50" style="width:90%">
+									<input type="text" id="representativeName" name="representativeName" placeholder="请输入法人真实姓名" value="${merchantVo.representativeName }" maxlength="50" style="width:90%">
 								</td>
 								<td class="td-left">法人身份证号码：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
-									<input type="text" name="representativeCertNo" id="representativeCertNo" placeholder="请输入法人身份证号码" value=${merchantVo.representativeCertNo } style="width:90%">
+									<input type="text" name="representativeCertNo" id="representativeCertNo" placeholder="请输入法人身份证号码" value="${merchantVo.representativeCertNo }" style="width:90%">
 								</td>
 							</tr>
 							<tr>
@@ -799,7 +910,6 @@
 										<input type="file" name="certAttribute1" id="certAttribute1"  onchange="showCertAttribute1Image(this)"/>
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
-
 								</td>
 							</tr>
 							<tr>
@@ -815,7 +925,6 @@
 										<input type="file" name="certAttribute2" id="certAttribute2" onchange="showCertAttribute2Image(this)"/>
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
-
 								</td>
 							</tr>
 							<tr>
@@ -845,15 +954,14 @@
 								<td class="td-right" style="color:#666;padding:10px 8px">
 									<input type="text" id="bankAcctName" name="bankAcctName" placeholder="请输入开户人" value="${merchantVo.bankAcctName }" style="width:90%">
 								</td>
-								
 							</tr>
 							<tr>
 								<td class="td-left">开户省份：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
 									<select class="width-90" id="bankProvinceName" onchange="getBankCityList();">
-										<c:if test="${not empty provincelist_ }">
+										<c:if test="${not empty provincelist }">
 											<option value=${merchantVo.bankProvinceName }>${merchantVo.bankProName }</option>
-											<c:forEach items="${provincelist_ }" var="prov">
+											<c:forEach items="${provincelist }" var="prov">
 												<option value="${prov.provinceId}">${prov.provinceName}</option>
 											</c:forEach>
 										</c:if>
@@ -869,7 +977,7 @@
 							<tr>
 								<td class="td-left">开户银行：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
-									<select class="width-90" id="compAcctBank" name="compAcctBank">
+									<select class="width-90" id="compAcctBank" name="compAcctBank" onchange="getbranchBank();">
 										<c:if test="${not empty banklist }">
 											<option value=${merchantVo.compAcctBank }>${merchantVo.bankName }</option>
 											<c:forEach items="${banklist }" var="bank">
@@ -881,14 +989,17 @@
 								</td>
 								<td class="td-left">开户支行：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
-									<input type="text" id="branchBank" name="branchBank" placeholder="请输入开户行" value="${merchantVo.branchBank }" style="width:90%">
+									<select name="branchBank" id="branchBank" class="width-90" >
+	                                    <option value=${merchantVo.branchBank }>${merchantVo.branchBank }</option>
+	                                </select>
+	                               	<label id="branchBankLab" class="label-tips"></label>
 								</td>
 							</tr>
 							<tr>
-								<td class="td-left">网点号：</td>
+								<%-- <td class="td-left">网点号：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
 									<input type="text" id="cnaps" name="cnaps" style="width:90%" placeholder="请输入网点号" value ="${merchantVo.cnaps }" > <a href="http://www.lianhanghao.com" target="_blank">[查找]</a>
-								</td>
+								</td> --%>
 								<td class="td-left">结算类型：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
 									<select class="width-90" id="compMainAcctType">
@@ -929,32 +1040,6 @@
 									<label class="label-tips" id="bankCardPhotoLabel" style="float:left;margin-top:88"></label>
 								</td>
 							</tr>
-							<%--
-                          <tr>
-                           <td colspan="4" class="headlerPreview" style="background:#7ebde1;">操作记录</td></tr>
-                          <tr>
-                           </tr>
-
-                           <tr>
-                               <td class="td-left">录入人：</td>
-                               <td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.createId }</td>
-                               <td class="td-left">录入时间：</td>
-                               <td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.createTime }</td>
-                           </tr>
-                           <tr>
-                               <td class="td-left">审核人：</td>
-                               <td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.aduitUserName }</td>
-                               <td class="td-left">录入时间：</td>
-                               <td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.modifyTime }</td>
-                           </tr>
-                           <tr>
-                               <td class="td-left">审核记录：</td>
-                               <td class="td-right" style="color:#666;padding:10px 8px"></td>
-                           </tr>
-
-                           <tr><td colspan="4" class="headlerPreview" style="background:#7ebde1;">付款二维码</td></tr>
-                           <tr></tr>
-                                --%>
 							</tbody></table>
 						<div style="margin:50px 0 0 0;text-align:center">
 							<button type="button"  class="btn btn-primary updateMerchantBtn" onclick="updateMerchantBtn()">保存</button>

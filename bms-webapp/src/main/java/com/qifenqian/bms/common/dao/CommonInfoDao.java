@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.qifenqian.bms.basemanager.bank.bean.Bank;
 import com.qifenqian.bms.basemanager.city.bean.City;
 import com.qifenqian.bms.common.bean.BranchBankInfo;
+import com.qifenqian.bms.merchant.reported.bean.CommonIndustry;
 import com.qifenqian.bms.merchant.reported.bean.Province;
 
 @Repository
@@ -63,6 +64,25 @@ public class CommonInfoDao {
 		return commonInfoMapper.suiXingBranchBankList(queryBean);
 	}
 	
+	/**
+	 * 查询支付宝商户经营类目
+	 * @return
+	 */
+	public List<CommonIndustry> ListAliPayIndustry(String parentLevel, String parentText) {
+		return commonInfoMapper.ListAliPayIndustry(parentLevel, parentText);
+	}
+	
+	/**
+	 * 
+	 * @param provinceId
+	 * @return
+	 */
+	public List<City> selWxChatAppCity(String provinceId) {
+		return commonInfoMapper.selWxChatAppCity(provinceId);
+	}
+	public List<City> getWxAreaByCityId(String cityName) {
+		return commonInfoMapper.getWxAreaByCityId(cityName);
+	}
 	
 
 

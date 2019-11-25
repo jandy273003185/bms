@@ -18,6 +18,8 @@ public class MerchantEnterReportedPath {
 	public static final String SUIXINGSUBMITREPORT = "/suiXingSubmitReport";
 	/**平安付报备资料页面**/
 	public static final String YQBMERCHANTREPORT = "/yqbMerchantReport";
+	/**支付宝报备资料页面**/
+	public static final String ALIPAY_MERCHANT_REPORTS = "/aliPayMerchantReport";
 	/**平安付提交报备**/
 	public static final String YQBSUBMITREPORT = "yqbSubmitReport";
 	/**翼支付报备资料页面**/

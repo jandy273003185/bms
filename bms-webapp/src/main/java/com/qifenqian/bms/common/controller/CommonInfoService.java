@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.common.collect.Lists;
 import com.qifenqian.bms.basemanager.bank.bean.Bank;
 import com.qifenqian.bms.basemanager.bank.dao.BankDAO;
 import com.qifenqian.bms.basemanager.branchbank.dao.BranchBankDao;
@@ -16,6 +17,7 @@ import com.qifenqian.bms.basemanager.city.bean.City;
 import com.qifenqian.bms.basemanager.city.mapper.CityMapper;
 import com.qifenqian.bms.common.bean.BranchBankInfo;
 import com.qifenqian.bms.common.dao.CommonInfoDao;
+import com.qifenqian.bms.merchant.reported.bean.CommonIndustry;
 import com.qifenqian.bms.merchant.reported.bean.Province;
 import com.qifenqian.bms.merchant.reported.dao.FmIncomeMapperDao;
 
@@ -77,6 +79,8 @@ public class CommonInfoService {
 			cityList = cityMapper.getCityByProvinceId(provinceId);
 		}else if("SUIXING_PAY".equals(channelCode)) {
 			cityList = commonInfoDao.selSuiXingCity(provinceId);
+		}else if("WX".equals(channelCode)) {
+			cityList = commonInfoDao.selWxChatAppCity(provinceId);
 		}
 		return cityList;
 		
@@ -89,11 +93,14 @@ public class CommonInfoService {
 	 * @param cityId
 	 * @return
 	 */
-	public List<City> getAreaByCityId(String cityId,String channelCode) {
+	public List<City> getAreaByCityId(City cityBean,String channelCode) {
 		List<City> areaList = new ArrayList<City>();
+		String cityId = Integer.toString(cityBean.getCityId());
 		//七分钱
 		if(StringUtils.isBlank(channelCode)) {
 			areaList = cityMapper.getAreaByCityId(cityId);
+		}else if("WX".equals(channelCode)) {
+			areaList = commonInfoDao.getWxAreaByCityId(cityBean.getCityName());
 		}
 		return areaList;
 	}
@@ -106,9 +113,35 @@ public class CommonInfoService {
 		//七分钱
 		if(StringUtils.isBlank(channelCode)) {
 			branchBankList = commonInfoDao.branchBankList(queryBean);
+			if(0 == branchBankList.size()) {
+				queryBean.setCityCode(-1);
+				branchBankList = commonInfoDao.branchBankList(queryBean);
+			}
 		}else if("SUIXING_PAY".equals(channelCode)) {
 			branchBankList = commonInfoDao.suiXingBranchBankList(queryBean);
 		}
 		return branchBankList;
+	}
+	
+	/**
+	 * 查找商家经营类目
+	 * @param channelCode 渠道号
+	 * @param parentLevel 查询层级  levelOne 一级  levelTwo 二级  levelThree 三级
+	 * @param parentText 上一级名称或编码 
+	 * @return
+	 */
+	public List<CommonIndustry> selectCommonIndustrys(String channelCode, String parentLevel, String parentText) {
+		List<CommonIndustry> industries = new ArrayList<CommonIndustry>();
+		//七分钱
+		if(StringUtils.isBlank(channelCode)) {
+			//provinceList = commonInfoDao.selectProvince();
+		}
+		else if ("ALIPAY".equals(channelCode)) {
+			industries = commonInfoDao.ListAliPayIndustry(parentLevel, parentText);
+		}
+		else if("SUIXING_PAY".equals(channelCode)) {
+			//provinceList = commonInfoDao.selSuiXingProvince();
+		}
+		return industries;
 	}
 }

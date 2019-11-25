@@ -8,11 +8,11 @@
 	</appender>
 	<!-- 文件日志 -->
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${LOG.BASEDIR}/sevenpay-bms-web.log</file> 
+		<file>@LOG.BASEDIR@/sevenpay-bms-web.log</file> 
 		 
          <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
          <!-- linux 下后缀为gz, window 下后缀为zip -->
-		    <fileNamePattern>${LOG.BASEDIR}/sevenpay-bms-web_%d{yyyy-MM-dd-HH}_%i.log.gz</fileNamePattern>
+		    <fileNamePattern>@LOG.BASEDIR@/sevenpay-bms-web_%d{yyyy-MM-dd-HH}_%i.log.gz</fileNamePattern>
 	      	<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
 	    	 	<maxFileSize>100MB</maxFileSize>
 	   	  	</timeBasedFileNamingAndTriggeringPolicy>        
@@ -25,9 +25,9 @@
     </appender>  
     
     <appender name="httpClientConnect_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${LOG.BASEDIR}/stc_web/httpClientConnect.log</file>
+		<file>@LOG.BASEDIR@/stc_web/httpClientConnect.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">  
-            <FileNamePattern>${LOG.BASEDIR}/stc_web/httpClientConnect_%d{yyyy-MM-dd-HH}_%i.log.gz</FileNamePattern>
+            <FileNamePattern>@LOG.BASEDIR@/stc_web/httpClientConnect_%d{yyyy-MM-dd-HH}_%i.log.gz</FileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
             	<maxFileSize>100MB</maxFileSize>
 	   	  	</timeBasedFileNamingAndTriggeringPolicy>
@@ -38,7 +38,7 @@
         </encoder>
     </appender>
     
-	<root level="info">
+	<root level="@LOG.LEVEL@">
 		<!-- <appender-ref ref="FILE" /> -->
 		<appender-ref ref="STDOUT" />
 	</root>

@@ -12,7 +12,6 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +21,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,7 +38,6 @@ import com.qifenqian.bms.basemanager.merchant.mapper.CustScanMapper;
 import com.qifenqian.bms.basemanager.merchant.mapper.MerchantMapper;
 import com.qifenqian.bms.basemanager.merchant.service.StoreManageService;
 import com.qifenqian.bms.basemanager.utils.GenSN;
-import com.qifenqian.bms.common.util.PropertiesUtil;
 
 @Controller
 @RequestMapping(StoreManagePath.BASE)
@@ -57,6 +56,9 @@ public class StoreManageController {
 
 	@Autowired
 	private CustScanMapper custScanMapper;
+	
+	@Value("${CERTIFY_FILE_SAVE_PATH}")
+	private String CERTIFY_FILE_SAVE_PATH;
 
 	/** 门店管理 */
 	@RequestMapping(StoreManagePath.LIST)
@@ -200,8 +202,7 @@ public class StoreManageController {
 				String url = "https://combinedpay.qifenqian.com/pub/merchantqr.do?mid=" + storeManage.getMerchantCode()
 						+ "&sn=" + storeManage.getShopNo();
 //					String fileUploadPath = commonData.getUploadFile().get("CERTIFY_FILE_SAVE_PATH");
-				Properties p = PropertiesUtil.getProperties();
-				String fileUploadPath = p.getProperty("CERTIFY_FILE_SAVE_PATH");
+				String fileUploadPath = CERTIFY_FILE_SAVE_PATH;
 				String filedName = "recode";
 				String urlToImg = QRCode.urlToImg(fileUploadPath, url, GenSN.getRandomNum(2) + filedName, 10);
 				HttpSession session = request.getSession();

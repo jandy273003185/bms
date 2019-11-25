@@ -39,11 +39,11 @@
 			<if test="orderTimeOut != null and orderTimeOut != ''">
 			ORDER_TIME_OUT = #{orderTimeOut,jdbcType=INTEGER},
 			</if>
-			<if test="extDate1 != null and extDate1 != ''">
-			EXT_DATA1 = #{extDate1,jdbcType=VARCHAR},
+			<if test="extData1 != null and extData1 != ''">
+			EXT_DATA1 = #{extData1,jdbcType=VARCHAR},
 			</if>
-			<if test="extDate2 != null and extDate2 != ''">
-			EXT_DATA2 = #{extDate2,jdbcType=VARCHAR},
+			<if test="extData2 != null and extData2 != ''">
+			EXT_DATA2 = #{extData2,jdbcType=VARCHAR},
 			</if>
 			<if test="orderState != null and orderState != ''">
 			ORDER_STATE = #{orderState,jdbcType=VARCHAR},

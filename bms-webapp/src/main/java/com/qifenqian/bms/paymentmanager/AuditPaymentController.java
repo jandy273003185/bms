@@ -15,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,7 +25,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
 import com.qifenqian.bms.basemanager.trade.service.DownLoadUtil;
 import com.qifenqian.bms.basemanager.trade.service.TradeBillService;
-import com.qifenqian.bms.common.util.PropertiesUtil;
 import com.qifenqian.bms.expresspay.CommonService;
 import com.qifenqian.bms.paymentmanager.bean.TdAuditReportExport;
 import com.qifenqian.bms.paymentmanager.bean.TdPaymentAuditRecode;
@@ -73,6 +73,8 @@ public class AuditPaymentController {
 	@Autowired
 	private TradeBillService tradeBillService;
 	
+	@Value("${channelMerchantid}")
+	private String channelMerchantid;
 	
 	/**
 	 * 查询批量代付记录明细
@@ -527,8 +529,8 @@ public class AuditPaymentController {
 		JSONObject ob = new JSONObject();
 		logger.info("开始 查询单笔代付记录明细:{}",single);
 		
-		Properties properties = PropertiesUtil.getProperties("/zbMerchantId.properties");
-		String channelMerchantidArray = properties.getProperty("channelMerchantid");
+		//Properties properties = PropertiesUtil.getProperties("/zbMerchantId.properties");
+		String channelMerchantidArray = channelMerchantid; //properties.getProperty("channelMerchantid");
 		if(StringUtils.isNotEmpty(channelMerchantidArray)) {
 			ob.put("channelMerchantidArray", channelMerchantidArray);
 		}
@@ -560,8 +562,8 @@ public class AuditPaymentController {
 		  }
 		 
 		//获取channelMerchantid
-		Properties properties = PropertiesUtil.getProperties("/zbMerchantId.properties");
-		String channelMerchantidArray = properties.getProperty("channelMerchantid");
+		//Properties properties = PropertiesUtil.getProperties("/zbMerchantId.properties");
+		String channelMerchantidArray = channelMerchantid;//properties.getProperty("channelMerchantid");
 		
 		TdPaymentBatInfo auditPayment = paymentService.getBatchAuditPayment(batNo);
 		ModelAndView mv = new ModelAndView(PaymentManagerPath.BASE + PaymentManagerPath.AUDITPAYMENTTINFOS);

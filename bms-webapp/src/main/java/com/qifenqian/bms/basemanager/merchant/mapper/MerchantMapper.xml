@@ -63,6 +63,7 @@
 			city,
 			country,
 			SHORT_NAME,
+			merchant_mobile,
 			merchant_email,
 			custManager,
 			contact_name,
@@ -70,7 +71,9 @@
 			cnaps,
 			COMP_MAIN_ACCT_TYPE,
 			bank_province_name,
-			bank_city_name
+			bank_city_name,
+			referrer,
+			service_level
 		) VALUES(
 			#{custId, 			jdbcType=VARCHAR},
 			#{custName, 		jdbcType=VARCHAR},
@@ -131,6 +134,7 @@
 			#{city, 	jdbcType=VARCHAR},
 			#{country, 	jdbcType=VARCHAR},
 			#{shortName, 	jdbcType=VARCHAR},
+			#{merchantMobile, 	jdbcType=VARCHAR},
 			#{merchantEmail, 	jdbcType=VARCHAR},
 			#{custManager, 	jdbcType=VARCHAR},
 			#{contactName, 	jdbcType=VARCHAR},
@@ -138,7 +142,9 @@
 			#{cnaps, 	jdbcType=VARCHAR},
 			#{compMainAcctType, 	jdbcType=VARCHAR},
 			#{bankProvinceName, 	jdbcType=VARCHAR},
-			#{bankCityName, 	jdbcType=VARCHAR}
+			#{bankCityName, 	jdbcType=VARCHAR},
+			#{referrer, 	jdbcType=VARCHAR},
+			#{serviceLevel, 	jdbcType=VARCHAR}
 		)
 	</insert>
 
@@ -884,7 +890,7 @@
 		C.city,
 		C.country,
 		C.filing_status,
-		C.filing_audit_status,
+		m.report_status filingAuditStatus,
 		DATE_FORMAT(C.CREATE_TIME,'%Y-%m-%d %H:%i:%s') createTime,
 		U.EMAIL,
 		U.MOBILE,
@@ -901,6 +907,8 @@
 		ON C.AUTH_ID = T.AUTH_ID
 		left JOIN SYS_USER S
 		ON S.USER_ID = T.CERTIFY_USER
+		LEFT JOIN td_merchant_detail_info m
+		on c.MERCHANT_CODE = m.merchant_code
 		<where>
 			C.MERCHANT_FLAG !='3' AND C.TRUST_CERTIFY_AUDIT_STATE in('01','30','34','35')
 			<if test="startCreateTime != null and '' != startCreateTime">
@@ -1710,11 +1718,12 @@
 		    M.area_name as areaName,
 		    P.PROVINCE_NAME provinceName,
 		    SP.PROVINCE_NAME bankProName,
-		    SC.CITY_NAME bankCitName
+		    SC.CITY_NAME bankCitName,
+		    T.CERTIFY_DATETIME auditTime
 		FROM TD_CUST_INFO C
 		INNER JOIN TD_LOGIN_USER_INFO U
 		ON C.CUST_ID=U.CUST_ID
-
+		
 		JOIN TD_CERTIFICATE_AUTH T
 		ON C.AUTH_ID = T.AUTH_ID
 		left JOIN SYS_USER S
@@ -1726,8 +1735,8 @@
 		left join tb_sp_city B ON B.city_id = C.city
         left join tb_bank_code Q ON Q.BANK_TYPE = C.COMP_ACCT_BANK
         left join tb_sp_area M ON M.area_id = C.country
-        left join tb_sp_province SP ON SP.PROVINCE_ID = C.bank_province_name
-        left join tb_sp_city SC ON SC.city_id = C.bank_city_name
+        left join tb_province SP ON SP.PROVINCE_ID = C.bank_province_name
+        left join tb_city SC ON SC.city_id = C.bank_city_name
 		WHERE c.CUST_ID = #{custId,jdbcType=VARCHAR}
 	</select>
 
@@ -1788,6 +1797,9 @@
 			</if>
 			<if test="businessTerm!=null">
 				BUSINESS_TERM=#{businessTerm,jdbcType=DATE},
+			</if>
+			<if test="businessTermStart!=null">
+				BUSINESS_TERM_START=#{businessTermStart,jdbcType=DATE},
 			</if>
 			<if test="businessTermEnd!=null">
 				BUSINESS_TERM_END=#{businessTermEnd,jdbcType=DATE},
@@ -1868,8 +1880,27 @@
 				filing_audit_status =  #{filingAuditStatus , jdbcType = VARCHAR},
 			</if>
             <if test="merchantState != null">
-                STATE =  #{merchantState , jdbcType = VARCHAR}
+                STATE =  #{merchantState , jdbcType = VARCHAR},
             </if>
+            <if test="custManager != null">
+                custManager =  #{custManager , jdbcType = VARCHAR},
+            </if>
+            <if test="bankProvinceName != null">
+                bank_province_name =  #{bankProvinceName , jdbcType = VARCHAR},
+            </if>
+            <if test="bankCityName != null">
+                bank_city_name =  #{bankCityName , jdbcType = VARCHAR},
+            </if>
+            <if test="shortName != null">
+                SHORT_NAME =  #{shortName , jdbcType = VARCHAR},
+            </if>
+            <if test="contactMobile != null">
+                contact_mobile =  #{contactMobile , jdbcType = VARCHAR},
+            </if>
+			<if test="contactName != null">
+                contact_name =  #{contactName , jdbcType = VARCHAR}
+            </if>
+           
 
 		
 		</set>
@@ -1976,10 +2007,10 @@
                 country = #{country,jdbcType=VARCHAR},
             </if>
             <if test="filingAuditStatus != null">
-                filing_audit_status =  #{filingAuditStatus , jdbcType = VARCHAR}
+                filing_audit_status =  #{filingAuditStatus , jdbcType = VARCHAR},
             </if>
             <if test="merchantState != null">
-                STATE =  #{merchantState , jdbcType = VARCHAR}
+                STATE =  #{merchantState , jdbcType = VARCHAR},
             </if>
             <if test="merchantEmail != null">
                 merchant_email =  #{merchantEmail , jdbcType = VARCHAR}
@@ -2372,5 +2403,130 @@
 			 </if>
 		</where>
 		ORDER BY C.CREATE_TIME    DESC	    		
+	</select>
+	
+	
+	<select id="getMerchantInfo" resultType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo" parameterType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo">
+		SELECT
+			C.*,
+			C.MERCHANT_MOBILE agentMobile,
+			IFNULL(U.EMAIL,U.MOBILE) EMAIL,
+			U.MOBILE,
+			F.FEE_CODE,
+            T.AUTH_RESULT_DESC aduitMessage,
+		    S.USER_NAME aduitUserName,
+		    Y.USER_NAME createName,
+		    P.PROVINCE_NAME,
+		    Q.BANK_NAME bankName,
+		    B.city_name,
+		    M.area_name as areaName,
+		    P.PROVINCE_NAME provinceName,
+		    SP.PROVINCE_NAME bankProName,
+		    SC.CITY_NAME bankCitName,
+		    d.rate agentRate,
+		    T.CERTIFY_DATETIME auditTime
+		FROM TD_CUST_INFO C
+		INNER JOIN TD_LOGIN_USER_INFO U
+		ON C.CUST_ID=U.CUST_ID
+		
+		JOIN TD_CERTIFICATE_AUTH T
+		ON C.AUTH_ID = T.AUTH_ID
+		left JOIN SYS_USER S
+		ON S.USER_ID = T.CERTIFY_USER
+		left JOIN SYS_USER Y
+		ON Y.USER_ID = C.CREATE_ID
+		left JOIN td_merchant_detail_info d
+		ON d.merchant_code = C.merchant_code
+		left join td_merchant_report r
+		on r.merchant_code = C.merchant_code
+		LEFT JOIN TD_CUST_FEE_RULE F ON C.CUST_ID=F.CUST_ID
+		left join tb_sp_province P ON P.PROVINCE_ID = C.province
+		left join tb_sp_city B ON B.city_id = C.city
+        left join tb_bank_code Q ON Q.BANK_TYPE = C.COMP_ACCT_BANK
+        left join tb_sp_area M ON M.area_id = C.country
+        left join tb_province SP ON SP.PROVINCE_ID = C.bank_province_name
+        left join tb_city SC ON SC.city_id = C.bank_city_name
+		<where>
+			1=1
+			<if test="merchantCode != null and merchantCode != '' ">
+			 	AND d.MERCHANT_CODE = #{merchantCode, jdbcType=VARCHAR} 
+			</if>
+			<if test="channelNo != null and channelNo != '' ">
+			 	AND r.CHANNEL_NO = #{channelNo, jdbcType=VARCHAR} 
+			</if>
+		</where>
+	</select>
+	
+	
+	
+	<insert id="saveCustBelongInfo" parameterType="com.qifenqian.bms.basemanager.merchant.bean.TdCustBelongInfo">
+	
+		INSERT INTO TD_CUST_BELONG_INFO(
+			MANAGER_ID,
+			SERVICE_PARENTER_ID,
+			SALESMAN_ID,
+			CUST_ID,
+			STATUS,
+			CREATE_TIME,
+			MODIFY_TIME
+		)VALUES(
+			#{managerId, jdbcType=INTEGER},
+			#{servicePartnerId, jdbcType=VARCHAR},
+			#{salesmanId, jdbcType=INTEGER},
+			#{custId, jdbcType=VARCHAR},
+			#{status, jdbcType=VARCHAR},
+			#{createTime, jdbcType=VARCHAR},
+			#{modiftyTime, jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<select id="findMerchantDetailInfo" parameterType="string" resultType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo">
+		select 
+		 t.patch_no,
+		 t.merchant_code,
+		 t.report_status,
+		 t.file_status,
+		 t.out_merchant_code,
+		 t.remark,
+		 t.prov_code,
+		 t.city_code,
+		 t.contry_code,
+		 t.bank_code,
+		 t.branch_bank_code,
+		 t.branch_bank_name,
+		 t.mobile_no,
+		 t.customer_Phone,
+		 t.qq,
+		 t.create_time,
+		 t.modify_time,
+		 t.power_id,
+		 t.app_id,
+		 t.loginNo,
+		 t.bestMerchantType,
+		 t.bestpayMctNo,
+		 t.result_msg,
+		 t.zfb_batch_no,
+		 t.zfb_batch_status,
+		 t.zfb_user_id,
+		 t.zfb_auth_app_id,
+		 t.zfb_app_auth_token,
+		 t.zfb_app_refresh_token,
+		 t.zfb_expires_in,
+		 t.zfb_re_expires_in,
+		 t.rate
+	from td_merchant_detail_info t
+	LEFT JOIN td_merchant_report r
+	on t.patch_no = r.patch_no
+	<where>
+		1=1
+		<if test="merchantCode != null and merchantCode !='' ">
+		 AND r.merchant_code = #{merchantCode,jdbcType=VARCHAR}
+		</if>
+		<if test="channlCode != null and channlCode !='' ">
+		 AND r.channel_no = #{channlCode,jdbcType=VARCHAR}
+		</if>
+	</where>
+	
+	
 	</select>
 </mapper>

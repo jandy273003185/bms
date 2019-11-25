@@ -26,11 +26,11 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.accounting.utils.DictionaryUtils;
-import com.qifenqian.bms.common.util.PropertiesUtil;
 import com.qifenqian.bms.expresspay.CommonService;
 import com.qifenqian.bms.platform.common.utils.SpringUtils;
 import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
@@ -64,6 +64,8 @@ public class BaseMessageService {
   @Autowired private BaseMessageMapper baseMessageMapper;
 
   @Autowired private CommonService commonService;
+  @Value("${AGRICULTURAL_BANK_SMS_PATH}")
+  private String AGRICULTURAL_BANK_SMS_PATH;
 
   /**
    * * 上传并保存数据
@@ -76,7 +78,6 @@ public class BaseMessageService {
   public JSONObject fileUpload(HttpServletRequest request, HttpServletResponse response)
       throws FileNotFoundException, IOException {
     JSONObject json = new JSONObject();
-    Properties perties = PropertiesUtil.getProperties();
     FileOutputStream out = null;
     InputStream in = null;
     String createDate = DateFormatUtils.format(new Date(), "yyyyMMdd");
@@ -112,8 +113,7 @@ public class BaseMessageService {
 
       String fileName = MESSAGE_FILENAME.replace("{yyyyMMddHHmmssSSS}", nowShortDatetime);
 
-      String filePath =
-          perties.getProperty("AGRICULTURAL_BANK_SMS_PATH") + File.separator + createDate;
+      String filePath =  AGRICULTURAL_BANK_SMS_PATH + File.separator + createDate;
 
       String filePathName = filePath + File.separator + fileName;
       String dictpath = request.getParameter("dictpath");

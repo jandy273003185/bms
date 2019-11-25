@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
-import java.util.Properties;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +19,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,7 +29,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.advertisement.bean.Ad;
 import com.qifenqian.bms.basemanager.advertisement.service.AdService;
 import com.qifenqian.bms.basemanager.bank.BankController;
-import com.qifenqian.bms.common.util.PropertiesUtil;
 
 @Controller
 @RequestMapping(AdPath.BASE)
@@ -39,6 +38,9 @@ public class AdController {
 	@Autowired
 	private AdService service;
 
+	@Value("${AD_FILE_SAVE_PATH}")
+	private String AD_FILE_SAVE_PATH;
+	
 	/**
 	 * 显示广告信息列表
 	 * 
@@ -168,12 +170,10 @@ public class AdController {
 					filename = System.currentTimeMillis() + filename;
 					in = item.getInputStream();
 
-					Properties pps = PropertiesUtil.getProperties();
+					
+					pathName = AD_FILE_SAVE_PATH + File.separator + filename;
 
-					String path=  pps.getProperty("AD_FILE_SAVE_PATH");
-					pathName = path + File.separator + filename;
-
-					File saveFile = new File(path);
+					File saveFile = new File(AD_FILE_SAVE_PATH);
 					if (!saveFile.exists()) {
 						saveFile.mkdirs();
 					}

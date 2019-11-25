@@ -20,6 +20,23 @@ public class BranchBankInfo implements Serializable {
 	/** 支行地址 */
 	private String bankAddress;
 	
+	private int areaCode;
+	
+	private int provinceId;
+	
+	
+	public int getProvinceId() {
+		return provinceId;
+	}
+	public void setProvinceId(int provinceId) {
+		this.provinceId = provinceId;
+	}
+	public int getAreaCode() {
+		return areaCode;
+	}
+	public void setAreaCode(int areaCode) {
+		this.areaCode = areaCode;
+	}
 	public String getBranchBankCode() {
 		return branchBankCode;
 	}

@@ -31,6 +31,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,7 +43,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.bean.OrderInfoBean;
 import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
 import com.qifenqian.bms.basemanager.utils.DatetimeUtils;
-import com.qifenqian.bms.common.util.PropertiesUtil;
 import com.qifenqian.bms.paymentmanager.PaymentManagerController;
 import com.qifenqian.bms.paymentmanager.bean.AcctSevenBussAgentpay;
 import com.qifenqian.bms.paymentmanager.bean.TdAgentPaymentChildRecord;
@@ -100,6 +100,9 @@ public class PaymentService {
 
   @Autowired private IB2eApiService iB2eService;
   @Autowired private SevenpayCoreServiceInterface coreServiceInterface;
+  
+  @Value("${EXCEL_FILE_SAVE_PATH}")
+  private String EXCEL_FILE_SAVE_PATH;
 
   /** 文件上传 * */
   public Map<String, String> tinyMerchantFileUpload(HttpServletRequest request, String batchNo) {
@@ -111,7 +114,6 @@ public class PaymentService {
       upload.setHeaderEncoding("UTF-8"); // 解决上传文件名的中文乱码
       List<FileItem> list = upload.parseRequest(request);
       InputStream inputStream = null;
-      Properties properties = PropertiesUtil.getProperties();
       for (FileItem item : list) {
         String filename = null; //
         if (!item.isFormField()) { // 是否是表单项
@@ -136,7 +138,7 @@ public class PaymentService {
             return result;
           }
           inputStream = item.getInputStream();
-          String fileUploadPath = properties.getProperty("d:/data/payment"); // 服务器上传路径
+          String fileUploadPath = EXCEL_FILE_SAVE_PATH; //properties.getProperty("d:/data/payment"); // 服务器上传路径
           /** 根据文件名生成路径规则 * */
           filename = new SimpleDateFormat("yyyy-MM-dd") + batchNo + type;
           fileUploadPath = fileUploadPath + File.separator + batchNo;
@@ -201,9 +203,8 @@ public class PaymentService {
       return result;
     }
     // 绝对路径
-    Properties properties = PropertiesUtil.getProperties();
     try {
-      String fileUploadPath = properties.getProperty("EXCEL_FILE_SAVE_PATH"); // 服务器上传路径
+      String fileUploadPath = EXCEL_FILE_SAVE_PATH ;// properties.getProperty("EXCEL_FILE_SAVE_PATH"); // 服务器上传路径
       File file = new File(fileUploadPath);
 
       if (!file.exists()) {

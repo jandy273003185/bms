@@ -801,6 +801,16 @@ public class Youtu {
 		return respose;
 	}
 	
+	public JSONObject creditCard(String image_path, String app_id, String session_id)
+			throws IOException, JSONException, KeyManagementException, NoSuchAlgorithmException {
+		JSONObject data = new JSONObject();
+		data.put("image", image_path);
+		data.put("app_id", app_id);
+		data.put("session_id", session_id);
+		JSONObject respose = m_not_use_https ? SendHttpRequest(data, "ocrapi/creditcardocr")
+				: SendHttpsRequest(data, "ocrapi/creditcardocr");
+		return respose;
+	}
 
-
+	
 }

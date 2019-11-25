@@ -135,9 +135,18 @@
 		FROM
 			td_merchant_report t1
 		INNER JOIN td_merchant_detail_info t2 ON t1.patch_no = t2.patch_no
-		WHERE
-			t1.merchant_code = #{merchantCode,jdbcType = VARCHAR} AND t1.channel_no = #{channelNo,jdbcType = VARCHAR}
+		<where>
+			1=1
+			<if test="merchantCode != null and merchantCode != '' ">
+			AND t1.merchant_code = #{merchantCode,jdbcType = VARCHAR} 
+			</if>
+			<if test="channelNo != null and channelNo != '' ">
+			AND t1.channel_no = #{channelNo,jdbcType = VARCHAR}
+			</if>
+			<if test="patchNo != null and patchNo != '' ">
 			AND t1.patch_no = #{patchNo,jdbcType = VARCHAR}
+			</if>
+		</where>
 	</select>
 	
 	<select id="selInComeInfo" parameterType="String"  resultType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo">
@@ -198,7 +207,16 @@
 			`category`,
 			`loginNo`,
 			`bestMerchantType`,
-			`bestpayMctNo`
+			`bestpayMctNo`,
+			`rate`,
+			`zfb_batch_no`,
+  			`zfb_batch_status`,
+	  		`zfb_user_id`,
+	  		`zfb_auth_app_id`,
+	  		`zfb_app_auth_token`,
+	  		`zfb_app_refresh_token`,
+	  		`zfb_expires_in`,
+	  		`zfb_re_expires_in`
 		)
 		VALUES
 			(
@@ -224,7 +242,16 @@
 				#{category,jdbcType = VARCHAR},
 				#{loginNo,jdbcType = VARCHAR},
 				#{bestMerchantType,jdbcType = VARCHAR},
-				#{bestpayMctNo,jdbcType = VARCHAR}
+				#{bestpayMctNo,jdbcType = VARCHAR},
+				#{rate,jdbcType = VARCHAR},
+				#{zfbBatchNo,jdbcType = VARCHAR},
+				#{zfbBatchStatus,jdbcType = VARCHAR},
+				#{zfbUserId,jdbcType = VARCHAR},
+				#{zfbAuthAppId,jdbcType = VARCHAR},
+				#{zfbAppAuthToken,jdbcType = VARCHAR},
+				#{zfbAppRefreshToken,jdbcType = VARCHAR},
+				#{zfbExpiresIn,jdbcType = VARCHAR},
+				#{zfbReExpiresIn,jdbcType = VARCHAR}
 			)
 	</insert>
 	
@@ -263,6 +290,31 @@
 		 	</if>
 		 	<if test="resultMsg != null and resultMsg !='' ">
 		 	`result_msg` = #{resultMsg,jdbcType = VARCHAR},
+		 	</if>
+		 	
+		 	<if test="zfbBatchNo != null and zfbBatchNo !='' ">
+		 	`zfb_batch_no` = #{zfbBatchNo,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="zfbBatchStatus != null and zfbBatchStatus !='' ">
+		 	`zfb_batch_status` = #{zfbBatchStatus,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="zfbUserId != null and zfbUserId !='' ">
+		 	`zfb_user_id` = #{zfbUserId,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="zfbAuthAppId != null and zfbAuthAppId !='' ">
+		 	`zfb_auth_app_id` = #{zfbAuthAppId,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="zfbAppAuthToken != null and zfbAppAuthToken !='' ">
+		 	`zfb_app_auth_token` = #{zfbAppAuthToken,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="zfbAppRefreshToken != null and zfbAppRefreshToken !='' ">
+		 	`zfb_app_refresh_token` = #{zfbAppRefreshToken,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="zfbExpiresIn != null and zfbExpiresIn !='' ">
+		 	`zfb_expires_in` = #{zfbExpiresIn,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="zfbReExpiresIn != null and zfbReExpiresIn !='' ">
+		 	`zfb_re_expires_in` = #{zfbReExpiresIn,jdbcType = VARCHAR},
 		 	</if>
 			 `modify_time` = now()
 		 WHERE

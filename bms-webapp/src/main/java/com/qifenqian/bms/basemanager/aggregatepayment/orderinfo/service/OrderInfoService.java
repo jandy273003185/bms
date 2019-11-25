@@ -11,7 +11,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,6 +18,7 @@ import org.apache.poi.ss.formula.functions.T;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
@@ -34,7 +34,6 @@ import com.qifenqian.bms.basemanager.aggregatepayment.orderinfo.dao.OrderRefundD
 import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
 import com.qifenqian.bms.basemanager.custInfo.service.TdCustInfoService;
 import com.qifenqian.bms.basemanager.utils.GenSN;
-import com.qifenqian.bms.common.util.PropertiesUtil;
 import com.qifenqian.bms.platform.web.page.Page;
 import com.sevenpay.invoke.SevenpayCoreServiceInterface;
 import com.sevenpay.invoke.common.message.request.RequestMessage;
@@ -62,6 +61,9 @@ public class OrderInfoService {
 
 	@Autowired
 	private OrderRefundService OrderRefundService;
+	
+	@Value("${EXPORT_EXCEL}")
+	private String EXPORT_EXCEL;
 
 	/** 查询所有交易 */
 	public List<OrderInfoBean> getOrderInfoList(OrderInfoQueryBean queryBean) {
@@ -85,8 +87,7 @@ public class OrderInfoService {
 
 		try {
 
-			Properties p = PropertiesUtil.getProperties();
-			String exportPath = p.getProperty("EXPORT_EXCEL");
+			String exportPath =EXPORT_EXCEL;
 			File saveFile = new File(exportPath);
 			if (!saveFile.exists()) {
 				saveFile.mkdirs();

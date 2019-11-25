@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.qifenqian.bms.basemanager.merchant.bean.*;
+import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
+
 import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.annotation.MapperScan;
 
@@ -184,4 +186,10 @@ public interface MerchantMapper {
 	void updateMerchantEnter(MerchantVo merchantVo);
 
 	String findAreaNameByAreaId(String areaId);
+
+	public MerchantVo getMerchantInfo(TdMerchantDetailInfo detailInfo);
+
+	void saveCustBelongInfo(TdCustBelongInfo tdCustBelongInfo);
+
+	public TdMerchantDetailInfo findMerchantDetailInfo(@Param("merchantCode") String merchantCode, @Param("channlCode") String channlCode);
 }

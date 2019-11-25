@@ -16,9 +16,10 @@
 		SELECT
 			T.BANK_CNAPS branchBankCode,
 			T.BANK_CODE,
-			T.AREA_ID cityCode,
+			T.AREA_ID areaCode,
 			T.BANK_NAME,
-			T.BANK_ADDRESS
+			T.BANK_ADDRESS,
+			A.CITY_ID
 		FROM
 			TB_BANK_INFO T
 		LEFT JOIN tb_area_info a ON t.AREA_ID = a.AREA_ID
@@ -27,8 +28,14 @@
 			<if test="bankCode!=null and bankCode!='' ">
 				AND T.BANK_CODE = #{bankCode, jdbcType = VARCHAR}
 			</if>
-			<if test="cityCode!=null and cityCode!='' ">
-				AND a.AREA_ID = #{cityCode, jdbcType = VARCHAR}
+			<if test="areaCode!=null and areaCode!='' ">
+				AND a.AREA_ID = #{areaCode, jdbcType = VARCHAR}
+			</if>
+			<if test="cityCode!=null and cityCode!='' and cityCode !=-1">
+				AND a.CITY_ID = #{cityCode, jdbcType = VARCHAR}
+			</if>
+			<if test="provinceId!=null and provinceId!='' ">
+				AND a.PROVINCE_ID = #{provinceId, jdbcType = VARCHAR}
 			</if>
 		</where>
 		ORDER BY T.BANK_CODE
@@ -72,7 +79,61 @@
 			<if test="cityCode!=null and cityCode!='' ">
 				AND z.bank_city_code = #{cityCode, jdbcType = VARCHAR}
 			</if>
+			<if test="provinceId!=null and provinceId!='' ">
+				AND z.bank_province_code = #{provinceId, jdbcType = VARCHAR}
+			</if>
 		</where>
 		ORDER BY z.brnach_bank_id
+	</select>
+	
+	<select id="ListAliPayIndustry" resultType="com.qifenqian.bms.merchant.reported.bean.CommonIndustry">
+		SELECT
+			<if test="parentLevel == 'levelOne' or parentLevel == null">
+				distinct t.level_one
+			</if>
+			<if test="parentLevel == 'levelTwo'">
+				distinct t.level_two
+			</if>
+			<if test="parentLevel == 'levelThree'">
+				t.level_three,
+				t.special_certificate,
+				t.level_code
+			</if>
+		FROM
+		td_alipay_mcc_info t
+		<where>
+			<if test="parentLevel == 'levelTwo'">
+				t.level_one = #{parentText, jdbcType=VARCHAR}
+			</if>
+			<if test="parentLevel == 'levelThree'">
+				t.level_two = #{parentText, jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	
+	
+	<select id="selWxChatAppCity" parameterType="String" resultType="com.qifenqian.bms.basemanager.city.bean.City">
+		SELECT  DISTINCT
+			PROVINCE_NAME,
+				CITY_NAME
+		FROM 
+			WX_AREA_INFO
+		WHERE 
+			PROVINCE_NAME = #{provinceId,jdbcType = VARCHAR}
+			and CITY_NAME != '';
+	</select>
+	
+	<select id="getWxAreaByCityId" parameterType="string" resultType="com.qifenqian.bms.basemanager.city.bean.City">
+		SELECT 
+			A.AREA_ID,
+			A.AREA_NAME 
+		FROM 
+			wx_area_info A 
+		<where>
+			1=1
+			<if test="cityName != null and cityName != ''">
+			AND  A.city_name = #{cityName,jdbcType = VARCHAR} 
+			</if>
+		</where>
 	</select>
 </mapper>

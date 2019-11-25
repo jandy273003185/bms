@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,17 +12,15 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
-import com.qifenqian.bms.basemanager.merchant.service.MerchantService;
 import com.qifenqian.bms.basemanager.utils.GenSN;
-import com.qifenqian.bms.common.util.PropertiesUtil;
 import com.qifenqian.bms.merchant.reported.bean.Bank;
 import com.qifenqian.bms.merchant.reported.bean.ChannlInfo;
 import com.qifenqian.bms.merchant.reported.bean.City;
@@ -34,12 +31,9 @@ import com.qifenqian.bms.merchant.reported.bean.Province;
 import com.qifenqian.bms.merchant.reported.bean.SuiXingBean;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
 import com.qifenqian.bms.merchant.reported.dao.FmIncomeMapperDao;
-import com.qifenqian.bms.merchant.reported.mapper.FmIncomeMapper;
 import com.qifenqian.bms.merchant.reported.service.CrIncomeService;
 import com.qifenqian.bms.merchant.reported.service.FmIncomeService;
 import com.seven.micropay.base.domain.ChannelResult;
-import com.seven.micropay.channel.domain.merchant.suixinpayInfo.SxPayBankInfo;
-import com.seven.micropay.channel.domain.merchant.suixinpayInfo.SxPayRequestInfo;
 import com.seven.micropay.channel.domain.merchant.suixinpayInfo.SxPayUploadFileInfo;
 import com.seven.micropay.channel.enums.ChannelMerRegist;
 import com.seven.micropay.channel.enums.suixinpay.SuixinBankType;
@@ -59,16 +53,13 @@ public class SuiXingPayMerchantReportsController {
    private CrIncomeService crIncomeService;
    
    @Autowired
-   private MerchantService merchantService;
-   
-   @Autowired
    private FmIncomeMapperDao fmIncomeMapperDao;
    
    @Autowired
    private IMerChantIntoService iMerChantIntoService;
 
-   @Autowired
-   private FmIncomeMapper fmIncomeMapper;
+   @Value("${SX_FILE_SAVE_PATH}")
+   private String SX_FILE_SAVE_PATH;
 	
 	
    /**
@@ -193,17 +184,12 @@ public class SuiXingPayMerchantReportsController {
 		detail.setPatchNo(patchNo);
 		TdMerchantDetailInfo detailInfo = fmIncomeMapperDao.selMerchantDetailInfo(detail);
 		//不为空即资料已提交
-		if(null != detailInfo && "".equals(detailInfo)) {
-			if(StringUtils.isNotBlank(detailInfo.getRemark())){
+		if(null != detailInfo) {
+			if(StringUtils.isNotBlank(detailInfo.getRemark()) && StringUtils.isNotBlank(detailInfo.getOutMerchantCode())){
 				cr.setTaskCode(detailInfo.getRemark());
 			}
 		}
 		
-		/*TdCustInfo custInfo = new TdCustInfo();
-		
-		if(null != cr.getMerchantCode()){
-			custInfo = fmIncomeMapperDao.getInComeInfo(cr.getMerchantCode());
-		}*/
 		try {
 			//文件更名压缩并上传服务器
 			logger.info("文件更名压缩并上传服务器" +  "------------------------------");
@@ -211,7 +197,6 @@ public class SuiXingPayMerchantReportsController {
 			if("SUCCESS".equals(fileResult.get("result"))){
 				
 				//文件上传至随行付
-				Properties p = PropertiesUtil.getProperties();
 //				File zipFile = new File(cr.getMerchantCode() +".zip") ;	// 定义压缩文件名称
 				
 //				String path =p.getProperty("SX_FILE_SAVE_PATH") + File.separator  + File.separator  +zipFile;
@@ -219,7 +204,7 @@ public class SuiXingPayMerchantReportsController {
 				//本地path
 //				String path = "D:"+  File.separator +  p.getProperty("SX_FILE_SAVE_PATH") + File.separator + fileResult.get("filePath") + File.separator + cr.getMerchantCode() +".zip";
 				//服务器地址
-				String path = p.getProperty("SX_FILE_SAVE_PATH") + File.separator + cr.getMerchantCode() +".zip";
+				String path = SX_FILE_SAVE_PATH + File.separator + cr.getMerchantCode() +".zip";
 				logger.info("+++++++++++" + path + "------------------------------");
 				
 				SxPayUploadFileInfo uploadFileInfo = new SxPayUploadFileInfo();
@@ -228,7 +213,7 @@ public class SuiXingPayMerchantReportsController {
 				uploadFileInfo.setFilePath(path);
 				Map<String, Object> req = new HashMap<>();
 				ChannelResult result = new ChannelResult();
-				if("" != cr.getTaskCode() && null != cr.getTaskCode()){
+				if(null != cr.getTaskCode()){
 					uploadFileInfo.setTaskCode(cr.getTaskCode());
 					req.put("merList", uploadFileInfo);
 					req.put("channelType", ChannelMerRegist.SUIXING_PAY);
@@ -303,7 +288,7 @@ public class SuiXingPayMerchantReportsController {
 			cc.setChannelNo(cr.getChannelNo());
 			TdMerchantDetailInfo td = fmIncomeService.getTdMerchantReport(cc);
 			//该商户已报备
-			if(td!=null){
+			if(null!= td){
 				//该商户已报备成功
 				if("Y".equals(td.getReportStatus())||"O".equals(td.getReportStatus())){
 				object.put("result", "FAILURE");
@@ -332,60 +317,29 @@ public class SuiXingPayMerchantReportsController {
 				info.setBranchBankName(cr.getInterBankName());
 				info.setMobileNo(cr.getMobileNo());
 				info.setRemark(cr.getTaskCode());
+				info.setRate(cr.getRate());
 				fmIncomeService.insertTdMerchantReport(info);
 				info.setReportStatus("99");
 				fmIncomeService.inserTdMerchantDetailInfo(info);
 			}
 			
-			//随行付查询银行信息
-			/*
-			 * SxPayBankInfo bankInfo = new SxPayBankInfo();
-			 * bankInfo.setBnkCd(SuixinBankType.valueOf(cr.getSuiXinBank()).getCode());
-			 * bankInfo.setLbnkProv(cr.getBankProvince());
-			 * bankInfo.setLbnkCity(cr.getBankCity());
-			 * bankInfo.setLbnkNm(cr.getInterBankName());
-			 * 
-			 * SxPayRequestInfo requestInfo = new SxPayRequestInfo();
-			 * requestInfo.setReqId(DateUtil.format(new Date(), DateUtil.YYYYMMDDHHMMSS));
-			 * requestInfo.setReqData(bankInfo);
-			 * requestInfo.setTimestamp(DateUtil.format(new Date(),
-			 * DateUtil.YYYYMMDDHHMMSS));
-			 * 
-			 * Map<String, Object> req = new HashMap<>(); req.put("merList", requestInfo);
-			 * req.put("channelType", ChannelMerRegist.SUIXING_PAY);
-			 */
-			// 获取联行号
-//			ChannelResult result = iMerChantIntoService.queryBankInfo(req);
-			
-//			if("00".equals(result.getChannelCode())){
-//				List list = (List) result.getData().get("bankList");
-//				if(list.size() != 0){
-//					JSONObject a = (JSONObject) list.get(0);
-//					String lbankNo = (String) a.get("lbnkNo");
-					cr.setLbnkNo(cr.getInterBankName());
-					//商户随行付进件
-					logger.info("商户随行付开始进件："+ "--------------------");
-					bestResult = fmIncomeService.suiXingReported(cr);
-					if("SUCCESS".equals(bestResult.get("result"))){
-						object.put("result", "SUCCESS");
-						object.put("message", "报备成功");
-					}else{
-						object.put("result", "FAILURE");
-						if(bestResult.get("message") == "" && bestResult.get("message") == null){
-							object.put("message", "随行付进件明确失败");
-							return object.toString();
-						}else {
-							object.put("message", bestResult.get("message"));
-							return object.toString();
-						}
-					}
-			/*
-			 * }else{ object.put("result", "FAILURE"); object.put("message","支行信息错误");
-			 * return object.toString(); } }else{ object.put("result", "FAILURE"); if("" ==
-			 * result.getReMsg() && null == result.getReMsg()){ object.put("message",
-			 * "查询银行信息失败"); }else{ object.put("message", result.getReMsg()); } return
-			 * object.toString(); }
-			 */
+			cr.setLbnkNo(cr.getInterBankName());
+			//商户随行付进件
+			logger.info("商户随行付开始进件："+ "--------------------");
+			bestResult = fmIncomeService.suiXingReported(cr);
+			if("SUCCESS".equals(bestResult.get("result"))){
+				object.put("result", "SUCCESS");
+				object.put("message", "报备成功");
+			}else{
+				object.put("result", "FAILURE");
+				if(bestResult.get("message") == "" && bestResult.get("message") == null){
+					object.put("message", "随行付进件明确失败");
+					return object.toString();
+				}else {
+					object.put("message", bestResult.get("message"));
+					return object.toString();
+				}
+			}
 			
 		} catch (Exception e) {
 			logger.error("随行付进件失败",e);

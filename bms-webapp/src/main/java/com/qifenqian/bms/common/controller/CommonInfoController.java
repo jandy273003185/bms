@@ -1,6 +1,10 @@
 package com.qifenqian.bms.common.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +20,7 @@ import com.qifenqian.bms.basemanager.city.bean.City;
 import com.qifenqian.bms.basemanager.city.bean.ProvinceBean;
 import com.qifenqian.bms.basemanager.city.service.CityService;
 import com.qifenqian.bms.common.bean.BranchBankInfo;
+import com.qifenqian.bms.merchant.reported.bean.CommonIndustry;
 import com.qifenqian.bms.merchant.reported.bean.Province;
 
 
@@ -71,11 +76,17 @@ public class CommonInfoController {
 	 */
 	@RequestMapping(value = "/getCityInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public List<City> getCityInfo(ProvinceBean provinceBean,String channelCode) {
-		
-		List<City> cityList = commonInfoService.getCityByProvinceId(provinceBean.getProvinceId(),channelCode);
-		
-		return cityList;
+	public String getCityInfo(String provinceId,String channelCode) {
+		JSONObject object = new JSONObject();
+		List<City> cityList = commonInfoService.getCityByProvinceId(provinceId,channelCode);
+		if(null!=cityList &&cityList.size()>0){
+			object.put("result", "SUCCESS");
+			object.put("cityList", cityList);
+		}else{
+			object.put("result", "FAIL");
+			object.put("message", "查询城市失败");
+		}
+		return object.toString();
 		
 	}
 	
@@ -86,12 +97,18 @@ public class CommonInfoController {
 	 */
 	@RequestMapping(value = "/getAreaInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public List<City> getAreaInfo(City cityBean,String channelCode) {
+	public String getAreaInfo(City cityBean,String channelCode) {
+		JSONObject object = new JSONObject();
 		
-		String cityId = Integer.toString(cityBean.getCityId());
-		List<City> areaList = commonInfoService.getAreaByCityId(cityId,channelCode);
-		
-		return areaList;
+		List<City> areaList = commonInfoService.getAreaByCityId(cityBean,channelCode);
+		if(null!=areaList &&areaList.size()>0){
+			object.put("result", "SUCCESS");
+			object.put("areaList", areaList);
+		}else{
+			object.put("result", "FAIL");
+			object.put("message", "查询县区失败");
+		}
+		return object.toString();
 		
 	}
 	
@@ -114,6 +131,39 @@ public class CommonInfoController {
 			object.put("message", "银行编号为空");
 		}
 		return object.toString();
+		
+	}
+	
+	/**
+	 * 根据渠道查询行业类目信息
+	 * @param channelCode 渠道号
+	 * @param parentLevel 查询层级  levelOne 一级  levelTwo 二级  levelThree 三级
+	 * @param parentText 上一级名称或编码 
+	 * @return
+	 */
+	@RequestMapping(value = "/getIndustrieInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> getIndustrieInfo(String channelCode, String parentLevel, String parentText) {
+		Map<String, Object> result = new HashMap<>();
+		if (StringUtils.isBlank(channelCode)) {
+			result.put("result", "FAIL");
+			result.put("message", "渠道号不能为空！");
+			return result;
+		}
+		if (StringUtils.isBlank(parentLevel)) {
+			result.put("result", "FAIL");
+			result.put("message", "经营类目层级不能为空！");
+			return result;
+		}
+		if (!"levelOne".equals(parentLevel) && StringUtils.isBlank(parentText)) {
+			result.put("result", "FAIL");
+			result.put("message", "查询非一级类目上级名称或编码不能为空！");
+			return result;
+		}
+		List<CommonIndustry>  commonIndustries = commonInfoService.selectCommonIndustrys(channelCode, parentLevel, parentText);
+		result.put("result", "SUCCESS");
+		result.put("data", commonIndustries);
+		return result;
 		
 	}
 	

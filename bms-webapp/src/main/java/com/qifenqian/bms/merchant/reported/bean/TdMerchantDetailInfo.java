@@ -73,8 +73,98 @@ public class TdMerchantDetailInfo implements Serializable{
 
 	private String endModifyTime;
 	
+	private String rate;
+	
+	private String zfbBatchNo;
+	
+	private String zfbBatchStatus;
+	
+	private String zfbUserId;
+	
+	private String zfbAuthAppId;
+	
+	private String zfbAppAuthToken;
+	
+	private String zfbAppRefreshToken;
+	
+	private String zfbExpiresIn;
+	
+	private String zfbReExpiresIn;
 	
 	
+	public String getRate() {
+		return rate;
+	}
+
+	public void setRate(String rate) {
+		this.rate = rate;
+	}
+	
+	public String getZfbBatchNo() {
+		return zfbBatchNo;
+	}
+
+	public void setZfbBatchNo(String zfbBatchNo) {
+		this.zfbBatchNo = zfbBatchNo;
+	}
+
+	public String getZfbBatchStatus() {
+		return zfbBatchStatus;
+	}
+
+	public void setZfbBatchStatus(String zfbBatchStatus) {
+		this.zfbBatchStatus = zfbBatchStatus;
+	}
+
+	public String getZfbUserId() {
+		return zfbUserId;
+	}
+
+	public void setZfbUserId(String zfbUserId) {
+		this.zfbUserId = zfbUserId;
+	}
+
+	public String getZfbAuthAppId() {
+		return zfbAuthAppId;
+	}
+
+	public void setZfbAuthAppId(String zfbAuthAppId) {
+		this.zfbAuthAppId = zfbAuthAppId;
+	}
+
+	public String getZfbAppAuthToken() {
+		return zfbAppAuthToken;
+	}
+
+	public void setZfbAppAuthToken(String zfbAppAuthToken) {
+		this.zfbAppAuthToken = zfbAppAuthToken;
+	}
+
+	public String getZfbAppRefreshToken() {
+		return zfbAppRefreshToken;
+	}
+
+	public void setZfbAppRefreshToken(String zfbAppRefreshToken) {
+		this.zfbAppRefreshToken = zfbAppRefreshToken;
+	}
+
+	public String getZfbExpiresIn() {
+		return zfbExpiresIn;
+	}
+
+	public void setZfbExpiresIn(String zfbExpiresIn) {
+		this.zfbExpiresIn = zfbExpiresIn;
+	}
+
+	public String getZfbReExpiresIn() {
+		return zfbReExpiresIn;
+	}
+
+	public void setZfbReExpiresIn(String zfbReExpiresIn) {
+		this.zfbReExpiresIn = zfbReExpiresIn;
+	}
+	
+
 	public String getStartModifyTime() {
 		return startModifyTime;
 	}
