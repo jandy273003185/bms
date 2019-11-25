@@ -31,7 +31,7 @@ public class FileController {
 			try {
 				String fileName = file.getOriginalFilename();
 				String suffixName = fileName.substring(fileName.lastIndexOf("."));
-				File localFile = new File(PRE_PATH + GenSN.getSysTime() + UUID.randomUUID().toString() + suffixName);
+				File localFile = new File(PRE_PATH + GenSN.getSysTime() + GenSN.getSN() + suffixName);
 				file.transferTo(localFile);
 				return new FileInfo(localFile.getAbsolutePath());
 			} catch (IllegalStateException | IOException e) {
