@@ -1,6 +1,8 @@
 package com.qifenqian.bms.merchant.reported.service;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,8 @@ import com.qifenqian.jellyfish.merRegistApi.IAlipayAgentMerRegistService;
 @Service
 public class AliPayIncomeService {
 	
+	private static final Logger logger = LoggerFactory.getLogger(AliPayIncomeService.class);
+	
 	@Reference 
 	private IAlipayAgentMerRegistService iAgentMerRegistService;
 	
@@ -30,6 +34,7 @@ public class AliPayIncomeService {
 	
 	public Object aliPayReported(AliPayCoBean aliPayCoBean) throws Exception {
 		//添加商户报备详情表（td_merchant_detail_info）和商户报备表（td_merchant_report）
+		logger.info("支付宝商户报备start.");
 		TdMerchantDetailInfo info = new TdMerchantDetailInfo();
 		info.setId(GenSN.getSN());
 		//报备批次号
@@ -42,8 +47,10 @@ public class AliPayIncomeService {
 		//info.setBankCode("5551458");
 		//info.setBranchBankName("华夏银行");
 		//info.setMobileNo("15666666666");
+		logger.debug("插入td_merchant_report表数据：{}", JSONObject.toJSONString(info));
 		fmIncomeService.insertTdMerchantReport(info);
 		info.setReportStatus("99");
+		logger.debug("插入td_merchant_detail_info表数据：{}", JSONObject.toJSONString(info));
 		fmIncomeService.inserTdMerchantDetailInfo(info);
 		
 		//调用支付宝渠道
@@ -56,8 +63,9 @@ public class AliPayIncomeService {
 		contactInfo.setContactMobile(aliPayCoBean.getContactMobile());
 		contactInfo.setContactName(aliPayCoBean.getContactName());
 		aliReqBean.setContactInfo(contactInfo);
+		logger.debug("开启支付宝报备事务：{}", JSONObject.toJSONString(aliReqBean));
 		AlipayOpenAgentCreateRes res = alipayOpenAgentCreate(aliReqBean);
-		System.out.println("开启报备："+JSONObject.toJSONString(res));
+		logger.debug("支付宝报备事务返回值：{}", JSONObject.toJSONString(res));
 		//返回批次号和状态
 		info.setZfbBatchNo(res.getBatchNo());
 		info.setZfbBatchStatus(res.getBatchStatus());
@@ -84,9 +92,9 @@ public class AliPayIncomeService {
 		}
 		
 		//营业执照是否长期有效
-		//aliSignReqBean.setLongTerm(false);
+		aliSignReqBean.setLongTerm("2099-12-31".equals(aliPayCoBean.getBusinessTerm()));
 		//营业期限
-		if (StringUtils.isNotBlank(aliPayCoBean.getBusinessTerm())) {
+		if (StringUtils.isNotBlank(aliPayCoBean.getBusinessTerm()) && !aliSignReqBean.getLongTerm()) {
 			aliSignReqBean.setDateLimitation(aliPayCoBean.getBusinessTerm());
 		}
 		if (StringUtils.isNotBlank(aliPayCoBean.getShopInteriorPath())) {
@@ -96,14 +104,16 @@ public class AliPayIncomeService {
 		
 		//店铺门头照
 		aliSignReqBean.setShopSignBoardPic(aliPayCoBean.getDoorPhotoPath());
+		logger.debug("支付宝商户签约：{}", JSONObject.toJSONString(aliSignReqBean));
 		AlipayOpenAgentFacetofaceSignRes signRes = alipayOpenAgentFacetofaceSign(aliSignReqBean);
-		System.out.println("签约："+JSONObject.toJSONString(signRes));
+		logger.debug("支付宝商户签约返回值：{}", JSONObject.toJSONString(signRes));
 		
 		//提交事务
 		AlipayOpenAgentConfirmReq aliConfirmReqBean = new AlipayOpenAgentConfirmReq();
 		aliConfirmReqBean.setBatchNo(res.getBatchNo());
+		logger.debug("支付宝商户签约提交：{}", JSONObject.toJSONString(aliConfirmReqBean));
 		AlipayOpenAgentConfirmRes confirmRes = alipayOpenAgentConfirm(aliConfirmReqBean);
-		System.out.println("提交事务："+JSONObject.toJSONString(confirmRes));
+		logger.debug("支付宝商户签约提交返回值：{}", JSONObject.toJSONString(confirmRes));
 		if (!"10000".equals(confirmRes.getCode())) {
 			throw new Exception();
 		}
@@ -116,7 +126,9 @@ public class AliPayIncomeService {
 		info.setZfbAppRefreshToken(confirmRes.getAppRefreshToken());
 		info.setZfbExpiresIn(confirmRes.getExpiresIn());
 		info.setZfbReExpiresIn(confirmRes.getReExpiresIn());
+		logger.debug("更新td_merchant_report和td_merchant_detail_info表数据：{}", JSONObject.toJSONString(info));
 		fmIncomeService.UpdateMerReportAndMerDetailInfo(info, "00");
+		logger.info("支付宝商户报备end.");
 		return confirmRes;
 	}
 	

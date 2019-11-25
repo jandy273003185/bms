@@ -145,8 +145,8 @@
 		                                    <option value="">--请选择二级经营类目--</option>
 		                                </select>
 		                               	<label id="levelTwoLabel" class="label-tips"></label>
-		                               	<input type="hidden" id="specialCertificate" name="specialCertificate" />
-		                                <select name="levelThree" id="levelThree" class="width-80" onchange="javascript:document.getElementById('specialCertificate').value = this.value;" >
+		                               	<!-- <input type="hidden" id="specialCertificate" name="specialCertificate" /> -->
+		                                <select name="levelThree" id="levelThree" class="width-80" onchange="javascript:document.getElementById('specialCertificate').innerHTML = this.options[this.options.selectedIndex].getAttribute('data-special');" >
 		                                    <option value="">--请选择三级经营类目--</option>
 		                                </select>
 										<label id="levelThreeLabel" class="label-tips"></label>
@@ -161,7 +161,10 @@
 	                                <td class="td-left">营业执照有效期：<span style="color:red;">(必填)</span></td>
 									<td class="td-right">
 										<input type="text" name="businessEffectiveTerm" id="businessEffectiveTerm" value="${custInfo.businessTermStart }" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> ——
-	                                    <input type="text" name="businessTerm" id="businessTerm" value="${custInfo.businessTermEnd }" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
+	                                    <input type="text" name="businessTerm" id="businessTerm" 
+	                                    <c:if test="${custInfo.businessTermEnd == '长期' }">value="2099-12-31"</c:if>
+	                                    <c:if test="${custInfo.businessTermEnd != '长期' }">value="${custInfo.businessTermEnd}"</c:if>
+	                                      onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
 	                                    <input type="button" onclick="businessForever()" value="长期" />
 									</td>
 								</tr>
@@ -197,7 +200,10 @@
 								</td>
 							</tr>
                             <tr id="qualificationType" style = "display:">
-								<td class="td-left">特殊行业资质照：<span >(可选)</span></td>
+								<td class="td-left">
+								特殊行业资质照：<span >(特殊可选)</span>
+								<p id="specialCertificate" style="font-size: 10px;color: red"></p>
+								</td>
 								<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success qualificationClick"  data-target="#previewImageModal"  >
 										<label id="qualificationDiv"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
@@ -577,6 +583,14 @@
 			  		  	alert("营业执照不能为空，请上传营业执照！");
 	 	   	    		return false;
 	 	   	    	}
+	   		    	//是否特殊行业资质
+	   		    	var isSpecial = $("#specialCertificate").html();
+	   		    	if(null != isSpecial && "" != isSpecial){
+	   		    		if("" == qualificationPath || null == qualificationPath){
+				  		  	alert("特殊行业资质照不能为空，请上传特殊行业资质照！");
+		 	   	    		return false;
+		 	   	    	}
+	   		    	}
 			  	  	
 			  	  	if("" == doorPhotoPath || null == doorPhotoPath){
 			  		  	alert("门头照不能为空，请上传门头照！");
@@ -603,8 +617,12 @@
  								"doorPhotoPath" : doorPhotoPath
  	   							},
  	   							function(data){
- 	   								if(data.result=="SUCCESS"){
+ 	   								if(data.code=="SUCCESS"){
  	  	   								alert("提交报备成功");
+ 	  	   								
+ 	  	   								window.opener=null;
+ 	  	   								window.open("","_self");
+ 	  	   			   					window.close();
  	   								}else{
  	   									if(null == data.message || "" ==data.message){
 										alert("进件失败");
