@@ -146,6 +146,9 @@
 			<if test="patchNo != null and patchNo != '' ">
 			AND t1.patch_no = #{patchNo,jdbcType = VARCHAR}
 			</if>
+			<if test="reportStatus != null and reportStatus != '' ">
+			 and t2.report_status = #{reportStatus,jdbcType=VARCHAR}
+			</if>
 		</where>
 	</select>
 	
@@ -357,6 +360,9 @@
 			</if>
 			<if test="channelNo != null and channelNo != '' ">
 			 and r.channel_no = #{channelNo,jdbcType=VARCHAR}
+			</if>
+			<if test="reportStatus != null and reportStatus != '' ">
+			 and r.report_status = #{reportStatus,jdbcType=VARCHAR}
 			</if>
 		</where>
 		ORDER BY t.create_time DESC

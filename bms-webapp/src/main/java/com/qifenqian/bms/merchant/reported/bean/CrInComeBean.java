@@ -120,10 +120,25 @@ public class CrInComeBean implements Serializable{
 	/**身份证号*/
 	private String certifyNo;
 	
+	private String reportStatus;
 	
 	
 	
-	
+
+
+
+	public String getReportStatus() {
+		return reportStatus;
+	}
+
+
+
+	public void setReportStatus(String reportStatus) {
+		this.reportStatus = reportStatus;
+	}
+
+
+
 	public String getCertifyNo() {
 		return certifyNo;
 	}
