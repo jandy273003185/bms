@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.qifenqian.bms.basemanager.utils.GenSN;
 import com.qifenqian.bms.common.bean.FileInfo;
 
 @Controller
 @RequestMapping("/common/files")
 public class FileController {
 
-	private static final String PRE_PATH = "/data/nfsshare/merchant/";
+	private static final String PRE_PATH = "/data/nfsshare/upload/picture/";
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	@ResponseBody
@@ -30,7 +31,7 @@ public class FileController {
 			try {
 				String fileName = file.getOriginalFilename();
 				String suffixName = fileName.substring(fileName.lastIndexOf("."));
-				File localFile = new File(PRE_PATH + UUID.randomUUID().toString() + suffixName);
+				File localFile = new File(PRE_PATH + GenSN.getSysTime() + UUID.randomUUID().toString() + suffixName);
 				file.transferTo(localFile);
 				return new FileInfo(localFile.getAbsolutePath());
 			} catch (IllegalStateException | IOException e) {
