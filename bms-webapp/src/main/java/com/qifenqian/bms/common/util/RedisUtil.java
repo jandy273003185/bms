@@ -1,11 +1,13 @@
 package com.qifenqian.bms.common.util;
 
-import java.util.ResourceBundle;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
+@Component
 public final class RedisUtil {
 
   public static final int RED_ENVELOPE_ROB_DB = 0;
@@ -15,13 +17,16 @@ public final class RedisUtil {
   public static final int MERCHANT_CASHIER_REF_DB = 4;
   public static final int MERCHANT_DB = 5;
 
-  // Redis服务器IP
+  // Redis服务器IP@
+  @Value("${REDIS.IP}")
   private String serverIp;
 
   // Redis的端口号
+  @Value("${REDIS.PORT}")
   private int serverPort;
 
   // 访问密码（生产）
+  @Value("${REDIS.AUTH}")
   private String auth;
 
   // 可用连接实例的最大数目，默认值为8；
@@ -57,15 +62,7 @@ public final class RedisUtil {
   }*/
 
   private RedisUtil() {
-    loadParam();
     initPool();
-  }
-
-  private void loadParam() {
-    ResourceBundle rb = ResourceBundle.getBundle("com/qifenqian/bms/common/util/redisUtil");
-    this.serverIp = rb.getString("serverIp");
-    this.serverPort = Integer.valueOf(rb.getString("serverPort"));
-    this.auth = rb.getString("auth");
   }
 
   private void initPool() {

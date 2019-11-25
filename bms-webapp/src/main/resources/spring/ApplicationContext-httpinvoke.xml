@@ -8,7 +8,7 @@
 
 	<!-- 调用核心的接口 -->
 	<bean id="coreHttpInvokerProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
-		<property name="serviceUrl" value="${SYSTEM.CORE.IP}/remoting/service" />
+		<property name="serviceUrl" value="@SYSTEM.CORE.IP@/remoting/service" />
 		<property name="serviceInterface" value="com.sevenpay.invoke.SevenpayCoreServiceInterface" />
 		<property name="httpInvokerRequestExecutor">
 			<bean class="org.springframework.remoting.httpinvoker.HttpComponentsHttpInvokerRequestExecutor"></bean>
@@ -18,7 +18,7 @@
 	<!-- 调用交广科技网关的接口 -->
 	<bean id="expressPayHttpInvokerProxy"
 		class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
-		<property name="serviceUrl" value="${SYSTEM.CORE.IP}/gateway/jgkj" />
+		<property name="serviceUrl" value="@SYSTEM.CORE.IP@/gateway/jgkj" />
 		<property name="serviceInterface" value="com.sevenpay.gateway.jgkj.IJgkj" />
 		<property name="httpInvokerRequestExecutor">
 			<bean class="org.springframework.remoting.httpinvoker.HttpComponentsHttpInvokerRequestExecutor"></bean>
@@ -28,7 +28,7 @@
 	<!-- 调用银联接口 -->
 	<bean id="httpInvokerProxyGatewayUnionPay"
 		class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
-		<property name="serviceUrl" value="${GATEWAY.UNIO.IP}/gateway/unionpay" />
+		<property name="serviceUrl" value="@GATEWAY.UNIO.IP@/gateway/unionpay" />
 		<property name="serviceInterface" value="com.stc.gateway.unionpay.IUnionPay" />
 		<property name="httpInvokerRequestExecutor">
 			<bean class="org.springframework.remoting.httpinvoker.HttpComponentsHttpInvokerRequestExecutor"></bean>
@@ -37,7 +37,7 @@
 
 	<!-- 调用plugin接口:SMS,EMAIL  -->
 	<bean id="pluginInvokerProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
-		<property name="serviceUrl" value="${SYSTEM.PLUGIN.IP}/servlet/sevenpay/plugin" />
+		<property name="serviceUrl" value="@SYSTEM.PLUGIN.IP@/servlet/sevenpay/plugin" />
 		<property name="serviceInterface" value="com.sevenpay.plugin.IPlugin" />
 		<property name="httpInvokerRequestExecutor">
 			<bean class="org.springframework.remoting.httpinvoker.HttpComponentsHttpInvokerRequestExecutor"></bean>
@@ -47,7 +47,7 @@
 	<!-- 调用金蝶接口 -->
 	<bean id="httpInvokerProxyGatewayKingdeePay"
 		class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
-		<property name="serviceUrl" value="${GATEWAY.KINGDEE.IP}/gateway/k3cloud" />
+		<property name="serviceUrl" value="@GATEWAY.KINGDEE.IP@/gateway/k3cloud" />
 		<property name="serviceInterface" value="com.sevenpay.gateway.k3cloud.IK3Cloud" />
 		<property name="httpInvokerRequestExecutor">
 			<bean class="org.springframework.remoting.httpinvoker.HttpComponentsHttpInvokerRequestExecutor"></bean>
@@ -56,19 +56,19 @@
 
 	<!-- 下载原数据 -->
 	<bean id="checkInvokerProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
-		<property name="serviceUrl" value="${GATEWAY.CHANNEL.IP}/checkApi" />
+		<property name="serviceUrl" value="@GATEWAY.CHANNEL.IP@/checkApi" />
 		<property name="serviceInterface" value="com.seven.micropay.channel.service.ICheckService" />
 	</bean>
 
 	<!-- 下载原数据 -->
 	<bean id="channelCheckInvokerProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
-		<property name="serviceUrl" value="${GATEWAY.CHANNEL.IP}/combineApi" />
+		<property name="serviceUrl" value="@GATEWAY.CHANNEL.IP@/combineApi" />
 		<property name="serviceInterface" value="com.seven.micropay.channel.service.api.ICombineApiService" />
 	</bean>
 
 	<!-- 调用代付网关 -->
 	<bean id="iB2eInvokerProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
-		<property name="serviceUrl" value="${GATEWAY.CHANNEL.IP}/iB2eApiService" />
+		<property name="serviceUrl" value="@GATEWAY.CHANNEL.IP@/iB2eApiService" />
 		<property name="serviceInterface" value="com.seven.micropay.channel.service.api.IB2eApiService" />
 		<property name="httpInvokerRequestExecutor">
 			<ref bean='iB2eHttpInvokerRequestExecutor' />
@@ -76,7 +76,7 @@
 	</bean>
 
 	<bean id="iMerChantIntoServiceProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
-		<property name="serviceUrl" value="${GATEWAY.CHANNEL.IP}/iIMerChantIntoService" />
+		<property name="serviceUrl" value="@GATEWAY.CHANNEL.IP@/iIMerChantIntoService" />
 		<property name="serviceInterface" value="com.seven.micropay.channel.service.IMerChantIntoService" />
 		<property name="httpInvokerRequestExecutor">
 			<bean class="org.springframework.remoting.httpinvoker.HttpComponentsHttpInvokerRequestExecutor"></bean>
@@ -84,7 +84,7 @@
 	</bean>
 	
 	<bean id="iFmBlueOceanServiceProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
-		<property name="serviceUrl" value="${GATEWAY.CHANNEL.IP}/channel/blueOcean" />
+		<property name="serviceUrl" value="@GATEWAY.CHANNEL.IP@/channel/blueOcean" />
 		<property name="serviceInterface" value="com.seven.micropay.channel.service.api.IFmBlueOceanService" />
 		<property name="httpInvokerRequestExecutor">
 			<bean class="org.springframework.remoting.httpinvoker.HttpComponentsHttpInvokerRequestExecutor"></bean>
