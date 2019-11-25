@@ -72,6 +72,7 @@ public class AliPayMerchantReportsController {
 			CrInComeBean comeBean = new CrInComeBean();
 			comeBean.setMerchantCode(aliPayCoBean.getMerchantCode());
 			comeBean.setChannelNo(aliPayCoBean.getChannelNo());
+			comeBean.setReportStatus("00");
 			TdMerchantDetailInfo merchantDetailInfo = fmIncomeMapperDao.selTdMerchantReport(comeBean);
 			if (null != merchantDetailInfo) {
 				if ("Y".equals(merchantDetailInfo.getReportStatus()) || "O".equals(merchantDetailInfo.getReportStatus())) {
