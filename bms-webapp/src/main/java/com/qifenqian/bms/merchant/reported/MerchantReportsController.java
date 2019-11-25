@@ -546,6 +546,11 @@ public class MerchantReportsController {
 				req.put("merchantId",custInfo.getBusinessLicense());
 			}
 			req.put("channelType", ChannelMerRegist.KFT_PAY);
+		}else if("WX".equals(detail.getChannelNo())){
+			
+			req.put("mch_id",detail.getMerchantCode());
+			req.put("applyment_id",custInfo.getCustType());
+//			WeChatAppService.WeChatMerchantQuery(req);
 		}
 			
 		ChannelResult channelResult = iMerChantIntoServic.merQuery(req);
