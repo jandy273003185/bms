@@ -184,6 +184,7 @@
 						alert("查询失败");
 					}else{
 						alert(data.message);
+						window.location.reload();
 					}
 				}
 			}

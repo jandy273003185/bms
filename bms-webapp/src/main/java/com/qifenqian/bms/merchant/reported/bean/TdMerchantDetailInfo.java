@@ -91,7 +91,29 @@ public class TdMerchantDetailInfo implements Serializable{
 	
 	private String zfbReExpiresIn;
 	
+	private String zfbAccount;
 	
+	private String zfbConfirmUrl;
+	
+	
+	
+	
+	public String getZfbAccount() {
+		return zfbAccount;
+	}
+
+	public void setZfbAccount(String zfbAccount) {
+		this.zfbAccount = zfbAccount;
+	}
+
+	public String getZfbConfirmUrl() {
+		return zfbConfirmUrl;
+	}
+
+	public void setZfbConfirmUrl(String zfbConfirmUrl) {
+		this.zfbConfirmUrl = zfbConfirmUrl;
+	}
+
 	public String getRate() {
 		return rate;
 	}
