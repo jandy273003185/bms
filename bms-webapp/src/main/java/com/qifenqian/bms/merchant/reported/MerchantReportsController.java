@@ -39,8 +39,11 @@ import com.qifenqian.bms.merchant.reported.bean.Province;
 import com.qifenqian.bms.merchant.reported.bean.TbFmTradeInfo;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
 import com.qifenqian.bms.merchant.reported.dao.FmIncomeMapperDao;
+import com.qifenqian.bms.merchant.reported.service.AliPayIncomeService;
 import com.qifenqian.bms.merchant.reported.service.CrIncomeService;
 import com.qifenqian.bms.merchant.reported.service.FmIncomeService;
+import com.qifenqian.jellyfish.bean.agentMerSign.alipay.AlipayOpenAgentOrderQueryRes;
+import com.qifenqian.jellyfish.bean.enums.GetwayStatus;
 
 @Controller
 @RequestMapping(MerchantReportedPath.BASE)
@@ -62,6 +65,10 @@ public class MerchantReportsController {
    
    @Autowired
    private IMerChantIntoService iMerChantIntoServic;
+   
+   @Autowired
+   private AliPayIncomeService aliPayIncomeService;
+
    
    /**
     * 商户报备入口
@@ -551,6 +558,67 @@ public class MerchantReportsController {
 			req.put("mch_id",detail.getMerchantCode());
 			req.put("applyment_id",custInfo.getCustType());
 //			WeChatAppService.WeChatMerchantQuery(req);
+		}else if ("ALIPAY".equals(detail.getChannelNo())) {
+			//查询
+			TdMerchantDetailInfo selMerchantDetailInfo = fmIncomeMapperDao.selMerchantDetailInfo(detail);
+			String batchNo = selMerchantDetailInfo.getZfbBatchNo();
+			AlipayOpenAgentOrderQueryRes orderQueryRes = aliPayIncomeService.alipayOpenAgentOrderQuery(batchNo);
+			if (GetwayStatus.SUCCESS.equals(orderQueryRes.getCode())) {
+				//审核成功
+				if ("MERCHANT_CONFIRM_SUCCESS".equals(orderQueryRes.getOrderStatus())) {
+					//报备表中状态改变
+					detail.setReportStatus("O");
+					//报备成功商户报备信息表中状态改变
+					detail.setFileStatus("Y");
+					detail.setOutMerchantCode(orderQueryRes.getMerchantPid());
+					//更新数据库
+					fmIncomeService.UpdateMerReportAndMerDetailInfo(detail, "1");
+					object.put("result", "SUCCESS");
+					object.put("message", "商户审核成功");
+				}
+				//审核失败
+				else if ("MERCHANT_APPLY_ORDER_CANCELED".equals(orderQueryRes.getOrderStatus())) {
+					detail.setReportStatus("F");
+					detail.setOutMerchantCode(orderQueryRes.getMerchantPid());
+					detail.setResultMsg(orderQueryRes.getRejectReason());
+					fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"2");
+					object.put("result", "FAIL");
+					object.put("message", orderQueryRes.getRejectReason());
+				}
+				//重新提交
+				else if ("MERCHANT_INFO_HOLD".equals(orderQueryRes.getOrderStatus()) || "MERCHANT_CONFIRM_TIME_OUT".equals(orderQueryRes.getOrderStatus())) {
+					detail.setReportStatus("F");
+					detail.setOutMerchantCode(orderQueryRes.getMerchantPid());
+					detail.setResultMsg(orderQueryRes.getRejectReason());
+					fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"16");
+					object.put("result", "FAIL");
+					object.put("message", StringUtils.isBlank(orderQueryRes.getRejectReason()) ? "暂存或商户超时未确认,请重新提交信息" : orderQueryRes.getRejectReason());
+				}
+				//审核中
+				else if ("MERCHANT_AUDITING".equals(orderQueryRes.getOrderStatus())) {
+					detail.setReportStatus("Y");
+					detail.setOutMerchantCode(orderQueryRes.getMerchantPid());
+					detail.setResultMsg(orderQueryRes.getRejectReason());
+					fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"0");
+					object.put("result", "FAIL");
+					object.put("message", StringUtils.isBlank(orderQueryRes.getRejectReason()) ? "审核中，申请信息正在人工审核中" : orderQueryRes.getRejectReason());
+				}
+				//审核通过,待确认
+				else if ("MERCHANT_CONFIRM".equals(orderQueryRes.getOrderStatus())) {
+					detail.setReportStatus("Y");
+					detail.setOutMerchantCode(orderQueryRes.getMerchantPid());
+					detail.setResultMsg(orderQueryRes.getRejectReason());
+					detail.setZfbConfirmUrl(orderQueryRes.getConfirmUrl());
+					fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"4");
+					object.put("result", "FAIL");
+					object.put("message", StringUtils.isBlank(orderQueryRes.getRejectReason()) ? "待商户确认，申请信息审核通过，等待联系人确认签约或授权" : orderQueryRes.getRejectReason());
+				}
+			} else {
+				object.put("result", "FAIL");
+				object.put("message", "调用支付宝申请单查询失败");
+				logger.error("调用支付宝申请单查询失败：{}", JSONObject.toJSONString(orderQueryRes));
+			}
+			return object.toString();
 		}
 			
 		ChannelResult channelResult = iMerChantIntoServic.merQuery(req);

@@ -21,6 +21,9 @@ import com.qifenqian.jellyfish.bean.agentMerSign.alipay.AlipayOpenAgentCreateReq
 import com.qifenqian.jellyfish.bean.agentMerSign.alipay.AlipayOpenAgentCreateRes;
 import com.qifenqian.jellyfish.bean.agentMerSign.alipay.AlipayOpenAgentFacetofaceSignReq;
 import com.qifenqian.jellyfish.bean.agentMerSign.alipay.AlipayOpenAgentFacetofaceSignRes;
+import com.qifenqian.jellyfish.bean.agentMerSign.alipay.AlipayOpenAgentOrderQueryReq;
+import com.qifenqian.jellyfish.bean.agentMerSign.alipay.AlipayOpenAgentOrderQueryRes;
+import com.qifenqian.jellyfish.bean.enums.GetwayStatus;
 import com.qifenqian.jellyfish.merRegistApi.IAlipayAgentMerRegistService;
 
 
@@ -35,6 +38,12 @@ public class AliPayIncomeService {
 	@Autowired
 	private FmIncomeService fmIncomeService;
 	
+	/**
+	 * 支付宝商户报备
+	 * @param aliPayCoBean
+	 * @return
+	 * @throws Exception
+	 */
 	public Map<String, Object> aliPayReported(AliPayCoBean aliPayCoBean) throws Exception {
 		//添加商户报备详情表（td_merchant_detail_info）和商户报备表（td_merchant_report）
 		Map<String, Object> result = new HashMap<String, Object>();
@@ -47,6 +56,7 @@ public class AliPayIncomeService {
 		info.setMerchantCode(aliPayCoBean.getMerchantCode());
 		info.setChannelNo(aliPayCoBean.getChannelNo());
 		info.setReportStatus("E");
+		info.setZfbAccount(aliPayCoBean.getAccount());
 
 		//info.setBankCode("5551458");
 		//info.setBranchBankName("华夏银行");
@@ -119,7 +129,7 @@ public class AliPayIncomeService {
 		AlipayOpenAgentConfirmRes confirmRes = alipayOpenAgentConfirm(aliConfirmReqBean);
 		logger.debug("支付宝商户签约提交返回值：{}", JSONObject.toJSONString(confirmRes));
 		String reportState = null;
-		if (!"10000".equals(confirmRes.getCode())) {
+		if (!GetwayStatus.SUCCESS.equals(confirmRes.getCode())) {
 			//异常信息
 			info.setResultMsg(confirmRes.getSubMsg());
 			reportState = "99";
@@ -145,6 +155,20 @@ public class AliPayIncomeService {
 		fmIncomeService.UpdateMerReportAndMerDetailInfo(info, reportState);
 		logger.info("支付宝商户报备end.");
 		return result;
+	}
+	
+	/**
+	 * 查询支付宝报备申请单状态
+	 * @param batchNo 支付宝报备事务编号
+	 * @return
+	 */
+	public AlipayOpenAgentOrderQueryRes alipayOpenAgentOrderQuery(String batchNo) {
+		logger.debug("查询支付宝报备申请单状态，报备事务编号：{}", batchNo);
+		AlipayOpenAgentOrderQueryReq orderQueryReq = new AlipayOpenAgentOrderQueryReq();
+		orderQueryReq.setBatchNo(batchNo);
+		AlipayOpenAgentOrderQueryRes orderQueryRes = iAgentMerRegistService.alipayOpenAgentOrderQuery(orderQueryReq);
+		logger.debug("查询支付宝报备申请单状态，返回值：{}", JSONObject.toJSONString(orderQueryRes));
+		return orderQueryRes;
 	}
 	
 	/**

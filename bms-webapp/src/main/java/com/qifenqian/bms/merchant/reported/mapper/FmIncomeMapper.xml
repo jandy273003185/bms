@@ -219,7 +219,8 @@
 	  		`zfb_app_auth_token`,
 	  		`zfb_app_refresh_token`,
 	  		`zfb_expires_in`,
-	  		`zfb_re_expires_in`
+	  		`zfb_re_expires_in`,
+	  		`zfb_account`
 		)
 		VALUES
 			(
@@ -254,7 +255,9 @@
 				#{zfbAppAuthToken,jdbcType = VARCHAR},
 				#{zfbAppRefreshToken,jdbcType = VARCHAR},
 				#{zfbExpiresIn,jdbcType = VARCHAR},
-				#{zfbReExpiresIn,jdbcType = VARCHAR}
+				#{zfbReExpiresIn,jdbcType = VARCHAR},
+				#{zfbAccount,jdbcType = VARCHAR}
+				
 			)
 	</insert>
 	
@@ -318,6 +321,9 @@
 		 	</if>
 		 	<if test="zfbReExpiresIn != null and zfbReExpiresIn !='' ">
 		 	`zfb_re_expires_in` = #{zfbReExpiresIn,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="zfbConfirmUrl != null and zfbConfirmUrl !='' ">
+		 	`zfb_confirm_url` = #{zfbConfirmUrl,jdbcType = VARCHAR},
 		 	</if>
 			 `modify_time` = now()
 		 WHERE
