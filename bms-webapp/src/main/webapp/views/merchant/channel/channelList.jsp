@@ -55,18 +55,22 @@ table {
 
 			});
 		});
+		
+		
+		//清空搜索栏
+		/* function cleanSearchBar() { */
+		$('.cleanSearchBar').click(function(){
+			//商户七分钱编号
+			$(".page-content #merchantCode").val('');
+			//商户七分钱名称
+			$(".page-content #custName").val('');
+			//商户渠道编号
+			$(".page-content #merchantChannelId").val("");
+		});
 
 	});
 
-	//清空搜索栏
-	function cleanSearchBar() {
-		//商户七分钱编号
-		$(".page-content #merchantCode").val("");
-		//商户七分钱名称
-		$(".page-content #custName").val("");
-		//商户渠道编号
-		$(".page-content #merchantChannelId").val("");
-	}
+	
 
 	
 	/**

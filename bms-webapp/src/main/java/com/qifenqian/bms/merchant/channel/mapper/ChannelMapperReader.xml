@@ -29,20 +29,25 @@
 	</resultMap>
 
 	<select id="selectChannels" resultMap="channel" parameterType="com.qifenqian.bms.merchant.channel.bean.ChannelBean">
-		select * from td_channel_agent_mer_info
+		select a.* from td_channel_agent_mer_info a
+		LEFT JOIN  stcdb.td_cust_info i 
+		on a.MER_CUST_ID = i.CUST_ID
 		<where>
 			<if test="channelName !=null and channelName !=''">
-				CHANNEL_CODE=#{channelName, typeHandler=org.apache.ibatis.type.ChannelMerRegistTypeHandler}
+				a.CHANNEL_CODE=#{channelName, typeHandler=org.apache.ibatis.type.ChannelMerRegistTypeHandler}
 			</if>
 			<if test="custId !=null and custId !=''">
-				and mer_cust_id=#{custId}
+				and a.mer_cust_id=#{custId}
 			</if>
 			<if test="merchantChannelId !=null and merchantChannelId !=''">
-				and mer_no=#{merchantChannelId}
+				and a.mer_no=#{merchantChannelId}
+			</if>
+			<if test="custName !=null and custName !=''">
+				and i.cust_name=#{custName}
 			</if>
 		</where>
 
-		order by modify_time desc
+		order by a.modify_time desc
 	</select>
 
 	<select id="selectChannelDetails" resultMap="channelDetail" parameterType="com.qifenqian.bms.merchant.channel.bean.ChannelDetailBean">

@@ -31,17 +31,23 @@
 <script type="text/javascript">
     $(function() {
         /**企业类型 **/
-        if($("#custType").val() =='0' ||$("#custType").val() =='2' ){
+        /* if($("#custType").val() =='0' ||$("#custType").val() =='2' ){
             //个人
-            $("#bankCardPhoto_").attr("style","display:");
+        	$("#bankCardPhoto_").attr("style","display:");
             $("#openAccount_").attr("style","display:none");
         }
         if($("#custType").val() =='1'){
             //企业
             $("#bankCardPhoto_").attr("style","display:none");
             $("#openAccount_").attr("style","display:");
-        }
-
+        } */
+		if($("#compMainAcctType").val() =='01'){
+			 $("#bankCardPhoto_").attr("style","display:none");
+			 $("#openAccount_").attr("style","display:");
+		}else{
+			$("#bankCardPhoto_").attr("style","display:");
+            $("#openAccount_").attr("style","display:none");
+		}
         var custId = $("#custId").val().trim();
         var authId = $("#authId").val().trim();
 
@@ -395,7 +401,7 @@
 								<td class="td-left">网点号：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.cnaps }</td>
 								<td class="td-left">结算类型：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px"><c:choose>
+								<td class="td-right" style="color:#666;padding:10px 8px" id ="compMainAcctType"><c:choose>
 									<c:when test="${merchantVo.compMainAcctType =='01'}">
 										对公
 									</c:when>

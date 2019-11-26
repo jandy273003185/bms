@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
 <%@ page import="java.util.ResourceBundle"%>
-<%ResourceBundle res = ResourceBundle.getBundle("uploadFileConfig"); %>
+<%-- <%ResourceBundle res = ResourceBundle.getBundle("uploadFileConfig"); %> --%>
 <%@page import="com.qifenqian.bms.basemanager.merchant.MerchantPath" %>
 <%@page import="com.qifenqian.bms.basemanager.merchant.MerchantEnterPath" %>
 <%@page import="com.qifenqian.bms.basemanager.merchant.StoreManagePath" %>
@@ -39,7 +39,7 @@
 
 	$(function() {
 
-		if($("#custType").val() =='0' ||$("#custType").val() =='2' ){
+		/* if($("#custType").val() =='0' ||$("#custType").val() =='2' ){
 			//个人
 			$("#bankCardPhoto_").attr("style","display:");
 			$("#openAccount_").attr("style","display:none");
@@ -48,8 +48,15 @@
 			//企业
 			$("#bankCardPhoto_").attr("style","display:none");
 			$("#openAccount_").attr("style","display:");
+		} */
+		if($("#compMainAcctType").val() =='01'){
+			 $("#bankCardPhoto_").attr("style","display:none");
+			 $("#openAccount_").attr("style","display:");
+		}else{
+			$("#bankCardPhoto_").attr("style","display:");
+           $("#openAccount_").attr("style","display:none");
 		}
-
+		
 		var custId = $("#custId").val();
 		var authId = $("#authId").val();
 
@@ -91,8 +98,8 @@
 			}
 		}
 		function check(obj){
-			var maxsize = '<%=res.getString("CERTIFY_FILE_MAX_SIZE")%>';
-			var fileType = '<%=res.getString("CERTIFY_SUPPORT_FILE_TYPE")%>';
+			var maxsize = '<%="5120000"%>';
+			var fileType = '<%=".jpg|.jpeg|.gif|.bmp|.png"%>';
 			if(!checkFileSize(maxsize,fileType,obj)){
 				var prevDiv = document.getElementById('img-' + obj.id);
 				$(prevDiv).html('<a href="javascript:;" >点击上传</a>');
@@ -331,13 +338,13 @@
 								<td class="td-left">网点号：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.cnaps }</td>
 								<td class="td-left">结算类型：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">
+								<td class="td-right" style="color:#666;padding:10px 8px" id="compMainAcctType">
                                     <c:choose>
                                         <c:when test="${merchantVo.compMainAcctType =='01'}">
-                                            对公
+                                            	对公
                                         </c:when>
                                         <c:otherwise>
-                                            对私
+                                            	对私
                                         </c:otherwise>
                                     </c:choose>
                                 </td>
@@ -468,6 +475,7 @@
 	function showBusinessPhotoImage(obj){
 		var divObj = document.getElementById("businessPhotoDiv");
 		var imageObj = document.getElementById("businessPhotoImage");
+		var obj = document.getElementById("businessPhoto");
 		var result1 = previewImage(divObj,imageObj,obj);
 		return result1;
 	}

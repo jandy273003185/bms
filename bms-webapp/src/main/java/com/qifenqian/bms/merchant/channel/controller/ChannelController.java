@@ -61,25 +61,25 @@ public class ChannelController {
     
     
     //商户编号查询
-    if (!"".equals(merchantCode)) {
-      TdCustInfo custInfo = new TdCustInfo();
-      custInfo.setMerchantCode(queryBean.getMerchantCode());
-      TdCustInfo tc = ts.selectByBean(custInfo);
-      if (tc != null) {
-        queryBean.setCustId(tc.getCustId());
-      } else {
-        return mv;
-      }
-    }else if(!"".equals(custName)) {
-		TdCustInfo custInfo = new TdCustInfo();
-	    custInfo.setCustName(queryBean.getCustName());
-	    TdCustInfo tc = ts.selectByBean(custInfo);
-	    if (tc != null) {
-	      queryBean.setCustId(tc.getCustId());
-	    } else {
-	      return mv;
-	    }
-    }
+//    if (!"".equals(merchantCode)) {
+//      TdCustInfo custInfo = new TdCustInfo();
+//      custInfo.setMerchantCode(queryBean.getMerchantCode());
+//      TdCustInfo tc = ts.selectByBean(custInfo);
+//      if (tc != null) {
+//        queryBean.setCustId(tc.getCustId());
+//      } else {
+//        return mv;
+//      }
+//    }else if(!"".equals(custName)) {
+//		TdCustInfo custInfo = new TdCustInfo();
+//	    custInfo.setCustName(queryBean.getCustName());
+//	    TdCustInfo tc = ts.selectByBean(custInfo);
+//	    if (tc != null) {
+//	      queryBean.setCustId(tc.getCustId());
+//	    } else {
+//	      return mv;
+//	    }
+//    }
 
     List<ChannelBean> result = channelService.getChannels(queryBean);
     if (LOGGER.isDebugEnabled()) {
