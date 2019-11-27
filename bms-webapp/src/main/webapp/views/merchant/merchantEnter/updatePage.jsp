@@ -108,7 +108,7 @@ $(function(){
 
     $(function() {
 
-        if($("#custType").val() =='0' ||$("#custType").val() =='2' ){
+        /* if($("#custType").val() =='0' ||$("#custType").val() =='2' ){
             //个人
             $("#bankCardPhoto_").attr("style","display:");
             $("#openAccount_").attr("style","display:none");
@@ -117,7 +117,14 @@ $(function(){
             //企业
             $("#bankCardPhoto_").attr("style","display:none");
             $("#openAccount_").attr("style","display:");
-        }
+        } */
+        if($("#compMainAcctType").val() =='01'){
+			 $("#bankCardPhoto_").attr("style","display:none");
+			 $("#openAccount_").attr("style","display:");
+		}else{
+			$("#bankCardPhoto_").attr("style","display:");
+           $("#openAccount_").attr("style","display:none");
+		}
 
         var custId = $("#custId").val().trim();
         var authId = $("#authId").val().trim();
@@ -570,17 +577,23 @@ $(function(){
         var bankCityName = $("#bankCityName").val();
         var compMainAcctType = $("#compMainAcctType").val();
         var custId = $("#custId").val();
+        
+        var openAccountPath =  $("#openAccountPath").val();
+    	var bankCardPhotoPath = $("#bankCardPhotoPath").val();
+    	var certAttribute2Path = $("#certAttribute2Path").val();
+    	var certAttribute1Path = $("#certAttribute1Path").val();
+    	var businessPhotoPath = $("#businessPhotoPath").val();
         /*alert(custId);*/
         $.blockUI();
         $.ajax({
             type : "POST",
-            url : window.Constants.ContextPath +'<%=TinyMerchantPath.BASE + TinyMerchantPath.FILEUPLOAD%>',
+            url : window.Constants.ContextPath +'<%="/common/files/getPicPath"%>?custId='+custId,
             data :{
-                businessPhoto : $('#businessPhototemp').val(),
-                certAttribute1 : $('#certAttribute1temp').val(),
-                certAttribute2 : $('#certAttribute2temp').val(),
-                openAccount : $('#openAccounttemp').val(),
-                bankCardPhoto : $('#bankCardPhototemp').val()
+            	"openAccountPath" :  openAccountPath,                //商户营业执照
+            	"idCardOPath"     :  certAttribute1Path,             //身份证正面照
+            	"idCardFPath"     :  certAttribute2Path,             //身份证背面照
+            	"bussinessPath"   :  businessPhotoPath,              //开户许可证
+            	"bankCardPath"    :  bankCardPhotoPath               //开户银行照
 
             },
             dataType : "json",
@@ -711,6 +724,66 @@ $(function(){
         $("input[name='businessTermEnd']").val("2099-12-31");
         $("#businessTermEnd").attr("value","2099-12-31");
     }
+    
+    /*
+    * file input file dom object
+    * pathTarget 路径保存的input元素id 
+    * preView 图片预览dom id
+    */
+    function commonFileUpload(file, pathTarget, preView) {
+    	var formdata=new FormData();
+        formdata.append("file",$(file).get(0).files[0]);
+        $.ajax({
+            url:'/common/files/uploadPic',
+            type:'post',
+            contentType:false,
+            data:formdata,
+            processData:false,
+            async:false,
+            success:function(info){ 
+                 $('#' + pathTarget + '').val(info.path);
+            },
+            error:function(err){
+                console.log(err)
+            }
+        });
+
+        var prevDiv = document.getElementById(preView);
+        if (file.files && file.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (evt) {
+            	prevDiv.innerHTML = '<img src="' + evt.target.result + '" onclick="bigImg(this);" style="width:120px;height:100px;" />';
+            }
+            reader.readAsDataURL(file.files[0]);
+        } else {
+            prevDiv.innerHTML = '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';
+        }
+    }
+
+    //营业执照上传
+    function showBusinessPhotoImage(file){
+    	commonFileUpload(file, 'businessPhotoPath', 'businessPhotoDiv');
+    }
+
+    //身份证正面
+    function showCertAttribute1Image(file){
+    	commonFileUpload(file, 'certAttribute1Path', 'certAttribute1Div');
+    }
+
+    //身份证反面
+    function showCertAttribute2Image(file){
+    	commonFileUpload(file, 'certAttribute2Path', 'certAttribute2Div');
+    } 
+
+    //上传银行卡照
+    function showBankCardPhotoImage(file){
+    	commonFileUpload(file, 'bankCardPhotoPath', 'bankCardPhotoDiv');
+    }
+
+    //上传开户许可证
+    function showOpenAccountImage(file){
+    	commonFileUpload(file, 'openAccountPath', 'openAccountDiv');
+    }
 </script>
 <body>
 <%@ include file="/include/top.jsp"%>
@@ -740,7 +813,7 @@ $(function(){
 						<input type="hidden" name="merchantCode" id="merchantCode" value="${merchantVo.merchantCode}">
 						<input type="hidden" name="authId" id="authId" value="${merchantVo.authId}">
 						<input type="hidden" name="custType" id="custType" value="${merchantVo.custType}">
-
+						<input type="hidden" name="compMainAcctType" id="compMainAcctType" value="${merchantVo.compMainAcctType}">
 						<input type="hidden" id="businessLicenseNumber" value="${merchantVo.businessLicense }"/>
 						<table id="merchant_table" class="list-table">
 							<tbody>
@@ -850,16 +923,27 @@ $(function(){
 							<tr id="businessPhotoId_"  style="display: ">
 								<td class="td-left" id="businessPhotoId">营业执照扫描件：</td>
 								<td class="td-right" colspan="3">
-									<a data-toggle='modal' class="tooltip-success businessPhotoClick" data-target="#previewImageModal" >
+									<!-- <a data-toggle='modal' class="tooltip-success businessPhotoClick" data-target="#previewImageModal" >
 										<label id="businessPhotoDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
 											<img  id="businessPhotoImageDiv" onclick="bigImg(this);"  style="width:100%;height:100%;display:none"  />
 										</label>
+									</a> -->
+									<a data-toggle='modal' class="tooltip-success businessPhotoClick" data-target="#previewImageModal" >
+										<label id="businessPhotoDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.bussinessPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
 									</a>
 									<div class="updateImageDiv" style="float:left; margin-top:75 " >
+										<input  type="hidden" id="businessPhotoPath" name="businessPhotoPath" />
 										<input type="hidden" id="businessPhotoImageVal02"  />
 										<input type="file" name="businessPhoto" id="businessPhoto" onchange="showBusinessPhotoImage(this)" />
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
+									<!-- <div class="updateImageDiv" style="float:left; margin-top:75 " >
+										<input type="hidden" id="businessPhotoImageVal02"  />
+										<input type="file" name="businessPhoto" id="businessPhoto" onchange="showBusinessPhotoImage(this)" />
+										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div> -->
 
 								</td>
 							</tr>
@@ -900,31 +984,50 @@ $(function(){
 							<tr>
 								<td class="td-left" >身份证图片正面：</td>
 								<td class="td-right" colspan="3">
-									<a data-toggle='modal' class="tooltip-success certAttribute1Click"   data-target="#previewImageModal" >
+									<!-- <a data-toggle='modal' class="tooltip-success certAttribute1Click"   data-target="#previewImageModal" >
 										<label id="certAttribute1Div"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">
 											<img  id="certAttribute1ImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none"/>
 										</label>
+									</a> -->
+									<a data-toggle='modal' class="tooltip-success certAttribute1Click" data-target="#previewImageModal" >
+										<label id="certAttribute1Div"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.idCardOPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
 									</a>
-									<div class="updateImageDiv" style="float:left; margin-top:75" >
+									<div style="float:left;margin-top:75" >
+								    	<input  type="hidden" id="certAttribute1Path" name="certAttribute1Path" />
+										<input type="file" name="certAttribute1" id="certAttribute1" onChange="showCertAttribute1Image(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div>
+									<!-- <div class="updateImageDiv" style="float:left; margin-top:75" >
 										<input type="hidden" id="certAttribute1Val02"  />
 										<input type="file" name="certAttribute1" id="certAttribute1"  onchange="showCertAttribute1Image(this)"/>
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-									</div>
+									</div> -->
 								</td>
 							</tr>
 							<tr>
 								<td class="td-left" >身份证图片背面：</td>
 								<td class="td-right" colspan="3">
-									<a data-toggle='modal' class="tooltip-success certAttribute2Click"  data-target="#previewImageModal"  >
+									<!-- <a data-toggle='modal' class="tooltip-success certAttribute2Click"  data-target="#previewImageModal"  >
 										<label id="certAttribute2Div"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">
 											<img  id="certAttribute2ImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none" />
 										</label>
+									</a> -->
+									<a data-toggle='modal' class="tooltip-success certAttribute2Click" data-target="#previewImageModal" >
+										<label id="certAttribute2Div"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.idCardFPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
 									</a>
-									<div class="updateImageDiv" style="float:left; margin-top:75" >
+									<div style="float:left;margin-top:75" >
+										<input  type="hidden" id="certAttribute2Path" name="certAttribute2Path" />
+										<input type="file" name="certAttribute2" id="certAttribute2" onChange="showCertAttribute2Image(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div>
+									<!-- <div class="updateImageDiv" style="float:left; margin-top:75" >
 										<input type="hidden" id="certAttribute2Val02"  />
 										<input type="file" name="certAttribute2" id="certAttribute2" onchange="showCertAttribute2Image(this)"/>
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-									</div>
+									</div> -->
+									
 								</td>
 							</tr>
 							<tr>
@@ -1012,30 +1115,49 @@ $(function(){
 							<tr id="openAccount_" style="display: none">
 								<td class="td-left" >开户许可证：</td>
 								<td class="td-right" colspan="3">
-									<a data-toggle='modal' class="tooltip-success openAccountClick"  data-target="#previewImageModal" >
+									<a data-toggle='modal' class="tooltip-success openAccountClick" data-target="#previewImageModal" >
+										<label id="openAccountDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.openAccountPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
+									</a>
+									<!-- <a data-toggle='modal' class="tooltip-success openAccountClick"  data-target="#previewImageModal" >
 										<label id="openAccountDiv"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">
 											<img  id="openAccountImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none"/>
 										</label>
-									</a>
-									<div class="updateImageDiv" style="float:left; margin-top:75" >
+									</a> -->
+									<div style="float:left;margin-top:75" >
+										<input  type="hidden" id="openAccountPath" name="openAccountPath" />
+										<input type="file" name="openAccount" id="openAccount" onChange="showOpenAccountImage(this)"/> 
+										<p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div>
+									<!-- <div class="updateImageDiv" style="float:left; margin-top:75" >
 										<input type="hidden" id="openAccountVal02"  />
 										<input type="file" name="openAccount" id="openAccount" onchange="showopenAccountImage(this)"/>
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-									</div>
+									</div> -->
 
 								</td>
 							</tr>
 							<tr id="bankCardPhoto_">
 								<td class="td-left" >银行卡照<span style="color:red"></span></td>
 								<td class="td-right" >
-									<a data-toggle='modal' class="tooltip-success bankCardPhotoClick"  data-target="#previewImageModal" >
+									<!-- <a data-toggle='modal' class="tooltip-success bankCardPhotoClick"  data-target="#previewImageModal" >
 										<label id="bankCardPhotoDiv" class="uploadImage">
 											<img  id="bankCardPhotoImageDiv" style="width:100%;height:100%;display:none"/>
 										</label>
+									</a> -->
+									<a data-toggle='modal' class="tooltip-success bankCardPhotoClick" data-target="#previewImageModal" >
+										<label id="bankCardPhotoDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.bankCardPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
 									</a>
 									<div style="float:left;margin-top:75" >
+										<input  type="hidden" id="bankCardPhotoPath" name="bankCardPhotoPath" />
 										<input type="file" name="bankCardPhoto" id="bankCardPhoto" onChange="showBankCardPhotoImage(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
+									<!-- <div style="float:left;margin-top:75" >
+										<input type="file" name="bankCardPhoto" id="bankCardPhoto" onChange="showBankCardPhotoImage(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div> -->
 
 									<label class="label-tips" id="bankCardPhotoLabel" style="float:left;margin-top:88"></label>
 								</td>

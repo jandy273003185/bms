@@ -54,7 +54,7 @@
 			 $("#openAccount_").attr("style","display:");
 		}else{
 			$("#bankCardPhoto_").attr("style","display:");
-           $("#openAccount_").attr("style","display:none");
+            $("#openAccount_").attr("style","display:none");
 		}
 		
 		var custId = $("#custId").val();
@@ -143,6 +143,7 @@
 						<input type="hidden" name="merchantCode" id="merchantCode" value="${merchantVo.merchantCode}">
 						<input type="hidden" name="authId" id="authId" value="${merchantVo.authId}">
 						<input type="hidden" name="custType" id="custType" value="${merchantVo.custType}">
+						<input type="hidden" name="compMainAcctType" id="compMainAcctType" value="${merchantVo.compMainAcctType}">
 						<table id="merchant_table" class="list-table">
 							<tbody>
 							<tr>
@@ -240,9 +241,14 @@
 							<tr>
 								<td class="td-left">营业执照扫描件：</td>
 								<td class="td-right" colspan="3">
+									<!-- <a data-toggle='modal' class="tooltip-success businessPhotoClick" data-target="#previewImageModal" >
+										<label id="businessPhotoDiv1"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img  id="businessPhotoImageDiv" onclick="bigImg(this);"  style="width:100%;height:100%;display:none"  />
+										</label>
+									</a> -->
 									<a data-toggle='modal' class="tooltip-success businessPhotoClick" data-target="#previewImageModal" >
 										<label id="businessPhotoDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
-											<img  id="businessPhotoImageDiv" onclick="bigImg(this);"  style="width:100%;height:100%;display:none"  />
+											<img src="${picturePathVo.bussinessPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
 										</label>
 									</a>
 									<%--<div class="updateImageDiv" style="float:left; margin-top:75 " >
@@ -272,9 +278,14 @@
 							<tr>
 								<td class="td-left" >身份证图片正面：</td>
 								<td class="td-right" colspan="3">
-									<a data-toggle='modal' class="tooltip-success certAttribute1Click"   data-target="#previewImageModal" >
-										<label id="certAttribute1Div"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">
+									<!-- <a data-toggle='modal' class="tooltip-success certAttribute1Click"   data-target="#previewImageModal" >
+										<label id="certAttribute1Div1"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">
 											<img  id="certAttribute1ImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none"/>
+										</label>
+									</a> -->
+									<a data-toggle='modal' class="tooltip-success certAttribute1Click" data-target="#previewImageModal" >
+										<label id="certAttribute1Div"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.idCardOPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
 										</label>
 									</a>
 									<%--<div class="updateImageDiv" style="float:left; margin-top:75" >
@@ -287,9 +298,14 @@
 							<tr>
 								<td class="td-left" >身份证图片背面：</td>
 								<td class="td-right" colspan="3">
-									<a data-toggle='modal' class="tooltip-success certAttribute2Click"  data-target="#previewImageModal"  >
-										<label id="certAttribute2Div"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">
+									<!-- <a data-toggle='modal' class="tooltip-success certAttribute2Click"  data-target="#previewImageModal"  >
+										<label id="certAttribute2Div1"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">
 											<img  id="certAttribute2ImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none" />
+										</label>
+									</a> -->
+									<a data-toggle='modal' class="tooltip-success certAttribute2Click" data-target="#previewImageModal" >
+										<label id="certAttribute2Div"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.idCardFPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
 										</label>
 									</a>
 									<%--<div class="updateImageDiv" style="float:left; margin-top:75" >
@@ -335,10 +351,10 @@
 								
 							</tr>
 							<tr>
-								<td class="td-left">网点号：</td>
+								<td class="td-left">银行联行号：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.cnaps }</td>
 								<td class="td-left">结算类型：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px" id="compMainAcctType">
+								<td class="td-right" style="color:#666;padding:10px 8px">
                                     <c:choose>
                                         <c:when test="${merchantVo.compMainAcctType =='01'}">
                                             	对公
@@ -352,9 +368,14 @@
 							<tr id="openAccount_" style="display: none">
 								<td class="td-left" >开户许可证：</td>
 								<td class="td-right" colspan="3">
-									<a data-toggle='modal' class="tooltip-success openAccountClick"  data-target="#previewImageModal" >
-										<label id="openAccountDiv"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">
+									<!-- <a data-toggle='modal' class="tooltip-success openAccountClick"  data-target="#previewImageModal" >
+										<label id="openAccountDiv1" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">
 											<img  id="openAccountImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none"/>
+										</label>
+									</a> -->
+									<a data-toggle='modal' class="tooltip-success openAccountClick" data-target="#previewImageModal" >
+										<label id="openAccountDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.openAccountPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
 										</label>
 									</a>
 									<%--<div class="updateImageDiv" style="float:left; margin-top:75" >
@@ -364,12 +385,17 @@
                                     </div>--%>
 								</td>
 							</tr>
-							<tr id="bankCardPhoto_">
+							<tr id="bankCardPhoto_" style="display: ">
 								<td class="td-left" >银行卡照<span style="color:red"></span></td>
 								<td class="td-right" >
-									<a data-toggle='modal' class="tooltip-success bankCardPhotoClick"  data-target="#previewImageModal" >
-										<label id="bankCardPhotoDiv" class="uploadImage">
-											<img  id="bankCardPhotoImageDiv" style="width:100%;height:100%;display:none"/>
+									<!-- <a data-toggle='modal' class="tooltip-success bankCardPhotoClick"  data-target="#previewImageModal" >
+										<label id="bankCardPhotoDiv1" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">
+											<img  id="bankCardPhotoImageDiv" onclick="bigImg(this);"style="width:100%;height:100%;display:none"/>
+										</label>
+									</a> -->
+									<a data-toggle='modal' class="tooltip-success bankCardPhotoClick" data-target="#previewImageModal" >
+										<label id="bankCardPhotoDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.bankCardPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
 										</label>
 									</a>
 									<%--<div style="float:left;margin-top:75" >

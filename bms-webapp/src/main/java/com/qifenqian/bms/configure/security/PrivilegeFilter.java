@@ -42,7 +42,7 @@ public class PrivilegeFilter implements Filter {
   private String[] excludedPageArray;
 
   /** 需要登录的公共功用 */
-  private String[] commonPage = {"/common/files/upload"};
+  private String[] commonPage = {"/common/files/upload","/common/files/uploadPic","/common/files/getPicPath"};
   
   private String[] commonInfo = {"/common/info/bankCnapsInfo","/common/info/getCityInfo","/common/info/getAreaInfo"};
   
@@ -109,6 +109,8 @@ public class PrivilegeFilter implements Filter {
     } else if (requestURI.startsWith("/druid")) {
       skip = true;
     } else if (requestURI.startsWith("/common/info")) {
+	  skip = true;
+	}else if (requestURI.startsWith("/pic")) {
 	  skip = true;
 	}
 
