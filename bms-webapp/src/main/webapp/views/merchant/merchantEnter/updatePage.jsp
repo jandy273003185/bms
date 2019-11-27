@@ -108,16 +108,6 @@ $(function(){
 
     $(function() {
 
-        /* if($("#custType").val() =='0' ||$("#custType").val() =='2' ){
-            //个人
-            $("#bankCardPhoto_").attr("style","display:");
-            $("#openAccount_").attr("style","display:none");
-        }
-        if($("#custType").val() =='1'){
-            //企业
-            $("#bankCardPhoto_").attr("style","display:none");
-            $("#openAccount_").attr("style","display:");
-        } */
         if($("#compMainAcctType").val() =='01'){
 			 $("#bankCardPhoto_").attr("style","display:none");
 			 $("#openAccount_").attr("style","display:");
@@ -140,47 +130,6 @@ $(function(){
         $("#certAttribute2ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=1&authId="+authId);
         $("#openAccountImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=03&authId="+authId);
 
-
-        /* if ("style=\"width:90%\"" == document.getElementById("custManager").value){
-            $("#custManager").attr("value","");
-        }
-
-        if ("style=\"width:90%\"" == document.getElementById("agentName").value){
-            $("#agentName").attr("value","");
-        }
-
-        if ("style=\"width:90%\"" == document.getElementById("businessLicense").value){
-            $("#businessLicense").attr("value","");
-        }
-
-        if ("onfocus=\"WdatePicker({minDate:'%y-%M-%d'})\"" == document.getElementById("businessTermStart").value){
-            $("#businessTermStart").attr("value","");
-        }
-        if ("onfocus=\"WdatePicker({minDate:'%y-%M-%d'})\"" == document.getElementById("businessTermEnd").value){
-            $("#businessTermEnd").attr("value","");
-        }
-        if ("onfocus=\"WdatePicker({skin:'whyGreen'})\"" == document.getElementById("businessTermStart").value){
-            $("#businessTermStart").attr("value","");
-        }
-        if ("onfocus=\"WdatePicker({skin:'whyGreen'})\"" == document.getElementById("businessTermEnd").value){
-            $("#businessTermEnd").attr("value","");
-        }
-
-        */
-        $(function(){
-            $('#compMainAcctType').on('change', function (e) {
-                //bankCardPhoto_
-                let compMainAcctType = $('#compMainAcctType').val();
-                if(compMainAcctType == '01'){
-                    $('#openAccount_').show();
-                    $('#bankCardPhoto_').hide();
-                }else{
-                    $('#bankCardPhoto_').show();
-                    $('#openAccount_').hide();
-                }
-            });
-        });
-
         /**商户类型 **/
         //个人
         if($("#custType").val() =='0'  ){
@@ -194,8 +143,6 @@ $(function(){
     		$('#businessPhotoId_').show();
         }
 
-       /*  $("#agentName").comboSelect();
-    	$("#custManager").comboSelect(); */
     });
     
     function getCityList(){
@@ -259,8 +206,7 @@ $(function(){
     }
 
 
-    function getBankCityList()
-    {
+    function getBankCityList(){
         var provVal = $("#bankProvinceName").val().trim();
 
         $("#cityDef").siblings().remove();
@@ -285,27 +231,6 @@ $(function(){
     			}
     		}
     	})
-        <%-- $.ajax({
-            type:"POST",
-            dataType:"json",
-            url:window.Constants.ContextPath +'<%=MerchantPath.BASE+MerchantPath.GRTCITYLIST %>',
-            data:
-                {
-                    "province" 	: provVal,
-                    "choiceType" : "city"
-                },
-            success:function(data){
-                if(data.result=="SUCCESS"){
-                    var cityList = data.cityList;
-                    for ( var city in cityList) {
-                        $("#bankCityName").append(
-                            "<option value='"+ cityList[city].cityId +"'>"
-                            + cityList[city].cityName + "</option>");
-                    }
-                }else{
-                }
-            }
-        }) --%>
     }
 	
     function getbranchBank(){
@@ -336,7 +261,7 @@ $(function(){
     		}
     	},'json'
     	);	
-    	}
+    }
     function updateMerchantBtn(){
 
         if(!(isNull($("#merchantEmail")[0])) && (!verifyEmailAddress($("#merchantEmail")[0]))){
@@ -379,7 +304,7 @@ $(function(){
 
             if ($("#businessLicense").val() == $("#businessLicenseNumber").val() ) {
                 //相等不去校验
-			}else {
+			}<%-- else {
                 $.ajax({
                     async:false,
                     dataType:"json",
@@ -396,7 +321,7 @@ $(function(){
                 if(!validateLicense){
                     return false;
                 }
-			};
+			}; --%>
 
 
             /*营业执照号*/
@@ -439,40 +364,7 @@ $(function(){
             var flag = Register.validateBusinessLicense($("#businessLicense").val().trim(),$("#businessLicenseLab"));
 
             if(!flag){return false;}
-
-            /* if(!checkAttach($("#businessPhoto")[0])){
-                $.gyzbadmin.alertFailure("必须提交营业执照扫描件");
-                return false;
-            } */
-
-            /*if(!checkAttach($("#openAccount")[0])){
-                $.gyzbadmin.alertFailure("必须提交开户许可证");
-                return false;
-            }*/
         }
-        /*个体户*/
-        /*if(custType=='2'){
-            if(checkAttach($("#businessPhoto")[0])){
-                if(isNull($("#businessLicense")[0])){
-                    $("#businessLicenseLab").text("必须填写营业执照注册号");
-                    return false;
-                }
-                // 校验营业时间
-                if(!Register.validateBusinessTerm($("#businessTermStart").val().trim(),$("#businessTermStartLabel"))){return false;}
-                if($("input:radio[name='end']:checked").val()=='sel'){
-                    if(!Register.validateBusinessTerm($("#businessTermEnd").val().trim(),$("#businessTermStartLabel"))){return false;}
-                    businessTermEnd = $("#businessTermEnd").val();
-                }
-                var flag = Register.validateBusinessLicense($("#businessLicense").val(),$("#businessLicenseLab"));
-                if(!flag){return false;}
-            }
-            if(!kong.test($("#businessLicense").val().trim())){
-                if(!checkAttach($("#businessPhoto")[0])){
-                    $.gyzbadmin.alertFailure("必须上传营业执照扫描件");
-                    return false;
-                }
-            }
-        }*/
 
         /*法人姓名*/
         if(isNull($("#representativeName")[0])){
@@ -499,11 +391,6 @@ $(function(){
             $("#contactMobile").focus();
             return false;
         }
-        /* if(!isMobilePhone($("#contactMobile")[0])){
-            $("#contactMobileLab").text("账号需用手机号 ");
-            $("#contactMobile").focus();
-            return false;
-        } */
         /*银行卡号*/
         if(isNull($("#compMainAcct")[0])){
             $("#compMainAcctLab").text("请填写银行卡号");
@@ -534,12 +421,6 @@ $(function(){
             $("#bankAcctName").focus();
             return false;
         }
-        /*网点号*/
-        /* if(isNull($("#cnaps")[0])){
-            $("#cnapseLab").text("请填写银联号");
-            $("#cnaps").focus();
-            return false;
-        } */
         /*结算类型*/
         if(isNull($("#compMainAcctType")[0])){
             $("#compMainAcctTypeLab").text("请填写结算类型");
@@ -583,7 +464,6 @@ $(function(){
     	var certAttribute2Path = $("#certAttribute2Path").val();
     	var certAttribute1Path = $("#certAttribute1Path").val();
     	var businessPhotoPath = $("#businessPhotoPath").val();
-        /*alert(custId);*/
         $.blockUI();
         $.ajax({
             type : "POST",
@@ -600,10 +480,10 @@ $(function(){
             success : function(data) {
                 if(data.result=='SUCCESS'){
                     $.post(window.Constants.ContextPath +'<%=MerchantEnterPath.BASE + MerchantEnterPath.UPDATE%>',{
-                        "custId":custId,							// 回传custId
-                        "merchantAccount":merchantAccount, 					// 商户二维码编号
+                        "custId":custId,							 // 回传custId
+                        "merchantAccount":merchantAccount, 			 // 商户二维码编号
                         "custType":custType,
-                        "custName":custName, 							// 客户姓名
+                        "custName":custName, 						 // 客户姓名
                         "shortName":shortName,                       // 客户简称
                         "merchantEmail":merchantEmail,
                         "contactPhone":contactPhone,
@@ -611,7 +491,7 @@ $(function(){
                         "city":city,
                         "country" :country,
                         "custAdd" : custAdd,
-                        "businessLicense":businessLicense,             // 营业执照注册号
+                        "businessLicense":businessLicense,           // 营业执照注册号
                         "businessTermStart":businessTermStart,
                         "businessTermEnd" : businessTermEnd,
                         "custManager":custManager,
@@ -648,7 +528,6 @@ $(function(){
 
     /** 点击预览大图 **/
     function bigImg(obj){
-        /* $('#showImageDiv #showImage').attr("src",obj.src); */
         var realWidth;
         var realHeight
         $('#showImageDiv #showImage').attr("src",obj.src).load(function(){
@@ -662,7 +541,6 @@ $(function(){
             $("#imageDiv").css("width",realWidth+"px").css("height",realHeight+"px");
         });
     }
-
 
     //图片预览
     function showBusinessPhotoImage(obj){
@@ -694,7 +572,6 @@ $(function(){
         var imageObj = document.getElementById("certAttribute2ImageDiv");
         return previewImage(divObj,imageObj,obj);
     }
-
     /** 银行卡预览 **/
     function showBankCardPhotoImage(obj){
         var divObj = document.getElementById("bankCardPhotoDiv");
@@ -726,6 +603,7 @@ $(function(){
     }
     
     /*
+    *
     * file input file dom object
     * pathTarget 路径保存的input元素id 
     * preView 图片预览dom id
@@ -1099,17 +977,12 @@ $(function(){
 								</td>
 							</tr>
 							<tr>
-								<%-- <td class="td-left">网点号：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">
-									<input type="text" id="cnaps" name="cnaps" style="width:90%" placeholder="请输入网点号" value ="${merchantVo.cnaps }" > <a href="http://www.lianhanghao.com" target="_blank">[查找]</a>
-								</td> --%>
 								<td class="td-left">结算类型：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
 									<select class="width-90" id="compMainAcctType">
 										<option value="01">对公</option>
 										<option value="02">对私</option>
 									</select>
-
 								</td>
 							</tr>
 							<tr id="openAccount_" style="display: none">
@@ -1192,7 +1065,6 @@ $(function(){
 </div><!-- /.main-container -->
 
 </body>
-
 
 <script type="text/javascript">
 </script>

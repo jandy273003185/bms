@@ -307,7 +307,7 @@ public class MerchantEnterService {
 		String bussinessPath = findPicturePath(custScan);
 		picturePath.setBussinessPath("/pic/" + bussinessPath);
 		//身份证正面照
-		custScan.setCertifyType("00");
+		custScan.setCertifyType("04");
 		String idCardOPath= findPicturePath(custScan);
 		picturePath.setIdCardOPath("/pic/" + idCardOPath);
 		//身份证反面照
@@ -322,7 +322,18 @@ public class MerchantEnterService {
 		custScan.setCertifyType("07");
 		String bankCardPath = findPicturePath(custScan);
 		picturePath.setBankCardPath("/pic/" + bankCardPath);
-		
+		//门头照
+		custScan.setCertifyType("08");
+		String doorPhotoPath = findPicturePath(custScan);
+		picturePath.setDoorPhotoPath("/pic/" + doorPhotoPath);
+		//结算人身份证正面
+		custScan.setCertifyType("30");
+		String settleCertAttribute1Path = findPicturePath(custScan);
+		picturePath.setSettleCertAttribute1Path("/pic/" + settleCertAttribute1Path);		
+		//结算人身份证反面
+		custScan.setCertifyType("31");
+		String settleCertAttribute2Path = findPicturePath(custScan);
+		picturePath.setSettleCertAttribute2Path("/pic/" + settleCertAttribute2Path);	
 		return picturePath;
 	}
 

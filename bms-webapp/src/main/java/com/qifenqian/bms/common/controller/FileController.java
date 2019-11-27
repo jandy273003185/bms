@@ -119,7 +119,7 @@ public class FileController {
                 file.transferTo(saveDir);
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("imagePath",Filename+prefix);
-//                jsonObject.put("uri",uri);
+//              jsonObject.put("uri",uri);
                 jsonObject.put("url",new StringBuilder("/pic/").append(Filename).append(prefix));
                 return new FileInfo(Filename+prefix);
             } catch (IOException e) {
@@ -153,67 +153,115 @@ public class FileController {
 		custScan.setCreateId(merchantVo.getCreateId());
 		custScan.setCustId(custId);
 		
-		
-		if(!StringUtils.isEmpty(picturePath.getBankCardPath())) {
-			custScan.setCertifyType("07");
-			if(!StringUtils.isEmpty(picturePathOld.getBankCardPath())) {
-				custScan.setStatus("01");
-				custScanMapper.updateCustScan(custScan);
+		try {
+			//银行卡照
+			if(!StringUtils.isEmpty(picturePath.getBankCardPath())) {
+				custScan.setCertifyType("07");
+				if(!StringUtils.isEmpty(picturePathOld.getBankCardPath())) {
+					custScan.setStatus("01");
+					custScanMapper.updateCustScan(custScan);
+				}
+				custScan.setStatus("00");
+				custScan.setScanCopyPath(picturePath.getBankCardPath());
+				custScanMapper.insertCustScan(custScan);
 			}
-			custScan.setStatus("00");
-			custScan.setScanCopyPath(picturePath.getBankCardPath());
-			custScanMapper.insertCustScan(custScan);
-		}
-		if(!StringUtils.isEmpty(picturePath.getIdCardOPath())) {
-			custScan.setCertifyType("00");
-			
-			if(!StringUtils.isEmpty(picturePathOld.getIdCardOPath())) {
-				custScan.setStatus("01");
-				custScanMapper.updateCustScan(custScan);
+			//身份证正面照
+			if(!StringUtils.isEmpty(picturePath.getIdCardOPath())) {
+				custScan.setCertifyType("04");
+				
+				if(!StringUtils.isEmpty(picturePathOld.getIdCardOPath())) {
+					custScan.setStatus("01");
+					custScanMapper.updateCustScan(custScan);
+				}
+				
+				custScan.setStatus("00");
+				custScan.setScanCopyPath(picturePath.getIdCardOPath());
+				custScanMapper.insertCustScan(custScan);
 			}
-			
-			custScan.setStatus("00");
-			custScan.setScanCopyPath(picturePath.getIdCardOPath());
-			custScanMapper.insertCustScan(custScan);
-		}
-		if(!StringUtils.isEmpty(picturePath.getIdCardFPath())) {
-			custScan.setCertifyType("16");
-			
-			if(!StringUtils.isEmpty(picturePathOld.getIdCardFPath())) {
-				custScan.setStatus("01");
-				custScanMapper.updateCustScan(custScan);
+			//身份证反面照
+			if(!StringUtils.isEmpty(picturePath.getIdCardFPath())) {
+				custScan.setCertifyType("16");
+				
+				if(!StringUtils.isEmpty(picturePathOld.getIdCardFPath())) {
+					custScan.setStatus("01");
+					custScanMapper.updateCustScan(custScan);
+				}
+				
+				custScan.setScanCopyPath(picturePath.getIdCardFPath());
+				custScan.setStatus("00");
+				custScanMapper.insertCustScan(custScan);
 			}
-			
-			custScan.setScanCopyPath(picturePath.getIdCardFPath());
-			custScan.setStatus("00");
-			custScanMapper.insertCustScan(custScan);
-		}
-		if(!StringUtils.isEmpty(picturePath.getBussinessPath())) {
-			custScan.setCertifyType("02");
-			
-			if(!StringUtils.isEmpty(picturePathOld.getBussinessPath())) {
-				custScan.setStatus("01");
-				custScanMapper.updateCustScan(custScan);
+			//营业执照
+			if(!StringUtils.isEmpty(picturePath.getBussinessPath())) {
+				custScan.setCertifyType("02");
+				
+				if(!StringUtils.isEmpty(picturePathOld.getBussinessPath())) {
+					custScan.setStatus("01");
+					custScanMapper.updateCustScan(custScan);
+				}
+				
+				custScan.setScanCopyPath(picturePath.getBussinessPath());
+				custScan.setStatus("00");
+				custScanMapper.insertCustScan(custScan);
 			}
-			
-			custScan.setScanCopyPath(picturePath.getBussinessPath());
-			custScan.setStatus("00");
-			custScanMapper.insertCustScan(custScan);
-		}
-		if(!StringUtils.isEmpty(picturePath.getOpenAccountPath())) {
-			custScan.setCertifyType("03");
-			
-			if(!StringUtils.isEmpty(picturePathOld.getOpenAccountPath())) {
-				custScan.setStatus("01");
-				custScanMapper.updateCustScan(custScan);
+			//开户许可证
+			if(!StringUtils.isEmpty(picturePath.getOpenAccountPath())) {
+				custScan.setCertifyType("03");
+				
+				if(!StringUtils.isEmpty(picturePathOld.getOpenAccountPath())) {
+					custScan.setStatus("01");
+					custScanMapper.updateCustScan(custScan);
+				}
+				
+				custScan.setScanCopyPath(picturePath.getOpenAccountPath());
+				custScan.setStatus("00");
+				custScanMapper.insertCustScan(custScan);
 			}
-			
-			custScan.setScanCopyPath(picturePath.getOpenAccountPath());
-			custScan.setStatus("00");
-			custScanMapper.insertCustScan(custScan);
+			//门头照
+			if(!StringUtils.isEmpty(picturePath.getDoorPhotoPath())) {
+				custScan.setCertifyType("08");
+				
+				if(!StringUtils.isEmpty(picturePathOld.getDoorPhotoPath())) {
+					custScan.setStatus("01");
+					custScanMapper.updateCustScan(custScan);
+				}
+				
+				custScan.setScanCopyPath(picturePath.getDoorPhotoPath());
+				custScan.setStatus("00");
+				custScanMapper.insertCustScan(custScan);
+			}
+			//结算人身份证正面
+			if(!StringUtils.isEmpty(picturePath.getSettleCertAttribute1Path())) {
+				custScan.setCertifyType("30");
+				
+				if(!StringUtils.isEmpty(picturePathOld.getSettleCertAttribute1Path())) {
+					custScan.setStatus("01");
+					custScanMapper.updateCustScan(custScan);
+				}
+				
+				custScan.setScanCopyPath(picturePath.getSettleCertAttribute1Path());
+				custScan.setStatus("00");
+				custScanMapper.insertCustScan(custScan);
+			}
+			//结算人身份证反面
+			if(!StringUtils.isEmpty(picturePath.getSettleCertAttribute2Path())) {
+				custScan.setCertifyType("31");
+				
+				if(!StringUtils.isEmpty(picturePathOld.getSettleCertAttribute2Path())) {
+					custScan.setStatus("01");
+					custScanMapper.updateCustScan(custScan);
+				}
+				
+				custScan.setScanCopyPath(picturePath.getSettleCertAttribute2Path());
+				custScan.setStatus("00");
+				custScanMapper.insertCustScan(custScan);
+			}
+			object.put("result", "SUCCESS");
+			object.put("message", "新增图片成功");
+		} catch (Exception e) {
+			object.put("result", "FAIL");
+			object.put("message", "新增图片失败");
 		}
-		object.put("result", "SUCCESS");
-		object.put("message", "新增成功");
 		return object.toString();
 		
 	}

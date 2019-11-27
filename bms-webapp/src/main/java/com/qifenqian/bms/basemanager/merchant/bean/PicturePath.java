@@ -8,7 +8,7 @@ public class PicturePath implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -7088932106537173148L;
-	//00 个人身份证正面
+	//04 个人身份证正面
 	private String idCardOPath;
 	//16 个人身份证反面
 	private String idCardFPath;
@@ -18,6 +18,74 @@ public class PicturePath implements Serializable {
 	private String openAccountPath;
 	//07银行卡正面
 	private String bankCardPath;
+	//08门头照
+	private String doorPhotoPath;
+	//30结算人身份证正面
+	private String settleCertAttribute1Path;
+	//31结算人身份证反面
+	private String settleCertAttribute2Path;
+	//18店内照
+	private String shopInteriorPath;
+	//11行业资质照
+	private String qualificationPath;
+	//12电子签名照
+	private String signaturePath;
+	//13手持身份证照
+	private String handIdCardPath;
+	//14银行卡反面照
+	private String bankCardBackPath;
+	
+	
+	
+	
+	public String getDoorPhotoPath() {
+		return doorPhotoPath;
+	}
+	public void setDoorPhotoPath(String doorPhotoPath) {
+		this.doorPhotoPath = doorPhotoPath;
+	}
+	public String getSettleCertAttribute1Path() {
+		return settleCertAttribute1Path;
+	}
+	public void setSettleCertAttribute1Path(String settleCertAttribute1Path) {
+		this.settleCertAttribute1Path = settleCertAttribute1Path;
+	}
+	public String getSettleCertAttribute2Path() {
+		return settleCertAttribute2Path;
+	}
+	public void setSettleCertAttribute2Path(String settleCertAttribute2Path) {
+		this.settleCertAttribute2Path = settleCertAttribute2Path;
+	}
+	public String getShopInteriorPath() {
+		return shopInteriorPath;
+	}
+	public void setShopInteriorPath(String shopInteriorPath) {
+		this.shopInteriorPath = shopInteriorPath;
+	}
+	public String getQualificationPath() {
+		return qualificationPath;
+	}
+	public void setQualificationPath(String qualificationPath) {
+		this.qualificationPath = qualificationPath;
+	}
+	public String getSignaturePath() {
+		return signaturePath;
+	}
+	public void setSignaturePath(String signaturePath) {
+		this.signaturePath = signaturePath;
+	}
+	public String getHandIdCardPath() {
+		return handIdCardPath;
+	}
+	public void setHandIdCardPath(String handIdCardPath) {
+		this.handIdCardPath = handIdCardPath;
+	}
+	public String getBankCardBackPath() {
+		return bankCardBackPath;
+	}
+	public void setBankCardBackPath(String bankCardBackPath) {
+		this.bankCardBackPath = bankCardBackPath;
+	}
 	public String getIdCardOPath() {
 		return idCardOPath;
 	}
