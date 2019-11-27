@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qifenqian.bms.merchant.reported.mapper.WeChatAppMapper">
+
+	<select id="getProvinceName" resultType="com.qifenqian.bms.merchant.reported.bean.WeChatAppAreaInfo">
+	select DISTINCT
+		province_name
+	from 
+		wx_area_info
+	</select>
+	
+	<select id="selTdMerchantDetailInfo" parameterType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo"  resultType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo">
+		SELECT
+			*
+		FROM
+			td_merchant_report t1
+		WHERE
+			t1.`merchant_code` = #{merchantCode,jdbcType = VARCHAR} and t1.channel_no = #{channelNo,jdbcType = VARCHAR}
+	</select>
+	
+	<update id="updateTdMerchantReport"  parameterType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo" >
+    	 UPDATE `stcdb`.`td_merchant_report`
+			SET 
+			<if test="reportStatus != null and reportStatus !='' ">
+		 	`report_status` = #{reportStatus,jdbcType = VARCHAR}
+		 	</if>
+		 WHERE `merchant_code` = #{merchantCode,jdbcType = VARCHAR} and channel_no = #{channelNo,jdbcType = VARCHAR} and patch_no = #{patchNo,jdbcType = VARCHAR}
+    </update>
+    
+    <update id="updateTdMerchantDetailInfo"  parameterType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo" >
+    	 UPDATE `stcdb`.`td_merchant_detail_info`
+		 SET 
+		 	<if test="reportStatus != null and reportStatus !='' ">
+		 	`report_status` = #{reportStatus,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="fileStatus != null and fileStatus !='' ">
+		 	`file_status` = #{fileStatus,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="outMerchantCode != null and outMerchantCode !='' ">
+		 	`out_merchant_code` = #{outMerchantCode,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="remark != null and remark !='' ">
+		 	`remark` = #{remark,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="bestMerchantType != null and bestMerchantType !='' ">
+		 	`bestMerchantType` = #{bestMerchantType,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="loginNo != null and loginNo !='' ">
+		 	`loginNo` = #{loginNo,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="bestpayMctNo != null and bestpayMctNo !='' ">
+		 	`bestpayMctNo` = #{bestpayMctNo,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="resultMsg != null and resultMsg !='' ">
+		 	`result_msg` = #{resultMsg,jdbcType = VARCHAR},
+		 	</if>
+			 `modify_time` = now()
+		 WHERE
+			`patch_no` = #{patchNo,jdbcType = VARCHAR}
+    </update>
+</mapper>
