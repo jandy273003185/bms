@@ -113,7 +113,7 @@ public class FileController {
         if (!file.isEmpty()) {//文件不为空
             try {
                 //上传路径
-                StringBuilder filePath = new StringBuilder("D:/data/nfsshare/upload/picture").append("/").append(Filename).append(prefix);
+                StringBuilder filePath = new StringBuilder("/data/nfsshare/upload/picture").append("/").append(Filename).append(prefix);
                 File saveDir = new File(String.valueOf(filePath));
                 // 转存文件
                 file.transferTo(saveDir);
