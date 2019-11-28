@@ -50,7 +50,7 @@
 		var loginNo = $(obj).parent().find('#loginNo_').val();
 		var outMerchantCode = $(obj).parent().find('#outMerchantCode_').val();
 		
-		var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.MERCHANTREPORTINFO%>?merchantCode="+merchantCode+"&channlCode="+channlCode; 
+		var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.MERCHANTREPORTINFO%>?merchantCode="+merchantCode+"&channlCode="+channlCode+"&patchNo="+patchNo; 
      	var name="window";                        //网页名称，可为空;
      	var iWidth=1200;                          //弹出窗口的宽度;
      	var iHeight=600;                       //弹出窗口的高度;

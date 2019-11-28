@@ -18,8 +18,11 @@ import com.qifenqian.bms.merchant.merchantReported.bean.KFTMccBean;
 import com.qifenqian.bms.merchant.merchantReported.mapper.KftIncomeMapper;
 import com.qifenqian.bms.merchant.merchantReported.service.KFTIncomeService;
 import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
+import com.qifenqian.bms.basemanager.merchant.bean.MerchantVo;
+import com.qifenqian.bms.basemanager.merchant.bean.PicturePath;
 import com.qifenqian.bms.basemanager.merchant.bean.StoreManage;
 import com.qifenqian.bms.basemanager.merchant.mapper.StoreManageMapper;
+import com.qifenqian.bms.basemanager.merchant.service.MerchantEnterService;
 import com.qifenqian.bms.merchant.reported.MerchantReportedPath;
 import com.qifenqian.bms.merchant.reported.bean.Bank;
 import com.qifenqian.bms.merchant.reported.bean.ChannlInfo;
@@ -56,6 +59,9 @@ public class MerchantEnterReportedController {
    
    @Autowired
    private KftIncomeMapper kftIncomeMapper;
+   
+   @Autowired
+   private MerchantEnterService merchantEnterService;
 	 
    /**
     * 商户报备查询
@@ -78,7 +84,7 @@ public class MerchantEnterReportedController {
 				//审核通过再判断是否已经报备
 				if(null!=reportedList && reportedList.size()>0){
 					for(int i=0;i<reportedList.size();i++){
-						if("1".equals(reportedList.get(i).getReportStatus()) ||"0".equals(reportedList.get(i).getReportStatus()) ){
+						if("1".equals(reportedList.get(i).getReportStatus()) ||"0".equals(reportedList.get(i).getReportStatus()) ||"00".equals(reportedList.get(i).getReportStatus())){
 							object.put("result", "SUCCESS");
 							return object.toString();
 						}
@@ -137,6 +143,12 @@ public class MerchantEnterReportedController {
 				return mv;
 			}
 		}
+		//获取图片路径
+		MerchantVo merchantVo = new MerchantVo();
+		merchantVo.setAuthId(custInfo.getAuthId());
+		merchantVo.setCustId(custInfo.getCustId());
+		PicturePath picturePath = merchantEnterService.getPicPath(merchantVo);
+		mv.addObject("picturePathVo", picturePath);
 		/*if(null!=reportedList && reportedList.size()>0){
 			mv.addObject("reportedList", reportedList);
 			String remark =  reportedList.get(0).getRemark();
@@ -566,6 +578,12 @@ public class MerchantEnterReportedController {
 				return mv;
 			}
 		}
+		//获取图片路径
+		MerchantVo merchantVo = new MerchantVo();
+		merchantVo.setAuthId(custInfo.getAuthId());
+		merchantVo.setCustId(custInfo.getCustId());
+		PicturePath picturePath = merchantEnterService.getPicPath(merchantVo);
+		mv.addObject("picturePathVo", picturePath);
 		/*if(null!=reportedList && reportedList.size()>0){
 			mv.addObject("reportedList", reportedList);
 			String remark =  reportedList.get(0).getRemark();

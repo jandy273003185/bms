@@ -294,11 +294,6 @@ public class MerchantEnterController {
 		PicturePath picturePath = merchantEnterService.getPicPath(merchantVo);
 		mv.addObject("picturePathVo", picturePath); 
 		
-//		mv.addObject("bussinessPath", "/pic/" + bussinessPath);
-//		mv.addObject("idCardOPath", "/pic/" + idCardOPath);
-//		mv.addObject("idCardFPath", "/pic/" + idCardFPath);
-//		mv.addObject("openPath", "/pic/" + openPath);
-//		mv.addObject("bankCardPath", "/pic/" + bankCardPath);
 		mv.addObject("banklist", bankMapper.selectBanks(bank));
 		mv.addObject("rulelist", ruleMapper.selectRules(rule));
 		mv.addObject("userlist", userService.getUserList(user));

@@ -17,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
 import com.qifenqian.bms.basemanager.merchant.bean.MerchantVo;
+import com.qifenqian.bms.basemanager.merchant.bean.PicturePath;
+import com.qifenqian.bms.basemanager.merchant.service.MerchantEnterService;
 import com.qifenqian.bms.basemanager.merchant.service.MerchantService;
 import com.qifenqian.bms.basemanager.toPayProduct.bean.ToPayProduct;
 import com.qifenqian.bms.basemanager.toPayProduct.mapper.ToPayProductMapper;
@@ -55,6 +57,8 @@ public class KftMerchantReportedController {
    @Autowired
    private MerchantService merchantService;
    
+   @Autowired
+   private MerchantEnterService merchantEnterService;
 	/**
 	 * 快付通提交报备
 	 */
@@ -188,7 +192,7 @@ public class KftMerchantReportedController {
 	
 	@RequestMapping(MerchantEnterReportedPath.MERCHANTREPORTINFO)
 	@ResponseBody
-	public ModelAndView reportInfo(HttpServletRequest request,HttpServletResponse response,String merchantCode,String channlCode){
+	public ModelAndView reportInfo(HttpServletRequest request,HttpServletResponse response,String merchantCode,String channlCode,String patchNo){
 	
 		ModelAndView mv = new ModelAndView();
 		TdMerchantDetailInfo detailInfo = new TdMerchantDetailInfo();
@@ -197,10 +201,11 @@ public class KftMerchantReportedController {
 	    
 	    detailInfo.setChannelCode(channlCode);
 		detailInfo.setMerchantCode(merchantCode);
+		detailInfo.setPatchNo(patchNo);
 //		MerchantVo merchant = merchantService.getMerchantInfo(detailInfo);
 		MerchantVo merchant = merchantService.findMerchantInfo(custInfo.getCustId());
 		/***报备明细***/
-		TdMerchantDetailInfo tdMerchantDetailInfo= merchantService.findMerchantDetailInfo(custInfo.getMerchantCode(),channlCode);
+		TdMerchantDetailInfo tdMerchantDetailInfo= merchantService.findMerchantDetailInfo(detailInfo);
 		/***查询随行付银行地区信息***/
 		List<Province> proviceList = fmIncomeService.getSuiXingProvinceList();
 		/***查询银行信息***/
@@ -228,7 +233,9 @@ public class KftMerchantReportedController {
 		if(null!=industryList && industryList.size()>0){
 			mv.addObject("industryList", industryList);
 		}
-		
+		//获取图片路径
+		PicturePath picturePath = merchantEnterService.getPicPath(merchant);
+		mv.addObject("picturePathVo", picturePath); 
 		return mv;
 	}
 }

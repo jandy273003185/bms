@@ -2492,7 +2492,7 @@
 		)
 	</insert>
 	
-	<select id="findMerchantDetailInfo" parameterType="string" resultType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo">
+	<select id="findMerchantDetailInfo" parameterType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo" resultType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo">
 		select 
 		 t.patch_no,
 		 t.merchant_code,
@@ -2534,8 +2534,11 @@
 		<if test="merchantCode != null and merchantCode !='' ">
 		 AND r.merchant_code = #{merchantCode,jdbcType=VARCHAR}
 		</if>
-		<if test="channlCode != null and channlCode !='' ">
-		 AND r.channel_no = #{channlCode,jdbcType=VARCHAR}
+		<if test="channelCode != null and channelCode !='' ">
+		 AND r.channel_no = #{channelCode,jdbcType=VARCHAR}
+		</if>
+		<if test="patchNo != null and patchNo !='' ">
+		 AND t.patch_no = #{patchNo,jdbcType=VARCHAR}
 		</if>
 	</where>
 	

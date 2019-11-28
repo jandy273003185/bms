@@ -46,13 +46,12 @@ public class FileController {
 	private static final String PRE_PATH = "/data/nfsshare/upload/picture/";
 	private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 	
-//	@Value("${images.uri}")
-//    private String uri;
-//    @Value("${images.relativePath}")
-//    private String relativePath;
-//    //存储路径
-//    @Value("${images.absolutePaths}")
-//    private String absolutePaths;
+	
+    @Value("${images.relativePaths}")
+    private String relativePaths;
+    //存储路径
+    @Value("${images.absolutePaths}")
+    private String absolutePaths;
 	
 	
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
