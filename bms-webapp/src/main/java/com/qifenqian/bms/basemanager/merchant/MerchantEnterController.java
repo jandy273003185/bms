@@ -22,6 +22,7 @@ import com.qifenqian.bms.platform.utils.SequenceUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -65,7 +66,11 @@ public class MerchantEnterController {
 	
 	
 	private Logger logger = LoggerFactory.getLogger(MerchantEnterController.class);
-
+	
+	/*
+	 * @Value("${images.uri}") private String uri;
+	 */
+	
 	@Autowired
 	private MerchantService merchantService;
 	@Autowired
@@ -285,6 +290,15 @@ public class MerchantEnterController {
 		if(null != sysUser) {
 			merchant.setCustManager(sysUser.getUserName());
 		}
+		//获取图片路径
+		PicturePath picturePath = merchantEnterService.getPicPath(merchantVo);
+		mv.addObject("picturePathVo", picturePath); 
+		
+//		mv.addObject("bussinessPath", "/pic/" + bussinessPath);
+//		mv.addObject("idCardOPath", "/pic/" + idCardOPath);
+//		mv.addObject("idCardFPath", "/pic/" + idCardFPath);
+//		mv.addObject("openPath", "/pic/" + openPath);
+//		mv.addObject("bankCardPath", "/pic/" + bankCardPath);
 		mv.addObject("banklist", bankMapper.selectBanks(bank));
 		mv.addObject("rulelist", ruleMapper.selectRules(rule));
 		mv.addObject("userlist", userService.getUserList(user));
@@ -341,6 +355,9 @@ public class MerchantEnterController {
 		if(null != sysUser) {
 			merchant.setCustManager(sysUser.getUserName());
 		}
+		//获取图片路径
+  		PicturePath picturePath = merchantEnterService.getPicPath(merchantVo);
+  		mv.addObject("picturePathVo", picturePath); 
 		mv.addObject("areaName", areaName);
 		mv.addObject("banklist", bankMapper.selectBanks(bank));
 		mv.addObject("rulelist", ruleMapper.selectRules(rule));
@@ -432,6 +449,9 @@ public class MerchantEnterController {
         if(null != tdCustInfo) {
         	merchant.setAgentName(tdCustInfo.getCustName());
         }
+        //获取图片路径
+  		PicturePath picturePath = merchantEnterService.getPicPath(merchantVo);
+  		mv.addObject("picturePathVo", picturePath); 
 		mv.addObject("merchantVo", merchant);
 		return mv;
     }

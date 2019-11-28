@@ -1769,7 +1769,21 @@
 	<select id="findPath" parameterType="com.qifenqian.bms.basemanager.merchant.bean.CustScan" resultType="string" >
 		select scan_copy_path 
 		from td_cust_scan_copy 
-		where cust_id = #{custId,jdbcType=VARCHAR} and certify_type = #{certifyType,jdbcType=VARCHAR}
+		<where> 
+			1=1
+			<if test="custId != null and custId != '' ">
+			 	AND cust_id = #{custId, jdbcType=VARCHAR} 
+			</if>
+			<if test="authId != null and authId != '' ">
+			 	AND AUTH_ID = #{authId, jdbcType=VARCHAR} 
+			</if>
+			<if test="certifyType != null and certifyType != '' ">
+			 	AND CERTIFY_TYPE = #{certifyType, jdbcType=VARCHAR} 
+			</if>
+			<if test="status != null and status != '' ">
+			 	AND status = #{status, jdbcType=VARCHAR} 
+			</if>
+		</where>
 	</select>
 	
 	<update id="updateMerchant"  parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">

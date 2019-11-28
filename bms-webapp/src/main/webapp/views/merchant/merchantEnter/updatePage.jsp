@@ -108,16 +108,13 @@ $(function(){
 
     $(function() {
 
-        if($("#custType").val() =='0' ||$("#custType").val() =='2' ){
-            //个人
-            $("#bankCardPhoto_").attr("style","display:");
-            $("#openAccount_").attr("style","display:none");
-        }
-        if($("#custType").val() =='1'){
-            //企业
-            $("#bankCardPhoto_").attr("style","display:none");
-            $("#openAccount_").attr("style","display:");
-        }
+        if($("#compMainAcctType").val() =='01'){
+			 $("#bankCardPhoto_").attr("style","display:none");
+			 $("#openAccount_").attr("style","display:");
+		}else{
+			$("#bankCardPhoto_").attr("style","display:");
+           $("#openAccount_").attr("style","display:none");
+		}
 
         var custId = $("#custId").val().trim();
         var authId = $("#authId").val().trim();
@@ -133,47 +130,6 @@ $(function(){
         $("#certAttribute2ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=1&authId="+authId);
         $("#openAccountImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=03&authId="+authId);
 
-
-        /* if ("style=\"width:90%\"" == document.getElementById("custManager").value){
-            $("#custManager").attr("value","");
-        }
-
-        if ("style=\"width:90%\"" == document.getElementById("agentName").value){
-            $("#agentName").attr("value","");
-        }
-
-        if ("style=\"width:90%\"" == document.getElementById("businessLicense").value){
-            $("#businessLicense").attr("value","");
-        }
-
-        if ("onfocus=\"WdatePicker({minDate:'%y-%M-%d'})\"" == document.getElementById("businessTermStart").value){
-            $("#businessTermStart").attr("value","");
-        }
-        if ("onfocus=\"WdatePicker({minDate:'%y-%M-%d'})\"" == document.getElementById("businessTermEnd").value){
-            $("#businessTermEnd").attr("value","");
-        }
-        if ("onfocus=\"WdatePicker({skin:'whyGreen'})\"" == document.getElementById("businessTermStart").value){
-            $("#businessTermStart").attr("value","");
-        }
-        if ("onfocus=\"WdatePicker({skin:'whyGreen'})\"" == document.getElementById("businessTermEnd").value){
-            $("#businessTermEnd").attr("value","");
-        }
-
-        */
-        $(function(){
-            $('#compMainAcctType').on('change', function (e) {
-                //bankCardPhoto_
-                let compMainAcctType = $('#compMainAcctType').val();
-                if(compMainAcctType == '01'){
-                    $('#openAccount_').show();
-                    $('#bankCardPhoto_').hide();
-                }else{
-                    $('#bankCardPhoto_').show();
-                    $('#openAccount_').hide();
-                }
-            });
-        });
-
         /**商户类型 **/
         //个人
         if($("#custType").val() =='0'  ){
@@ -187,8 +143,6 @@ $(function(){
     		$('#businessPhotoId_').show();
         }
 
-       /*  $("#agentName").comboSelect();
-    	$("#custManager").comboSelect(); */
     });
     
     function getCityList(){
@@ -252,8 +206,7 @@ $(function(){
     }
 
 
-    function getBankCityList()
-    {
+    function getBankCityList(){
         var provVal = $("#bankProvinceName").val().trim();
 
         $("#cityDef").siblings().remove();
@@ -278,27 +231,6 @@ $(function(){
     			}
     		}
     	})
-        <%-- $.ajax({
-            type:"POST",
-            dataType:"json",
-            url:window.Constants.ContextPath +'<%=MerchantPath.BASE+MerchantPath.GRTCITYLIST %>',
-            data:
-                {
-                    "province" 	: provVal,
-                    "choiceType" : "city"
-                },
-            success:function(data){
-                if(data.result=="SUCCESS"){
-                    var cityList = data.cityList;
-                    for ( var city in cityList) {
-                        $("#bankCityName").append(
-                            "<option value='"+ cityList[city].cityId +"'>"
-                            + cityList[city].cityName + "</option>");
-                    }
-                }else{
-                }
-            }
-        }) --%>
     }
 	
     function getbranchBank(){
@@ -329,7 +261,7 @@ $(function(){
     		}
     	},'json'
     	);	
-    	}
+    }
     function updateMerchantBtn(){
 
         if(!(isNull($("#merchantEmail")[0])) && (!verifyEmailAddress($("#merchantEmail")[0]))){
@@ -372,7 +304,7 @@ $(function(){
 
             if ($("#businessLicense").val() == $("#businessLicenseNumber").val() ) {
                 //相等不去校验
-			}else {
+			}<%-- else {
                 $.ajax({
                     async:false,
                     dataType:"json",
@@ -389,7 +321,7 @@ $(function(){
                 if(!validateLicense){
                     return false;
                 }
-			};
+			}; --%>
 
 
             /*营业执照号*/
@@ -432,40 +364,7 @@ $(function(){
             var flag = Register.validateBusinessLicense($("#businessLicense").val().trim(),$("#businessLicenseLab"));
 
             if(!flag){return false;}
-
-            /* if(!checkAttach($("#businessPhoto")[0])){
-                $.gyzbadmin.alertFailure("必须提交营业执照扫描件");
-                return false;
-            } */
-
-            /*if(!checkAttach($("#openAccount")[0])){
-                $.gyzbadmin.alertFailure("必须提交开户许可证");
-                return false;
-            }*/
         }
-        /*个体户*/
-        /*if(custType=='2'){
-            if(checkAttach($("#businessPhoto")[0])){
-                if(isNull($("#businessLicense")[0])){
-                    $("#businessLicenseLab").text("必须填写营业执照注册号");
-                    return false;
-                }
-                // 校验营业时间
-                if(!Register.validateBusinessTerm($("#businessTermStart").val().trim(),$("#businessTermStartLabel"))){return false;}
-                if($("input:radio[name='end']:checked").val()=='sel'){
-                    if(!Register.validateBusinessTerm($("#businessTermEnd").val().trim(),$("#businessTermStartLabel"))){return false;}
-                    businessTermEnd = $("#businessTermEnd").val();
-                }
-                var flag = Register.validateBusinessLicense($("#businessLicense").val(),$("#businessLicenseLab"));
-                if(!flag){return false;}
-            }
-            if(!kong.test($("#businessLicense").val().trim())){
-                if(!checkAttach($("#businessPhoto")[0])){
-                    $.gyzbadmin.alertFailure("必须上传营业执照扫描件");
-                    return false;
-                }
-            }
-        }*/
 
         /*法人姓名*/
         if(isNull($("#representativeName")[0])){
@@ -492,11 +391,6 @@ $(function(){
             $("#contactMobile").focus();
             return false;
         }
-        /* if(!isMobilePhone($("#contactMobile")[0])){
-            $("#contactMobileLab").text("账号需用手机号 ");
-            $("#contactMobile").focus();
-            return false;
-        } */
         /*银行卡号*/
         if(isNull($("#compMainAcct")[0])){
             $("#compMainAcctLab").text("请填写银行卡号");
@@ -527,12 +421,6 @@ $(function(){
             $("#bankAcctName").focus();
             return false;
         }
-        /*网点号*/
-        /* if(isNull($("#cnaps")[0])){
-            $("#cnapseLab").text("请填写银联号");
-            $("#cnaps").focus();
-            return false;
-        } */
         /*结算类型*/
         if(isNull($("#compMainAcctType")[0])){
             $("#compMainAcctTypeLab").text("请填写结算类型");
@@ -570,27 +458,32 @@ $(function(){
         var bankCityName = $("#bankCityName").val();
         var compMainAcctType = $("#compMainAcctType").val();
         var custId = $("#custId").val();
-        /*alert(custId);*/
+        
+        var openAccountPath =  $("#openAccountPath").val();
+    	var bankCardPhotoPath = $("#bankCardPhotoPath").val();
+    	var certAttribute2Path = $("#certAttribute2Path").val();
+    	var certAttribute1Path = $("#certAttribute1Path").val();
+    	var businessPhotoPath = $("#businessPhotoPath").val();
         $.blockUI();
         $.ajax({
             type : "POST",
-            url : window.Constants.ContextPath +'<%=TinyMerchantPath.BASE + TinyMerchantPath.FILEUPLOAD%>',
+            url : window.Constants.ContextPath +'<%="/common/files/getPicPath"%>?custId='+custId,
             data :{
-                businessPhoto : $('#businessPhototemp').val(),
-                certAttribute1 : $('#certAttribute1temp').val(),
-                certAttribute2 : $('#certAttribute2temp').val(),
-                openAccount : $('#openAccounttemp').val(),
-                bankCardPhoto : $('#bankCardPhototemp').val()
+            	"openAccountPath" :  openAccountPath,                //商户营业执照
+            	"idCardOPath"     :  certAttribute1Path,             //身份证正面照
+            	"idCardFPath"     :  certAttribute2Path,             //身份证背面照
+            	"bussinessPath"   :  businessPhotoPath,              //开户许可证
+            	"bankCardPath"    :  bankCardPhotoPath               //开户银行照
 
             },
             dataType : "json",
             success : function(data) {
                 if(data.result=='SUCCESS'){
                     $.post(window.Constants.ContextPath +'<%=MerchantEnterPath.BASE + MerchantEnterPath.UPDATE%>',{
-                        "custId":custId,							// 回传custId
-                        "merchantAccount":merchantAccount, 					// 商户二维码编号
+                        "custId":custId,							 // 回传custId
+                        "merchantAccount":merchantAccount, 			 // 商户二维码编号
                         "custType":custType,
-                        "custName":custName, 							// 客户姓名
+                        "custName":custName, 						 // 客户姓名
                         "shortName":shortName,                       // 客户简称
                         "merchantEmail":merchantEmail,
                         "contactPhone":contactPhone,
@@ -598,7 +491,7 @@ $(function(){
                         "city":city,
                         "country" :country,
                         "custAdd" : custAdd,
-                        "businessLicense":businessLicense,             // 营业执照注册号
+                        "businessLicense":businessLicense,           // 营业执照注册号
                         "businessTermStart":businessTermStart,
                         "businessTermEnd" : businessTermEnd,
                         "custManager":custManager,
@@ -635,7 +528,6 @@ $(function(){
 
     /** 点击预览大图 **/
     function bigImg(obj){
-        /* $('#showImageDiv #showImage').attr("src",obj.src); */
         var realWidth;
         var realHeight
         $('#showImageDiv #showImage').attr("src",obj.src).load(function(){
@@ -649,7 +541,6 @@ $(function(){
             $("#imageDiv").css("width",realWidth+"px").css("height",realHeight+"px");
         });
     }
-
 
     //图片预览
     function showBusinessPhotoImage(obj){
@@ -681,7 +572,6 @@ $(function(){
         var imageObj = document.getElementById("certAttribute2ImageDiv");
         return previewImage(divObj,imageObj,obj);
     }
-
     /** 银行卡预览 **/
     function showBankCardPhotoImage(obj){
         var divObj = document.getElementById("bankCardPhotoDiv");
@@ -710,6 +600,67 @@ $(function(){
     function fun(){
         $("input[name='businessTermEnd']").val("2099-12-31");
         $("#businessTermEnd").attr("value","2099-12-31");
+    }
+    
+    /*
+    *
+    * file input file dom object
+    * pathTarget 路径保存的input元素id 
+    * preView 图片预览dom id
+    */
+    function commonFileUpload(file, pathTarget, preView) {
+    	var formdata=new FormData();
+        formdata.append("file",$(file).get(0).files[0]);
+        $.ajax({
+            url:'/common/files/uploadPic',
+            type:'post',
+            contentType:false,
+            data:formdata,
+            processData:false,
+            async:false,
+            success:function(info){ 
+                 $('#' + pathTarget + '').val(info.path);
+            },
+            error:function(err){
+                console.log(err)
+            }
+        });
+
+        var prevDiv = document.getElementById(preView);
+        if (file.files && file.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (evt) {
+            	prevDiv.innerHTML = '<img src="' + evt.target.result + '" onclick="bigImg(this);" style="width:120px;height:100px;" />';
+            }
+            reader.readAsDataURL(file.files[0]);
+        } else {
+            prevDiv.innerHTML = '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';
+        }
+    }
+
+    //营业执照上传
+    function showBusinessPhotoImage(file){
+    	commonFileUpload(file, 'businessPhotoPath', 'businessPhotoDiv');
+    }
+
+    //身份证正面
+    function showCertAttribute1Image(file){
+    	commonFileUpload(file, 'certAttribute1Path', 'certAttribute1Div');
+    }
+
+    //身份证反面
+    function showCertAttribute2Image(file){
+    	commonFileUpload(file, 'certAttribute2Path', 'certAttribute2Div');
+    } 
+
+    //上传银行卡照
+    function showBankCardPhotoImage(file){
+    	commonFileUpload(file, 'bankCardPhotoPath', 'bankCardPhotoDiv');
+    }
+
+    //上传开户许可证
+    function showOpenAccountImage(file){
+    	commonFileUpload(file, 'openAccountPath', 'openAccountDiv');
     }
 </script>
 <body>
@@ -740,7 +691,7 @@ $(function(){
 						<input type="hidden" name="merchantCode" id="merchantCode" value="${merchantVo.merchantCode}">
 						<input type="hidden" name="authId" id="authId" value="${merchantVo.authId}">
 						<input type="hidden" name="custType" id="custType" value="${merchantVo.custType}">
-
+						<input type="hidden" name="compMainAcctType" id="compMainAcctType" value="${merchantVo.compMainAcctType}">
 						<input type="hidden" id="businessLicenseNumber" value="${merchantVo.businessLicense }"/>
 						<table id="merchant_table" class="list-table">
 							<tbody>
@@ -850,16 +801,27 @@ $(function(){
 							<tr id="businessPhotoId_"  style="display: ">
 								<td class="td-left" id="businessPhotoId">营业执照扫描件：</td>
 								<td class="td-right" colspan="3">
-									<a data-toggle='modal' class="tooltip-success businessPhotoClick" data-target="#previewImageModal" >
+									<!-- <a data-toggle='modal' class="tooltip-success businessPhotoClick" data-target="#previewImageModal" >
 										<label id="businessPhotoDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
 											<img  id="businessPhotoImageDiv" onclick="bigImg(this);"  style="width:100%;height:100%;display:none"  />
 										</label>
+									</a> -->
+									<a data-toggle='modal' class="tooltip-success businessPhotoClick" data-target="#previewImageModal" >
+										<label id="businessPhotoDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.bussinessPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
 									</a>
 									<div class="updateImageDiv" style="float:left; margin-top:75 " >
+										<input  type="hidden" id="businessPhotoPath" name="businessPhotoPath" />
 										<input type="hidden" id="businessPhotoImageVal02"  />
 										<input type="file" name="businessPhoto" id="businessPhoto" onchange="showBusinessPhotoImage(this)" />
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
+									<!-- <div class="updateImageDiv" style="float:left; margin-top:75 " >
+										<input type="hidden" id="businessPhotoImageVal02"  />
+										<input type="file" name="businessPhoto" id="businessPhoto" onchange="showBusinessPhotoImage(this)" />
+										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div> -->
 
 								</td>
 							</tr>
@@ -900,31 +862,50 @@ $(function(){
 							<tr>
 								<td class="td-left" >身份证图片正面：</td>
 								<td class="td-right" colspan="3">
-									<a data-toggle='modal' class="tooltip-success certAttribute1Click"   data-target="#previewImageModal" >
+									<!-- <a data-toggle='modal' class="tooltip-success certAttribute1Click"   data-target="#previewImageModal" >
 										<label id="certAttribute1Div"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">
 											<img  id="certAttribute1ImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none"/>
 										</label>
+									</a> -->
+									<a data-toggle='modal' class="tooltip-success certAttribute1Click" data-target="#previewImageModal" >
+										<label id="certAttribute1Div"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.idCardOPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
 									</a>
-									<div class="updateImageDiv" style="float:left; margin-top:75" >
+									<div style="float:left;margin-top:75" >
+								    	<input  type="hidden" id="certAttribute1Path" name="certAttribute1Path" />
+										<input type="file" name="certAttribute1" id="certAttribute1" onChange="showCertAttribute1Image(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div>
+									<!-- <div class="updateImageDiv" style="float:left; margin-top:75" >
 										<input type="hidden" id="certAttribute1Val02"  />
 										<input type="file" name="certAttribute1" id="certAttribute1"  onchange="showCertAttribute1Image(this)"/>
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-									</div>
+									</div> -->
 								</td>
 							</tr>
 							<tr>
 								<td class="td-left" >身份证图片背面：</td>
 								<td class="td-right" colspan="3">
-									<a data-toggle='modal' class="tooltip-success certAttribute2Click"  data-target="#previewImageModal"  >
+									<!-- <a data-toggle='modal' class="tooltip-success certAttribute2Click"  data-target="#previewImageModal"  >
 										<label id="certAttribute2Div"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">
 											<img  id="certAttribute2ImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none" />
 										</label>
+									</a> -->
+									<a data-toggle='modal' class="tooltip-success certAttribute2Click" data-target="#previewImageModal" >
+										<label id="certAttribute2Div"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.idCardFPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
 									</a>
-									<div class="updateImageDiv" style="float:left; margin-top:75" >
+									<div style="float:left;margin-top:75" >
+										<input  type="hidden" id="certAttribute2Path" name="certAttribute2Path" />
+										<input type="file" name="certAttribute2" id="certAttribute2" onChange="showCertAttribute2Image(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div>
+									<!-- <div class="updateImageDiv" style="float:left; margin-top:75" >
 										<input type="hidden" id="certAttribute2Val02"  />
 										<input type="file" name="certAttribute2" id="certAttribute2" onchange="showCertAttribute2Image(this)"/>
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-									</div>
+									</div> -->
+									
 								</td>
 							</tr>
 							<tr>
@@ -996,46 +977,60 @@ $(function(){
 								</td>
 							</tr>
 							<tr>
-								<%-- <td class="td-left">网点号：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">
-									<input type="text" id="cnaps" name="cnaps" style="width:90%" placeholder="请输入网点号" value ="${merchantVo.cnaps }" > <a href="http://www.lianhanghao.com" target="_blank">[查找]</a>
-								</td> --%>
 								<td class="td-left">结算类型：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
 									<select class="width-90" id="compMainAcctType">
 										<option value="01">对公</option>
 										<option value="02">对私</option>
 									</select>
-
 								</td>
 							</tr>
 							<tr id="openAccount_" style="display: none">
 								<td class="td-left" >开户许可证：</td>
 								<td class="td-right" colspan="3">
-									<a data-toggle='modal' class="tooltip-success openAccountClick"  data-target="#previewImageModal" >
+									<a data-toggle='modal' class="tooltip-success openAccountClick" data-target="#previewImageModal" >
+										<label id="openAccountDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.openAccountPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
+									</a>
+									<!-- <a data-toggle='modal' class="tooltip-success openAccountClick"  data-target="#previewImageModal" >
 										<label id="openAccountDiv"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">
 											<img  id="openAccountImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none"/>
 										</label>
-									</a>
-									<div class="updateImageDiv" style="float:left; margin-top:75" >
+									</a> -->
+									<div style="float:left;margin-top:75" >
+										<input  type="hidden" id="openAccountPath" name="openAccountPath" />
+										<input type="file" name="openAccount" id="openAccount" onChange="showOpenAccountImage(this)"/> 
+										<p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div>
+									<!-- <div class="updateImageDiv" style="float:left; margin-top:75" >
 										<input type="hidden" id="openAccountVal02"  />
 										<input type="file" name="openAccount" id="openAccount" onchange="showopenAccountImage(this)"/>
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-									</div>
+									</div> -->
 
 								</td>
 							</tr>
 							<tr id="bankCardPhoto_">
 								<td class="td-left" >银行卡照<span style="color:red"></span></td>
 								<td class="td-right" >
-									<a data-toggle='modal' class="tooltip-success bankCardPhotoClick"  data-target="#previewImageModal" >
+									<!-- <a data-toggle='modal' class="tooltip-success bankCardPhotoClick"  data-target="#previewImageModal" >
 										<label id="bankCardPhotoDiv" class="uploadImage">
 											<img  id="bankCardPhotoImageDiv" style="width:100%;height:100%;display:none"/>
 										</label>
+									</a> -->
+									<a data-toggle='modal' class="tooltip-success bankCardPhotoClick" data-target="#previewImageModal" >
+										<label id="bankCardPhotoDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.bankCardPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
 									</a>
 									<div style="float:left;margin-top:75" >
+										<input  type="hidden" id="bankCardPhotoPath" name="bankCardPhotoPath" />
 										<input type="file" name="bankCardPhoto" id="bankCardPhoto" onChange="showBankCardPhotoImage(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
+									<!-- <div style="float:left;margin-top:75" >
+										<input type="file" name="bankCardPhoto" id="bankCardPhoto" onChange="showBankCardPhotoImage(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div> -->
 
 									<label class="label-tips" id="bankCardPhotoLabel" style="float:left;margin-top:88"></label>
 								</td>
@@ -1070,7 +1065,6 @@ $(function(){
 </div><!-- /.main-container -->
 
 </body>
-
 
 <script type="text/javascript">
 </script>

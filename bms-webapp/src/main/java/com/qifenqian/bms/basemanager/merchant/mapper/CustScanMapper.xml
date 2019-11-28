@@ -92,6 +92,9 @@
 			<if test="scanCopyPath != null and scanCopyPath !=''">
 				SCAN_COPY_PATH = #{scanCopyPath,jdbcType = VARCHAR},
 			</if>
+			<if test="status != null and status !=''">
+				STATUS = #{status,jdbcType = VARCHAR},
+			</if>
 			<if test="modifyId !=null">
 				MODIFY_ID = #{modifyId,jdbcType = VARCHAR},
 			</if>
@@ -112,6 +115,9 @@
 			</if>
 			<if test="scanCopyPath != null and scanCopyPath !=''">
 				SCAN_COPY_PATH = #{scanCopyPath,jdbcType = VARCHAR},
+			</if>
+			<if test="status != null and status !=''">
+				STATUS = #{status,jdbcType = VARCHAR},
 			</if>
 			<if test="modifyId !=null">
 				MODIFY_ID = #{modifyId,jdbcType = VARCHAR},

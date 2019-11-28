@@ -9,9 +9,11 @@ import com.qifenqian.bms.basemanager.city.service.CityService;
 import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
 import com.qifenqian.bms.basemanager.custInfo.mapper.TdCustInfoMapper;
 import com.qifenqian.bms.basemanager.custInfo.service.TdCustInfoService;
+import com.qifenqian.bms.basemanager.merchant.bean.CustScan;
 import com.qifenqian.bms.basemanager.merchant.bean.Merchant;
 import com.qifenqian.bms.basemanager.merchant.bean.MerchantExport;
 import com.qifenqian.bms.basemanager.merchant.bean.MerchantVo;
+import com.qifenqian.bms.basemanager.merchant.bean.PicturePath;
 import com.qifenqian.bms.basemanager.merchant.bean.TdLoginUserInfo;
 import com.qifenqian.bms.basemanager.merchant.dao.MerchantDao;
 import com.qifenqian.bms.basemanager.merchant.mapper.*;
@@ -292,4 +294,53 @@ public class MerchantEnterService {
     public List<MerchantRegisterInfo> queryMerchantInfo(String merchantCode){
         return merchantListDao.queryMerchantInfo(merchantCode);
     }
+
+	//获取图片路径
+	public PicturePath getPicPath(MerchantVo merchantVo) {
+		CustScan custScan = new CustScan();
+		custScan.setCustId(merchantVo.getCustId());
+		custScan.setAuthId(merchantVo.getAuthId());
+		custScan.setStatus("00");
+		PicturePath picturePath = new PicturePath();
+		//营业执照
+		custScan.setCertifyType("02");
+		String bussinessPath = findPicturePath(custScan);
+		picturePath.setBussinessPath("/pic/" + bussinessPath);
+		//身份证正面照
+		custScan.setCertifyType("04");
+		String idCardOPath= findPicturePath(custScan);
+		picturePath.setIdCardOPath("/pic/" + idCardOPath);
+		//身份证反面照
+		custScan.setCertifyType("16");
+		String idCardFPath= findPicturePath(custScan);
+		picturePath.setIdCardFPath("/pic/" + idCardFPath);
+		//开户许可证
+		custScan.setCertifyType("03");
+		String openAccountPath = findPicturePath(custScan);
+		picturePath.setOpenAccountPath("/pic/" + openAccountPath);
+		//银行卡照
+		custScan.setCertifyType("07");
+		String bankCardPath = findPicturePath(custScan);
+		picturePath.setBankCardPath("/pic/" + bankCardPath);
+		//门头照
+		custScan.setCertifyType("08");
+		String doorPhotoPath = findPicturePath(custScan);
+		picturePath.setDoorPhotoPath("/pic/" + doorPhotoPath);
+		//结算人身份证正面
+		custScan.setCertifyType("30");
+		String settleCertAttribute1Path = findPicturePath(custScan);
+		picturePath.setSettleCertAttribute1Path("/pic/" + settleCertAttribute1Path);		
+		//结算人身份证反面
+		custScan.setCertifyType("31");
+		String settleCertAttribute2Path = findPicturePath(custScan);
+		picturePath.setSettleCertAttribute2Path("/pic/" + settleCertAttribute2Path);	
+		return picturePath;
+	}
+
+	//获取对应类型图片路径
+	private String findPicturePath(CustScan custScan) {
+		String tdCustScanCopy = merchantMapper.findPath(custScan);
+		return tdCustScanCopy;
+		
+	}
 }

@@ -35,9 +35,10 @@ public class CustScan implements Serializable {
 	private String certifyBeginTime; 
 	/** 证件失效时间 */
 	private String certifyEndTime;
-	
-	
-
+	/**资料归属类型*/
+	private String scanBelong;
+	/**状态*/
+	private String status;
 	/**
 	 * 
 	 */
@@ -155,6 +156,22 @@ public class CustScan implements Serializable {
 
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
+	}
+
+	public String getScanBelong() {
+		return scanBelong;
+	}
+
+	public void setScanBelong(String scanBelong) {
+		this.scanBelong = scanBelong;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }
