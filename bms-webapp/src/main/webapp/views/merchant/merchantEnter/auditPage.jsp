@@ -509,7 +509,7 @@
 									</tr>
 									<tr>
 										<td>
-											<textarea rows="5" cols="40" id="auditMessage" maxlength="50"  >请输入小于50字的审核意见</textarea>
+											<textarea rows="5" cols="40" id="auditMessage" maxlength="50" placeholder="请输入小于50字的审核意见"  ></textarea>
 										</td>
 									</tr>
 								</table>
