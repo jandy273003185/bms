@@ -767,7 +767,7 @@ $(function(){
 										</select>
 									</div>
 									<div class="col-xs-5 pd0" style="padding:0;margin-left:1%">
-										<input type="text" id="custAdd" name="custAdd"  placeholder="详细地址" style="width:100%" value =${merchantVo.custAdd }  >
+										<input type="text" id="custAdd" name="custAdd"  placeholder="详细地址" style="width:100%" value ="${merchantVo.custAdd }"  >
 										<label class="label-tips" id="custAddLab"></label>
 									</div>
 								</td>
@@ -775,13 +775,13 @@ $(function(){
 							<tr  id="businessCodeId_"  style="display: " class="tab-pane active">
 								<td class="td-left" id="businessCodeId">营业执照编号：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
-									<input type="text" id="businessLicense" name="businessLicense" style="width:90%" placeholder="请输入营业执照" value=${merchantVo.businessLicense } >
+									<input type="text" id="businessLicense" name="businessLicense" style="width:90%" placeholder="请输入营业执照" value="${merchantVo.businessLicense }" >
 									<label class="label-tips" id="businessLicenseLab"></label>
 								</td>
 								<td class="td-left" id="businessTimeId">营业执照有效期：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
 
-									<input type="text" id="businessTermStart" name="businessTermStart" value = ${merchantVo.businessTermStart } onfocus="WdatePicker({skin:'whyGreen'})" onfocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
+									<input type="text" id="businessTermStart" name="businessTermStart" value = "${merchantVo.businessTermStart }" onfocus="WdatePicker({skin:'whyGreen'})" onfocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
 									<label class="label-tips" id="businessTermLabStart"></label>
 									-
 									<input type="text" id="businessTermEnd" name="businessTermEnd" value =
