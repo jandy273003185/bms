@@ -333,7 +333,27 @@ public class MerchantEnterService {
 		//结算人身份证反面
 		custScan.setCertifyType("31");
 		String settleCertAttribute2Path = findPicturePath(custScan);
-		picturePath.setSettleCertAttribute2Path("/pic/" + settleCertAttribute2Path);	
+		picturePath.setSettleCertAttribute2Path("/pic/" + settleCertAttribute2Path);
+		//银行卡反面照
+		custScan.setCertifyType("14");
+		String bankCardBackPath = findPicturePath(custScan);
+		picturePath.setBankCardBackPath("/pic/" + bankCardBackPath);
+		//手持身份证照
+		custScan.setCertifyType("13");
+		String handIdCardPath = findPicturePath(custScan);
+		picturePath.setHandIdCardPath("/pic/" + handIdCardPath);
+		//店内照
+		custScan.setCertifyType("18");
+		String shopInteriorPath = findPicturePath(custScan);
+		picturePath.setShopInteriorPath("/pic/" + shopInteriorPath);
+		//行业资质照
+		custScan.setCertifyType("11");
+		String qualificationPath = findPicturePath(custScan);
+		picturePath.setQualificationPath("/pic/" + qualificationPath);
+		//电子签名照
+		custScan.setCertifyType("12");
+		String signaturePath = findPicturePath(custScan);
+		picturePath.setSignaturePath("/pic/" + signaturePath);
 		return picturePath;
 	}
 

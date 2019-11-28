@@ -2186,7 +2186,7 @@ public class MerchantService {
 		return merchantMapper.getMerchantInfo(detailInfo);
 	}
 
-	public TdMerchantDetailInfo findMerchantDetailInfo(String merchantCode, String channlCode) {
-		return merchantMapper.findMerchantDetailInfo(merchantCode,channlCode);
+	public TdMerchantDetailInfo findMerchantDetailInfo(TdMerchantDetailInfo detailInfo) {
+		return merchantMapper.findMerchantDetailInfo(detailInfo);
 	}
 }
