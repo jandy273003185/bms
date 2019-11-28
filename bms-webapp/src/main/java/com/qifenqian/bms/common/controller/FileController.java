@@ -43,35 +43,21 @@ public class FileController {
 	@Autowired
 	private MerchantEnterService merchantEnterService;
 	
-	private static final String PRE_PATH = "/data/nfsshare/upload/picture/";
+	private static final String PRE_PATH = "/data/nfsshare/upload/picture";
 	private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 	
-//	@Value("${images.uri}")
-//    private String uri;
-//    @Value("${images.relativePath}")
-//    private String relativePath;
-//    //存储路径
-//    @Value("${images.absolutePaths}")
-//    private String absolutePaths;
+	
+    @Value("${images.relativePaths}")
+    private String relativePaths;
+    //存储路径
+    @Value("${images.absolutePaths}")
+    private String absolutePaths;
 	
 	
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	@ResponseBody
 	public FileInfo upload(MultipartFile file) {
-
-		if (!file.isEmpty()) {
-			try {
-				String fileName = file.getOriginalFilename();
-				String suffixName = fileName.substring(fileName.lastIndexOf("."));
-				File localFile = new File(PRE_PATH + GenSN.getSysTime() + GenSN.getSN() + suffixName);
-				file.transferTo(localFile);
-				return new FileInfo(localFile.getAbsolutePath());
-			} catch (IllegalStateException | IOException e) {
-				e.printStackTrace();
-				return null;
-			}
-		}
-		return null;
+		return fileUpload(file);
 	}
 
 	/**
@@ -113,7 +99,7 @@ public class FileController {
         if (!file.isEmpty()) {//文件不为空
             try {
                 //上传路径
-                StringBuilder filePath = new StringBuilder("/data/nfsshare/upload/picture").append("/").append(Filename).append(prefix);
+                StringBuilder filePath = new StringBuilder(PRE_PATH).append("/").append(Filename).append(prefix);
                 File saveDir = new File(String.valueOf(filePath));
                 // 转存文件
                 file.transferTo(saveDir);
