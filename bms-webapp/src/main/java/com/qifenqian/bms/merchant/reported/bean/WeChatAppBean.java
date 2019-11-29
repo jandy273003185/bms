@@ -116,9 +116,88 @@ public class WeChatAppBean implements Serializable{
 	private String businessScene;
 	//联系邮箱
 	private String contactEmail;
+	//公众号APPID
+	private String mpAppid;
+	//公众号页面截图
+	private String mpAppScreenShotsPath;
+	//小程序APPID
+	private String miniprogramAppid;
+	//小程序页面截图
+	private String miniprogramAppidPath;
+	//应用APPID
+	private String appAppid;
+	//APP下载链接
+	private String appDownloadUrl;
+	//APP截图
+	private String appAppidPath;
+	//PC网站域名
+	private String webUrl;
+	//PC网站对应的公众号APPID
+	private String webAppid;
+	//网站授权函
+	private String webUrlPath;
 	
 	
-	
+	public String getMpAppid() {
+		return mpAppid;
+	}
+	public void setMpAppid(String mpAppid) {
+		this.mpAppid = mpAppid;
+	}
+	public String getMpAppScreenShotsPath() {
+		return mpAppScreenShotsPath;
+	}
+	public void setMpAppScreenShotsPath(String mpAppScreenShotsPath) {
+		this.mpAppScreenShotsPath = mpAppScreenShotsPath;
+	}
+	public String getMiniprogramAppid() {
+		return miniprogramAppid;
+	}
+	public void setMiniprogramAppid(String miniprogramAppid) {
+		this.miniprogramAppid = miniprogramAppid;
+	}
+	public String getMiniprogramAppidPath() {
+		return miniprogramAppidPath;
+	}
+	public void setMiniprogramAppidPath(String miniprogramAppidPath) {
+		this.miniprogramAppidPath = miniprogramAppidPath;
+	}
+	public String getAppAppid() {
+		return appAppid;
+	}
+	public void setAppAppid(String appAppid) {
+		this.appAppid = appAppid;
+	}
+	public String getAppDownloadUrl() {
+		return appDownloadUrl;
+	}
+	public void setAppDownloadUrl(String appDownloadUrl) {
+		this.appDownloadUrl = appDownloadUrl;
+	}
+	public String getAppAppidPath() {
+		return appAppidPath;
+	}
+	public void setAppAppidPath(String appAppidPath) {
+		this.appAppidPath = appAppidPath;
+	}
+	public String getWebUrl() {
+		return webUrl;
+	}
+	public void setWebUrl(String webUrl) {
+		this.webUrl = webUrl;
+	}
+	public String getWebAppid() {
+		return webAppid;
+	}
+	public void setWebAppid(String webAppid) {
+		this.webAppid = webAppid;
+	}
+	public String getWebUrlPath() {
+		return webUrlPath;
+	}
+	public void setWebUrlPath(String webUrlPath) {
+		this.webUrlPath = webUrlPath;
+	}
 	public String getMerchantProperty() {
 		return merchantProperty;
 	}

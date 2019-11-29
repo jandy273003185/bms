@@ -1,7 +1,9 @@
 package com.qifenqian.bms.merchant.reported;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
+import com.qifenqian.bms.basemanager.merchant.bean.MerchantVo;
+import com.qifenqian.bms.basemanager.merchant.bean.PicturePath;
+import com.qifenqian.bms.basemanager.merchant.service.MerchantEnterService;
 import com.qifenqian.bms.basemanager.utils.GenSN;
 import com.qifenqian.bms.merchant.reported.bean.Bank;
 import com.qifenqian.bms.merchant.reported.bean.ChannlInfo;
@@ -46,6 +51,8 @@ public class WeChatAppReportsController {
 	 @Autowired
 	 private WeChatAppService weChatAppService;
 	 
+	 @Autowired
+	 private MerchantEnterService merchantEnterService;
 	 
 	/**
 	 * 微信商户报备入口
@@ -202,17 +209,20 @@ public class WeChatAppReportsController {
 	 * 微信商户升级报备入口
 	*/
 	@RequestMapping("/merchantReported/weChatAppUpgradeMerchantReport")
-	public ModelAndView  viewUpgradeMerchantReported(HttpServletRequest request,HttpServletResponse response,TdMerchantDetailInfo detail,String merchantCode,String status){
+	public ModelAndView  viewUpgradeMerchantReported(HttpServletRequest request,HttpServletResponse response,TdMerchantDetailInfo detail,String merchantCode,String channlCode, String patchNo){
 		
 		ModelAndView mv = new ModelAndView();
 		TdCustInfo custInfo = new TdCustInfo();
-		String channlCode = "WX";
+		channlCode = "WX";
 		
 		if(null == detail || null == detail.getMerchantCode() ){
 			detail.setMerchantCode(merchantCode);
 		}
 		if(null ==detail || null == detail.getChannelNo()){
 			detail.setChannelNo(channlCode);
+		}
+		if(null ==detail || null == detail.getPatchNo()){
+			detail.setPatchNo(patchNo);
 		}
 		/***查询客户信息***/
 		if(null != merchantCode){
@@ -224,11 +234,18 @@ public class WeChatAppReportsController {
 		List<ChannlInfo> channlInfoList = crIncomeService.getChannlInfoList();
 		/***查询报备信息***/
 		List<TdMerchantDetailInfo> reportedList = fmIncomeService.getMerchantDetailInfoList(detail);
-		
+		TdMerchantDetailInfo tdMerchantDetailInfo = fmIncomeMapperDao.selMerchantDetailInfo(detail);
+		//获取图片路径
+		MerchantVo merchantVo = new MerchantVo();
+		merchantVo.setAuthId(custInfo.getAuthId());
+		merchantVo.setCustId(custInfo.getCustId());
+		PicturePath picturePath = merchantEnterService.getPicPath(merchantVo);
+		mv.addObject("picturePathVo", picturePath);
 		mv.addObject("custInfo",custInfo);
 		mv.addObject("weChatAppAreaInfoList",weChatAppAreaInfoList);
 		mv.addObject("channlInfoList",channlInfoList);
 		mv.addObject("reportedList",reportedList);
+		mv.addObject("tdMerchantDetailInfo",tdMerchantDetailInfo);
 		return mv;
 	}
 	

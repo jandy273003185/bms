@@ -112,16 +112,6 @@ $(function(){
 					<input type="hidden" id="channelCode" name="channelCode" value="WX"/>
 					<input type="hidden" id="custId" name="custId" value="${custInfo.custId }"/>
 					<input type="hidden" id="authId" name="authId" value="${custInfo.authId }"/>
-					<input type="hidden" id="shopInteriortemp" />
-					<input type="hidden" id="businessPhototemp"/>
-					<input type="hidden" id="openPhototemp"/>
-					<input type="hidden" id="certAttribute1temp" />
-					<input type="hidden" id="certAttribute2temp" />
-					<input type="hidden" id="legalCertAttribute1temp" />
-					<input type="hidden" id="legalCertAttribute2temp" />
-					<input type="hidden" id="settleCertAttribute1temp" />
-					<input type="hidden" id="settleCertAttribute2temp" />
-					<input type="hidden" id="bankCardPhototemp"/>
 					<div id="door_temp"></div>
 					<section class="aui-content">
 					    <div class="aui-content-up">
@@ -147,28 +137,9 @@ $(function(){
 								<td colspan="4" class="headlerPreview" style="background:#7ebde1">基本信息</td>
 							</tr>
 							<tr>
-								<td class="td-left" width="18%">微信商户号：<span style="color:red;">(必填)</span></td>
+								<td class="td-left" width="18%">微信小微商户号：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" width="32%"> 
-									<input type="text" id="outMerchantCode" name="outMerchantCode" value="${reportedList.outMerchantCode }" style="width:90%">
-								</td>
-                                <td class="td-left">经营场景：<span style="color:red;">(必填)</span></td>
-								<td class="td-right"> 
-								   <select name="businessScene" id="businessScene" class="width-90">
-								   		<option value="">--经营场景--</option>
-										<option value="1721">线下</option>
-										<option value="1837">公众号</option>
-										<option value="1838">小程序 </option>
-										<option value="1724">APP</option>
-										<option value="1840">PC网站</option>
-									</select>	
-								</td>
-							</tr>
-	                        <tr>
-	                        	<td class="td-left">联系邮箱：<span style="color:red;">（必填)</span></td>
-								<td class="td-right">
-									<input type="text" id="merchantEmail" name="merchantEmail" value="${custInfo.merchantEmail }" style="width:90%">
-									
-									<label class="label-tips" id="contactPhoneLab"></label>
+									<input type="text" id="outMerchantCode" name="outMerchantCode" value="${tdMerchantDetailInfo.outMerchantCode }" style="width:90%">
 								</td>
 								<td class="td-left">主体类型：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
@@ -178,6 +149,25 @@ $(function(){
 										<option value="4">个体工商户</option>
 										<option value="2">党政、机关及事业单位 </option>
 										<option value="1708">其他组织</option>
+									</select>	
+								</td>
+							</tr>
+	                        <tr>
+	                        	<td class="td-left">商户简称：<span style="color:red;">（必填)</span></td>
+								<td class="td-right">
+									<input type="text" id="shortName" name="shortName" value="${custInfo.shortName }" style="width:90%">
+									
+									<label class="label-tips" id="shortNameLab"></label>
+								</td>
+								<td class="td-left">经营场景：<span style="color:red;">(必填)</span></td>
+								<td class="td-right"> 
+								   <select name="businessScene" id="businessScene" class="width-90">
+								   		<option value="">--经营场景--</option>
+										<option value="1721">线下</option>
+										<option value="1837">公众号</option>
+										<option value="1838">小程序 </option>
+										<option value="1724">APP</option>
+										<option value="1840">PC网站</option>
 									</select>	
 								</td>
 							</tr>
@@ -229,7 +219,7 @@ $(function(){
 							<tr id="businessPhotoType" style = "display:">
 								<td class="td-left">营业执照照片：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3">
-									<a data-toggle='modal' class="tooltip-success businessPhotoClick"  data-target="#previewImageModal"  >
+									<!-- <a data-toggle='modal' class="tooltip-success businessPhotoClick"  data-target="#previewImageModal"  >
 										<label id="businessPhotoDiv"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
 										        <img  id="businessPhotoImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none" />
 										</label>
@@ -239,13 +229,24 @@ $(function(){
 										<input type="hidden" id="businessPhotoImageVal02"  />  
 										<input type="file" name="businessPhoto" id="businessPhoto" onchange="showBusinessPhotoImage(this)"/>
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div> -->
+									<a data-toggle='modal' class="tooltip-success businessPhotoClick" data-target="#previewImageModal" >
+										<label id="businessPhotoDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.bussinessPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
+									</a>
+									<div class="updateImageDiv" style="float:left; margin-top:75 " >
+										<input  type="hidden" id="businessPhotoPath" name="businessPhotoPath" />
+										<input type="hidden" id="businessPhotoImageVal02"  />
+										<input type="file" name="businessPhoto" id="businessPhoto" onchange="showBusinessPhotoImage(this)" />
+										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
 								</td>
 							</tr>
 							<tr id="qualificationType" style = "display:">
-								<td class="td-left">特殊行业资质照：<span style="color:red;">(必填)</span></td>
+								<td class="td-left">特殊行业资质照：</td>
 								<td class="td-right" colspan="3">
-									<a data-toggle='modal' class="tooltip-success qualificationClick"  data-target="#previewImageModal"  >
+									<!-- <a data-toggle='modal' class="tooltip-success qualificationClick"  data-target="#previewImageModal"  >
 										<label id="qualificationDiv"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
 										        <img  id="qualificationImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none" />
 										</label>
@@ -255,10 +256,21 @@ $(function(){
 										<input type="hidden" id="qualificationImageVal02"  />  
 										<input type="file" name="qualification" id="qualification" onchange="showQualification(this)"/>
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div> -->
+									<a data-toggle='modal' class="tooltip-success qualificationClick" data-target="#previewImageModal" >
+										<label id="qualificationDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.qualificationPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
+									</a>
+									<div class="updateImageDiv" style="float:left; margin-top:75 " >
+										<input  type="hidden" id="qualificationPath" name="qualificationPath" />
+										<input type="hidden" id="qualificationImageVal02"  />
+										<input type="file" name="qualification" id="qualification" onchange="showQualificationImage(this)" />
+										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
 								</td>
 							</tr>	
-	                        <%-- <tr>
+	                        <tr>
 								<td colspan="4" class="headlerPreview" style="background:#7ebde1;">法人信息</td>
 							</tr>
 							<tr></tr>
@@ -267,71 +279,19 @@ $(function(){
 								<td class="td-right"> 
 									<input type="text" id="representativeName" name="representativeName" placeholder="请输入法人真实姓名"  value="${custInfo.representativeName }" maxlength="" style="width:90%">
 								</td>
-								<td class="td-left">手机号码：<span style="color:red;">(必填)</span></td>
+								<td class="td-left">手机号码：</td>
 								<td class="td-right"> 
 									<input type="text" name="mobileNo" id="mobileNo" placeholder="请输入手机号码"  value="${custInfo.mobile }" style="width:90%">
 								</td>
 							</tr>
-                            <tr>
-								<td class="td-left">法人证件类型：<span style="color:red;">(必填)</span></td>
-								<td class="td-right"> 
-									<select name="representativeCertType" id="representativeCertType" style="width:90%;"  >
-										<option value="00">--身份证--</option>
-										<option value="03">--军人证--</option>
-										<option value="04">--警察证--</option>
-										<option value="05">--港澳居民往来内地通行证--</option>
-										<option value="06">--台湾居民来往大陆通行证--</option>
-										<option value="07">--护照--</option>
-										<option value="98">--单位证件--</option>
-										<option value="06">--其他证件--</option>
-									</select>
-								</td>
-								<td class="td-left">法人身份证号码：<span style="color:red;">(必填)</span></td>
-								<td class="td-right"> 
-									<input type="text" name="representativeCertNo" id="representativeCertNo" placeholder="请输入法人身份证号码"  value="${custInfo.representativeCertNo }" style="width:90%">
-								</td>
-							</tr>
 							<tr>
-								<td class="td-left">身份证有效期：<span style="color:red;">(必填)</span></td>
-									<td class="td-right">
-										<input type="text" name="identityEffDate" id="identityEffDate" value="${custInfo.idTermStart }" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> ——
-	                                    <input type="text" name="identityValDate" id="identityValDate" value="${custInfo.idTermEnd }" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
-	                                    <input type="button" onclick="identityForever()" value="长期" />
-									</td>
-							</tr>
-							<tr id="legalIdCardType" style = "display:">
-								<td class="td-left">法人身份证正面：<span style="color:red;">(必填)</span></td>
-								<td class="td-right" colspan="3">
-									<a data-toggle="modal" class="tooltip-success legalCertAttribute1Click" data-target="#previewImageModal">
-									<label id="legalCertAttribute1Div" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
-									        <img id="legalCertAttribute1ImageDiv" onClick="bigImg(this);" style="width: 100%; height: 100%;" >
-									</label>
-									</a>
-									<div class="updateImageDiv" style="float: left; margin-top: 75px; display: block;">
-										<input  type="hidden" id="legalCertAttribute1Path" name="legalCertAttribute1Path" />
-										<input type="hidden" id="legalCertAttribute1Val02">  
-										<input type="file" name="legalCertAttribute1" id="legalCertAttribute1" onChange="showlegalCertAttribute1Image(this)"> 
-										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-									</div>
+								<td class="td-left">联系邮箱：<span style="color:red;">（必填)</span></td>
+								<td class="td-right">
+									<input type="text" id="merchantEmail" name="merchantEmail" value="${custInfo.merchantEmail }" style="width:90%">
+									
+									<label class="label-tips" id="contactPhoneLab"></label>
 								</td>
 							</tr>
-							<tr id="legalIdCardBackType" style = "display:">
-								<td class="td-left">法人身份证背面：<span style="color:red;">(必填)</span></td>
-								<td class="td-right" colspan="3"> 
-									<a data-toggle="modal" class="tooltip-success legalCertAttribute2Click" data-target="#previewImageModal">
-										<label id="legalCertAttribute2Div" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
-										        <img id="legalCertAttribute2ImageDiv" onClick="bigImg(this);" style="width: 100%; height: 100%;" >
-										</label>
-									</a>
-									<div class="updateImageDiv" style="float: left; margin-top: 75px; display: block;">
-										<input  type="hidden" id="legalCertAttribute2Path" name="legalCertAttribute2Path" />
-										<input type="hidden" id="legalCertAttribute2Val02">  
-										<input type="file" name="legalCertAttribute2" id="legalCertAttribute2" onChange="showlegalCertAttribute2Image(this)"> 
-										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-									</div>
-								</td>
-							</tr> --%>
-							
 							<tr id="next_id">
 								<td colspan="4" class="headlerPreview" style="background:#7ebde1;">结算信息</td>
 							</tr>
@@ -408,98 +368,98 @@ $(function(){
 							   -->
 							  </td>
 							</tr>
-	                        <tr id="mpAppScreenShotsType1" style = "display:none">
-								<td class="td-left">公众号APPID：<span style="color:red;">(必填)</span></td>
+	                        <tr id="mpAppScreenShotsType1" style = "display:">
+								<td class="td-left">公众号APPID：</td>
 								<td class="td-right"> 
 									<input type="text" id="mpAppid" name="mpAppid" maxlength="100" placeholder="请输入公众号APPID"  value="" style="width:90%">
 								</td>
 							</tr>
-							<tr id="mpAppScreenShotsType" style = "display:none">
-								<td class="td-left">公众号页面截图：<span style="color:red;">(必填)</span></td>
+							<tr id="mpAppScreenShotsType" style = "display:">
+								<td class="td-left">公众号页面截图：</td>
 								<td class="td-right" colspan="3">
-									<a data-toggle='modal' class="tooltip-success mpAppScreenShotsClick"  data-target="#previewImageModal"  >
-										<label id="mpAppScreenShotsDiv"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
-										        <img  id="mpAppScreenShotsImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none" />
+									<a data-toggle='modal' class="tooltip-success mpAppScreenShotsClick" data-target="#previewImageModal" >
+										<label id="mpAppScreenShotsDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.mpAppScreenShotsPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
 										</label>
 									</a>
-									<div class="updateImageDiv" style="float:left; margin-top:75" >
+									<div class="updateImageDiv" style="float:left; margin-top:75 " >
 										<input  type="hidden" id="mpAppScreenShotsPath" name="mpAppScreenShotsPath" />
-										<input type="hidden" id="mpAppScreenShotsImageVal02"  />  
-										<input type="file" name="mpAppScreenShots" id="mpAppScreenShots" onchange="mpAppScreenShots(this)"/>
+										<input type="hidden" id="mpAppScreenShotsImageVal02"  />
+										<input type="file" name="mpAppScreenShots" id="mpAppScreenShots" onchange="showMpAppScreenShotsImage(this)" />
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
 								</td>
 							</tr>
-							<tr id="miniprogramAppidType1" style = "display:none">
-								<td class="td-left">小程序APPID：<span style="color:red;">(必填)</span></td>
+							<tr id="miniprogramAppidType1" style = "display:">
+								<td class="td-left">小程序APPID：</td>
 								<td class="td-right"> 
 									<input type="text" id="miniprogramAppid" name="miniprogramAppid" maxlength="100" placeholder="请输入小程序APPID"  value="" style="width:90%">
 								</td>
 							</tr>
-							<tr id="miniprogramAppidType" style = "display:none">
-								<td class="td-left">小程序页面截图：<span style="color:red;">(必填)</span></td>
+							<tr id="miniprogramAppidType" style = "display:">
+								<td class="td-left">小程序页面截图：</td>
 								<td class="td-right" colspan="3">
-									<a data-toggle='modal' class="tooltip-success miniprogramAppidClick"  data-target="#previewImageModal"  >
-										<label id="miniprogramAppidDiv"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
-										        <img  id="miniprogramAppidImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none" />
+									<a data-toggle='modal' class="tooltip-success miniprogramAppidClick" data-target="#previewImageModal" >
+										<label id="miniprogramAppidDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.miniprogramAppidPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
 										</label>
 									</a>
-									<div class="updateImageDiv" style="float:left; margin-top:75" >
+									<div class="updateImageDiv" style="float:left; margin-top:75 " >
 										<input  type="hidden" id="miniprogramAppidPath" name="miniprogramAppidPath" />
-										<input type="hidden" id="miniprogramAppidImageVal02"  />  
-										<input type="file" name="miniprogramAppid" id="miniprogramAppid" onchange="miniprogramAppid(this)"/>
+										<input type="hidden" id="miniprogramAppidImageVal02"  />
+										<input type="file" name="miniprogramAppid" id="miniprogramAppid" onchange="showMiniprogramAppidImage(this)" />
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
 								</td>
 							</tr>
-							<tr id="appAppidType1" style = "display:none">
-								<td class="td-left">应用APPID：<span style="color:red;">(必填)</span></td>
+							<tr id="appAppidType1" style = "display:">
+								<td class="td-left">应用APPID：</td>
 								<td class="td-right"> 
 									<input type="text" id="appAppid" name="appAppid" maxlength="100" placeholder="请输入应用APPID"  value="" style="width:90%">
 								</td>
-								<td class="td-left">APP下载链接：<span style="color:red;">(必填)</span></td>
+								<td class="td-left">APP下载链接：</td>
 								<td class="td-right"> 
 									<input type="text" id="appDownloadUrl" name="appDownloadUrl" maxlength="100" placeholder="请输入APP下载链接"  value="" style="width:90%">
 								</td>
 							</tr>
-							<tr id="appAppidType" style = "display:none">
-								<td class="td-left">小程序页面截图：<span style="color:red;">(必填)</span></td>
+							<tr id="appAppidType" style = "display:">
+								<td class="td-left">APP截图：</td>
 								<td class="td-right" colspan="3">
-									<a data-toggle='modal' class="tooltip-success appAppidClick"  data-target="#previewImageModal"  >
-										<label id="appAppidDiv"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
-										        <img  id="appAppidImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none" />
+									<a data-toggle='modal' class="tooltip-success appAppidClick" data-target="#previewImageModal" >
+										<label id="appAppidDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.appAppidPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
 										</label>
 									</a>
-									<div class="updateImageDiv" style="float:left; margin-top:75" >
+									<div class="updateImageDiv" style="float:left; margin-top:75 " >
 										<input  type="hidden" id="appAppidPath" name="appAppidPath" />
-										<input type="hidden" id="appAppidImageVal02"  />  
-										<input type="file" name="appAppid" id="appAppid" onchange="appAppid(this)"/>
+										<input type="hidden" id="appAppidImageVal02"  />
+										<input type="file" name="appAppid" id="appAppid" onchange="showAppAppidImage(this)" />
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
 								</td>
 							</tr>
-							<tr id="webUrlType1" style = "display:none">
-								<td class="td-left">PC网站域名：<span style="color:red;">(必填)</span></td>
+							<tr id="webUrlType1" style = "display:">
+								<td class="td-left">PC网站域名：</td>
 								<td class="td-right"> 
 									<input type="text" id="webUrl" name="webUrl" maxlength="100" placeholder="请输入PC网站域名"  value="" style="width:90%">
 								</td>
-								<td class="td-left">PC网站对应的公众号APPID：<span style="color:red;">(必填)</span></td>
+								<td class="td-left">PC网站对应的公众号APPID：</td>
 								<td class="td-right"> 
 									<input type="text" id="webAppid" name="webAppid" maxlength="100" placeholder="请输入PC网站对应的公众号APPID"  value="" style="width:90%">
 								</td>
 							</tr>
-							<tr id="webUrlType" style = "display:none">
-								<td class="td-left">网站授权函：<span style="color:red;">(必填)</span></td>
+							<tr id="webUrlType" style = "display:">
+								<td class="td-left">网站授权函：</td>
 								<td class="td-right" colspan="3">
-									<a data-toggle='modal' class="tooltip-success webUrlClick"  data-target="#previewImageModal"  >
-										<label id="webUrlDiv"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
-										        <img  id="webUrlImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none" />
+									<a data-toggle='modal' class="tooltip-success webUrlClick" data-target="#previewImageModal" >
+										<label id="webUrlDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.webUrlPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
 										</label>
 									</a>
-									<div class="updateImageDiv" style="float:left; margin-top:75" >
+									<div class="updateImageDiv" style="float:left; margin-top:75 " >
 										<input  type="hidden" id="webUrlPath" name="webUrlPath" />
-										<input type="hidden" id="webUrlImageVal02"  />  
-										<input type="file" name="webUrl" id="webUrl" onchange="webUrl(this)"/>
+										<input type="hidden" id="webUrlImageVal02"  />
+										<input type="file" name="webUrl" id="webUrl" onchange="showWebUrlImage(this)" />
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
 								</td>
@@ -939,12 +899,12 @@ $(function(){
 	  	   						"channelNo" : channelNo,
 	  	   						"merchantCode" : merchantCode,
 	  	   					 	"custName" : custName,
-	  	   						outMerchantCode : outMerchantCode,
-	  	   						businessScene : businessScene,
-	  	   						merchantEmail : merchantEmail,
-	  	   					    businessLicense : businessLicense,
-	  	   						businessEffectiveTerm : businessEffectiveTerm,
-	  	   						businessTerm : businessTerm,
+	  	   						"outMerchantCode" : outMerchantCode,
+	  	   						"businessScene" : businessScene,
+	  	   						"merchantEmail" : merchantEmail,
+	  	   					    "businessLicense" : businessLicense,
+	  	   						"businessEffectiveTerm" : businessEffectiveTerm,
+	  	   						"businessTerm" : businessTerm,
 	  	   						"mobileNo" : mobileNo,
 	  	   						"mecTypeFlag" : mecTypeFlag,
 	  	   					    "province" : merchantProvince,

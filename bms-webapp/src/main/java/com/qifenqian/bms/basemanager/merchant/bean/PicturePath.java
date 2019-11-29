@@ -34,10 +34,41 @@ public class PicturePath implements Serializable {
 	private String handIdCardPath;
 	//14银行卡反面照
 	private String bankCardBackPath;
+	//32公众号页面截图
+	private String mpAppScreenShotsPath;
+	//33小程序页面截图
+	private String miniprogramAppidPath;
+	//34APP截图
+	private String appAppidPath;
+	//35网站授权函
+	private String webUrlPath;
 	
 	
 	
-	
+	public String getMpAppScreenShotsPath() {
+		return mpAppScreenShotsPath;
+	}
+	public void setMpAppScreenShotsPath(String mpAppScreenShotsPath) {
+		this.mpAppScreenShotsPath = mpAppScreenShotsPath;
+	}
+	public String getMiniprogramAppidPath() {
+		return miniprogramAppidPath;
+	}
+	public void setMiniprogramAppidPath(String miniprogramAppidPath) {
+		this.miniprogramAppidPath = miniprogramAppidPath;
+	}
+	public String getAppAppidPath() {
+		return appAppidPath;
+	}
+	public void setAppAppidPath(String appAppidPath) {
+		this.appAppidPath = appAppidPath;
+	}
+	public String getWebUrlPath() {
+		return webUrlPath;
+	}
+	public void setWebUrlPath(String webUrlPath) {
+		this.webUrlPath = webUrlPath;
+	}
 	public String getDoorPhotoPath() {
 		return doorPhotoPath;
 	}

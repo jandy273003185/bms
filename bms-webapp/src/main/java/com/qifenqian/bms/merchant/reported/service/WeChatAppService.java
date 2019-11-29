@@ -160,7 +160,7 @@ public class WeChatAppService {
 			req.setCompany_address("");                       //注册地址
 			req.setLegal_person("");                          //经营者姓名/法定代表人(营业执照上的经营者/法人姓名)
 			req.setBusiness_time("");                         //营业期限
-			req.setBusiness_licence_type("");                 //营业执照类型
+			req.setBusiness_licence_type("1762");             //营业执照类型
 			req.setAccount_name("");                          //开户名称
 			req.setAccount_bank("");                          //开户银行
 			req.setBank_address_code("");                     //开户银行省市编码
