@@ -109,19 +109,9 @@ $(function(){
 				<div class="row">
 					<div class="col-xs-12">
 					<input type="hidden" id="status" name="status" value="${status}"/>
-					<input type="hidden" id="channelCode" name="channelCode" value="WX"/>
+					<input type="hidden" id="channelCode" name="channelNo" value="WX"/>
 					<input type="hidden" id="custId" name="custId" value="${custInfo.custId }"/>
 					<input type="hidden" id="authId" name="authId" value="${custInfo.authId }"/>
-					<input type="hidden" id="shopInteriortemp" />
-					<input type="hidden" id="businessPhototemp"/>
-					<input type="hidden" id="openPhototemp"/>
-					<input type="hidden" id="certAttribute1temp" />
-					<input type="hidden" id="certAttribute2temp" />
-					<input type="hidden" id="legalCertAttribute1temp" />
-					<input type="hidden" id="legalCertAttribute2temp" />
-					<input type="hidden" id="settleCertAttribute1temp" />
-					<input type="hidden" id="settleCertAttribute2temp" />
-					<input type="hidden" id="bankCardPhototemp"/>
 					<div id="door_temp"></div>
 					<section class="aui-content">
 					    <div class="aui-content-up">
@@ -136,11 +126,11 @@ $(function(){
                             <tr>
 								<td class="td-left" width="18%">商户编号：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" width="32%"> 
-									<input type="text" id="merchantCode" name="merchantCode" readonly value="${custInfo.merchantCode }" style="width:90%">
+									<input type="text" id="merchantCode" name="merchantCode" data-validation="notnull" data-errMsg="商户编号不能为空"  readonly value="${custInfo.merchantCode }" style="width:90%">
 								</td>
                                 <td class="td-left" width="18%">商户名称：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" width="32%"> 
-									<input type="text" id="custName" name="custName" value="${custInfo.custName }" style="width:90%">
+									<input type="text" id="custName" name="custName" data-validation="notnull" data-errMsg="商户名称不能为空"  value="${custInfo.custName }" style="width:90%">
 								</td>
 							</tr>
 	                        <tr>
@@ -149,12 +139,12 @@ $(function(){
 							<tr>
 								<td class="td-left" width="18%">门店名称：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" width="32%"> 
-									<input type="text" id="custName" name="custName" value="${custInfo.custName }" style="width:90%">
+									<input type="text" id="storeName" data-validation="notnull" data-errMsg="门店名称不能为空"  name="storeName" value="${custInfo.custName }" style="width:90%">
 								</td>
                                 <td class="td-left">商户服务信息：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-								   <select name="industry" id="industry" class="width-90">
-								   		<option value="">--售卖商品/提供服务描述--</option>
+								   <select name="industry" id="industry" class="width-90" data-validation="notnull" data-errMsg="商户服务信息不能为空" >
+								   		<option value="">--请选择售卖商品/提供服务描述--</option>
 										<option value="餐饮">餐饮</option>
 										<option value="线下零售">线下零售</option>
 										<option value="居民生活服务">居民生活服务</option>
@@ -167,7 +157,7 @@ $(function(){
 	                        <tr>
 	                        	<td class="td-left">客服号码：<span style="color:red;">（必填)</span></td>
 								<td class="td-right">
-									<input type="text" id="contactPhone" name="contactPhone" value="${custInfo.contactPhone }" style="width:90%">
+									<input type="text" id="contactPhone" data-validation="notnull" data-errMsg="客服号码不能为空"  name="contactPhone" value="${custInfo.contactPhone }" style="width:90%">
 									
 									<label class="label-tips" id="contactPhoneLab"></label>
 								</td>
@@ -194,7 +184,7 @@ $(function(){
 		                                </select>
 	                                </div>
 	                                <div class="col-xs-2 pd0" style="padding:0;">
-		                                <select class="form-control" name="merchantArea" id="merchantArea" >
+		                                <select class="form-control" name="merchantArea" id="merchantArea" data-validation="notnull" data-errMsg="省市区不能为空"  >
 		                                    <option value="" id="areaDef">--请选择区--</option>
 		                                </select>
 	                                </div>
@@ -213,7 +203,7 @@ $(function(){
 										</label>
 									</a>
 									<div class="updateImageDiv" style="float: left; margin-top: 75px; display: block;">
-										<input  type="hidden" id="doorPhotoPath" name="doorPhotoPath" />
+										<input  type="hidden" id="doorPhotoPath" data-validation="notnull" data-errMsg="门头照不能为空"  name="doorPhotoPath" />
 										<input type="hidden" id="doorPhotoImageVal02">  
 										<input type="file" name="doorPhoto" id="doorPhoto" onChange="showDoorPhotoImage(this)">
 									 	<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
@@ -229,7 +219,7 @@ $(function(){
 										</label>
 									</a>
 									<div class="updateImageDiv" style="float: left; margin-top: 75px; display: block;">
-										<input  type="hidden" id="shopInteriorPath" name="shopInteriorPath" />
+										<input  type="hidden" id="shopInteriorPath" data-validation="notnull" data-errMsg="店内照不能为空"  name="shopInteriorPath" />
 										<input type="hidden" id="shopInteriorImageVal02">  
 										<input type="file" name="shopInterior" id="shopInterior" onChange="showShopInteriorImage(this)">
 									 	<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
@@ -243,17 +233,21 @@ $(function(){
                            	<tr>
 								<td class="td-left">法人真实姓名：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-									<input type="text" id="representativeName" name="representativeName" placeholder="请输入法人真实姓名"  value="${custInfo.representativeName }" maxlength="" style="width:90%">
+									<input type="text" id="representativeName" name="representativeName" data-validation="notnull" data-errMsg="法人真实姓名不能为空"  placeholder="请输入法人真实姓名"  value="${custInfo.representativeName }" maxlength="" style="width:90%">
 								</td>
 								<td class="td-left">手机号码：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-									<input type="text" name="mobileNo" id="mobileNo" placeholder="请输入手机号码"  value="${custInfo.mobile }" style="width:90%">
+									<input type="text" name="mobileNo" id="mobileNo" placeholder="请输入手机号码"  data-validation="notnull" data-errMsg="手机号码不能为空"  value="${custInfo.mobile }" style="width:90%">
 								</td>
 							</tr>
                             <tr>
-								<td class="td-left">法人证件类型：<span style="color:red;">(必填)</span></td>
+                            	<td class="td-left">邮箱：<span >(可选)</span></td>
 								<td class="td-right"> 
-									<select name="representativeCertType" id="representativeCertType" style="width:90%;"  >
+									<input type="text" name="email" id="email" placeholder="请输入邮箱"  value="${custInfo.email }" style="width:90%">
+								</td>
+								<!-- <td class="td-left">法人证件类型：<span style="color:red;">(必填)</span></td>
+								<td class="td-right"> 
+									<select name="representativeCertType" id="representativeCertType" data-validation="notnull" data-errMsg="法人证件类型不能为空"  style="width:90%;"  >
 										<option value="00">--身份证--</option>
 										<option value="03">--军人证--</option>
 										<option value="04">--警察证--</option>
@@ -263,17 +257,17 @@ $(function(){
 										<option value="98">--单位证件--</option>
 										<option value="06">--其他证件--</option>
 									</select>
-								</td>
+								</td> -->
 								<td class="td-left">法人身份证号码：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-									<input type="text" name="representativeCertNo" id="representativeCertNo" placeholder="请输入法人身份证号码"  value="${custInfo.representativeCertNo }" style="width:90%">
+									<input type="text" name="representativeCertNo" id="representativeCertNo" data-validation="notnull" data-errMsg="法人身份证号码不能为空"  placeholder="请输入法人身份证号码"  value="${custInfo.representativeCertNo }" style="width:90%">
 								</td>
 							</tr>
 							<tr>
 								<td class="td-left">身份证有效期：<span style="color:red;">(必填)</span></td>
 									<td class="td-right">
-										<input type="text" name="identityEffDate" id="identityEffDate" value="${custInfo.idTermStart }" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> ——
-	                                    <input type="text" name="identityValDate" id="identityValDate" value="${custInfo.idTermEnd }" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
+										<input type="text" name="identityEffDate" id="identityEffDate" data-validation="notnull" data-errMsg="身份证有效期起始值不能为空"  value="${custInfo.idTermStart }" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> ——
+	                                    <input type="text" name="identityValDate" id="identityValDate" data-validation="notnull" data-errMsg="身份证有效期结束值不能为空"  value="${custInfo.idTermEnd }" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
 	                                    <input type="button" onclick="identityForever()" value="长期" />
 									</td>
 							</tr>
@@ -286,7 +280,7 @@ $(function(){
 									</label>
 									</a>
 									<div class="updateImageDiv" style="float: left; margin-top: 75px; display: block;">
-										<input  type="hidden" id="legalCertAttribute1Path" name="legalCertAttribute1Path" />
+										<input  type="hidden" id="legalCertAttribute1Path" data-validation="notnull" data-errMsg="法人身份证正面不能为空"  name="legalCertAttribute1Path" />
 										<input type="hidden" id="legalCertAttribute1Val02">  
 										<input type="file" name="legalCertAttribute1" id="legalCertAttribute1" onChange="showlegalCertAttribute1Image(this)"> 
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
@@ -302,7 +296,7 @@ $(function(){
 										</label>
 									</a>
 									<div class="updateImageDiv" style="float: left; margin-top: 75px; display: block;">
-										<input  type="hidden" id="legalCertAttribute2Path" name="legalCertAttribute2Path" />
+										<input  type="hidden" id="legalCertAttribute2Path" data-validation="notnull" data-errMsg="法人身份证背面不能为空"  name="legalCertAttribute2Path" />
 										<input type="hidden" id="legalCertAttribute2Val02">  
 										<input type="file" name="legalCertAttribute2" id="legalCertAttribute2" onChange="showlegalCertAttribute2Image(this)"> 
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
@@ -316,17 +310,17 @@ $(function(){
 	                        <tr>
 								<td class="td-left">结算账户名称：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-									<input type="text" id="actNm" name="actNm" maxlength="100" placeholder="请输入结算账户名称"  value="" style="width:90%">
+									<input type="text" id="accountNm" name="accountNm" maxlength="100" placeholder="请输入结算账户名称"  data-validation="notnull" data-errMsg="结算账户名称不能为空"  value="" style="width:90%">
 								</td>
 								<td class="td-left">结算账号：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-									<input type="text" id="bankCardNo" name="bankCardNo" maxlength="100" placeholder="请输入银行卡号"  value="${custInfo.compMainAcct }" style="width:90%">
+									<input type="text" id="accountNo" name="accountNo" maxlength="100" placeholder="请输入银行卡号"  data-validation="notnull" data-errMsg="结算账号不能为空"  value="${custInfo.compMainAcct }" style="width:90%">
 								</td>
 							</tr>
                             <tr>
 								<td class="td-left">开户省份：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-									<select name="bankProvince" id="bankProvince" class="width-90" onchange="getCity();">
+									<select name="bankProvince" id="bankProvince" class="width-90" onchange="getCity();" data-validation="notnull" data-errMsg="开户省份不能为空" >
 	                                    <option value="">--请选择省--</option>
 	                                    <c:if test="${not empty weChatAppAreaInfoList }">
 	                                        <c:forEach items="${weChatAppAreaInfoList }" var="province">
@@ -340,7 +334,7 @@ $(function(){
 								</td>
 								<td class="td-left">开户城市：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-									<select name="bankCity" id="bankCity" class="width-90" >
+									<select name="bankCity" id="bankCity" class="width-90" data-validation="notnull" data-errMsg="开户城市不能为空"  >
 		                                    <option value="">--请选择市--</option>
 	                                </select>
 	                               	<label id="bankCityLabel" class="label-tips"></label>
@@ -349,7 +343,7 @@ $(function(){
 							<tr>
 								<td class="td-left">开户银行：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-									<select name="weChatBank" id="weChatBank" style="width-90;">
+									<select name="bank" id="bank" style="width-90;" data-validation="notnull" data-errMsg="开户银行不能为空" >
 										<option value="">--请选择--</option>
 										<c:forEach items="<%=WeChatBankType.values()%>" var="status">
 											<option value="${status.name}" <c:if test="${status == queryBean.name}">selected</c:if>>
@@ -360,14 +354,14 @@ $(function(){
 								</td>
 	                            <td class="td-left">开户支行<span style="color:red;">(必填)</span></td>
 	                            <td class="td-right">
-	                            	<input type="text" id="interBankName" name="interBankName" maxlength="100" placeholder="请输入支行名称"  value="" style="width:90%"> 
+	                            	<input type="text" id="interBankName" name="interBankName" maxlength="100" data-validation="notnull" data-errMsg="开户支行不能为空" placeholder="请输入支行名称"  value="" style="width:90%"> 
 	                               	<label id="interBankNameLabel" class="label-tips"></label>
 								</td>
 							</tr>
                             <tr>
                                 <td class="td-left">结算费率：<span style="color:red;">(必填)</span></td>
 							  <td class="td-right"> 
-							  		<select id="rate" name="rate" >
+							  		<select id="rate" name="rate" data-validation="notnull" data-errMsg="结算费率不能为空" >
 							  			<option value="">--结算费率--</option>
 							  			<option value="0.38%">0.38%</option>
 							  			<option value="0.39%">0.39%</option>
@@ -422,9 +416,8 @@ $(function(){
 
 		//长期
 		function identityForever(){
-			$("input[name='identityValDate']").val("长期");
-			$("#identityValDate").attr("value","2099-12-31");
-			alert($("#identityValDate").val());
+			//$("input[name='identityValDate']").val("长期");
+			$("#identityValDate").val("2099-12-31");
 		}
 		
 		//关闭
@@ -451,6 +444,7 @@ $(function(){
 				if(data.result=="SUCCESS"){
 					var cityList = data.cityList;
 					$("#merchantCity").html("");
+					$("#merchantCity").append("<option value=''>--请选择市--</option>");
 		   			for ( var city in cityList) {
 		   				$("#merchantCity").append(
 		   						"<option value='"+ cityList[city].cityName +"'>"
@@ -476,10 +470,12 @@ $(function(){
     			if(data.result=="SUCCESS"){
     				var areaList = data.areaList;
     				$("#merchantArea").html("");
+    				$("#merchantArea").append("<option value=''>--请选择区--</option>");
+    				debugger;
            			for ( var area in areaList) {
            				$("#merchantArea").append(
            						"<option value='"+ areaList[area].areaId +"'>"
-           								+ areaList[area].areaName + "</option>"); 
+           								+ (area == "0" ? merchantCityName : areaList[area].areaName) + "</option>"); 
            			}
     			}else{
     				alert("市不能为空");
@@ -501,6 +497,7 @@ $(function(){
 				if(data.result=="SUCCESS"){
 					var cityList = data.cityList;
 					$("#bankCity").html("");
+					$("#bankCity").append("<option value=''>--请选择市--</option>");
 		   			for ( var city in cityList) {
 		   				$("#bankCity").append(
 		   						"<option value='"+ cityList[city].areaId +"'>"
@@ -577,153 +574,66 @@ $(function(){
         	});
         }
       	
-      	/** 门头照点击预览 **/
-      	$('.doorPhotoClick').click(function(){
-      		var divObj = document.getElementById("showImageDiv");
-      		var imageObj = document.getElementById("showImage");
-      		var obj = document.getElementById("doorPhoto");
-      		return previewImage(divObj,imageObj,obj);
-      	});
-      	
-      	/** 银行卡点击预览 **/
-      	$('.bankCardPhotoClick').click(function(){
-      		var divObj = document.getElementById("showImageDiv");
-      		var imageObj = document.getElementById("showImage");
-      		var obj = document.getElementById("bankCardPhoto");
-      		return previewImage(divObj,imageObj,obj);
-      	});
-      	
-      	/** 开户许可证背面点击预览 **/
-      	$('.openAccountClick').click(function(){
-      		var divObj = document.getElementById("showImageDiv");
-      		var imageObj = document.getElementById("showImage");
-      		var obj = document.getElementById("openAccount");
-      		return previewImage(divObj,imageObj,obj);
-      	});
-      	
-      	/** 身份证背面点击预览 **/
-      	$('.legalCertAttribute2Click').click(function(){
-      		var divObj = document.getElementById("showImageDiv");
-      		var imageObj = document.getElementById("showImage");
-      		var obj = document.getElementById("legalCertAttribute2");
-      		return previewImage(divObj,imageObj,obj);
-      	});
-      	
-      	/** 身份证正面点击预览 **/
-      	$('.legalCertAttribute1Click').click(function(){
-      		var divObj = document.getElementById("showImageDiv");
-      		var imageObj = document.getElementById("showImage");
-      		var obj = document.getElementById("legalCertAttribute1");
-      		return previewImage(divObj,imageObj,obj);
-      	});
-      	
-      	/** 营业执照点击预览 **/
-      	$('.businessPhotoClick').click(function(){
-      		var divObj = document.getElementById("showImageDiv");
-      		var imageObj = document.getElementById("showImage");
-      		var obj = document.getElementById("businessPhoto");
-      		return previewImage(divObj,imageObj,obj);
-      	});
-      	
-      	/** 店内照预览 **/
-      	$('.shopInteriorClick').click(function(){
-      		var divObj = document.getElementById("showImageDiv");
-      		var imageObj = document.getElementById("showImage");
-      		var obj = document.getElementById("shopInteriorClick");
-      		return previewImage(divObj,imageObj,obj); 
-      	});
+      	//校验函数,更多类型待拓展
+      	var checkFun = {
+      		notnull : function(value){
+      			return null != value && "" != value;
+      		}
+      	};
+	
+		//表单验证
+		function formValidation(formId){
+			var flag = false;
+			var form = document.getElementById(formId);
+			var attr = null;
+			$.each(form, function(i, e) {
+				attr = $(e).attr("data-validation");
+				if(attr){
+					if(checkFun[attr](e.value)){
+						flag = true;
+					} else {
+						flag = false;
+						alert($(e).attr("data-errMsg"));
+						return false;
+					}
+				}
+			})
+			return flag;
+		}
 
-
-        //图片预览
-        function showShopInteriorImage(obj){  
-    	 var divObj = document.getElementById("shopInteriorDiv");  
-    	 var imageObj = document.getElementById("shopInteriorImageDiv");  
-    	 return previewImage(divObj,imageObj,obj);  
-        }
         
-    	function showBusinessPhotoImage(obj){  
-   		 var divObj = document.getElementById("businessPhotoDiv");  
-   		 var imageObj = document.getElementById("businessPhotoImageDiv");  
-   		 return previewImage(divObj,imageObj,obj);  
-    	}
-
-    	function showOpenPhotoImage(obj){  
-   		 var divObj = document.getElementById("openPhotoDiv");  
-   		 var imageObj = document.getElementById("openPhotoImageDiv");  
-   		 return previewImage(divObj,imageObj,obj);  
-   		}
-
-    	function showDoorPhotoImage(obj){  
-   		 var divObj = document.getElementById("doorPhotoDiv");  
-   		 var imageObj = document.getElementById("doorPhotoImageDiv");  
-   		 return previewImage(divObj,imageObj,obj);  
-    	}
-
-    	function showLegalCertAttribute1Image(obj){  
-   		 var divObj = document.getElementById("legalCertAttribute1Div");  
-   		 var imageObj = document.getElementById("legalCertAttribute1ImageDiv");  
-   		 return previewImage(divObj,imageObj,obj);  
-	   	}
-	
-	   	function showLegalCertAttribute2Image(obj){  
-   		 var divObj = document.getElementById("legalCertAttribute2Div");  
-   		 var imageObj = document.getElementById("legalCertAttribute2ImageDiv");  
-   		 return previewImage(divObj,imageObj,obj);  
-	   	}
-
-    	function showBankCardPhotoImage(obj){  
-   		 var divObj = document.getElementById("bankCardPhotoDiv");  
-   		 var imageObj = document.getElementById("bankCardPhotoImageDiv");  
-   		 return previewImage(divObj,imageObj,obj);  
-   		}
-    	
-    	function showSettleCertAttribute1Image(obj){  
-   		 var divObj = document.getElementById("settleCertAttribute1Div");  
-   		 var imageObj = document.getElementById("settleCertAttribute1ImageDiv");  
-   		 return previewImage(divObj,imageObj,obj);  
-	   	}
-	
-	   	function showSettleCertAttribute2Image(obj){  
-   		 var divObj = document.getElementById("settleCertAttribute1Div");  
-   		 var imageObj = document.getElementById("settleCertAttribute2ImageDiv");  
-   		 return previewImage(divObj,imageObj,obj);  
-	   	}
 	   	
     	/* 图片显示 */
-    	$("#openPhotoImageDiv").show();
-    	$("#businessPhotoImageDiv").show();
-    	$("#certAttribute1ImageDiv").show();
-    	$("#certAttribute2ImageDiv").show();
     	$("#legalCertAttribute1ImageDiv").show();
     	$("#legalCertAttribute2ImageDiv").show();
-    	$("#settleCertAttribute1Div").show();
-    	$("#settleCertAttribute2Div").show();
     	$("#doorPhotoImageDiv").show();
-    	$("#bankCardPhotoImageDiv").show();
-    	$("#businessPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=02&authId="+authId);
-    	$("#certAttribute1ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=0&authId="+authId);
-    	$("#certAttribute2ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=1&authId="+authId);
     	$("#doorPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=08&authId="+authId);
-    	$("#bankCardPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=05&authId="+authId);
-    	$("#openPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=03&authId="+authId);
     	$("#legalCertAttribute1ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=0&authId="+authId);
     	$("#legalCertAttribute2ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=1&authId="+authId);
-    	$("#settleCertAttribute1Div").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=0&authId="+authId);
-    	$("#settleCertAttribute2Div").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=1&authId="+authId);
     	
     	$("#submitData").click(function(){
     		
    			//渠道
-   			var channelNo = $("#channlCode").val();
+   			var channelNo = $("#channelCode").val();
 			//商户号
    			var merchantCode = $("#merchantCode").val();
-			//客户简称getCustName getShortName
+			//客户名称getCustName getShortName
    			var custName = $("#custName").val();
-   			//手机号 getPhone
-   			var mobileNo = $("#mobileNo").val();
-   			//mecTypeFlag（商户类型）
-   			var mecTypeFlag = $("#mecTypeFlag").val();
-   			// merchantProvince（注册地区）getArea
+			//门店名称
+			var storeName = $("#storeName").val();
+   			// representativeName（法人姓名）representativeName
+   			var representativeName = $("#representativeName").val();
+   			// representativeCertNo（法人证件号）representativeCertNo
+   			var representativeCertNo = $("#representativeCertNo").val();
+   			//rate getRate 费率
+   			var rate = $("#rate").val();
+   			//身份证有效起始期getIdentityValDate
+			var identityEffDate =  $("#identityEffDate").val();
+			//身份证有效截止期
+			var identityValDate =  $("#identityValDate").val();
+			//industry（行业信息）getIndustryCode
+   			var industryCode = $("#industry").val();
+			//商户地址省
    			var merchantProvince = $("#merchantProvince").val();
    			// merchantCity
    			var merchantCity = $("#merchantCity").val();
@@ -731,37 +641,19 @@ $(function(){
    			var merchantArea =$("#merchantArea").val();
    			// cprRegAddr（商户详细地址）getCprRegAddr
    			var cprRegAddr = $("#cprRegAddr").val();
-   			//industry（行业信息）getIndustryCode
-   			var industryCode = $("#industry").val();
-   			// representativeName（法人姓名）representativeName
-   			var representativeName = $("#representativeName").val();
-   			// representativeCertType（法人证件类型）
-   			var representativeCertType = $("#representativeCertType").val();
-   			// representativeCertNo（法人证件号）representativeCertNo
-   			var representativeCertNo = $("#representativeCertNo").val();
-   			//actNm（结算名）representativeName
-   			var actNm = $("#actNm").val();
-   			//actType（结算类型）
-   			var actType = $("#actType").val();
-   			// bankCardNo（结算银行卡号）getAccountNo
-   			var bankCardNo = $("#bankCardNo").val();
-   			//weChatBank（开户行）getBankName
-   			var weChatBank = $("#weChatBank").val();
+   			//accountNm（结算名）representativeName
+   			var accountNm = $("#accountNm").val();
+   			// accountNo（结算银行卡号）getAccountNo
+   			var accountNo = $("#accountNo").val();
+   			// interBankName(开户支行名称)getInterBankName
+   			var interBankName = $("#interBankName").val();
+   			//bank（开户行）getBankName
+   			var bank = $("#bank").val();
    			//  bankProvince（开户行所在地区）getBankCity
    			var bankProvince = $("#bankProvince").val();
    			// bankCity  
-   			var bankCity = $("#bankCity").val()
-   			// interBankName(开户支行名称)getInterBankName
-   			var interBankName = $("#interBankName").val();
-   			//rate getRate
-   			var rate = $("#rate").val();
-			//身份证有效起始期getIdentityValDate
-			var identityEffDate =  $("#identityEffDate").val();
-			//身份证有效截止期
-			var identityValDate =  $("#identityValDate").val();
-			//客服电话getCustomerPhone
-			var contactPhone =  $("#contactPhone").val(); 
-			//身份证人像照
+   			var bankCity = $("#bankCity").val();
+   			//身份证人像照
 			var legalCertAttribute1Path = $("#legalCertAttribute1Path").val(); 
 			//身份证国徽照
 			var legalCertAttribute2Path = $("#legalCertAttribute2Path").val(); 
@@ -769,89 +661,67 @@ $(function(){
 			var doorPhotoPath = $("#doorPhotoPath").val(); 
 			//店内照
 			var shopInteriorPath = $("#shopInteriorPath").val(); 
+			//客服电话getCustomerPhone
+			var contactPhone =  $("#contactPhone").val(); 
+   			//手机号 getPhone
+   			var mobileNo = $("#mobileNo").val();
+   			//邮箱 email
+   			var email = $("#email").val();
+   			
 			
-   			//上传照片
-			var imgDoor = [];
-			var imgSrc = [];
-			var merchantData = new FormData(document.getElementById('merchantForm'));	
+			//表单数据验证
+			if(!formValidation("merchantForm")){
+				return false;
+			}
+			
 			$.ajax({
-				type : "POST",
-				url : window.Constants.ContextPath +'<%=MerchantReportedPath.BASE + MerchantReportedPath.FILEUPLOAD%>?merchantCode='+merchantCode,
-				data :merchantData,
-                dataType : "json",
-                cache: false,
-                processData: false,
-                contentType: false,
-				success : function(data){
-				if(data.result=="SUCCESS"){
-					if("" != data.message){
-	  	   				$.ajax({
-	  	   					type : "POST",
-	  	   					url : window.Constants.ContextPath +'<%="/reported/weChatAppMerchantReportSubmit"%>',
-	  	   					data :{
-	  	   						"channelNo" : channelNo,
-	  	   						"merchantCode" : merchantCode,
-	  	   					 	"custName" : custName,
-	  	   						"mobileNo" : mobileNo,
-	  	   						"mecTypeFlag" : mecTypeFlag,
-	  	   					    "province" : merchantProvince,
-	  	   						"city" : merchantCity,
-	  	   						"area" : merchantArea,
-	  	   						"cprRegAddr" : cprRegAddr,
-	  	   						"industryCode" : industryCode,
-	  	   						"representativeName": representativeName,
-	  	   						"representativeCertType": representativeCertType,
-	  	   					    "representativeCertNo": representativeCertNo,
-	  	   					    "actNm": actNm,
-	  	   						"actType": actType,
-	  	   					    "accountNo": bankCardNo,
-	  	   					    "weChatBank": weChatBank,
-	  	   						"bankProvince": bankProvince,
-	  	   						"bankCity": bankCity,
-	  	   						"interBankName": interBankName,
-	  	   						"rate": rate,
-	  	   					    "identityEffDate": identityEffDate,
-	  	   					    "identityValDate": identityValDate,
-	  	   					    "customerPhone": contactPhone,
-	  	   					    "certAttribute1Path" :legalCertAttribute1Path,
-	  	   						"certAttribute1Path" :legalCertAttribute2Path,
-	  	   						"doorPhotoPath" :doorPhotoPath,
-	  	   						"shopInteriorPath" :shopInteriorPath
-	  	   					    
-	  	   					},
-	  	   					dataType : "json",
-	  	   					success : function(data) {
-	  	   						if(data.result=='SUCCESS'){							
-	  	   							$.gyzbadmin.alertSuccess("提交报备成功！",function(){
-									
-	  	   							},function(){
-										this.location.reload();
-									});
-								}else{
-									alert(data.message);
-								}
-	  	   						
-	  	   					}
-	  	   				});
+  					type : "POST",
+  					url : window.Constants.ContextPath + "/merchant/reported/weChatAppMerchantReportSubmit",
+  					data :{
+  						"channelNo" : channelNo,
+  						"merchantCode" : merchantCode,
+  						"custName" : custName,
+  						"storeName" : storeName,
+  						"representativeName" : representativeName,
+  						"representativeCertNo" : representativeCertNo,
+  						"rate" : rate,
+  						"identityEffDate" : identityEffDate,
+  						"identityValDate" : identityValDate,
+  						"industryCode" : industryCode,
+  						"merchantProvince" : merchantProvince,
+  						"merchantCity" : merchantCity,
+  						"merchantArea" : merchantArea,
+  						"cprRegAddr" : cprRegAddr,
+  						"accountNm" : accountNm,
+  						"accountNo" : accountNo,
+  						"interBankName" : interBankName,
+  						"bank" : bank,
+  						"bankProvince" : bankProvince,
+  						"bankCity" : bankCity,
+  						"legalCertAttribute1Path" : legalCertAttribute1Path,
+  						"legalCertAttribute2Path" : legalCertAttribute2Path,
+  						"doorPhotoPath" : doorPhotoPath,
+  						"shopInteriorPath" : shopInteriorPath,
+  						"contactPhone" : contactPhone,
+  						"mobileNo" : mobileNo,
+  						"email" : email,
+  					},
+  					dataType : "json",
+  					success : function(data) {
+  						if(data.result=='SUCCESS'){							
+  							$.gyzbadmin.alertSuccess("提交报备成功！",function(){
 					
-					}else{
-						alert("上传图片返回码异常");
-					}
-					
-				}else{
-					if("" == data.message || null == data.message){
-						alert("失败");
-					}else{
-						alert("上传图片失败 ");
-					}
-				}
-			},
-			error : function(){
-				alert("上传失败");
-			},
-			
-    	
-    	});
+  							},function(){
+  								window.opener=null;
+	   							window.open("","_self");
+	   			   				window.close();
+							});
+						}else{
+							alert(data.message);
+						}
+  						
+  					}
+  			});
     	
    	});  
 </script>
