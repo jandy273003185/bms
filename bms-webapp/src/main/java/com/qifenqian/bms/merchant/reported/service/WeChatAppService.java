@@ -9,12 +9,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONObject;
+import com.qifenqian.bms.basemanager.utils.GenSN;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
 import com.qifenqian.bms.merchant.reported.bean.WeChatAppAreaInfo;
 import com.qifenqian.bms.merchant.reported.bean.WeChatAppBean;
 import com.qifenqian.bms.merchant.reported.dao.WeChatAppMapperDao;
 import com.qifenqian.bms.merchant.reported.mapper.WeChatAppMapper;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgentMerRegistReq;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgentMerRegistResp;
+import com.qifenqian.jellyfish.bean.enums.BusinessStatus;
+import com.qifenqian.jellyfish.merRegistApi.WxpayAgentMerRegistService;
 import com.seven.micropay.base.domain.ChannelResult;
 import com.seven.micropay.base.enums.ReStatus;
 import com.seven.micropay.channel.domain.UpgradeApplicatioMerchanelReq;
@@ -31,100 +37,115 @@ public class WeChatAppService {
 	private WeChatAppMapperDao weChatAppMapperDao;
 	
 	@Autowired
-	private IMerChantIntoService iMerChantIntoService;
+	private WeChatAppMapper weChatAppMapper;
 	
 	@Autowired
-	private WeChatAppMapper weChatAppMapper;
+	private FmIncomeService fmIncomeService;
+	
+	@Reference
+	private WxpayAgentMerRegistService wxpayAgentMerRegistService;
 	
 	
 	/**
 	 * 微信报备
 	 * @param cr
 	 * @return
+	 * @throws Exception 
 	 */
-	public JSONObject weChatAppReported(WeChatAppBean cr) {
-		JSONObject object = new JSONObject();
-		WeChatApplicationReq req = new WeChatApplicationReq();
-		try {
-			String idCardValidTime = "[" +cr.getIdentityEffDate()+ "," + cr.getIdentityValDate()+"]";
+	public Map<String, Object> weChatAppReported(WeChatAppBean cr) throws Exception {
+		logger.info("微信进件报备start..");
+		Map<String, Object> result = new HashMap<String, Object>();
+		//添加商户报备详情表（td_merchant_detail_info）和商户报备表（td_merchant_report）
+		TdMerchantDetailInfo info = new TdMerchantDetailInfo();
+		info.setId(GenSN.getSN());
+		String patchNo = GenSN.getSN();
+		info.setPatchNo(patchNo);
+		info.setMerchantCode(cr.getMerchantCode().trim());
+		info.setChannelNo(cr.getChannelNo());
+		info.setReportStatus("E");
+		info.setProvCode(cr.getMerchantProvince());
+		info.setCityCode(cr.getMerchantCity());
+		info.setContryCode(cr.getMerchantArea());
+		//info.setBankCode(cr.getBankCode());
+		info.setBranchBankName(cr.getInterBankName());
+		info.setMobileNo(cr.getMobileNo());
+		logger.debug("插入td_merchant_report表数据：{}", JSONObject.toJSONString(info));
+		fmIncomeService.insertTdMerchantReport(info);
+		info.setReportStatus("99");
+		logger.debug("插入td_merchant_detail_info表数据：{}", JSONObject.toJSONString(info));
+		fmIncomeService.inserTdMerchantDetailInfo(info);
+		
+		
+		//微信报备
+		WeiXinAgentMerRegistReq req = new WeiXinAgentMerRegistReq();
+		//业务申请编号
+		req.setBusinessCode(patchNo);
+		// 身份证人像面照片
+		req.setIdCardCopy(cr.getLegalCertAttribute1Path());
+		// 身份证国徽面
+		req.setIdCardNational(cr.getLegalCertAttribute2Path());
+		// 门店门口照片
+		req.setStoreEntrancePic(cr.getDoorPhotoPath());
+		// 店内环境照片
+		req.setIndoorPic(cr.getShopInteriorPath());
+		// 身份证姓名
+		req.setIdCardName(cr.getRepresentativeName());
+		// 身份证号码
+		req.setIdCardNumber(cr.getRepresentativeCertNo());
+		// 身份证有效期限
+		String idCardValidTime = "[\"" + cr.getIdentityEffDate() + "\",\"" + ("2099-12-31".equals(cr.getIdentityValDate()) ? "长期" : cr.getIdentityValDate()) + "\"]";
+		req.setIdCardValidTime(idCardValidTime);
+		// 开户名称
+		req.setAccountName(cr.getAccountNm());
+		// 开户银行
+		req.setAccountBank(cr.getBank());
+		// 开户银行省市编码
+		req.setBankAddressCode(cr.getBankCity());
+		// 银行账号
+		req.setAccountNumber(cr.getAccountNo());
+		// 门店名称
+		req.setStoreName(cr.getStoreName());
+		// 门店省市编码
+		req.setStoreAddressCode(cr.getMerchantArea());
+		// 门店街道名称
+		req.setStoreStreet(cr.getCprRegAddr());
+		// 商户简称
+		req.setMerchantShortname(cr.getCustName());
+		// 客服电话
+		req.setServicePhone(cr.getContactPhone());
+		// 售卖商品/提供服务描述
+		req.setProductDesc(cr.getIndustryCode());
+		// 费率
+		req.setRate(cr.getRate());
+		// 超级管理员姓名
+		req.setContact(cr.getRepresentativeName());
+		// 手机号码
+		req.setContactPhone(cr.getMobileNo());
+		// 管理员邮箱
+		req.setContactEmail(cr.getEmail());
 			
-			req.setBusiness_code(cr.getMerchantCode());              //业务申请编号
-			req.setId_card_name(cr.getRepresentativeName());         //身份证名字
-			req.setId_card_number(cr.getRepresentativeCertNo());     //身份证号
-			req.setId_card_valid_time(idCardValidTime);              //身份证有效期
-			req.setAccount_name(cr.getRepresentativeName());         //开户名称 
-			req.setAccount_bank(cr.getBankName());                   //开户银行
-			req.setBank_address_code(cr.getBankCity());              //开户银行省市编码
-			req.setBank_name(cr.getInterBankName());                 //开户银行全称（含支行）
-			req.setAccount_number(cr.getAccountNo());                //结算账号
-			req.setStore_name(cr.getCustName());					 //门店名称
-			req.setStore_address_code(cr.getArea());				 //门店省市编码
-			req.setStore_street(cr.getCprRegAddr());                 //门店街道名称
-			req.setMerchant_shortname(cr.getShortName());			 //商户简称 
-			req.setService_phone(cr.getCustomerPhone());             //客服电话
-			req.setProduct_desc(cr.getIndustryCode());               //售卖商品/提供服务描述
-			req.setRate(cr.getRate());                               //费率
-			req.setContact(cr.getRepresentativeName());				 //超级管理员姓名
-			req.setContact_phone(cr.getPhone());					 //手机号
-			req.setContact_email(cr.getEmail());					 //联系邮箱
-			req.setIdCard(cr.getCertAttribute1Path());               //身份证正面照片
-			req.setNational(cr.getCertAttribute2Path());             //身份证反面照片
-			req.setEntrance(cr.getDoorPhotoPath());                  //门店门口照片
-			req.setIndoor(cr.getShopInteriorPath());                 //店内环境照片
-			
-			
-			/*
-			 * //图片路径 PicPath picPath = new PicPath();
-			 * req.setIdCard(picPath.getIdentityImagePath0()); //身份证正面照片
-			 * req.setNational(picPath.getIdentityImagePath1()); //身份证反面照片
-			 * req.setEntrance(picPath.getDoorPath()); //门店门口照片
-			 * req.setIndoor(picPath.getShopInteriorPath()); //店内环境照片
-			 */
-			Map<String, Object> reqs = new HashMap<>();
-			ChannelResult channelResult = new ChannelResult();
-			logger.info("-----------------微信进件请求报文：" + JSONObject.toJSONString(req));
-			reqs.put("req", req);
-			reqs.put("channelType", ChannelMerRegist.WX);
-			channelResult= iMerChantIntoService.merchatAdd(reqs);
-			logger.info("-----------------微信进件响应报文：" + JSONObject.toJSONString(channelResult));
-		    
-		    if(channelResult != null && "SUCCESS".equals(channelResult.getStatus().toString())) {
-		    	if(ReStatus.SUCCESS.equals(channelResult.getStatus()) 
-		    		  && "00".equals(channelResult.getChannelCode())) {
-		    		
-		    		TdMerchantDetailInfo tdInfo = new TdMerchantDetailInfo();
-		    		tdInfo.setMerchantCode(cr.getMerchantCode().trim());
-		    		tdInfo.setChannelNo(cr.getChannelNo());
-		    		tdInfo.setReportStatus("O");
-		    		// 查询商户报备信息
-		            TdMerchantDetailInfo tdInfo_ = weChatAppMapper.selTdMerchantDetailInfo(tdInfo);
-		            tdInfo.setPatchNo(tdInfo_.getPatchNo());
-		            String mchntStatus = "0";
-		            tdInfo.setFileStatus("Y");
-		            UpdateMerReportAndMerDetailInfo(tdInfo, mchntStatus);
-		        } else {
-		           logger.error("微信进件明确失败:" + channelResult.getData().get("errorMsg"));
-		           object.put("message", channelResult.getData().get("errorMsg"));
-		           object.put("result", "FAILURE");
-		           return object;
-		        }
-
-	        }else{
-	         logger.error("微信进件明确失败:" + channelResult.getReMsg());
-	         object.put("result", "FAILURE");
-	         object.put("message", channelResult.getReMsg());
-	         return object;
-	        }
-
-
-	     } catch (Exception e) {
-	       logger.error("FmIncomingServlet execute exception", e);
-	       object.put("result", "FAILURE");
-	       object.put("message", e);
-	       return object;
-	     }
-	     object.put("result", "SUCCESS");
-		return object; 
+		logger.info("-----------------微信进件请求报文：" + JSONObject.toJSONString(req));
+		WeiXinAgentMerRegistResp wxregResp = wxpayAgentMerRegistService.microMerRegist(req);
+		logger.info("-----------------微信进件响应报文：" + JSONObject.toJSONString(wxregResp));
+	    String reportState = null;
+	    if(BusinessStatus.SUCCESS.equals(wxregResp.getSubCode())) {
+    		info.setReportStatus("O");
+    		reportState = "00";
+            info.setFileStatus("Y");
+            result.put("data", wxregResp);
+			result.put("message", "报备成功");
+			result.put("result", "SUCCESS");
+	    } else {
+           logger.error("微信进件明确失败：{}", wxregResp.getSubMsg());
+           info.setResultMsg(wxregResp.getSubMsg());
+		   reportState = "99";
+		   result.put("message", wxregResp.getSubMsg());
+		   result.put("result", "FAIL");
+	    }
+	    logger.debug("更新td_merchant_report和td_merchant_detail_info表数据：{}", JSONObject.toJSONString(info));
+	    UpdateMerReportAndMerDetailInfo(info, reportState);
+	    logger.info("微信进件报备end..");
+		return result; 
 		
 	}
 	
@@ -152,7 +173,7 @@ public class WeChatAppService {
 		JSONObject object = new JSONObject();
 		UpgradeApplicatioMerchanelReq req = new UpgradeApplicatioMerchanelReq();
 		try {
-			req.setSub_mch_id(cr.getOutMerchantCode());       //小微商户的商户号
+			//req.setSub_mch_id(cr.getOutMerchantCode());       //小微商户的商户号
 			req.setOrganization_type("");                     //主体类型
 			req.setBusiness_license_copy("");				  //营业执照扫描件
 			req.setBusiness_license_number("");               //营业执照注册号
@@ -198,7 +219,7 @@ public class WeChatAppService {
 		JSONObject object = new JSONObject();
 		UpgradeApplicatioMerchanelReq req = new UpgradeApplicatioMerchanelReq();
 		try {
-			req.setMch_id(cr.getOutMerchantCode());
+			req.setMch_id("");
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -215,7 +236,7 @@ public class WeChatAppService {
 		JSONObject object = new JSONObject();
 		UpgradeApplicatioMerchanelReq req = new UpgradeApplicatioMerchanelReq();
 		try {
-			req.setMch_id(cr.getOutMerchantCode());
+			//req.setMch_id(cr.getOutMerchantCode());
 			//主体类型，根据主体类型判断是对公还是对私枚举类型
 			req.setOrganization_type("ACCOUNT_TYPE_BUSINESS");
 			req.setAccount_bank(cr.getBank());
