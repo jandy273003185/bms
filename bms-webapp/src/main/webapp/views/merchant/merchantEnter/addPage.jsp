@@ -272,7 +272,7 @@ function addMerchantBtn(){
 	var merchantAccount =$("#merchantAccount").val();
 	if(custType =='0'){
 		roleId = 'per';
-		merchantFlag = '1'
+		merchantFlag = '2'
 	}else if(custType =='1' ){
 		roleId = 'ent';
 		merchantFlag = '0';
