@@ -3,6 +3,8 @@ package com.qifenqian.bms.common.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
@@ -56,7 +58,7 @@ public class FileController {
 	
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	@ResponseBody
-	public FileInfo upload(MultipartFile file) {
+	public Map<String, Object> upload(MultipartFile file) {
 		return fileUpload(file);
 	}
 
@@ -89,8 +91,8 @@ public class FileController {
 	
 	@RequestMapping(value = "/uploadPic", method = RequestMethod.POST)
     @ResponseBody
-    public FileInfo fileUpload(@RequestParam("file")MultipartFile file){
-
+    public Map<String, Object> fileUpload(@RequestParam("file")MultipartFile file){
+		Map<String, Object> result = new HashMap<String, Object>();
         // 获取文件名后缀名
         String suffix = file.getOriginalFilename();
         String prefix = suffix.substring(suffix.lastIndexOf("."));
@@ -103,18 +105,18 @@ public class FileController {
                 File saveDir = new File(String.valueOf(filePath));
                 // 转存文件
                 file.transferTo(saveDir);
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("imagePath",Filename+prefix);
+                result.put("imagePath",Filename+prefix);
 //              jsonObject.put("uri",uri);
-                jsonObject.put("url",new StringBuilder("/pic/").append(Filename).append(prefix));
-                return new FileInfo(Filename+prefix);
+                result.put("path", saveDir.getAbsolutePath());
+                result.put("url",new StringBuilder("/pic/").append(Filename).append(prefix));
             } catch (IOException e) {
                 e.printStackTrace();
                 logger.error("上传失败");
+                result.put("message","网络延迟，请重新提交");
             }
         }
         logger.error("上传文件为空");
-        return new FileInfo("网络延迟，请重新提交");
+        return result;
         
         
         
