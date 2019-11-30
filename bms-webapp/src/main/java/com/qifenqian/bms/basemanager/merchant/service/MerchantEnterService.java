@@ -354,7 +354,26 @@ public class MerchantEnterService {
 		custScan.setCertifyType("12");
 		String signaturePath = findPicturePath(custScan);
 		picturePath.setSignaturePath("/pic/" + signaturePath);
+		//公众号页面截图
+		custScan.setCertifyType("32");
+		String mpAppScreenShotsPath = findPicturePath(custScan);
+		picturePath.setSignaturePath("/pic/" + mpAppScreenShotsPath);
+		//小程序页面截图
+		custScan.setCertifyType("33");
+		String miniprogramAppidPath = findPicturePath(custScan);
+		picturePath.setSignaturePath("/pic/" + miniprogramAppidPath);
+		//APP截图
+		custScan.setCertifyType("34");
+		String appAppidPath = findPicturePath(custScan);
+		picturePath.setSignaturePath("/pic/" + appAppidPath);
+		//网站授权函
+		custScan.setCertifyType("35");
+		String webUrlPath = findPicturePath(custScan);
+		picturePath.setSignaturePath("/pic/" + webUrlPath);
+		
+		
 		return picturePath;
+				
 	}
 
 	//获取对应类型图片路径
