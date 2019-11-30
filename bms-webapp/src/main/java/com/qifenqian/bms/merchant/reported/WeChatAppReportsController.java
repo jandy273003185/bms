@@ -281,20 +281,31 @@ public class WeChatAppReportsController {
 		return object.toString();
 	}
 	
-
 	/**
 	 * 小微商户查询提现状态
 	*/
 	@RequestMapping("/merchantReported/queryAutoWithDraw")
-	public String  queryAutoWithDraw(HttpServletRequest request,HttpServletResponse response,WeChatAppBean weChatBean){
+	public Map<String, Object>  queryAutoWithDraw(HttpServletRequest request,HttpServletResponse response,WeChatAppBean weChatBean){
 		
-		JSONObject object = new JSONObject();
-		JSONObject weChatResult = new JSONObject();
+		Map<String, Object> weChatResult = new HashMap<String, Object>();
 		//调用微信报备查询结算账户
 		logger.info("-----------------调用微信报备接口开始");
 		weChatResult = weChatAppService.merchantWithdrawalStateQuery(weChatBean);
 		logger.info("-----------------调用微信报备接口返回" +weChatResult.get("result") +  "----------------------");
-				
-		return object.toString();
+		return weChatResult;
+	}
+	
+	/**
+	 * 小微商户查询提现状态
+	*/
+	@RequestMapping("/merchantReported/reAutoWithDraw")
+	public Map<String, Object>  reAutoWithDraw(HttpServletRequest request,HttpServletResponse response,WeChatAppBean weChatBean){
+		
+		Map<String, Object> weChatResult = new HashMap<String, Object>();
+		//调用微信报备查询结算账户
+		logger.info("-----------------调用微信报备接口开始");
+		weChatResult = weChatAppService.reintroduceWithdrawals(weChatBean);
+		logger.info("-----------------调用微信报备接口返回" +weChatResult.get("result") +  "----------------------");
+		return weChatResult;
 	}
 }

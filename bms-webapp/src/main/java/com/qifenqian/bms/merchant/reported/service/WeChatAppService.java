@@ -26,11 +26,14 @@ import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgrntMerRegistQuer
 import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgrntMerRegistQueryResp;
 import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgrntMerRegistUpgradeQueryReq;
 import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgrntMerRegistUpgradeQueryResp;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinReintroduceWithdrawalsReq;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinReintroduceWithdrawalsResp;
 import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinWithdrawalStateQueryReq;
 import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinWithdrawalStateQueryResp;
 import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgrntMerRegistQueryReq;
 import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgrntMerRegistQueryResp;
 import com.qifenqian.jellyfish.bean.enums.BusinessStatus;
+import com.qifenqian.jellyfish.bean.enums.GetwayStatus;
 import com.qifenqian.jellyfish.merRegistApi.WxpayAgentMerRegistService;
 import com.seven.micropay.channel.domain.UpgradeApplicatioMerchanelReq;
 
@@ -339,8 +342,8 @@ public class WeChatAppService {
 	 * @param weChatBean
 	 * @return
 	 */
-	public JSONObject merchantWithdrawalStateQuery(WeChatAppBean weChatBean) {
-		JSONObject object = new JSONObject();
+	public Map<String, Object> merchantWithdrawalStateQuery(WeChatAppBean weChatBean) {
+		Map<String, Object> weChatResult = new HashMap<String, Object>();
 		WeiXinWithdrawalStateQueryReq req = new WeiXinWithdrawalStateQueryReq();
 		req.setDate(weChatBean.getDate());
 		req.setSubMchId(weChatBean.getOutMerchantCode());
@@ -348,13 +351,57 @@ public class WeChatAppService {
 			logger.info("查询微信提现状态：{}", req);
 			WeiXinWithdrawalStateQueryResp weiXinWithdrawalStateQueryResp = wxpayAgentMerRegistService.merchantWithdrawalStateQuery(req);
 			logger.info("查询微信提现状态：{}", weiXinWithdrawalStateQueryResp);
+			if(GetwayStatus.SUCCESS.equals(weiXinWithdrawalStateQueryResp.getCode())){
+				if (BusinessStatus.SUCCESS.equals(weiXinWithdrawalStateQueryResp.getSubCode())) {
+					weChatResult.put("message",weiXinWithdrawalStateQueryResp);
+					weChatResult.put("result", "SUCCESS");
+				}else if(BusinessStatus.FAIL.equals(weiXinWithdrawalStateQueryResp.getSubCode())) {
+					weChatResult.put("message",weiXinWithdrawalStateQueryResp.getSubMsg());
+					weChatResult.put("result", "FAIL");
+				}
+			}else if(GetwayStatus.FAIL.equals(weiXinWithdrawalStateQueryResp.getCode())){
+				weChatResult.put("message",weiXinWithdrawalStateQueryResp.getMsg());
+				weChatResult.put("result", "FAIL");
+			}
 			
-			if (BusinessStatus.SUCCESS.equals(weiXinWithdrawalStateQueryResp.getSubCode())) {
+		} catch (Exception e) {
+			weChatResult.put("message",e);
+			weChatResult.put("result", "FAIL");
+		}
+		return weChatResult;
+	}
+
+	/**
+	 * 重新发起提现
+	 * @param weChatBean
+	 * @return
+	 */
+	public Map<String, Object> reintroduceWithdrawals(WeChatAppBean weChatBean) {
+		Map<String, Object> weChatResult = new HashMap<String, Object>();
+		WeiXinReintroduceWithdrawalsReq req = new WeiXinReintroduceWithdrawalsReq();
+		req.setDate(weChatBean.getDate());
+		req.setSubMchId(weChatBean.getOutMerchantCode());
+		try {
+			logger.info("重新发起提现状态：{}", req);
+			WeiXinReintroduceWithdrawalsResp resp = wxpayAgentMerRegistService.reintroduceWithdrawals(req);
+			logger.info("重新发起提现状态：{}", resp);
+			if(GetwayStatus.SUCCESS.equals(resp.getCode())){
+				if (BusinessStatus.SUCCESS.equals(resp.getSubCode())) {
+					weChatResult.put("message",resp);
+					weChatResult.put("result", "SUCCESS");
+				}else if(BusinessStatus.FAIL.equals(resp.getSubCode())) {
+					weChatResult.put("message",resp.getSubMsg());
+					weChatResult.put("result", "FAIL");
+				}
+			}else if(GetwayStatus.FAIL.equals(resp.getCode())){
+				weChatResult.put("message",resp.getMsg());
+				weChatResult.put("result", "FAIL");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			weChatResult.put("message",e);
+			weChatResult.put("result", "FAIL");
 		}
-		return object;
+		return weChatResult;
 	}
 	
 }
