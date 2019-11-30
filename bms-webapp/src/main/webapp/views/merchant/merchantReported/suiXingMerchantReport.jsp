@@ -230,7 +230,7 @@ $(function(){
 	                                <label class="label-tips" id="countryLab"></label>
 								</td>
 							</tr>	
-						 	<tr>
+						 	<tr id="businessPhotoType1" style = "display:">
 								<td class="td-left">营业执照名称：</td>
 								<td class="td-right">
 									<input type="text" name="cprRegNmCn" id="cprRegNmCn"  placeholder="请输入营业名称"  value="" style="width:90%">
@@ -242,7 +242,7 @@ $(function(){
 	                                    <input type="button" onclick="businessForever()" value="长期" />
 									</td>
 							</tr>
-							<tr>
+							<tr id="businessPhotoType2" style = "display:">
 								<td class="td-left">营业执照编号：</td>
 								<td class="td-right">
 									<input type="text" name="registCode" id="registCode"  placeholder="请输入营业编号"  value="${custInfo.businessLicense }" style="width:90%">
@@ -841,11 +841,14 @@ $(function(){
 				$("#idCardType").attr("style","display:none");
 				$("#idCardBackType").attr("style","display:none");
 				$("#businessPhotoType").attr("style","display:");
+				$("#businessPhotoType1").attr("style","display:");
+				$("#businessPhotoType2").attr("style","display:");
 				$("#openPhotoType").attr("style","display:");
 				$("#legalIdCardType").attr("style","display:");
 				$("#legalIdCardBackType").attr("style","display:");
 				$("#settleIdCardType").attr("style","display:");
 				$("#settleIdCardBackType").attr("style","display:");
+				id="businessPhotoType" style = "display:"
 				
 			}else if("02" == suiXingMerchantType){
 				$("#legalIdCardType").attr("style","display:none");
@@ -853,6 +856,8 @@ $(function(){
 				$("#settleIdCardType").attr("style","display:");
 				$("#settleIdCardBackType").attr("style","display:");
 				$("#businessPhotoType").attr("style","display:none");
+				$("#businessPhotoType1").attr("style","display:none");
+				$("#businessPhotoType2").attr("style","display:none");
 				$("#openPhotoType").attr("style","display:none");
 				$("#bankCardPhotoType").attr("style","display:");
 				$("#idCardType").attr("style","display:none");
