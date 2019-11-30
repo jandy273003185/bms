@@ -19,6 +19,8 @@ import com.qifenqian.bms.merchant.reported.dao.WeChatAppMapperDao;
 import com.qifenqian.bms.merchant.reported.mapper.WeChatAppMapper;
 import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgentMerRegistReq;
 import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgentMerRegistResp;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgrntMerRegistQueryReq;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgrntMerRegistQueryResp;
 import com.qifenqian.jellyfish.bean.enums.BusinessStatus;
 import com.qifenqian.jellyfish.merRegistApi.WxpayAgentMerRegistService;
 import com.seven.micropay.base.domain.ChannelResult;
@@ -66,7 +68,9 @@ public class WeChatAppService {
 		info.setProvCode(cr.getMerchantProvince());
 		info.setCityCode(cr.getMerchantCity());
 		info.setContryCode(cr.getMerchantArea());
-		//info.setBankCode(cr.getBankCode());
+		info.setBankCode(cr.getBank());
+		//结算账户
+		info.setAccountNumber(cr.getAccountNo());
 		info.setBranchBankName(cr.getInterBankName());
 		info.setMobileNo(cr.getMobileNo());
 		logger.debug("插入td_merchant_report表数据：{}", JSONObject.toJSONString(info));
@@ -132,6 +136,7 @@ public class WeChatAppService {
     		info.setReportStatus("O");
     		reportState = "00";
             info.setFileStatus("Y");
+            info.setApplymentId(wxregResp.getApplymentId());
             result.put("data", wxregResp);
 			result.put("message", "报备成功");
 			result.put("result", "SUCCESS");
@@ -154,6 +159,17 @@ public class WeChatAppService {
 	   weChatAppMapper.updateTdMerchantReport(tdInfo);
 	   tdInfo.setReportStatus(status);
 	   weChatAppMapper.updateTdMerchantDetailInfo(tdInfo);
+	}
+	
+	
+	public WeiXinAgrntMerRegistQueryResp microMerRegistQuery(String applymentId) throws Exception {
+		WeiXinAgrntMerRegistQueryReq registQueryReq = new WeiXinAgrntMerRegistQueryReq();
+		registQueryReq.setApplymentId(applymentId);
+		registQueryReq.setBusinessCode("123");
+		logger.info("查询微信进件申请单入参：{}", registQueryReq);
+		WeiXinAgrntMerRegistQueryResp microMerRegistQuery = wxpayAgentMerRegistService.microMerRegistQuery(registQueryReq);
+		logger.info("查询微信进件申请单返回值：{}", microMerRegistQuery);
+		return microMerRegistQuery;
 	}
 
 	/**
@@ -181,7 +197,7 @@ public class WeChatAppService {
 			req.setCompany_address("");                       //注册地址
 			req.setLegal_person("");                          //经营者姓名/法定代表人(营业执照上的经营者/法人姓名)
 			req.setBusiness_time("");                         //营业期限
-			req.setBusiness_licence_type("");                 //营业执照类型
+			req.setBusiness_licence_type("1762");             //营业执照类型
 			req.setAccount_name("");                          //开户名称
 			req.setAccount_bank("");                          //开户银行
 			req.setBank_address_code("");                     //开户银行省市编码
