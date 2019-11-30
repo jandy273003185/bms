@@ -42,7 +42,11 @@ import com.qifenqian.bms.merchant.reported.dao.FmIncomeMapperDao;
 import com.qifenqian.bms.merchant.reported.service.AliPayIncomeService;
 import com.qifenqian.bms.merchant.reported.service.CrIncomeService;
 import com.qifenqian.bms.merchant.reported.service.FmIncomeService;
+import com.qifenqian.bms.merchant.reported.service.WeChatAppService;
 import com.qifenqian.jellyfish.bean.agentMerSign.alipay.AlipayOpenAgentOrderQueryRes;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.AuditDetail;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgrntMerRegistQueryResp;
+import com.qifenqian.jellyfish.bean.enums.BusinessStatus;
 import com.qifenqian.jellyfish.bean.enums.GetwayStatus;
 
 @Controller
@@ -68,6 +72,9 @@ public class MerchantReportsController {
    
    @Autowired
    private AliPayIncomeService aliPayIncomeService;
+   
+   @Autowired
+   private WeChatAppService weChatAppService;
 
    
    /**
@@ -554,10 +561,75 @@ public class MerchantReportsController {
 			}
 			req.put("channelType", ChannelMerRegist.KFT_PAY);
 		}else if("WX".equals(detail.getChannelNo())){
-			
-			req.put("mch_id",detail.getMerchantCode());
-			req.put("applyment_id",custInfo.getCustType());
-//			WeChatAppService.WeChatMerchantQuery(req);
+			//查询
+			TdMerchantDetailInfo wxMerchantDetailInfo = fmIncomeMapperDao.selMerchantDetailInfo(detail);
+			String applymentId = wxMerchantDetailInfo.getApplymentId();
+			try {
+				WeiXinAgrntMerRegistQueryResp registQueryResp = weChatAppService.microMerRegistQuery(applymentId);
+				if (BusinessStatus.SUCCESS.equals(registQueryResp.getSubCode())) {
+					//审核中
+					if ("AUDITING".equals(registQueryResp.getApplymentState())) {
+						detail.setReportStatus("Y");
+						detail.setResultMsg(registQueryResp.getApplymentStateDesc());
+						fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"0");
+						object.put("result", "FAIL");
+						object.put("message", registQueryResp.getApplymentStateDesc());
+					}
+					//已驳回
+					else if ("REJECTED".equals(registQueryResp.getApplymentState())) {
+						List<AuditDetail> auditDetailList = registQueryResp.getAuditDetailList();
+						String auditDetailStr = getAuditDetailString(auditDetailList);
+						detail.setReportStatus("F");
+						detail.setResultMsg(auditDetailStr);
+						fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"2");
+						object.put("result", "FAIL");
+						object.put("message", auditDetailStr);
+					}
+					//已冻结
+					else if ("FROZEN".equals(registQueryResp.getApplymentState())) {
+						detail.setReportStatus("F");
+						detail.setResultMsg(registQueryResp.getApplymentStateDesc());
+						fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"17");
+						object.put("result", "FAIL");
+						object.put("message", registQueryResp.getApplymentStateDesc());
+					}
+					//待签约
+					else if ("TO_BE_SIGNED".equals(registQueryResp.getApplymentState())) {
+						detail.setReportStatus("Y");
+						detail.setOutMerchantCode(registQueryResp.getSubMchId());
+						detail.setResultMsg(registQueryResp.getApplymentStateDesc());
+						detail.setSignUrl(registQueryResp.getSignUrl());
+						fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"4");
+						object.put("result", "FAIL");
+						//object.put("message", StringUtils.isBlank(orderQueryRes.getRejectReason()) ? "待商户确认，申请信息审核通过，等待联系人确认签约或授权" : orderQueryRes.getRejectReason());
+					}
+					//完成
+					else if ("FINISH".equals(registQueryResp.getApplymentState())) {
+						//报备表中状态改变
+						detail.setReportStatus("O");
+						//报备成功商户报备信息表中状态改变
+						detail.setFileStatus("Y");
+						detail.setOutMerchantCode(registQueryResp.getSubMchId());
+						detail.setResultMsg(registQueryResp.getApplymentStateDesc());
+						detail.setSignUrl(registQueryResp.getSignUrl());
+						//更新数据库
+						fmIncomeService.UpdateMerReportAndMerDetailInfo(detail, "1");
+						object.put("result", "SUCCESS");
+						object.put("message", "商户审核成功");
+					}
+				} else {
+					logger.error("查询微信进件申请单：{}", registQueryResp);
+					object.put("result", "FAIL");
+					object.put("message", "调用查询微信进件申请单失败");
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				logger.error("查询微信进件申请单异常：{}", e.getMessage());
+				object.put("result", "FAIL");
+				object.put("message", "调用查询微信进件申请单失败");
+			}
+			return object.toString();
 		}else if ("ALIPAY".equals(detail.getChannelNo())) {
 			//查询
 			TdMerchantDetailInfo selMerchantDetailInfo = fmIncomeMapperDao.selMerchantDetailInfo(detail);
@@ -710,5 +782,16 @@ public class MerchantReportsController {
 		
 		return  object.toString();
 		
+	}
+	
+	private String getAuditDetailString(List<AuditDetail> auditDetails) {
+		StringBuffer auditDetailStr = new StringBuffer();
+		for (AuditDetail auditDetail : auditDetails) {
+			auditDetailStr.append(auditDetail.getParamName());
+			auditDetailStr.append(":");
+			auditDetailStr.append(auditDetail.getRejectReason());
+			auditDetailStr.append(";");
+		}
+		return auditDetailStr.toString();
 	}
 }

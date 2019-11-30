@@ -95,9 +95,45 @@ public class TdMerchantDetailInfo implements Serializable{
 	
 	private String zfbConfirmUrl;
 	
+	/**
+	 * 微信支付分配申请单号
+	 */
+	private String applymentId;
+	/**
+	 * 微信返回签约链接
+	 */
+	private String signUrl;
+	/**
+	 * 结算账户
+	 */
+	private String accountNumber;
 	
 	
 	
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+
+	public String getSignUrl() {
+		return signUrl;
+	}
+
+	public void setSignUrl(String signUrl) {
+		this.signUrl = signUrl;
+	}
+
+	public String getApplymentId() {
+		return applymentId;
+	}
+
+	public void setApplymentId(String applymentId) {
+		this.applymentId = applymentId;
+	}
+
 	public String getZfbAccount() {
 		return zfbAccount;
 	}

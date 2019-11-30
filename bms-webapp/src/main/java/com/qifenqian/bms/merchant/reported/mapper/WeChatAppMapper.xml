@@ -56,6 +56,9 @@
 		 	<if test="resultMsg != null and resultMsg !='' ">
 		 	`result_msg` = #{resultMsg,jdbcType = VARCHAR},
 		 	</if>
+		 	<if test="applymentId != null and applymentId !='' ">
+		 	`applyment_id` = #{applymentId,jdbcType = VARCHAR},
+		 	</if>
 			 `modify_time` = now()
 		 WHERE
 			`patch_no` = #{patchNo,jdbcType = VARCHAR}
