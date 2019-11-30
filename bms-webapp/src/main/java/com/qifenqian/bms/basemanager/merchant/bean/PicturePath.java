@@ -26,7 +26,7 @@ public class PicturePath implements Serializable {
 	private String settleCertAttribute2Path;
 	//18店内照
 	private String shopInteriorPath;
-	//11行业资质照
+	//11特殊行业资质照
 	private String qualificationPath;
 	//12电子签名照
 	private String signaturePath;

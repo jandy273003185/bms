@@ -155,7 +155,7 @@
 								
 								<td class="td-left">营业执照照片：</td>
 								<td class="td-right" colspan="3">
-									<a data-toggle="modal" class="tooltip-success businessPhotoClick" data-target="#previewImageModal">
+									<!-- <a data-toggle="modal" class="tooltip-success businessPhotoClick" data-target="#previewImageModal">
 										<label id="businessPhotoDiv" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
 										  <img id="businessPhotoImageDiv" onClick="bigImg(this);" style="width: 100%; height: 100%;">										  
 										</label>
@@ -164,6 +164,17 @@
 										<input type="hidden" id="businessPhotoImageVal02">  
 										<input type="file" name="businessPhoto" id="businessPhoto" onChange="showBusinessPhotoImage(this)">
 									 	<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div> -->
+									<a data-toggle='modal' class="tooltip-success businessPhotoClick" data-target="#previewImageModal" >
+										<label id="businessPhotoDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.bussinessPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
+									</a>
+									<div class="updateImageDiv" style="float:left; margin-top:75 " >
+										<input  type="hidden" id="businessPhotoPath" name="businessPhotoPath" />
+										<input type="hidden" id="businessPhotoImageVal02"  />
+										<input type="file" name="businessPhoto" id="businessPhoto" onchange="showBusinessPhotoImage(this)" />
+										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
 								</td>
 								
@@ -171,7 +182,7 @@
                             <tr id="doorPhotoType" style = "display:">
 								<td class="td-left">门头照照片：</td>
 								<td class="td-right" colspan="3">
-									<a data-toggle="modal" class="tooltip-success doorPhotoClick" data-target="#previewImageModal">
+									<!-- <a data-toggle="modal" class="tooltip-success doorPhotoClick" data-target="#previewImageModal">
 										<label id="doorPhotoDiv" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
 										  <img id="doorPhotoImageDiv" onClick="bigImg(this);" style="width: 100%; height: 100%;">										  
 										</label>
@@ -180,6 +191,17 @@
 										<input type="hidden" id="doorPhotoImageVal02">  
 										<input type="file" name="doorPhoto" id="doorPhoto" onChange="showDoorPhotoImage(this)">
 									 	<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div> -->
+									<a data-toggle='modal' class="tooltip-success doorPhotoClick" data-target="#previewImageModal" >
+										<label id="doorPhotoDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.doorPhotoPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
+									</a>
+									<div class="updateImageDiv" style="float:left; margin-top:75 " >
+										<input  type="hidden" id="doorPhotoPath" name="doorPhotoPath" />
+										<input type="hidden" id="doorPhotoImageVal02"  />
+										<input type="file" name="doorPhoto" id="doorPhoto" onchange="showDoorPhotoImage(this)" />
+										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
 								</td>
 							</tr>
@@ -220,7 +242,7 @@
 							<tr id="legalIdCardType" style = "display:">
 								<td class="td-left">法人身份证正面：</td>
 								<td class="td-right" colspan="3">
-									<a data-toggle="modal" class="tooltip-success legalCertAttribute1Click" data-target="#previewImageModal">
+									<!-- <a data-toggle="modal" class="tooltip-success legalCertAttribute1Click" data-target="#previewImageModal">
 									<label id="legalCertAttribute1Div" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
 									        <img id="legalCertAttribute1ImageDiv" onClick="bigImg(this);" style="width: 100%; height: 100%;">
 									</label>
@@ -229,6 +251,15 @@
 										<input type="hidden" id="legalCertAttribute1Val02">  
 										<input type="file" name="legalCertAttribute1" id="legalCertAttribute1" onChange="showlegalCertAttribute1Image(this)"> 
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div> -->
+									<a data-toggle='modal' class="tooltip-success legalCertAttribute1Click" data-target="#previewImageModal" >
+										<label id="legalCertAttribute1Div"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.idCardOPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
+									</a>
+									<div style="float:left;margin-top:75" >
+								    	<input  type="hidden" id="legalCertAttribute1Path" name="legalCertAttribute1Path" />
+										<input type="file" name="legalCertAttribute1" id="legalCertAttribute1" onChange="showlegalCertAttribute1Image(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
 									
 								</td>
@@ -236,7 +267,7 @@
 							<tr id="legalIdCardBackType" style = "display:">
 								<td class="td-left">法人身份证背面：</td>
 								<td class="td-right" colspan="3"> 
-									<a data-toggle="modal" class="tooltip-success legalCertAttribute2Click" data-target="#previewImageModal">
+									<!-- <a data-toggle="modal" class="tooltip-success legalCertAttribute2Click" data-target="#previewImageModal">
 										<label id="legalCertAttribute2Div" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
 										        <img id="legalCertAttribute2ImageDiv" onClick="bigImg(this);" style="width: 100%; height: 100%;">
 										</label>
@@ -245,6 +276,15 @@
 										<input type="hidden" id="legalCertAttribute2Val02">  
 										<input type="file" name="legalCertAttribute2" id="legalCertAttribute2" onChange="showlegalCertAttribute2Image(this)"> 
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div> -->
+									<a data-toggle='modal' class="tooltip-success legalCertAttribute2Click" data-target="#previewImageModal" >
+										<label id="legalCertAttribute2Div"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.idCardFPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
+									</a>
+									<div style="float:left;margin-top:75" >
+								    	<input  type="hidden" id="legalCertAttribute2Path" name="legalCertAttribute2Path" />
+										<input type="file" name="legalCertAttribute2" id="legalCertAttribute2" onChange="showlegalCertAttribute2Image(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
 								</td>
 							</tr>
@@ -326,7 +366,7 @@
 							<tr id="openPhotoType" style = "display:">
 								<td class="td-left">开户许可证：</td>
 								<td class="td-right" colspan="3"> 
-									<a data-toggle="modal" class="tooltip-success certAttribute0Click" data-target="#previewImageModal">
+									<!-- <a data-toggle="modal" class="tooltip-success certAttribute0Click" data-target="#previewImageModal">
 										<label id="certAttribute0Div" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
 										        <img id="certAttribute0ImageDiv" onClick="bigImg(this);" style="width: 100%; height: 100%;">
 										</label>
@@ -335,13 +375,23 @@
 										<input type="hidden" id="certAttribute0Val02">  
 										<input type="file" name="certAttribute0" id="certAttribute0" onChange="showCertAttribute0Image(this)">
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div> -->
+									<a data-toggle='modal' class="tooltip-success openAccountClick" data-target="#previewImageModal" >
+										<label id="openAccountDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.openAccountPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
+									</a>
+									<div style="float:left;margin-top:75" >
+										<input  type="hidden" id="openAccountPath" name="openAccountPath" />
+										<input type="file" name="openAccount" id="openAccount" onChange="showOpenAccountImage(this)"/> 
+										<p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
 								</td>
 							</tr>
 							<tr id="bankCardPhotoType" style = "display:">
 				                <td class="td-left">银行卡正面照：</td>
 		                    	<td class="td-right" colspan="3">
-									<a data-toggle='modal' class="tooltip-success bankCardPhotoClick"  data-target="#previewImageModal"  >
+									<!-- <a data-toggle='modal' class="tooltip-success bankCardPhotoClick"  data-target="#previewImageModal"  >
 										<label id="bankCardPhotoDiv"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
 										        <img  id="bankCardPhotoImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none" />
 										</label>
@@ -350,13 +400,23 @@
 										<input type="hidden" id="bankCardPhotoImageVal02"  />  
 										<input type="file" name="bankCardPhoto" id="bankCardPhoto" onchange="showBankCardPhotoImage(this)"/>
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div> -->
+									<a data-toggle='modal' class="tooltip-success bankCardPhotoClick" data-target="#previewImageModal" >
+										<label id="bankCardPhotoDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.bankCardPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
+									</a>
+									<div style="float:left;margin-top:75" >
+										<input  type="hidden" id="bankCardPhotoPath" name="bankCardPhotoPath" />
+										<input type="hidden" id="bankCardPhotoImageVal02"  />  
+										<input type="file" name="bankCardPhoto" id="bankCardPhoto" onChange="showBankCardPhotoImage(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
 								</td>
 							</tr>
 							<tr id="settleIdCardType" style = "display:">
 				                <td class="td-left"> 结算人身份证正面 </td>
 		                    	<td class="td-right" colspan="3">
-									<a data-toggle='modal' class="tooltip-success settleCertAttribute1Click"  data-target="#previewImageModal"  >
+									<!-- <a data-toggle='modal' class="tooltip-success settleCertAttribute1Click"  data-target="#previewImageModal"  >
 										<label id="settleCertAttribute1Div"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
 										        <img  id="settleCertAttribute1ImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none" />
 										</label>
@@ -365,13 +425,23 @@
 										<input type="hidden" id="settleCertAttribute1Val02"  />   
 										<input type="file" name="settleCertAttribute1" id="settleCertAttribute1" onchange="showSettleCertAttribute1Image(this)"/>
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div> -->
+									<a data-toggle='modal' class="tooltip-success settleCertAttribute1Click" data-target="#previewImageModal" >
+										<label id="settleCertAttribute1Div"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.settleCertAttribute1Path }" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
+									</a>
+									<div style="float:left;margin-top:75" >
+										<input  type="hidden" id="settleCertAttribute1Path" name="settleCertAttribute1Path" />
+										<input type="hidden" id="settleCertAttribute1ImageVal02"  />  
+										<input type="file" name="settleCertAttribute1" id="settleCertAttribute1" onChange="showSettleCertAttribute1Image(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
 								</td>
 					         </tr>
 					         <tr id="settleIdCardBackType" style = "display:">
 				                <td class="td-left"> 结算人身份证反面 </td>
 		                    	<td class="td-right" colspan="3">
-									<a data-toggle='modal' class="tooltip-success settleCertAttribute2Click"  data-target="#previewImageModal"  >
+									<!-- <a data-toggle='modal' class="tooltip-success settleCertAttribute2Click"  data-target="#previewImageModal"  >
 										<label id="settleCertAttribute2Div"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
 										        <img  id="settleCertAttribute2ImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none" />
 										</label>
@@ -380,6 +450,16 @@
 										<input type="hidden" id="settleCertAttribute2Val02"  />  
 										<input type="file" name="settleCertAttribute2" id="settleCertAttribute2" onchange="showSettleCertAttribute2Image(this)"/>
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div> -->
+									<a data-toggle='modal' class="tooltip-success settleCertAttribute2Click" data-target="#previewImageModal" >
+										<label id="settleCertAttribute2Div"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.settleCertAttribute2Path }" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
+									</a>
+									<div style="float:left;margin-top:75" >
+										<input  type="hidden" id="settleCertAttribute2Path" name="settleCertAttribute2Path" />
+										<input type="hidden" id="settleCertAttribute2ImageVal02"  />  
+										<input type="file" name="settleCertAttribute2" id="settleCertAttribute2" onChange="showSettleCertAttribute2Image(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
 								</td>
 							 </tr>					           
@@ -426,6 +506,89 @@
      </div>
 </div>   
 <script type="text/javascript">
+
+
+		/*
+		*
+		* file input file dom object
+		* pathTarget 路径保存的input元素id 
+		* preView 图片预览dom id
+		*/
+		function commonFileUpload(file, pathTarget, preView) {
+			var formdata=new FormData();
+		    formdata.append("file",$(file).get(0).files[0]);
+		    $.ajax({
+		        url:'/common/files/uploadPic',
+		        type:'post',
+		        contentType:false,
+		        data:formdata,
+		        processData:false,
+		        async:false,
+		        success:function(info){ 
+		             $('#' + pathTarget + '').val(info.path);
+		        },
+		        error:function(err){
+		            console.log(err)
+		        }
+		    });
+		
+		    var prevDiv = document.getElementById(preView);
+		    if (file.files && file.files[0]) {
+		        var reader = new FileReader();
+		        reader.onload = function (evt) {
+		        	prevDiv.innerHTML = '<img src="' + evt.target.result + '" onclick="bigImg(this);" style="width:120px;height:100px;" />';
+		        }
+		        reader.readAsDataURL(file.files[0]);
+		    } else {
+		        prevDiv.innerHTML = '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';
+		    }
+		}
+		
+		//营业执照上传
+		function showBusinessPhotoImage(file){
+			commonFileUpload(file, 'businessPhotoPath', 'businessPhotoDiv');
+		}
+		
+		//门头上传
+		function showDoorPhotoImage(file){
+			commonFileUpload(file, 'doorPhotoPath', 'doorPhotoDiv');
+		}
+		
+		//法人身份证正面
+		function showlegalCertAttribute1Image(file){
+			commonFileUpload(file, 'legalCertAttribute1Path', 'legalCertAttribute1Div');
+		}
+		
+		//法人身份证反面
+		function showlegalCertAttribute2Image(file){
+			commonFileUpload(file, 'legalCertAttribute2Path', 'legalCertAttribute2Div');
+		} 
+		
+		//上传银行卡照
+		function showBankCardPhotoImage(file){
+			commonFileUpload(file, 'bankCardPhotoPath', 'bankCardPhotoDiv');
+		}
+		
+		//上传开户许可证
+		function showOpenAccountImage(file){
+			commonFileUpload(file, 'openAccountPath', 'openAccountDiv');
+		}
+		
+		//结算人身份证正面
+		function showSettleCertAttribute1Image(file){
+			commonFileUpload(file, 'settleCertAttribute1Path', 'settleCertAttribute1Div');
+		}
+		
+		//结算人身份证反面
+		function showSettleCertAttribute2Image(file){
+			commonFileUpload(file, 'settleCertAttribute2Path', 'settleCertAttribute2Div');
+		} 
+		
+		function businessForever(){
+			$("input[name='businessTerm']").val("2099-12-31");
+			$("#businessTerm").attr("value","2099-12-31");
+		}
+		
         /** 点击预览大图 **/
       	function bigImg(obj){
             /* $('#showImageDiv #showImage').attr("src",obj.src); */
@@ -794,6 +957,26 @@
 					}
 				}
 			});  */
+			 $.ajax({
+		            type : "POST",
+		            url : window.Constants.ContextPath +'<%="/common/files/getPicPath"%>?custId='+custId,
+		            data :{
+		            	"openAccountPath"          : openAccountPath,                //商户营业执照
+		            	"idCardOPath"              : certAttribute1Path,             //身份证正面照
+		            	"idCardFPath"              : certAttribute2Path,             //身份证背面照
+		            	"bussinessPath"            : businessPhotoPath,              //开户许可证
+		            	"bankCardPath"             : bankCardPhotoPath,              //开户银行照
+						"doorPhotoPath"            : doorPhotoPath,					 //门头照
+						"settleCertAttribute1Path" : settleCertAttribute1Path,		 //结算人身份证正面
+						"settleCertAttribute2Path" : settleCertAttribute2Path		 //结算人身份证反面
+		            },
+		            dataType : "json",
+		            success : function(data) {
+		                if(data.result=='SUCCESS'){
+		                	
+		                }
+		            }
+			 })
 			$.ajax({
 				type : "POST",
 				url : window.Constants.ContextPath +'<%=MerchantReportedPath.BASE + MerchantReportedPath.SELSUIXINGFILEUPLOAD %>?patchNo='+patchNo+'&status='+status,

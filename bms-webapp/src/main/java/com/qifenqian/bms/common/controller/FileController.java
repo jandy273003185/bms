@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,8 +29,6 @@ import com.qifenqian.bms.basemanager.merchant.bean.PicturePath;
 import com.qifenqian.bms.basemanager.merchant.mapper.CustScanMapper;
 import com.qifenqian.bms.basemanager.merchant.mapper.MerchantMapper;
 import com.qifenqian.bms.basemanager.merchant.service.MerchantEnterService;
-import com.qifenqian.bms.basemanager.utils.GenSN;
-import com.qifenqian.bms.common.bean.FileInfo;
 import com.qifenqian.bms.platform.common.utils.DateUtils;
 
 @Controller
@@ -241,6 +238,71 @@ public class FileController {
 				}
 				
 				custScan.setScanCopyPath(picturePath.getSettleCertAttribute2Path());
+				custScan.setStatus("00");
+				custScanMapper.insertCustScan(custScan);
+			}
+			//特殊资质照
+			if(!StringUtils.isEmpty(picturePath.getQualificationPath())) {
+				custScan.setCertifyType("11");
+				
+				if(!StringUtils.isEmpty(picturePathOld.getQualificationPath())) {
+					custScan.setStatus("01");
+					custScanMapper.updateCustScan(custScan);
+				}
+				
+				custScan.setScanCopyPath(picturePath.getQualificationPath());
+				custScan.setStatus("00");
+				custScanMapper.insertCustScan(custScan);
+			}
+			//公众号页面截图
+			if(!StringUtils.isEmpty(picturePath.getMpAppScreenShotsPath())) {
+				custScan.setCertifyType("32");
+				
+				if(!StringUtils.isEmpty(picturePathOld.getMpAppScreenShotsPath())) {
+					custScan.setStatus("01");
+					custScanMapper.updateCustScan(custScan);
+				}
+				
+				custScan.setScanCopyPath(picturePath.getMpAppScreenShotsPath());
+				custScan.setStatus("00");
+				custScanMapper.insertCustScan(custScan);
+			}
+			//小程序页面截图
+			if(!StringUtils.isEmpty(picturePath.getMiniprogramAppidPath())) {
+				custScan.setCertifyType("33");
+				
+				if(!StringUtils.isEmpty(picturePathOld.getMiniprogramAppidPath())) {
+					custScan.setStatus("01");
+					custScanMapper.updateCustScan(custScan);
+				}
+				
+				custScan.setScanCopyPath(picturePath.getMiniprogramAppidPath());
+				custScan.setStatus("00");
+				custScanMapper.insertCustScan(custScan);
+			}
+			//APP截图
+			if(!StringUtils.isEmpty(picturePath.getAppAppidPath())) {
+				custScan.setCertifyType("34");
+				
+				if(!StringUtils.isEmpty(picturePathOld.getAppAppidPath())) {
+					custScan.setStatus("01");
+					custScanMapper.updateCustScan(custScan);
+				}
+				
+				custScan.setScanCopyPath(picturePath.getAppAppidPath());
+				custScan.setStatus("00");
+				custScanMapper.insertCustScan(custScan);
+			}
+			//网站授权函
+			if(!StringUtils.isEmpty(picturePath.getWebUrlPath())) {
+				custScan.setCertifyType("35");
+				
+				if(!StringUtils.isEmpty(picturePathOld.getWebUrlPath())) {
+					custScan.setStatus("01");
+					custScanMapper.updateCustScan(custScan);
+				}
+				
+				custScan.setScanCopyPath(picturePath.getWebUrlPath());
 				custScan.setStatus("00");
 				custScanMapper.insertCustScan(custScan);
 			}
