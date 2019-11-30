@@ -601,7 +601,7 @@ public class MerchantReportsController {
 						detail.setSignUrl(registQueryResp.getSignUrl());
 						fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"4");
 						object.put("result", "FAIL");
-						//object.put("message", StringUtils.isBlank(orderQueryRes.getRejectReason()) ? "待商户确认，申请信息审核通过，等待联系人确认签约或授权" : orderQueryRes.getRejectReason());
+						object.put("message", registQueryResp.getApplymentStateDesc());
 					}
 					//完成
 					else if ("FINISH".equals(registQueryResp.getApplymentState())) {
