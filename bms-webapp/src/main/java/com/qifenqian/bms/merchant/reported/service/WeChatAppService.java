@@ -28,6 +28,8 @@ import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgrntMerRegistUpgr
 import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgrntMerRegistUpgradeQueryResp;
 import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinWithdrawalStateQueryReq;
 import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinWithdrawalStateQueryResp;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgrntMerRegistQueryReq;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgrntMerRegistQueryResp;
 import com.qifenqian.jellyfish.bean.enums.BusinessStatus;
 import com.qifenqian.jellyfish.merRegistApi.WxpayAgentMerRegistService;
 import com.seven.micropay.channel.domain.UpgradeApplicatioMerchanelReq;

@@ -330,9 +330,12 @@
 		 	<if test="signUrl != null and signUrl !='' ">
 		 	`sign_url` = #{signUrl,jdbcType = VARCHAR},
 		 	</if>
+<<<<<<< HEAD
 		 	<if test="signQrcode != null and signQrcode !='' ">
 		 	`sign_qrcode` = #{signQrcode,jdbcType = VARCHAR},
 		 	</if>
+=======
+>>>>>>> branch 'springboot' of https://gitlab.qifenqian.com/qifenqian/bms.git
 			 `modify_time` = now()
 		 WHERE
 			`patch_no` = #{patchNo,jdbcType = VARCHAR}

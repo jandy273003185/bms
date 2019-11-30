@@ -695,7 +695,6 @@ public class MerchantReportsController {
 						object.put("message", "调用查询微信升级进件申请单失败");
 					}
 				}
-				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
