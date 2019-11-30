@@ -9,6 +9,7 @@ import org.apache.tomcat.util.descriptor.web.ContextResource;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.embedded.tomcat.TomcatWebServer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.jndi.JndiObjectFactoryBean;
 
 //@Configuration
