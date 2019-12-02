@@ -18,12 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
-import com.seven.micropay.base.domain.ChannelResult;
-import com.seven.micropay.base.enums.ReStatus;
-import com.seven.micropay.channel.domain.merchant.suixinpayInfo.SxPayRequestInfo;
-import com.seven.micropay.channel.enums.ChannelMerRegist;
-import com.seven.micropay.channel.service.IMerChantIntoService;
-import com.seven.micropay.commons.util.DateUtil;
 import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
 import com.qifenqian.bms.basemanager.merchant.service.MerchantService;
 import com.qifenqian.bms.basemanager.utils.GenSN;
@@ -43,12 +37,18 @@ import com.qifenqian.bms.merchant.reported.service.AliPayIncomeService;
 import com.qifenqian.bms.merchant.reported.service.CrIncomeService;
 import com.qifenqian.bms.merchant.reported.service.FmIncomeService;
 import com.qifenqian.bms.merchant.reported.service.WeChatAppService;
-import com.qifenqian.jellyfish.bean.agentMerSign.alipay.AlipayOpenAgentOrderQueryRes;
-import com.qifenqian.jellyfish.bean.agentMerSign.weixin.AuditDetail;
-import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgrntMerRegistQueryResp;
-import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgrntMerRegistUpgradeQueryResp;
 import com.qifenqian.jellyfish.bean.enums.BusinessStatus;
 import com.qifenqian.jellyfish.bean.enums.GetwayStatus;
+import com.qifenqian.jellyfish.bean.merregist.alipay.AlipayOpenAgentOrderQueryRes;
+import com.qifenqian.jellyfish.bean.merregist.weixin.AuditDetail;
+import com.qifenqian.jellyfish.bean.merregist.weixin.WeiXinAgrntMerRegistQueryResp;
+import com.qifenqian.jellyfish.bean.merregist.weixin.WeiXinAgrntMerRegistUpgradeQueryResp;
+import com.seven.micropay.base.domain.ChannelResult;
+import com.seven.micropay.base.enums.ReStatus;
+import com.seven.micropay.channel.domain.merchant.suixinpayInfo.SxPayRequestInfo;
+import com.seven.micropay.channel.enums.ChannelMerRegist;
+import com.seven.micropay.channel.service.IMerChantIntoService;
+import com.seven.micropay.commons.util.DateUtil;
 
 @Controller
 @RequestMapping(MerchantReportedPath.BASE)
