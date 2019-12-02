@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,17 @@ import com.qifenqian.bms.basemanager.utils.GenSN;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
 import com.qifenqian.bms.merchant.reported.bean.WeChatAppAreaInfo;
 import com.qifenqian.bms.merchant.reported.bean.WeChatAppBean;
+import com.qifenqian.bms.merchant.reported.bean.WeChatAppModifyBean;
 import com.qifenqian.bms.merchant.reported.dao.WeChatAppMapperDao;
 import com.qifenqian.bms.merchant.reported.mapper.WeChatAppMapper;
 import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgentMerRegistReq;
 import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgentMerRegistResp;
 import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgrntMerRegistQueryReq;
 import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgrntMerRegistQueryResp;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinModifyContactinfoReq;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinModifyContactinfoResp;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinModifySettlementCardReq;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinModifySettlementCardResp;
 import com.qifenqian.jellyfish.bean.enums.BusinessStatus;
 import com.qifenqian.jellyfish.merRegistApi.WxpayAgentMerRegistService;
 import com.seven.micropay.base.domain.ChannelResult;
@@ -29,6 +35,7 @@ import com.seven.micropay.channel.domain.UpgradeApplicatioMerchanelReq;
 import com.seven.micropay.channel.domain.WeChatApplicationReq;
 import com.seven.micropay.channel.enums.ChannelMerRegist;
 import com.seven.micropay.channel.service.IMerChantIntoService;
+import com.sevenpay.plugin.exception.bean.ExceptionColumnValues.model;
 
 @Service
 public class WeChatAppService {
@@ -185,47 +192,108 @@ public class WeChatAppService {
 	 * @param cr
 	 * @return
 	 */
-	public JSONObject weChatAppUpgradeReported(WeChatAppBean cr) {
-		JSONObject object = new JSONObject();
-		UpgradeApplicatioMerchanelReq req = new UpgradeApplicatioMerchanelReq();
-		try {
-			//req.setSub_mch_id(cr.getOutMerchantCode());       //小微商户的商户号
-			req.setOrganization_type("");                     //主体类型
-			req.setBusiness_license_copy("");				  //营业执照扫描件
-			req.setBusiness_license_number("");               //营业执照注册号
-			req.setMerchant_name("");                         //商户名称(营业执照上的商户名称)
-			req.setCompany_address("");                       //注册地址
-			req.setLegal_person("");                          //经营者姓名/法定代表人(营业执照上的经营者/法人姓名)
-			req.setBusiness_time("");                         //营业期限
-			req.setBusiness_licence_type("1762");             //营业执照类型
-			req.setAccount_name("");                          //开户名称
-			req.setAccount_bank("");                          //开户银行
-			req.setBank_address_code("");                     //开户银行省市编码
-			req.setBank_name("");                             //开户银行全称（含支行）
-			req.setAccount_number("");                        //银行卡号
-			req.setMerchant_shortname("");                    //商户简称
-			req.setBusiness("");                              //费率结算规则ID
-			req.setBusiness_scene("");                        //经营场景
-			req.setContact_email("");                         //联系邮箱
-			req.setMp_appid("");                              //公众号APPID
-			req.setMp_app_screen_shots("");                   //公众号页面截图
-			req.setMiniprogram_appid("");                     //小程序APPID
-			req.setMiniprogram_screen_shots("");              //小程序页面截图
-			req.setApp_appid("");                             //应用APPID
-			req.setApp_screen_shots("");                      //APP截图
-			req.setApp_download_url("");                      //APP下载衔接
-			req.setWeb_url("");                               //PC网站域名
-			req.setWeb_authoriation_letter("");               //网站授权函
-			req.setWeb_appid("");                             //PC网站对应的公众号APPID
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+	public Map<String, Object> weChatAppUpgradeReported(WeChatAppBean cr) {
 		
-		return object;
+		logger.info("-----------------微信升级进件开始-----------------");
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		WeiXinAgentMerRegistUpgradeReq req = new WeiXinAgentMerRegistUpgradeReq();
+		TdMerchantDetailInfo info = new TdMerchantDetailInfo();
+		try {
+			//添加商户报备详情表（td_merchant_detail_info）和商户报备表（td_merchant_report）
+			info.setId(GenSN.getSN()); 
+			String patchNo = GenSN.getSN();
+			info.setPatchNo(patchNo); 
+			info.setMerchantCode(cr.getMerchantCode().trim());
+			info.setChannelNo(cr.getChannelNo()); 
+			info.setReportStatus("E");
+			info.setProvCode(cr.getMerchantProvince());
+			info.setCityCode(cr.getMerchantCity());
+			info.setContryCode(cr.getMerchantArea());
+			info.setBranchBankName(cr.getInterBankName());
+			info.setMobileNo(cr.getMobileNo());
+			logger.debug("插入td_merchant_report表数据：{}", JSONObject.toJSONString(info));
+			fmIncomeService.insertTdMerchantReport(info); 
+			info.setReportStatus("99");
+			info.setRemark("weChatUpgrade");//备注值为weChatUpgrade则是微信升级信息
+			logger.debug("插入td_merchant_detail_info表数据：{}",
+			JSONObject.toJSONString(info));
+			fmIncomeService.inserTdMerchantDetailInfo(info);
+			 
+			String businessTermTime = "[\"" + cr.getBusinessEffectiveTerm() + "\",\"" + ("2099-12-31".equals(cr.getBusinessTerm()) ? "长期" : cr.getBusinessTerm()) + "\"]";
+			String businessSceneList = "[" +cr.getBusinessScene()+ "]";
+			req.setSubMchId(cr.getOutMerchantCode());       		         //小微商户的商户号
+			req.setOrganizationType(cr.getMerchantProperty());               //主体类型
+			req.setBusinessLicenseCopy(cr.getBusinessPhotoPath());		     //营业执照扫描件
+			req.setBusinessLicenseNumber(cr.getBusinessLicense());           //营业执照注册号
+			req.setMerchantName(cr.getCustName());                           //商户名称(营业执照上的商户名称)
+			req.setCompanyAddress(cr.getCprRegAddr());                       //注册地址
+			req.setLegalPerson(cr.getRepresentativeName());                  //经营者姓名/法定代表人(营业执照上的经营者/法人姓名)
+			req.setBusinessTime(businessTermTime);                           //营业期限
+			req.setBusinessLicenceType("1762");                              //营业执照类型
+			req.setAccountName(cr.getAccountNm());                           //开户名称
+			req.setAccountBank(cr.getBank());                                //开户银行
+			req.setBankAddressCode(cr.getBankCity());                        //开户银行省市编码
+			req.setBankName(cr.getInterBankName());                          //开户银行全称（含支行）
+			req.setAccountNumber(cr.getAccountNo());                         //银行卡号
+			req.setMerchantShortname(cr.getShortName());                     //商户简称
+			req.setBusiness(cr.getRateId());                                 //费率结算规则ID
+			req.setBusinessScene(businessSceneList);                         //经营场景
+			req.setContactEmail(cr.getAttentionEmail());                     //联系邮箱
+			req.setMpAppid(cr.getMpAppid());                                 //公众号APPID
+			req.setMpAppScreenShots(cr.getMpAppScreenShotsPath());           //公众号页面截图
+			req.setMiniprogramAppid(cr.getMiniprogramAppid());               //小程序APPID
+			req.setMiniprogramScreenShots(cr.getMiniprogramAppidPath());     //小程序页面截图
+			req.setAppAppid(cr.getAppAppid());                               //应用APPID
+			req.setAppScreenShots(cr.getAppAppidPath());                     //APP截图
+			req.setAppDownloadUrl(cr.getAppDownloadUrl());                   //APP下载衔接
+			req.setWebUrl(cr.getWebUrl());                                   //PC网站域名
+			req.setWebAuthoriationLetter(cr.getWebUrlPath());                //网站授权函
+			req.setWebAppid(cr.getWebAppid());                               //PC网站对应的公众号APPID
+			
+			logger.info("-----------------微信升级进件请求报文：" + JSONObject.toJSONString(req));
+			WeiXinAgentMerRegistUpgradeResp wxregUpgradeResp = wxpayAgentMerRegistService.microMerRegistUpgrade(req);
+			logger.info("-----------------微信升级进件响应报文：" + JSONObject.toJSONString(wxregUpgradeResp));
+			
+			String reportState = null;
+		    if(BusinessStatus.SUCCESS.equals(wxregUpgradeResp.getSubCode())) {
+	    		info.setReportStatus("O");
+	    		reportState = "00";
+	            info.setFileStatus("Y");
+	            result.put("data", wxregUpgradeResp);
+				result.put("message", "报备成功");
+				result.put("result", "SUCCESS");
+		    } else {
+	           logger.error("微信进件明确失败：{}", wxregUpgradeResp.getSubMsg());
+	           info.setResultMsg(wxregUpgradeResp.getSubMsg());
+			   reportState = "99";
+			   result.put("message", wxregUpgradeResp.getSubMsg());
+			   result.put("result", "FAIL");
+		    }
+		    logger.debug("更新td_merchant_report和td_merchant_detail_info表数据：{}", JSONObject.toJSONString(info));
+		    UpdateMerReportAndMerDetailInfo(info, reportState);
+		    logger.info("-----------------微信升级进件结束-----------------");
+		} catch (Exception e) {
+			result.put("message", e);
+			result.put("result", "FAIL");
+		}
+		return result;
 	}
 	
-	
+	/**
+	 * 升级查询
+	 * @param applymentId
+	 * @return
+	 * @throws Exception
+	 */
+	public WeiXinAgrntMerRegistUpgradeQueryResp microMerRegistUpgradeQuery(String subMchId) throws Exception {
+		WeiXinAgrntMerRegistUpgradeQueryReq registUpgradeQueryReq = new WeiXinAgrntMerRegistUpgradeQueryReq();
+		registUpgradeQueryReq.setSubMchId(subMchId);
+		logger.info("查询微信进件申请单入参：{}", registUpgradeQueryReq);
+		WeiXinAgrntMerRegistUpgradeQueryResp microMerRegistQuery = wxpayAgentMerRegistService.microMerRegistUpgradeQuery(registUpgradeQueryReq);
+		logger.info("查询微信进件申请单返回值：{}", microMerRegistQuery);
+		return microMerRegistQuery;
+	}
 	/**
 	 * 微信查询结算账户
 	 * @param cr
@@ -247,26 +315,162 @@ public class WeChatAppService {
 	 * 微信修改结算账户
 	 * @param cr
 	 * @return
+	 * @throws Exception 
 	 */
-	public JSONObject modifySettlement(WeChatAppBean cr) {
-		JSONObject object = new JSONObject();
-		UpgradeApplicatioMerchanelReq req = new UpgradeApplicatioMerchanelReq();
+	public Map<String, Object> modifySettlement(WeChatAppModifyBean modifyBean) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		WeiXinModifySettlementCardReq req = new WeiXinModifySettlementCardReq();
+		req.setSubMchId(modifyBean.getSubMchId());
+		if (StringUtils.isNotBlank(modifyBean.getAccountNo())) {
+			req.setAccountNumber(modifyBean.getAccountNo());
+		}
+		if (StringUtils.isNotBlank(modifyBean.getInterBankName())) {
+			req.setBankName(modifyBean.getInterBankName());
+		}
+		if (StringUtils.isNotBlank(modifyBean.getBank())) {
+			req.setAccountBank(modifyBean.getBank());
+		}
+		req.setBankAddressCode(modifyBean.getBankCity());
+		
 		try {
-			//req.setMch_id(cr.getOutMerchantCode());
-			//主体类型，根据主体类型判断是对公还是对私枚举类型
-			req.setOrganization_type("ACCOUNT_TYPE_BUSINESS");
-			req.setAccount_bank(cr.getBank());
-			req.setBank_address_code(cr.getBankCity());
-			req.setBank_name(cr.getInterBankName());
-//			req.setBank_branch_id(cr.getBankCode());
-			req.setAccount_number(cr.getAccountNo());
-			
-			
+			logger.info("微信修改结算信息请求信息：{}", JSONObject.toJSONString(req));
+			WeiXinModifySettlementCardResp modifySettlementCard = wxpayAgentMerRegistService.modifySettlementCard(req);
+			logger.info("微信修改结算信息响应信息：{}", JSONObject.toJSONString(modifySettlementCard));
+			if (BusinessStatus.SUCCESS.equals(modifySettlementCard.getSubCode())) {
+				//更新
+				TdMerchantDetailInfo merchantDetailInfo = new TdMerchantDetailInfo();
+				merchantDetailInfo.setPatchNo(modifyBean.getPatchNo());
+				merchantDetailInfo.setBankCode(modifyBean.getBank());
+				merchantDetailInfo.setAccountNumber(modifyBean.getAccountNo());
+				merchantDetailInfo.setBranchBankName(modifyBean.getInterBankName());
+				weChatAppMapper.updateTdMerchantDetailInfo(merchantDetailInfo);
+				
+				result.put("code", "SUCCESS");
+				result.put("message", "修改结算信息成功");
+			} else {
+				result.put("code", "FAIL");
+				result.put("message", "修改结算信息失败：" + modifySettlementCard.getSubMsg());
+			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.error("修改结算信息异常：{}", e.getMessage());
+			result.put("code", "FAIL");
+			result.put("message", "修改结算信息异常");
 		}
 		
-		return object;
+		return result;
+	}
+	
+	/**
+	 * 修改微信联系信息
+	 * @param modifyBean
+	 * @return
+	 */
+	public Map<String, Object> modifyContact(WeChatAppModifyBean modifyBean) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		WeiXinModifyContactinfoReq req = new WeiXinModifyContactinfoReq();
+		req.setSubMchId(modifyBean.getSubMchId());
+		if (StringUtils.isNotBlank(modifyBean.getMobileNo())) {
+			req.setMobilePhone(modifyBean.getMobileNo());
+		}
+		if (StringUtils.isNotBlank(modifyBean.getEmail())) {
+			req.setEmail(modifyBean.getEmail());
+		}
+		if (StringUtils.isNotBlank(modifyBean.getShortName())) {
+			req.setMerchantName(modifyBean.getShortName());
+		}
+		try {
+			logger.info("微信修改联系信息请求体：{}", JSONObject.toJSONString(req));
+			WeiXinModifyContactinfoResp modifyContactinfoResp = wxpayAgentMerRegistService.modifyContactinfo(req);
+			logger.info("微信修改联系信息响应体：{}", JSONObject.toJSONString(modifyContactinfoResp));
+			if (BusinessStatus.SUCCESS.equals(modifyContactinfoResp.getSubCode())) {
+				TdMerchantDetailInfo merchantDetailInfo = new TdMerchantDetailInfo();
+				merchantDetailInfo.setPatchNo(modifyBean.getPatchNo());
+				merchantDetailInfo.setMobileNo(modifyBean.getMobileNo());
+				weChatAppMapper.updateTdMerchantDetailInfo(merchantDetailInfo);
+				
+				result.put("code", "SUCCESS");
+				result.put("message", "修改联系信息成功");
+			} else {
+				result.put("code", "FAIL");
+				result.put("message", "修改联系信息失败：" + modifyContactinfoResp.getSubMsg());
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.error("修改联系信息异常：{}", e.getMessage());
+			result.put("code", "FAIL");
+			result.put("message", "修改联系信息异常");
+		}
+		return result;
+	}
+	
+	/**
+	 * 查询提现状态
+	 * @param weChatBean
+	 * @return
+	 */
+	public Map<String, Object> merchantWithdrawalStateQuery(WeChatAppBean weChatBean) {
+		Map<String, Object> weChatResult = new HashMap<String, Object>();
+		WeiXinWithdrawalStateQueryReq req = new WeiXinWithdrawalStateQueryReq();
+		req.setDate(weChatBean.getDate());
+		req.setSubMchId(weChatBean.getOutMerchantCode());
+		try {
+			logger.info("查询微信提现状态：{}", req);
+			WeiXinWithdrawalStateQueryResp weiXinWithdrawalStateQueryResp = wxpayAgentMerRegistService.merchantWithdrawalStateQuery(req);
+			logger.info("查询微信提现状态：{}", weiXinWithdrawalStateQueryResp);
+			if(GetwayStatus.SUCCESS.equals(weiXinWithdrawalStateQueryResp.getCode())){
+				if (BusinessStatus.SUCCESS.equals(weiXinWithdrawalStateQueryResp.getSubCode())) {
+					weChatResult.put("message",weiXinWithdrawalStateQueryResp);
+					weChatResult.put("result", "SUCCESS");
+				}else if(BusinessStatus.FAIL.equals(weiXinWithdrawalStateQueryResp.getSubCode())) {
+					weChatResult.put("message",weiXinWithdrawalStateQueryResp.getSubMsg());
+					weChatResult.put("result", "FAIL");
+				}
+			}else if(GetwayStatus.FAIL.equals(weiXinWithdrawalStateQueryResp.getCode())){
+				weChatResult.put("message",weiXinWithdrawalStateQueryResp.getMsg());
+				weChatResult.put("result", "FAIL");
+			}
+			
+		} catch (Exception e) {
+			weChatResult.put("message",e);
+			weChatResult.put("result", "FAIL");
+		}
+		return weChatResult;
+	}
+
+	/**
+	 * 重新发起提现
+	 * @param weChatBean
+	 * @return
+	 */
+	public Map<String, Object> reintroduceWithdrawals(WeChatAppBean weChatBean) {
+		Map<String, Object> weChatResult = new HashMap<String, Object>();
+		WeiXinReintroduceWithdrawalsReq req = new WeiXinReintroduceWithdrawalsReq();
+		req.setDate(weChatBean.getDate());
+		req.setSubMchId(weChatBean.getOutMerchantCode());
+		try {
+			logger.info("重新发起提现状态：{}", req);
+			WeiXinReintroduceWithdrawalsResp resp = wxpayAgentMerRegistService.reintroduceWithdrawals(req);
+			logger.info("重新发起提现状态：{}", resp);
+			if(GetwayStatus.SUCCESS.equals(resp.getCode())){
+				if (BusinessStatus.SUCCESS.equals(resp.getSubCode())) {
+					weChatResult.put("message",resp);
+					weChatResult.put("result", "SUCCESS");
+				}else if(BusinessStatus.FAIL.equals(resp.getSubCode())) {
+					weChatResult.put("message",resp.getSubMsg());
+					weChatResult.put("result", "FAIL");
+				}
+			}else if(GetwayStatus.FAIL.equals(resp.getCode())){
+				weChatResult.put("message",resp.getMsg());
+				weChatResult.put("result", "FAIL");
+			}
+		} catch (Exception e) {
+			weChatResult.put("message",e);
+			weChatResult.put("result", "FAIL");
+		}
+		return weChatResult;
 	}
 	
 }

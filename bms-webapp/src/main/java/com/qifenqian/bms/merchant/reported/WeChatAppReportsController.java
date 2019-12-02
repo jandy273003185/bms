@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ import com.qifenqian.bms.merchant.reported.bean.CrInComeBean;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
 import com.qifenqian.bms.merchant.reported.bean.WeChatAppAreaInfo;
 import com.qifenqian.bms.merchant.reported.bean.WeChatAppBean;
+import com.qifenqian.bms.merchant.reported.bean.WeChatAppModifyBean;
 import com.qifenqian.bms.merchant.reported.dao.FmIncomeMapperDao;
 import com.qifenqian.bms.merchant.reported.service.CrIncomeService;
 import com.qifenqian.bms.merchant.reported.service.FmIncomeService;
@@ -190,33 +192,23 @@ public class WeChatAppReportsController {
 	@ResponseBody
 	public String reportUpgradeSubmit(HttpServletRequest request,HttpServletResponse response,WeChatAppBean cr){
 		JSONObject object = new JSONObject();
-		JSONObject weChatResult = new JSONObject();
+		Map<String, Object> weChatResult = new HashMap<String, Object>();
 		if("WX".equals(cr.getChannelNo().trim())){
 			
 			//查询该商户是否已报备
 			CrInComeBean comeBean = new CrInComeBean();
 			comeBean.setMerchantCode(cr.getMerchantCode());
 			comeBean.setChannelNo(cr.getChannelNo());
+			comeBean.setPatchNo(cr.getPatchNo());
 			TdMerchantDetailInfo td = fmIncomeService.getTdMerchantReport(comeBean);
 			
 			if(td!=null){
 				//该商户已报备
-				if("Y".equals(td.getReportStatus())||"O".equals(td.getReportStatus())){
-				object.put("result", "FAILURE");
-					object.put("message", "商户已经报备，请勿重新提交");
+				if(!("Y".equals(td.getReportStatus())||"O".equals(td.getReportStatus()))){
+					object.put("result", "FAILURE");
+					object.put("message", "商户报备失败,请先报备小微商户");
 					return object.toString();
-				}else{//商户报备
-					TdMerchantDetailInfo tdInfo = new TdMerchantDetailInfo();
-					tdInfo.setMerchantCode(td.getMerchantCode());
-					tdInfo.setChannelNo(td.getChannelNo());
-					tdInfo.setReportStatus("E");
-					fmIncomeService.UpdateMerReportAndMerDetailInfo(tdInfo,"99");
-					Bank bank = new Bank();
-					bank.setBankId(cr.getBank());
-					List<Bank> bankIdList = fmIncomeService.getYQBBankList(bank);
-					if(bankIdList.size() != 0){
-						//cr.setBankName(bankIdList.get(0).getBankName());
-					}
+				}else{
 					//调用微信报备接口
 					logger.info("-----------------调用微信报备接口开始");
 					weChatResult = weChatAppService.weChatAppUpgradeReported(cr);
@@ -233,40 +225,10 @@ public class WeChatAppReportsController {
 						}
 					}
 				}
-			}else{//查询为空，商户未报备
-				//添加商户报备详情表（td_merchant_detail_info）和商户报备表（td_merchant_report）
-				TdMerchantDetailInfo info = new TdMerchantDetailInfo();
-				info.setId(GenSN.getSN());
-				info.setPatchNo(GenSN.getSN());
-				info.setMerchantCode(cr.getMerchantCode().trim());
-				info.setChannelNo(cr.getChannelNo());
-				info.setReportStatus("E");
-				info.setProvCode(cr.getMerchantProvince());
-				info.setCityCode(cr.getMerchantCity());
-				info.setContryCode(cr.getMerchantArea());
-				//info.setBankCode(cr.getBankCode());
-				info.setBranchBankName(cr.getInterBankName());
-				//info.setMobileNo(cr.getMobile());
-				fmIncomeService.insertTdMerchantReport(info);
-				info.setReportStatus("99");
-				fmIncomeService.inserTdMerchantDetailInfo(info);
-				
-				//调用微信报备接口
-				logger.info("-----------------调用微信报备接口开始");
-				weChatResult = weChatAppService.weChatAppUpgradeReported(cr);
-				logger.info("-----------------调用微信报备接口返回" +weChatResult.get("result") +  "----------------------");
-				
-				if("SUCCESS".equals(weChatResult.get("result"))){
-						object.put("result", "SUCCESS");
-						object.put("message", "报备成功");
-				}else{
-					object.put("result", "FAILURE");
-					if(weChatResult.get("message") == "" && weChatResult.get("message") == null){
-						object.put("message", "微信进件明确失败");
-					}else {
-						object.put("message", weChatResult.get("message"));
-					}
-				}
+			}else{
+				//查询为空，商户未进行报备
+				object.put("result", "FAILURE");
+				object.put("message", "微信未进行进件,请先报备小微商户");
 			}
 		}
 		return object.toString();
@@ -292,34 +254,79 @@ public class WeChatAppReportsController {
 	}
 	
 	/**
+	 * 微信商户修改结算、联系信息
+	*/
+	@RequestMapping("/merchantReported/weChatAppMerchantModify")
+	public ModelAndView  viewMerchantModify(String merchantCode, String patchNo){
+		
+		ModelAndView mv = new ModelAndView();
+		TdCustInfo custInfo = new TdCustInfo();
+		/***查询客户信息***/
+		if(StringUtils.isNotBlank(merchantCode)){
+			custInfo = fmIncomeMapperDao.getInComeInfo(merchantCode);
+		}
+		/***查询省份***/
+		List<WeChatAppAreaInfo> weChatAppAreaInfoList = weChatAppService.getProvinceName();
+		//查询商户报备明细信息
+		TdMerchantDetailInfo merchantDetailQueryReq = new TdMerchantDetailInfo();
+		merchantDetailQueryReq.setPatchNo(patchNo);
+		merchantDetailQueryReq.setMerchantCode(merchantCode);
+		TdMerchantDetailInfo merchantDetailInfo = fmIncomeMapperDao.selMerchantDetailInfo(merchantDetailQueryReq);
+		mv.addObject("merchantDetailInfo", merchantDetailInfo);
+		mv.addObject("custInfo", custInfo);
+		mv.addObject("weChatAppAreaInfoList", weChatAppAreaInfoList);
+		return mv;
+	}
+	
+	/**
 	 * 微信商户修改结算账户
 	*/
+	@ResponseBody
 	@RequestMapping("/merchantReported/weChatAppModifySettlement")
-	public String  modifySettlement(HttpServletRequest request,HttpServletResponse response,WeChatAppBean weChatBean){
+	public Map<String, Object>  modifySettlement(WeChatAppModifyBean modifyBean){
+		logger.info("-----------------调用微信商户修改结算账户接口开始");
+		Map<String, Object> result = weChatAppService.modifySettlement(modifyBean);
+		logger.info("微信商户修改结算账户返回值：{}", JSONObject.toJSONString(result));
+		return result;
+	}
+	
+	/**
+	 * 微信商户修改联系信息
+	*/
+	@ResponseBody
+	@RequestMapping("/merchantReported/weChatAppModifyContact")
+	public Map<String, Object> ModifyContact(WeChatAppModifyBean modifyBean){
+		logger.info("-----------------调用微信商户修改联系信息接口开始");
+		Map<String, Object> result = weChatAppService.modifyContact(modifyBean);
+		logger.info("微信商户修改结算账户返回值：{}", JSONObject.toJSONString(result));
+		return result;
+	}
+	
+	/**
+	 * 小微商户查询提现状态
+	*/
+	@RequestMapping("/merchantReported/queryAutoWithDraw")
+	public Map<String, Object>  queryAutoWithDraw(HttpServletRequest request,HttpServletResponse response,WeChatAppBean weChatBean){
 		
-		JSONObject object = new JSONObject();
-		JSONObject weChatResult = new JSONObject();
-		
-		TdMerchantDetailInfo info = new TdMerchantDetailInfo();
-		info.setMerchantCode(weChatBean.getMerchantCode().trim());
-		info.setChannelNo(weChatBean.getChannelNo());
-		info.setReportStatus("E");
-		info.setProvCode(weChatBean.getMerchantProvince());
-		info.setCityCode(weChatBean.getMerchantCity());
-		info.setContryCode(weChatBean.getMerchantArea());
-		//info.setBankCode(weChatBean.getBankCode());
-		info.setBranchBankName(weChatBean.getInterBankName());
-		//info.setMobileNo(weChatBean.getMobile());
-		info.setReportStatus("99");
-		fmIncomeService.UpdateMerReportAndMerDetailInfo(info,"99");
-		
+		Map<String, Object> weChatResult = new HashMap<String, Object>();
 		//调用微信报备查询结算账户
 		logger.info("-----------------调用微信报备接口开始");
-		weChatResult = weChatAppService.modifySettlement(weChatBean);
+		weChatResult = weChatAppService.merchantWithdrawalStateQuery(weChatBean);
 		logger.info("-----------------调用微信报备接口返回" +weChatResult.get("result") +  "----------------------");
+		return weChatResult;
+	}
+	
+	/**
+	 * 小微商户查询提现状态
+	*/
+	@RequestMapping("/merchantReported/reAutoWithDraw")
+	public Map<String, Object>  reAutoWithDraw(HttpServletRequest request,HttpServletResponse response,WeChatAppBean weChatBean){
 		
-		
-		
-		return object.toString();
+		Map<String, Object> weChatResult = new HashMap<String, Object>();
+		//调用微信报备查询结算账户
+		logger.info("-----------------调用微信报备接口开始");
+		weChatResult = weChatAppService.reintroduceWithdrawals(weChatBean);
+		logger.info("-----------------调用微信报备接口返回" +weChatResult.get("result") +  "----------------------");
+		return weChatResult;
 	}
 }
