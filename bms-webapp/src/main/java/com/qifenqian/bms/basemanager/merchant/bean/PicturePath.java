@@ -42,9 +42,16 @@ public class PicturePath implements Serializable {
 	private String appAppidPath;
 	//35网站授权函
 	private String webUrlPath;
+	//23其他资料照1
+	private String otherMaterialPath;
 	
 	
-	
+	public String getOtherMaterialPath() {
+		return otherMaterialPath;
+	}
+	public void setOtherMaterialPath(String otherMaterialPath) {
+		this.otherMaterialPath = otherMaterialPath;
+	}
 	public String getMpAppScreenShotsPath() {
 		return mpAppScreenShotsPath;
 	}

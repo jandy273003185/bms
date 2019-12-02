@@ -370,7 +370,10 @@ public class MerchantEnterService {
 		custScan.setCertifyType("35");
 		String webUrlPath = findPicturePath(custScan);
 		picturePath.setSignaturePath("/pic/" + webUrlPath);
-		
+		//23其他资料照1
+		custScan.setCertifyType("23");
+		String otherMaterialPath = findPicturePath(custScan);
+		picturePath.setSignaturePath("/pic/" + otherMaterialPath);
 		
 		return picturePath;
 				

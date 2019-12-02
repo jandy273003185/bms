@@ -306,6 +306,20 @@ public class FileController {
 				custScan.setStatus("00");
 				custScanMapper.insertCustScan(custScan);
 			}
+			//23其他资料照1
+			if(!StringUtils.isEmpty(picturePath.getOtherMaterialPath())) {
+				custScan.setCertifyType("23");
+				
+				if(!StringUtils.isEmpty(picturePathOld.getOtherMaterialPath())) {
+					custScan.setStatus("01");
+					custScanMapper.updateCustScan(custScan);
+				}
+				
+				custScan.setScanCopyPath(picturePath.getOtherMaterialPath());
+				custScan.setStatus("00");
+				custScanMapper.insertCustScan(custScan);
+			}
+			
 			object.put("result", "SUCCESS");
 			object.put("message", "新增图片成功");
 		} catch (Exception e) {
