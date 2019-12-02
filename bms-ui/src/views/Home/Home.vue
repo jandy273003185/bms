@@ -29,7 +29,7 @@
         <div class="breadcrumb-main">
           <el-breadcrumb separator=">">
             <el-breadcrumb-item>
-              <site-icon iconClass="" />
+              <site-icon iconClass="shouye" color="#000" size="16" />
             </el-breadcrumb-item>
             <el-breadcrumb-item v-for="(item,index) in path" :key="index">{{item}}</el-breadcrumb-item>
           </el-breadcrumb>
@@ -54,7 +54,7 @@ export default {
   data() {
     return {
       toggleMenu: false,
-      path: [],
+      path: ['系统管理', '用户管理'],
       searchText: '',
       sendToSearchText: ''
     };

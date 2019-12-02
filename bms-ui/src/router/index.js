@@ -337,7 +337,7 @@ const tacitly = [
     component: Login
   },
   {
-    path: '/',
+    path: '/system',
     component: Home,
     children: menuRoutes
   }
@@ -347,11 +347,11 @@ const tacitly = [
 const common = [
   {
     path: '/',
-    redirect: '/home'
+    redirect: '/system/user'
   },
   {
     path: '*',
-    redirect: '/home'
+    redirect: '/system/user'
   }
 ];
 

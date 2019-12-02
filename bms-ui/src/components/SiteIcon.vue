@@ -24,13 +24,13 @@ export default {
 <style>
 @font-face {
   font-family: 'iconfont'; /* project id 1536645 */
-  src: url('//at.alicdn.com/t/font_1536645_blv3t5ya9e.eot');
-  src: url('//at.alicdn.com/t/font_1536645_blv3t5ya9e.eot?#iefix')
+  src: url('//at.alicdn.com/t/font_1536645_eavdijokou6.eot');
+  src: url('//at.alicdn.com/t/font_1536645_eavdijokou6.eot?#iefix')
       format('embedded-opentype'),
-    url('//at.alicdn.com/t/font_1536645_blv3t5ya9e.woff2') format('woff2'),
-    url('//at.alicdn.com/t/font_1536645_blv3t5ya9e.woff') format('woff'),
-    url('//at.alicdn.com/t/font_1536645_blv3t5ya9e.ttf') format('truetype'),
-    url('//at.alicdn.com/t/font_1536645_blv3t5ya9e.svg#iconfont') format('svg');
+    url('//at.alicdn.com/t/font_1536645_eavdijokou6.woff2') format('woff2'),
+    url('//at.alicdn.com/t/font_1536645_eavdijokou6.woff') format('woff'),
+    url('//at.alicdn.com/t/font_1536645_eavdijokou6.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_1536645_eavdijokou6.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -80,5 +80,8 @@ export default {
 
 .icon-mima:before {
   content: '\e61b';
+}
+.icon-shouye:before {
+  content: '\e620';
 }
 </style>
