@@ -1044,7 +1044,9 @@
                                             	<c:if test="${reported.reportStatus !='99' && reported.detailStatus !='E' && reported.detailStatus !='F'}">
 	                                            	<button type="button"  class="btn btn-primary btn-xs" disabled>报备更新</button>
                                             	</c:if>
+                                            	<c:if test="${reported.channelNo =='WX'}">
                                             	<button type="button"  class="btn btn-primary btn-xs" onclick ="getWeChatUpdate(this);">微信升级</button>
+										    	</c:if>
 										    </td>
 										</tr>
 									   </c:forEach> 
