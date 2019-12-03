@@ -3,25 +3,11 @@
     <page-model>
       <template slot="controlQueryOps">
         <el-form :model="examine" label-width="80px" :inline="true" ref="controlQueryForm">
-          <el-form-item label="真实姓名" prop="username">
-            <el-input v-model="examine.username" placeholder="请输入姓名"></el-input>
+          <el-form-item label="角色代码" prop="usercode">
+            <el-input v-model="examine.usercode"></el-input>
           </el-form-item>
-          <el-form-item label="部门名称" prop="depart">
-            <el-select v-model="examine.depart" placeholder="请选择部门">
-              <el-option label="(GYZB)-国银证保" value="1"></el-option>
-              <el-option label="(TECH)-信息技术部" value="2"></el-option>
-              <el-option label="(OPER)-运营管理部" value="4"></el-option>
-              <el-option label="(FINA)-财务部" value="5"></el-option>
-              <el-option label="(CPB)-产品部" value="6"></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="状态" prop="status">
-            <el-select v-model="examine.status" placeholder="请选择用户状态">
-              <el-option label="(VALID)-生效" value="VALID"></el-option>
-              <el-option label="(FREEZE)-冻结" value="FREEZE"></el-option>
-              <el-option label="(LEAVE)-离职" value="LEAVE"></el-option>
-              <el-option label="(LOGIN)-已登陆" value="LOGIN"></el-option>
-            </el-select>
+          <el-form-item label="角色名称" prop="username">
+            <el-input v-model="examine.username"></el-input>
           </el-form-item>
         </el-form>
       </template>
@@ -34,18 +20,17 @@
       <template slot="tableInner">
         <el-table :data="tableData" border style="width: 100%">
           <el-table-column prop="serial" min-width="50" label="编号"></el-table-column>
-          <el-table-column prop="employee" min-width="120" label="员工编号"></el-table-column>
-          <el-table-column prop="name" label="姓名" min-width="120"></el-table-column>
-          <el-table-column prop="industry" min-width="150" label="部门名称"></el-table-column>
-          <el-table-column prop="sex" min-width="50" label="性别"></el-table-column>
-          <el-table-column prop="phone" min-width="220" label="个人电话"></el-table-column>
-          <el-table-column prop="status" min-width="100" label="状态"></el-table-column>
-          <el-table-column prop="creator" min-width="120" label="创建人"></el-table-column>
-          <el-table-column prop="date" label="创建时间" min-width="220"></el-table-column>
-          <el-table-column prop="regenerator" label="更新人" min-width="150"></el-table-column>
-          <el-table-column prop="turnovertime" label="更新时间" min-width="160"></el-table-column>
-          <el-table-column fixed="right" label="操作" width="100">
+          <el-table-column prop='usercode' min-width="100" label="角色代码"></el-table-column>
+          <el-table-column prop='username' min-width="100" label="角色名称"></el-table-column>
+          <el-table-column prop='regenerator' min-width="100" label="角色说明"></el-table-column>
+          <el-table-column prop='valid' min-width="80" label="是否有效"></el-table-column>
+          <el-table-column prop='creator' min-width="80" label="创建人"></el-table-column>
+          <el-table-column prop='date' min-width="200" label="创建时间"></el-table-column>
+          <el-table-column prop='lastupdate' min-width="100" label="最后更改人"></el-table-column>
+          <el-table-column prop='turnovertime' min-width="200" label="最后更改时间"></el-table-column>
+          <el-table-column fixed="right" label="操作" width="140">
             <template slot-scope="scope">
+              <el-button type="text" size="small" @click="editorClick(scope.row)">查看</el-button>
               <el-button type="text" size="small" @click="editorClick(scope.row)">编辑</el-button>
             </template>
           </el-table-column>
@@ -73,15 +58,13 @@
 <script>
 const testData = {
   serial: '1',
-  employee: 'GYZB-0000',
-  name: '王小虎',
-  industry: '国银证宝',
-  sex: '男',
-  phone: '012987654321',
-  status: '已登录',
+  usercode: 'clear',
+  username: '王小虎',
+  regenerator: '所有权限',
+  valid: '有效',
   creator: '创建人',
-  date: '2016-05-02',
-  regenerator: '管理员',
+  date: '2015-12-22 6:08:54',
+  lastupdate: '石理',
   turnovertime: '2019-12-04 03:53:03'
 };
 
@@ -91,8 +74,7 @@ export default {
     return {
       examine: {
         username: '',
-        depart: '',
-        status: ''
+        usercode: ''
       },
       display: false,
       modelData: {
@@ -143,36 +125,3 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-.control-query {
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-  .el-form {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-  }
-
-  .control-query-ops {
-    border-bottom: 1px solid #eee;
-  }
-  .control-query-btns {
-    margin-top: 10px;
-    .el-button {
-      margin-right: 50px;
-    }
-    text-align: center;
-  }
-}
-
-.table-inner {
-  height: 100%;
-  overflow: auto;
-  padding: 10px;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
-}
-.page-model-pagination {
-  padding: 10px 0;
-}
-</style>

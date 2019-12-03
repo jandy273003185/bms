@@ -342,8 +342,6 @@ function flatten(arr) {
 
 const menuRoutes = flatten(menuRouter);
 
-console.log(menuRoutes, 'menuRoutes');
-
 // 默认路由
 const tacitly = [
   {
