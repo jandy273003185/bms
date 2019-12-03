@@ -26,7 +26,7 @@ public class PicturePath implements Serializable {
 	private String settleCertAttribute2Path;
 	//18店内照
 	private String shopInteriorPath;
-	//11行业资质照
+	//11特殊行业资质照
 	private String qualificationPath;
 	//12电子签名照
 	private String signaturePath;
@@ -42,9 +42,16 @@ public class PicturePath implements Serializable {
 	private String appAppidPath;
 	//35网站授权函
 	private String webUrlPath;
+	//23其他资料照1
+	private String otherMaterialPath;
 	
 	
-	
+	public String getOtherMaterialPath() {
+		return otherMaterialPath;
+	}
+	public void setOtherMaterialPath(String otherMaterialPath) {
+		this.otherMaterialPath = otherMaterialPath;
+	}
 	public String getMpAppScreenShotsPath() {
 		return mpAppScreenShotsPath;
 	}
