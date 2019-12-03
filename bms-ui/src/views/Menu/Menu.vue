@@ -10,13 +10,13 @@
 <script>
 import MenuItem from './MenuItem';
 // import list from './menulist';
-import { menu } from '@/router';
+import { menuRouter } from '@/router';
 export default {
   props: ['toggle'],
   components: { MenuItem },
   data() {
     return {
-      list: menu
+      list: menuRouter
     };
   },
   methods: {
@@ -26,7 +26,7 @@ export default {
       arr.reduce((pre, cur) => {
         route.push(pre[cur].name);
         return pre[cur].children;
-      }, menu);
+      }, menuRouter);
       this.$emit('input', route);
     }
   }

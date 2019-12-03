@@ -1,34 +1,41 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/views/Home/Home'
-import Login from '@/views/Login/Login'
-import User from '@/views/System/User/User'
-
-// 系统管理
-// const User = () => import(/* webpackChunkName: "system" */ '@/views/System/User/User');
-
 Vue.use(Router)
 
+import Home from '@/views/Home/Home'
+import Login from '@/views/Login/Login'
+// 系统管理
+import User from '@/views/System/User/User'
+const Role = () => import(/* webpackChunkName: "system" */ '@/views/System/Role/Role');
+const Menu = () => import(/* webpackChunkName: "system" */ '@/views/System/Menu/Menu');
+const Depart = () => import(/* webpackChunkName: "system" */ '@/views/System/Depart/Depart');
+const TaskConfig = () => import(/* webpackChunkName: "system" */ '@/views/System/TaskConfig/TaskConfig');
+const TaskLog = () => import(/* webpackChunkName: "system" */ '@/views/System/TaskLog/TaskLog');
+const SmsLog = () => import(/* webpackChunkName: "system" */ '@/views/System/SmsLog/SmsLog');
+const Test = () => import(/* webpackChunkName: "system" */ '@/views/System/Test/Test');
+const Auth = () => import(/* webpackChunkName: "system" */ '@/views/System/Market/Auth/Auth');
+const Group = () => import(/* webpackChunkName: "system" */ '@/views/System/Market/Group/Group');
+
 // 菜单列表
-export const menu = [
+export const menuRouter = [
   {
     name: '系统管理',
     path: '',
     children: [
       { name: '用户管理', path: '/system/user', component: User },
-      { name: '角色管理', path: '/system/user' },
-      { name: '菜单管理', path: '/system/user' },
-      { name: '部门管理', path: '/system/user' },
-      { name: '任务调度配置', path: '/system/user' },
-      { name: '任务调度日志', path: '/system/user' },
-      { name: '短信邮件日志', path: '/system/user' },
-      { name: '测试', path: '/system/user' },
+      { name: '角色管理', path: '/system/role', component: Role },
+      { name: '菜单管理', path: '/system/menu', component: Menu },
+      { name: '部门管理', path: '/system/depart', component: Depart },
+      { name: '任务调度配置', path: '/system/taskconfig', component: TaskConfig },
+      { name: '任务调度日志', path: '/system/tasklog', component: TaskLog },
+      { name: '短信邮件日志', path: '/system/smslog', component: SmsLog },
+      { name: '测试', path: '/system/test', component: Test },
       {
         name: '市场部管理',
-        path: '/system/user',
+        path: '',
         children: [
-          { name: '市场部权限', path: '/system/user' },
-          { name: '市场部分组管理', path: '/system/user' }
+          { name: '市场部权限', path: '/system/market/auth', component: Auth },
+          { name: '市场部分组管理', path: '/system/market/group', component: Group }
         ]
       }
     ]
@@ -319,8 +326,13 @@ function flatten(arr) {
   function deal(obj) {
     for (var key in obj) {
       if (typeof obj[key] === "object" && obj[key] !== null && obj[key].length) {
-        arr2.push(obj[key]);
-        deal(obj[key]);
+        obj[key].forEach(ele => {
+          if (ele.children && ele.children.length) {
+            deal(ele);
+          } else {
+            arr2.push(ele);
+          }
+        });
       }
     }
   }
@@ -328,7 +340,9 @@ function flatten(arr) {
   return arr2.flat();
 }
 
-const menuRoutes = flatten(menu);
+const menuRoutes = flatten(menuRouter);
+
+console.log(menuRoutes, 'menuRoutes');
 
 // 默认路由
 const tacitly = [

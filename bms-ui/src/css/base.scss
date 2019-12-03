@@ -190,6 +190,18 @@ video {
   .el-submenu__title {
     padding-right: 40px;
   }
+
+  .el-table td {
+    padding: 0;
+  }
+
+  .el-table {
+    font-size: 13px;
+  }
+
+  .el-form-item {
+    margin-bottom: 10px !important;
+  }
 }
 
 .breadcrumb-main {
