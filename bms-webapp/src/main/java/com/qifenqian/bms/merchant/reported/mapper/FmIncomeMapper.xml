@@ -330,6 +330,9 @@
 		 	<if test="signUrl != null and signUrl !='' ">
 		 	`sign_url` = #{signUrl,jdbcType = VARCHAR},
 		 	</if>
+		 	<if test="signQrcode != null and signQrcode !='' ">
+		 	`sign_qrcode` = #{signQrcode,jdbcType = VARCHAR},
+		 	</if>
 			 `modify_time` = now()
 		 WHERE
 			`patch_no` = #{patchNo,jdbcType = VARCHAR}

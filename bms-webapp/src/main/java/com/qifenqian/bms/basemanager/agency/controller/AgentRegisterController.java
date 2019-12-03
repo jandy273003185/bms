@@ -183,9 +183,9 @@ public class AgentRegisterController {
 			}
 
 			if("1".equals(merchant.getCustType())){
-				merchant.setMerchantCode(SequenceUtils.getMerchantSeqNo("C"));
+				merchant.setMerchantCode( "C" + GenSN.getRandomNum(15));
 			}else{
-				merchant.setMerchantCode(SequenceUtils.getMerchantSeqNo("P"));
+				merchant.setMerchantCode( "P" + GenSN.getRandomNum(15));
 			}
 			//merchant.setMerchantCode("M"+GenSN.getRandomNum(15));//生成商户编号：M***************
 			Map<String, String> custScanMap = (Map<String, String>) request.getSession().getAttribute("custScanMap");

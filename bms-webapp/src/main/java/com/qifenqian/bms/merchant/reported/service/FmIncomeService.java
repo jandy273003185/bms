@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -104,9 +103,6 @@ public class FmIncomeService {
 
   @Autowired
   private FmIncomeMapper fmIncomeMapper;
-
-  @Autowired
-  private AuditorService auditorService;
 
   @Autowired
   private MerchantService merchantService;
@@ -720,7 +716,7 @@ public class FmIncomeService {
               fileName = "licensePic" + type;
             }
             // 开户许可证
-            if ("openPhoto".equals(typeName)) {
+            if ("openAccount".equals(typeName)) {
               String type = fileName.substring(fileName.lastIndexOf("."));
               fileName = "openingAccountLicensePic" + type;
             }

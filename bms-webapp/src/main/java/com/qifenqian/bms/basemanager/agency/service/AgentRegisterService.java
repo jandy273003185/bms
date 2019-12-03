@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +27,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.Constant;
@@ -38,8 +36,6 @@ import com.qifenqian.bms.basemanager.bank.bean.Bank;
 import com.qifenqian.bms.basemanager.bank.service.BankService;
 import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
 import com.qifenqian.bms.basemanager.custInfo.mapper.TdCustInfoMapper;
-import com.qifenqian.bms.basemanager.custInfo.service.TdCustInfoService;
-import com.qifenqian.bms.basemanager.feerule.service.FeeRuleService;
 import com.qifenqian.bms.basemanager.merchant.bean.BmsProtocolContent;
 import com.qifenqian.bms.basemanager.merchant.bean.CustScan;
 import com.qifenqian.bms.basemanager.merchant.bean.Merchant;
@@ -53,8 +49,6 @@ import com.qifenqian.bms.basemanager.merchant.mapper.CustScanMapper;
 import com.qifenqian.bms.basemanager.merchant.mapper.MerchantMapper;
 import com.qifenqian.bms.basemanager.merchant.mapper.TdLoginUserInfoMapper;
 import com.qifenqian.bms.basemanager.photo.bean.CertificateAuth;
-import com.qifenqian.bms.basemanager.rule.mapper.RuleMapper;
-import com.qifenqian.bms.basemanager.rule.service.RuleService;
 import com.qifenqian.bms.basemanager.utils.DatetimeUtils;
 import com.qifenqian.bms.basemanager.utils.GenSN;
 import com.qifenqian.bms.expresspay.CommonService;
@@ -92,8 +86,6 @@ public class AgentRegisterService {
 	@Autowired
 	SevenpayCoreServiceInterface sevenpayCoreServiceInterface;
 	@Autowired
-	private RuleMapper ruleMapper;
-	@Autowired
 	private TdLoginUserInfoMapper mapper;
 
 	@Autowired
@@ -101,12 +93,6 @@ public class AgentRegisterService {
 
 	@Autowired
 	private CustScanMapper custScanMapper;
-
-	@Autowired
-	private RuleService ruleService;
-
-	@Autowired
-	private FeeRuleService feeRuleService;
 
 	@Autowired
 	private MerchantDao dao;
@@ -134,9 +120,6 @@ public class AgentRegisterService {
 
 	@Autowired
 	private TdLoginUserInfoMapper tdLoginUserInfoMapper;
-	
-	@Autowired
-	private TdCustInfoService tdCustInfoService;
 	
 	@Autowired
 	private AcctSevenBussMapper acctSevenBussMapper;

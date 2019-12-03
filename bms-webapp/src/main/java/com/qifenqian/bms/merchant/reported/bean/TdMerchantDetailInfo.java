@@ -108,8 +108,21 @@ public class TdMerchantDetailInfo implements Serializable{
 	 */
 	private String accountNumber;
 	
+	/**
+	 * 签约二维码
+	 */
+	private String signQrcode;
 	
 	
+	
+	public String getSignQrcode() {
+		return signQrcode;
+	}
+
+	public void setSignQrcode(String signQrcode) {
+		this.signQrcode = signQrcode;
+	}
+
 	public String getAccountNumber() {
 		return accountNumber;
 	}

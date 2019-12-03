@@ -20,6 +20,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
+import com.qifenqian.bms.basemanager.merchant.bean.MerchantVo;
+import com.qifenqian.bms.basemanager.merchant.bean.PicturePath;
+import com.qifenqian.bms.basemanager.merchant.service.MerchantEnterService;
 import com.qifenqian.bms.basemanager.utils.GenSN;
 import com.qifenqian.bms.merchant.reported.bean.Bank;
 import com.qifenqian.bms.merchant.reported.bean.ChannlInfo;
@@ -57,6 +60,9 @@ public class SuiXingPayMerchantReportsController {
    
    @Autowired
    private IMerChantIntoService iMerChantIntoService;
+   
+   @Autowired
+   private MerchantEnterService merchantEnterService;
 
    @Value("${SX_FILE_SAVE_PATH}")
    private String SX_FILE_SAVE_PATH;
@@ -98,6 +104,12 @@ public class SuiXingPayMerchantReportsController {
 			String remark =  reportedList.get(0).getRemark();
 			mv.addObject("remark", remark);
 		}
+		//获取图片路径
+		MerchantVo merchantVo = new MerchantVo();
+		merchantVo.setAuthId(custInfo.getAuthId());
+		merchantVo.setCustId(custInfo.getCustId());
+		PicturePath picturePath = merchantEnterService.getPicPath(merchantVo);
+		mv.addObject("picturePathVo", picturePath); 
 		if(null!=channlInfoList && channlInfoList.size()>0){
 			mv.addObject("infoList", channlInfoList);
 		}
@@ -213,7 +225,7 @@ public class SuiXingPayMerchantReportsController {
 				uploadFileInfo.setFilePath(path);
 				Map<String, Object> req = new HashMap<>();
 				ChannelResult result = new ChannelResult();
-				if(null != cr.getTaskCode()){
+				if(null != cr.getTaskCode() && StringUtils.isNotBlank(detailInfo.getOutMerchantCode())){
 					uploadFileInfo.setTaskCode(cr.getTaskCode());
 					req.put("merList", uploadFileInfo);
 					req.put("channelType", ChannelMerRegist.SUIXING_PAY);

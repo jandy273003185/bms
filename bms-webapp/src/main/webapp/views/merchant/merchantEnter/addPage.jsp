@@ -396,8 +396,8 @@ function addMerchantBtn(){
 	}
 	
 	/**结算账号*/
-    if($("#compMainAcct").val().length < 8 || $("#compMainAcct").val().length > 25){
-        $("#compMainAcctLab").text("请填写8-25位银行卡号");
+    if($("#compMainAcct").val().length < 5 || $("#compMainAcct").val().length > 25){
+        $("#compMainAcctLab").text("请填写5-25位银行卡号");
         $("#compMainAcct").focus();
         return false;
     }else{
@@ -1136,10 +1136,10 @@ function showOpenAccountImage(file){
 
 
         $("#representativeCertNo").on('blur',function () {
-            if ($("#representativeCertNo").val().length == 18 ){
+            if ($("#representativeCertNo").val().length < 5 || $("#representativeCertNo").val().length > 25){
                 $("#representativeCertNoLab").text('');
             }else {
-                $("#representativeCertNoLab").text("请填写18位身份证号");
+                $("#representativeCertNoLab").text("请填写5-25位身份证号");
                 $("#representativeCertNoLab").focus();
                 return false;
             }
