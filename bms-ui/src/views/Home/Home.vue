@@ -148,13 +148,14 @@ td {
 .el-main-content.el-main {
   box-sizing: border-box;
   position: relative;
-  padding-top: 40px;
+  padding: 40px 0 0 0;
   overflow: hidden;
   .breadcrumb-main {
     width: 100%;
     position: absolute;
     top: 0;
-    left: 20px;
+    left: 0;
+    padding-left: 20px;
     border-bottom: 1px solid #eee;
     display: flex;
     justify-content: space-between;
@@ -170,5 +171,11 @@ td {
       }
     }
   }
+}
+
+.el-main-view {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
 }
 </style>
