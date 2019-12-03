@@ -11,7 +11,8 @@
 <script src='<c:url value="/static/js/mobileBUGFix.mini.js"/>'></script>
 <script src='<c:url value="/static/js/uploadCompress.js"/>'></script>
 <script src='<c:url value="/static/js/up.js"/>'></script>
-
+<link href="<c:url value='/static/css/select2.min.css' />" rel="stylesheet" />
+<script src="<c:url value='/static/js/select2.min.js' />"</script>
 <link rel="stylesheet" href="<c:url value='/static/css/base.css' />" />
 <link rel="stylesheet" href="<c:url value='/static/css/home.css' />" />
 
@@ -116,10 +117,11 @@
 											<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="interBankName">开户银行全称:</label>
 											<div class="col-xs-12 col-sm-9">
 												<div class="clearfix">
-													<!-- <select id="state" name="state" class="select2 select2-hidden-accessible" data-placeholder="请选择开户银行全称" style="width: 200px;" tabindex="-1" aria-hidden="true">
-													</select> -->
+													<select class="form-control" id="interBankName" name="interBankName" >
+														<option value="">--请选择开户银行全称--</option>
+													</select>
 													
-													<input type="text" name="interBankName" id="interBankName" value="${merchantDetailInfo.branchBankName}" class="col-xs-12 col-sm-6"  >
+													<%-- <input type="text" name="interBankName" id="interBankName" value="${merchantDetailInfo.branchBankName}" class="col-xs-12 col-sm-6"  > --%>
 												</div>
 											</div>
 										</div>
@@ -301,6 +303,31 @@
 	});
 }) */
 
+$(function(){
+	$('#interBankName').select2({
+	    placeholder: '请选择开户银行全称',
+	    ajax: {
+	      url: window.Constants.ContextPath + "/common/info/selectWeChatBankList",
+	      dataType: 'json',
+	      delay: 300,
+	      type: 'POST',
+	      data: function (params) {
+	        return {
+	          bankName: params.term,
+	        };
+	      },
+	      processResults: function (data) {
+	        return {
+	          results: data
+	        };
+	      },
+	      cache: true
+	    },
+	    minimumInputLength: 2
+	});
+});
+
+
 //表单验证组件
 var checkFun = {
       		notnull : function(value){
@@ -346,7 +373,7 @@ var checkFun = {
 			var merchantName = $("#merchantName").val();
 			var accountNo = $("#accountNo").val();
 			var bank = $("#bank").val();
-			var interBankName = $("#interBankName").val();
+			var interBankName = $("#interBankName").select2("data")[0].text;
 			var bankProvince = $("#bankProvince").val();
 			var bankCity = $("#bankCity").val();
 			

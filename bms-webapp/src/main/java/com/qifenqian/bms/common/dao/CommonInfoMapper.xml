@@ -138,4 +138,12 @@
 			</if>
 		</where>
 	</select>
+	
+	<select id="selectWeChatBankList" parameterType="java.lang.String" resultType="java.util.Map" >
+		SELECT 
+			t.bank_cnaps 'id',
+			t.bank_name 'text'
+		FROM tb_bank_info t
+		where t.BANK_NAME like "%"#{bankName,jdbcType = VARCHAR}"%"
+	</select>
 </mapper>
