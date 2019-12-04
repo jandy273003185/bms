@@ -27,7 +27,7 @@
       <el-main class="el-main-content">
         <!-- 面包屑导航 -->
         <div class="breadcrumb-main">
-          <el-breadcrumb separator=">">
+          <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item>
               <site-icon iconClass="shouye" color="#000" size="16" />
             </el-breadcrumb-item>

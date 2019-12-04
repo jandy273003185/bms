@@ -2,7 +2,6 @@ package com.qifenqian.bms.common.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -49,10 +48,6 @@ public class CommonInfoService {
 			bankList = commonInfoDao.selectSuiXingBanks();
 		}
 		return bankList;
-	}
-	
-	public List<Map<String, String>> selectWeChatBankList(String bankName) {
-		return commonInfoDao.selectWeChatBankList(bankName);
 	}
 	
 	/**

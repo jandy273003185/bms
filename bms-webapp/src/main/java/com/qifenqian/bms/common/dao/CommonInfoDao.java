@@ -1,7 +1,6 @@
 package com.qifenqian.bms.common.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -83,10 +82,6 @@ public class CommonInfoDao {
 	}
 	public List<City> getWxAreaByCityId(String cityName) {
 		return commonInfoMapper.getWxAreaByCityId(cityName);
-	}
-	
-	public List<Map<String, String>> selectWeChatBankList(String bankName){
-		return commonInfoMapper.selectWeChatBankList(bankName);
 	}
 	
 

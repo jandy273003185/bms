@@ -87,6 +87,8 @@
   .el-form {
     width: 100%;
     display: flex;
+    // flex-wrap: wrap;
+    overflow: hidden;
     justify-content: space-around;
   }
   .el-form-item {

@@ -191,12 +191,18 @@ video {
     padding-right: 40px;
   }
 
-  .el-table td {
+
+  .el-table--mini td {
     padding: 0;
   }
 
   .el-table {
     font-size: 13px;
+  }
+
+  .el-table--mini.el-table.nofix td {
+    padding-top: 4px;
+    padding-bottom: 4px;
   }
 
   .el-form-item {

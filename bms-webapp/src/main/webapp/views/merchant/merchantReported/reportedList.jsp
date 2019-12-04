@@ -266,23 +266,6 @@
 			alert("进件失败原因" + resultMsg);
 		}
 		
-		if("WX" == channlCode){
-			var url=window.Constants.ContextPath + "/merchant/merchantReported/weChatAppMerchantModify?merchantCode=" + merchantCode + "&patchNo=" + patchNo; 
-	     	var name="window";                        //网页名称，可为空;
-	     	var iWidth=1200;                          //弹出窗口的宽度;
-	     	var iHeight=600;                       //弹出窗口的高度;
-	     	//获得窗口的垂直位置
-	     	var iTop = (window.screen.availHeight-30-iHeight)/2; 
-	     	//获得窗口的水平位置
-	     	var iLeft = (window.screen.availWidth-10-iWidth)/2;
-	     	var params='width='+iWidth
-	            +',height='+iHeight
-	            +',top='+iTop
-	            +',left='+iLeft; 
-	     	/*  $.blockUI();  */
-	      	winChild =  window.open(url, name,params);
-		}
-		
 		if("BEST_PAY" == channlCode){
 	   	   	
 	   		var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.UPDATEBESTPAYREPORT%>?merchantCode="+merchantCode+"&status="+status+"&channlCode="+channlCode; 
