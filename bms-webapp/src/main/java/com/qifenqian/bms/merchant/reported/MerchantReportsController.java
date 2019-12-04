@@ -839,6 +839,8 @@ public class MerchantReportsController {
 			//审核通过,开通产品
 			ChannelBean bean = new ChannelBean();
 			String channelMerNo = "";
+			String wxMerNo = "";
+			String zfbMerNo = "";
 			if("BEST_PAY".equals(detail.getChannelNo())){
 				
 				if("02".equals(detail.getBestMerchantType())){
@@ -856,6 +858,8 @@ public class MerchantReportsController {
 			}else if("SUIXING_PAY".equals(detail.getChannelNo())){
 				bean.setChannelName(ChannelMerRegist.SUIXING_PAY);
 				channelMerNo = rtnResultMap.get("mno")==null?"":(String)rtnResultMap.get("mno");
+				wxMerNo = rtnResultMap.get("wxChildNo")==null?"":(String)rtnResultMap.get("wxChildNo");
+				zfbMerNo= rtnResultMap.get("zfbChildNo")==null?"":(String)rtnResultMap.get("zfbChildNo");
 				object.put("result", "SUCCESS");
 				object.put("message", "商户审核成功");
 				
@@ -882,6 +886,8 @@ public class MerchantReportsController {
 			//报备成功商户报备信息表中状态改变
 			detail.setFileStatus("Y");
 			detail.setOutMerchantCode(channelMerNo);
+			detail.setWxChildNo(wxMerNo);
+			detail.setZfbChildNo(zfbMerNo);
 			fmIncomeService.UpdateMerReportAndMerDetailInfo(detail, "1");
 			
 			
