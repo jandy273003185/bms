@@ -59,6 +59,19 @@
 		 	<if test="applymentId != null and applymentId !='' ">
 		 	`applyment_id` = #{applymentId,jdbcType = VARCHAR},
 		 	</if>
+		 	
+		 	<if test="bankCode != null and bankCode !='' ">
+		 	`bank_code` = #{bankCode,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="branchBankName != null and branchBankName !='' ">
+		 	`branch_bank_name` = #{branchBankName,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="accountNumber != null and accountNumber !='' ">
+		 	`account_number` = #{accountNumber,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="mobileNo != null and mobileNo !='' ">
+		 	`mobile_no` = #{mobileNo,jdbcType = VARCHAR},
+		 	</if>
 			 `modify_time` = now()
 		 WHERE
 			`patch_no` = #{patchNo,jdbcType = VARCHAR}
