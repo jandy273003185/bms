@@ -41,6 +41,37 @@
 	
 	    })
 	 })
+	 function getVerified(obj){
+		 
+		var merchantCode=$(obj).parent().find('#merchantCode_').val();
+		var patchNo = $(obj).parent().find("#patchNo_").val();
+		var channlCode =$(obj).parent().find('#channelNo_').val();
+		var outMerchantCode = $(obj).parent().find('#outMerchantCode_').val();
+		$.ajax({
+			type:"POST",
+			dataType:"json",
+			url:window.Constants.ContextPath+'<%="/merchant/verified/merchantReportSubmit" %>',
+			data:
+			{
+				"merchantCode" 	: merchantCode,
+				"patchNo" : patchNo,
+				"channelNo" : channlCode,
+				"outMerchantCode" : outMerchantCode
+			},
+			success:function(data){
+				if(data.result=="SUCCESS"){
+					alert("调用实名认证成功");
+				}else{
+					if(null == data.message || "" ==data.message){
+					}else{
+						alert(data.message);
+						window.location.reload();
+					}
+				}
+			}
+		});
+	 }
+	 
 	 function getWeChatUpdate(obj){
 		 
 		var merchantCode=$(obj).parent().find('#merchantCode_').val();
@@ -233,6 +264,23 @@
 		var resultMsg =  $(obj).parent().find('#resultMsg_').val();
 		if(null != resultMsg){
 			alert("进件失败原因" + resultMsg);
+		}
+		
+		if("WX" == channlCode){
+			var url=window.Constants.ContextPath + "/merchant/merchantReported/weChatAppMerchantModify?merchantCode=" + merchantCode + "&patchNo=" + patchNo; 
+	     	var name="window";                        //网页名称，可为空;
+	     	var iWidth=1200;                          //弹出窗口的宽度;
+	     	var iHeight=600;                       //弹出窗口的高度;
+	     	//获得窗口的垂直位置
+	     	var iTop = (window.screen.availHeight-30-iHeight)/2; 
+	     	//获得窗口的水平位置
+	     	var iLeft = (window.screen.availWidth-10-iWidth)/2;
+	     	var params='width='+iWidth
+	            +',height='+iHeight
+	            +',top='+iTop
+	            +',left='+iLeft; 
+	     	/*  $.blockUI();  */
+	      	winChild =  window.open(url, name,params);
 		}
 		
 		if("BEST_PAY" == channlCode){
@@ -1047,6 +1095,9 @@
                                             	<c:if test="${reported.channelNo =='WX'}">
                                             	<button type="button"  class="btn btn-primary btn-xs" onclick ="getWeChatUpdate(this);">微信升级</button>
 										    	</c:if>
+										    	<c:if test="${reported.reportStatus =='1' && reported.outMerchantCode != null &&  reported.channelNo =='SUIXING_PAY'}">
+	                                            	<button type="button"  class="btn btn-primary btn-xs"  onclick ="getVerified(this);">实名认证</button>
+	                                            </c:if>
 										    </td>
 										</tr>
 									   </c:forEach> 
