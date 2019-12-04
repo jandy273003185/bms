@@ -1,4 +1,5 @@
 package com.qifenqian.bms.merchant.reported;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,15 +20,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
-import com.seven.micropay.base.domain.ChannelResult;
-import com.seven.micropay.base.enums.ReStatus;
-import com.seven.micropay.channel.domain.merchant.suixinpayInfo.SxPayRequestInfo;
-import com.seven.micropay.channel.enums.ChannelMerRegist;
-import com.seven.micropay.channel.service.IMerChantIntoService;
-import com.seven.micropay.commons.util.DateUtil;
 import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
 import com.qifenqian.bms.basemanager.merchant.service.MerchantService;
 import com.qifenqian.bms.basemanager.utils.GenSN;
+import com.qifenqian.bms.merchant.channel.bean.ChannelBean;
+import com.qifenqian.bms.merchant.channel.bean.ChannelDetailBean;
+import com.qifenqian.bms.merchant.channel.service.ChannelService;
 import com.qifenqian.bms.merchant.reported.bean.Area;
 import com.qifenqian.bms.merchant.reported.bean.Bank;
 import com.qifenqian.bms.merchant.reported.bean.BankBranch;
@@ -43,12 +42,20 @@ import com.qifenqian.bms.merchant.reported.service.AliPayIncomeService;
 import com.qifenqian.bms.merchant.reported.service.CrIncomeService;
 import com.qifenqian.bms.merchant.reported.service.FmIncomeService;
 import com.qifenqian.bms.merchant.reported.service.WeChatAppService;
-import com.qifenqian.jellyfish.bean.agentMerSign.alipay.AlipayOpenAgentOrderQueryRes;
-import com.qifenqian.jellyfish.bean.agentMerSign.weixin.AuditDetail;
-import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgrntMerRegistQueryResp;
-import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgrntMerRegistUpgradeQueryResp;
 import com.qifenqian.jellyfish.bean.enums.BusinessStatus;
 import com.qifenqian.jellyfish.bean.enums.GetwayStatus;
+import com.qifenqian.jellyfish.bean.merregist.alipay.AlipayOpenAgentOrderQueryRes;
+import com.qifenqian.jellyfish.bean.merregist.weixin.AuditDetail;
+import com.qifenqian.jellyfish.bean.merregist.weixin.WeiXinAgrntMerRegistQueryResp;
+import com.qifenqian.jellyfish.bean.merregist.weixin.WeiXinAgrntMerRegistUpgradeQueryResp;
+import com.seven.micropay.base.domain.ChannelResult;
+import com.seven.micropay.base.enums.ReStatus;
+import com.seven.micropay.channel.domain.merchant.suixinpayInfo.SxPayRequestInfo;
+import com.seven.micropay.channel.enums.ChannelCode;
+import com.seven.micropay.channel.enums.ChannelMerRegist;
+import com.seven.micropay.channel.enums.PayType;
+import com.seven.micropay.channel.service.IMerChantIntoService;
+import com.seven.micropay.commons.util.DateUtil;
 
 @Controller
 @RequestMapping(MerchantReportedPath.BASE)
@@ -76,6 +83,9 @@ public class MerchantReportsController {
    
    @Autowired
    private WeChatAppService weChatAppService;
+   
+   @Autowired
+   private ChannelService channelService;
 
    
    /**
@@ -618,6 +628,37 @@ public class MerchantReportsController {
 							detail.setSignUrl(registQueryResp.getSignUrl());
 							//更新数据库
 							fmIncomeService.UpdateMerReportAndMerDetailInfo(detail, "1");
+							
+							//审核通过,开通产品
+							ChannelBean bean = new ChannelBean();
+							bean.setCustId(custInfo.getCustId());
+							bean.setChannelName(ChannelMerRegist.WX);
+							//外部商户号
+							bean.setMerchantChannelId(registQueryResp.getSubMchId());
+							bean.setMerchantChannelKey(registQueryResp.getSubMchId());
+							List<ChannelDetailBean> details = new ArrayList<ChannelDetailBean>();
+							//微信扫码
+							ChannelDetailBean weChatSM = new ChannelDetailBean();
+							weChatSM.setChannelCode(ChannelCode.WECHAT);
+							weChatSM.setSubCode(PayType.SM);
+							weChatSM.setWxAppId("wx1fc84beff3d0eeb8");
+							weChatSM.setWxAppsecret("055e6b98ac3b4b6d7b704a6c3e884d64");
+							details.add(weChatSM);
+							//微信刷卡
+							ChannelDetailBean weChatSK = new ChannelDetailBean();
+							BeanUtils.copyProperties(weChatSM, weChatSK);
+							weChatSK.setSubCode(PayType.SK);
+							details.add(weChatSK);
+							//微信公众号
+							ChannelDetailBean weChatGZH = new ChannelDetailBean();
+							BeanUtils.copyProperties(weChatSM, weChatGZH);
+							weChatGZH.setSubCode(PayType.GZH);
+							details.add(weChatGZH);
+							//产品列表
+							bean.setDetails(details);
+							boolean saveChannel = channelService.saveOrupdateChannel(bean, null);
+							logger.info("开通微信渠道产品状态：{}", saveChannel ? "成功" : "失败");
+							
 							object.put("result", "SUCCESS");
 							object.put("message", "商户审核成功");
 						}
@@ -718,6 +759,30 @@ public class MerchantReportsController {
 					detail.setOutMerchantCode(orderQueryRes.getMerchantPid());
 					//更新数据库
 					fmIncomeService.UpdateMerReportAndMerDetailInfo(detail, "1");
+					
+					//审核通过,开通产品
+					ChannelBean bean = new ChannelBean();
+					bean.setCustId(custInfo.getCustId());
+					bean.setChannelName(ChannelMerRegist.ALIPAY);
+					//外部商户号
+					bean.setMerchantChannelId(orderQueryRes.getMerchantPid());
+					bean.setMerchantChannelKey(orderQueryRes.getMerchantPid());
+					List<ChannelDetailBean> details = new ArrayList<ChannelDetailBean>();
+					//支付宝扫码
+					ChannelDetailBean aliPaySM = new ChannelDetailBean();
+					aliPaySM.setChannelCode(ChannelCode.ALIPAY);
+					aliPaySM.setSubCode(PayType.SM);
+					details.add(aliPaySM);
+					//支付宝刷卡
+					ChannelDetailBean aliPaySK = new ChannelDetailBean();
+					aliPaySK.setChannelCode(ChannelCode.ALIPAY);
+					aliPaySK.setSubCode(PayType.SK);
+					details.add(aliPaySK);
+					//产品列表
+					bean.setDetails(details);
+					boolean saveChannel = channelService.saveOrupdateChannel(bean, null);
+					logger.info("开通支付宝渠道产品状态：{}", saveChannel ? "成功" : "失败");
+					
 					object.put("result", "SUCCESS");
 					object.put("message", "商户审核成功");
 				}
@@ -771,6 +836,8 @@ public class MerchantReportsController {
 		Map<String, Object> rtnResultMap = channelResult.getData();
 		
 		if((ReStatus.SUCCESS).equals(channelResult.getStatus())){
+			//审核通过,开通产品
+			ChannelBean bean = new ChannelBean();
 			String channelMerNo = "";
 			if("BEST_PAY".equals(detail.getChannelNo())){
 				
@@ -779,6 +846,7 @@ public class MerchantReportsController {
 					object.put("result", "SUCCESS");
 					object.put("message", detail.getBestMerchantType());
 				}else{
+					bean.setChannelName(ChannelMerRegist.BEST_PAY);
 					channelMerNo =  rtnResultMap.get("bestpayMctNo") == null?"":(String)rtnResultMap.get("bestpayMctNo");
 					detail.setBestpayMctNo(channelMerNo);
 					object.put("result", "SUCCESS");
@@ -786,24 +854,24 @@ public class MerchantReportsController {
 				}
 				
 			}else if("SUIXING_PAY".equals(detail.getChannelNo())){
-				
+				bean.setChannelName(ChannelMerRegist.SUIXING_PAY);
 				channelMerNo = rtnResultMap.get("mno")==null?"":(String)rtnResultMap.get("mno");
 				object.put("result", "SUCCESS");
 				object.put("message", "商户审核成功");
 				
 			}else if("SUM_PAY".equals(detail.getChannelNo())){
-				
+				bean.setChannelName(ChannelMerRegist.SUM_PAY);
 				channelMerNo = detail.getOutMerchantCode();
 				object.put("result", "SUCCESS");
 				object.put("message", "商户审核成功");
 				
 			}else if("YQB".equals(detail.getChannelNo())){
-				
+				bean.setChannelName(ChannelMerRegist.YQB);
 				channelMerNo =  rtnResultMap.get("merchantId") == null?"":(String)rtnResultMap.get("merchantId");
 				object.put("result", "SUCCESS");
 				object.put("message", "商户审核成功");
 			}else if("KFT_PAY".equals(detail.getChannelNo())){
-				
+				bean.setChannelName(ChannelMerRegist.KFT_PAY);
 				channelMerNo =  rtnResultMap.get("merchantNo") == null?"":(String)rtnResultMap.get("merchantNo");
 				object.put("result", "SUCCESS");
 				object.put("message", "商户审核成功");
@@ -815,6 +883,53 @@ public class MerchantReportsController {
 			detail.setFileStatus("Y");
 			detail.setOutMerchantCode(channelMerNo);
 			fmIncomeService.UpdateMerReportAndMerDetailInfo(detail, "1");
+			
+			
+			bean.setCustId(custInfo.getCustId());
+			//外部商户号
+			bean.setMerchantChannelId(channelMerNo);
+			bean.setMerchantChannelKey(channelMerNo);
+			List<ChannelDetailBean> details = new ArrayList<ChannelDetailBean>();
+			//微信扫码
+			ChannelDetailBean weChatSM = new ChannelDetailBean();
+			weChatSM.setChannelCode(ChannelCode.WECHAT);
+			weChatSM.setSubCode(PayType.SM);
+			weChatSM.setWxAppId("wx1fc84beff3d0eeb8");
+			weChatSM.setWxAppsecret("055e6b98ac3b4b6d7b704a6c3e884d64");
+			details.add(weChatSM);
+			//微信刷卡
+			ChannelDetailBean weChatSK = new ChannelDetailBean();
+			BeanUtils.copyProperties(weChatSM, weChatSK);
+			weChatSK.setSubCode(PayType.SK);
+			details.add(weChatSK);
+			//微信公众号
+			ChannelDetailBean weChatGZH = new ChannelDetailBean();
+			BeanUtils.copyProperties(weChatSM, weChatGZH);
+			weChatGZH.setSubCode(PayType.GZH);
+			details.add(weChatGZH);
+			
+			//支付宝扫码
+			ChannelDetailBean aliPaySM = new ChannelDetailBean();
+			aliPaySM.setChannelCode(ChannelCode.ALIPAY);
+			aliPaySM.setSubCode(PayType.SM);
+			details.add(aliPaySM);
+			//支付宝刷卡
+			ChannelDetailBean aliPaySK = new ChannelDetailBean();
+			aliPaySK.setChannelCode(ChannelCode.ALIPAY);
+			aliPaySK.setSubCode(PayType.SK);
+			details.add(aliPaySK);
+			
+			//有营业执照开通云闪付
+			if (StringUtils.isNotBlank(custInfo.getBusinessLicense())) {
+				ChannelDetailBean unionPay = new ChannelDetailBean();
+				unionPay.setChannelCode(ChannelCode.UNIONPAY);
+				unionPay.setSubCode(PayType.SK);
+				details.add(unionPay);
+			}
+			//产品列表
+			bean.setDetails(details);
+			boolean saveChannel = channelService.saveOrupdateChannel(bean, null);
+			logger.info("开通渠道产品状态：{}", saveChannel ? "成功" : "失败");
 			
 		}else if((ReStatus.FAIL).equals(channelResult.getStatus())){
 			//查询报备失败改变表中状态
