@@ -113,8 +113,68 @@ public class TdMerchantDetailInfo implements Serializable{
 	 */
 	private String signQrcode;
 	
+	/**
+	 * 客户号
+	 */
+	private String custId;
+	/**
+	 * 微信申请单编号
+	 */
+	private String wxApplyNo;
+	/**
+	 * 微信实名认证状态
+	 */
+	private String idenStatus;
+	/**
+	 * 微信子商户号
+	 */
+	private String wxChildNo;
+	/**
+	 * 支付宝子商户
+	 */
+	private String zfbChildNo;
 	
 	
+	public String getWxChildNo() {
+		return wxChildNo;
+	}
+
+	public void setWxChildNo(String wxChildNo) {
+		this.wxChildNo = wxChildNo;
+	}
+
+	public String getZfbChildNo() {
+		return zfbChildNo;
+	}
+
+	public void setZfbChildNo(String zfbChildNo) {
+		this.zfbChildNo = zfbChildNo;
+	}
+
+	public String getWxApplyNo() {
+		return wxApplyNo;
+	}
+
+	public void setWxApplyNo(String wxApplyNo) {
+		this.wxApplyNo = wxApplyNo;
+	}
+
+	public String getIdenStatus() {
+		return idenStatus;
+	}
+
+	public void setIdenStatus(String idenStatus) {
+		this.idenStatus = idenStatus;
+	}
+
+	public String getCustId() {
+		return custId;
+	}
+
+	public void setCustId(String custId) {
+		this.custId = custId;
+	}
+
 	public String getSignQrcode() {
 		return signQrcode;
 	}
