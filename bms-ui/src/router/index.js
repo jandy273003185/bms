@@ -285,8 +285,20 @@ const Account = () => import(/* webpackChunkName: "abnormal" */ '@/views/Abnorma
 const Exchange = () => import(/* webpackChunkName: "abnormal" */ '@/views/Abnormal/Exchange/Exchange');
 const Message = () => import(/* webpackChunkName: "abnormal" */ '@/views/Abnormal/Message/Message');
 // 工作流管理
-const Wuser = () => import(/* webpackChunkName: "abnormal" */ '@/views/Workflow/Wuser/Wuser');
-const Wgroup = () => import(/* webpackChunkName: "abnormal" */ '@/views/Workflow/Wgroup/Wgroup');
+const Wuser = () => import(/* webpackChunkName: "Workflow" */ '@/views/Workflow/Wuser/Wuser');
+const Wgroup = () => import(/* webpackChunkName: "Workflow" */ '@/views/Workflow/Wgroup/Wgroup');
+// 交易管理
+const Consumption = () => import(/* webpackChunkName: "Trading" */ '@/views/Trading/Consumption/Consumption');
+const Summary = () => import(/* webpackChunkName: "Trading" */ '@/views/Trading/Summary/Summary');
+const Recharge = () => import(/* webpackChunkName: "Trading" */ '@/views/Trading/Recharge/Recharge');
+const Revocation = () => import(/* webpackChunkName: "Trading" */ '@/views/Trading/Revocation/Revocation');
+const Refund = () => import(/* webpackChunkName: "Trading" */ '@/views/Trading/Refund/Refund');
+const Transfer = () => import(/* webpackChunkName: "Trading" */ '@/views/Trading/Transfer/Transfer');
+const Transactions = () => import(/* webpackChunkName: "Trading" */ '@/views/Trading/Transactions/Transactions');
+const RechargeRe = () => import(/* webpackChunkName: "Trading" */ '@/views/Trading/RechargeRe/RechargeRe');
+const TransferRe = () => import(/* webpackChunkName: "Trading" */ '@/views/Trading/TransferRe/TransferRe');
+const Merchants = () => import(/* webpackChunkName: "Trading" */ '@/views/Trading/Merchants/Merchants');
+
 
 // 菜单列表
 export const menuRouter = [
@@ -327,6 +339,22 @@ export const menuRouter = [
     children: [
       { name: '工作流用户', path: '/workflow/wuser', component: Wuser },
       { name: '工作流用户组', path: '/workflow/wgroup', component: Wgroup }
+    ]
+  },
+  {
+    name: '交易管理',
+    path: '',
+    children: [
+      { name: '消费查询', path: '/trading/consumption', component: Consumption },
+      { name: '商户交易汇总', path: '/trading/summary', component: Summary },
+      { name: '充值查询', path: '/trading/recharge', component: Recharge },
+      { name: '交易撤销', path: '/trading/revocation', component: Revocation },
+      { name: '退款管理', path: '/trading/refund', component: Refund },
+      { name: '客户转账', path: '/trading/transfer', component: Transfer },
+      { name: '交易汇总查询', path: '/trading/transactions', component: Transactions },
+      { name: '充值撤销管理', path: '/trading/rechargere', component: RechargeRe },
+      { name: '转账撤销管理', path: '/trading/transferre', component: TransferRe },
+      { name: '商户转账', path: '/trading/merchants', component: Merchants }
     ]
   },
   {
