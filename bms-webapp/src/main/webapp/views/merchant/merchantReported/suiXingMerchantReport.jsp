@@ -191,7 +191,7 @@ $(function(){
 	                        <tr>
 							    <td class="td-left">是否有证商户：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-								    <select  name="suiXingMerchantType" id="suiXingMerchantType" onchange = "getUpdateType();"class="width-90">
+								    <select  name="suiXingMerchantType" id="suiXingMerchantType" onchange = "getUpdateType()"class="width-90">
 										<option value="01">有证商户</option>
 										<option value="02">无证商户</option>
 									</select>
@@ -202,7 +202,7 @@ $(function(){
 								<td class="td-left">注册地址：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3">
 									<div class="col-xs-2 pd0" style="padding:0;">
-	                                    <select class="form-control" name="merchantProvince" id="merchantProvince" onchange="getMerchantCity();">
+	                                    <select class="form-control" name="merchantProvince" id="merchantProvince" onchange="getMerchantCity()">
 	                                       	<option value="">--请选择省--</option>
 		                                    <c:if test="${not empty merchantProvinceList }">
 		                                        <c:forEach items="${merchantProvinceList }" var="merchantProvince">
@@ -215,7 +215,7 @@ $(function(){
 		                                </select>
 	                                </div>
 	                                <div class="col-xs-2 pd0" style="margin:0 1%;padding:0;">
-		                                <select class="form-control" name="merchantCity" id="merchantCity"  onchange="getMerchantArea();">
+		                                <select class="form-control" name="merchantCity" id="merchantCity"  onchange="getMerchantArea()">
 		                                    <option value="" id="cityDef">--请选择市--</option>
 		                                </select>
 	                                </div>
