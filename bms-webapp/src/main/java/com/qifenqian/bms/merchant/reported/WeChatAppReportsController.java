@@ -314,7 +314,7 @@ public class WeChatAppReportsController {
 	}
 	
 	/**
-	 * 小微商户查询提现状态
+	 * 小微商户重新发起提现
 	*/
 	@RequestMapping("/merchantReported/reAutoWithDraw")
 	public Map<String, Object>  reAutoWithDraw(HttpServletRequest request,HttpServletResponse response,WeChatAppBean weChatBean){

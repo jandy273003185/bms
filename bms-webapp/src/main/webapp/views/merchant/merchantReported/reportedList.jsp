@@ -41,6 +41,37 @@
 	
 	    })
 	 })
+	 function getVerified(obj){
+		 
+		var merchantCode=$(obj).parent().find('#merchantCode_').val();
+		var patchNo = $(obj).parent().find("#patchNo_").val();
+		var channlCode =$(obj).parent().find('#channelNo_').val();
+		var outMerchantCode = $(obj).parent().find('#outMerchantCode_').val();
+		$.ajax({
+			type:"POST",
+			dataType:"json",
+			url:window.Constants.ContextPath+'<%="/merchant/verified/merchantReportSubmit" %>',
+			data:
+			{
+				"merchantCode" 	: merchantCode,
+				"patchNo" : patchNo,
+				"channelNo" : channlCode,
+				"outMerchantCode" : outMerchantCode
+			},
+			success:function(data){
+				if(data.result=="SUCCESS"){
+					alert("调用实名认证成功");
+				}else{
+					if(null == data.message || "" ==data.message){
+					}else{
+						alert(data.message);
+						window.location.reload();
+					}
+				}
+			}
+		});
+	 }
+	 
 	 function getWeChatUpdate(obj){
 		 
 		var merchantCode=$(obj).parent().find('#merchantCode_').val();
@@ -1064,6 +1095,9 @@
                                             	<c:if test="${reported.channelNo =='WX'}">
                                             	<button type="button"  class="btn btn-primary btn-xs" onclick ="getWeChatUpdate(this);">微信升级</button>
 										    	</c:if>
+										    	<c:if test="${reported.reportStatus =='1' && reported.outMerchantCode != null &&  reported.channelNo =='SUIXING_PAY'}">
+	                                            	<button type="button"  class="btn btn-primary btn-xs"  onclick ="getVerified(this);">实名认证</button>
+	                                            </c:if>
 										    </td>
 										</tr>
 									   </c:forEach> 
