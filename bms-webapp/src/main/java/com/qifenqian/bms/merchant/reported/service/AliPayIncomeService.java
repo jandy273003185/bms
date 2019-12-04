@@ -14,17 +14,17 @@ import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.utils.GenSN;
 import com.qifenqian.bms.merchant.reported.bean.AliPayCoBean;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
-import com.qifenqian.jellyfish.api.merregist.IAlipayAgentMerRegistService;
+import com.qifenqian.jellyfish.bean.agentMerSign.ContactInfo;
+import com.qifenqian.jellyfish.bean.agentMerSign.alipay.AlipayOpenAgentConfirmReq;
+import com.qifenqian.jellyfish.bean.agentMerSign.alipay.AlipayOpenAgentConfirmRes;
+import com.qifenqian.jellyfish.bean.agentMerSign.alipay.AlipayOpenAgentCreateReq;
+import com.qifenqian.jellyfish.bean.agentMerSign.alipay.AlipayOpenAgentCreateRes;
+import com.qifenqian.jellyfish.bean.agentMerSign.alipay.AlipayOpenAgentFacetofaceSignReq;
+import com.qifenqian.jellyfish.bean.agentMerSign.alipay.AlipayOpenAgentFacetofaceSignRes;
+import com.qifenqian.jellyfish.bean.agentMerSign.alipay.AlipayOpenAgentOrderQueryReq;
+import com.qifenqian.jellyfish.bean.agentMerSign.alipay.AlipayOpenAgentOrderQueryRes;
 import com.qifenqian.jellyfish.bean.enums.GetwayStatus;
-import com.qifenqian.jellyfish.bean.merregist.ContactInfo;
-import com.qifenqian.jellyfish.bean.merregist.alipay.AlipayOpenAgentConfirmReq;
-import com.qifenqian.jellyfish.bean.merregist.alipay.AlipayOpenAgentConfirmRes;
-import com.qifenqian.jellyfish.bean.merregist.alipay.AlipayOpenAgentCreateReq;
-import com.qifenqian.jellyfish.bean.merregist.alipay.AlipayOpenAgentCreateRes;
-import com.qifenqian.jellyfish.bean.merregist.alipay.AlipayOpenAgentFacetofaceSignReq;
-import com.qifenqian.jellyfish.bean.merregist.alipay.AlipayOpenAgentFacetofaceSignRes;
-import com.qifenqian.jellyfish.bean.merregist.alipay.AlipayOpenAgentOrderQueryReq;
-import com.qifenqian.jellyfish.bean.merregist.alipay.AlipayOpenAgentOrderQueryRes;
+import com.qifenqian.jellyfish.merRegistApi.IAlipayAgentMerRegistService;
 
 
 @Service
