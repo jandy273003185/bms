@@ -13,7 +13,7 @@
             <el-input v-model="examine.name3"></el-input>
           </el-form-item>
           <el-form-item label="收件时间" prop="name4">
-            <el-date-picker v-model="examine.name4" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" format="yyyy年MM月dd日" value-format="yyyy-MM-dd">
+            <el-date-picker v-model="examine.name4" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" value-format="yyyy-MM-dd">
             </el-date-picker>
           </el-form-item>
         </el-form>

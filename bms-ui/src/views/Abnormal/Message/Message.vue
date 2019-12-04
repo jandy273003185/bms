@@ -13,7 +13,7 @@
             </el-select>
           </el-form-item>
           <el-form-item label="创建时间" prop="name3">
-            <el-date-picker v-model="examine.name3" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" format="yyyy年MM月dd日" value-format="yyyy-MM-dd">
+            <el-date-picker v-model="examine.name3" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" value-format="yyyy-MM-dd">
             </el-date-picker>
           </el-form-item>
         </el-form>
@@ -31,7 +31,7 @@
             </el-select>
           </el-form-item>
           <el-form-item label="最后创建时间" prop="name6">
-            <el-date-picker v-model="examine.name6" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" format="yyyy年MM月dd日" value-format="yyyy-MM-dd">
+            <el-date-picker v-model="examine.name6" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" value-format="yyyy-MM-dd">
             </el-date-picker>
           </el-form-item>
         </el-form>

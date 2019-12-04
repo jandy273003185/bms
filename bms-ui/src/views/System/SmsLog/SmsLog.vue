@@ -4,7 +4,7 @@
       <template slot="controlQueryOps">
         <el-form :model="examine" label-width="86px" :inline="true" ref="controlQueryForm">
           <el-form-item label="收件时间" prop="name1">
-            <el-date-picker v-model="examine.name1" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" format="yyyy年MM月dd日" value-format="yyyy-MM-dd">
+            <el-date-picker v-model="examine.name1" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" value-format="yyyy-MM-dd">
             </el-date-picker>
           </el-form-item>
           <el-form-item label="日志类型" prop="name2">
