@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,23 +16,28 @@ import com.qifenqian.bms.basemanager.utils.GenSN;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
 import com.qifenqian.bms.merchant.reported.bean.WeChatAppAreaInfo;
 import com.qifenqian.bms.merchant.reported.bean.WeChatAppBean;
+import com.qifenqian.bms.merchant.reported.bean.WeChatAppModifyBean;
 import com.qifenqian.bms.merchant.reported.dao.WeChatAppMapperDao;
 import com.qifenqian.bms.merchant.reported.mapper.WeChatAppMapper;
-import com.qifenqian.jellyfish.api.merregist.WxpayAgentMerRegistService;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgentMerRegistReq;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgentMerRegistResp;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgentMerRegistUpgradeReq;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgentMerRegistUpgradeResp;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgrntMerRegistQueryReq;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgrntMerRegistQueryResp;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgrntMerRegistUpgradeQueryReq;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinAgrntMerRegistUpgradeQueryResp;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinModifyContactinfoReq;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinModifyContactinfoResp;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinModifySettlementCardReq;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinModifySettlementCardResp;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinReintroduceWithdrawalsReq;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinReintroduceWithdrawalsResp;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinWithdrawalStateQueryReq;
+import com.qifenqian.jellyfish.bean.agentMerSign.weixin.WeiXinWithdrawalStateQueryResp;
 import com.qifenqian.jellyfish.bean.enums.BusinessStatus;
 import com.qifenqian.jellyfish.bean.enums.GetwayStatus;
-import com.qifenqian.jellyfish.bean.merregist.weixin.WeiXinAgentMerRegistReq;
-import com.qifenqian.jellyfish.bean.merregist.weixin.WeiXinAgentMerRegistResp;
-import com.qifenqian.jellyfish.bean.merregist.weixin.WeiXinAgentMerRegistUpgradeReq;
-import com.qifenqian.jellyfish.bean.merregist.weixin.WeiXinAgentMerRegistUpgradeResp;
-import com.qifenqian.jellyfish.bean.merregist.weixin.WeiXinAgrntMerRegistQueryReq;
-import com.qifenqian.jellyfish.bean.merregist.weixin.WeiXinAgrntMerRegistQueryResp;
-import com.qifenqian.jellyfish.bean.merregist.weixin.WeiXinAgrntMerRegistUpgradeQueryReq;
-import com.qifenqian.jellyfish.bean.merregist.weixin.WeiXinAgrntMerRegistUpgradeQueryResp;
-import com.qifenqian.jellyfish.bean.merregist.weixin.WeiXinReintroduceWithdrawalsReq;
-import com.qifenqian.jellyfish.bean.merregist.weixin.WeiXinReintroduceWithdrawalsResp;
-import com.qifenqian.jellyfish.bean.merregist.weixin.WeiXinWithdrawalStateQueryReq;
-import com.qifenqian.jellyfish.bean.merregist.weixin.WeiXinWithdrawalStateQueryResp;
+import com.qifenqian.jellyfish.merRegistApi.WxpayAgentMerRegistService;
 import com.seven.micropay.channel.domain.UpgradeApplicatioMerchanelReq;
 
 @Service
@@ -312,26 +318,95 @@ public class WeChatAppService {
 	 * 微信修改结算账户
 	 * @param cr
 	 * @return
+	 * @throws Exception 
 	 */
-	public JSONObject modifySettlement(WeChatAppBean cr) {
-		JSONObject object = new JSONObject();
-		UpgradeApplicatioMerchanelReq req = new UpgradeApplicatioMerchanelReq();
+	public Map<String, Object> modifySettlement(WeChatAppModifyBean modifyBean) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		WeiXinModifySettlementCardReq req = new WeiXinModifySettlementCardReq();
+		req.setSubMchId(modifyBean.getSubMchId());
+		if (StringUtils.isNotBlank(modifyBean.getAccountNo())) {
+			req.setAccountNumber(modifyBean.getAccountNo());
+		}
+		if (StringUtils.isNotBlank(modifyBean.getInterBankName())) {
+			req.setBankName(modifyBean.getInterBankName());
+		}
+		if (StringUtils.isNotBlank(modifyBean.getBank())) {
+			req.setAccountBank(modifyBean.getBank());
+		}
+		req.setBankAddressCode(modifyBean.getBankCity());
+		
 		try {
-			//req.setMch_id(cr.getOutMerchantCode());
-			//主体类型，根据主体类型判断是对公还是对私枚举类型
-			req.setOrganization_type("ACCOUNT_TYPE_BUSINESS");
-			req.setAccount_bank(cr.getBank());
-			req.setBank_address_code(cr.getBankCity());
-			req.setBank_name(cr.getInterBankName());
-//			req.setBank_branch_id(cr.getBankCode());
-			req.setAccount_number(cr.getAccountNo());
-			
-			
+			logger.info("微信修改结算信息请求信息：{}", JSONObject.toJSONString(req));
+			WeiXinModifySettlementCardResp modifySettlementCard = wxpayAgentMerRegistService.modifySettlementCard(req);
+			logger.info("微信修改结算信息响应信息：{}", JSONObject.toJSONString(modifySettlementCard));
+			if (BusinessStatus.SUCCESS.equals(modifySettlementCard.getSubCode())) {
+				//更新
+				TdMerchantDetailInfo merchantDetailInfo = new TdMerchantDetailInfo();
+				merchantDetailInfo.setPatchNo(modifyBean.getPatchNo());
+				merchantDetailInfo.setBankCode(modifyBean.getBank());
+				merchantDetailInfo.setAccountNumber(modifyBean.getAccountNo());
+				merchantDetailInfo.setBranchBankName(modifyBean.getInterBankName());
+				weChatAppMapper.updateTdMerchantDetailInfo(merchantDetailInfo);
+				
+				result.put("code", "SUCCESS");
+				result.put("message", "修改结算信息成功");
+			} else {
+				result.put("code", "FAIL");
+				result.put("message", "修改结算信息失败：" + modifySettlementCard.getSubMsg());
+			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.error("修改结算信息异常：{}", e.getMessage());
+			result.put("code", "FAIL");
+			result.put("message", "修改结算信息异常");
 		}
 		
-		return object;
+		return result;
+	}
+	
+	/**
+	 * 修改微信联系信息
+	 * @param modifyBean
+	 * @return
+	 */
+	public Map<String, Object> modifyContact(WeChatAppModifyBean modifyBean) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		WeiXinModifyContactinfoReq req = new WeiXinModifyContactinfoReq();
+		req.setSubMchId(modifyBean.getSubMchId());
+		if (StringUtils.isNotBlank(modifyBean.getMobileNo())) {
+			req.setMobilePhone(modifyBean.getMobileNo());
+		}
+		if (StringUtils.isNotBlank(modifyBean.getEmail())) {
+			req.setEmail(modifyBean.getEmail());
+		}
+		if (StringUtils.isNotBlank(modifyBean.getShortName())) {
+			req.setMerchantName(modifyBean.getShortName());
+		}
+		try {
+			logger.info("微信修改联系信息请求体：{}", JSONObject.toJSONString(req));
+			WeiXinModifyContactinfoResp modifyContactinfoResp = wxpayAgentMerRegistService.modifyContactinfo(req);
+			logger.info("微信修改联系信息响应体：{}", JSONObject.toJSONString(modifyContactinfoResp));
+			if (BusinessStatus.SUCCESS.equals(modifyContactinfoResp.getSubCode())) {
+				TdMerchantDetailInfo merchantDetailInfo = new TdMerchantDetailInfo();
+				merchantDetailInfo.setPatchNo(modifyBean.getPatchNo());
+				merchantDetailInfo.setMobileNo(modifyBean.getMobileNo());
+				weChatAppMapper.updateTdMerchantDetailInfo(merchantDetailInfo);
+				
+				result.put("code", "SUCCESS");
+				result.put("message", "修改联系信息成功");
+			} else {
+				result.put("code", "FAIL");
+				result.put("message", "修改联系信息失败：" + modifyContactinfoResp.getSubMsg());
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.error("修改联系信息异常：{}", e.getMessage());
+			result.put("code", "FAIL");
+			result.put("message", "修改联系信息异常");
+		}
+		return result;
 	}
 	
 	/**

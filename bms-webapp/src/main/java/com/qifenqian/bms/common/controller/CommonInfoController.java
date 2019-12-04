@@ -54,6 +54,18 @@ public class CommonInfoController {
 	}
 	
 	/**
+	 * 查询微信开户银行信息
+	 * @param bankName
+	 * @return
+	 */
+	@RequestMapping(value = "/selectWeChatBankList", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Map<String, String>> selectWeChatBankList(String bankName) {
+		List<Map<String, String>> selectWeChatBankList = commonInfoService.selectWeChatBankList(bankName);
+		return selectWeChatBankList;
+	}
+	
+	/**
 	 * 根据渠道查询所有省份
 	 * @return
 	 */

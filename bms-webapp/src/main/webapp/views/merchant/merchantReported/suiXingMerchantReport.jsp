@@ -13,9 +13,10 @@
 <script src='<c:url value="/static/js/mobileBUGFix.mini.js"/>'></script>
 <script src='<c:url value="/static/js/uploadCompress.js"/>'></script>
 <script src='<c:url value="/static/js/up.js"/>'></script>
+<script src="https://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/js/bootstrap-select.min.js"></script>
 <link rel="stylesheet" href="<c:url value='/static/css/base.css' />" />
 <link rel="stylesheet" href="<c:url value='/static/css/home.css' />" />
-
+<link href="https://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/css/bootstrap-select.css" rel="stylesheet">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -163,6 +164,15 @@ $(function(){
 								</td>
                                 <td class="td-left">商户行业信息：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
+								<%--  
+								<select name="industry" id="industry" class="selectpicker show-tick form-control" data-width="250px" data-live-search="true">
+									<option value="">--请选择商户行业--</option>
+									<c:if test="${not empty industryList }">
+			                           	<c:forEach items="${industryList }" var="industry">
+			                           		<option id="${industry.industryCode}" value="${industry.industryCode}">${industry.industryName}</option>
+			                           	</c:forEach>
+		                 		  	</c:if>
+								</select> --%>
 								   <select name="industry" id="industry" class="width-90">
 										<option value="">--请选择商户行业--</option>
 											<c:if test="${not empty industryList }">
@@ -191,7 +201,7 @@ $(function(){
 	                        <tr>
 							    <td class="td-left">是否有证商户：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-								    <select  name="suiXingMerchantType" id="suiXingMerchantType" onchange = "getUpdateType();"class="width-90">
+								    <select  name="suiXingMerchantType" id="suiXingMerchantType" onchange = "getUpdateType()"class="width-90">
 										<option value="01">有证商户</option>
 										<option value="02">无证商户</option>
 									</select>
@@ -202,7 +212,7 @@ $(function(){
 								<td class="td-left">注册地址：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3">
 									<div class="col-xs-2 pd0" style="padding:0;">
-	                                    <select class="form-control" name="merchantProvince" id="merchantProvince" onchange="getMerchantCity();">
+	                                    <select class="form-control" name="merchantProvince" id="merchantProvince" onchange="getMerchantCity()">
 	                                       	<option value="">--请选择省--</option>
 		                                    <c:if test="${not empty merchantProvinceList }">
 		                                        <c:forEach items="${merchantProvinceList }" var="merchantProvince">
@@ -215,7 +225,7 @@ $(function(){
 		                                </select>
 	                                </div>
 	                                <div class="col-xs-2 pd0" style="margin:0 1%;padding:0;">
-		                                <select class="form-control" name="merchantCity" id="merchantCity"  onchange="getMerchantArea();">
+		                                <select class="form-control" name="merchantCity" id="merchantCity"  onchange="getMerchantArea()">
 		                                    <option value="" id="cityDef">--请选择市--</option>
 		                                </select>
 	                                </div>
@@ -848,8 +858,6 @@ $(function(){
 				$("#legalIdCardBackType").attr("style","display:");
 				$("#settleIdCardType").attr("style","display:");
 				$("#settleIdCardBackType").attr("style","display:");
-				id="businessPhotoType" style = "display:"
-				
 			}else if("02" == suiXingMerchantType){
 				$("#legalIdCardType").attr("style","display:none");
 				$("#legalIdCardBackType").attr("style","display:none");

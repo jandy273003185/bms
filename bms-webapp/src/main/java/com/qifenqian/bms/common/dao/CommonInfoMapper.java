@@ -1,6 +1,7 @@
 package com.qifenqian.bms.common.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.annotation.MapperScan;
@@ -36,6 +37,6 @@ public interface CommonInfoMapper {
 
 	public List<City> getWxAreaByCityId(@Param("cityName") String cityName);
 	
-
+	public List<Map<String, String>> selectWeChatBankList(String bankName);
 	
 }

@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
 import com.qifenqian.bms.basemanager.merchant.bean.MerchantVo;
@@ -26,6 +26,7 @@ import com.qifenqian.bms.merchant.reported.bean.CrInComeBean;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
 import com.qifenqian.bms.merchant.reported.bean.WeChatAppAreaInfo;
 import com.qifenqian.bms.merchant.reported.bean.WeChatAppBean;
+import com.qifenqian.bms.merchant.reported.bean.WeChatAppModifyBean;
 import com.qifenqian.bms.merchant.reported.dao.FmIncomeMapperDao;
 import com.qifenqian.bms.merchant.reported.service.CrIncomeService;
 import com.qifenqian.bms.merchant.reported.service.FmIncomeService;
@@ -250,35 +251,52 @@ public class WeChatAppReportsController {
 	}
 	
 	/**
+	 * 微信商户修改结算、联系信息
+	*/
+	@RequestMapping("/merchantReported/weChatAppMerchantModify")
+	public ModelAndView  viewMerchantModify(String merchantCode, String patchNo){
+		
+		ModelAndView mv = new ModelAndView();
+		TdCustInfo custInfo = new TdCustInfo();
+		/***查询客户信息***/
+		if(StringUtils.isNotBlank(merchantCode)){
+			custInfo = fmIncomeMapperDao.getInComeInfo(merchantCode);
+		}
+		/***查询省份***/
+		List<WeChatAppAreaInfo> weChatAppAreaInfoList = weChatAppService.getProvinceName();
+		//查询商户报备明细信息
+		TdMerchantDetailInfo merchantDetailQueryReq = new TdMerchantDetailInfo();
+		merchantDetailQueryReq.setPatchNo(patchNo);
+		merchantDetailQueryReq.setMerchantCode(merchantCode);
+		TdMerchantDetailInfo merchantDetailInfo = fmIncomeMapperDao.selMerchantDetailInfo(merchantDetailQueryReq);
+		mv.addObject("merchantDetailInfo", merchantDetailInfo);
+		mv.addObject("custInfo", custInfo);
+		mv.addObject("weChatAppAreaInfoList", weChatAppAreaInfoList);
+		return mv;
+	}
+	
+	/**
 	 * 微信商户修改结算账户
 	*/
+	@ResponseBody
 	@RequestMapping("/merchantReported/weChatAppModifySettlement")
-	public String  modifySettlement(HttpServletRequest request,HttpServletResponse response,WeChatAppBean weChatBean){
-		
-		JSONObject object = new JSONObject();
-		JSONObject weChatResult = new JSONObject();
-		
-		TdMerchantDetailInfo info = new TdMerchantDetailInfo();
-		info.setMerchantCode(weChatBean.getMerchantCode().trim());
-		info.setChannelNo(weChatBean.getChannelNo());
-		info.setReportStatus("E");
-		info.setProvCode(weChatBean.getMerchantProvince());
-		info.setCityCode(weChatBean.getMerchantCity());
-		info.setContryCode(weChatBean.getMerchantArea());
-		//info.setBankCode(weChatBean.getBankCode());
-		info.setBranchBankName(weChatBean.getInterBankName());
-		//info.setMobileNo(weChatBean.getMobile());
-		info.setReportStatus("99");
-		fmIncomeService.UpdateMerReportAndMerDetailInfo(info,"99");
-		
-		//调用微信报备查询结算账户
-		logger.info("-----------------调用微信报备接口开始");
-		weChatResult = weChatAppService.modifySettlement(weChatBean);
-		logger.info("-----------------调用微信报备接口返回" +weChatResult.get("result") +  "----------------------");
-		
-		
-		
-		return object.toString();
+	public Map<String, Object>  modifySettlement(WeChatAppModifyBean modifyBean){
+		logger.info("-----------------调用微信商户修改结算账户接口开始");
+		Map<String, Object> result = weChatAppService.modifySettlement(modifyBean);
+		logger.info("微信商户修改结算账户返回值：{}", JSONObject.toJSONString(result));
+		return result;
+	}
+	
+	/**
+	 * 微信商户修改联系信息
+	*/
+	@ResponseBody
+	@RequestMapping("/merchantReported/weChatAppModifyContact")
+	public Map<String, Object> ModifyContact(WeChatAppModifyBean modifyBean){
+		logger.info("-----------------调用微信商户修改联系信息接口开始");
+		Map<String, Object> result = weChatAppService.modifyContact(modifyBean);
+		logger.info("微信商户修改结算账户返回值：{}", JSONObject.toJSONString(result));
+		return result;
 	}
 	
 	/**
@@ -296,7 +314,7 @@ public class WeChatAppReportsController {
 	}
 	
 	/**
-	 * 小微商户查询提现状态
+	 * 小微商户重新发起提现
 	*/
 	@RequestMapping("/merchantReported/reAutoWithDraw")
 	public Map<String, Object>  reAutoWithDraw(HttpServletRequest request,HttpServletResponse response,WeChatAppBean weChatBean){
