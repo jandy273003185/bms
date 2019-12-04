@@ -5,7 +5,7 @@ Vue.use(Router)
 import Home from '@/views/Home/Home'
 import Login from '@/views/Login/Login'
 // 系统管理
-import User from '@/views/System/User/User'
+import Suser from '@/views/System/Suser/Suser'
 const Role = () => import(/* webpackChunkName: "system" */ '@/views/System/Role/Role');
 const Menu = () => import(/* webpackChunkName: "system" */ '@/views/System/Menu/Menu');
 const Depart = () => import(/* webpackChunkName: "system" */ '@/views/System/Depart/Depart');
@@ -16,16 +16,20 @@ const Test = () => import(/* webpackChunkName: "system" */ '@/views/System/Test/
 const Auth = () => import(/* webpackChunkName: "system" */ '@/views/System/Market/Auth/Auth');
 const Group = () => import(/* webpackChunkName: "system" */ '@/views/System/Market/Group/Group');
 // 异常列表
-const Account = () => import(/* webpackChunkName: "system" */ '@/views/Abnormal/Account/Account');
-const Exchange = () => import(/* webpackChunkName: "system" */ '@/views/Abnormal/Exchange/Exchange');
-const Message = () => import(/* webpackChunkName: "system" */ '@/views/Abnormal/Message/Message');
+const Account = () => import(/* webpackChunkName: "abnormal" */ '@/views/Abnormal/Account/Account');
+const Exchange = () => import(/* webpackChunkName: "abnormal" */ '@/views/Abnormal/Exchange/Exchange');
+const Message = () => import(/* webpackChunkName: "abnormal" */ '@/views/Abnormal/Message/Message');
+// 工作流管理
+const Wuser = () => import(/* webpackChunkName: "abnormal" */ '@/views/Workflow/Wuser/Wuser');
+const Wgroup = () => import(/* webpackChunkName: "abnormal" */ '@/views/Workflow/Wgroup/Wgroup');
+
 // 菜单列表
 export const menuRouter = [
   {
     name: '系统管理',
     path: '',
     children: [
-      { name: '用户管理', path: '/system/user', component: User },
+      { name: '用户管理', path: '/system/suser', component: Suser },
       { name: '角色管理', path: '/system/role', component: Role },
       { name: '菜单管理', path: '/system/menu', component: Menu },
       { name: '部门管理', path: '/system/depart', component: Depart },
@@ -37,8 +41,8 @@ export const menuRouter = [
         name: '市场部管理',
         path: '',
         children: [
-          { name: '市场部权限', path: '/system/market/auth', component: Auth },
-          { name: '市场部分组管理', path: '/system/market/group', component: Group }
+          { name: '市场部权限', path: '/abnormal/market/auth', component: Auth },
+          { name: '市场部分组管理', path: '/abnormal/market/group', component: Group }
         ]
       }
     ]
@@ -54,10 +58,10 @@ export const menuRouter = [
   },
   {
     name: '工作流管理',
-    path: '/system/user',
+    path: '',
     children: [
-      { name: '工作流用户', path: '/system/user' },
-      { name: '工作流用户组', path: '/system/user' }
+      { name: '工作流用户', path: '/workflow/wuser', component: Wuser },
+      { name: '工作流用户组', path: '/workflow/wgroup', component: Wgroup }
     ]
   },
   {
@@ -267,7 +271,7 @@ export const menuRouter = [
     ]
   },
   {
-    name: '社交', path: '/system/user',
+    name: '代理商管理', path: '/system/user',
     children: [
       { name: '代理商商户注册', path: '/system/user' },
       { name: '代理商商户列表', path: '/system/user' },
