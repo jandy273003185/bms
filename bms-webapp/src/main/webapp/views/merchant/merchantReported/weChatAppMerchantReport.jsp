@@ -272,7 +272,7 @@ $(function(){
 									</td>
 							</tr>
 							<tr id="legalIdCardType" style = "display:">
-								<td class="td-left">法人身份证正面：<span style="color:red;">(必填)</span></td>
+								<td class="td-left">法人身份证人像面：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3">
 									<a data-toggle="modal" class="tooltip-success legalCertAttribute1Click" data-target="#previewImageModal">
 									<label id="legalCertAttribute1Div" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
@@ -288,7 +288,7 @@ $(function(){
 								</td>
 							</tr>
 							<tr id="legalIdCardBackType" style = "display:">
-								<td class="td-left">法人身份证背面：<span style="color:red;">(必填)</span></td>
+								<td class="td-left">法人身份证国徽面：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3"> 
 									<a data-toggle="modal" class="tooltip-success legalCertAttribute2Click" data-target="#previewImageModal">
 										<label id="legalCertAttribute2Div" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
