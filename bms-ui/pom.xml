@@ -12,6 +12,10 @@
 	</parent>
 	<artifactId>bms-ui</artifactId>
 	<name>bms ui</name>
+	
+	<properties>
+		<frontend-maven-plugin.version>1.6</frontend-maven-plugin.version>
+	</properties>
 
 	<build>
 		<plugins>
