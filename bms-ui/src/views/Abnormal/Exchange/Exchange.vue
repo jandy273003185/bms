@@ -94,11 +94,12 @@ export default {
   },
   created() {},
   methods: {
-    toggle() {
-      this.display = true;
+    editorModelCancel() {
+      this.editorDisplay = false;
     },
-    modelSubmit() {
-      console.log(this.modelData);
+    editorModelSubmit(c) {
+      console.log(this.editorModelData);
+      c();
     },
     editorClick(row) {
       this.display = true;

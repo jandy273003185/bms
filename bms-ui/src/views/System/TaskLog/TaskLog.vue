@@ -46,7 +46,7 @@
     </page-model>
 
     <!-- 修改model -->
-    <alert-model v-show="display" :display.sync="display" @put="modelSubmit" title="测试">
+    <alert-model v-show="display" :display.sync="display" @on-submit="editorModelSubmit" @on-cancel="editorModelCancel" title="测试">
       <el-form :model="modelData" class="alert-model-form" label-width="80px">
         <el-form-item :label="modelData.label">
           <el-input v-model="modelData.value" :placeholder="`请输入${modelData.label}`" />
@@ -101,15 +101,15 @@ export default {
     searchText(v) {
       console.log(v);
     }
-    
   },
   created() {},
   methods: {
-    toggle() {
-      this.display = true;
+    editorModelCancel() {
+      this.editorDisplay = false;
     },
-    modelSubmit() {
-      console.log(this.modelData);
+    editorModelSubmit(c) {
+      console.log(this.editorModelData);
+      c();
     },
     editorClick(row) {
       this.display = true;

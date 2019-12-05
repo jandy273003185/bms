@@ -254,7 +254,6 @@ export default {
     searchText(v) {
       console.log(v);
     }
-    
   },
   created() {},
   methods: {

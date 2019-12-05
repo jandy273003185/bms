@@ -73,7 +73,7 @@
 
     <!-- 修改 查看 model -->
     <alert-model v-show="editorDisplay" title="角色修改" @on-submit="editorModelSubmit" @on-cancel="editorModelCancel" :hideBtn="hideBtn">
-      <el-form :disabled="look_editor" ref="alertAddModelForm" :model="editorModelData" class="alert-model-form" label-width="80px" :show-message="false">
+      <el-form :disabled="look_editor" ref="alertEditorModelForm" :model="editorModelData" class="alert-model-form" label-width="80px" :show-message="false">
         <el-form-item prop="name1" label="角色名称" required>
           <el-input v-model="editorModelData.name1"></el-input>
         </el-form-item>
@@ -146,11 +146,13 @@ export default {
       examine: {},
       addDisplay: false,
       addModelData: {
+        //新增model数据
         name5: modelDataCheckboxList
       },
       editorDisplay: false,
       modelDataCheckboxList: modelDataCheckboxList,
       editorModelData: {
+        //修改model数据
         name5: modelDataCheckboxList
       },
       look_editor: false, //编辑还是查看
