@@ -120,6 +120,9 @@ export default {
   },
   watch: {
     // 监听search传来的数据
+    searchText(v) {
+      console.log(v);
+    }
     
   },
   created() {},
