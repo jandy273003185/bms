@@ -1,6 +1,6 @@
 <template>
   <div class='alert-model' @click.stop.prevent="closeModel">
-    <div class="alert-model-inner" @click.stop.prevent>
+    <div class="alert-model-inner" @click.stop>
       <div v-show="title" class="alert-model-title">{{title}} <span @click="closeModel" class="el-icon-close"></span> </div>
       <!-- 表单内容 -->
       <slot></slot>

@@ -128,10 +128,7 @@ export default {
   },
   watch: {
     // 监听search传来的数据
-    searchText(v, o) {
-      if (!v || v === o) return;
-      console.log(v);
-    }
+    
   },
   created() {},
   methods: {
@@ -151,7 +148,7 @@ export default {
     },
     insertItem() {
       // 新增
-      console.log('新增');
+      this.addDisplay = true;
     },
     resetFormFileds() {
       this.$refs['controlQueryForm1'].resetFields();

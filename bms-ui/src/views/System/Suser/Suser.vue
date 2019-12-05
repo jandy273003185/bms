@@ -118,34 +118,34 @@
     </alert-model>
 
     <!-- 修改model -->
-    <alert-model v-show="display" title="用户修改" @on-submit="modelSubmit" @on-cancel="modelCancel">
-      <el-form ref="alertModelForm" :model="addModelData" class="alert-model-form" label-width="80px" :show-message="false">
+    <alert-model v-show="editorDisplay" title="用户修改" @on-submit="editorModelSubmit" @on-cancel="editorModelCancel">
+      <el-form ref="alertModelForm" :model="editorModelData" class="alert-model-form" label-width="80px" :show-message="false">
         <el-form-item prop="name1" label="编号" required>
-          <el-input disabled v-model="addModelData.name1"></el-input>
+          <el-input disabled v-model="editorModelData.name1"></el-input>
         </el-form-item>
         <el-form-item prop="name2" label="员工编号" required>
-          <el-input disabled v-model="addModelData.name2"></el-input>
+          <el-input disabled v-model="editorModelData.name2"></el-input>
         </el-form-item>
         <el-form-item prop="name3" label="用户名" required>
-          <el-input v-model="addModelData.name3"></el-input>
+          <el-input v-model="editorModelData.name3"></el-input>
         </el-form-item>
         <el-form-item prop="name4" label="密码" required>
-          <el-input v-model="addModelData.name4"></el-input>
+          <el-input v-model="editorModelData.name4"></el-input>
         </el-form-item>
         <el-form-item prop="name5" label="真是姓名" required>
-          <el-input v-model="addModelData.name5"></el-input>
+          <el-input v-model="editorModelData.name5"></el-input>
         </el-form-item>
         <el-form-item prop="name6" label="昵称">
-          <el-input v-model="addModelData.name6"></el-input>
+          <el-input v-model="editorModelData.name6"></el-input>
         </el-form-item>
         <el-form-item prop="name7" label="性别" required>
-          <el-select v-model="addModelData.name7" placeholder="选择">
+          <el-select v-model="editorModelData.name7" placeholder="选择">
             <el-option label="男" value="1"></el-option>
             <el-option label="女" value="0"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item prop="name8" label="状态" required>
-          <el-select v-model="addModelData.name8" placeholder="请选择用户状态">
+          <el-select v-model="editorModelData.name8" placeholder="请选择用户状态">
             <el-option label="(VALID)-生效" value="VALID"></el-option>
             <el-option label="(FREEZE)-冻结" value="FREEZE"></el-option>
             <el-option label="(LEAVE)-离职" value="LEAVE"></el-option>
@@ -153,7 +153,7 @@
           </el-select>
         </el-form-item>
         <el-form-item prop="name9" label="所属部门" required>
-          <el-select v-model="addModelData.name9" placeholder="请选择部门">
+          <el-select v-model="editorModelData.name9" placeholder="请选择部门">
             <el-option label="(GYZB)-国银证保" value="1"></el-option>
             <el-option label="(TECH)-信息技术部" value="2"></el-option>
             <el-option label="(OPER)-运营管理部" value="4"></el-option>
@@ -163,24 +163,24 @@
         </el-form-item>
         <el-form-item prop="name10" label="角色" required>
           <div class="user-checked">
-            <el-input v-model="addModelData.name10"></el-input>
+            <el-input v-model="editorModelData.name10"></el-input>
             <el-button type="warning" @click="editorRoleClick">角色选择</el-button>
           </div>
         </el-form-item>
         <el-form-item prop="name11" label="办公电话">
-          <el-input v-model="addModelData.name11"></el-input>
+          <el-input v-model="editorModelData.name11"></el-input>
         </el-form-item>
         <el-form-item prop="name12" label="个人电话">
-          <el-input v-model="addModelData.name12"></el-input>
+          <el-input v-model="editorModelData.name12"></el-input>
         </el-form-item>
         <el-form-item prop="name13" label="办公邮箱">
-          <el-input v-model="addModelData.name13"></el-input>
+          <el-input v-model="editorModelData.name13"></el-input>
         </el-form-item>
         <el-form-item prop="name14" label="个人邮箱">
-          <el-input v-model="addModelData.name14"></el-input>
+          <el-input v-model="editorModelData.name14"></el-input>
         </el-form-item>
         <el-form-item prop="name15" label="备注">
-          <el-input type="textarea" v-model="addModelData.name15"></el-input>
+          <el-input type="textarea" v-model="editorModelData.name15"></el-input>
         </el-form-item>
       </el-form>
     </alert-model>
@@ -222,10 +222,10 @@ export default {
     return {
       examine: {}, //查询字段
       addDisplay: false, //新增
-      display: false, //编辑
-      roleDisplay: false, //角色选择
-      modelData: {}, //编辑数据
       addModelData: {}, //新增表单数据
+      editorDisplay: false, //编辑
+      editorModelData: {}, //编辑数据
+      roleDisplay: false, //角色选择
       multipleSelection: [], //角色选择checkbox数据
       roleModelData: [
         //角色选择
@@ -251,24 +251,21 @@ export default {
   },
   watch: {
     // 监听search传来的数据
-    searchText(v, o) {
-      if (!v || v === o) return;
-      console.log(v);
-    }
+    
   },
   created() {},
   methods: {
     // 控制编辑
-    modelSubmit(callback) {
+    editorModelSubmit(callback) {
       console.log('提交', this.modelData);
       callback();
     },
-    modelCancel() {
+    editorModelCancel() {
       this.resetFormFields('alertModelForm');
-      this.display = false;
+      this.editorDisplay = false;
     },
     editorClick(row) {
-      this.display = true;
+      this.editorDisplay = true;
       console.log(row);
     },
     // 角色选择
@@ -287,16 +284,16 @@ export default {
     },
     // 新增
     insertItem() {
-      console.log('新增');
+      this.addDisplay = true;
       this.addDisplay = true;
     },
     addModelSubmit(callback) {
       this.$refs['alertAddModelForm'].validate((files, object) => {
         if (files) {
-          callback();
+          // 验证通过 发送请求添加数据到数据库
+          callback(); //执行回调
         } else {
           const keys = Object.keys(object);
-          // console.log(keys);
           this.$message.error(`${keys[0]}不可为空`);
         }
       });
