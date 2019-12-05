@@ -14,6 +14,8 @@
 <script src='<c:url value="/static/js/register.js"/>'></script>
 <script src='<c:url value="/static/js/checkRule_source.js"/>'></script>
 <script src="<c:url value='/static/js/jquery.combo.select.js'/>"></script>
+<script src="<c:url value='/static/topayProfit/layui/layui.js'/>"></script>
+<script src="<c:url value='/static/topayProfit/layui/layui.all.js'/>"></script>
 <html>
 <head>
 	<meta charset="utf-8" />
@@ -22,6 +24,7 @@
 	<meta name="description" content="七分钱后台管理" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="<c:url value='/static/css/combo.select.css' />" />
+	<link rel="stylesheet" href="<c:url value='/static/topayProfit/layui/css/layui.css' />" />	
 	<link rel="stylesheet" href="<c:url value='/static/css/combo.select.scss' />" />
 	<style type="text/css">
 	table tr td{word-wrap:break-word;word-break:break-all;}
@@ -120,11 +123,19 @@ function getbranchBank(){
 		if(data.result=="SUCCESS"){
 			var branchBankList = data.branchBankList;
 			$("#branchBank").html("");
+			$("#branchBank").append('<option value="">直接选择或搜索选择</option>');
    			for ( var branchBank in branchBankList) {
    				$("#branchBank").append(
    						"<option value='"+ branchBankList[branchBank].branchBankCode +"'>"
    								+ branchBankList[branchBank].bankName + "</option>"); 
    			}
+   			   			
+   		 	layui.use('form', function (){
+   				var form = layui.form; 
+   				
+   				form.render();
+   			 });  
+   			
 		}
 		
 	},'json'
@@ -533,7 +544,9 @@ function addMerchantBtn(){
                     	"idCardOPath"     :  certAttribute1Path,             //身份证正面照
                     	"idCardFPath"     :  certAttribute2Path,             //身份证背面照
                     	"bussinessPath"   :  businessPhotoPath,              //商户营业执照
-                    	"bankCardPath"    :  bankCardPhotoPath               //开户银行照
+                    	"bankCardPath"    :  bankCardPhotoPath,              //开户银行照
+                    	"doorPhotoPath"   :  doorPhotoPath,                  //门头照
+                    	"shopInteriorPath":  shopInteriorPath				 //店内照
                     },
                     dataType : "json",
                     success : function (data) {
@@ -578,7 +591,34 @@ function bigImg(obj){
 	});
 }
 
-
+/** 店内照预览 **/
+function showShopInteriorImage(obj){
+	 var divObj = document.getElementById("shopInteriorDiv");
+	 var imageObj = document.getElementById("shopInteriorImage");
+	 var result1 = previewImage(divObj,imageObj,obj);
+	 return result1;
+}
+/** 店内照点击预览 **/
+$('.shopInteriorClick').click(function(){
+	var divObj = document.getElementById("showImageDiv");
+	var imageObj = document.getElementById("showImage");
+	var obj = document.getElementById("shopInterior");
+	return previewImage(divObj,imageObj,obj);
+});
+/** 门头照预览 **/
+function showDoorPhotoImage(obj){
+	 var divObj = document.getElementById("doorPhotoDiv");
+	 var imageObj = document.getElementById("doorPhotoImage");
+	 var result1 = previewImage(divObj,imageObj,obj);
+	 return result1;
+}
+/** 门头照点击预览 **/
+$('.doorPhotoClick').click(function(){
+	var divObj = document.getElementById("showImageDiv");
+	var imageObj = document.getElementById("showImage");
+	var obj = document.getElementById("doorPhoto");
+	return previewImage(divObj,imageObj,obj);
+});
 /** 营业执照预览 **/
 function showBusinessPhotoImage(obj){
 	 var divObj = document.getElementById("businessPhotoDiv");
@@ -720,6 +760,16 @@ function commonFileUpload(file, pathTarget, preView) {
     } else {
         prevDiv.innerHTML = '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';
     }
+}
+
+//店内照上传
+function showShopInteriorImage(file){
+	commonFileUpload(file, 'shopInteriorPath', 'shopInteriorDiv');
+}
+
+//门头照上传
+function showDoorPhotoImage(file){
+	commonFileUpload(file, 'doorPhotoPath', 'doorPhotoDiv');
 }
 
 //营业执照上传
@@ -906,6 +956,40 @@ function showOpenAccountImage(file){
 								<label class="label-tips" id="businessPhotoLabel" style="float:left;margin-top:88" ></label>
 							</td>
 						</tr>
+						<tr id="doorPhotoId_"  style="display: ">
+							<td class="td-left">门头照：<span style="color:red">*</span></td>
+							<td class="td-right" colspan="3">
+								<a data-toggle='modal' class="tooltip-success doorPhotoClick" data-target="#previewImageModal" >
+									<label id="doorPhotoDiv" class="uploadImage" >
+										<img  id="doorPhotoImage" onclick="bigImg(this);"  style="width:100%;height:100%;display:none"  />
+									</label>
+								</a>
+								<div class="updateImageDiv" style="float:left; margin-top:75 " >
+									<input  type="hidden" id="doorPhotoPath" name="doorPhotoPath" />
+									<input type="hidden" id="doorPhotoImageVal02"  />
+									<input type="file" name="doorPhoto" id="doorPhoto" onchange="showDoorPhotoImage(this)" />
+									<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+								</div>
+								<label class="label-tips" id="doorPhotoLabel" style="float:left;margin-top:88" ></label>
+							</td>
+						</tr>
+						<tr id="shopInteriorId_"  style="display: ">
+							<td class="td-left" id="shopInteriorId">店内照：<span style="color:red">*</span></td>
+							<td class="td-right" colspan="3">
+								<a data-toggle='modal' class="tooltip-success shopInteriorClick" data-target="#previewImageModal" >
+									<label id="shopInteriorDiv" class="uploadImage" >
+										<img  id="shopInteriorImage" onclick="bigImg(this);"  style="width:100%;height:100%;display:none"  />
+									</label>
+								</a>
+								<div class="updateImageDiv" style="float:left; margin-top:75 " >
+									<input  type="hidden" id="shopInteriorPath" name="shopInteriorPath" />
+									<input type="hidden" id="shopInteriorImageVal02"  />
+									<input type="file" name="shopInterior" id="shopInterior" onchange="showShopInteriorImage(this)" />
+									<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+								</div>
+								<label class="label-tips" id="shopInteriorLabel" style="float:left;margin-top:88" ></label>
+							</td>
+						</tr>
 						<tr>
 							<td class="td-left">所属业务人员：</td>
 							<td class="td-right">
@@ -1048,14 +1132,23 @@ function showOpenAccountImage(file){
 								<label class="label-tips" id="compAcctBankLab"></label>
 							</td>
 							<td class="td-left">开户支行：<span style="color:red;">（必填)</span></td>
-							<td class="td-right">
-								<select name="branchBank" id="branchBank" class="width-90" >
-                                    <option value="">--请选择支行--</option>
-                                </select>
-                               	<label id="branchBankLab" class="label-tips"></label>
-								<!-- <input type="text" id="branchBank" name="branchBank" placeholder="请输入开户行" style="width:90%">
-								<label class="label-tips" id="branchBankLab"></label> -->
-							</td>
+							<td class="td-right" >
+								
+									<!-- <form class="layui-form" action="" style="max-height:40px;">
+									  <div class="layui-form-item" style="width:100%"> -->
+									    <div class="layui-inline layui-form" style="width:96%">
+									      <div class="layui-input-inline" style="width:94%">
+									        <select   id="branchBank"  name="branchBank" lay-verify="required" lay-search="" lay-filter="branchBank">
+									          <option value="">直接选择或搜索选择</option>        
+									       
+									        </select>
+									      </div>
+									    </div>
+									<!--   </div> 
+									</form> -->
+
+									<label class="label-tips" id="branchBankLab"></label>
+								</td>
 							
 						</tr>
                         <tr>
@@ -1227,5 +1320,84 @@ function showOpenAccountImage(file){
             $("#contactMobileLab").text("");
         });
        
+</script>
+
+<script>
+//页面加载时重新加载专用js脚本
+//页面加载时重新加载一下输入下拉框
+	layui.use('form', function (){
+		var form = layui.form; 
+		
+		form.render();
+	 });  
+layui.use(['form', 'layedit', 'laydate'], function(){
+  var form = layui.form
+  ,layer = layui.layer
+  ,layedit = layui.layedit
+  ,laydate = layui.laydate;
+  
+  //日期
+  laydate.render({
+    elem: '#date'
+  });
+  laydate.render({
+    elem: '#date1'
+  });
+  
+  //创建一个编辑器
+  var editIndex = layedit.build('LAY_demo_editor');
+ 
+  //自定义验证规则
+  form.verify({
+    title: function(value){
+      if(value.length < 5){
+        return '标题至少得5个字符啊';
+      }
+    }
+    ,pass: [
+      /^[\S]{6,12}$/
+      ,'密码必须6到12位，且不能出现空格'
+    ]
+    ,content: function(value){
+      layedit.sync(editIndex);
+    }
+  });
+  
+  //监听指定开关
+  form.on('switch(switchTest)', function(data){
+    layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
+      offset: '6px'
+    });
+    layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+  });
+  
+  //监听提交
+  form.on('submit(demo1)', function(data){
+    layer.alert(JSON.stringify(data.field), {
+      title: '最终的提交信息'
+    })
+    return false;
+  });
+ 
+  //表单赋值
+  layui.$('#LAY-component-form-setval').on('click', function(){
+    form.val('example', {
+      "username": "贤心" // "name": "value"
+      ,"password": "123456"
+      ,"interest": 1
+      ,"like[write]": true //复选框选中状态
+      ,"close": true //开关状态
+      ,"sex": "女"
+      ,"desc": "我爱 layui"
+    });
+  });
+  
+  //表单取值
+  layui.$('#LAY-component-form-getval').on('click', function(){
+    var data = form.val('example');
+    alert(JSON.stringify(data));
+  });  
+  
+});
 </script>
 </html>
