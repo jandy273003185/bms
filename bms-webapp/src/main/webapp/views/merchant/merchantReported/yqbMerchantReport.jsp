@@ -1255,18 +1255,21 @@
 			 	   
   	   				$.ajax({
   	   					type : "POST",
-  	   					url : window.Constants.ContextPath +'<%=MerchantReportedPath.BASE + MerchantReportedPath.FILEUPLOAD%>?merchantCode='+merchantCode,
+  	   					url : window.Constants.ContextPath +'<%="/common/files/getPicPath"%>?custId='+custId,
   	   					data :{
-  	   						businessPhoto : $('#businessPhototemp').val(),//营业执照
-	  	   					certAttribute1 : $('#certAttribute1temp').val(),//法人身份证正面照路径
-	   						certAttribute2 : $('#certAttribute2temp').val(),//法人身份证反面照路径
-  	   						shopInterior : $('#shopInteriortemp').val(),//商户经营场所或仓库照	
-  	   						qualification :$('#qualificationtemp').val(),//特殊行业资质图片
-  	   						signature : $('#signaturetemp').val(), //电子签名照
-  	   						certAttribute0 : $('#opentemp').val(),//企业：开户许可证
-  	   						bankCardPhoto : $('#bankCardPhototemp').val(),//结算卡照片  个体/个人：银行卡正面照片("");
-  	   						doorPhoto : imgDoor,//店铺门面照
-	   						doorSrc : imgSrc	
+  	   						
+  	   						bussinessPath : $('#businessPhotoPath').val(),//营业执照
+  	   				    	qualificationPath : $('#qualificationPath').val(),//11特殊行业资质照
+  	   				 		doorPhotoPath : $('#doorPhotoPath').val(),//08门头照
+  	   				 		shopInteriorPath : $('#shopInteriorPath').val(),//18店内照
+  	   				 		signaturePath : $('#signaturePath').val(),//12电子签名照
+  	   				 		otherMaterialPath : $('#otherMaterialPath').val(),//特殊行业资质照
+  	   				 		idCardOPath : $('#certAttribute1FilePath').val(),//04 个人身份证正面
+  	   				 		idCardFPath : $('#certAttribute2FilePath').val(),//16 个人身份证反面
+  	   						openAccountPath : $('#openPath').val(), //开户许可证照片
+  	   					
+  	   						bankCardPath : $('#bankCardPhotoPath').val()//开户银行卡正面照
+  	   				 		
   	   					},
   	   					dataType : "json",
   	   					success : function(data) {

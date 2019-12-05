@@ -1,12 +1,12 @@
 <template>
   <div class='alert-model' @click.stop.prevent="closeModel">
-    <div class="alert-model-inner" @click.stop.prevent>
-      <div v-show="title" class="alert-model-title">{{title}}</div>
+    <div class="alert-model-inner" @click.stop>
+      <div v-show="title" class="alert-model-title">{{title}} <span @click="closeModel" class="el-icon-close"></span> </div>
       <!-- 表单内容 -->
       <slot></slot>
       <div class="btns">
         <el-button size="small" @click="closeModel">取消</el-button>
-        <el-button size="small" type="warning" @click="goToSubmit">确定</el-button>
+        <el-button size="small" type="primary" @click="goToSubmit">提交</el-button>
       </div>
     </div>
   </div>
@@ -22,19 +22,16 @@ export default {
   created() {},
   methods: {
     closeModel() {
-      this.$emit('update:display', false);
+      this.$emit('on-cancel');
     },
     goToSubmit() {
-      // 提交更改后的数据
-      this.$emit('put');
-      // 隐藏模态框
-      this.$emit('update:display', false);
+      this.$emit('on-submit', this.closeModel);
     }
   }
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang='scss'>
 .alert-model {
   width: 100%;
   height: 100%;
@@ -43,18 +40,21 @@ export default {
   top: 0;
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 1000;
+  .el-select.el-select--mini {
+    width: 100%;
+  }
 }
 .alert-model-inner {
   width: 600px;
   // height: 100px;
   background-color: #fff;
   position: absolute;
-  top: 20%;
+  top: 50%;
   left: 50%;
   max-height: 100%;
   overflow: auto;
   padding: 0 0 20px 0;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(-50%);
 }
 
 .alert-model-title {
@@ -62,7 +62,14 @@ export default {
   line-height: 56px;
   font-size: 18px;
   border-bottom: 1px solid #eee;
-  padding-left: 20px;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  span {
+    color: #dddddd;
+    cursor: pointer;
+  }
 }
 
 .alert-model-form {

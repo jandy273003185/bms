@@ -41,6 +41,118 @@
 	
 	    })
 	 })
+	 
+	 //子商户授权状态查询
+	 function getVerifiedAuthorize(obj){
+		 
+		var merchantCode=$(obj).parent().find('#merchantCode_').val();
+		var patchNo = $(obj).parent().find("#patchNo_").val();
+		var channlCode =$(obj).parent().find('#channelNo_').val();
+		var outMerchantCode = $(obj).parent().find('#outMerchantCode_').val();
+		var wxApplyNo = $(obj).parent().find('#wxApplyNo_').val();
+		var custId = $(obj).parent().find('#custId_').val();
+		
+		$.ajax({
+			type:"POST",
+			dataType:"json",
+			url:window.Constants.ContextPath+'<%="/merchant/verified/cancelMerchant" %>',
+			data:
+			{
+				"merchantCode" 	: merchantCode,
+				"patchNo" : patchNo,
+				"channelNo" : channlCode,
+				"wxApplyNo" : wxApplyNo,
+				"custId" : custId,
+				"outMerchantCode" : outMerchantCode
+			},
+			success:function(data){
+				if(data.result=="SUCCESS"){
+					alert("子商户授权状态查询请求成功");
+				}else{
+					if(null == data.message || "" ==data.message){
+					}else{
+						alert("子商户授权状态查询失败");
+						window.location.reload();
+					}
+				}
+			}
+		});
+	 }
+	 //申请撤销
+	 function getVerifiedCancel(obj){
+		 
+		var merchantCode=$(obj).parent().find('#merchantCode_').val();
+		var patchNo = $(obj).parent().find("#patchNo_").val();
+		var channlCode =$(obj).parent().find('#channelNo_').val();
+		var outMerchantCode = $(obj).parent().find('#outMerchantCode_').val();
+		var wxApplyNo = $(obj).parent().find('#wxApplyNo_').val();
+		var custId = $(obj).parent().find('#custId_').val();
+		
+		$.ajax({
+			type:"POST",
+			dataType:"json",
+			url:window.Constants.ContextPath+'<%="/merchant/verified/cancelMerchant" %>',
+			data:
+			{
+				"merchantCode" 	: merchantCode,
+				"patchNo" : patchNo,
+				"channelNo" : channlCode,
+				"wxApplyNo" : wxApplyNo,
+				"custId" : custId,
+				"outMerchantCode" : outMerchantCode
+			},
+			success:function(data){
+				if(data.result=="SUCCESS"){
+					alert("实名认证申请撤销请求成功");
+				}else{
+					if(null == data.message || "" ==data.message){
+					}else{
+						alert("实名认证申请撤销请求失败");
+						window.location.reload();
+					}
+				}
+			}
+		});
+	 }
+	 
+	 //认证结果
+	 function getVerifiedQuery(obj){
+		 
+		var merchantCode=$(obj).parent().find('#merchantCode_').val();
+		var patchNo = $(obj).parent().find("#patchNo_").val();
+		var channlCode =$(obj).parent().find('#channelNo_').val();
+		var outMerchantCode = $(obj).parent().find('#outMerchantCode_').val();
+		var wxApplyNo = $(obj).parent().find('#wxApplyNo_').val();
+		var custId = $(obj).parent().find('#custId_').val();
+		
+		$.ajax({
+			type:"POST",
+			dataType:"json",
+			url:window.Constants.ContextPath+'<%="/merchant/verified/queryMerchant" %>',
+			data:
+			{
+				"merchantCode" 	: merchantCode,
+				"patchNo" : patchNo,
+				"channelNo" : channlCode,
+				"wxApplyNo" : wxApplyNo,
+				"custId" : custId,
+				"outMerchantCode" : outMerchantCode
+			},
+			success:function(data){
+				if(data.result=="SUCCESS"){
+					alert("调用认证申请结果查询成功");
+				}else{
+					if(null == data.message || "" ==data.message){
+					}else{
+						alert("认证申请结果查询失败");
+						window.location.reload();
+					}
+				}
+			}
+		});
+	 }
+ 
+	 //实名认证
 	 function getVerified(obj){
 		 
 		var merchantCode=$(obj).parent().find('#merchantCode_').val();
@@ -64,7 +176,7 @@
 				}else{
 					if(null == data.message || "" ==data.message){
 					}else{
-						alert(data.message);
+						alert("实名认证失败");
 						window.location.reload();
 					}
 				}
@@ -970,12 +1082,13 @@
 								<table id="sample-table-2" class="list-table">
 									<thead>
 										<tr>
-											<th width="10%">商户名称</th>
-											<th width="10%">商户简称</th>
+											<th width="8%">商户名称</th>
+											<th width="6%">商户简称</th>
 											<th width="10%">商户编号</th>
-											<th width="10%">邮箱账号</th>
+											<th width="8%">邮箱账号</th>
 											<th width="5%">报备渠道</th>
 											<th width="10%">渠道商户号</th>
+											<th width="10%">微信申请单编号</th>
 											<th width="7%">商户报备状态</th>
 											<th width="14%">返回信息</th>
 											<th width="10%">报备时间</th>
@@ -1025,6 +1138,7 @@
 											    </c:if>
 										    </td>
 										    <td>${reported.outMerchantCode}</td>
+										    <td>${reported.wxApplyNo}</td>
 										    <td>
 											    <c:if test="${reported.reportStatus == '00'}">
 											    	提交报备成功
@@ -1077,6 +1191,9 @@
 	                                            <input type="hidden" id="reportStatus_" value="${reported.reportStatus }">
 	                                            <input type="hidden" id="remark_" value="${reported.remark }">
 	                                            <input type="hidden" id="resultMsg_" value="${reported.resultMsg }">
+	                                            <input type="hidden" id="wxApplyNo_" value="${reported.wxApplyNo }">
+	                                            <input type="hidden" id="custId_" value="${reported.custId }">
+	                                            <input type="hidden" id="wxChildNo_" value="${reported.wxChildNo }">
 	                                            <button type="button"  class="btn btn-primary btn-xs" onclick="getInfo(this);">查看</button>
 	                                            
 	                                            <c:if test="${reported.reportStatus =='0' ||reported.reportStatus =='00' }">
@@ -1098,6 +1215,13 @@
 										    	<c:if test="${reported.reportStatus =='1' && reported.outMerchantCode != null &&  reported.channelNo =='SUIXING_PAY'}">
 	                                            	<button type="button"  class="btn btn-primary btn-xs"  onclick ="getVerified(this);">实名认证</button>
 	                                            </c:if>
+	                                            <c:if test="${reported.reportStatus =='20' && reported.outMerchantCode != null &&  reported.channelNo =='SUIXING_PAY'}">
+										    		<button type="button"  class="btn btn-primary btn-xs"  onclick ="getVerifiedQuery(this);">认证结果</button>
+	                                            	<button type="button"  class="btn btn-primary btn-xs"  onclick ="getVerifiedCancel(this);">申请撤销</button>	                                         	
+										    	</c:if>
+										    	<c:if test="${reported.reportStatus =='21' && reported.outMerchantCode != null &&  reported.channelNo =='SUIXING_PAY'}">
+										    		<button type="button"  class="btn btn-primary btn-xs"  onclick ="getVerifiedAuthorize(this);">子商户授权</button>
+										    	</c:if>
 										    </td>
 										</tr>
 									   </c:forEach> 

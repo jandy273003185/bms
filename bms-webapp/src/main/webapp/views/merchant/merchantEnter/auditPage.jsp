@@ -325,6 +325,26 @@
 								</td>
 							</tr>
 							<tr>
+								<td class="td-left">门头照：</td>
+								<td class="td-right" colspan="3">
+									<a data-toggle='modal' class="tooltip-success doorPhotoClick" data-target="#previewImageModal" >
+										<label id="doorPhotoDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.doorPhotoPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td class="td-left">店内照：</td>
+								<td class="td-right" colspan="3">
+									<a data-toggle='modal' class="tooltip-success shopInteriorClick" data-target="#previewImageModal" >
+										<label id="shopInteriorDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.shopInteriorPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
+									</a>
+								</td>
+							</tr>
+							<tr>
 								<td class="td-left">所属业务人员：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.custManager }</td>
 								<td class="td-left">所属代理商：</td>

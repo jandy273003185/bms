@@ -46,7 +46,7 @@
 </template>
 
 <script>
-// import { storage } from '@/tools/utils';
+import { sstorage } from '@/tools/utils';
 import Menu from '@/views/Menu/Menu';
 export default {
   name: 'App',
@@ -54,12 +54,30 @@ export default {
   data() {
     return {
       toggleMenu: false,
-      path: ['系统管理', '用户管理'],
+      path: [],
       searchText: '',
       sendToSearchText: ''
     };
   },
   watch: {},
+  created() {
+    // const token = storage.get('accessToken') || '';
+    // if (token) {
+    //   this.$router.push('/home');
+    // } else {
+    //   this.$router.push('/login');
+    // }
+
+    const currentRouterArr = sstorage.get('currentRouterArr') || [];
+    if (currentRouterArr.length) {
+      this.path = currentRouterArr;
+    } else {
+      this.path = ['系统管理', '用户管理'];
+    }
+  },
+  beforeDistroyed() {
+    sstorage.set('currentRouterArr', []);
+  },
   methods: {
     exit() {},
     goToToggleMenu() {
@@ -72,14 +90,6 @@ export default {
       this.sendToSearchText = this.searchText;
       this.searchText = '';
     }
-  },
-  created() {
-    // const token = storage.get('accessToken') || '';
-    // if (token) {
-    //   this.$router.push('/home');
-    // } else {
-    //   this.$router.push('/login');
-    // }
   },
   updated() {}
 };
