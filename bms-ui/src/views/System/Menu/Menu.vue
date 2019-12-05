@@ -68,11 +68,7 @@
             <el-option label="无效" value="0"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="活动性质">
-          <el-checkbox-group v-model="editorModelData.name5">
-            <el-checkbox v-for="(item,index) in modelDataCheckboxList" :key="index" :label="item"></el-checkbox>
-          </el-checkbox-group>
-        </el-form-item>
+
       </el-form>
     </alert-model>
   </div>
@@ -99,16 +95,8 @@ export default {
   data() {
     return {
       examine: {},
-      display: false,
-      modelData: {
-        label: '账户名', //label
-        value: '', //输入值(默认值)
-        type: '', //表单类型 text select ...
-        options: [{ label: '', value: '' }], //type为selec时的选项
-        rules: {}, //校验规则
-        disable: false, //禁止修改
-        reuqire: false //是否必填
-      },
+      editorDisplay: false,
+      editorModelData: {},
       tableData: new Array(5).fill(testData),
       paginationOps: {
         pageSizes: [5, 10, 15, 20],
@@ -132,7 +120,7 @@ export default {
       c();
     },
     editorClick(row) {
-      this.display = true;
+      this.editorDisplay = true;
       console.log(row);
     },
     goToSearch() {
@@ -147,4 +135,4 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang='scss' scoped></style>
