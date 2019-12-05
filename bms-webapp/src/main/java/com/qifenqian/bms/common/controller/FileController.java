@@ -136,7 +136,6 @@ public class FileController {
 		custScan.setCustId(custId);
 		custScan.setAuthId(merchantVo.getAuthId());
 		custScan.setCreateId(merchantVo.getCreateId());
-		custScan.setCustId(custId);
 		
 		try {
 			//银行卡照
@@ -316,6 +315,19 @@ public class FileController {
 				}
 				
 				custScan.setScanCopyPath(picturePath.getOtherMaterialPath());
+				custScan.setStatus("00");
+				custScanMapper.insertCustScan(custScan);
+			}
+			//18店内照
+			if(!StringUtils.isEmpty(picturePath.getShopInteriorPath())) {
+				custScan.setCertifyType("18");
+				
+				if(!StringUtils.isEmpty(picturePathOld.getShopInteriorPath())) {
+					custScan.setStatus("01");
+					custScanMapper.updateCustScan(custScan);
+				}
+				
+				custScan.setScanCopyPath(picturePath.getShopInteriorPath());
 				custScan.setStatus("00");
 				custScanMapper.insertCustScan(custScan);
 			}
