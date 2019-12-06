@@ -229,8 +229,8 @@ export default {
       multipleSelection: [], //角色选择checkbox数据
       roleModelData: [
         //角色选择
-        { name1: '1', name2: '管理员', checked: false },
-        { name1: '3', name2: '清结算组', checked: true },
+        { name1: '1', name2: '管理员' },
+        { name1: '3', name2: '清结算组' },
         { name1: '4', name2: '产品组' },
         { name1: '5', name2: '测试人员' },
         { name1: '99', name2: 'Default' },
@@ -272,8 +272,18 @@ export default {
     },
     // 角色选择
     roleModelSubmit(callback) {
-      console.log('角色选择提交', this.multipleSelection);
-      callback();
+      const data = this.multipleSelection.map(ele => ele.name2).join(',');
+      // 判断是新增还是修改，从而将数据加入不同的data
+      if (this.addDisplay) {
+        this.addModelData = Object.assign({}, this.addModelData, {
+          name8: data
+        });
+      } else {
+        this.editorModelData = Object.assign({}, this.editorModelData, {
+          name10: data
+        });
+      }
+      callback(); //完成回调
     },
     roleModelCancel() {
       this.roleDisplay = false;
@@ -282,11 +292,11 @@ export default {
       this.roleDisplay = true;
     },
     handleSelectionChange(val) {
+      console.log(val, 'val');
       this.multipleSelection = val;
     },
     // 新增
     insertItem() {
-      this.addDisplay = true;
       this.addDisplay = true;
     },
     addModelSubmit(callback) {

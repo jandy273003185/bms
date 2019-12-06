@@ -80,15 +80,7 @@ export default {
     return {
       examine: {},
       display: false,
-      modelData: {
-        label: '账户名', //label
-        value: '', //输入值(默认值)
-        type: '', //表单类型 text select ...
-        options: [{ label: '', value: '' }], //type为selec时的选项
-        rules: {}, //校验规则
-        disable: false, //禁止修改
-        reuqire: false //是否必填
-      },
+      editorModelData: {},
       tableData: new Array(10).fill(testData),
       paginationOps: {
         pageSizes: [5, 10, 15, 20],
