@@ -50,29 +50,105 @@
       </template>
     </page-model>
 
-    <!-- 修改model -->
-    <alert-model v-show="editorDisplay" title="角色修改" @on-submit="editorModelSubmit" @on-cancel="editorModelCancel">
-      <el-form ref="alertEditorModelForm" :model="editorModelData" class="alert-model-form" label-width="80px" :show-message="false">
-        <el-form-item prop="name1" label="角色名称" required>
-          <el-input v-model="editorModelData.name1"></el-input>
+    <!-- 菜单新增 -->
+    <alert-model v-show="addDisplay" title="菜单新增" @on-submit="addModelSubmit" @on-cancel="addModelCancel">
+      <el-form ref="alertAddModelForm" :model="addModelData" class="alert-model-form" label-width="100px" :show-message="false">
+        <el-form-item prop="name1" label="功能代码" required>
+          <el-input v-model="addModelData.name1"></el-input>
         </el-form-item>
-        <el-form-item prop="name2" label="角色代码" required>
-          <el-input v-model="editorModelData.name2"></el-input>
+        <el-form-item prop="name2" label="功能名称" required>
+          <el-input v-model="addModelData.name2"></el-input>
         </el-form-item>
-        <el-form-item prop="name3" label="角色说明" required>
-          <el-input v-model="editorModelData.name3"></el-input>
+        <el-form-item prop="name3" label="上级编号" required>
+          <el-input v-model="addModelData.name3"></el-input>
         </el-form-item>
-        <el-form-item prop="name4" label="是否有效" required>
-          <el-select v-model="editorModelData.name4" placeholder="选择角色状态">
-            <el-option label="有效" value="1"></el-option>
-            <el-option label="无效" value="0"></el-option>
+        <el-form-item prop="name4" label="功能级别" required>
+          <el-input v-model="addModelData.name4"></el-input>
+        </el-form-item>
+        <el-form-item prop="name5" label="功能排序" required>
+          <el-input v-model="addModelData.name5"></el-input>
+        </el-form-item>
+        <el-form-item prop="name6" label="URL" required>
+          <el-input v-model="addModelData.name6"></el-input>
+        </el-form-item>
+        <el-form-item prop="name7" label="是否是菜单" required>
+          <el-select v-model="addModelData.name7" placeholder="选择是否是菜单">
+            <el-option label="是" value="1"></el-option>
+            <el-option label="否" value="0"></el-option>
           </el-select>
         </el-form-item>
+        <el-form-item prop="name8" label="是否要授权" required>
+          <el-select v-model="addModelData.name8" placeholder="是否授权">
+            <el-option label="是" value="1"></el-option>
+            <el-option label="否" value="0"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item prop="name9" label="是否有效" required>
+          <el-select v-model="addModelData.name9" placeholder="是否有效">
+            <el-option label="是" value="1"></el-option>
+            <el-option label="否" value="0"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item prop="name10" label="图标样式">
+          <el-input v-model="addModelData.name10"></el-input>
+        </el-form-item>
+        <el-form-item prop="name11" label="备注">
+          <el-input type="textarea" v-model="addModelData.name11"></el-input>
+        </el-form-item>
+      </el-form>
+    </alert-model>
 
+    <!-- 修改model -->
+    <alert-model v-show="editorDisplay" title="角色修改" @on-submit="editorModelSubmit" @on-cancel="editorModelCancel">
+      <el-form ref="alertEditorModelForm" :model="editorModelData" class="alert-model-form" label-width="100px" :show-message="false">
+        <el-form-item prop="name1" label="功能编号" required>
+          <el-input v-model="editorModelData.name1"></el-input>
+        </el-form-item>
+        <el-form-item prop="name2" label="功能代码" required>
+          <el-input v-model="editorModelData.name2"></el-input>
+        </el-form-item>
+        <el-form-item prop="name3" label="功能名称" required>
+          <el-input v-model="editorModelData.name3"></el-input>
+        </el-form-item>
+        <el-form-item prop="name4" label="上级编号" required>
+          <el-input v-model="editorModelData.name4"></el-input>
+        </el-form-item>
+        <el-form-item prop="name5" label="功能级别" required>
+          <el-input v-model="editorModelData.name5"></el-input>
+        </el-form-item>
+        <el-form-item prop="name6" label="功能排序" required>
+          <el-input v-model="editorModelData.name6"></el-input>
+        </el-form-item>
+        <el-form-item prop="name7" label="URL" required>
+          <el-input v-model="editorModelData.name7"></el-input>
+        </el-form-item>
+        <el-form-item prop="name8" label="是否是菜单" required>
+          <el-select v-model="editorModelData.name8" placeholder="选择是否是菜单">
+            <el-option label="是" value="1"></el-option>
+            <el-option label="否" value="0"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item prop="name9" label="是否要授权" required>
+          <el-select v-model="editorModelData.name9" placeholder="是否授权">
+            <el-option label="是" value="1"></el-option>
+            <el-option label="否" value="0"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item prop="name10" label="是否有效" required>
+          <el-select v-model="editorModelData.name10" placeholder="是否有效">
+            <el-option label="是" value="1"></el-option>
+            <el-option label="否" value="0"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item prop="name11" label="图标样式">
+          <el-input v-model="editorModelData.name11"></el-input>
+        </el-form-item>
+        <el-form-item prop="name12" label="备注">
+          <el-input type="textarea" v-model="editorModelData.name12"></el-input>
+        </el-form-item>
       </el-form>
     </alert-model>
   </div>
-
 </template>
 
 <script>
@@ -95,9 +171,11 @@ export default {
   data() {
     return {
       examine: {},
+      addDisplay: false,
+      addModelData: {},
       editorDisplay: false,
       editorModelData: {},
-      tableData: new Array(5).fill(testData),
+      tableData: new Array(10).fill(testData),
       paginationOps: {
         pageSizes: [5, 10, 15, 20],
         total: 100
@@ -112,6 +190,22 @@ export default {
   },
   created() {},
   methods: {
+    addModelSubmit(c) {
+      this.$refs['alertAddModelForm'].validate((files, object) => {
+        if (files) {
+          // 验证通过 发送请求添加数据到数据库
+          c(); //执行回调
+        } else {
+          const keys = Object.keys(object);
+          this.$message.error(`${keys[0]}不可为空`);
+        }
+      });
+      console.log(this.addModelData);
+    },
+    addModelCancel() {
+      this.addDisplay = false;
+      // this.resetFormFields('alertAddModelForm');
+    },
     editorModelCancel() {
       this.editorDisplay = false;
     },
@@ -121,6 +215,7 @@ export default {
     },
     editorClick(row) {
       this.editorDisplay = true;
+      this.editorModelData = row;
       console.log(row);
     },
     goToSearch() {

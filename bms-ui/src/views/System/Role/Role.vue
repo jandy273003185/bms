@@ -45,7 +45,7 @@
       </template>
     </page-model>
 
-    <!-- 用户新增 -->
+    <!-- 角色新增 -->
     <alert-model v-show="addDisplay" title="角色新增" @on-submit="addModelSubmit" @on-cancel="addModelCancel">
       <el-form ref="alertAddModelForm" :model="addModelData" class="alert-model-form" label-width="80px" :show-message="false">
         <el-form-item prop="name1" label="角色名称" required>
@@ -198,6 +198,7 @@ export default {
       this.editorDisplay = true;
       this.look_editor = true;
       this.hideBtn = true;
+      // this.editorModelData = row;
       console.log(row);
     },
     goToSearch() {
