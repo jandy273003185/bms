@@ -71,8 +71,6 @@ export default {
     const currentRouterArr = sstorage.get('currentRouterArr') || [];
     if (currentRouterArr.length) {
       this.path = currentRouterArr;
-    } else {
-      this.path = ['系统管理', '用户管理'];
     }
   },
   beforeDistroyed() {

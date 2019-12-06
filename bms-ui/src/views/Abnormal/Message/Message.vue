@@ -71,8 +71,8 @@
     </page-model>
 
     <!-- 修改model -->
-    <alert-model v-show="display" :display.sync="display" @on-submit="editorModelSubmit" @on-cancel="editorModelCancel" title="测试">
-      <el-form :model="modelData" class="alert-model-form" label-width="80px">
+    <alert-model v-show="display" @on-submit="editorModelSubmit" @on-cancel="editorModelCancel" title="测试">
+      <el-form :model="modelData" class="alert-model-form" label-width="80px" :show-message="false">
         <el-form-item :label="modelData.label">
           <el-input v-model="modelData.value" :placeholder="`请输入${modelData.label}`" />
         </el-form-item>
