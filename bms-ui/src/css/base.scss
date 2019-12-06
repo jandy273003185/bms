@@ -210,6 +210,19 @@ video {
   }
 }
 
+// 修改dialog默认定位
+.el-dialog__wrapper .el-dialog {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  margin-top: 0 !important;
+
+  .el-select.el-select--mini {
+    width: 100%;
+  }
+}
+
 .breadcrumb-main {
   height: 40px;
   display: flex;
