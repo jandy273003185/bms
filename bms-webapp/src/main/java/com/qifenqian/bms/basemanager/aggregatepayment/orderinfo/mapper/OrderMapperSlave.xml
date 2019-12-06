@@ -596,6 +596,12 @@
 						stcdb.td_cust_info I 
 					WHERE
 						I.custManager = #{userId,jdbcType=VARCHAR}
+					UNION
+					SELECT 
+					B.CUST_ID
+					FROM 
+						stcdb.td_cust_belong_info B 
+					WHERE B.manager_id = #{userId,jdbcType=VARCHAR}
 					) TT
 				WHERE
 					TT.cust_id = T.MCH_ID
