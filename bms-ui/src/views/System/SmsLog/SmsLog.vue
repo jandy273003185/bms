@@ -70,12 +70,12 @@
     </page-model>
 
     <!-- 日志内容 -->
-    <alert-model v-show="lookDisplay" @on-submit="lookModelSubmit" @on-cancel="lookModelCancel" title="日志内容" hideBtn>
+    <el-dialog title="日志内容" :visible.sync="lookDisplay" width="600px">
       <div class="sms-look-content">
         客户手机号码：13590385556 <br />
         客户建议留言：123456电风扇
       </div>
-    </alert-model>
+    </el-dialog>
   </div>
 
 </template>
@@ -139,7 +139,7 @@ export default {
 .sms-look-content {
   width: 500px;
   height: 300px;
-  margin: 30px auto;
+  margin: 0 auto;
   font-size: 14px;
   color: #777;
   padding: 10px;
