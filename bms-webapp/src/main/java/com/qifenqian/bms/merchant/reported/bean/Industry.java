@@ -13,9 +13,9 @@ public class Industry implements Serializable{
 
 
 
-	private String industryCode;//省份编号
+	private String industryCode;//行业编号
 	
-	private String industryName;//省份名字
+	private String industryName;//行业名字
 
 	public String getIndustryCode() {
 		return industryCode;
