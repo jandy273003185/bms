@@ -51,7 +51,7 @@
     </page-model>
 
     <!-- 菜单新增 -->
-    <alert-model v-show="addDisplay" title="菜单新增" @on-submit="addModelSubmit" @on-cancel="addModelCancel">
+    <el-dialog title="菜单新增" :visible.sync="addDisplay" width="600px">
       <el-form ref="alertAddModelForm" :model="addModelData" class="alert-model-form" label-width="100px" :show-message="false">
         <el-form-item prop="name1" label="功能代码" required>
           <el-input v-model="addModelData.name1"></el-input>
@@ -96,10 +96,14 @@
           <el-input type="textarea" v-model="addModelData.name11"></el-input>
         </el-form-item>
       </el-form>
-    </alert-model>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="addModelCancel">取 消</el-button>
+        <el-button type="primary" @click="addModelSubmit">确 定</el-button>
+      </div>
+    </el-dialog>
 
     <!-- 修改model -->
-    <alert-model v-show="editorDisplay" title="角色修改" @on-submit="editorModelSubmit" @on-cancel="editorModelCancel">
+    <el-dialog title="角色修改" :visible.sync="editorDisplay" width="600px">
       <el-form ref="alertEditorModelForm" :model="editorModelData" class="alert-model-form" label-width="100px" :show-message="false">
         <el-form-item prop="name1" label="功能编号" required>
           <el-input v-model="editorModelData.name1"></el-input>
@@ -147,7 +151,11 @@
           <el-input type="textarea" v-model="editorModelData.name12"></el-input>
         </el-form-item>
       </el-form>
-    </alert-model>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="editorModelCancel">取 消</el-button>
+        <el-button type="primary" @click="editorModelSubmit">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -209,9 +217,8 @@ export default {
     editorModelCancel() {
       this.editorDisplay = false;
     },
-    editorModelSubmit(c) {
+    editorModelSubmit() {
       console.log(this.editorModelData);
-      c();
     },
     editorClick(row) {
       this.editorDisplay = true;
