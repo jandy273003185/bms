@@ -31,5 +31,27 @@ public class ServiceParenterDao {
 	public List<MerchantVo> myServicesList(MerchantVo merchantVo) {
 		return serviceParenterMapper.myServicesList(merchantVo);
 	}
-
+	
+	/**
+	 * 新  查询代理商列表  //增加待审核状态
+	 * @param merchantVo zhanggc
+	 * @return
+	 */
+	@Page
+	public List<MerchantVo> serviceNewList(MerchantVo merchantVo) {
+		return serviceParenterMapper.serviceNewList(merchantVo);
+	}
+	/**
+	 * zhanggc 表 td_cust_info 修改审核状态
+	 */
+	public int updateTdCustInfoState(String custId,String newState, String state) {
+		return serviceParenterMapper.updateTdCustInfoState(custId,newState, state);
+	}
+	
+	/**
+	 * zhanggc 表td_certificate_auth 修改审核状态
+	 */
+	public int updateTdCertificateAuthState(String custId,String newState, String state) {
+		return serviceParenterMapper.updateTdCertificateAuthState(custId,newState, state);
+	}
 }

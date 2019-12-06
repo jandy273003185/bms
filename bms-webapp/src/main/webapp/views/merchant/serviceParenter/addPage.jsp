@@ -390,8 +390,8 @@ function addServiceBtn(){
 	}
 	
 	/**结算账号*/
-    if($("#compMainAcct").val().length < 12 || $("#compMainAcct").val().length > 25){
-        $("#compMainAcctLab").text("请填写12-19位银行卡号");
+    if($("#compMainAcct").val().length < 5 || $("#compMainAcct").val().length > 25){
+        $("#compMainAcctLab").text("请填写5-25位银行卡号");
         $("#compMainAcct").focus();
         return false;
     }else{

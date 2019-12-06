@@ -371,7 +371,9 @@ public class MerchantVo implements Serializable {
 	 */
 	private String auditTime;
 
-	/** 开户行地址 */
+	/** 
+	 * 开户行地址
+	 */
 	private String openAddressRec;
 
 	private String userId;
@@ -411,15 +413,26 @@ public class MerchantVo implements Serializable {
 	
 	private String filingAuditStatus;
 	
-	private String isClear;
+	private String isClear;	
 	
-	//客户经理名字
+	/**
+	 * //客户经理名字
+	 */
 	private String custManagerName;
-	//商户所属服务商名字
+	
+	/**
+	 * 商户所属服务商名字
+	 */
 	private String facilitatorName;
-	//开户银行省份
+	
+	/**
+	 * 开户银行省份
+	 */
 	private String bankProvinceName;
-	//开户银行城市
+	
+	/**
+	 * 开户银行城市
+	 */
 	private String bankCityName;
 
 	//创建人名称
@@ -432,7 +445,9 @@ public class MerchantVo implements Serializable {
 	private String bankCitName;
 
 	private String referrer;
-	
+	/**
+	 * 服务商级别',
+	 */
 	private String serviceLevel;
 	
 	private String agentCode;
