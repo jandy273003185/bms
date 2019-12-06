@@ -58,7 +58,7 @@
     </page-model>
 
     <!-- 修改model -->
-    <alert-model v-show="display" :display.sync="display" @put="modelSubmit" title="测试">
+    <alert-model v-show="display"  @on-submit="editorModelSubmit" @on-cancel="editorModelCancel" title="测试">
       <el-form :model="modelData" class="alert-model-form" label-width="80px">
         <el-form-item :label="modelData.label">
           <el-input v-model="modelData.value" :placeholder="`请输入${modelData.label}`" />
@@ -95,15 +95,7 @@ export default {
     return {
       examine: {},
       display: false,
-      modelData: {
-        label: '账户名', //label
-        value: '', //输入值(默认值)
-        type: '', //表单类型 text select ...
-        options: [{ label: '', value: '' }], //type为selec时的选项
-        rules: {}, //校验规则
-        disable: false, //禁止修改
-        reuqire: false //是否必填
-      },
+      editorModelData:{},
       tableData: new Array(5).fill(testData),
       paginationOps: {
         pageSizes: [5, 10, 15, 20],
@@ -113,18 +105,20 @@ export default {
   },
   watch: {
     // 监听search传来的数据
-    searchText(v, o) {
-      if (!v || v === o) return;
+    searchText(v) {
       console.log(v);
     }
+    
   },
   created() {},
   methods: {
-    toggle() {
-      this.display = true;
+    editorModelCancel() {
+      this.editorDisplay = false;
     },
-    modelSubmit() {
-      console.log(this.modelData);
+    
+    editorModelSubmit(c) {
+      console.log(this.editorModelData);
+      c();
     },
     editorClick(row) {
       this.display = true;
@@ -136,7 +130,7 @@ export default {
     },
     insertItem() {
       // 新增
-      console.log('新增');
+      this.addDisplay = true;
     }
   }
 };

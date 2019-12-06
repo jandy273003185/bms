@@ -1,13 +1,14 @@
 <template>
-  <div>
+  <!-- 系统管理 => 角色管理 -->
+  <div class="system-role-page">
     <page-model>
       <template slot="controlQueryOps">
         <el-form :model="examine" label-width="80px" :inline="true" ref="controlQueryForm">
-          <el-form-item label="角色代码" prop="usercode">
-            <el-input v-model="examine.usercode"></el-input>
+          <el-form-item label="角色代码" prop="name1">
+            <el-input v-model="examine.name1"></el-input>
           </el-form-item>
-          <el-form-item label="角色名称" prop="username">
-            <el-input v-model="examine.username"></el-input>
+          <el-form-item label="角色名称" prop="name2">
+            <el-input v-model="examine.name2"></el-input>
           </el-form-item>
         </el-form>
       </template>
@@ -17,6 +18,7 @@
         <el-button type="warning" @click="$refs['controlQueryForm'].resetFields()">清空<i class="el-icon-rank"></i></el-button>
         <el-button type="info" @click="insertItem">新增<i class="el-icon-circle-plus-outline"></i></el-button>
       </template>
+
       <template slot="tableInner">
         <el-table :data="tableData" border style="width: 100%">
           <el-table-column prop="serial" min-width="50" label="编号"></el-table-column>
@@ -30,7 +32,7 @@
           <el-table-column prop='turnovertime' min-width="200" label="最后更改时间"></el-table-column>
           <el-table-column fixed="right" label="操作" width="140">
             <template slot-scope="scope">
-              <el-button type="text" size="small" @click="editorClick(scope.row)">查看</el-button>
+              <el-button type="text" size="small" @click="lookClick(scope.row)">查看</el-button>
               <el-button type="text" size="small" @click="editorClick(scope.row)">编辑</el-button>
             </template>
           </el-table-column>
@@ -43,16 +45,58 @@
       </template>
     </page-model>
 
-    <!-- 修改model -->
-    <alert-model v-show="display" :display.sync="display" @put="modelSubmit" title="测试">
-      <el-form :model="modelData" class="alert-model-form" label-width="80px">
-        <el-form-item :label="modelData.label">
-          <el-input v-model="modelData.value" :placeholder="`请输入${modelData.label}`" />
+    <!-- 角色新增 -->
+    <alert-model v-show="addDisplay" title="角色新增" @on-submit="addModelSubmit" @on-cancel="addModelCancel">
+      <el-form ref="alertAddModelForm" :model="addModelData" class="alert-model-form" label-width="80px" :show-message="false">
+        <el-form-item prop="name1" label="角色名称" required>
+          <el-input v-model="addModelData.name1"></el-input>
+        </el-form-item>
+        <el-form-item prop="name2" label="角色代码" required>
+          <el-input v-model="addModelData.name2"></el-input>
+        </el-form-item>
+        <el-form-item prop="name3" label="角色说明" required>
+          <el-input v-model="addModelData.name3"></el-input>
+        </el-form-item>
+        <el-form-item prop="name4" label="是否有效" required>
+          <el-select v-model="addModelData.name4" placeholder="选择角色状态">
+            <el-option label="有效" value="1"></el-option>
+            <el-option label="无效" value="0"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="活动性质">
+          <el-checkbox-group v-model="addModelData.name5">
+            <el-checkbox v-for="(item,index) in modelDataCheckboxList" :key="index" :label="item"></el-checkbox>
+          </el-checkbox-group>
+        </el-form-item>
+      </el-form>
+    </alert-model>
+
+    <!-- 修改 查看 model -->
+    <alert-model v-show="editorDisplay" title="角色修改" @on-submit="editorModelSubmit" @on-cancel="editorModelCancel" :hideBtn="hideBtn">
+      <el-form :disabled="look_editor" ref="alertEditorModelForm" :model="editorModelData" class="alert-model-form" label-width="80px" :show-message="false">
+        <el-form-item prop="name1" label="角色名称" required>
+          <el-input v-model="editorModelData.name1"></el-input>
+        </el-form-item>
+        <el-form-item prop="name2" label="角色代码" required>
+          <el-input v-model="editorModelData.name2"></el-input>
+        </el-form-item>
+        <el-form-item prop="name3" label="角色说明" required>
+          <el-input v-model="editorModelData.name3"></el-input>
+        </el-form-item>
+        <el-form-item prop="name4" label="是否有效" required>
+          <el-select v-model="editorModelData.name4" placeholder="选择角色状态">
+            <el-option label="有效" value="1"></el-option>
+            <el-option label="无效" value="0"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="活动性质">
+          <el-checkbox-group v-model="editorModelData.name5">
+            <el-checkbox v-for="(item,index) in modelDataCheckboxList" :key="index" :label="item"></el-checkbox>
+          </el-checkbox-group>
         </el-form-item>
       </el-form>
     </alert-model>
   </div>
-
 </template>
 
 <script>
@@ -68,24 +112,51 @@ const testData = {
   turnovertime: '2019-12-04 03:53:03'
 };
 
+// 活动性质选项
+const modelDataCheckboxList = [
+  '系统管理',
+  '码表维护',
+  '商户管理',
+  '客户管理',
+  '交易管理',
+  '我的工作空间',
+  '科目管理',
+  '调账管理',
+  '账务管理',
+  '交广科技信息查询',
+  '银联交易查询',
+  '异常列表',
+  '工作流管理',
+  '短信管理',
+  '社交',
+  '代理商管理',
+  '实名认证',
+  '聚合支付对账',
+  '聚合支付',
+  '学生管理',
+  '代付管理',
+  'APP管理',
+  '物料管理'
+];
+
 export default {
   props: ['searchText'],
   data() {
     return {
-      examine: {
-        username: '',
-        usercode: ''
+      examine: {},
+      addDisplay: false,
+      addModelData: {
+        //新增model数据
+        name5: modelDataCheckboxList
       },
-      display: false,
-      modelData: {
-        label: '账户名', //label
-        value: '', //输入值(默认值)
-        type: '', //表单类型 text select ...
-        options: [{ label: '', value: '' }], //type为selec时的选项
-        rules: {}, //校验规则
-        disable: false, //禁止修改
-        reuqire: false //是否必填
+      editorDisplay: false,
+      modelDataCheckboxList: modelDataCheckboxList,
+      editorModelData: {
+        //修改model数据
+        name5: modelDataCheckboxList
       },
+      look_editor: false, //编辑还是查看
+      hideBtn: false, //查看时，隐藏按钮组
       tableData: new Array(5).fill(testData),
       paginationOps: {
         pageSizes: [5, 10, 15, 20],
@@ -95,21 +166,39 @@ export default {
   },
   watch: {
     // 监听search传来的数据
-    searchText(v, o) {
-      if (!v || v === o) return;
+    searchText(v) {
       console.log(v);
     }
   },
   created() {},
   methods: {
-    toggle() {
-      this.display = true;
+    addModelSubmit(c) {
+      console.log(this.addModelData);
+      c();
     },
-    modelSubmit() {
-      console.log(this.modelData);
+    addModelCancel() {
+      this.addDisplay = false;
+      // this.resetFormFields('alertAddModelForm');
+    },
+    editorModelSubmit(c) {
+      console.log(this.editorModelData);
+      c();
+    },
+    editorModelCancel() {
+      this.editorDisplay = false;
+      this.look_editor = false;
+      this.hideBtn = false;
     },
     editorClick(row) {
-      this.display = true;
+      this.editorDisplay = true;
+      this.look_editor = false;
+      console.log(row);
+    },
+    lookClick(row) {
+      this.editorDisplay = true;
+      this.look_editor = true;
+      this.hideBtn = true;
+      // this.editorModelData = row;
       console.log(row);
     },
     goToSearch() {
@@ -118,10 +207,16 @@ export default {
     },
     insertItem() {
       // 新增
-      console.log('新增');
+      this.addDisplay = true;
     }
   }
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang='scss'>
+.system-role-page {
+  .el-checkbox {
+    width: 25%;
+  }
+}
+</style>

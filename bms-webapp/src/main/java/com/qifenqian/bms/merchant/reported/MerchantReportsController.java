@@ -756,7 +756,7 @@ public class MerchantReportsController {
 					detail.setReportStatus("O");
 					//报备成功商户报备信息表中状态改变
 					detail.setFileStatus("Y");
-					detail.setOutMerchantCode(orderQueryRes.getMerchantPid());
+					detail.setMerchantPid(orderQueryRes.getMerchantPid());
 					//更新数据库
 					fmIncomeService.UpdateMerReportAndMerDetailInfo(detail, "1");
 					

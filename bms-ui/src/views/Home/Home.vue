@@ -21,7 +21,7 @@
             <site-icon :iconClass="toggleMenu ?'right': 'left'" size="12" />
           </el-button> 
         -->
-        <Menu :toggle="toggleMenu" v-model="path" />
+        <MenuTree :toggle="toggleMenu" v-model="path" />
       </div>
       <!-- 右边内容 -->
       <el-main class="el-main-content">
@@ -47,10 +47,10 @@
 
 <script>
 import { sstorage } from '@/tools/utils';
-import Menu from '@/views/Menu/Menu';
+import MenuTree from '@/views/MenuTree/Menu';
 export default {
   name: 'App',
-  components: { Menu },
+  components: { MenuTree },
   data() {
     return {
       toggleMenu: false,
@@ -71,8 +71,6 @@ export default {
     const currentRouterArr = sstorage.get('currentRouterArr') || [];
     if (currentRouterArr.length) {
       this.path = currentRouterArr;
-    } else {
-      this.path = ['系统管理', '用户管理'];
     }
   },
   beforeDistroyed() {

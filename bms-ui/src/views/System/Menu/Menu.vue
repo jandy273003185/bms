@@ -1,16 +1,17 @@
 <template>
+  <!-- 系统管理 => 菜单管理 -->
   <div>
     <page-model>
       <template slot="controlQueryOps">
         <el-form :model="examine" label-width="80px" :inline="true" ref="controlQueryForm">
-          <el-form-item label="菜单代码" prop="menucode">
-            <el-input v-model="examine.menucode"></el-input>
+          <el-form-item label="菜单代码" prop="name1">
+            <el-input v-model="examine.name1"></el-input>
           </el-form-item>
-          <el-form-item label="菜单名称" prop="menuname">
-            <el-input v-model="examine.menuname"></el-input>
+          <el-form-item label="菜单名称" prop="name2">
+            <el-input v-model="examine.name2"></el-input>
           </el-form-item>
-          <el-form-item label="URL" prop="menurl">
-            <el-input v-model="examine.menurl"></el-input>
+          <el-form-item label="URL" prop="name3">
+            <el-input v-model="examine.name3"></el-input>
           </el-form-item>
         </el-form>
       </template>
@@ -20,19 +21,20 @@
         <el-button type="warning" @click="$refs['controlQueryForm'].resetFields()">清空<i class="el-icon-rank"></i></el-button>
         <el-button type="info" @click="insertItem">新增<i class="el-icon-circle-plus-outline"></i></el-button>
       </template>
+
       <template slot="tableInner">
         <el-table :data="tableData" border>
-          <el-table-column prop='serial' label='菜单编号' min-width="80"></el-table-column>
-          <el-table-column prop='menucode' label='菜单代码' min-width="80"></el-table-column>
-          <el-table-column prop='menuname' label='菜单名称' min-width="140"></el-table-column>
-          <el-table-column prop='preserial' label='上级编号' min-width="80"></el-table-column>
-          <el-table-column prop='level' label='功能级别' min-width="80"></el-table-column>
-          <el-table-column prop='url' label='URL' min-width="140"></el-table-column>
-          <el-table-column prop='isMenu' label='是否是菜单' min-width="100"></el-table-column>
-          <el-table-column prop='valid' label='是否有效' min-width="100"></el-table-column>
-          <el-table-column prop='auth' label='是否要授权' min-width="100"></el-table-column>
-          <el-table-column prop='creator' label='创建人' min-width="120"></el-table-column>
-          <el-table-column prop='date' min-width="140" label='创建时间'></el-table-column>
+          <el-table-column prop='name1' label='菜单编号' min-width="80"></el-table-column>
+          <el-table-column prop='name2' label='菜单代码' min-width="80"></el-table-column>
+          <el-table-column prop='name3' label='菜单名称' min-width="140"></el-table-column>
+          <el-table-column prop='name4' label='上级编号' min-width="80"></el-table-column>
+          <el-table-column prop='name5' label='功能级别' min-width="80"></el-table-column>
+          <el-table-column prop='name6' label='URL' min-width="140"></el-table-column>
+          <el-table-column prop='name7' label='是否是菜单' min-width="100"></el-table-column>
+          <el-table-column prop='name8' label='是否有效' min-width="100"></el-table-column>
+          <el-table-column prop='name9' label='是否要授权' min-width="100"></el-table-column>
+          <el-table-column prop='name10' label='创建人' min-width="120"></el-table-column>
+          <el-table-column prop='name10' min-width="140" label='创建时间'></el-table-column>
 
           <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
@@ -48,53 +50,132 @@
       </template>
     </page-model>
 
+    <!-- 菜单新增 -->
+    <alert-model v-show="addDisplay" title="菜单新增" @on-submit="addModelSubmit" @on-cancel="addModelCancel">
+      <el-form ref="alertAddModelForm" :model="addModelData" class="alert-model-form" label-width="100px" :show-message="false">
+        <el-form-item prop="name1" label="功能代码" required>
+          <el-input v-model="addModelData.name1"></el-input>
+        </el-form-item>
+        <el-form-item prop="name2" label="功能名称" required>
+          <el-input v-model="addModelData.name2"></el-input>
+        </el-form-item>
+        <el-form-item prop="name3" label="上级编号" required>
+          <el-input v-model="addModelData.name3"></el-input>
+        </el-form-item>
+        <el-form-item prop="name4" label="功能级别" required>
+          <el-input v-model="addModelData.name4"></el-input>
+        </el-form-item>
+        <el-form-item prop="name5" label="功能排序" required>
+          <el-input v-model="addModelData.name5"></el-input>
+        </el-form-item>
+        <el-form-item prop="name6" label="URL" required>
+          <el-input v-model="addModelData.name6"></el-input>
+        </el-form-item>
+        <el-form-item prop="name7" label="是否是菜单" required>
+          <el-select v-model="addModelData.name7" placeholder="选择是否是菜单">
+            <el-option label="是" value="1"></el-option>
+            <el-option label="否" value="0"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item prop="name8" label="是否要授权" required>
+          <el-select v-model="addModelData.name8" placeholder="是否授权">
+            <el-option label="是" value="1"></el-option>
+            <el-option label="否" value="0"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item prop="name9" label="是否有效" required>
+          <el-select v-model="addModelData.name9" placeholder="是否有效">
+            <el-option label="是" value="1"></el-option>
+            <el-option label="否" value="0"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item prop="name10" label="图标样式">
+          <el-input v-model="addModelData.name10"></el-input>
+        </el-form-item>
+        <el-form-item prop="name11" label="备注">
+          <el-input type="textarea" v-model="addModelData.name11"></el-input>
+        </el-form-item>
+      </el-form>
+    </alert-model>
+
     <!-- 修改model -->
-    <alert-model v-show="display" :display.sync="display" @put="modelSubmit" title="测试">
-      <el-form :model="modelData" class="alert-model-form" label-width="80px">
-        <el-form-item :label="modelData.label">
-          <el-input v-model="modelData.value" :placeholder="`请输入${modelData.label}`" />
+    <alert-model v-show="editorDisplay" title="角色修改" @on-submit="editorModelSubmit" @on-cancel="editorModelCancel">
+      <el-form ref="alertEditorModelForm" :model="editorModelData" class="alert-model-form" label-width="100px" :show-message="false">
+        <el-form-item prop="name1" label="功能编号" required>
+          <el-input v-model="editorModelData.name1"></el-input>
+        </el-form-item>
+        <el-form-item prop="name2" label="功能代码" required>
+          <el-input v-model="editorModelData.name2"></el-input>
+        </el-form-item>
+        <el-form-item prop="name3" label="功能名称" required>
+          <el-input v-model="editorModelData.name3"></el-input>
+        </el-form-item>
+        <el-form-item prop="name4" label="上级编号" required>
+          <el-input v-model="editorModelData.name4"></el-input>
+        </el-form-item>
+        <el-form-item prop="name5" label="功能级别" required>
+          <el-input v-model="editorModelData.name5"></el-input>
+        </el-form-item>
+        <el-form-item prop="name6" label="功能排序" required>
+          <el-input v-model="editorModelData.name6"></el-input>
+        </el-form-item>
+        <el-form-item prop="name7" label="URL" required>
+          <el-input v-model="editorModelData.name7"></el-input>
+        </el-form-item>
+        <el-form-item prop="name8" label="是否是菜单" required>
+          <el-select v-model="editorModelData.name8" placeholder="选择是否是菜单">
+            <el-option label="是" value="1"></el-option>
+            <el-option label="否" value="0"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item prop="name9" label="是否要授权" required>
+          <el-select v-model="editorModelData.name9" placeholder="是否授权">
+            <el-option label="是" value="1"></el-option>
+            <el-option label="否" value="0"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item prop="name10" label="是否有效" required>
+          <el-select v-model="editorModelData.name10" placeholder="是否有效">
+            <el-option label="是" value="1"></el-option>
+            <el-option label="否" value="0"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item prop="name11" label="图标样式">
+          <el-input v-model="editorModelData.name11"></el-input>
+        </el-form-item>
+        <el-form-item prop="name12" label="备注">
+          <el-input type="textarea" v-model="editorModelData.name12"></el-input>
         </el-form-item>
       </el-form>
     </alert-model>
   </div>
-
 </template>
 
 <script>
 const testData = {
-  serial: '1',
-  menucode: '1001',
-  menuname: '文件上传',
-  preserial: '2',
-  level: '2',
-  url: '/demo/fileupload',
-  isMenu: 'Y',
-  valid: 'Y',
-  auth: 'N',
-  creator: '创建人',
-  date: '2015-12-22 6:08:54'
+  name1: '1',
+  name2: '1001',
+  name3: '文件上传',
+  name4: '2',
+  name5: '2',
+  name6: '/demo/fileupload',
+  name7: 'Y',
+  name8: 'Y',
+  name9: 'N',
+  name10: '创建人',
+  name11: '2015-12-22 6:08:54'
 };
 
 export default {
   props: ['searchText'],
   data() {
     return {
-      examine: {
-        menuname: '',
-        menucode: '',
-        menurl: ''
-      },
-      display: false,
-      modelData: {
-        label: '账户名', //label
-        value: '', //输入值(默认值)
-        type: '', //表单类型 text select ...
-        options: [{ label: '', value: '' }], //type为selec时的选项
-        rules: {}, //校验规则
-        disable: false, //禁止修改
-        reuqire: false //是否必填
-      },
-      tableData: new Array(5).fill(testData),
+      examine: {},
+      addDisplay: false,
+      addModelData: {},
+      editorDisplay: false,
+      editorModelData: {},
+      tableData: new Array(10).fill(testData),
       paginationOps: {
         pageSizes: [5, 10, 15, 20],
         total: 100
@@ -103,21 +184,38 @@ export default {
   },
   watch: {
     // 监听search传来的数据
-    searchText(v, o) {
-      if (!v || v === o) return;
+    searchText(v) {
       console.log(v);
     }
   },
   created() {},
   methods: {
-    toggle() {
-      this.display = true;
+    addModelSubmit(c) {
+      this.$refs['alertAddModelForm'].validate((files, object) => {
+        if (files) {
+          // 验证通过 发送请求添加数据到数据库
+          c(); //执行回调
+        } else {
+          const keys = Object.keys(object);
+          this.$message.error(`${keys[0]}不可为空`);
+        }
+      });
+      console.log(this.addModelData);
     },
-    modelSubmit() {
-      console.log(this.modelData);
+    addModelCancel() {
+      this.addDisplay = false;
+      // this.resetFormFields('alertAddModelForm');
+    },
+    editorModelCancel() {
+      this.editorDisplay = false;
+    },
+    editorModelSubmit(c) {
+      console.log(this.editorModelData);
+      c();
     },
     editorClick(row) {
-      this.display = true;
+      this.editorDisplay = true;
+      this.editorModelData = row;
       console.log(row);
     },
     goToSearch() {
@@ -126,10 +224,10 @@ export default {
     },
     insertItem() {
       // 新增
-      console.log('新增');
+      this.addDisplay = true;
     }
   }
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang='scss' scoped></style>

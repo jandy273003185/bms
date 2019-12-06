@@ -1,13 +1,14 @@
 <template>
+  <!-- 系统管理 => 部门管理 -->
   <div>
     <page-model>
       <template slot="controlQueryOps">
         <el-form :model="examine" label-width="80px" :inline="true" ref="controlQueryForm">
-          <el-form-item label="部门代码" prop="departcode">
-            <el-input v-model="examine.departcode"></el-input>
+          <el-form-item label="部门代码" prop="name1">
+            <el-input v-model="examine.name1"></el-input>
           </el-form-item>
-          <el-form-item label="部门名称" prop="departname">
-            <el-input v-model="examine.departname"></el-input>
+          <el-form-item label="部门名称" prop="name2">
+            <el-input v-model="examine.name2"></el-input>
           </el-form-item>
         </el-form>
       </template>
@@ -17,18 +18,19 @@
         <el-button type="warning" @click="$refs['controlQueryForm'].resetFields()">清空<i class="el-icon-rank"></i></el-button>
         <el-button type="info" @click="insertItem">新增<i class="el-icon-circle-plus-outline"></i></el-button>
       </template>
+
       <template slot="tableInner">
         <el-table :data="tableData" border>
-          <el-table-column prop='serial' label='部门编号' min-width="50"></el-table-column>
-          <el-table-column prop='departname' label='部门名称' min-width="120"></el-table-column>
-          <el-table-column prop='departcode' label='部门代码' min-width="100"></el-table-column>
-          <el-table-column prop='level' label='部门级别' min-width="80"></el-table-column>
-          <el-table-column prop='preserial' label='上级部门' min-width="80"></el-table-column>
-          <el-table-column prop='valid' label='是否有效' min-width="80"></el-table-column>
-          <el-table-column prop='creator' label='创建人' min-width="100"></el-table-column>
-          <el-table-column prop='date' label='创建时间' min-width="140"></el-table-column>
-          <el-table-column prop='regenerator' label='更新人' min-width="100"></el-table-column>
-          <el-table-column prop='turnovertime' min-width="140" label='更新时间'></el-table-column>
+          <el-table-column prop='name1' label='部门编号' min-width="50"></el-table-column>
+          <el-table-column prop='name2' label='部门名称' min-width="120"></el-table-column>
+          <el-table-column prop='name3' label='部门代码' min-width="100"></el-table-column>
+          <el-table-column prop='name4' label='部门级别' min-width="80"></el-table-column>
+          <el-table-column prop='name5' label='上级部门' min-width="80"></el-table-column>
+          <el-table-column prop='name6' label='是否有效' min-width="80"></el-table-column>
+          <el-table-column prop='name7' label='创建人' min-width="100"></el-table-column>
+          <el-table-column prop='name8' label='创建时间' min-width="140"></el-table-column>
+          <el-table-column prop='name9' label='更新人' min-width="100"></el-table-column>
+          <el-table-column prop='name10' min-width="140" label='更新时间'></el-table-column>
 
           <el-table-column fixed="right" label="操作" width="140">
             <template slot-scope="scope">
@@ -44,11 +46,77 @@
       </template>
     </page-model>
 
+    <!-- 部门新增 -->
+    <alert-model v-show="addDisplay" title="部门新增" @on-submit="addModelSubmit" @on-cancel="addModelCancel">
+      <el-form ref="alertAddModelForm" :model="addModelData" class="alert-model-form" label-width="100px" :show-message="false">
+        <el-form-item prop="name1" label="部门名称" required>
+          <el-input v-model="addModelData.name1"></el-input>
+        </el-form-item>
+        <el-form-item prop="name2" label="部门代码" required>
+          <el-input v-model="addModelData.name2"></el-input>
+        </el-form-item>
+        <el-form-item prop="name3" label="部门级别" required>
+          <el-input v-model="addModelData.name3"></el-input>
+        </el-form-item>
+        <el-form-item prop="name5" label="上级部门" required>
+          <el-select v-model="addModelData.name5" placeholder="请选择部门">
+            <el-option label="(GYZB)-国银证保" value="1"></el-option>
+            <el-option label="(TECH)-信息技术部" value="2"></el-option>
+            <el-option label="(OPER)-运营管理部" value="4"></el-option>
+            <el-option label="(FINA)-财务部" value="5"></el-option>
+            <el-option label="(CPB)-产品部" value="6"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item prop="name6" label="是否有效" required>
+          <el-select v-model="addModelData.name6" placeholder="是否有效">
+            <el-option label="是" value="1"></el-option>
+            <el-option label="否" value="0"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item prop="name7" label="部门地址">
+          <el-input v-model="addModelData.name7"></el-input>
+        </el-form-item>
+        <el-form-item prop="name8" label="备注">
+          <el-input type="textarea" v-model="addModelData.name8"></el-input>
+        </el-form-item>
+      </el-form>
+    </alert-model>
+
     <!-- 修改model -->
-    <alert-model v-show="display" :display.sync="display" @put="modelSubmit" title="测试">
-      <el-form :model="modelData" class="alert-model-form" label-width="80px">
-        <el-form-item :label="modelData.label">
-          <el-input v-model="modelData.value" :placeholder="`请输入${modelData.label}`" />
+    <alert-model v-show="editorDisplay" @on-submit="editorModelSubmit" @on-cancel="editorModelCancel" title="测试">
+      <el-form :model="editorModelData" class="alert-model-form" label-width="80px">
+        <el-form-item prop="name9" label="部门编号" required>
+          <el-input v-model="editorModelData.name9"></el-input>
+        </el-form-item>
+        <el-form-item prop="name1" label="部门名称" required>
+          <el-input v-model="editorModelData.name1"></el-input>
+        </el-form-item>
+        <el-form-item prop="name2" label="部门代码" required>
+          <el-input v-model="editorModelData.name2"></el-input>
+        </el-form-item>
+        <el-form-item prop="name3" label="部门级别" required>
+          <el-input v-model="editorModelData.name3"></el-input>
+        </el-form-item>
+        <el-form-item prop="name5" label="上级部门" required>
+          <el-select v-model="editorModelData.name5" placeholder="请选择部门">
+            <el-option label="(GYZB)-国银证保" value="1"></el-option>
+            <el-option label="(TECH)-信息技术部" value="2"></el-option>
+            <el-option label="(OPER)-运营管理部" value="4"></el-option>
+            <el-option label="(FINA)-财务部" value="5"></el-option>
+            <el-option label="(CPB)-产品部" value="6"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item prop="name6" label="是否有效" required>
+          <el-select v-model="editorModelData.name6" placeholder="是否有效">
+            <el-option label="是" value="1"></el-option>
+            <el-option label="否" value="0"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item prop="name7" label="部门地址">
+          <el-input v-model="editorModelData.name7"></el-input>
+        </el-form-item>
+        <el-form-item prop="name8" label="备注">
+          <el-input type="textarea" v-model="editorModelData.name8"></el-input>
         </el-form-item>
       </el-form>
     </alert-model>
@@ -58,36 +126,27 @@
 
 <script>
 const testData = {
-  serial: '1',
-  departname: '国银证宝',
-  departcode: 'GZYB',
-  level: '2',
-  preserial: '0',
-  valid: 'Y',
-  creator: '创建人',
-  date: '2015-12-22 6:08:54',
-  regenerator: '管理员',
-  turnovertime: '2015-12-22 6:08:54'
+  name1: '1',
+  name2: '国银证宝',
+  name3: 'GZYB',
+  name4: '2',
+  name5: '0',
+  name6: 'Y',
+  name7: '创建人',
+  name8: '2015-12-22 6:08:54',
+  name9: '管理员',
+  name10: '2015-12-22 6:08:54'
 };
 
 export default {
   props: ['searchText'],
   data() {
     return {
-      examine: {
-        departcode: '',
-        departname: ''
-      },
-      display: false,
-      modelData: {
-        label: '账户名', //label
-        value: '', //输入值(默认值)
-        type: '', //表单类型 text select ...
-        options: [{ label: '', value: '' }], //type为selec时的选项
-        rules: {}, //校验规则
-        disable: false, //禁止修改
-        reuqire: false //是否必填
-      },
+      examine: {},
+      addDisplay: false,
+      addModelData: {},
+      editorDisplay: false,
+      editorModelData: {},
       tableData: new Array(5).fill(testData),
       paginationOps: {
         pageSizes: [5, 10, 15, 20],
@@ -97,21 +156,38 @@ export default {
   },
   watch: {
     // 监听search传来的数据
-    searchText(v, o) {
-      if (!v || v === o) return;
+    searchText(v) {
       console.log(v);
     }
   },
   created() {},
   methods: {
-    toggle() {
-      this.display = true;
+    addModelSubmit(c) {
+      this.$refs['alertAddModelForm'].validate((files, object) => {
+        if (files) {
+          // 验证通过 发送请求添加数据到数据库
+          c(); //执行回调
+        } else {
+          const keys = Object.keys(object);
+          this.$message.error(`${keys[0]}不可为空`);
+        }
+      });
+      console.log(this.addModelData);
     },
-    modelSubmit() {
-      console.log(this.modelData);
+    addModelCancel() {
+      this.addDisplay = false;
+      // this.resetFormFields('alertAddModelForm');
+    },
+    editorModelCancel() {
+      this.editorDisplay = false;
+    },
+    editorModelSubmit(c) {
+      console.log(this.editorModelData);
+      c();
     },
     editorClick(row) {
-      this.display = true;
+      this.editorDisplay = true;
+      this.editorModelData = row;
       console.log(row);
     },
     goToSearch() {
@@ -120,7 +196,7 @@ export default {
     },
     insertItem() {
       // 新增
-      console.log('新增');
+      this.addDisplay = true;
     }
   }
 };

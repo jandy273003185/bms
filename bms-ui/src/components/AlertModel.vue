@@ -1,10 +1,10 @@
 <template>
   <div class='alert-model' @click.stop.prevent="closeModel">
-    <div class="alert-model-inner" @click.stop.prevent>
+    <div class="alert-model-inner" @click.stop>
       <div v-show="title" class="alert-model-title">{{title}} <span @click="closeModel" class="el-icon-close"></span> </div>
       <!-- 表单内容 -->
       <slot></slot>
-      <div class="btns">
+      <div class="btns" v-if="!hideBtn">
         <el-button size="small" @click="closeModel">取消</el-button>
         <el-button size="small" type="primary" @click="goToSubmit">提交</el-button>
       </div>
@@ -14,7 +14,14 @@
 
 <script>
 export default {
-  props: ['title'],
+  props: {
+    title: {
+      type: String
+    },
+    hideBtn: {
+      type: Boolean
+    }
+  },
   data() {
     return {};
   },
@@ -67,7 +74,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   span {
-    color: #dddddd;
+    color: #999;
     cursor: pointer;
   }
 }

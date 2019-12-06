@@ -166,8 +166,8 @@ public class ServiceParenterController {
 				//表示个人
 				merchantCode = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + GenSN.getRandomNum(3);
 			}else{
-				merchant.setMerchantCode(SequenceUtils.getMerchantSeqNo("P"));
-//				merchantCode = BusinessUtils.getMerchantId(merchant.getBusinessLicense());
+				merchant.setMerchantCode("P" + GenSN.getRandomNum(18));
+//				merchant  Code = BusinessUtils.getMerchantId(merchant.getBusinessLicense());
 			}
 			if("".equals(merchant.getMerchantCode()) || null == merchant.getMerchantCode()) {
 				merchant.setMerchantCode(GenSN.getRandomNum(19));

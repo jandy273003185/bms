@@ -95,6 +95,8 @@ public class TdMerchantDetailInfo implements Serializable{
 	
 	private String zfbConfirmUrl;
 	
+	private String merchantPid;
+	
 	/**
 	 * 微信支付分配申请单号
 	 */
@@ -135,6 +137,15 @@ public class TdMerchantDetailInfo implements Serializable{
 	private String zfbChildNo;
 	
 	
+	
+	public String getMerchantPid() {
+		return merchantPid;
+	}
+
+	public void setMerchantPid(String merchantPid) {
+		this.merchantPid = merchantPid;
+	}
+
 	public String getWxChildNo() {
 		return wxChildNo;
 	}

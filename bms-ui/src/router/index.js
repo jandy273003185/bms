@@ -4,6 +4,7 @@ Vue.use(Router)
 
 import Home from '@/views/Home/Home'
 import Login from '@/views/Login/Login'
+import Welcome from '@/views/Welcome/Welcome'
 // 系统管理
 import Suser from '@/views/System/Suser/Suser'
 const Role = () => import(/* webpackChunkName: "system" */ '@/views/System/Role/Role');
@@ -375,7 +376,7 @@ function flatten(arr) {
   return arr2.flat();
 }
 
-const menuRoutes = flatten(menuRouter);
+const menuRoutes = [...flatten(menuRouter), { path: '/welcome', component: Welcome }];
 
 // 默认路由
 const tacitly = [
@@ -394,11 +395,11 @@ const tacitly = [
 const common = [
   {
     path: '/',
-    redirect: '/system/user'
+    redirect: '/welcome'
   },
   {
     path: '*',
-    redirect: '/system/user'
+    redirect: '/system/suser'
   }
 ];
 

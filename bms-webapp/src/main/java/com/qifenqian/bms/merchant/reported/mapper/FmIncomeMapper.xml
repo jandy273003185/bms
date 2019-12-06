@@ -332,6 +332,9 @@
 		 	<if test="zfbConfirmUrl != null and zfbConfirmUrl !='' ">
 		 	`zfb_confirm_url` = #{zfbConfirmUrl,jdbcType = VARCHAR},
 		 	</if>
+		 	<if test="merchantPid != null and merchantPid !='' ">
+		 	`merchant_pid` = #{merchantPid,jdbcType = VARCHAR},
+		 	</if>
 		 	<if test="signUrl != null and signUrl !='' ">
 		 	`sign_url` = #{signUrl,jdbcType = VARCHAR},
 		 	</if>
