@@ -92,7 +92,7 @@
 
     <!-- 删除商户详情 -->
     <el-dialog title="删除商户详情" :visible.sync="deleteDisplay" width="600px">
-      <div class="deleted-model-content">您确定要删除该任务调度配置<span>[8338]</span>吗？</div>
+      <div class="dialog-deleted-content">您确定要删除该任务调度配置<span>[8338]</span>吗？</div>
       <div slot="footer" class="dialog-footer">
         <el-button @click="deleteModelCancel">取 消</el-button>
         <el-button type="primary" @click="deleteModelSubmit">确 定</el-button>
@@ -188,16 +188,6 @@ export default {
   display: flex;
   .el-button {
     margin-left: 10px;
-  }
-}
-.deleted-model-content {
-  height: 60px;
-  line-height: 60px;
-  font-size: 16px;
-  font-weight: 700;
-  text-align: center;
-  span {
-    color: #ff0000;
   }
 }
 </style>

@@ -128,7 +128,7 @@
 
     <!-- 任务删除 -->
     <el-dialog title="删除任务" :visible.sync="deleteDisplay" width="600px">
-      <div class="deleted-model-content">您确定要删除该任务调度配置[8338]吗？</div>
+      <div class="dialog-deleted-content">您确定要删除该任务调度配置[8338]吗？</div>
       <div slot="footer" class="dialog-footer">
         <el-button @click="deleteModelCancel">取 消</el-button>
         <el-button type="primary" @click="deleteModelSubmit">确 定</el-button>
@@ -266,13 +266,4 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
-.deleted-model-content {
-  height: 60px;
-  line-height: 60px;
-  font-size: 16px;
-  color: #ff0000;
-  font-weight: 700;
-  text-align: center;
-}
-</style>
+<style lang='scss' scoped></style>

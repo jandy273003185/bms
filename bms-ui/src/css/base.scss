@@ -238,3 +238,15 @@ video {
   padding: 10px;
   border: 1px solid #e8b995;
 }
+
+.dialog-deleted-content {
+  height: 60px;
+  line-height: 60px;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+
+  span {
+    color: #ff0000;
+  }
+}
