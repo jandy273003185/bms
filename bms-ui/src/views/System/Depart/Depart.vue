@@ -47,7 +47,7 @@
     </page-model>
 
     <!-- 部门新增 -->
-    <alert-model v-show="addDisplay" title="部门新增" @on-submit="addModelSubmit" @on-cancel="addModelCancel">
+    <el-dialog title="角色新增" :visible.sync="addDisplay" width="600px">
       <el-form ref="alertAddModelForm" :model="addModelData" class="alert-model-form" label-width="100px" :show-message="false">
         <el-form-item prop="name1" label="部门名称" required>
           <el-input v-model="addModelData.name1"></el-input>
@@ -80,10 +80,14 @@
           <el-input type="textarea" v-model="addModelData.name8"></el-input>
         </el-form-item>
       </el-form>
-    </alert-model>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="addModelCancel">取 消</el-button>
+        <el-button type="primary" @click="addModelSubmit">确 定</el-button>
+      </div>
+    </el-dialog>
 
     <!-- 修改model -->
-    <alert-model v-show="editorDisplay" @on-submit="editorModelSubmit" @on-cancel="editorModelCancel" title="测试">
+    <el-dialog title="部门修改" :visible.sync="editorDisplay" width="600px">
       <el-form :model="editorModelData" class="alert-model-form" label-width="80px">
         <el-form-item prop="name9" label="部门编号" required>
           <el-input v-model="editorModelData.name9"></el-input>
@@ -119,7 +123,11 @@
           <el-input type="textarea" v-model="editorModelData.name8"></el-input>
         </el-form-item>
       </el-form>
-    </alert-model>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="editorModelCancel">取 消</el-button>
+        <el-button type="primary" @click="editorModelSubmit">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 
 </template>
@@ -162,11 +170,11 @@ export default {
   },
   created() {},
   methods: {
-    addModelSubmit(c) {
+    addModelSubmit() {
       this.$refs['alertAddModelForm'].validate((files, object) => {
         if (files) {
           // 验证通过 发送请求添加数据到数据库
-          c(); //执行回调
+          this.addDisplay = false;
         } else {
           const keys = Object.keys(object);
           this.$message.error(`${keys[0]}不可为空`);
@@ -181,9 +189,8 @@ export default {
     editorModelCancel() {
       this.editorDisplay = false;
     },
-    editorModelSubmit(c) {
-      console.log(this.editorModelData);
-      c();
+    editorModelSubmit() {
+      this.editorDisplay = false;
     },
     editorClick(row) {
       this.editorDisplay = true;

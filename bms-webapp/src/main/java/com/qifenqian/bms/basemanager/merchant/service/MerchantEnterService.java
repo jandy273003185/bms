@@ -374,7 +374,10 @@ public class MerchantEnterService {
 		custScan.setCertifyType("23");
 		String otherMaterialPath = findPicturePath(custScan);
 		picturePath.setSignaturePath("/pic/" + otherMaterialPath);
-		
+		//15 非法人结算授权函
+		custScan.setCertifyType("15");
+		String letterOfAuthPath = findPicturePath(custScan);
+		picturePath.setLetterOfAuthPath("/pic/" + letterOfAuthPath);
 		return picturePath;
 				
 	}

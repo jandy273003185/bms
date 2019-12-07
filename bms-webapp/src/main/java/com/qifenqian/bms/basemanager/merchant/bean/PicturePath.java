@@ -46,9 +46,17 @@ public class PicturePath implements Serializable {
 	private String otherMaterialPath;
 	//36 微信联系人信息确认二维码
 	private String infoQrcodePath;
+	//15 非法人结算授权函
+	private String letterOfAuthPath;
 	
 	
 	
+	public String getLetterOfAuthPath() {
+		return letterOfAuthPath;
+	}
+	public void setLetterOfAuthPath(String letterOfAuthPath) {
+		this.letterOfAuthPath = letterOfAuthPath;
+	}
 	public String getInfoQrcodePath() {
 		return infoQrcodePath;
 	}

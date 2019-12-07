@@ -1,4 +1,5 @@
 <template>
+  <!-- 交易管理 => 客户转账 -->
   <div>
     <page-model>
       <template slot="controlQueryOps">
@@ -53,7 +54,7 @@
       <template slot="controlQueryBtns">
         <el-button type="primary" @click="goToSearch">查询<i class="el-icon-search"></i> </el-button>
         <el-button type="warning" @click="resetFormFileds">清空<i class="el-icon-rank"></i></el-button>
-        <el-button type="info" @click="insertItem">新增<i class="el-icon-circle-plus-outline"></i></el-button>
+        <el-button type="info" @click="download">导出报表<i class="el-icon-download"></i></el-button>
       </template>
 
       <template slot="tableInner">
@@ -73,7 +74,7 @@
 
           <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
-              <el-button type="text" size="small" @click="editorClick(scope.row)">查看详情</el-button>
+              <el-button type="text" size="small" @click="lookClick(scope.row)">查看详情</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -85,14 +86,47 @@
       </template>
     </page-model>
 
-    <!-- 修改model -->
-    <alert-model v-show="display"  @on-submit="editorModelSubmit" @on-cancel="editorModelCancel" title="测试">
-      <el-form :model="modelData" class="alert-model-form" label-width="80px">
-        <el-form-item :label="modelData.label">
-          <el-input v-model="modelData.value" :placeholder="`请输入${modelData.label}`" />
+    <!-- 订单预览 -->
+    <el-dialog title="订单预览" :visible.sync="lookDisplay" width="900px">
+      <el-form :model="lookModelData" disabled label-width="110px" :inline="true" ref="lookQueryForm" class="look-query-form">
+        <el-form-item label="订单名称" prop="name1">
+          <el-input v-model="lookModelData.name1"></el-input>
+        </el-form-item>
+        <el-form-item label="订单描述" prop="name2">
+          <el-input v-model="lookModelData.name2"></el-input>
+        </el-form-item>
+        <el-form-item label="七分钱订单号:" prop="name3">
+          <el-input v-model="lookModelData.name3"></el-input>
+        </el-form-item>
+        <el-form-item label="交广科技订单号" prop="name4">
+          <el-input v-model="lookModelData.name4"></el-input>
+        </el-form-item>
+        <el-form-item label="付方客户手机号" prop="name5">
+          <el-input v-model="lookModelData.name5"></el-input>
+        </el-form-item>
+        <el-form-item label="付方客户名称" prop="name5">
+          <el-input v-model="lookModelData.name5"></el-input>
+        </el-form-item>
+        <el-form-item label="收方客户手机号" prop="name6">
+          <el-input v-model="lookModelData.name6"></el-input>
+        </el-form-item>
+        <el-form-item label="付方客户名称" prop="name7">
+          <el-input v-model="lookModelData.name7"></el-input>
+        </el-form-item>
+        <el-form-item label="订单开始日期" prop="name8">
+          <el-input v-model="lookModelData.name8"></el-input>
+        </el-form-item>
+        <el-form-item label="订单状态" prop="name9">
+          <el-input v-model="lookModelData.name9"></el-input>
+        </el-form-item>
+        <el-form-item label="订单金额" prop="name10">
+          <el-input v-model="lookModelData.name10"></el-input>
+        </el-form-item>
+        <el-form-item label="账期" prop="name11">
+          <el-input v-model="lookModelData.name11"></el-input>
         </el-form-item>
       </el-form>
-    </alert-model>
+    </el-dialog>
   </div>
 
 </template>
@@ -118,8 +152,8 @@ export default {
   data() {
     return {
       examine: {},
-      display: false,
-      editorModelData:{},
+      lookDisplay: false,
+      lookModelData: {},
       tableData: new Array(5).fill(testData),
       paginationOps: {
         pageSizes: [5, 10, 15, 20],
@@ -132,29 +166,29 @@ export default {
     searchText(v) {
       console.log(v);
     }
-    
   },
   created() {},
   methods: {
-    editorModelCancel() {
-      this.editorDisplay = false;
+    lookModelCancel() {
+      this.lookDisplay = false;
     },
-    
-    editorModelSubmit(c) {
-      console.log(this.editorModelData);
+
+    lookModelSubmit(c) {
+      console.log(this.lookModelData);
       c();
     },
-    editorClick(row) {
-      this.display = true;
+    lookClick(row) {
+      this.lookDisplay = true;
+      this.lookModelData = row;
       console.log(row);
     },
     goToSearch() {
       //查询
       console.log(this.examine, '查询');
     },
-    insertItem() {
+    download() {
       // 新增
-      this.addDisplay = true;
+      this.$message('导出报表');
     },
     resetFormFileds() {
       this.$refs['controlQueryForm1'].resetFields();
@@ -165,4 +199,14 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped></style>
+<style lang='scss'>
+.look-query-form {
+  .el-form-item {
+    width: 50%;
+    margin-right: 0;
+  }
+  .el-form-item__content {
+    width: 300px;
+  }
+}
+</style>

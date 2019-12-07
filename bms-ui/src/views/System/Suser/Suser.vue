@@ -61,7 +61,7 @@
     </page-model>
 
     <!-- 用户新增 -->
-    <alert-model v-show="addDisplay" title="用户新增" @on-submit="addModelSubmit" @on-cancel="addModelCancel">
+    <el-dialog title="用户新增" :visible.sync="addDisplay" width="600px">
       <el-form ref="alertAddModelForm" :model="addModelData" class="alert-model-form" label-width="80px" :show-message="false">
         <el-form-item prop="name1" label="员工编号" required>
           <el-input v-model="addModelData.name1"></el-input>
@@ -94,10 +94,10 @@
           </el-select>
         </el-form-item>
         <el-form-item prop="name8" label="角色" required>
-          <div class="user-checked">
-            <el-input v-model="addModelData.name8"></el-input>
-            <el-button type="warning" @click="editorRoleClick">角色选择</el-button>
-          </div>
+          <el-select v-model="addModelData.name8" multiple placeholder="请选择">
+            <el-option v-for="item in roleModelData" :key="item.value" :label="item.name2" :value="item.name1">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item prop="name9" label="办公电话">
           <el-input v-model="addModelData.name9"></el-input>
@@ -115,10 +115,14 @@
           <el-input type="textarea" v-model="addModelData.name13"></el-input>
         </el-form-item>
       </el-form>
-    </alert-model>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="addModelCancel">取 消</el-button>
+        <el-button type="primary" @click="addModelSubmit">确 定</el-button>
+      </div>
+    </el-dialog>
 
     <!-- 修改model -->
-    <alert-model v-show="editorDisplay" title="用户修改" @on-submit="editorModelSubmit" @on-cancel="editorModelCancel">
+    <el-dialog title="用户修改" :visible.sync="editorDisplay" width="600px">
       <el-form ref="alertModelForm" :model="editorModelData" class="alert-model-form" label-width="80px" :show-message="false">
         <el-form-item prop="name1" label="编号" required>
           <el-input disabled v-model="editorModelData.name1"></el-input>
@@ -162,10 +166,10 @@
           </el-select>
         </el-form-item>
         <el-form-item prop="name10" label="角色" required>
-          <div class="user-checked">
-            <el-input v-model="editorModelData.name10"></el-input>
-            <el-button type="warning" @click="editorRoleClick">角色选择</el-button>
-          </div>
+          <el-select v-model="editorModelData.name10" multiple placeholder="请选择">
+            <el-option v-for="item in roleModelData" :key="item.value" :label="item.name2" :value="item.name1">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item prop="name11" label="办公电话">
           <el-input v-model="editorModelData.name11"></el-input>
@@ -183,21 +187,11 @@
           <el-input type="textarea" v-model="editorModelData.name15"></el-input>
         </el-form-item>
       </el-form>
-    </alert-model>
-
-    <!-- 角色选择 -->
-    <alert-model v-show="roleDisplay" title="角色选择" @on-submit="roleModelSubmit" @on-cancel="roleModelCancel">
-      <el-table ref="roleTableForm" border :data="roleModelData" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
-        <el-table-column type="selection" width="55">
-        </el-table-column>
-        <!-- <el-table-column prop="name1" label="角色编号">
-        </el-table-column>
-        <el-table-column prop="name2" label="角色名称">
-        </el-table-column> -->
-
-        <el-table-column v-for="(item,index) in roleModelData[0]" :key="index" :label="{name1:'角色编号',name2:'角色名称'}[index]" :prop="index"></el-table-column>
-      </el-table>
-    </alert-model>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="editorModelCancel">取 消</el-button>
+        <el-button type="primary" @click="editorModelSubmit">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -225,8 +219,6 @@ export default {
       addModelData: {}, //新增表单数据
       editorDisplay: false, //编辑
       editorModelData: {}, //编辑数据
-      roleDisplay: false, //角色选择
-      multipleSelection: [], //角色选择checkbox数据
       roleModelData: [
         //角色选择
         { name1: '1', name2: '管理员' },
@@ -258,9 +250,8 @@ export default {
   created() {},
   methods: {
     // 控制编辑
-    editorModelSubmit(callback) {
-      console.log('提交', this.modelData);
-      callback();
+    editorModelSubmit() {
+      console.log('提交', this.editorModelData);
     },
     editorModelCancel() {
       this.resetFormFields('alertModelForm');
@@ -270,40 +261,16 @@ export default {
       this.editorDisplay = true;
       console.log(row);
     },
-    // 角色选择
-    roleModelSubmit(callback) {
-      const data = this.multipleSelection.map(ele => ele.name2).join(',');
-      // 判断是新增还是修改，从而将数据加入不同的data
-      if (this.addDisplay) {
-        this.addModelData = Object.assign({}, this.addModelData, {
-          name8: data
-        });
-      } else {
-        this.editorModelData = Object.assign({}, this.editorModelData, {
-          name10: data
-        });
-      }
-      callback(); //完成回调
-    },
-    roleModelCancel() {
-      this.roleDisplay = false;
-    },
-    editorRoleClick() {
-      this.roleDisplay = true;
-    },
-    handleSelectionChange(val) {
-      console.log(val, 'val');
-      this.multipleSelection = val;
-    },
     // 新增
     insertItem() {
       this.addDisplay = true;
     },
-    addModelSubmit(callback) {
+    addModelSubmit() {
+      console.log(this.addModelData);
       this.$refs['alertAddModelForm'].validate((files, object) => {
         if (files) {
           // 验证通过 发送请求添加数据到数据库
-          callback(); //执行回调
+          this.addDisplay = false;
         } else {
           const keys = Object.keys(object);
           this.$message.error(`${keys[0]}不可为空`);
@@ -354,12 +321,5 @@ export default {
 }
 .page-model-pagination {
   padding: 10px 0;
-}
-
-.user-checked {
-  display: flex;
-  .el-button {
-    margin-left: 10px;
-  }
 }
 </style>

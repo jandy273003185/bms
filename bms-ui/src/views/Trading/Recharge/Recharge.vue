@@ -1,4 +1,5 @@
 <template>
+  <!-- 交易管理 => 充值查询 -->
   <div>
     <!-- <page-model>
       <template slot="controlQueryOps">
@@ -88,7 +89,7 @@ export default {
     return {
       examine: {},
       display: false,
-      editorModelData:{},
+      editorModelData: {},
       tableData: new Array(5).fill(testData),
       paginationOps: {
         pageSizes: [5, 10, 15, 20],
@@ -101,14 +102,13 @@ export default {
     searchText(v) {
       console.log(v);
     }
-    
   },
   created() {},
   methods: {
     editorModelCancel() {
       this.editorDisplay = false;
     },
-    
+
     editorModelSubmit(c) {
       console.log(this.editorModelData);
       c();

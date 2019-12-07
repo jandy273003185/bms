@@ -59,8 +59,8 @@
     </page-model>
 
     <!-- 任务新增 -->
-    <alert-model v-show="addDisplay" title="任务新增" @on-submit="addModelSubmit" @on-cancel="addModelCancel">
-      <el-form ref="alertAddModelForm" :model="addModelData" class="alert-model-form" label-width="120px">
+    <el-dialog title="新增任务" :visible.sync="addDisplay" width="600px">
+      <el-form ref="alertAddModelForm" :model="addModelData" class="alert-model-form" label-width="120px" :show-message="false">
         <el-form-item prop="name1" label="任务名称" required>
           <el-input v-model="addModelData.name1"></el-input>
         </el-form-item>
@@ -86,10 +86,14 @@
           <el-input type="textarea" v-model="addModelData.name8"></el-input>
         </el-form-item>
       </el-form>
-    </alert-model>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="addModelCancel">取 消</el-button>
+        <el-button type="primary" @click="addModelSubmit">确 定</el-button>
+      </div>
+    </el-dialog>
 
     <!-- 修改model -->
-    <alert-model v-show="editorDisplay" @on-submit="editorModelSubmit" @on-cancel="editorModelCancel" title="任务修改">
+    <el-dialog title="任务修改" :visible.sync="editorDisplay" width="600px">
       <el-form :model="editorModelData" class="alert-model-form" label-width="120px" :show-message="false">
         <el-form-item prop="name1" label="任务名称" required>
           <el-input v-model="editorModelData.name1"></el-input>
@@ -116,16 +120,24 @@
           <el-input type="textarea" v-model="editorModelData.name8"></el-input>
         </el-form-item>
       </el-form>
-    </alert-model>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="editorModelCancel">取 消</el-button>
+        <el-button type="primary" @click="editorModelSubmit">确 定</el-button>
+      </div>
+    </el-dialog>
 
     <!-- 任务删除 -->
-    <alert-model v-show="deleteDisplay" @on-submit="deleteModelSubmit" @on-cancel="deleteModelCancel" title="任务删除">
-      <div class="deleted-model-content">您确定要删除该任务调度配置[8338]吗？</div>
-    </alert-model>
+    <el-dialog title="删除任务" :visible.sync="deleteDisplay" width="600px">
+      <div class="dialog-deleted-content">您确定要删除该任务调度配置[8338]吗？</div>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="deleteModelCancel">取 消</el-button>
+        <el-button type="primary" @click="deleteModelSubmit">确 定</el-button>
+      </div>
+    </el-dialog>
 
     <!-- 任务执行 -->
-    <alert-model v-show="performDisplay" @on-submit="performModelSubmit" @on-cancel="performModelCancel" title="任务执行">
-      <el-form :model="performModelData" :disabled="true" class="alert-model-form" label-width="80px">
+    <el-dialog title="任务执行" :visible.sync="performDisplay" width="600px">
+      <el-form :model="performModelData" :disabled="true" class="alert-model-form" label-width="100px">
         <el-form-item prop="name1" label="任务名称" required>
           <el-input v-model="performModelData.name1"></el-input>
         </el-form-item>
@@ -142,7 +154,11 @@
           <el-input v-model="performModelData.name5"></el-input>
         </el-form-item>
       </el-form>
-    </alert-model>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="performModelCancel">取 消</el-button>
+        <el-button type="primary" @click="performModelSubmit">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -187,11 +203,11 @@ export default {
   },
   created() {},
   methods: {
-    addModelSubmit(c) {
+    addModelSubmit() {
       this.$refs['alertAddModelForm'].validate((files, object) => {
         if (files) {
           // 验证通过 发送请求添加数据到数据库
-          c(); //执行回调
+          this.addDisplay = false;
         } else {
           const keys = Object.keys(object);
           this.$message.error(`${keys[0]}不可为空`);
@@ -206,28 +222,29 @@ export default {
     editorModelCancel() {
       this.editorDisplay = false;
     },
-    editorModelSubmit(c) {
+    editorModelSubmit() {
       console.log(this.editorModelData);
-      c();
+      this.editorDisplay = false;
     },
     editorClick(row) {
       this.editorDisplay = true;
+      this.editorModelData = row;
       console.log(row);
     },
     performModelCancel() {
       this.performDisplay = false;
     },
-    performModelSubmit(c) {
+    performModelSubmit() {
       console.log(this.performModelData);
-      c();
+      this.performDisplay = false;
     },
     performClick(row) {
       this.performDisplay = true;
+      this.performModelData = row;
       console.log(row);
     },
-    deleteModelSubmit(c) {
-      this.deleteDisplay = true;
-      c();
+    deleteModelSubmit() {
+      this.deleteDisplay = false;
     },
     deleteModelCancel(row) {
       this.deleteDisplay = false;
@@ -249,13 +266,4 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
-.deleted-model-content {
-  height: 60px;
-  line-height: 60px;
-  font-size: 13px;
-  color: #ff0000;
-  font-weight: 700;
-  text-align: center;
-}
-</style>
+<style lang='scss' scoped></style>

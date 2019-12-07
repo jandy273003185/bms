@@ -1,4 +1,5 @@
 <template>
+  <!-- 交易管理 => 消费查询 -->
   <div>
     <!-- <page-model>
       <template slot="controlQueryOps">
@@ -88,7 +89,7 @@ export default {
     return {
       examine: {},
       display: false,
-      editorModelData:{},
+      editorModelData: {},
       tableData: new Array(5).fill(testData),
       paginationOps: {
         pageSizes: [5, 10, 15, 20],

@@ -1,4 +1,5 @@
 <template>
+  <!-- 交易管理 => 交易撤销 -->
   <div>
     <page-model>
       <template slot="controlQueryOps">
@@ -22,7 +23,7 @@
       <template slot="controlQueryBtns">
         <el-button type="primary" @click="goToSearch">查询<i class="el-icon-search"></i> </el-button>
         <el-button type="warning" @click="$refs['controlQueryForm'].resetFields()">清空<i class="el-icon-rank"></i></el-button>
-        <el-button type="info" @click="insertItem">新增<i class="el-icon-circle-plus-outline"></i></el-button>
+        <el-button type="info" @click="insertItem">新增申请<i class="el-icon-circle-plus-outline"></i></el-button>
       </template>
       <template slot="tableInner">
         <el-table :data="tableData" border>
@@ -45,7 +46,8 @@
 
           <el-table-column fixed="right" label="操作" width="60">
             <template slot-scope="scope">
-              <el-button type="text" size="small" @click="editorClick(scope.row)">审核</el-button>
+              <el-button v-if="scope.flag" type="text" size="small" @click="performClick(scope.row)">审核</el-button>
+              <el-button v-if="!scope.flag" type="text" size="small" @click="performClick(scope.row)">审核</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -57,16 +59,68 @@
       </template>
     </page-model>
 
-    <!-- 修改model -->
-    <alert-model v-show="display"  @on-submit="editorModelSubmit" @on-cancel="editorModelCancel" title="测试">
-      <el-form :model="modelData" class="alert-model-form" label-width="80px">
-        <el-form-item :label="modelData.label">
-          <el-input v-model="modelData.value" :placeholder="`请输入${modelData.label}`" />
+    <!-- 交易撤销新增申请 -->
+    <el-dialog title="交易撤销新增申请" :visible.sync="addDisplay" width="600px">
+      <el-form ref="alertAddModelForm" :model="addModelData" class="alert-model-form" label-width="120px" :show-message="false">
+        <el-form-item prop="name1" label="原交易订单号">
+          <el-input v-model="addModelData.name1"></el-input>
+        </el-form-item>
+        <el-form-item prop="name8" label="撤销原因">
+          <el-input type="textarea" v-model="addModelData.name8"></el-input>
         </el-form-item>
       </el-form>
-    </alert-model>
-  </div>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="addModelCancel">取消</el-button>
+        <el-button type="primary" @click="addModelSubmit">提交</el-button>
+      </div>
+    </el-dialog>
 
+    <!-- 任务执行 -->
+    <el-dialog title="任务执行" :visible.sync="performDisplay" width="600px">
+      <el-form :model="performModelData" class="alert-model-form" label-width="120px">
+        <el-form-item prop="name1" label="订单号" required>
+          <el-input v-model="performModelData.name1"></el-input>
+        </el-form-item>
+        <el-form-item prop="name2" label="原交易订单号" required>
+          <el-input v-model="performModelData.name2"></el-input>
+        </el-form-item>
+        <el-form-item prop="name3" label="原交易名称" required>
+          <el-input v-model="performModelData.name3"></el-input>
+        </el-form-item>
+        <el-form-item prop="name4" label="原交易时间" required>
+          <el-input v-model="performModelData.name4"></el-input>
+        </el-form-item>
+        <el-form-item prop="name4" label="商户账号" required>
+          <el-input v-model="performModelData.name4"></el-input>
+        </el-form-item>
+        <el-form-item prop="name5" label="撤销金额" required>
+          <el-input v-model="performModelData.name5"></el-input>
+        </el-form-item>
+        <el-form-item prop="name6" label="撤销原因" required>
+          <el-input v-model="performModelData.name6"></el-input>
+        </el-form-item>
+        <el-form-item prop="name7" label="钱记到家测试" required>
+          <el-input v-model="performModelData.name7"></el-input>
+        </el-form-item>
+        <el-form-item prop="name8" label="创建人" required>
+          <el-input v-model="performModelData.name8"></el-input>
+        </el-form-item>
+        <el-form-item prop="name9" label="创建时间" required>
+          <el-input v-model="performModelData.name9"></el-input>
+        </el-form-item>
+        <el-form-item prop="name12" label="审核状态" required>
+          <el-select v-model="performModelData.name12">
+            <el-option peop="1" value="审核通过"></el-option>
+            <el-option peop="0" value="审核不通过"></el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="performModelCancel">取 消</el-button>
+        <el-button type="primary" @click="performModelSubmit">确 定</el-button>
+      </div>
+    </el-dialog>
+  </div>
 </template>
 
 <script>
@@ -94,8 +148,10 @@ export default {
   data() {
     return {
       examine: {},
-      display: false,
-      editorModelData:{},
+      addDisplay: false,
+      addModelData: {},
+      performDisplay: false,
+      performModelData: {},
       tableData: new Array(5).fill(testData),
       paginationOps: {
         pageSizes: [5, 10, 15, 20],
@@ -108,20 +164,35 @@ export default {
     searchText(v) {
       console.log(v);
     }
-    
   },
   created() {},
   methods: {
-    editorModelCancel() {
-      this.editorDisplay = false;
+    addModelSubmit() {
+      this.$refs['alertAddModelForm'].validate((files, object) => {
+        if (files) {
+          // 验证通过 发送请求添加数据到数据库
+          this.addDisplay = false;
+        } else {
+          const keys = Object.keys(object);
+          this.$message.error(`${keys[0]}不可为空`);
+        }
+      });
+      console.log(this.addModelData);
     },
-    
-    editorModelSubmit(c) {
-      console.log(this.editorModelData);
-      c();
+    addModelCancel() {
+      this.addDisplay = false;
+      // this.resetFormFields('alertAddModelForm');
     },
-    editorClick(row) {
-      this.display = true;
+    performModelCancel() {
+      this.performDisplay = false;
+    },
+    performModelSubmit() {
+      console.log(this.performModelData);
+      this.performDisplay = false;
+    },
+    performClick(row) {
+      this.performDisplay = true;
+      this.performModelData = row;
       console.log(row);
     },
     goToSearch() {

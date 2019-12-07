@@ -1,4 +1,5 @@
 <template>
+  <!-- 异常列表 => 交广科技交易未明列表 -->
   <div>
     <page-model>
       <template slot="controlQueryOps">
@@ -21,7 +22,6 @@
       <template slot="controlQueryBtns">
         <el-button type="primary" @click="goToSearch">查询<i class="el-icon-search"></i> </el-button>
         <el-button type="warning" @click="$refs['controlQueryForm'].resetFields()">清空<i class="el-icon-rank"></i></el-button>
-        <el-button type="info" @click="insertItem">新增<i class="el-icon-circle-plus-outline"></i></el-button>
       </template>
       <template slot="tableInner">
         <el-table :data="tableData" border class="nofix">
@@ -69,8 +69,6 @@ export default {
   data() {
     return {
       examine: {},
-      display: false,
-      editorModelData:{},
       tableData: new Array(5).fill(testData),
       paginationOps: {
         pageSizes: [5, 10, 15, 20],
@@ -86,24 +84,9 @@ export default {
   },
   created() {},
   methods: {
-    editorModelCancel() {
-      this.editorDisplay = false;
-    },
-    editorModelSubmit(c) {
-      console.log(this.editorModelData);
-      c();
-    },
-    editorClick(row) {
-      this.display = true;
-      console.log(row);
-    },
     goToSearch() {
       //查询
       console.log(this.examine, '查询');
-    },
-    insertItem() {
-      // 新增
-      this.addDisplay = true;
     }
   }
 };
