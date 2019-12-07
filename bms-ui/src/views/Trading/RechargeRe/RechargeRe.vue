@@ -1,4 +1,5 @@
 <template>
+  <!-- 交易管理 => 充值撤销管理 -->
   <div>
     <page-model>
       <template slot="controlQueryOps">
@@ -24,6 +25,7 @@
         <el-button type="warning" @click="$refs['controlQueryForm'].resetFields()">清空<i class="el-icon-rank"></i></el-button>
         <el-button type="info" @click="insertItem">新增申请<i class="el-icon-circle-plus-outline"></i></el-button>
       </template>
+
       <template slot="tableInner">
         <el-table :data="tableData" border>
           <el-table-column prop='name1' label='订单号' min-width="140"></el-table-column>
@@ -41,9 +43,9 @@
           <el-table-column prop='name13' label='备注' min-width="120"></el-table-column>
 
           <el-table-column fixed="right" label="操作" width="60">
-            <template slot-scope="scope">
+            <!-- <template slot-scope="scope">
               <el-button type="text" size="small" @click="editorClick(scope.row)">编辑</el-button>
-            </template>
+            </template> -->
           </el-table-column>
         </el-table>
       </template>
@@ -54,16 +56,22 @@
       </template>
     </page-model>
 
-    <!-- 修改model -->
-    <alert-model v-show="display"  @on-submit="editorModelSubmit" @on-cancel="editorModelCancel" title="测试">
-      <el-form :model="modelData" class="alert-model-form" label-width="80px">
-        <el-form-item :label="modelData.label">
-          <el-input v-model="modelData.value" :placeholder="`请输入${modelData.label}`" />
+    <!-- 新增申请 -->
+    <el-dialog title="交易撤销新增申请" :visible.sync="addDisplay" width="600px">
+      <el-form ref="alertAddModelForm" :model="addModelData" class="alert-model-form" label-width="120px" :show-message="false">
+        <el-form-item prop="name1" label="原交易订单号">
+          <el-input v-model="addModelData.name1"></el-input>
+        </el-form-item>
+        <el-form-item prop="name5" label="撤销原因">
+          <el-input type="textarea" v-model="addModelData.name8"></el-input>
         </el-form-item>
       </el-form>
-    </alert-model>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="addModelCancel">取 消</el-button>
+        <el-button type="primary" @click="addModelSubmit">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
-
 </template>
 
 <script>
@@ -88,8 +96,10 @@ export default {
   data() {
     return {
       examine: {},
+      addDisplay: false,
+      addModelData: {},
       display: false,
-      editorModelData:{},
+      editorModelData: {},
       tableData: new Array(5).fill(testData),
       paginationOps: {
         pageSizes: [5, 10, 15, 20],
@@ -102,14 +112,29 @@ export default {
     searchText(v) {
       console.log(v);
     }
-    
   },
   created() {},
   methods: {
+    addModelSubmit() {
+      this.$refs['alertAddModelForm'].validate((files, object) => {
+        if (files) {
+          // 验证通过 发送请求添加数据到数据库
+          this.addDisplay = false;
+        } else {
+          const keys = Object.keys(object);
+          this.$message.error(`${keys[0]}不可为空`);
+        }
+      });
+      console.log(this.addModelData);
+    },
+    addModelCancel() {
+      this.addDisplay = false;
+      // this.resetFormFields('alertAddModelForm');
+    },
     editorModelCancel() {
       this.editorDisplay = false;
     },
-    
+
     editorModelSubmit(c) {
       console.log(this.editorModelData);
       c();

@@ -57,14 +57,6 @@
       </template>
     </page-model> -->
     交易汇总 内容待添加
-    <!-- 修改model -->
-    <alert-model v-show="display"  @on-submit="editorModelSubmit" @on-cancel="editorModelCancel" title="测试">
-      <el-form :model="modelData" class="alert-model-form" label-width="80px">
-        <el-form-item :label="modelData.label">
-          <el-input v-model="modelData.value" :placeholder="`请输入${modelData.label}`" />
-        </el-form-item>
-      </el-form>
-    </alert-model>
   </div>
 
 </template>
@@ -95,7 +87,7 @@ export default {
     return {
       examine: {},
       display: false,
-      editorModelData:{},
+      editorModelData: {},
       tableData: new Array(5).fill(testData),
       paginationOps: {
         pageSizes: [5, 10, 15, 20],
@@ -108,14 +100,13 @@ export default {
     searchText(v) {
       console.log(v);
     }
-    
   },
   created() {},
   methods: {
     editorModelCancel() {
       this.editorDisplay = false;
     },
-    
+
     editorModelSubmit(c) {
       console.log(this.editorModelData);
       c();
