@@ -481,6 +481,21 @@ $(function(){
 									<input type="text" id="certifyNo" name="v" placeholder="请输入账户人身份证号码"  value="" style="width:90%">
 								</td>
 							</tr>
+							<tr id="letterOfAuthType" style = "display:">
+								<td class="td-left">非法人结算授权函：<span style="color:red;">(必填)</span></td>
+								<td class="td-right" colspan="3"> 
+									<a data-toggle='modal' class="tooltip-success letterOfAuthClick" data-target="#previewImageModal" >
+										<label id="letterOfAuthDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.letterOfAuthPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
+									</a>
+									<div style="float:left;margin-top:75" >
+										<input  type="hidden" id="letterOfAuthPath" name="letterOfAuthPath" />
+										<input type="file" name="letterOfAuth" id="letterOfAuth" onChange="showLetterOfAuthImage(this)"/> 
+										<p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div>
+								</td>
+							</tr>
 							<tr id="openPhotoType" style = "display:">
 								<td class="td-left">开户许可证：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3"> 
@@ -679,6 +694,11 @@ $(function(){
 		//上传开户许可证
 		function showOpenAccountImage(file){
 			commonFileUpload(file, 'openAccountPath', 'openAccountDiv');
+		}
+		
+		//上传非法人结算授权函
+		function showLetterOfAuthImage(file){
+			commonFileUpload(file, 'letterOfAuthPath', 'letterOfAuthDiv');
 		}
 		
 		//结算人身份证正面
@@ -899,7 +919,7 @@ $(function(){
 				$("#settleIdCardBackType").attr("style","display:none");
 				$("#openPhotoType").attr("style","display:");
 				$("#bankCardPhotoType").attr("style","display:none");
-				
+				$("#letterOfAuthType").attr("style","display:none");
 			}else if("01" == actType){
 				$("#legalIdCardType").attr("style","display:none");
 				$("#legalIdCardBackType").attr("style","display:none");
@@ -907,7 +927,7 @@ $(function(){
 				$("#settleIdCardBackType").attr("style","display:");
 				$("#openPhotoType").attr("style","display:none");
 				$("#bankCardPhotoType").attr("style","display:");
-				
+				$("#letterOfAuthType").attr("style","display:");
 			}
 
       	}
@@ -970,7 +990,7 @@ $(function(){
       	});
 
         //图片预览
-        function shopInteriorImage(obj){  
+        /* function shopInteriorImage(obj){  
        		var divObj = document.getElementById("shopInteriorDiv");  
        		var imageObj = document.getElementById("shopInteriorImageDiv");  
        		return previewImage(divObj,imageObj,obj);  
@@ -1022,7 +1042,7 @@ $(function(){
 	   		 var divObj = document.getElementById("settleCertAttribute1Div");  
 	   		 var imageObj = document.getElementById("settleCertAttribute2ImageDiv");  
 	   		 return previewImage(divObj,imageObj,obj);  
-	   	}
+	   	} */
 	   	
 	   	function exit() {
 	   		if (confirm("您确定要关闭吗？")) {
@@ -1130,6 +1150,7 @@ $(function(){
    			var	independentModel = $("#independentModel").val();
    	    	
    			var openAccountPath =  $("#openAccountPath").val();
+   			var letterOfAuthPath = $("#letterOfAuthPath").val();
    	    	var bankCardPhotoPath = $("#bankCardPhotoPath").val();
    	    	var certAttribute2Path = $("#legalCertAttribute2Path").val();
    	    	var certAttribute1Path = $("#legalCertAttribute1Path").val();
@@ -1146,6 +1167,7 @@ $(function(){
 		            url : window.Constants.ContextPath +'<%="/common/files/getPicPath"%>?custId='+custId,
 		            data :{
 		            	"openAccountPath"          : openAccountPath,                //开户许可证
+		            	"letterOfAuthPath"         : letterOfAuthPath,               //非法人结算授权函
 		            	"idCardOPath"              : certAttribute1Path,             //身份证正面照
 		            	"idCardFPath"              : certAttribute2Path,             //身份证背面照
 		            	"bussinessPath"            : businessPhotoPath,              //商户营业执照
@@ -1171,6 +1193,7 @@ $(function(){
                 contentType: false,
 				success : function(data){
 				if(data.result=="SUCCESS"){
+					debugger;
 					if("" != data.message){
 						taskCode = data.message;
 						//随行付渠道
