@@ -43,6 +43,8 @@ public class ServiceParenterDao {
 	}
 	/**
 	 * zhanggc 表 td_cust_info 修改审核状态
+	 * @param newState 修改的新状态
+	 * @param state 原有状态
 	 */
 	public int updateTdCustInfoState(String custId,String newState, String state) {
 		return serviceParenterMapper.updateTdCustInfoState(custId,newState, state);
@@ -53,5 +55,11 @@ public class ServiceParenterDao {
 	 */
 	public int updateTdCertificateAuthState(String custId,String newState, String state) {
 		return serviceParenterMapper.updateTdCertificateAuthState(custId,newState, state);
+	}
+	/**
+	 * zhanggc 表td_certificate_auth 修改审核状态
+	 */
+	public int updateTdLoginUserInfoAuthState(String custId,String newState, String state) {
+		return serviceParenterMapper.updateTdLoginUserInfoAuthState(custId,newState, state);
 	}
 }

@@ -25,4 +25,8 @@ public interface ServiceParenterMapper {
 	 * zhanggc 表td_certificate_auth 修改审核状态
 	 */
 	int updateTdCertificateAuthState(@Param("custId") String custId ,@Param("newState") String newState, @Param("state") String state );
+	/**
+	 * zhanggc 表td_login_user_info 修改审核状态
+	 */
+	int updateTdLoginUserInfoAuthState(@Param("custId") String custId ,@Param("newState") String newState, @Param("state") String state );
 }
