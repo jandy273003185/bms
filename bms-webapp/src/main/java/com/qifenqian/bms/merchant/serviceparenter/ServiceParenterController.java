@@ -97,7 +97,7 @@ public class ServiceParenterController {
 		}else{
 			merchantVo.setUserId(userId);
 			merchantVo.setUserName(WebUtils.getUserInfo().getUserName());
-			list = serviceParenterService.myServicesList(merchantVo);
+			list = serviceParenterService.myServicesNewList(merchantVo);
 		}
 		
 		mv.addObject("isFirst","No");

@@ -14,8 +14,10 @@ public interface ServiceParenterMapper {
 
 	List<MerchantVo> myServicesList(MerchantVo merchantVo);
 	
-	//zhanggc 查询代理商立标  
+	//zhanggc 查询代理商列表显示
 	List<MerchantVo> serviceNewList(MerchantVo merchantVo);
+	//zhanggc 查询代理商列表 显示 增加权限
+	List<MerchantVo> myServicesNewList(MerchantVo merchantVo);
 	
 	/**
 	 * zhanggc 表 td_cust_info 修改审核状态

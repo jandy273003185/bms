@@ -25,9 +25,16 @@ public class ServiceParenterService {
 		return serviceDao.myServicesList(merchantVo);
 	}
 	
-	/**新  查询代理商列表  //增加待审核状态 zhanggc**/
+	/**新  查询代理商列表  zhanggc**/
 	public List<MerchantVo> selectNewServices(MerchantVo merchantVo){
 		return serviceDao.serviceNewList(merchantVo);
+	}
+	/**
+	 * 新  查询代理商列表   zhanggc
+	 */
+	public List<MerchantVo> myServicesNewList(MerchantVo merchantVo) {
+		// TODO Auto-generated method stub
+		return serviceDao.myServicesNewList(merchantVo);
 	}
 	
 	/**

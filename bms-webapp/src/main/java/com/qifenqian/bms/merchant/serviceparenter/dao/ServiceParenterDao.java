@@ -42,6 +42,15 @@ public class ServiceParenterDao {
 		return serviceParenterMapper.serviceNewList(merchantVo);
 	}
 	/**
+	 * 新  	zhanggc 查询代理商列表 显示 增加权限
+	 * @param merchantVo 
+	 * @return
+	 */
+	@Page
+	public List<MerchantVo> myServicesNewList(MerchantVo merchantVo) {
+		return serviceParenterMapper.myServicesNewList(merchantVo);
+	}
+	/**
 	 * zhanggc 表 td_cust_info 修改审核状态
 	 * @param newState 修改的新状态
 	 * @param state 原有状态
