@@ -989,60 +989,6 @@ $(function(){
       		return previewImage(divObj,imageObj,obj);
       	});
 
-        //图片预览
-        /* function shopInteriorImage(obj){  
-       		var divObj = document.getElementById("shopInteriorDiv");  
-       		var imageObj = document.getElementById("shopInteriorImageDiv");  
-       		return previewImage(divObj,imageObj,obj);  
-        }
-        
-    	function showBusinessPhotoImage(obj){  
-    		 var divObj = document.getElementById("businessPhotoDiv");  
-    		 var imageObj = document.getElementById("businessPhotoImageDiv");  
-    		 return previewImage(divObj,imageObj,obj);  
-    	}
-
-    	function showOpenAccountImage(obj){  
-   		 var divObj = document.getElementById("openAccountDiv");  
-   		 var imageObj = document.getElementById("openPhotoImageDiv");  
-   		 return previewImage(divObj,imageObj,obj);  
-   		}
-
-    	function showDoorPhotoImage(obj){  
-    		 var divObj = document.getElementById("doorPhotoDiv");  
-    		 var imageObj = document.getElementById("doorPhotoImageDiv");  
-    		 return previewImage(divObj,imageObj,obj);  
-    	}
-
-    	function showLegalCertAttribute1Image(obj){  
-   		 var divObj = document.getElementById("legalCertAttribute1Div");  
-   		 var imageObj = document.getElementById("legalCertAttribute1ImageDiv");  
-   		 return previewImage(divObj,imageObj,obj);  
-	   	}
-	
-	   	function showLegalCertAttribute2Image(obj){  
-	   		 var divObj = document.getElementById("legalCertAttribute2Div");  
-	   		 var imageObj = document.getElementById("legalCertAttribute2ImageDiv");  
-	   		 return previewImage(divObj,imageObj,obj);  
-	   	}
-
-    	function showBankCardPhotoImage(obj){  
-   		 var divObj = document.getElementById("bankCardPhotoDiv");  
-   		 var imageObj = document.getElementById("bankCardPhotoImageDiv");  
-   		 return previewImage(divObj,imageObj,obj);  
-   		}
-    	
-    	function showSettleCertAttribute1Image(obj){  
-   		 var divObj = document.getElementById("settleCertAttribute1Div");  
-   		 var imageObj = document.getElementById("settleCertAttribute1ImageDiv");  
-   		 return previewImage(divObj,imageObj,obj);  
-	   	}
-	
-	   	function showSettleCertAttribute2Image(obj){  
-	   		 var divObj = document.getElementById("settleCertAttribute1Div");  
-	   		 var imageObj = document.getElementById("settleCertAttribute2ImageDiv");  
-	   		 return previewImage(divObj,imageObj,obj);  
-	   	} */
 	   	
 	   	function exit() {
 	   		if (confirm("您确定要关闭吗？")) {
@@ -1193,7 +1139,6 @@ $(function(){
                 contentType: false,
 				success : function(data){
 				if(data.result=="SUCCESS"){
-					debugger;
 					if("" != data.message){
 						taskCode = data.message;
 						//随行付渠道
