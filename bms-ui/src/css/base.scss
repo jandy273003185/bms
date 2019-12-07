@@ -208,6 +208,12 @@ video {
   .el-form-item {
     margin-bottom: 10px !important;
   }
+
+  .el-input--mini.is-disabled {
+    .el-input__inner {
+      cursor: pointer;
+    }
+  }
 }
 
 // 修改dialog默认定位
