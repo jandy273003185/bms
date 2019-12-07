@@ -228,3 +228,13 @@ video {
   display: flex;
   align-items: center;
 }
+
+.dialog-look-content {
+  width: 500px;
+  min-height: 300px;
+  margin: 0 auto;
+  font-size: 14px;
+  color: #777;
+  padding: 10px;
+  border: 1px solid #e8b995;
+}

@@ -1,4 +1,5 @@
 <template>
+  <!-- 异常列表 => 异常信息列表 -->
   <div>
     <page-model>
       <template slot="controlQueryOps">
@@ -8,8 +9,10 @@
           </el-form-item>
           <el-form-item label="当前状态" prop="name2">
             <el-select v-model="examine.name2" placeholder="请选择">
-              <el-option label="短信" value="1"></el-option>
-              <el-option label="邮件" value="0"></el-option>
+              <el-option label="创建" value="1"></el-option>
+              <el-option label="处理中" value="0"></el-option>
+              <el-option label="已解决" value="2"></el-option>
+              <el-option label="暂挂" value="3"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="创建时间" prop="name3">
@@ -20,14 +23,36 @@
         <el-form :model="examine" label-width="120px" :inline="true" ref="controlQueryForm2">
           <el-form-item label="模块" prop="name4">
             <el-select v-model="examine.name4" placeholder="请选择">
-              <el-option label="注册验证" value="1"></el-option>
-              <el-option label="登录密码找回验证" value="0"></el-option>
+              <el-option label="七分钱前端客户端" value="1"></el-option>
+              <el-option label="七分钱核心系统" value="2"></el-option>
+              <el-option label="七分钱后台系统" value="3"></el-option>
+              <el-option label="网关系统" value="4"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="业务类型" prop="name5">
             <el-select v-model="examine.name5" placeholder="请选择">
-              <el-option label="注册验证" value="1"></el-option>
-              <el-option label="登录密码找回验证" value="0"></el-option>
+              <el-option value="REGISTER" label='注册'></el-option>
+              <el-option value="RECHARGE" label='充值'></el-option>
+              <el-option value="PAYMENT" label='支付'></el-option>
+              <el-option value="PAYMENT_REVOKE" label='支付撤销'></el-option>
+              <el-option value="PAYMENT_REFUND" label='支付退款'></el-option>
+              <el-option value="WITHDRAW" label='提现'></el-option>
+              <el-option value="SETTLE" label='结算'></el-option>
+              <el-option value="WITHDRAW_APPLY" label='提现申请'></el-option>
+              <el-option value="WITHDRAW_REVOKE" label='提现申请撤销'></el-option>
+              <el-option value="SETTLE_APPLY" label='结算申请'></el-option>
+              <el-option value="SETTLE_REVOKE" label='结算申请撤销'></el-option>
+              <el-option value="REFUND" label='退款'></el-option>
+              <el-option value="RECHARGE_REVOKE" label='充值撤销'></el-option>
+              <el-option value="RECHARGE_REFUND" label='充值退款'></el-option>
+              <el-option value="RECEIVE" label='收款'></el-option>
+              <el-option value="RECEIVE_REVOKE" label='收款撤销'></el-option>
+              <el-option value="RECEIVE_REFUND" label='收款退款'></el-option>
+              <el-option value="TRANSFER" label='转账'></el-option>
+              <el-option value="FREEZE" label='冻结'></el-option>
+              <el-option value="UNFREEZE" label='解冻'></el-option>
+              <el-option value="ADJUST" label='调账'></el-option>
+              <el-option value="OTHER" label='其他业务'></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="最后创建时间" prop="name6">
@@ -39,8 +64,7 @@
 
       <template slot="controlQueryBtns">
         <el-button type="primary" @click="goToSearch">查询<i class="el-icon-search"></i> </el-button>
-        <el-button type="warning" @click="$refs['controlQueryForm'].resetFields()">清空<i class="el-icon-rank"></i></el-button>
-        <el-button type="info" @click="insertItem">新增<i class="el-icon-circle-plus-outline"></i></el-button>
+        <el-button type="warning" @click="restFormFiles">清空<i class="el-icon-rank"></i></el-button>
       </template>
 
       <template slot="tableInner">
@@ -58,7 +82,7 @@
 
           <el-table-column fixed="right" label="异常信息描述" width="100">
             <template slot-scope="scope">
-              <el-button type="text" size="small" @click="editorClick(scope.row)">查看内容</el-button>
+              <el-button type="text" size="small" @click="lookClick(scope.row)">查看内容</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -70,16 +94,16 @@
       </template>
     </page-model>
 
-    <!-- 修改model -->
-    <alert-model v-show="display" @on-submit="editorModelSubmit" @on-cancel="editorModelCancel" title="测试">
-      <el-form :model="modelData" class="alert-model-form" label-width="80px" :show-message="false">
-        <el-form-item :label="modelData.label">
-          <el-input v-model="modelData.value" :placeholder="`请输入${modelData.label}`" />
-        </el-form-item>
-      </el-form>
-    </alert-model>
+    <!-- 异常信息描述 -->
+    <el-dialog title="异常信息描述" :visible.sync="lookDisplay" width="600px">
+      <div class="dialog-look-content">
+        报文头信息入库异常
+        ### Error updating database. Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException:
+        Duplicate entry 'COMBINED-QR20191029151536152cxpoecGUCS' for key
+        'trans_record_index_req'
+      </div>
+    </el-dialog>
   </div>
-
 </template>
 
 <script>
@@ -101,8 +125,7 @@ export default {
   data() {
     return {
       examine: {},
-      display: false,
-      editorModelData: {},
+      lookDisplay: false,
       tableData: new Array(5).fill(testData),
       paginationOps: {
         pageSizes: [5, 10, 15, 20],
@@ -118,15 +141,19 @@ export default {
   },
   created() {},
   methods: {
-    editorModelCancel() {
-      this.editorDisplay = false;
+    restFormFiles() {
+      this.$refs['controlQueryForm1'].resetFields();
+      this.$refs['controlQueryForm2'].resetFields();
     },
-    editorModelSubmit(c) {
-      console.log(this.editorModelData);
-      c();
+    lookClick(row) {
+      this.lookDisplay = true;
+      console.log(row);
     },
-    editorClick(row) {
-      this.display = true;
+    lookModelSubmit() {
+      this.lookDisplay = false;
+    },
+    lookModelCancel(row) {
+      this.lookDisplay = false;
       console.log(row);
     },
     goToSearch() {
