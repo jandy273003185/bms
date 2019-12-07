@@ -44,7 +44,7 @@
           <el-input v-model="addModelData.name2"></el-input>
         </el-form-item>
         <el-form-item prop="name3" label="用户组" required>
-          <el-select v-model="addModelData.name3" placeholder="选择用户组">
+          <el-select v-model="addModelData.name3" multiple placeholder="选择用户组">
             <el-option label="总裁组" value="1"></el-option>
             <el-option label="副总裁组" value="2"></el-option>
           </el-select>
