@@ -209,10 +209,16 @@ video {
     margin-bottom: 10px !important;
   }
 
-  .el-input--mini.is-disabled {
-    .el-input__inner {
+  .el-checkbox.is-disabled {
+
+    .el-checkbox__label,
+    .el-checkbox__inner {
       cursor: pointer;
     }
+  }
+
+  .el-input.is-disabled .el-input__inner {
+    cursor: pointer !important;
   }
 }
 
