@@ -19,6 +19,12 @@ public class MerchantSubAccouontBean implements Serializable{
 	private String id;
 	/** 客户号 */
 	private String custId;
+	/**
+	 * 关联的CUST_NAME
+	 */
+	private String custName;
+	/**渠道*/
+	private String channelCode;
 	/** 外部商户号 */
 	private String outMerchantCode;
 	/** 分账方类型 */
@@ -33,6 +39,8 @@ public class MerchantSubAccouontBean implements Serializable{
 	private String customRelation;
 	/** 外部请求号 */
 	private String outRequestNo;
+	/** 分账描述, 微信必填*/
+	private String desc;
 	/** 分账比例 */
 	private String rate;
 	/** 备注 */
@@ -41,14 +49,35 @@ public class MerchantSubAccouontBean implements Serializable{
 	private Date createTime;
 	/** 修改时间 */
 	private Date modifyTime;
-	/**渠道*/
-	private String channelCode;
 	/**请求添加分账方状态*/
 	private String reportStatus;
 	/**使用状态*/
 	private String status;
+	/**
+	 * 分账ID
+	 */
+	private String relationId;
 	
 	
+	
+	public String getCustName() {
+		return custName;
+	}
+	public void setCustName(String custName) {
+		this.custName = custName;
+	}
+	public String getRelationId() {
+		return relationId;
+	}
+	public void setRelationId(String relationId) {
+		this.relationId = relationId;
+	}
+	public String getDesc() {
+		return desc;
+	}
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
 	public String getChannelCode() {
 		return channelCode;
 	}

@@ -2,9 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.qifenqian.bms.merchant.subAccount.mapper.MerchantSubAccountMapper">
-
-	<!-- 查询商户分账列表 -->
-	<select id="selectSubAccountList" parameterType="com.qifenqian.bms.merchant.subAccount.bean.MerchantSubAccouontBean" resultType="com.qifenqian.bms.merchant.subAccount.bean.MerchantSubAccouontBean" >
+	<!-- 根据分账ID查询商户分账信息 -->
+	<select id="getSubAccountById" resultType="com.qifenqian.bms.merchant.subAccount.bean.MerchantSubAccouontBean" parameterType="java.lang.String">
 		SELECT
 			t.cust_id,
 			t.out_merchant_code,
@@ -14,15 +13,45 @@
 			t.relation_type,
 			t.custom_relation,
 			t.out_request_no,
+			t.desc,
 			t.rate,
 			t.remark,
 			t.channel_code,
 			t.report_status,
 			t.status,
+			t.relation_id,
 			t.create_time,
 			t.modify_time
 		FROM
-			combinedpayment.td_royalty_relation_mg t			
+			combinedpayment.td_royalty_relation_mg t
+			where t.relation_id = #{relationId, jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 查询商户分账列表 -->
+	<select id="selectSubAccountList" parameterType="com.qifenqian.bms.merchant.subAccount.bean.MerchantSubAccouontBean" resultType="com.qifenqian.bms.merchant.subAccount.bean.MerchantSubAccouontBean" >
+		SELECT
+			t.cust_id,
+			c.cust_name,
+			t.out_merchant_code,
+			t.sub_account_type,
+			t.account,
+			t.account_name,
+			t.relation_type,
+			t.custom_relation,
+			t.out_request_no,
+			t.desc,
+			t.rate,
+			t.remark,
+			t.channel_code,
+			t.report_status,
+			t.status,
+			t.relation_id,
+			t.create_time,
+			t.modify_time
+		FROM
+			combinedpayment.td_royalty_relation_mg t
+			left join td_cust_info c 
+			on t.cust_id = c.cust_id			
 		<where>
 			1=1
 			<if test="custId != null and custId != '' "> 
@@ -64,11 +93,13 @@
 			relation_type,
 			custom_relation,
 			out_request_no,
+			`desc`,
 			rate,
 			remark,
 			channel_code,
 			report_status,
 			status,
+			relation_id,
 			create_time,
 			modify_time
 		) VALUES (
@@ -80,14 +111,30 @@
 		  	#{relationType, jdbcType=VARCHAR},
 		  	#{customRelation, jdbcType=VARCHAR},
 		  	#{outRequestNo, jdbcType=VARCHAR},
+		  	#{desc, jdbcType=VARCHAR},
 		  	#{rate, jdbcType=VARCHAR},
 		  	#{remark, jdbcType=VARCHAR},
 		  	#{channelCode, jdbcType=VARCHAR},
 		  	#{reportStatus, jdbcType=VARCHAR},
 		  	#{status, jdbcType=VARCHAR},
-		  	#{createTime, jdbcType=VARCHAR},
-		  	#{modifyTime, jdbcType=VARCHAR}
+		  	#{relationId, jdbcType=VARCHAR},
+		  	now(),
+		  	now()
 		)
 	</insert>
+	
+	<update id="updateSubAccount" parameterType="com.qifenqian.bms.merchant.subAccount.bean.MerchantSubAccouontBean">
+		UPDATE combinedpayment.td_royalty_relation_mg 
+		<set>
+			<if test="reportStatus !=null and reportStatus !=''">
+				report_status = #{reportStatus, jdbcType=VARCHAR},
+			</if>
+			<if test="status !=null and status !=''">
+				status = #{status, jdbcType=VARCHAR},
+			</if>
+			modify_time = now()
+		</set>
+		where relation_id = #{relationId, jdbcType=VARCHAR}
+	</update>
 	
 </mapper>

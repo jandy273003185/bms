@@ -31,6 +31,10 @@ public class MerchantSubAccountDao {
 	public List<MerchantSubAccouontBean> selectSubAccountList(MerchantSubAccouontBean merchantSubAccouontBean) {
 		return merchantSubAccountMapper.selectSubAccountList(merchantSubAccouontBean);
 	}
+	
+	public MerchantSubAccouontBean getSubAccountById(String relationId) {
+		return merchantSubAccountMapper.getSubAccountById(relationId);
+	}
 
 	/**
 	 * 商户分账新增
@@ -39,6 +43,10 @@ public class MerchantSubAccountDao {
 	public int insterSubAccount(MerchantSubAccouontBean merchantSubAccouont) {
 		int i = merchantSubAccountMapper.insterSubAccount(merchantSubAccouont);
 		return i;
+	}
+	
+	public int updateSubAccount(MerchantSubAccouontBean merchantSubAccouont) {
+		return merchantSubAccountMapper.updateSubAccount(merchantSubAccouont);
 	}
 
 }
