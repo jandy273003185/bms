@@ -21,13 +21,10 @@
 
       <template slot="tableInner">
         <el-table :data="tableData" border>
-          <el-table-column prop='name1' label='渠道编号'></el-table-column>
-          <el-table-column prop='name1' label='渠道名称'></el-table-column>
-          <el-table-column prop='name1' label='渠道说明'></el-table-column>
-          <el-table-column prop='name1' label='成本费率'></el-table-column>
-          <el-table-column prop='name1' label='渠道提供机构'></el-table-column>
-          <el-table-column prop='name1' label='我方结算账户号'></el-table-column>
-          <el-table-column prop='name1' label='我方结算账户名'></el-table-column>
+          <el-table-column prop='name1' label='产品编号'></el-table-column>
+          <el-table-column prop='name1' label='产品名称'></el-table-column>
+          <el-table-column prop='name1' label='产品说明'></el-table-column>
+          <el-table-column prop='name1' label='标准费率'></el-table-column>
 
           <el-table-column fixed="right" label="操作" width="120">
             <template slot-scope="scope">
