@@ -4,15 +4,14 @@
     <page-model>
       <template slot="controlQueryOps">
         <el-form :model="examine" label-width="86px" :inline="true" ref="controlQueryForm">
-          <el-form-item label="任务名称" prop="name2">
+          <el-form-item label="商户编号" prop="name1">
+            <el-input v-model="examine.name1"></el-input>
+          </el-form-item>
+          <el-form-item label="代理商编号" prop="name2">
             <el-input v-model="examine.name2"></el-input>
           </el-form-item>
-
-          <el-form-item label="是否开启" prop="name4">
-            <el-select v-model="examine.name4" placeholder="请选择">
-              <el-option label="开启" value="1"></el-option>
-              <el-option label="停止" value="0"></el-option>
-            </el-select>
+          <el-form-item label="产品编号" prop="name3">
+            <el-input v-model="examine.name3"></el-input>
           </el-form-item>
         </el-form>
       </template>
