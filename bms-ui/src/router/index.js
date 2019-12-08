@@ -34,6 +34,10 @@ const Transactions = () => import(/* webpackChunkName: "Trading" */ '@/views/Tra
 const RechargeRe = () => import(/* webpackChunkName: "Trading" */ '@/views/Trading/RechargeRe/RechargeRe');
 const TransferRe = () => import(/* webpackChunkName: "Trading" */ '@/views/Trading/TransferRe/TransferRe');
 const Merchants = () => import(/* webpackChunkName: "Trading" */ '@/views/Trading/Merchants/Merchants');
+// 聚合支付
+const Daily = () => import(/* webpackChunkName: "Trading" */ '@/views/Aggregate/Agent/Daily/Daily');
+const Agreement = () => import(/* webpackChunkName: "Trading" */ '@/views/Aggregate/Agent/Agreement/Agreement');
+const Settlement = () => import(/* webpackChunkName: "Trading" */ '@/views/Aggregate/Agent/Settlement/Settlement');
 
 
 // 菜单列表
@@ -95,15 +99,15 @@ export const menuRouter = [
   },
   {
     name: '聚合支付',
-    path: '/system/user',
+    path: '/aggregate',
     children: [
       {
         name: '代理商交易管理',
-        path: '/system/user',
+        path: '',
         children: [
-          { name: '代理商每日汇集', path: '/system/user' },
-          { name: '代理商协议', path: '/system/user' },
-          { name: '代理商结算', path: '/system/user' }
+          { name: '代理商每日汇集', path: '/aggregate/agent/daily', component: Daily },
+          { name: '代理商协议', path: '/aggregate/agent/Agreement', component: Agreement },
+          { name: '代理商结算', path: '/aggregate/agent/Settlement', component: Settlement }
         ]
       },
       {
