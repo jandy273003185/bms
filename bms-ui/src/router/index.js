@@ -43,6 +43,10 @@ const Mdaily = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggrega
 const Rate = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Merchants/Rate/Rate');
 const Mrefund = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Merchants/Mrefund/Mrefund');
 const Mexchange = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Merchants/Mexchange/Mexchange');
+const Olist = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Order/List/List');
+const Orefund = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Order/Orefund/Orefund');
+const Pchannels = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Product/Channels/Channels');
+const Pmanage = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Product/Manage/Manage');
 
 
 // 菜单列表
@@ -104,7 +108,7 @@ export const menuRouter = [
   },
   {
     name: '聚合支付',
-    path: '/aggregate',
+    path: '',
     children: [
       {
         name: '代理商交易管理',
@@ -117,7 +121,7 @@ export const menuRouter = [
       },
       {
         name: '商户交易管理',
-        path: '/system/user',
+        path: '',
         children: [
           { name: '渠道金额限制', path: '/aggregate/merchants/limit', component: Limit },
           { name: '商户每日汇集数据', path: '/aggregate/merchants/mdaily', component: Mdaily },
@@ -128,18 +132,18 @@ export const menuRouter = [
       },
       {
         name: '订单信息',
-        path: '/system/user',
+        path: '',
         children: [
-          { name: '订单列表', path: '/system/user' },
-          { name: '退款列表', path: '/system/user' }
+          { name: '订单列表', path: '/aggregate/order/list', component: Olist },
+          { name: '退款列表', path: '/aggregate/order/refund', component: Orefund }
         ]
       },
       {
         name: '产品渠道',
-        path: '/system/user',
+        path: '',
         children: [
-          { name: '支付渠道管理', path: '/system/user' },
-          { name: '支付产品管理', path: '/system/user' }
+          { name: '支付渠道管理', path: '/aggregate/product/list', component: Pchannels },
+          { name: '支付产品管理', path: '/aggregate/product/manage', component: Pmanage }
         ]
       },
       { name: '订单异常列表', path: '/system/user' },
