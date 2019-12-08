@@ -715,6 +715,11 @@ public class FmIncomeService {
               String type = fileName.substring(fileName.lastIndexOf("."));
               fileName = "licensePic" + type;
             }
+            // 非法人结算授权函
+            if ("letterOfAuth".equals(typeName)) {
+              String type = fileName.substring(fileName.lastIndexOf("."));
+              fileName = "letterOfAuthPic" + type;
+            }
             // 开户许可证
             if ("openAccount".equals(typeName)) {
               String type = fileName.substring(fileName.lastIndexOf("."));

@@ -15,8 +15,13 @@
 			t.bestMerchantType,
 			t.result_msg,
 			t.loginNo,
+			t.wx_apply_no,
+			t.iden_status,
+			t.wx_child_no,
+			t.zfb_child_no,
 			f.cust_name,
 			f.short_name,
+			f.cust_id,
 			r.report_status as detail_status,
 			f.merchant_email as email,
 			r.channel_no,
@@ -327,15 +332,32 @@
 		 	<if test="zfbConfirmUrl != null and zfbConfirmUrl !='' ">
 		 	`zfb_confirm_url` = #{zfbConfirmUrl,jdbcType = VARCHAR},
 		 	</if>
+		 	<if test="merchantPid != null and merchantPid !='' ">
+		 	`merchant_pid` = #{merchantPid,jdbcType = VARCHAR},
+		 	</if>
 		 	<if test="signUrl != null and signUrl !='' ">
 		 	`sign_url` = #{signUrl,jdbcType = VARCHAR},
 		 	</if>
 		 	<if test="signQrcode != null and signQrcode !='' ">
 		 	`sign_qrcode` = #{signQrcode,jdbcType = VARCHAR},
 		 	</if>
+		 	<if test="wxApplyNo != null and wxApplyNo !='' ">
+		 	`wx_apply_no` = #{wxApplyNo,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="idenStatus != null and idenStatus !='' ">
+		 	`iden_status` = #{idenStatus,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="wxChildNo != null and wxChildNo !='' ">
+		 	`wx_child_no` = #{wxChildNo,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="zfbChildNo != null and zfbChildNo !='' ">
+		 	`zfb_child_no` = #{zfbChildNo,jdbcType = VARCHAR},
+		 	</if>
 			 `modify_time` = now()
 		 WHERE
 			`patch_no` = #{patchNo,jdbcType = VARCHAR}
+		 or
+		 	`out_merchant_code` = #{outMerchantCode,jdbcType = VARCHAR}
     </update>
 	
 	<update id="updateInComeInfo"  parameterType="String" >

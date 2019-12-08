@@ -17,6 +17,7 @@ target/
 *.ipr
 *.iml
 *.iws
+.history
 
 # temp ignore
 *.log
@@ -35,3 +36,8 @@ Thumbs.db
 
 # license check result
 license-list
+
+bms-webapp/src/main/resources/public
+bms-ui/node
+bms-ui/node-modules
+bms-ui/dist

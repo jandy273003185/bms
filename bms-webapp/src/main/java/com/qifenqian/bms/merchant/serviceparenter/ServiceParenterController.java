@@ -93,11 +93,11 @@ public class ServiceParenterController {
 			merchantVo.setEmail(merchantVo.getEmail().trim());
 		}
 		if(isAllList){
-			list = serviceParenterService.selectServices(merchantVo);
+			list = serviceParenterService.selectNewServices(merchantVo);
 		}else{
 			merchantVo.setUserId(userId);
 			merchantVo.setUserName(WebUtils.getUserInfo().getUserName());
-			list = serviceParenterService.myServicesList(merchantVo);
+			list = serviceParenterService.myServicesNewList(merchantVo);
 		}
 		
 		mv.addObject("isFirst","No");
@@ -166,8 +166,8 @@ public class ServiceParenterController {
 				//表示个人
 				merchantCode = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + GenSN.getRandomNum(3);
 			}else{
-				merchant.setMerchantCode(SequenceUtils.getMerchantSeqNo("P"));
-//				merchantCode = BusinessUtils.getMerchantId(merchant.getBusinessLicense());
+				merchant.setMerchantCode("P" + GenSN.getRandomNum(18));
+//				merchant  Code = BusinessUtils.getMerchantId(merchant.getBusinessLicense());
 			}
 			if("".equals(merchant.getMerchantCode()) || null == merchant.getMerchantCode()) {
 				merchant.setMerchantCode(GenSN.getRandomNum(19));
@@ -193,8 +193,39 @@ public class ServiceParenterController {
 
 		return object.toJSONString();
 	}
-
 	
+	/**
+	 * @return zhanggc 审核服务商
+	 */
+	@RequestMapping("/audit")
+	@ResponseBody
+	public String updateStatis(String custId , String fals) {
+		 JSONObject ob = new JSONObject();
+		 if (!StringUtils.isBlank(custId) && !StringUtils.isBlank(fals)) {
+			 try { 
+				 	//服务商审核状态
+				 	String updateState = serviceParenterService.updateState(custId, fals);
+				 
+				 	if ("SUCCESS".equals(updateState))
+				 	{
+				 		ob.put("result", "SUCCESS");
+					    ob.put("message", "操作成功");
+					    return ob.toJSONString();
+					}
+				 	ob.put("result", "FAILE");
+				    ob.put("message", "操作失败");
+				    return ob.toJSONString();
+				} catch (Exception e) {
+					// TODO: handle exception
+					ob.put("result", "FAILE");
+			        ob.put("message", "系统错误");
+			        return ob.toJSONString();
+				}
+		}
+		 ob.put("result", "FAILE");
+	     ob.put("message", "参数为空");
+		return ob.toJSONString();
+	}
 
 	private JSONObject pass(String merchantCode, String message, String isPass) {
         /**

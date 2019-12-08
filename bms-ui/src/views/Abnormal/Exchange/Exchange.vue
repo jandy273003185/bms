@@ -1,4 +1,5 @@
 <template>
+  <!-- 异常列表 => 交广科技交易未明列表 -->
   <div>
     <page-model>
       <template slot="controlQueryOps">
@@ -21,7 +22,6 @@
       <template slot="controlQueryBtns">
         <el-button type="primary" @click="goToSearch">查询<i class="el-icon-search"></i> </el-button>
         <el-button type="warning" @click="$refs['controlQueryForm'].resetFields()">清空<i class="el-icon-rank"></i></el-button>
-        <el-button type="info" @click="insertItem">新增<i class="el-icon-circle-plus-outline"></i></el-button>
       </template>
       <template slot="tableInner">
         <el-table :data="tableData" border class="nofix">
@@ -69,16 +69,6 @@ export default {
   data() {
     return {
       examine: {},
-      display: false,
-      modelData: {
-        label: '账户名', //label
-        value: '', //输入值(默认值)
-        type: '', //表单类型 text select ...
-        options: [{ label: '', value: '' }], //type为selec时的选项
-        rules: {}, //校验规则
-        disable: false, //禁止修改
-        reuqire: false //是否必填
-      },
       tableData: new Array(5).fill(testData),
       paginationOps: {
         pageSizes: [5, 10, 15, 20],
@@ -88,30 +78,15 @@ export default {
   },
   watch: {
     // 监听search传来的数据
-    searchText(v, o) {
-      if (!v || v === o) return;
+    searchText(v) {
       console.log(v);
     }
   },
   created() {},
   methods: {
-    toggle() {
-      this.display = true;
-    },
-    modelSubmit() {
-      console.log(this.modelData);
-    },
-    editorClick(row) {
-      this.display = true;
-      console.log(row);
-    },
     goToSearch() {
       //查询
       console.log(this.examine, '查询');
-    },
-    insertItem() {
-      // 新增
-      console.log('新增');
     }
   }
 };

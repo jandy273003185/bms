@@ -1,13 +1,14 @@
 <template>
+  <!-- 系统管理 => 用户管理 -->
   <div>
     <page-model>
       <template slot="controlQueryOps">
         <el-form :model="examine" label-width="80px" :inline="true" ref="controlQueryForm">
-          <el-form-item label="真实姓名" prop="username">
-            <el-input v-model="examine.username" placeholder="请输入姓名"></el-input>
+          <el-form-item label="真实姓名" prop="name1">
+            <el-input v-model="examine.name1" placeholder="请输入姓名"></el-input>
           </el-form-item>
-          <el-form-item label="部门名称" prop="depart">
-            <el-select v-model="examine.depart" placeholder="请选择部门">
+          <el-form-item label="部门名称" prop="name2">
+            <el-select v-model="examine.name2" placeholder="请选择部门">
               <el-option label="(GYZB)-国银证保" value="1"></el-option>
               <el-option label="(TECH)-信息技术部" value="2"></el-option>
               <el-option label="(OPER)-运营管理部" value="4"></el-option>
@@ -15,8 +16,8 @@
               <el-option label="(CPB)-产品部" value="6"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="状态" prop="status">
-            <el-select v-model="examine.status" placeholder="请选择用户状态">
+          <el-form-item label="状态" prop="name3">
+            <el-select v-model="examine.name3" placeholder="请选择用户状态">
               <el-option label="(VALID)-生效" value="VALID"></el-option>
               <el-option label="(FREEZE)-冻结" value="FREEZE"></el-option>
               <el-option label="(LEAVE)-离职" value="LEAVE"></el-option>
@@ -31,6 +32,7 @@
         <el-button type="warning" @click="$refs['controlQueryForm'].resetFields()">清空<i class="el-icon-rank"></i></el-button>
         <el-button type="info" @click="insertItem">新增<i class="el-icon-circle-plus-outline"></i></el-button>
       </template>
+
       <template slot="tableInner">
         <el-table :data="tableData" border style="width: 100%">
           <el-table-column prop="serial" min-width="50" label="编号"></el-table-column>
@@ -58,16 +60,139 @@
       </template>
     </page-model>
 
-    <!-- 修改model -->
-    <alert-model v-show="display" :display.sync="display" @put="modelSubmit" title="测试">
-      <el-form :model="modelData" class="alert-model-form" label-width="80px">
-        <el-form-item :label="modelData.label">
-          <el-input v-model="modelData.value" :placeholder="`请输入${modelData.label}`" />
+    <!-- 用户新增 -->
+    <el-dialog title="用户新增" :visible.sync="addDisplay" width="600px">
+      <el-form ref="alertAddModelForm" :model="addModelData" class="alert-model-form" label-width="80px" :show-message="false">
+        <el-form-item prop="name1" label="员工编号" required>
+          <el-input v-model="addModelData.name1"></el-input>
+        </el-form-item>
+        <el-form-item prop="name2" label="密码" required>
+          <el-input v-model="addModelData.name2"></el-input>
+        </el-form-item>
+        <el-form-item prop="name3" label="用户名" required>
+          <el-input v-model="addModelData.name3"></el-input>
+        </el-form-item>
+        <el-form-item prop="name4" label="真实姓名" required>
+          <el-input v-model="addModelData.name4"></el-input>
+        </el-form-item>
+        <el-form-item prop="name5" label="昵称">
+          <el-input v-model="addModelData.name5"></el-input>
+        </el-form-item>
+        <el-form-item prop="name6" label="性别" required>
+          <el-select v-model="addModelData.name6" placeholder="选择">
+            <el-option label="男" value="1"></el-option>
+            <el-option label="女" value="0"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item prop="name7" label="所属部门" required>
+          <el-select v-model="addModelData.name7" placeholder="请选择部门">
+            <el-option label="(GYZB)-国银证保" value="1"></el-option>
+            <el-option label="(TECH)-信息技术部" value="2"></el-option>
+            <el-option label="(OPER)-运营管理部" value="4"></el-option>
+            <el-option label="(FINA)-财务部" value="5"></el-option>
+            <el-option label="(CPB)-产品部" value="6"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item prop="name8" label="角色" required>
+          <el-select v-model="addModelData.name8" multiple placeholder="请选择">
+            <el-option v-for="item in roleModelData" :key="item.value" :label="item.name2" :value="item.name1">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item prop="name9" label="办公电话">
+          <el-input v-model="addModelData.name9"></el-input>
+        </el-form-item>
+        <el-form-item prop="name10" label="个人电话">
+          <el-input v-model="addModelData.name10"></el-input>
+        </el-form-item>
+        <el-form-item prop="name11" label="办公邮箱">
+          <el-input v-model="addModelData.name11"></el-input>
+        </el-form-item>
+        <el-form-item prop="name12" label="个人邮箱">
+          <el-input v-model="addModelData.name12"></el-input>
+        </el-form-item>
+        <el-form-item prop="name13" label="备注">
+          <el-input type="textarea" v-model="addModelData.name13"></el-input>
         </el-form-item>
       </el-form>
-    </alert-model>
-  </div>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="addModelCancel">取 消</el-button>
+        <el-button type="primary" @click="addModelSubmit">确 定</el-button>
+      </div>
+    </el-dialog>
 
+    <!-- 修改model -->
+    <el-dialog title="用户修改" :visible.sync="editorDisplay" width="600px">
+      <el-form ref="alertModelForm" :model="editorModelData" class="alert-model-form" label-width="80px" :show-message="false">
+        <el-form-item prop="name1" label="编号" required>
+          <el-input disabled v-model="editorModelData.name1"></el-input>
+        </el-form-item>
+        <el-form-item prop="name2" label="员工编号" required>
+          <el-input disabled v-model="editorModelData.name2"></el-input>
+        </el-form-item>
+        <el-form-item prop="name3" label="用户名" required>
+          <el-input v-model="editorModelData.name3"></el-input>
+        </el-form-item>
+        <el-form-item prop="name4" label="密码" required>
+          <el-input v-model="editorModelData.name4"></el-input>
+        </el-form-item>
+        <el-form-item prop="name5" label="真是姓名" required>
+          <el-input v-model="editorModelData.name5"></el-input>
+        </el-form-item>
+        <el-form-item prop="name6" label="昵称">
+          <el-input v-model="editorModelData.name6"></el-input>
+        </el-form-item>
+        <el-form-item prop="name7" label="性别" required>
+          <el-select v-model="editorModelData.name7" placeholder="选择">
+            <el-option label="男" value="1"></el-option>
+            <el-option label="女" value="0"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item prop="name8" label="状态" required>
+          <el-select v-model="editorModelData.name8" placeholder="请选择用户状态">
+            <el-option label="(VALID)-生效" value="VALID"></el-option>
+            <el-option label="(FREEZE)-冻结" value="FREEZE"></el-option>
+            <el-option label="(LEAVE)-离职" value="LEAVE"></el-option>
+            <el-option label="(LOGIN)-已登陆" value="LOGIN"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item prop="name9" label="所属部门" required>
+          <el-select v-model="editorModelData.name9" placeholder="请选择部门">
+            <el-option label="(GYZB)-国银证保" value="1"></el-option>
+            <el-option label="(TECH)-信息技术部" value="2"></el-option>
+            <el-option label="(OPER)-运营管理部" value="4"></el-option>
+            <el-option label="(FINA)-财务部" value="5"></el-option>
+            <el-option label="(CPB)-产品部" value="6"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item prop="name10" label="角色" required>
+          <el-select v-model="editorModelData.name10" multiple placeholder="请选择">
+            <el-option v-for="item in roleModelData" :key="item.value" :label="item.name2" :value="item.name1">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item prop="name11" label="办公电话">
+          <el-input v-model="editorModelData.name11"></el-input>
+        </el-form-item>
+        <el-form-item prop="name12" label="个人电话">
+          <el-input v-model="editorModelData.name12"></el-input>
+        </el-form-item>
+        <el-form-item prop="name13" label="办公邮箱">
+          <el-input v-model="editorModelData.name13"></el-input>
+        </el-form-item>
+        <el-form-item prop="name14" label="个人邮箱">
+          <el-input v-model="editorModelData.name14"></el-input>
+        </el-form-item>
+        <el-form-item prop="name15" label="备注">
+          <el-input type="textarea" v-model="editorModelData.name15"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="editorModelCancel">取 消</el-button>
+        <el-button type="primary" @click="editorModelSubmit">确 定</el-button>
+      </div>
+    </el-dialog>
+  </div>
 </template>
 
 <script>
@@ -89,23 +214,28 @@ export default {
   props: ['searchText'],
   data() {
     return {
-      examine: {
-        username: '',
-        depart: '',
-        status: ''
-      },
-      display: false,
-      modelData: {
-        label: '账户名', //label
-        value: '', //输入值(默认值)
-        type: '', //表单类型 text select ...
-        options: [{ label: '', value: '' }], //type为selec时的选项
-        rules: {}, //校验规则
-        disable: false, //禁止修改
-        reuqire: false //是否必填
-      },
-      tableData: new Array(5).fill(testData),
+      examine: {}, //查询字段
+      addDisplay: false, //新增
+      addModelData: {}, //新增表单数据
+      editorDisplay: false, //编辑
+      editorModelData: {}, //编辑数据
+      roleModelData: [
+        //角色选择
+        { name1: '1', name2: '管理员' },
+        { name1: '3', name2: '清结算组' },
+        { name1: '4', name2: '产品组' },
+        { name1: '5', name2: '测试人员' },
+        { name1: '99', name2: 'Default' },
+        { name1: '100', name2: 'test1' },
+        { name1: '102', name2: '数据查询全权限' },
+        { name1: '103', name2: '测试' },
+        { name1: '104', name2: '市场部总裁' },
+        { name1: '105', name2: '市场部副总裁' },
+        { name1: '107', name2: '交易管理部分' }
+      ],
+      tableData: new Array(10).fill(testData), //表单数据
       paginationOps: {
+        //分页
         pageSizes: [5, 10, 15, 20],
         total: 100
       }
@@ -113,30 +243,47 @@ export default {
   },
   watch: {
     // 监听search传来的数据
-    searchText(v, o) {
-      if (!v || v === o) return;
+    searchText(v) {
       console.log(v);
     }
   },
   created() {},
   methods: {
-    toggle() {
-      this.display = true;
+    // 控制编辑
+    editorModelSubmit() {
+      console.log('提交', this.editorModelData);
     },
-    modelSubmit() {
-      console.log(this.modelData);
+    editorModelCancel() {
+      this.resetFormFields('alertModelForm');
+      this.editorDisplay = false;
     },
     editorClick(row) {
-      this.display = true;
+      this.editorDisplay = true;
       console.log(row);
     },
-    goToSearch() {
-      //查询
-      console.log(this.examine, '查询');
-    },
+    // 新增
     insertItem() {
-      // 新增
-      console.log('新增');
+      this.addDisplay = true;
+    },
+    addModelSubmit() {
+      console.log(this.addModelData);
+      this.$refs['alertAddModelForm'].validate((files, object) => {
+        if (files) {
+          // 验证通过 发送请求添加数据到数据库
+          this.addDisplay = false;
+        } else {
+          const keys = Object.keys(object);
+          this.$message.error(`${keys[0]}不可为空`);
+        }
+      });
+    },
+    addModelCancel() {
+      this.resetFormFields('alertAddModelForm');
+      this.addDisplay = false;
+    },
+    // 查询
+    goToSearch() {
+      console.log(this.examine, '查询');
     }
   }
 };

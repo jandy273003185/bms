@@ -147,16 +147,40 @@
 											<td>${merchant.bankCardName }</td>
 											<td>${merchant.custManager }</td>
 											<td>${merchant.referrer }</td>
-											<td>${merchant.serviceLevel }</td>
-											<td>${merchant.merchantState}</td>
+											<td>${merchant.serviceLevel }级</td>	
+											<td>
+												<c:choose>
+													<c:when test="${merchant.state =='00'}">
+														有效
+													</c:when>
+													<c:when test="${merchant.state =='01'}">
+														待审核
+													</c:when>
+													<c:when test="${merchant.state =='02'}">
+														注销
+													</c:when>
+													<c:when test="${merchant.state =='03'}">
+														冻结
+													</c:when>
+													<c:when test="${merchant.state =='04'}">
+														审核不通过
+													</c:when>
+												</c:choose>
+											</td>
 											<td>	
 												<input type="hidden" name="custId_01" id="custId_01" value="${merchant.custId}"> 
+												<c:if test="${merchant.state =='01'}">
+													<gyzbadmin:function url="<%=AgencyPath.BASE + AgencyPath.UPDATEAGENCYINFO%>">  	
+														<button type="button" onclick="updateAgencyInfo(this,'edit')" data-toggle='modal' data-target="#updateAgency" class="btn btn-primary btn-xs qifenqian_update_tc" >修改信息</button>
+													</gyzbadmin:function>
+													
+													<gyzbadmin:function url="<%=AgencyPath.BASE + AgencyPath.UPDATEAGENCYINFO%>">  	
+														<button type="button" onclick="updateAgencyInfo(this,'audit')" data-toggle='modal' data-target="#updateAgency" class="btn btn-primary btn-xs qifenqian_update_tc" >审核</button>
+													</gyzbadmin:function>
+												</c:if>
 												
-												<gyzbadmin:function url="<%=AgencyPath.BASE + AgencyPath.UPDATEAGENCYINFO%>">  	
-													<button type="button" onclick="updateAgencyInfo(this,'edit')" data-toggle='modal' data-target="#updateAgency" class="btn btn-primary btn-xs qifenqian_update_tc" >修改服务商信息</button>
-												</gyzbadmin:function>
                                             	
-                                            	<button type="button" onclick="updateAgencyInfo(this,'preview')" data-toggle='modal' data-target="#updateAgency" class="btn btn-primary btn-xs qifenqian_view_tc" >详情</button> 
+                                            	<button type="button" onclick="updateAgencyInfo(this,'preview')" data-toggle='modal' data-target="#updateAgency" class="btn btn-primary btn-xs qifenqian_view_tc" >预览</button> 
 											</td>
 										</tr>
 									</c:forEach>
@@ -185,6 +209,8 @@
 	
 	<div class="modal fade" style="z-index:1040;" id="updateAgency" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog" style="width:60%;z-index:90;" >
+		<!-- 修改审核时用 -->
+		<input type="hidden" name="custIda" id="custIda" value=""> 
 			<div class="modal-content" style="width:950px;" id="merchantDiv">
 		    	<div class="modal-header" style="background-color:0099CC">
 		        	<button type="button" class="close" data-dismiss="modal" idupdateAgencyntClose" aria-hidden="true">&times;</button>
@@ -344,6 +370,9 @@
 		        	<input type="hidden" id="custType" name="custType" />
 					<button type="button" id="" class="btn btn-default closeBtn" data-dismiss="modal">关闭</button>
 		           	<button type="button" class="btn btn-primary updateAgencyBtn" onclick="confirmAgencyInfo()">提交</button>
+		           	
+		           	<button type="button" class="btn btn-primary updateAgencyBtnGo" onclick="confirmAgencyAudit('yes')">审核通过</button>
+		           	<button type="button" class="btn btn-primary updateAgencyBtnNo" onclick="confirmAgencyAudit('no')">审核不通过</button>
 		    	</div>
 	    	</div><!-- /.modal-content -->
 		</div>
@@ -632,6 +661,8 @@ function updateAgencyInfo(obj,option){
 	if(option == 'preview'){ 
 		// 隐藏提交按钮
 		$('#updateAgency .updateAgencyBtn').hide(); 
+		$('#updateAgency .updateAgencyBtnGo').hide(); 
+		$('#updateAgency .updateAgencyBtnNo').hide(); 
 		// 让input框和select框
 		$('#updateAgency input,select').prop("disabled", true); 
 	
@@ -650,7 +681,24 @@ function updateAgencyInfo(obj,option){
 	/** 编辑 **/
 	if(option == 'edit'){
 		$('#updateAgency .updateAgencyBtn').show();
-	
+		$('#updateAgency .updateAgencyBtnGo').hide(); 
+		$('#updateAgency .updateAgencyBtnNo').hide(); 
+		
+		$('#updateAgency input,select').prop("disabled", false);
+		if(merchant.custType == '0'){
+			$('#updateAgency .tempBusinessLicense').prop("disabled", true); 
+			$('#updateAgency .tempBusinessPhoto').prop("disabled", true);
+		}else{
+			$('#updateAgency .tempBusinessLicense').prop("disabled", false); 
+			$('#updateAgency .tempBusinessPhoto').prop("disabled",false);
+		}
+	}
+	/* 审核 */
+	if(option == 'audit'){
+		$('#updateAgency .updateAgencyBtn').hide();
+		$('#updateAgency .updateAgencyBtnGo').show(); 
+		$('#updateAgency .updateAgencyBtnNo').show(); 
+		
 		$('#updateAgency input,select').prop("disabled", false);
 		if(merchant.custType == '0'){
 			$('#updateAgency .tempBusinessLicense').prop("disabled", true); 
@@ -671,6 +719,7 @@ function updateAgencyInfo(obj,option){
 	}
 	
  	var custId = $(obj).parent().find('#custId_01').val();
+ 	$("#custIda").val(custId);
 	$("#updateAgency #businessPhotoImageDiv").show();
 	$("#updateAgency #certAttribute1ImageDiv").show();
 	$("#updateAgency #certAttribute2ImageDiv").show(); 
@@ -681,6 +730,7 @@ function updateAgencyInfo(obj,option){
 	$("#updateAgency #certAttribute2ImageDiv").attr("src","<%=request.getContextPath() + AgencyPath.BASE + AgencyPath.PREVIEWAGENCYIMAGE %>?custId=" + custId + "&certifyType=04&front=1");
 	$("#updateAgency #bankCardImage").attr("src","<%=request.getContextPath() + AgencyPath.BASE + AgencyPath.PREVIEWAGENCYIMAGE %>?custId=" + custId + "&certifyType=05");
 	$("#updateAgency #otherPapersImage").attr("src","<%=request.getContextPath() + AgencyPath.BASE + AgencyPath.PREVIEWAGENCYIMAGE %>?custId=" + custId + "&certifyType=06");
+	
 }
 
 /** 导出服务商列表 */
@@ -815,5 +865,31 @@ $('.buttonSearch').click(function(){
 	var form = $('#merchantForm');
 	form.submit();
 });
+/* 审核 */
+function confirmAgencyAudit(obj){
+	var custId = $("#custIda").val();;
+	var fals =obj;
+	alert(custId)
+
+	$.post(window.Constants.ContextPath +'/merchant/serviceParenter/audit',{
+		'custId':custId,
+		'fals':fals
+	},function(data){
+		
+		if(data.result=="SUCCESS"){
+			$.gyzbadmin.alertSuccess('修改服务商成功！', null, function(){
+				window.location.reload(); // 强迫浏览器刷新当前页面
+			});
+		}else{
+			$.gyzbadmin.alertFailure("修改服务商失败！" + data.message,null, function(){
+				window.location.reload();
+			});
+		}
+		
+		
+	},'json')
+	
+}
+
 </script>
 </html>

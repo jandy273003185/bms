@@ -1,4 +1,5 @@
 <template>
+  <!-- 工作流管理 => 工作流用户分组 -->
   <div>
     <page-model>
       <template slot="controlQueryOps">
@@ -22,7 +23,7 @@
 
           <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
-              <el-button type="text" size="mini" @click="editorClick(scope.row)">删除</el-button>
+              <el-button type="text" size="mini" @click="deleteClick(scope.row)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -34,16 +35,28 @@
       </template>
     </page-model>
 
-    <!-- 修改model -->
-    <alert-model v-show="display" :display.sync="display" @put="modelSubmit" title="测试">
-      <el-form :model="modelData" class="alert-model-form" label-width="80px">
-        <el-form-item :label="modelData.label">
-          <el-input v-model="modelData.value" :placeholder="`请输入${modelData.label}`" />
+    <!-- 新增用户 -->
+    <el-dialog title="新增用户" :visible.sync="addDisplay" width="600px">
+      <el-form ref="alertAddModelForm" :model="addModelData" class="alert-model-form" label-width="100px" :show-message="false">
+        <el-form-item prop="name1" label="用户组名称" required>
+          <el-input v-model="addModelData.name1"></el-input>
         </el-form-item>
       </el-form>
-    </alert-model>
-  </div>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="addModelCancel">取 消</el-button>
+        <el-button type="primary" @click="addModelSubmit">确 定</el-button>
+      </div>
+    </el-dialog>
 
+    <!-- 删除商户详情 -->
+    <el-dialog title="删除商户详情" :visible.sync="deleteDisplay" width="600px">
+      <div class="dialog-deleted-content">您确定要删除该任务调度配置<span>[8338]</span>吗？</div>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="deleteModelCancel">取 消</el-button>
+        <el-button type="primary" @click="deleteModelSubmit">确 定</el-button>
+      </div>
+    </el-dialog>
+  </div>
 </template>
 
 <script>
@@ -64,16 +77,9 @@ export default {
   data() {
     return {
       examine: {},
-      display: false,
-      modelData: {
-        label: '账户名', //label
-        value: '', //输入值(默认值)
-        type: '', //表单类型 text select ...
-        options: [{ label: '', value: '' }], //type为selec时的选项
-        rules: {}, //校验规则
-        disable: false, //禁止修改
-        reuqire: false //是否必填
-      },
+      addDisplay: false,
+      addModelData: {},
+      deleteDisplay: false,
       tableData: new Array(5).fill(testData),
       paginationOps: {
         pageSizes: [5, 10, 15, 20],
@@ -83,22 +89,36 @@ export default {
   },
   watch: {
     // 监听search传来的数据
-    searchText(v, o) {
-      if (!v || v === o) return;
+    searchText(v) {
       console.log(v);
     }
   },
   created() {},
   methods: {
-    toggle() {
-      this.display = true;
+    addModelSubmit() {
+      this.$refs['alertAddModelForm'].validate((files, object) => {
+        if (files) {
+          // 验证通过 发送请求添加数据到数据库
+          this.addDisplay = false;
+        } else {
+          const keys = Object.keys(object);
+          this.$message.error(`${keys[0]}不可为空`);
+        }
+      });
     },
-    modelSubmit() {
-      console.log(this.modelData);
+    addModelCancel() {
+      this.resetFormFields('alertAddModelForm');
+      this.addDisplay = false;
     },
-    editorClick(row) {
-      this.display = true;
+    deleteClick(row) {
+      this.deleteDisplay = true;
       console.log(row);
+    },
+    deleteModelSubmit() {
+      this.deleteDisplay = false;
+    },
+    deleteModelCancel() {
+      this.deleteDisplay = false;
     },
     goToSearch() {
       //查询
@@ -106,10 +126,10 @@ export default {
     },
     insertItem() {
       // 新增
-      console.log('新增');
+      this.addDisplay = true;
     }
   }
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang='scss' scoped></style>

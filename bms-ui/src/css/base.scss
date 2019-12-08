@@ -208,10 +208,57 @@ video {
   .el-form-item {
     margin-bottom: 10px !important;
   }
+
+  .el-checkbox.is-disabled {
+
+    .el-checkbox__label,
+    .el-checkbox__inner {
+      cursor: pointer;
+    }
+  }
+
+  .el-input.is-disabled .el-input__inner {
+    cursor: pointer !important;
+  }
+}
+
+// 修改dialog默认定位
+.el-dialog__wrapper .el-dialog {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  margin-top: 0 !important;
+
+  .el-select.el-select--mini {
+    width: 100%;
+  }
 }
 
 .breadcrumb-main {
   height: 40px;
   display: flex;
   align-items: center;
+}
+
+.dialog-look-content {
+  width: 500px;
+  min-height: 300px;
+  margin: 0 auto;
+  font-size: 14px;
+  color: #777;
+  padding: 10px;
+  border: 1px solid #e8b995;
+}
+
+.dialog-deleted-content {
+  height: 60px;
+  line-height: 60px;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+
+  span {
+    color: #ff0000;
+  }
 }
