@@ -110,7 +110,7 @@
       </div>
 
       <el-dialog title="执行确认" class="next-dialog" append-to-body :visible.sync="nextDisplay" width="600px">
-        <el-form :model="nextData" label-width="80px">
+        <el-form :model="nextData" disabled label-width="80px">
           <el-form-item label="退款编号">
             <el-input v-model="nextData.name1"></el-input>
           </el-form-item>
