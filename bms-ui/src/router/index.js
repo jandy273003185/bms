@@ -47,6 +47,8 @@ const Olist = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregat
 const Orefund = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Order/Orefund/Orefund');
 const Pchannels = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Product/Channels/Channels');
 const Pmanage = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Product/Manage/Manage');
+const Exception = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Exception/Exception');
+const Arouter = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Router/Router');
 
 
 // 菜单列表
@@ -146,8 +148,8 @@ export const menuRouter = [
           { name: '支付产品管理', path: '/aggregate/product/manage', component: Pmanage }
         ]
       },
-      { name: '订单异常列表', path: '/system/user' },
-      { name: '渠道路由', path: '/system/user' }
+      { name: '订单异常列表', path: '/aggregate/exception', component: Exception },
+      { name: '渠道路由', path: '/aggregate/router', component: Arouter }
     ]
   },
   {
