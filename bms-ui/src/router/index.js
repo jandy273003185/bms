@@ -35,9 +35,14 @@ const RechargeRe = () => import(/* webpackChunkName: "Trading" */ '@/views/Tradi
 const TransferRe = () => import(/* webpackChunkName: "Trading" */ '@/views/Trading/TransferRe/TransferRe');
 const Merchants = () => import(/* webpackChunkName: "Trading" */ '@/views/Trading/Merchants/Merchants');
 // 聚合支付
-const Daily = () => import(/* webpackChunkName: "Trading" */ '@/views/Aggregate/Agent/Daily/Daily');
-const Agreement = () => import(/* webpackChunkName: "Trading" */ '@/views/Aggregate/Agent/Agreement/Agreement');
-const Settlement = () => import(/* webpackChunkName: "Trading" */ '@/views/Aggregate/Agent/Settlement/Settlement');
+const Adaily = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Agent/Adaily/Adaily');
+const Agreement = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Agent/Agreement/Agreement');
+const Settlement = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Agent/Settlement/Settlement');
+const Limit = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Merchants/Limit/Limit');
+const Mdaily = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Merchants/Mdaily/Mdaily');
+const Rate = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Merchants/Rate/Rate');
+const Mrefund = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Merchants/Mrefund/Mrefund');
+const Mexchange = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Merchants/Mexchange/Mexchange');
 
 
 // 菜单列表
@@ -105,7 +110,7 @@ export const menuRouter = [
         name: '代理商交易管理',
         path: '',
         children: [
-          { name: '代理商每日汇集', path: '/aggregate/agent/daily', component: Daily },
+          { name: '代理商每日汇集', path: '/aggregate/agent/adaily', component: Adaily },
           { name: '代理商协议', path: '/aggregate/agent/Agreement', component: Agreement },
           { name: '代理商结算', path: '/aggregate/agent/Settlement', component: Settlement }
         ]
@@ -114,11 +119,11 @@ export const menuRouter = [
         name: '商户交易管理',
         path: '/system/user',
         children: [
-          { name: '渠道金额限制', path: '/system/user' },
-          { name: '商户每日汇集数据', path: '/system/user' },
-          { name: '商户产品费率', path: '/system/user' },
-          { name: '商户退款', path: '/system/user' },
-          { name: '商户交易汇总', path: '/system/user' }
+          { name: '渠道金额限制', path: '/aggregate/merchants/limit', component: Limit },
+          { name: '商户每日汇集数据', path: '/aggregate/merchants/mdaily', component: Mdaily },
+          { name: '商户产品费率', path: '/aggregate/merchants/rate', component: Rate },
+          { name: '商户退款', path: '/aggregate/merchants/refund', component: Mrefund },
+          { name: '商户交易汇总', path: '/aggregate/merchants/mexchange', component: Mexchange }
         ]
       },
       {
