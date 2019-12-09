@@ -46,6 +46,7 @@
 
           <el-table-column fixed="right" label="操作" width="60">
             <template slot-scope="scope">
+              <!-- 对接，根据字段来判断显示 -->
               <el-button v-if="scope.flag" type="text" size="small" @click="performClick(scope.row)">审核</el-button>
               <el-button v-if="!scope.flag" type="text" size="small" @click="performClick(scope.row)">审核</el-button>
             </template>
@@ -79,34 +80,34 @@
     <el-dialog title="任务执行" :visible.sync="performDisplay" width="600px">
       <el-form :model="performModelData" class="alert-model-form" label-width="120px">
         <el-form-item prop="name1" label="订单号" required>
-          <el-input v-model="performModelData.name1"></el-input>
+          <el-input disabled v-model="performModelData.name1"></el-input>
         </el-form-item>
         <el-form-item prop="name2" label="原交易订单号" required>
-          <el-input v-model="performModelData.name2"></el-input>
+          <el-input disabled v-model="performModelData.name2"></el-input>
         </el-form-item>
         <el-form-item prop="name3" label="原交易名称" required>
-          <el-input v-model="performModelData.name3"></el-input>
+          <el-input disabled v-model="performModelData.name3"></el-input>
         </el-form-item>
         <el-form-item prop="name4" label="原交易时间" required>
-          <el-input v-model="performModelData.name4"></el-input>
+          <el-input disabled v-model="performModelData.name4"></el-input>
         </el-form-item>
         <el-form-item prop="name4" label="商户账号" required>
-          <el-input v-model="performModelData.name4"></el-input>
+          <el-input disabled v-model="performModelData.name4"></el-input>
         </el-form-item>
         <el-form-item prop="name5" label="撤销金额" required>
-          <el-input v-model="performModelData.name5"></el-input>
+          <el-input disabled v-model="performModelData.name5"></el-input>
         </el-form-item>
         <el-form-item prop="name6" label="撤销原因" required>
-          <el-input v-model="performModelData.name6"></el-input>
+          <el-input disabled v-model="performModelData.name6"></el-input>
         </el-form-item>
         <el-form-item prop="name7" label="钱记到家测试" required>
-          <el-input v-model="performModelData.name7"></el-input>
+          <el-input disabled v-model="performModelData.name7"></el-input>
         </el-form-item>
         <el-form-item prop="name8" label="创建人" required>
-          <el-input v-model="performModelData.name8"></el-input>
+          <el-input disabled v-model="performModelData.name8"></el-input>
         </el-form-item>
         <el-form-item prop="name9" label="创建时间" required>
-          <el-input v-model="performModelData.name9"></el-input>
+          <el-input disabled v-model="performModelData.name9"></el-input>
         </el-form-item>
         <el-form-item prop="name12" label="审核状态" required>
           <el-select v-model="performModelData.name12">
