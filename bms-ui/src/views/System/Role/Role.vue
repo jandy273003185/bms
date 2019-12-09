@@ -77,7 +77,7 @@
 
     <!-- 修改 查看 model -->
     <el-dialog title="角色修改" :visible.sync="editorDisplay" width="600px">
-      <el-form ref="alertEditorModelForm" :model="editorModelData" class="alert-model-form" label-width="80px" :show-message="false">
+      <el-form ref="alertEditorModelForm" disabled :model="editorModelData" class="alert-model-form" label-width="80px" :show-message="false">
         <el-form-item prop="name1" label="角色名称" required>
           <el-input v-model="editorModelData.name1"></el-input>
         </el-form-item>
@@ -155,13 +155,13 @@ export default {
       addDisplay: false,
       addModelData: {
         //新增model数据
-        name5: modelDataCheckboxList
+        name5: []
       },
       editorDisplay: false,
       modelDataCheckboxList: modelDataCheckboxList,
       editorModelData: {
         //修改model数据
-        name5: modelDataCheckboxList
+        name5: []
       },
       islook: false, //编辑还是查看
       tableData: new Array(5).fill(testData),

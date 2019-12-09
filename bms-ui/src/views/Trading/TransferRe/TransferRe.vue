@@ -1,4 +1,5 @@
 <template>
+  <!-- 交易管理 => 转账撤销管理 -->
   <div>
     <page-model>
       <template slot="controlQueryOps">
@@ -34,19 +35,19 @@
           <el-table-column prop='name6' label='原付方姓名' min-width="90"></el-table-column>
           <el-table-column prop='name7' label='原收方账号' min-width="120"></el-table-column>
           <el-table-column prop='name8' label='原收方姓名' min-width="100"></el-table-column>
-          <el-table-column prop='name9' label='申请人' min-width="100"></el-table-column>
+          <el-table-column prop='name9' label='申请人' min-width="80"></el-table-column>
           <el-table-column prop='name10' label='申请时间' min-width="90"></el-table-column>
           <el-table-column prop='name11' label='状态' min-width="70"></el-table-column>
           <el-table-column prop='name12' label='撤销描述信息' min-width="100"></el-table-column>
-          <el-table-column prop='name14' label='审核人' min-width="100"></el-table-column>
-          <el-table-column prop='name15' label='审核状态' min-width="120"></el-table-column>
+          <el-table-column prop='name14' label='审核人' min-width="80"></el-table-column>
+          <el-table-column prop='name15' label='审核状态' min-width="80"></el-table-column>
           <el-table-column prop='name16' label='审核时间' min-width="100"></el-table-column>
           <el-table-column prop='name17' label='备注' min-width="100"></el-table-column>
 
           <el-table-column fixed="right" label="操作" width="60">
-            <template slot-scope="scope">
+            <!-- <template slot-scope="scope">
               <el-button type="text" size="small" @click="editorClick(scope.row)">编辑</el-button>
-            </template>
+            </template> -->
           </el-table-column>
         </el-table>
       </template>
@@ -57,16 +58,22 @@
       </template>
     </page-model>
 
-    <!-- 修改model -->
-    <alert-model v-show="display"  @on-submit="editorModelSubmit" @on-cancel="editorModelCancel" title="测试">
-      <el-form :model="modelData" class="alert-model-form" label-width="80px">
-        <el-form-item :label="modelData.label">
-          <el-input v-model="modelData.value" :placeholder="`请输入${modelData.label}`" />
+    <!-- 新增申请 -->
+    <el-dialog title="转账撤销新增申请" :visible.sync="addDisplay" width="600px">
+      <el-form ref="alertAddModelForm" :model="addModelData" class="alert-model-form" label-width="120px" :show-message="false">
+        <el-form-item prop="name1" label="原交易订单号">
+          <el-input v-model="addModelData.name1"></el-input>
+        </el-form-item>
+        <el-form-item prop="name5" label="撤销原因">
+          <el-input type="textarea" v-model="addModelData.name8"></el-input>
         </el-form-item>
       </el-form>
-    </alert-model>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="addModelCancel">取 消</el-button>
+        <el-button type="primary" @click="addModelSubmit">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
-
 </template>
 
 <script>
@@ -95,8 +102,10 @@ export default {
   data() {
     return {
       examine: {},
-      display: false,
-      editorModelData:{},
+      addDisplay: false,
+      addModelData: {},
+      editorDisplay: false,
+      editorModelData: {},
       tableData: new Array(5).fill(testData),
       paginationOps: {
         pageSizes: [5, 10, 15, 20],
@@ -109,20 +118,34 @@ export default {
     searchText(v) {
       console.log(v);
     }
-    
   },
   created() {},
   methods: {
+    addModelSubmit() {
+      this.$refs['alertAddModelForm'].validate((files, object) => {
+        if (files) {
+          // 验证通过 发送请求添加数据到数据库
+          this.addDisplay = false;
+        } else {
+          const keys = Object.keys(object);
+          this.$message.error(`${keys[0]}不可为空`);
+        }
+      });
+      console.log(this.addModelData);
+    },
+    addModelCancel() {
+      this.addDisplay = false;
+      // this.resetFormFields('alertAddModelForm');
+    },
     editorModelCancel() {
       this.editorDisplay = false;
     },
-    
-    editorModelSubmit(c) {
+
+    editorModelSubmit() {
       console.log(this.editorModelData);
-      c();
     },
     editorClick(row) {
-      this.display = true;
+      this.editorDisplay = true;
       console.log(row);
     },
     goToSearch() {

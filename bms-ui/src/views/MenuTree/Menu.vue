@@ -10,14 +10,14 @@
 <script>
 import MenuItem from './MenuItem';
 import { sstorage } from '@/tools/utils';
-import { menuRouter } from '@/router';
+import { uatRouter } from '@/router';
 export default {
   props: ['toggle'],
   components: { MenuItem },
   data() {
     return {
       defaultActive: '',
-      list: menuRouter
+      list: uatRouter
     };
   },
   created() {
@@ -31,7 +31,7 @@ export default {
       arr.reduce((pre, cur) => {
         route.push(pre[cur].name);
         return pre[cur].children;
-      }, menuRouter);
+      }, uatRouter);
       this.$emit('input', route);
       sstorage.set('currentRouterArr', route);
       sstorage.set('defaultActive', index);

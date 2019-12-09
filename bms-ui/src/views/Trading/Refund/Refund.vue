@@ -1,4 +1,5 @@
 <template>
+  <!-- 交易管理 => 退款管理 -->
   <div>
     <page-model>
       <template slot="controlQueryOps">
@@ -24,7 +25,7 @@
           </el-form-item>
         </el-form>
 
-        <el-form :model="examine" label-width="110px" :inline="true" ref="controlQueryForm2">
+        <el-form :model="examine" label-width="110px" :inline="true" ref="controlQueryForm2" class="controlQueryForm2">
           <el-form-item label="客户账号" prop="name5">
             <el-input v-model="examine.name5"></el-input>
           </el-form-item>
@@ -60,7 +61,7 @@
       <template slot="controlQueryBtns">
         <el-button type="primary" @click="goToSearch">查询<i class="el-icon-search"></i> </el-button>
         <el-button type="warning" @click="resetFormFileds">清空<i class="el-icon-rank"></i></el-button>
-        <el-button type="info" @click="insertItem">新增<i class="el-icon-circle-plus-outline"></i></el-button>
+        <el-button type="info" @click="download">导出报表<i class="el-icon-download"></i></el-button>
       </template>
 
       <template slot="tableInner">
@@ -83,8 +84,8 @@
 
           <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
-              <el-button type="text" size="small" @click="editorClick(scope.row)">查看详情</el-button>
-              <el-button type="text" size="small" @click="editorClick(scope.row)">确认核销</el-button>
+              <el-button type="text" size="small" @click="lookClick(scope.row)">查看详情</el-button>
+              <el-button type="text" size="small" @click="performClick(scope.row)">确认核销</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -96,16 +97,86 @@
       </template>
     </page-model>
 
-    <!-- 修改model -->
-    <alert-model v-show="display"  @on-submit="editorModelSubmit" @on-cancel="editorModelCancel" title="测试">
-      <el-form :model="modelData" class="alert-model-form" label-width="80px">
-        <el-form-item :label="modelData.label">
-          <el-input v-model="modelData.value" :placeholder="`请输入${modelData.label}`" />
+    <!-- 执行 -->
+    <el-dialog title="退货详情" :visible.sync="performDisplay" width="600px">
+      <div class="dialog-deleted-content">
+        您确定已核销<span>[2018012516160013300700000001]</span>么？
+      </div>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="performModelCancel">取 消</el-button>
+        <el-button type="primary" @click="performModelSubmit">确定</el-button>
+      </div>
+    </el-dialog>
+
+    <!-- 退货审批 -->
+    <el-dialog title="退货审批" :visible.sync="lookDisplay" width="900px">
+      <el-form :model="lookModelData" disabled label-width="110px" :inline="true" ref="lookQueryForm" class="look-query-form">
+        <el-form-item label="七分钱退款编号" prop="name1">
+          <el-input v-model="lookModelData.name1"></el-input>
+        </el-form-item>
+        <el-form-item label="客户账号" prop="name2">
+          <el-input v-model="lookModelData.name2"></el-input>
+        </el-form-item>
+        <el-form-item label="原七分钱订单号" prop="name3">
+          <el-input v-model="lookModelData.name3"></el-input>
+        </el-form-item>
+        <el-form-item label="商户编号" prop="name4">
+          <el-input v-model="lookModelData.name4"></el-input>
+        </el-form-item>
+        <el-form-item label="渠道订单号" prop="name5">
+          <el-input v-model="lookModelData.name5"></el-input>
+        </el-form-item>
+        <el-form-item label="商户名称" prop="name5">
+          <el-input v-model="lookModelData.name5"></el-input>
+        </el-form-item>
+        <el-form-item label="原商户订单号" prop="name6">
+          <el-input v-model="lookModelData.name6"></el-input>
+        </el-form-item>
+        <el-form-item label="退款申请时间" prop="name7">
+          <el-input v-model="lookModelData.name7"></el-input>
+        </el-form-item>
+        <el-form-item label="原始交易金额" prop="name8">
+          <el-input v-model="lookModelData.name8"></el-input>
+        </el-form-item>
+        <el-form-item label="退款金额" prop="name9">
+          <el-input v-model="lookModelData.name9"></el-input>
+        </el-form-item>
+        <el-form-item label="原始交易时间" prop="name10">
+          <el-input v-model="lookModelData.name10"></el-input>
+        </el-form-item>
+        <el-form-item label="账期" prop="name11">
+          <el-input v-model="lookModelData.name11"></el-input>
+        </el-form-item>
+        <el-form-item label="手续费" prop="name12">
+          <el-input v-model="lookModelData.name12"></el-input>
+        </el-form-item>
+        <el-form-item label="付手续费方" prop="name13">
+          <el-input v-model="lookModelData.name13"></el-input>
+        </el-form-item>
+        <el-form-item label="审核" prop="name14">
+          <el-input v-model="lookModelData.name14"></el-input>
+        </el-form-item>
+        <el-form-item label="核销状态" prop="name15">
+          <el-input v-model="lookModelData.name15"></el-input>
+        </el-form-item>
+        <el-form-item label="审核人" prop="name16">
+          <el-input v-model="lookModelData.name16"></el-input>
+        </el-form-item>
+        <el-form-item label="核销人" prop="name17">
+          <el-input v-model="lookModelData.name17"></el-input>
+        </el-form-item>
+        <el-form-item label="审核时间" prop="name18">
+          <el-input v-model="lookModelData.name18"></el-input>
+        </el-form-item>
+        <el-form-item label="核销时间" prop="name19">
+          <el-input v-model="lookModelData.name19"></el-input>
+        </el-form-item>
+        <el-form-item label="退款理由" prop="name20">
+          <el-input v-model="lookModelData.name20"></el-input>
         </el-form-item>
       </el-form>
-    </alert-model>
+    </el-dialog>
   </div>
-
 </template>
 
 <script>
@@ -133,7 +204,10 @@ export default {
     return {
       examine: {},
       display: false,
-      editorModelData:{},
+      editorModelData: {},
+      performDisplay: false,
+      lookDisplay: false,
+      lookModelData: {},
       tableData: new Array(5).fill(testData),
       paginationOps: {
         pageSizes: [5, 10, 15, 20],
@@ -146,29 +220,34 @@ export default {
     searchText(v) {
       console.log(v);
     }
-    
   },
   created() {},
   methods: {
-    editorModelCancel() {
-      this.editorDisplay = false;
+    lookClick(row) {
+      this.lookDisplay = true;
+      this.lookModelData = row;
+      // console.log(row);
     },
-    
-    editorModelSubmit(c) {
-      console.log(this.editorModelData);
-      c();
-    },
-    editorClick(row) {
-      this.display = true;
+    performClick(row) {
+      this.performDisplay = true;
+      this.performModelData = row;
       console.log(row);
+    },
+    performModelCancel() {
+      this.performDisplay = false;
+    },
+    performModelSubmit() {
+      console.log(this.performModelData);
+      this.performDisplay = false;
     },
     goToSearch() {
       //查询
       console.log(this.examine, '查询');
     },
-    insertItem() {
-      // 新增
-      this.addDisplay = true;
+    download() {
+      // 导出报表
+      this.$message('导出报表');
+      console.log('导出报表');
     },
     resetFormFileds() {
       this.$refs['controlQueryForm1'].resetFields();
@@ -179,4 +258,14 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped></style>
+<style lang='scss'>
+.look-query-form {
+  .el-form-item {
+    width: 50%;
+    margin-right: 0;
+  }
+  .el-form-item__content {
+    width: 300px;
+  }
+}
+</style>
