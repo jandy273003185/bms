@@ -60,11 +60,14 @@
         </el-form-item>
         <el-form-item prop="name5" label="上级部门" required>
           <el-select v-model="addModelData.name5" placeholder="请选择部门">
-            <el-option label="(GYZB)-国银证保" value="1"></el-option>
-            <el-option label="(TECH)-信息技术部" value="2"></el-option>
-            <el-option label="(OPER)-运营管理部" value="4"></el-option>
-            <el-option label="(FINA)-财务部" value="5"></el-option>
-            <el-option label="(CPB)-产品部" value="6"></el-option>
+            <el-option value='1' label='(GYZB)-国银证保'></el-option>
+            <el-option value='2' label='(TECH)-信息技术部'></el-option>
+            <el-option value='3' label='(OPERATION)-运营管理部'></el-option>
+            <el-option value='4' label='(BJQFQ)-北京七分钱'></el-option>
+            <el-option value='5' label='(FIN)-财务部'></el-option>
+            <el-option value='6' label='(RM)-风险管理部'></el-option>
+            <el-option value='7' label='(KEFU)-客服'></el-option>
+            <el-option value='8' label='(PROD)-产品'></el-option>
           </el-select>
         </el-form-item>
         <el-form-item prop="name6" label="是否有效" required>
@@ -103,11 +106,14 @@
         </el-form-item>
         <el-form-item prop="name5" label="上级部门" required>
           <el-select v-model="editorModelData.name5" placeholder="请选择部门">
-            <el-option label="(GYZB)-国银证保" value="1"></el-option>
-            <el-option label="(TECH)-信息技术部" value="2"></el-option>
-            <el-option label="(OPER)-运营管理部" value="4"></el-option>
-            <el-option label="(FINA)-财务部" value="5"></el-option>
-            <el-option label="(CPB)-产品部" value="6"></el-option>
+            <el-option value='1' label='(GYZB)-国银证保'></el-option>
+            <el-option value='2' label='(TECH)-信息技术部'></el-option>
+            <el-option value='3' label='(OPERATION)-运营管理部'></el-option>
+            <el-option value='4' label='(BJQFQ)-北京七分钱'></el-option>
+            <el-option value='5' label='(FIN)-财务部'></el-option>
+            <el-option value='6' label='(RM)-风险管理部'></el-option>
+            <el-option value='7' label='(KEFU)-客服'></el-option>
+            <el-option value='8' label='(PROD)-产品'></el-option>
           </el-select>
         </el-form-item>
         <el-form-item prop="name6" label="是否有效" required>
