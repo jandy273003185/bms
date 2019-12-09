@@ -1,6 +1,6 @@
 <template>
   <!-- 交易管理 => 退款管理 -->
-  <div>
+  <div class="trading-refund-page">
     <page-model>
       <template slot="controlQueryOps">
         <el-form :model="examine" label-width="110px" :inline="true" ref="controlQueryForm1">
@@ -19,8 +19,9 @@
           </el-form-item>
           <el-form-item label="退款类型" prop="name4">
             <el-select v-model="examine.name4" placeholder="请选择">
-              <el-option label="注册验证" value="1"></el-option>
-              <el-option label="登录密码找回验证" value="0"></el-option>
+              <el-option label="余额支付退款" value="0"></el-option>
+              <el-option label="卡支付退款" value="1"></el-option>
+              <el-option label="红包支付退款" value="3"></el-option>
             </el-select>
           </el-form-item>
         </el-form>
@@ -41,8 +42,11 @@
           </el-form-item>
           <el-form-item label="退款状态" prop="name8">
             <el-select v-model="examine.name8" placeholder="请选择">
-              <el-option label="注册验证" value="1"></el-option>
-              <el-option label="登录密码找回验证" value="0"></el-option>
+              <el-option label="成功" value="1"></el-option>
+              <el-option label="待审核" value="2"></el-option>
+              <el-option label="处理中" value="3"></el-option>
+              <el-option label="失败" value="4"></el-option>
+              <el-option label="审核不通过" value="5"></el-option>
             </el-select>
           </el-form-item>
         </el-form>
@@ -85,7 +89,7 @@
           <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
               <el-button type="text" size="small" @click="lookClick(scope.row)">查看详情</el-button>
-              <el-button type="text" size="small" @click="performClick(scope.row)">确认核销</el-button>
+              <el-button class="perform-btn" type="text" size="small" @click="performClick(scope.row)">确认核销</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -259,13 +263,19 @@ export default {
 </script>
 
 <style lang='scss'>
-.look-query-form {
-  .el-form-item {
-    width: 50%;
-    margin-right: 0;
+.trading-refund-page {
+  .look-query-form {
+    .el-form-item {
+      width: 50%;
+      margin-right: 0;
+    }
+    .el-form-item__content {
+      width: 300px;
+    }
   }
-  .el-form-item__content {
-    width: 300px;
+
+  .perform-btn {
+    margin-left: 0;
   }
 }
 </style>
