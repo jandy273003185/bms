@@ -24,8 +24,13 @@
           </el-form-item>
           <el-form-item label="订单状态" prop="name6">
             <el-select v-model="examine.name6" placeholder="请选择">
-              <el-option label="短信" value="1"></el-option>
-              <el-option label="邮件" value="0"></el-option>
+              <el-option label="成功" value="1"></el-option>
+              <el-option label="待提交" value="0"></el-option>
+              <el-option label="提交核心" value="0"></el-option>
+              <el-option label="提交处理中" value="0"></el-option>
+              <el-option label="失败" value="0"></el-option>
+              <el-option label="取消" value="0"></el-option>
+              <el-option label="未明" value="0"></el-option>
             </el-select>
           </el-form-item>
         </el-form>
