@@ -155,13 +155,13 @@ export default {
       addDisplay: false,
       addModelData: {
         //新增model数据
-        name5: modelDataCheckboxList
+        name5: []
       },
       editorDisplay: false,
       modelDataCheckboxList: modelDataCheckboxList,
       editorModelData: {
         //修改model数据
-        name5: modelDataCheckboxList
+        name5: []
       },
       islook: false, //编辑还是查看
       tableData: new Array(5).fill(testData),
