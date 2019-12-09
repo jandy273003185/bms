@@ -478,7 +478,7 @@ jQuery(function($){
 	</div><!-- /.main-container -->
 					<div class="modal fade" id="addMerchantProductModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					   <div class="modal-dialog">
-					      <div class="modal-content" style="width: 600px;">
+					      <div class="modal-content" style="width: 700px;">
 					         <div class="modal-header">
 					            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times;</button>
 					            <h4 class="modal-title" id="myModalLabel">商户产品新增</h4>
