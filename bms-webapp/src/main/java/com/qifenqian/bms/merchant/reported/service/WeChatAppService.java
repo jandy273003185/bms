@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.utils.GenSN;
+import com.qifenqian.bms.merchant.reported.bean.City;
+import com.qifenqian.bms.merchant.reported.bean.TdMerchantBankInfo;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
 import com.qifenqian.bms.merchant.reported.bean.WeChatAppAreaInfo;
 import com.qifenqian.bms.merchant.reported.bean.WeChatAppBean;
@@ -188,6 +190,28 @@ public class WeChatAppService {
 	 */
 	public List<WeChatAppAreaInfo> getProvinceName() {
 		return weChatAppMapperDao.getProvinceName();
+	}
+	
+	/**
+	 * 查微信区域信息
+	 * @param areaName
+	 * @return
+	 */
+	public WeChatAppAreaInfo selectWxAreaInfo(String areaName) {
+		return weChatAppMapperDao.selectWxAreaInfo(areaName);
+	}
+	
+	/**
+	 * 查询商户银行账号信息
+	 * @param custId
+	 * @return
+	 */
+	public TdMerchantBankInfo getMerchantBankInfo(String custId) {
+		return weChatAppMapperDao.getMerchantBankInfo(custId);
+	}
+	
+	public City getTbSpCity(String cityId) {
+		return weChatAppMapperDao.getTbSpCity(cityId);
 	}
 
 	/**
