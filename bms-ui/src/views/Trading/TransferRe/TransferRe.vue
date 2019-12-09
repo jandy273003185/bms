@@ -31,7 +31,7 @@
           <el-table-column prop='name2' label='原交易订单号' min-width="100"></el-table-column>
           <el-table-column prop='name3' label='交易金额' min-width="100"></el-table-column>
           <el-table-column prop='name4' label='原交易时间' min-width="100"></el-table-column>
-          <el-table-column prop='name5' label='原付方账号' min-width="80"></el-table-column>
+          <el-table-column prop='name5' label='原付方账号' min-width="120"></el-table-column>
           <el-table-column prop='name6' label='原付方姓名' min-width="90"></el-table-column>
           <el-table-column prop='name7' label='原收方账号' min-width="120"></el-table-column>
           <el-table-column prop='name8' label='原收方姓名' min-width="100"></el-table-column>
