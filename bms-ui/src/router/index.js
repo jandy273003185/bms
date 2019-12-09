@@ -34,7 +34,204 @@ const Transactions = () => import(/* webpackChunkName: "Trading" */ '@/views/Tra
 const RechargeRe = () => import(/* webpackChunkName: "Trading" */ '@/views/Trading/RechargeRe/RechargeRe');
 const TransferRe = () => import(/* webpackChunkName: "Trading" */ '@/views/Trading/TransferRe/TransferRe');
 const Merchants = () => import(/* webpackChunkName: "Trading" */ '@/views/Trading/Merchants/Merchants');
+// 聚合支付
+const Adaily = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Agent/Adaily/Adaily');
+const Agreement = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Agent/Agreement/Agreement');
+const Settlement = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Agent/Settlement/Settlement');
+const Limit = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Merchants/Limit/Limit');
+const Mdaily = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Merchants/Mdaily/Mdaily');
+const Rate = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Merchants/Rate/Rate');
+const Mrefund = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Merchants/Mrefund/Mrefund');
+const Mexchange = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Merchants/Mexchange/Mexchange');
+const Olist = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Order/List/List');
+const Orefund = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Order/Orefund/Orefund');
+const Pchannels = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Product/Channels/Channels');
+const Pmanage = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Product/Manage/Manage');
+const Exception = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Exception/Exception');
+const Arouter = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Router/Router');
+// 物料管理
+const Mmanage = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Material/Manage/Manage');
 
+
+// UAT 后台菜单
+export const uatRouter = [
+  {
+    name: '系统管理',
+    path: '',
+    children: [
+      { name: '用户管理', path: '/system/suser', component: Suser },
+      { name: '角色管理', path: '/system/role', component: Role },
+      { name: '菜单管理', path: '/system/menu', component: Menu },
+      { name: '部门管理', path: '/system/depart', component: Depart },
+      { name: '任务调度配置', path: '/system/taskconfig', component: TaskConfig },
+      { name: '任务调度日志', path: '/system/tasklog', component: TaskLog },
+      { name: '短信邮件日志', path: '/system/smslog', component: SmsLog }
+    ]
+  },
+  {
+    name: '交易管理',
+    path: '',
+    children: [
+      { name: '消费查询', path: '/trading/consumption', component: Consumption },
+      { name: '商户交易汇总', path: '/trading/summary', component: Summary },
+      { name: '充值查询', path: '/trading/recharge', component: Recharge },
+      { name: '交易撤销', path: '/trading/revocation', component: Revocation },
+      { name: '退款管理', path: '/trading/refund', component: Refund },
+      { name: '转账管理', path: '/trading/transfer', component: Transfer },
+      { name: '交易汇总查询', path: '/trading/transactions', component: Transactions },
+      { name: '充值撤销管理', path: '/trading/rechargere', component: RechargeRe },
+      { name: '转账撤销管理', path: '/trading/transferre', component: TransferRe },
+      { name: '商户转账管理', path: '/trading/merchants', component: Merchants }
+    ]
+  },
+  {
+    name: '物料管理',
+    path: '',
+    children: [{ name: '物料管理', path: '/system/user', component: Mmanage }]
+  },
+  {
+    name: '聚合支付',
+    path: '',
+    children: [
+      {
+        name: '订单信息',
+        path: '',
+        children: [
+          { name: '订单列表', path: '/aggregate/order/list', component: Olist },
+          { name: '退款列表', path: '/aggregate/order/refund', component: Orefund }
+        ]
+      },
+      { name: '订单异常列表', path: '/aggregate/exception', component: Exception },
+      {
+        name: '商户交易管理',
+        path: '',
+        children: [
+          { name: '商户交易汇总', path: '/aggregate/merchants/mexchange', component: Mexchange }
+        ]
+      }
+    ]
+  },
+  {
+    name: '财务管理',
+    path: '',
+    children: [
+      { name: '商户结算', path: '/system/user' },
+      { name: '财务查询', path: '/system/user' },
+      { name: '交广科技对账结果', path: '/system/user' },
+      { name: '渠道源数据', path: '/system/user' },
+      { name: '银联对账结果', path: '/system/user' },
+      { name: '财务异常处理', path: '/system/user' },
+      { name: '金蝶财务', path: '/system/user' },
+      { name: '中信对账结果查询', path: '/system/user' },
+      { name: '对账汇总', path: '/system/user' },
+      { name: '差错处理', path: '/system/user' },
+      { name: '对账汇总（V2）', path: '/system/user' }
+    ]
+  },
+  {
+    name: '码表维护',
+    path: '',
+    children: [
+      { name: '节假日管理', path: '/system/user' },
+      { name: '手续费管理', path: '/system/user' },
+      { name: '银行信息管理', path: '/system/user' },
+      { name: '证件管理', path: '/system/user' },
+      { name: '城市信息管理', path: '/system/user' },
+      { name: '问题管理列表', path: '/system/user' },
+      { name: '首页广告维护', path: '/system/user' },
+      { name: '协议模板维护', path: '/system/user' },
+      { name: '数据字典', path: '/system/user' },
+      { name: '交易控制', path: '/system/user' },
+      { name: '提现控制', path: '/system/user' },
+      { name: '支行信息管理', path: '/system/user' }
+    ]
+  },
+  {
+    name: '商户管理',
+    path: '',
+    children: [
+      { name: '商户网关维护', path: '/system/user' },
+      { name: '商户协议管理', path: '/system/user' },
+      { name: '费率管理', path: '/system/user' },
+      { name: '商户账户管理', path: '/system/user' },
+      { name: '收银员', path: '/system/user' },
+      { name: '门店管理', path: '/system/user' },
+      { name: '商户渠道列表', path: '/system/user' },
+      { name: '商户列表', path: '/system/user' },
+      { name: '商户报备列表', path: '/system/user' },
+      { name: '商户产品管理', path: '/system/user' },
+      { name: '商户设备管理', path: '/system/user' },
+      { name: '服务商列表', path: '/system/user' }
+    ]
+  },
+  {
+    name: '客户管理',
+    path: '/system/user',
+    children: [
+      { name: '证件审核管理', path: '/system/user' },
+      { name: '客户管理列表', path: '/system/user' },
+      { name: '客户账户管理', path: '/system/user' }
+    ]
+  },
+  {
+    name: '短信管理',
+    path: '/system/user',
+    children: [{ name: '短信管列表', path: '/system/user' }]
+  },
+  {
+    name: '实名认证', path: '/system/user',
+    children: [
+      { name: '实名认证文件列表', path: '/system/user' },
+      { name: '实名认证验证明细', path: '/system/user' }
+    ]
+  },
+  {
+    name: '代理商管理', path: '/system/user',
+    children: [
+      { name: '微商户列表', path: '/system/user' },
+      { name: '代理商注册', path: '/system/user' },
+      { name: '代理商商户注册', path: '/system/user' },
+      { name: '代理商列表', path: '/system/user' },
+      { name: '代理商审核列表', path: '/system/user' },
+      { name: '代理商报表', path: '/system/user' },
+      { name: '代理商协议管理', path: '/system/user' },
+      { name: '代理商商户审核列表', path: '/system/user' },
+      { name: '服务商注册审核(新)', path: '/system/user' }
+    ]
+  },
+  {
+    name: '聚合支付对账', path: '/system/user',
+    children: [
+      { name: '对账文件列表', path: '/system/user' },
+      { name: '对账结果', path: '/system/user' },
+      { name: '渠道对账文件下载', path: '/system/user' }
+    ]
+  },
+  {
+    name: '学生管理', path: '/system/user',
+    children: [{ name: '学生信息', path: '/system/user' }]
+  },
+  {
+    name: '代付管理', path: '/system/user',
+    children: [
+      { name: '批量代付', path: '/system/user' },
+      { name: '代付查询', path: '/system/user' },
+      { name: '代付账户管理', path: '/system/user' },
+      { name: '代付审核', path: '/system/user' },
+      { name: '开通代付审核', path: '/system/user' },
+      { name: '代付统计报表', path: '/system/user' },
+      { name: '代付记录', path: '/system/user' },
+      { name: '充值审核', path: '/system/user' },
+      { name: '代付列表', path: '/system/user' },
+      { name: '新增代付', path: '/system/user' },
+      { name: '凭证审核列表(新)', path: '/system/user' },
+      { name: '代付产品列表', path: '/system/user' },
+      { name: '代付详细列表', path: '/system/user' },
+      { name: '代付收益', path: '/system/user' },
+      { name: '商户渠道', path: '/system/user' }
+    ]
+  }
+];
 
 // 菜单列表
 export const menuRouter = [
@@ -95,46 +292,46 @@ export const menuRouter = [
   },
   {
     name: '聚合支付',
-    path: '/system/user',
+    path: '',
     children: [
       {
         name: '代理商交易管理',
-        path: '/system/user',
+        path: '',
         children: [
-          { name: '代理商每日汇集', path: '/system/user' },
-          { name: '代理商协议', path: '/system/user' },
-          { name: '代理商结算', path: '/system/user' }
+          { name: '代理商每日汇集', path: '/aggregate/agent/adaily', component: Adaily },
+          { name: '代理商协议', path: '/aggregate/agent/Agreement', component: Agreement },
+          { name: '代理商结算', path: '/aggregate/agent/Settlement', component: Settlement }
         ]
       },
       {
         name: '商户交易管理',
-        path: '/system/user',
+        path: '',
         children: [
-          { name: '渠道金额限制', path: '/system/user' },
-          { name: '商户每日汇集数据', path: '/system/user' },
-          { name: '商户产品费率', path: '/system/user' },
-          { name: '商户退款', path: '/system/user' },
-          { name: '商户交易汇总', path: '/system/user' }
+          { name: '渠道金额限制', path: '/aggregate/merchants/limit', component: Limit },
+          { name: '商户每日汇集数据', path: '/aggregate/merchants/mdaily', component: Mdaily },
+          { name: '商户产品费率', path: '/aggregate/merchants/rate', component: Rate },
+          { name: '商户退款', path: '/aggregate/merchants/refund', component: Mrefund },
+          { name: '商户交易汇总', path: '/aggregate/merchants/mexchange', component: Mexchange }
         ]
       },
       {
         name: '订单信息',
-        path: '/system/user',
+        path: '',
         children: [
-          { name: '订单列表', path: '/system/user' },
-          { name: '退款列表', path: '/system/user' }
+          { name: '订单列表', path: '/aggregate/order/list', component: Olist },
+          { name: '退款列表', path: '/aggregate/order/refund', component: Orefund }
         ]
       },
       {
         name: '产品渠道',
-        path: '/system/user',
+        path: '',
         children: [
-          { name: '支付渠道管理', path: '/system/user' },
-          { name: '支付产品管理', path: '/system/user' }
+          { name: '支付渠道管理', path: '/aggregate/product/list', component: Pchannels },
+          { name: '支付产品管理', path: '/aggregate/product/manage', component: Pmanage }
         ]
       },
-      { name: '订单异常列表', path: '/system/user' },
-      { name: '渠道路由', path: '/system/user' }
+      { name: '订单异常列表', path: '/aggregate/exception', component: Exception },
+      { name: '渠道路由', path: '/aggregate/router', component: Arouter }
     ]
   },
   {
@@ -376,7 +573,9 @@ function flatten(arr) {
   return arr2.flat();
 }
 
-const menuRoutes = [...flatten(menuRouter), { path: '/welcome', component: Welcome }];
+// const menuRoutes = [...flatten(menuRouter), { path: '/welcome', component: Welcome }];//sitmg
+
+const menuRoutes = [...flatten(uatRouter), { path: '/welcome', component: Welcome }];//uta
 
 // 默认路由
 const tacitly = [

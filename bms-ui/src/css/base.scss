@@ -208,18 +208,6 @@ video {
   .el-form-item {
     margin-bottom: 10px !important;
   }
-
-  .el-checkbox.is-disabled {
-
-    .el-checkbox__label,
-    .el-checkbox__inner {
-      cursor: pointer;
-    }
-  }
-
-  .el-input.is-disabled .el-input__inner {
-    cursor: pointer !important;
-  }
 }
 
 // 修改dialog默认定位
@@ -261,4 +249,16 @@ video {
   span {
     color: #ff0000;
   }
+}
+
+.el-checkbox.is-disabled {
+
+  .el-checkbox__label,
+  .el-checkbox__inner {
+    cursor: pointer !important;
+  }
+}
+
+.el-input.is-disabled .el-input__inner {
+  cursor: pointer !important;
 }

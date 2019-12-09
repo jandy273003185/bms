@@ -22,7 +22,9 @@ import com.qifenqian.bms.basemanager.merchant.bean.MerchantVo;
 import com.qifenqian.bms.basemanager.merchant.bean.PicturePath;
 import com.qifenqian.bms.basemanager.merchant.service.MerchantEnterService;
 import com.qifenqian.bms.merchant.reported.bean.ChannlInfo;
+import com.qifenqian.bms.merchant.reported.bean.City;
 import com.qifenqian.bms.merchant.reported.bean.CrInComeBean;
+import com.qifenqian.bms.merchant.reported.bean.TdMerchantBankInfo;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
 import com.qifenqian.bms.merchant.reported.bean.WeChatAppAreaInfo;
 import com.qifenqian.bms.merchant.reported.bean.WeChatAppBean;
@@ -79,7 +81,20 @@ public class WeChatAppReportsController {
 		List<ChannlInfo> channlInfoList = crIncomeService.getChannlInfoList();
 		/***查询报备信息***/
 		List<TdMerchantDetailInfo> reportedList = fmIncomeService.getMerchantDetailInfoList(detail);
-		
+		//转化七分钱开户银行省市为微信省市信息
+		TdMerchantBankInfo merchantBankInfo = null;
+		if (StringUtils.isNotBlank(custInfo.getCustId())) {
+			merchantBankInfo = weChatAppService.getMerchantBankInfo(custInfo.getCustId());
+			mv.addObject("merchantBankInfo",merchantBankInfo);
+		}
+		City bankCity = null;
+		if (null != merchantBankInfo) {
+			bankCity = weChatAppService.getTbSpCity(merchantBankInfo.getBankAddressCode());
+		}
+		if (null != bankCity) {
+			WeChatAppAreaInfo wxAreaInfo = weChatAppService.selectWxAreaInfo(bankCity.getCityName());
+			mv.addObject("wxAreaInfo",wxAreaInfo);
+		}
 		mv.addObject("custInfo",custInfo);
 		mv.addObject("weChatAppAreaInfoList",weChatAppAreaInfoList);
 		mv.addObject("channlInfoList",channlInfoList);

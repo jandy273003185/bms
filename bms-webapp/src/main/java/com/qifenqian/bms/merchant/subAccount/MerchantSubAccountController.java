@@ -1,6 +1,7 @@
 package com.qifenqian.bms.merchant.subAccount;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,6 +45,7 @@ public class MerchantSubAccountController {
 		mv.addObject("merchantSubAccouontList", merchantSubAccouontList);
 		mv.addObject("merchantSubAccouontBean", merchantSubAccouontBean);
 		TdMerchantDetailInfo tdMerchantDetailInfo = new TdMerchantDetailInfo();
+		tdMerchantDetailInfo.setReportStatus("1");
 		List<TdMerchantDetailInfo>  tdMerchantDetailInfoList= fmIncomeMapper.selMerchantDetailInfoList(tdMerchantDetailInfo);
 		mv.addObject("tdMerchantDetailInfoList",tdMerchantDetailInfoList);
 		return mv;
@@ -55,19 +57,24 @@ public class MerchantSubAccountController {
 	 */
 	@RequestMapping("/add")
 	@ResponseBody
-	public String add(MerchantSubAccouontBean merchantSubAccouont) {
-		
+	public Map<String, String> add(MerchantSubAccouontBean merchantSubAccouont) {
 		// 请求bean 打印
 		logger.info("请求保存MerchantSubAccouontBean：[{}]", JSONObject.toJSONString(merchantSubAccouont, true));
-		JSONObject jsonObject = new JSONObject();
-		
-		int i = merchantSubAccountService.insterSubAccount(merchantSubAccouont);
-		if(0 < i) {
-			jsonObject.put("result", "SUCCESS");
-		}else {
-			jsonObject.put("result", "FAILURE");
-			jsonObject.put("message", "新增失败");
-		}
-		return jsonObject.toJSONString();
+		Map<String, String> result = merchantSubAccountService.insterSubAccount(merchantSubAccouont);
+		return result;
 	}
+	
+	/**
+	 * 商户分账方停用
+	 * @return
+	 */
+	@RequestMapping("/delete")
+	@ResponseBody
+	public Map<String, String> delete(MerchantSubAccouontBean merchantSubAccouont) {
+		// 请求bean 打印
+		logger.info("请求停用MerchantSubAccouontBean：[{}]", JSONObject.toJSONString(merchantSubAccouont, true));
+		Map<String, String> result = merchantSubAccountService.disableSubAccount(merchantSubAccouont);
+		return result;
+	}
+	
 }

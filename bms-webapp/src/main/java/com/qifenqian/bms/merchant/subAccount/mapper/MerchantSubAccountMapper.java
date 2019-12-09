@@ -21,7 +21,11 @@ public interface MerchantSubAccountMapper {
 	 * @return
 	 */
 	List<MerchantSubAccouontBean> selectSubAccountList(MerchantSubAccouontBean merchantSubAccouontBean);
+	
+	MerchantSubAccouontBean getSubAccountById(String relationId);
 
 	int insterSubAccount(MerchantSubAccouontBean merchantSubAccouont);
+	
+	int updateSubAccount(MerchantSubAccouontBean merchantSubAccouont);
 
 }

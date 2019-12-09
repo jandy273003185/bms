@@ -9,11 +9,14 @@
           </el-form-item>
           <el-form-item label="部门名称" prop="name2">
             <el-select v-model="examine.name2" placeholder="请选择部门">
-              <el-option label="(GYZB)-国银证保" value="1"></el-option>
-              <el-option label="(TECH)-信息技术部" value="2"></el-option>
-              <el-option label="(OPER)-运营管理部" value="4"></el-option>
-              <el-option label="(FINA)-财务部" value="5"></el-option>
-              <el-option label="(CPB)-产品部" value="6"></el-option>
+              <el-option value='1' label='(GYZB)-国银证保'></el-option>
+              <el-option value='2' label='(TECH)-信息技术部'></el-option>
+              <el-option value='3' label='(OPERATION)-运营管理部'></el-option>
+              <el-option value='4' label='(BJQFQ)-北京七分钱'></el-option>
+              <el-option value='5' label='(FIN)-财务部'></el-option>
+              <el-option value='6' label='(RM)-风险管理部'></el-option>
+              <el-option value='7' label='(KEFU)-客服'></el-option>
+              <el-option value='8' label='(PROD)-产品'></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="状态" prop="name3">
@@ -35,17 +38,17 @@
 
       <template slot="tableInner">
         <el-table :data="tableData" border style="width: 100%">
-          <el-table-column prop="serial" min-width="50" label="编号"></el-table-column>
-          <el-table-column prop="employee" min-width="120" label="员工编号"></el-table-column>
-          <el-table-column prop="name" label="姓名" min-width="120"></el-table-column>
-          <el-table-column prop="industry" min-width="150" label="部门名称"></el-table-column>
-          <el-table-column prop="sex" min-width="50" label="性别"></el-table-column>
-          <el-table-column prop="phone" min-width="220" label="个人电话"></el-table-column>
-          <el-table-column prop="status" min-width="100" label="状态"></el-table-column>
-          <el-table-column prop="creator" min-width="120" label="创建人"></el-table-column>
-          <el-table-column prop="date" label="创建时间" min-width="220"></el-table-column>
-          <el-table-column prop="regenerator" label="更新人" min-width="150"></el-table-column>
-          <el-table-column prop="turnovertime" label="更新时间" min-width="160"></el-table-column>
+          <el-table-column prop="name1" min-width="50" label="编号"></el-table-column>
+          <el-table-column prop="name2" min-width="120" label="员工编号"></el-table-column>
+          <el-table-column prop="name3" label="姓名" min-width="120"></el-table-column>
+          <el-table-column prop="name4" min-width="150" label="部门名称"></el-table-column>
+          <el-table-column prop="name5" min-width="50" label="性别"></el-table-column>
+          <el-table-column prop="name6" min-width="220" label="个人电话"></el-table-column>
+          <el-table-column prop="name7" min-width="100" label="状态"></el-table-column>
+          <el-table-column prop="name8" min-width="120" label="创建人"></el-table-column>
+          <el-table-column prop="name9" label="创建时间" min-width="220"></el-table-column>
+          <el-table-column prop="name10" label="更新人" min-width="150"></el-table-column>
+          <el-table-column prop="name11" label="更新时间" min-width="160"></el-table-column>
           <el-table-column fixed="right" label="操作" width="100">
             <template slot-scope="scope">
               <el-button type="text" size="small" @click="editorClick(scope.row)">编辑</el-button>
@@ -86,11 +89,14 @@
         </el-form-item>
         <el-form-item prop="name7" label="所属部门" required>
           <el-select v-model="addModelData.name7" placeholder="请选择部门">
-            <el-option label="(GYZB)-国银证保" value="1"></el-option>
-            <el-option label="(TECH)-信息技术部" value="2"></el-option>
-            <el-option label="(OPER)-运营管理部" value="4"></el-option>
-            <el-option label="(FINA)-财务部" value="5"></el-option>
-            <el-option label="(CPB)-产品部" value="6"></el-option>
+            <el-option value='1' label='(GYZB)-国银证保'></el-option>
+            <el-option value='2' label='(TECH)-信息技术部'></el-option>
+            <el-option value='3' label='(OPERATION)-运营管理部'></el-option>
+            <el-option value='4' label='(BJQFQ)-北京七分钱'></el-option>
+            <el-option value='5' label='(FIN)-财务部'></el-option>
+            <el-option value='6' label='(RM)-风险管理部'></el-option>
+            <el-option value='7' label='(KEFU)-客服'></el-option>
+            <el-option value='8' label='(PROD)-产品'></el-option>
           </el-select>
         </el-form-item>
         <el-form-item prop="name8" label="角色" required>
@@ -136,7 +142,7 @@
         <el-form-item prop="name4" label="密码" required>
           <el-input v-model="editorModelData.name4"></el-input>
         </el-form-item>
-        <el-form-item prop="name5" label="真是姓名" required>
+        <el-form-item prop="name5" label="真实姓名" required>
           <el-input v-model="editorModelData.name5"></el-input>
         </el-form-item>
         <el-form-item prop="name6" label="昵称">
@@ -197,17 +203,17 @@
 
 <script>
 const testData = {
-  serial: '1',
-  employee: 'GYZB-0000',
-  name: '王小虎',
-  industry: '国银证宝',
-  sex: '男',
-  phone: '012987654321',
-  status: '已登录',
-  creator: '创建人',
-  date: '2016-05-02',
-  regenerator: '管理员',
-  turnovertime: '2019-12-04 03:53:03'
+  name1: '1',
+  name2: 'GYZB-0000',
+  name3: '王小虎',
+  name4: '国银证宝',
+  name5: '男',
+  name6: '012987654321',
+  name7: '已登录',
+  name8: '创建人',
+  name9: '2016-05-02',
+  name10: '管理员',
+  name11: '2019-12-04 03:53:03'
 };
 
 export default {
@@ -221,17 +227,20 @@ export default {
       editorModelData: {}, //编辑数据
       roleModelData: [
         //角色选择
-        { name1: '1', name2: '管理员' },
-        { name1: '3', name2: '清结算组' },
-        { name1: '4', name2: '产品组' },
-        { name1: '5', name2: '测试人员' },
-        { name1: '99', name2: 'Default' },
-        { name1: '100', name2: 'test1' },
-        { name1: '102', name2: '数据查询全权限' },
-        { name1: '103', name2: '测试' },
-        { name1: '104', name2: '市场部总裁' },
-        { name1: '105', name2: '市场部副总裁' },
-        { name1: '107', name2: '交易管理部分' }
+        { name1: 1, name2: '超级管理员' },
+        { name1: 2, name2: '清结算组' },
+        { name1: 3, name2: '产品组' },
+        { name1: 5, name2: '客服' },
+        { name1: 6, name2: '财务部' },
+        { name1: 7, name2: '短信管理员' },
+        { name1: 8, name2: '市场部' },
+        { name1: 9, name2: '空权限' },
+        { name1: 10, name2: '管理员' },
+        { name1: 11, name2: '数据查询全权限' },
+        { name1: 12, name2: '风控' },
+        { name1: 13, name2: '技术部' },
+        { name1: 14, name2: '录单' },
+        { name1: 15, name2: 'OM' }
       ],
       tableData: new Array(10).fill(testData), //表单数据
       paginationOps: {
@@ -259,6 +268,7 @@ export default {
     },
     editorClick(row) {
       this.editorDisplay = true;
+      this.editorModelData = row;
       console.log(row);
     },
     // 新增

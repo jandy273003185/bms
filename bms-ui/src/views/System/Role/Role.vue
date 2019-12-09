@@ -63,7 +63,7 @@
             <el-option label="无效" value="0"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="活动性质">
+        <el-form-item label="活动性质" required>
           <el-checkbox-group v-model="addModelData.name5">
             <el-checkbox v-for="(item,index) in modelDataCheckboxList" :key="index" :label="item"></el-checkbox>
           </el-checkbox-group>
@@ -77,29 +77,32 @@
 
     <!-- 修改 查看 model -->
     <el-dialog title="角色修改" :visible.sync="editorDisplay" width="600px">
-      <el-form ref="alertEditorModelForm" disabled :model="editorModelData" class="alert-model-form" label-width="80px" :show-message="false">
-        <el-form-item prop="name1" label="角色名称" required>
-          <el-input v-model="editorModelData.name1"></el-input>
+      <el-form ref="alertEditorModelForm" :disabled="islook" :model="editorModelData" class="alert-model-form" label-width="80px" :show-message="false">
+        <el-form-item prop="name1" label="角色编号" required>
+          <el-input disabled v-model="editorModelData.name1"></el-input>
         </el-form-item>
         <el-form-item prop="name2" label="角色代码" required>
           <el-input v-model="editorModelData.name2"></el-input>
         </el-form-item>
-        <el-form-item prop="name3" label="角色说明" required>
+        <el-form-item prop="name3" label="角色名称" required>
           <el-input v-model="editorModelData.name3"></el-input>
         </el-form-item>
-        <el-form-item prop="name4" label="是否有效" required>
-          <el-select v-model="editorModelData.name4" placeholder="选择角色状态">
+        <el-form-item prop="name4" label="角色说明" required>
+          <el-input v-model="editorModelData.name4"></el-input>
+        </el-form-item>
+        <el-form-item prop="name5" label="是否有效" required>
+          <el-select v-model="editorModelData.name5" placeholder="选择角色状态">
             <el-option label="有效" value="1"></el-option>
             <el-option label="无效" value="0"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="活动性质">
-          <el-checkbox-group v-model="editorModelData.name5">
+        <el-form-item label="角色选择" required>
+          <el-checkbox-group v-model="editorModelData.name6">
             <el-checkbox v-for="(item,index) in modelDataCheckboxList" :key="index" :label="item"></el-checkbox>
           </el-checkbox-group>
         </el-form-item>
       </el-form>
-      <div v-show="islook" slot="footer" class="dialog-footer">
+      <div v-show="!islook" slot="footer" class="dialog-footer">
         <el-button @click="editorModelCancel">取 消</el-button>
         <el-button type="primary" @click="editorModelSubmit">确 定</el-button>
       </div>
@@ -114,7 +117,7 @@ const testData = {
   name3: '王小虎',
   name4: '所有权限',
   name5: '有效',
-  name6: '创建人',
+  name6: ['系统管理'],
   name7: '2015-12-22 6:08:54',
   name8: '石理',
   name9: '2019-12-04 03:53:03'
@@ -127,23 +130,11 @@ const modelDataCheckboxList = [
   '商户管理',
   '客户管理',
   '交易管理',
-  '我的工作空间',
-  '科目管理',
-  '调账管理',
   '账务管理',
-  '交广科技信息查询',
-  '银联交易查询',
-  '异常列表',
-  '工作流管理',
   '短信管理',
-  '社交',
-  '代理商管理',
   '实名认证',
-  '聚合支付对账',
   '聚合支付',
-  '学生管理',
-  '代付管理',
-  'APP管理',
+  '代理商管理',
   '物料管理'
 ];
 
@@ -155,13 +146,13 @@ export default {
       addDisplay: false,
       addModelData: {
         //新增model数据
-        name5: modelDataCheckboxList
+        name5: []
       },
       editorDisplay: false,
       modelDataCheckboxList: modelDataCheckboxList,
       editorModelData: {
         //修改model数据
-        name5: modelDataCheckboxList
+        name6: []
       },
       islook: false, //编辑还是查看
       tableData: new Array(5).fill(testData),
@@ -197,13 +188,14 @@ export default {
     },
     editorClick(row) {
       this.editorDisplay = true;
-      this.islook = true;
+      this.islook = false;
+      // row.name6 = row.name6.split(''); //接口对接时，若角色选择字段为字符串，则需要将数据转数组
       this.editorModelData = row;
       console.log(row);
     },
     lookClick(row) {
       this.editorDisplay = true;
-      this.islook = false;
+      this.islook = true;
       this.editorModelData = row;
       console.log(row);
     },

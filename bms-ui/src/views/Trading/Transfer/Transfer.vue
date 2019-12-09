@@ -38,14 +38,18 @@
         <el-form :model="examine" label-width="110px" :inline="true" ref="controlQueryForm3" class="el-form-diy">
           <el-form-item label="订单状态" prop="name8">
             <el-select v-model="examine.name8" placeholder="请选择">
-              <el-option label="注册验证" value="1"></el-option>
-              <el-option label="登录密码找回验证" value="0"></el-option>
+              <el-option label="成功" value="1"></el-option>
+              <el-option label="待提交" value="0"></el-option>
+              <el-option label="提交核心" value="0"></el-option>
+              <el-option label="提交处理中" value="0"></el-option>
+              <el-option label="失败" value="0"></el-option>
+              <el-option label="未明" value="0"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="订单类型" prop="name10">
             <el-select v-model="examine.name10" placeholder="请选择">
-              <el-option label="注册验证" value="1"></el-option>
-              <el-option label="登录密码找回验证" value="0"></el-option>
+              <el-option label="转账七分钱" value="1"></el-option>
+              <el-option label="红包入账" value="0"></el-option>
             </el-select>
           </el-form-item>
         </el-form>

@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +25,9 @@ import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
 import com.qifenqian.bms.basemanager.custInfo.service.TdCustInfoService;
 import com.qifenqian.bms.basemanager.merchant.bean.Merchant;
 import com.qifenqian.bms.basemanager.merchant.bean.MerchantVo;
+import com.qifenqian.bms.basemanager.merchant.bean.PicturePath;
 import com.qifenqian.bms.basemanager.merchant.mapper.MerchantMapper;
+import com.qifenqian.bms.basemanager.merchant.service.MerchantEnterService;
 import com.qifenqian.bms.basemanager.merchant.service.MerchantService;
 import com.qifenqian.bms.basemanager.merchant.service.MerchantWorkFlowAuditService;
 import com.qifenqian.bms.basemanager.rule.bean.Rule;
@@ -72,7 +75,9 @@ public class ServiceParenterController {
 	private BankMapper bankMapper;
 	@Autowired
 	private ServiceParenterService serviceParenterService;
-	
+	@Autowired
+	private MerchantEnterService merchantEnterService;
+	  
 	@RequestMapping("/list")
 	public ModelAndView serviceParenter(MerchantVo merchantVo) {
 		
@@ -99,7 +104,6 @@ public class ServiceParenterController {
 			merchantVo.setUserName(WebUtils.getUserInfo().getUserName());
 			list = serviceParenterService.myServicesNewList(merchantVo);
 		}
-		
 		mv.addObject("isFirst","No");
 		mv.addObject("banklist", bankMapper.selectBanks(bank));
 		mv.addObject("agencyList", JSONObject.toJSON(list));
@@ -121,21 +125,79 @@ public class ServiceParenterController {
 		User user = new User();
 		rule.setStatus("VALID");
 		//获取用户信息
-		String userId  = String.valueOf(WebUtils.getUserInfo().getUserId());
-		SysUser  sysUser = sysUserMapper.selectUserById(userId);
-		mv.addObject("sysUser", sysUser);
-		mv.addObject("taskId", request.getParameter("taskId"));
+	//	String userId  = String.valueOf(WebUtils.getUserInfo().getUserId());
+	//	SysUser  sysUser = sysUserMapper.selectUserById(userId);
+	//	mv.addObject("sysUser", sysUser);
+	//	mv.addObject("taskId", request.getParameter("taskId"));
 		mv.addObject("banklist", bankMapper.selectBanks(bank));
-		mv.addObject("rulelist", ruleMapper.selectRules(rule));
-		mv.addObject("userlist", userService.getUserList(user));
+	//	mv.addObject("rulelist", ruleMapper.selectRules(rule));
+	//	mv.addObject("userlist", userService.getUserList(user));
 		mv.addObject("provincelist", cityService.selectAllProvince());
 		mv.addObject("provincelist_", cityService.selAllProvince());
-		mv.addObject("agentList", merchantMapper.selectAgent());
+	//	mv.addObject("agentList", merchantMapper.selectAgent());
 		mv.addObject("queryBean", agenReport);
 		return mv;
 		
 	}
+	
+	@RequestMapping("/updatePage")
+	public ModelAndView updateView(HttpServletRequest request ,String custId ){
+		ModelAndView mv = new ModelAndView("/merchant/serviceParenter/updatePage");
+		
+		Bank bank = new Bank();
+		//获取用户信息
+	//	String userId  = String.valueOf(WebUtils.getUserInfo().getUserId());
+		MerchantVo merchantVo = merchantMapper.newFindMerchantInfo(custId);//获取商户信息
+		mv.addObject("banklist", bankMapper.selectBanks(bank));
+		mv.addObject("provincelist", cityService.selectAllProvince());
+		mv.addObject("provincelist_", cityService.selAllProvince());
+		mv.addObject("merchantVo",merchantVo);//商户信息
+		PicturePath picturePathOld = merchantEnterService.getPicPath(merchantVo);
+		mv.addObject("picturePathOld",picturePathOld); //图片地址信息
+		return mv;
+		
+	}
+	/**
+	 * @param merchantVo  修改代理商信息
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/update")
+	@ResponseBody
+	public String update(MerchantVo merchantVo,HttpServletRequest request ){
+        JSONObject object = new JSONObject();
+        try {
+        	merchantMapper.updateMerchant(merchantVo);
+		} catch (Exception e) {
+			// TODO: handle exception
+			 object.put("result", "fail");
+	         object.put("message", "系统错误");
+	         return object.toJSONString();
+		}
+        object.put("result", "SUCCESS");
+		object.put("message", "修改成功");
+        return object.toJSONString();
+	}
 
+	/**
+	 * @param request zhanggc  打开浏览jsp页面
+	 * @param custId
+	 * @return
+	 */
+	@RequestMapping("/showPage")
+	public ModelAndView showPageView(HttpServletRequest request ,String custId ){
+		ModelAndView mv = new ModelAndView("/merchant/serviceParenter/showPage");
+		Bank bank = new Bank();
+		//获取用户信息
+		MerchantVo merchantVo = merchantMapper.newFindMerchantInfo(custId);//获取商户信息
+		mv.addObject("banklist", bankMapper.selectBanks(bank));
+		mv.addObject("provincelist", cityService.selectAllProvince());
+		mv.addObject("provincelist_", cityService.selAllProvince());
+		mv.addObject("merchantVo",merchantVo);//商户信息
+		PicturePath picturePathOld = merchantEnterService.getPicPath(merchantVo);
+		mv.addObject("picturePathOld",picturePathOld); //图片地址信息
+		return mv;
+	}
 	/**
 	 * 商户新增
 	 *
@@ -192,6 +254,31 @@ public class ServiceParenterController {
 		}
 
 		return object.toJSONString();
+	}
+	
+	
+	/**
+	 * @param request zhanggc 打开审核页面
+	 * @param custId
+	 * @return
+	 */
+	@RequestMapping("/auditPage")
+	public ModelAndView auditPageView(HttpServletRequest request ,String custId ){
+		ModelAndView mv = new ModelAndView("/merchant/serviceParenter/auditPage");
+		Bank bank = new Bank();
+		//获取用户信息
+		MerchantVo merchantVo = merchantMapper.newFindMerchantInfo(custId);//获取商户信息
+		
+		if ("".equals(merchantVo.getState()) || merchantVo.getState()==null ) {
+			return  new ModelAndView("");
+		}
+		mv.addObject("banklist", bankMapper.selectBanks(bank));
+		mv.addObject("provincelist", cityService.selectAllProvince());
+		mv.addObject("provincelist_", cityService.selAllProvince());
+		mv.addObject("merchantVo",merchantVo);//商户信息
+		PicturePath picturePathOld = merchantEnterService.getPicPath(merchantVo);
+		mv.addObject("picturePathOld",picturePathOld); //图片地址信息
+		return mv;
 	}
 	
 	/**
