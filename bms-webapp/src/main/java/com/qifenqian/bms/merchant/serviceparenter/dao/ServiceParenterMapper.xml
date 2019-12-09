@@ -319,6 +319,9 @@
 			C.BUSINESS_TERM_END,
 			C.BUSINESS_TERM_START,
 			C.REFERRER,
+			
+			C.contact_name,
+			C.contact_mobile,
 			C.SERVICE_LEVEL,
 			DATE_FORMAT(c.CREATE_TIME,'%Y-%m-%d %H:%i:%s') CREATE_TIME,
 			b.id protocol_id,
@@ -434,6 +437,8 @@
 		C.BUSINESS_TERM_END,
 		C.BUSINESS_TERM_START,
 		C.REFERRER,
+			C.contact_name,
+			C.contact_mobile,
 		C.SERVICE_LEVEL,
 		b.id protocol_id,
 		b.disable_date,

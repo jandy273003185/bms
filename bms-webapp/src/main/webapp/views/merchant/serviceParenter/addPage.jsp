@@ -521,19 +521,19 @@ function addServiceBtn(){
                 //ajax
                 $.ajax({
                     type : "POST",
-                    url : window.Constants.ContextPath + '<%=MerchantPath.BASE+MerchantPath.FILEUPLOAD%>?custId='+data.custId,
+                    url : window.Constants.ContextPath + '<%="/common/files/getPicPath"%>?custId='+data.custId,
                     data : {
-                        businessPhoto :  $('#businessPhototemp').val(),                //商户营业执照
-                        certAttribute1 : $('#certAttribute1temp').val(),               //身份证正面照
-                        certAttribute2 : $('#certAttribute2temp').val(),               //身份证背面照
-                        certAttribute0 : $('#openAccounttemp').val(),                  //开户许可证
-                        bankCardPhoto :  $('#bankCardPhototemp').val(),                //开户银行照
+                    	bussinessPath :  $('#bussinessPath').val(),                //商户营业执照
+                        idCardOPath : $('#idCardOPath').val(),               //身份证正面照
+                        idCardFPath : $('#idCardFPath').val(),               //身份证背面照
+                        openAccountPath : $('#openAccountPath').val(),                  //开户许可证
+                        bankCardPath :  $('#bankCardPath').val(),                //开户银行照
                     },
                     dataType : "json",
                     success : function (data) {
                         if(data.result=='SUCCESS'){
                             $.gyzbadmin.alertSuccess("注册申请成功,请等待审批！",null,function(){
-                                window.location.href = window.Constants.ContextPath + '<%=MerchantEnterPath.BASE + MerchantEnterPath.LIST %>';
+                            	 window.location.href = window.Constants.ContextPath + '/merchant/serviceParenter/list';
                             });
                         }else{
                             $.gyzbadmin.alertFailure("扫描件上传失败,请选择合适的类型");
@@ -553,6 +553,41 @@ function addServiceBtn(){
 
 
 /********************图片预览***********************/
+  /*
+    *
+    * file input file dom object
+    * pathTarget 路径保存的input元素id 
+    * preView 图片预览dom id
+    */
+    function commonFileUpload(file, pathTarget, preView) {
+    	var formdata=new FormData();
+        formdata.append("file",$(file).get(0).files[0]);
+        $.ajax({
+            url:'/common/files/uploadPic',
+            type:'post',
+            contentType:false,
+            data:formdata,
+            processData:false,
+            async:false,
+            success:function(info){ 
+                 $('#' + pathTarget + '').val(info.path);
+            },
+            error:function(err){
+                console.log(err)
+            }
+        });
+
+        var prevDiv = document.getElementById(preView);
+        if (file.files && file.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (evt) {
+            	prevDiv.innerHTML = '<img src="' + evt.target.result + '" onclick="bigImg(this);" style="width:120px;height:100px;" />';
+            }
+            reader.readAsDataURL(file.files[0]);
+        } else {
+            prevDiv.innerHTML = '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';
+        }
+    }
 
 
 /** 点击预览大图 **/
@@ -579,6 +614,12 @@ function showBusinessPhotoImage(obj){
 	 var result1 = previewImage(divObj,imageObj,obj);
 	 return result1;
 }
+
+//营业执照上传
+function showBusinessPhotoImage(file){
+	commonFileUpload(file, 'bussinessPath', 'businessPhotoDiv');
+} 
+
 /** 营业执照点击预览 **/
 $('.businessPhotoClick').click(function(){
 	var divObj = document.getElementById("showImageDiv");
@@ -586,6 +627,8 @@ $('.businessPhotoClick').click(function(){
 	var obj = document.getElementById("businessPhoto");
 	return previewImage(divObj,imageObj,obj);
 });
+
+
 /** 身份证正面预览 **/
 function showCertAttribute1Image(obj){
 	 var divObj = document.getElementById("certAttribute1Div");
@@ -593,6 +636,11 @@ function showCertAttribute1Image(obj){
 	 var result1 = previewImage(divObj,imageObj,obj);
 	 return result1;
 }
+//身份证正面上传
+function showCertAttribute1Image(file){
+	commonFileUpload(file, 'idCardOPath', 'certAttribute1Div');
+} 
+
 /** 身份证正面点击预览 **/
 $('.certAttribute1Click').click(function(){
 	var divObj = document.getElementById("showImageDiv");
@@ -600,6 +648,9 @@ $('.certAttribute1Click').click(function(){
 	var obj = document.getElementById("certAttribute1");
 	return previewImage(divObj,imageObj,obj);
 });
+
+
+
 /** 身份证背面预览 **/
 function showCertAttribute2Image(obj){
 	 var divObj = document.getElementById("certAttribute2Div");
@@ -607,6 +658,10 @@ function showCertAttribute2Image(obj){
 	 var result1 = previewImage(divObj,imageObj,obj);
 	 return result1;
 }
+//身份证背面上传
+function showCertAttribute2Image(file){
+	commonFileUpload(file, 'idCardFPath', 'certAttribute2Div');
+} 
 /** 身份证背面点击预览 **/
 $('.certAttribute2Click').click(function(){
 	var divObj = document.getElementById("showImageDiv");
@@ -615,6 +670,8 @@ $('.certAttribute2Click').click(function(){
 	return previewImage(divObj,imageObj,obj);
 });
 
+
+
 /** 开户许可证预览 **/
 function showOpenAccountImage(obj){
 	 var divObj = document.getElementById("openAccountDiv");
@@ -622,6 +679,11 @@ function showOpenAccountImage(obj){
 	 var result1 = previewImage(divObj,imageObj,obj);
 	 return result1;
 }
+//开户许可证上传
+function showOpenAccountImage(file){
+	commonFileUpload(file, 'openAccountPath', 'openAccountDiv');
+} 
+
 /** 开户许可证背面点击预览 **/
 $('.openAccountClick').click(function(){
 	var divObj = document.getElementById("showImageDiv");
@@ -630,6 +692,8 @@ $('.openAccountClick').click(function(){
 	return previewImage(divObj,imageObj,obj);
 });
 
+
+
 /** 银行卡预览 **/
 function showBankCardPhotoImage(obj){
 	 var divObj = document.getElementById("bankCardPhotoDiv");
@@ -637,6 +701,10 @@ function showBankCardPhotoImage(obj){
 	 var result1 = previewImage(divObj,imageObj,obj);
 	 return result1;
 }
+/** 银行卡预览上传 **/
+function showBankCardPhotoImage(file){
+	commonFileUpload(file, 'bankCardPath', 'bankCardPhotoDiv');
+} 
 /** 银行卡点击预览 **/
 $('.bankCardPhotoClick').click(function(){
 	var divObj = document.getElementById("showImageDiv");
@@ -700,11 +768,6 @@ function businessForever(){
 				<div class="page-content">
 					<div class="row">
 					<div class="col-xs-12">
-						<input type="hidden" id="businessPhototemp">
-						<input type="hidden" id="certAttribute1temp">
-						<input type="hidden" id="certAttribute2temp">
-						<input type="hidden" id="openAccounttemp" />
-						<input type="hidden" id="bankCardPhototemp" />
                     <table id="merchant_table" class="list-table">
 					<tbody>
                         <tr>
@@ -822,7 +885,7 @@ function businessForever(){
 									</label>
 								</a>
 								<div class="updateImageDiv" style="float:left; margin-top:75 " >
-									<input type="hidden" id="businessPhotoImageVal02"  />
+									<input type="hidden" id="bussinessPath"  />
 									<input type="file" name="businessPhoto" id="businessPhoto" onchange="showBusinessPhotoImage(this)" />
 									<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 								</div>
@@ -864,6 +927,7 @@ function businessForever(){
 								</label>
 								</a>
 								<div style="float:left;margin-top:75" >
+									<input  type="hidden" id="idCardOPath" name="idCardOPath" />
 									<input type="file" name="certAttribute1" id="certAttribute1" onChange="showCertAttribute1Image(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 								</div>
 								<label class="label-tips" id="certAttribute1Label" style="float:left;margin-top:88"></label>
@@ -878,7 +942,8 @@ function businessForever(){
 									</label>
 								</a>
 								<div style="float:left;margin-top:75" >
-								<input type="file" name="certAttribute2" id="certAttribute2" onChange="showCertAttribute2Image(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									<input  type="hidden" id="idCardFPath" name="idCardFPath" />
+									<input type="file" name="certAttribute2" id="certAttribute2" onChange="showCertAttribute2Image(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 								</div>
 								<label class="label-tips" id="certAttribute2Label" style="float:left;margin-top:88"></label>
 							</td>
@@ -985,6 +1050,7 @@ function businessForever(){
 									</label>
 								</a>
 								<div style="float:left;margin-top:75" >
+									<input  type="hidden" id="bankCardPath" name="bankCardPath" />
 									<input type="file" name="bankCardPhoto" id="bankCardPhoto" onChange="showBankCardPhotoImage(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 								</div>
 								<label class="label-tips" id="bankCardPhotoLabel" style="float:left;margin-top:88"></label>
@@ -1000,6 +1066,7 @@ function businessForever(){
 									</label>
 								</a>
 								<div style="float:left;margin-top:75" >
+								<input  type="hidden" id="openAccountPath" name="openAccountPath" />
 								<input type="file" name="openAccount" id="openAccount" onChange="showOpenAccountImage(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 								</div>
 								<label class="label-tips" id="openAccountLabel" style="float:left;margin-top:88"></label>
