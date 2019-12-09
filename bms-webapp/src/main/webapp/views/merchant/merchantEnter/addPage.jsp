@@ -716,7 +716,7 @@ function commonFileUpload(file, pathTarget, preView) {
         processData:false,
         async:false,
         success:function(info){ 
-             $('#' + pathTarget + '').val(info.path);
+             $('#' + pathTarget + '').val(info.imagePath);
         },
         error:function(err){
             console.log(err)
@@ -1160,69 +1160,11 @@ function showOpenAccountImage(file){
 
         $("#representativeCertNo").on('blur',function () {
             if ($("#representativeCertNo").val().length < 5 || $("#representativeCertNo").val().length > 25){
-                $("#representativeCertNoLab").text('');
-            }else {
-                $("#representativeCertNoLab").text("请填写5-25位身份证号");
-                $("#representativeCertNoLab").focus();
+            	$("#representativeCertNoLab").text("请填写5-25位身份证号");
+            	$("#representativeCertNoLab").focus();
                 return false;
-            }
         });
 
-        <%-- $("#custManager").on('blur',function () {
-            $.ajax({
-                async:false,
-                dataType:"json",
-                url:window.Constants.ContextPath +'<%=MerchantEnterPath.BASE+MerchantEnterPath.VERIFYBUSINESSPERSONNEL%>',
-                data:{custManager:$('#custManager').val()},
-                success:function(data){
-                    if(data.result=="FAIL"){
-                        $("#custManagerLab").text("");
-                    }else{
-                        $("#custManagerLab").text("未查询到该业务员");
-                        return false;
-                    }
-                }});
-        });
- --%>
-        //代理商
-       <%--  $("#agentName").on('blur',function () {
-            $.ajax({
-                async:false,
-                dataType:"json",
-                url:window.Constants.ContextPath +'<%=MerchantEnterPath.BASE+MerchantEnterPath.VERIFICATIONAGENT%>',
-                data:{deptName:$('#agentName').val()},
-                success:function(data){
-                    if(data.result=="FAIL"){
-                        $("#agentNameLab").text("");
-                    }else{
-                        $("#agentNameLab").text("未查询到代理商");
-                        return false;
-                    }
-                }});
-        });
- --%>
-
-        /*商户账号*/
-        <%-- $("#merchantAccount").on('blur',function () {
-        	if(!isPhoneNo($("#merchantAccount")[0])){
-        		$("#merchantAccountLab").text("商户账户请用手机号 ");
-        		$("#merchantAccount").focus();
-        		return false;
-        	}
-            $.ajax({
-                async:false,
-                dataType:"json",
-                url:window.Constants.ContextPath +'<%=MerchantEnterPath.BASE+MerchantEnterPath.VALIDATEMERCHANTACCOUNT%>',
-                data:{deptName:$('#merchantAccount').val()},
-                success:function(data){
-                    if(data.result=="FAIL"){
-                        $("#merchantAccountLab").text("");
-                    }else{
-                        $("#merchantAccountLab").text("未查询到代理商");
-                        return false;
-                    }
-                }});
-        }); --%>
 		/*商户名称*/
         $("#custName").on('blur',function () {
             $("#custNameLab").text("");
