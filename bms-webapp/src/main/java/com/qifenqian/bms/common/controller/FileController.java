@@ -331,6 +331,19 @@ public class FileController {
 				custScan.setStatus("00");
 				custScanMapper.insertCustScan(custScan);
 			}
+			//15 非法人结算授权函
+			if(!StringUtils.isEmpty(picturePath.getLetterOfAuthPath())) {
+				custScan.setCertifyType("15");
+				
+				if(!StringUtils.isEmpty(picturePathOld.getLetterOfAuthPath())) {
+					custScan.setStatus("01");
+					custScanMapper.updateCustScan(custScan);
+				}
+				
+				custScan.setScanCopyPath(picturePath.getLetterOfAuthPath());
+				custScan.setStatus("00");
+				custScanMapper.insertCustScan(custScan);
+			}
 			
 			object.put("result", "SUCCESS");
 			object.put("message", "新增图片成功");

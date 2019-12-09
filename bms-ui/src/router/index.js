@@ -49,6 +49,9 @@ const Pchannels = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggr
 const Pmanage = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Product/Manage/Manage');
 const Exception = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Exception/Exception');
 const Arouter = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Router/Router');
+// 物料管理
+const Mmanage = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Material/Manage/Manage');
+
 
 // UAT 后台菜单
 export const uatRouter = [
@@ -83,8 +86,8 @@ export const uatRouter = [
   },
   {
     name: '物料管理',
-    path: '/system/user',
-    children: [{ name: '物料管理', path: '/system/user' }]
+    path: '',
+    children: [{ name: '物料管理', path: '/system/user', component: Mmanage }]
   },
   {
     name: '聚合支付',

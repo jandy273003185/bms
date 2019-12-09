@@ -53,7 +53,7 @@
 						<input type="hidden" id="certAttribute2temp" />
 						<input type="hidden" id="settlEmentCardtemp" />
 						<!-- 查询条件 -->
-						<form  id="merchantForm" action='<c:url value="<%=AgencyPath.BASE + AgencyPath.LIST %>"/>' method="post">
+						<form  id="merchantForm" action='<c:url value="/merchant/serviceParenter/list"/>' method="post">
 							<input type="hidden" name="isFirst" value="${isFirst}"> 
 							<table class="search-table">
 								<tr>
@@ -71,6 +71,7 @@
 											<i class="icon-leaf blue"></i>
 										</span>
 									</td>
+									
 									<%-- <td class="td-left" >协议状态：</td>
 									<td class="td-right" > 
 										<span class="input-icon">
@@ -99,7 +100,7 @@
 								<tr>
 									<td colspan="6" align="center">
 										<span class="input-group-btn">
-											<gyzbadmin:function url="<%=AgencyPath.BASE + AgencyPath.LIST %>">
+											<gyzbadmin:function url="/merchant/serviceParenter/list">
 												<button type="submit" class="btn btn-purple btn-sm btn-margin  buttonSearch" >
 													查询<i class="icon-search icon-on-right bigger-110"></i>
 												</button>
@@ -127,9 +128,9 @@
 										<th width="10%">服务商名称</th>
 										<!-- <th width="10%">服务产品及费率</th> -->
 										<th width="10%">服务商类型</th>
-										<th width="10%">联系人</th>
-										<th width="10%">开户名</th>
-										<th width="10%">客户经理</th>
+										
+										<th width="10%">联系人姓名</th>
+										<th width="10%">联系人电话</th>
 										<th width="10%">推荐人</th>
 										<th width="10%">服务商级别</th>
 										<th width="12%">状态</th>
@@ -138,14 +139,16 @@
 								</thead>
 								<tbody>
 									<c:forEach items="${agencyList }" var="merchant" varStatus="i">
+									
 										<tr class="merchant" id="merchant">
 											<td>${merchant.merchantCode }</td>
 											<td>${merchant.custName }</td>
 											<%-- <td>${merchant.agentRate }</td> --%>
 											<td>${merchant.custType }</td>
-											<td>${merchant.agentName }</td>
-											<td>${merchant.bankCardName }</td>
-											<td>${merchant.custManager }</td>
+											
+											<td>${merchant.contactName }</td>
+											<td>${merchant.contactMobile }</td>
+											
 											<td>${merchant.referrer }</td>
 											<td>${merchant.serviceLevel }级</td>	
 											<td>
@@ -167,20 +170,14 @@
 													</c:when>
 												</c:choose>
 											</td>
+											
 											<td>	
 												<input type="hidden" name="custId_01" id="custId_01" value="${merchant.custId}"> 
+												<a href="<%=request.getContextPath() + "/merchant/serviceParenter/showPage?custId="%>${merchant.custId}"  class="btn btn-primary btn-xs qifenqian_view_tc" >浏览</a> 	
 												<c:if test="${merchant.state =='01'}">
-													<gyzbadmin:function url="<%=AgencyPath.BASE + AgencyPath.UPDATEAGENCYINFO%>">  	
-														<button type="button" onclick="updateAgencyInfo(this,'edit')" data-toggle='modal' data-target="#updateAgency" class="btn btn-primary btn-xs qifenqian_update_tc" >修改信息</button>
-													</gyzbadmin:function>
-													
-													<gyzbadmin:function url="<%=AgencyPath.BASE + AgencyPath.UPDATEAGENCYINFO%>">  	
-														<button type="button" onclick="updateAgencyInfo(this,'audit')" data-toggle='modal' data-target="#updateAgency" class="btn btn-primary btn-xs qifenqian_update_tc" >审核</button>
-													</gyzbadmin:function>
+													<a href="<%=request.getContextPath() + "/merchant/serviceParenter/auditPage?custId="%>${merchant.custId}"  class="btn btn-primary btn-xs qifenqian_view_tc" >审核</a> 
 												</c:if>
-												
-                                            	
-                                            	<button type="button" onclick="updateAgencyInfo(this,'preview')" data-toggle='modal' data-target="#updateAgency" class="btn btn-primary btn-xs qifenqian_view_tc" >预览</button> 
+													<a href="<%=request.getContextPath() + "/merchant/serviceParenter/updatePage?custId="%>${merchant.custId}"  class="btn btn-primary btn-xs qifenqian_view_tc" >修改</a> 	
 											</td>
 										</tr>
 									</c:forEach>
@@ -207,176 +204,7 @@
 			<!-- 设置 -->
 			<%@ include file="/include/setting.jsp"%>
 	
-	<div class="modal fade" style="z-index:1040;" id="updateAgency" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog" style="width:60%;z-index:90;" >
-		<!-- 修改审核时用 -->
-		<input type="hidden" name="custIda" id="custIda" value=""> 
-			<div class="modal-content" style="width:950px;" id="merchantDiv">
-		    	<div class="modal-header" style="background-color:0099CC">
-		        	<button type="button" class="close" data-dismiss="modal" idupdateAgencyntClose" aria-hidden="true">&times;</button>
-		            <h4 class="modal-title" id="myModalLabel">服务商信息</h4>
-		        </div>
-		        <div class="modal-body">
-					<table id="sample-table-2" class="list-table" >
-						<tr class="edit_email">
-							<td class="td-left" width="18%">邮箱：</td>
-							<td class="td-right" width="32%"> 
-								<input type="text" id="email_04" name="email" readonly="readonly" style="width:35%">
-								<input type="hidden" name="custName_id_01" id="custName_id_01"  />
-							</td>
-						</tr>
-						<tr class="edit_merchantCode">
-						 	<td class="td-left">服务商编号：</td>
-						 	<td class="td-right" colspan="3">
-						 		<input type="text" id="merchantCode_tc" name="merchantCode" readonly="readonly" placeholder="商户编号" style="width:35%">
-						 		<i class="icon-leaf blue"></i>
-								<label class="label-tips" id="merchantCodeLabel"></label>
-						 	</td>
-						</tr>
-						<tr>
-						 	<td class="td-left">服务商名称：</td>
-						 	<td class="td-right" colspan="3">
-						 		<input type="text" id="custName_tc" name="custName" placeholder="客户姓名" style="width:35%">
-						 		<i class="icon-leaf blue"></i>
-								<label id="custNameLabel" class="label-tips"></label>
-						 	</td>
-						</tr>
-						<tr>
-						 	<td class="td-left">联系人：</td>
-						 	<td class="td-right" colspan="3">
-						 		<input type="text" id="agentName" name="agentName" placeholder="联系人" style="width:35%">
-						 		<i class="icon-leaf blue"></i>
-								<label id="agentNameLabel" class="label-tips"></label>
-						 	</td>
-						</tr>
-						<tr>
-							<td class="td-left" >手机号码：</td>
-							<td class="td-right" colspan="3"> 
-								<input type="text" id="representativeMobile"  name="representativeMobile" placeholder="手机号码" style="width:35%">
-								<i class="icon-leaf blue"></i>
-								<label id="representativeMobileLabel" class="label-tips"></label>
-							</td>
-						</tr>
-						<tr class="tempBusinessLicense">
-							<td class="td-left">营业执照号码或统一社会信用代码：</td>
-							<td class="td-right">
-								<input type="text" id="businessLicense" name="businessLicense" placeholder="营业执照注册号" style="width:35%">
-								<input type="hidden" id="businessLicenseHiddenData" name="businessLicense" >
-								<i class="icon-leaf blue"></i>
-								<label class="label-tips" id="businessLicenseLabel"></label>
-							</td>
-						 </tr>
-						 <tr class="tempBusinessPhoto">
-						 	<td class="td-left">营业执照扫描件：</td>
-							<td class="td-right" colspan="3">
-								<a data-toggle='modal' class="tooltip-success businessPhotoClick" data-target="#previewImageModal" >
-									<label id="businessPhotoDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
-										<img  id="businessPhotoImageDiv" onclick="bigImg(this);"  style="width:100%;height:100%;display:none"  />										  
-									</label>
-								</a>
-								<div class="updateImageDiv" style="float:left; margin-top:75 " >
-									<input type="hidden" id="businessPhotoImageVal02"  />  
-									<input type="file" name="businessPhoto" id="businessPhoto" onchange="showBusinessPhotoImage(this)" />
-									<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-								</div>
-							</td>
-						</tr>
-						<tr class="tempBusinessLicenseTime">
-							<td class="td-left">营业期限</td>
-							<td class="td-right">
-							<span class="input-icon">
-								起始：<input type="text" name="businessTermStart"   id="businessTermStart" readonly="readonly"   onfocus="WdatePicker({skin:'whyGreen',minDate:'#F{$dp.$D(\'businessTermEnd\')}'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> 
-								
-								终止：<input type="radio" id="endSel" name="end" value="sel"/>
-								<input type="text" name="businessTermEnd"   id="businessTermEnd" readonly="readonly"  onfocus="WdatePicker({skin:'whyGreen',minDate:'#F{$dp.$D(\'businessTermStart\')}'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
-								<input type="radio" id="endForever" name="end" value="forever">长期
-								<label id="businessTermStartLabel" class="label-tips"></label>
-							</td>
-							</span>
-						 </tr>
-						<tr>
-							<td class="td-left" >身份证图片正面：</td>
-							<td class="td-right" colspan="3">
-								<a data-toggle='modal' class="tooltip-success certAttribute1Click"   data-target="#previewImageModal" >
-									<label id="certAttribute1Div"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
-										<img  id="certAttribute1ImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none"/>
-									</label>
-								</a>
-								<div class="updateImageDiv" style="float:left; margin-top:75" >
-									<input type="hidden" id="certAttribute1Val02"  />  
-									<input type="file" name="certAttribute1" id="certAttribute1"  onchange="showCertAttribute1Image(this)"/> 
-									<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td class="td-left" >身份证图片背面：</td>
-							<td class="td-right" colspan="3"> 
-								<a data-toggle='modal' class="tooltip-success certAttribute2Click"  data-target="#previewImageModal"  >
-									<label id="certAttribute2Div"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
-										<img  id="certAttribute2ImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none" />
-									</label>
-								</a>
-								<div class="updateImageDiv" style="float:left; margin-top:75" >
-									<input type="hidden" id="certAttribute2Val02"  />  
-									<input type="file" name="certAttribute2" id="certAttribute2" onchange="showCertAttribute2Image(this)"/> 
-									<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td class="td-left" >结算银行卡照片：</td>
-							<td class="td-right" colspan="3"> 
-								<a data-toggle='modal' class="tooltip-success certAttribute2Click"  data-target="#previewImageModal"  >
-									<label id="settlEmentCardDiv"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">  
-										<img  id="settlEmentCardPhotoDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none" />
-									</label>
-								</a>
-								<div class="updateImageDiv" style="float:left; margin-top:75" >
-									<input type="file" name="settlEmentCard" id="settlEmentCard" onchange="showsettlEmentCardImage(this)"/> 
-									<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td class="td-left" >证件类型</td>
-							<td class="td-right" > 
-								<span class="input-icon">
-									<select  id="certifyType"  name="certifyType">
-										<option value ="10">--请选择--</option>
-										<option value ="00">大陆居民身份证</option>
-										<option value ="01">香港居民身份证</option>
-										<option value ="02">澳门居民身份证</option>
-										<option value ="03">台湾居民身份证</option> 
-									</select>
-									<label id="certifyTypeLabel" class="label-tips"></label>
-								</span>
-							</td>
-						</tr>
-						<tr>
-						 	<td class="td-left">身份证号码：</td>
-						 	<td class="td-right"  colspan="3"> 
-								<span class="input-icon">
-									<input type="text" id="certifyNo" name="certifyNo" placeholder="身份证号码"/>
-									<i class="icon-leaf blue"></i>
-									<label id="certifyNoLabel" class="label-tips"></label>
-								</span>
-							</td>
-						</tr>
-					</table>
-		        </div>
-		        <div class="modal-footer">
-		        	<input type="hidden" id="tc_test" name="tc_test" value="" />
-		        	<input type="hidden" id="custType" name="custType" />
-					<button type="button" id="" class="btn btn-default closeBtn" data-dismiss="modal">关闭</button>
-		           	<button type="button" class="btn btn-primary updateAgencyBtn" onclick="confirmAgencyInfo()">提交</button>
-		           	
-		           	<button type="button" class="btn btn-primary updateAgencyBtnGo" onclick="confirmAgencyAudit('yes')">审核通过</button>
-		           	<button type="button" class="btn btn-primary updateAgencyBtnNo" onclick="confirmAgencyAudit('no')">审核不通过</button>
-		    	</div>
-	    	</div><!-- /.modal-content -->
-		</div>
-	</div>
+
 	
 	<!-- 图片预览 -->
 	<div class="modal fade" id="previewImageModal"  aria-hidden="true">
@@ -389,7 +217,6 @@
 </body>
 
 <script type="text/javascript">
-
 $(function(){
 	/** 缓存 **/
 	var custIds = ${agencyList };
@@ -398,68 +225,6 @@ $(function(){
 		$.data(custId[i],"merchant",value);
 	});
 	
-	$("input[type=file]").each(
-			function() {
-				var _this = $(this);
-				_this.localResizeIMG({
-					quality : 0.8,
-					success : function(result,file) {
-						
-						var att = pre.substr(pre.lastIndexOf("."));
-						//压缩后图片的base64字符串
-						var base64_string = result.clearBase64;
-						
-						$('#'+_this.attr('id')+'temp').val(att+","+base64_string);
-						//图片预览
-			             var imgObj = $('#'+_this.attr('id')+'ImageDiv');
-			             imgObj.attr("src", "data:image/jpeg;base64," + base64_string).show(); 
-			             
-			             var width = result.width;
-			             var height = result.height;
-			             var scale =  width/height;
-			             if(width >800){
-			             width = 800;
-			             height = width / scale;
-			             }
-			             $(".showDiv").width(width+"px");
-			             $(".showDiv").height(height+"px");
-						
-			             
-			             
-				           //优图
-				             var param = "{str:\""+base64_string+"\",flag:\""+_this.attr('id')+"\"}"
-				    		 $.ajax({
-				    	   			async:false,
-				    	   			type:"POST",
-				    	   			contentType:"application/json;charset=utf-8",
-				    	   			dataType:"text",
-				    	   			url:window.Constants.ContextPath +'<%=AgentRegisterPath.BASE + AgentRegisterPath.YOUTU%>',
-				    	   	        data:param,
-				    	   	        success:function(data){
-				    	   	      		var json = eval('(' + data + ')');
-				    	   	        	if(json.result=="SUCCESS"){
-				    	   	        		 if(_this.attr('id')=="certAttribute1"){//身份證
-				    	       	  				$("#updateAgency #agentName").val(json.cardName);
-				    	       	  				$("#updateAgency #certifyNo").val(json.cardId);
-				    	       	  			}else if(_this.attr('id')=="businessPhoto"){//营业执照
-				    	       	  				$("#updateAgency #businessLicense").val(json.businessLicense);
-				    	       	  				$("#updateAgency #businessTermStart").val(json.businessTermStart);
-				    	       	  				if("长期"==json.businessTermEnd){
-				    	       	  					$("input[value='forever']").click();
-				    	       	  				}else{
-				    	       	  					$("#updateAgency #businessTermEnd").val(json.businessTermEnd);
-				    	       	  				} 
-				    	       	  				//$("#businessRegAddr").val(json.legalAddress);
-				    	       	  				
-				    	       	  			} 
-				    	   				}
-				    	   			}
-				    	   		});
-			             
-			             
-					}
-				});
-			});
 });
 
 
@@ -533,205 +298,8 @@ function loadfun(){
 	$("#merchantState").val($("#stateTemp").val());
 	$("#protocolState").val($("#protocolStateTemp").val());
 }
-/** 更新服务商信息提交 **/
-function confirmAgencyInfo(){
-	var flag;
-	// 校验联系人
-	flag = Register.validateCustName($("#updateAgency #agentName").val().trim(),$("#agentNameLabel"));
-	if(!flag){return false;}
-	// 校验商户名称
-	flag = Register.validateCustName($("#updateAgency #custName_tc").val().trim(),$("#custNameLabel"));
-	if(!flag){return false;}
-	// 校验手机号码
-	flag = Register.validatePhone($("#updateAgency #representativeMobile").val().trim(),$("#representativeMobileLabel"));
-	if(!flag){return false;}
-	
-	if($("#updateAgency #custType").val() == '企业'){
-		// 校验营业执照注册号
-		if ($("#updateAgency #businessLicense").val().trim() != "" && $("#updateAgency #businessLicense").val() != null) {
-			flag = Register.validateBusinessLicense($("#updateAgency #businessLicense").val().trim(),$("#updateAgency #businessLicenseLabel"));
-			if(!flag){return false;}
-		}
-		
-		var startTime = $("#updateAgency #businessTermStart").val();
-		if(kong.test(startTime)) {
-			$.gyzbadmin.alertFailure('营业期限起始时间不能为空');
-			return;
-		}
-		var endTime;
-		if($("#endSel").is(':checked')){
-			 endTime = $("#updateAgency #businessTermEnd").val();
-			if(kong.test(endTime)) {
-				$.gyzbadmin.alertFailure('营业期限终止时间不能为空');
-				return;
-			}
-		}else{
-			endTime = 'forever';
-		}
-	}
-	
-	// 校验证件类型
-	flag = Register.validateCertifyType($("#updateAgency  select[name='certifyType']").val(),$("#updateAgency #certifyTypeLabel"),$("#updateAgency #certifyNo").val());
-	if(!flag){return false;}
-	// 校验身份证号码
-	flag = Register.validateCertifyNo($("#updateAgency #certifyNo").val().trim(),$("#updateAgency #certifyNoLabel"),$("#updateAgency select[name='certifyType']").val());
-	if(!flag){return false;}
-	
-	
-	if($("#updateAgency #businessLicense").val() != $("#updateAgency #businessLicenseHiddenData").val()){
-		if(!checkAttach($("#updateAgency #businessPhoto")[0])){
-			$.gyzbadmin.alertFailure("由于营业执照已修改，必须重新提交营业执照扫描件");
-			return false;
-		}
-	}
-	if(checkAttach($("#updateAgency #businessPhoto")[0])){
-		if(isNull($("#updateAgency #businessLicense")[0])){
-			$("#businessLicenseLabel").text("必须填写营业执照号码或统一社会信用代码");
-			return false;
-		}
-		var flag = Register.validateBusinessLicense($("#updateAgency #businessLicense").val().trim(),$("#updateAgency #businessLicenseLab"));
-		if(!flag){return false;}
-	}
-	// 提交前清空所有错误提示栏
-	Register.clearAllErrorMsgLabel();
-	// 组装修改表单数据
-	var agentName=$("#updateAgency #agentName").val().trim();
-	var custId = $("#updateAgency #tc_test").val().trim();
-	var merchantCode = $("#updateAgency #merchantCode_tc").val().trim(); 					// 商户编号
-	var custName = $("#updateAgency #custName_tc").val().trim(); 							// 客户名称
-	var mobile = $("#updateAgency #representativeMobile").val().trim(); 	                // 手机号码
-	var businessLicense = $("#updateAgency #businessLicense").val().trim(); 				// 营业执照注册号
-	var certifyType = $("#updateAgency #certifyType").val();								// 证件类型
-	var certifyNo = $("#updateAgency #certifyNo").val().trim(); 							// 身份证号码
-	var url = window.Constants.ContextPath +'<%=AgencyPath.BASE + AgencyPath.UPDATEFILEUPLOAD%>?custId=' + custId;
-	$.ajax({
-		type : "POST",
-		url :  url,
-		data :{
-			businessPhoto :  $('#businessPhototemp').val(),
-			certAttribute1 : $('#certAttribute1temp').val(),
-			certAttribute2 : $('#certAttribute2temp').val(),
-			settlEmentCard:  $('#settlEmentCardtemp').val()
-		},
-		dataType : "json",
-		success : function(data) {
-			if(data.result=='SUCCESS'){
-				$.post(window.Constants.ContextPath +'<%=AgencyPath.BASE + AgencyPath.UPDATEAGENCYINFO%>',{
-        			'custId':custId,
-        			'custName':custName,
-        			'agentName':agentName,
-        			'mobile':mobile,
-        			'businessLicense':businessLicense,
-        			'certifyType':certifyType,
-        			'certifyNo':certifyNo,
-        			'businessTermEnd': endTime,
-        			'businessTermStart' :startTime,
-        			'businessType':data.businessType,				// 营业执照扫描件
-    	 			'idCardType_1':data.idCardType_1, 				// 身份证号正面
-    	 			'idCardType_2':data.idCardType_2,				// 身份证号反面
-    	 			'settlEmentCard':data.settlEmentCard
-        		},function(data){
-        			$.unblockUI();
-    				if(data.result=="SUCCESS"){
-    					$("#updateAgency").hide();
-    					$.gyzbadmin.alertSuccess('修改服务商成功！', null, function(){
-    						window.location.reload(); // 强迫浏览器刷新当前页面
-    					});
-    				}else{
-    					$.gyzbadmin.alertFailure("修改服务商失败！" + data.message,null, function(){
-    						window.location.reload();
-    					});
-    				}
-        		},'json')
-        	}else{
-        		$.gyzbadmin.alertFailure("扫描件上传失败,请选择合适的类型");
-        	}
-		}
-	});  
-	
-}
 
 
-/** 点击预览和更新 **/
-function updateAgencyInfo(obj,option){
-	/** 预览 **/
-	
-	$("#updateAgency img").attr("src","");
-	var merchant = 	$.data($(obj).parent().parent()[0],"merchant");
-	if(option == 'preview'){ 
-		// 隐藏提交按钮
-		$('#updateAgency .updateAgencyBtn').hide(); 
-		$('#updateAgency .updateAgencyBtnGo').hide(); 
-		$('#updateAgency .updateAgencyBtnNo').hide(); 
-		// 让input框和select框
-		$('#updateAgency input,select').prop("disabled", true); 
-	
-		$('#updateAgency #certifyType').val(merchant.certifyType);
-		$('#updateAgency #certifyNo').val(merchant.certifyNo);
-		$('#updateAgency #businessLicense').val(merchant.businessLicense);
-		$('#updateAgency #representativeMobile').val(merchant.mobile);
-		if(merchant.custType == '0'){
-			$('#updateAgency .tempBusinessLicense').prop("disabled", true); 
-			$('#updateAgency .tempBusinessPhoto').prop("disabled", true);
-		}else{
-			$('#updateAgency .tempBusinessLicense').prop("disabled", false); 
-			$('#updateAgency .tempBusinessPhoto').prop("disabled", false);
-		}
-	} 
-	/** 编辑 **/
-	if(option == 'edit'){
-		$('#updateAgency .updateAgencyBtn').show();
-		$('#updateAgency .updateAgencyBtnGo').hide(); 
-		$('#updateAgency .updateAgencyBtnNo').hide(); 
-		
-		$('#updateAgency input,select').prop("disabled", false);
-		if(merchant.custType == '0'){
-			$('#updateAgency .tempBusinessLicense').prop("disabled", true); 
-			$('#updateAgency .tempBusinessPhoto').prop("disabled", true);
-		}else{
-			$('#updateAgency .tempBusinessLicense').prop("disabled", false); 
-			$('#updateAgency .tempBusinessPhoto').prop("disabled",false);
-		}
-	}
-	/* 审核 */
-	if(option == 'audit'){
-		$('#updateAgency .updateAgencyBtn').hide();
-		$('#updateAgency .updateAgencyBtnGo').show(); 
-		$('#updateAgency .updateAgencyBtnNo').show(); 
-		
-		$('#updateAgency input,select').prop("disabled", false);
-		if(merchant.custType == '0'){
-			$('#updateAgency .tempBusinessLicense').prop("disabled", true); 
-			$('#updateAgency .tempBusinessPhoto').prop("disabled", true);
-		}else{
-			$('#updateAgency .tempBusinessLicense').prop("disabled", false); 
-			$('#updateAgency .tempBusinessPhoto').prop("disabled",false);
-		}
-	}
-	$("#updateAgency #businessTermStart").val(merchant.businessTermStart);
-	
-	if(merchant.businessTermEnd == 'forever'){
-		$("#endForever").attr("checked","checked");
-		$('#updateAgency #businessTermEnd').prop("disabled", true); 
-	}else{
-		$("#updateAgency #businessTermEnd").val(merchant.businessTermEnd);
-		$("#endSel").attr("checked","checked");
-	}
-	
- 	var custId = $(obj).parent().find('#custId_01').val();
- 	$("#custIda").val(custId);
-	$("#updateAgency #businessPhotoImageDiv").show();
-	$("#updateAgency #certAttribute1ImageDiv").show();
-	$("#updateAgency #certAttribute2ImageDiv").show(); 
-	$("#updateAgency #settlEmentCardPhotoDiv").show(); 
-	$("#updateAgency #settlEmentCardPhotoDiv").attr("src","<%=request.getContextPath() + AgencyPath.BASE + AgencyPath.PREVIEWAGENCYIMAGE %>?custId=" + custId + "&certifyType=10");
-	$("#updateAgency #businessPhotoImageDiv").attr("src", "<%=request.getContextPath() + AgencyPath.BASE + AgencyPath.PREVIEWAGENCYIMAGE %>?custId=" + custId + "&certifyType=02");
-	$("#updateAgency #certAttribute1ImageDiv").attr("src","<%=request.getContextPath() + AgencyPath.BASE + AgencyPath.PREVIEWAGENCYIMAGE %>?custId=" + custId + "&certifyType=04&front=0");
-	$("#updateAgency #certAttribute2ImageDiv").attr("src","<%=request.getContextPath() + AgencyPath.BASE + AgencyPath.PREVIEWAGENCYIMAGE %>?custId=" + custId + "&certifyType=04&front=1");
-	$("#updateAgency #bankCardImage").attr("src","<%=request.getContextPath() + AgencyPath.BASE + AgencyPath.PREVIEWAGENCYIMAGE %>?custId=" + custId + "&certifyType=05");
-	$("#updateAgency #otherPapersImage").attr("src","<%=request.getContextPath() + AgencyPath.BASE + AgencyPath.PREVIEWAGENCYIMAGE %>?custId=" + custId + "&certifyType=06");
-	
-}
 
 /** 导出服务商列表 */
 $(".exportBut").click(function(){
@@ -865,31 +433,7 @@ $('.buttonSearch').click(function(){
 	var form = $('#merchantForm');
 	form.submit();
 });
-/* 审核 */
-function confirmAgencyAudit(obj){
-	var custId = $("#custIda").val();;
-	var fals =obj;
-	alert(custId)
 
-	$.post(window.Constants.ContextPath +'/merchant/serviceParenter/audit',{
-		'custId':custId,
-		'fals':fals
-	},function(data){
-		
-		if(data.result=="SUCCESS"){
-			$.gyzbadmin.alertSuccess('修改服务商成功！', null, function(){
-				window.location.reload(); // 强迫浏览器刷新当前页面
-			});
-		}else{
-			$.gyzbadmin.alertFailure("修改服务商失败！" + data.message,null, function(){
-				window.location.reload();
-			});
-		}
-		
-		
-	},'json')
-	
-}
 
 </script>
 </html>

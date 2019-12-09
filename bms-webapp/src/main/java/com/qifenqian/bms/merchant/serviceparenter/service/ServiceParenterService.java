@@ -100,6 +100,7 @@ public class ServiceParenterService {
 				 }else
 			     {
 			    	 i = serviceDao.updateTdCustInfoState(custId, "01","04");//00 有效；01 待审核；02 注销；03 冻结；04 审核不通过;05 待完善',
+			    	 return "FAILE";
 				 }
 		 	 }else 
 		 	 {

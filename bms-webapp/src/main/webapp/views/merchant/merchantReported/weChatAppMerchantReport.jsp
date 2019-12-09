@@ -310,17 +310,19 @@ $(function(){
 	                        <tr>
 								<td class="td-left">结算账户名称：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-									<input type="text" id="accountNm" name="accountNm" maxlength="100" placeholder="请输入结算账户名称"  data-validation="notnull" data-errMsg="结算账户名称不能为空"  value="" style="width:90%">
+									<input type="text" id="accountNm" name="accountNm" maxlength="100" placeholder="请输入结算账户名称"  data-validation="notnull" data-errMsg="结算账户名称不能为空"  value="${custInfo.representativeName }" style="width:90%">
 								</td>
 								<td class="td-left">结算账号：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-									<input type="text" id="accountNo" name="accountNo" maxlength="100" placeholder="请输入银行卡号"  data-validation="notnull" data-errMsg="结算账号不能为空"  value="${custInfo.compMainAcct }" style="width:90%">
+									<input type="text" id="accountNo" name="accountNo" maxlength="100" placeholder="请输入银行卡号"  data-validation="notnull" data-errMsg="结算账号不能为空"  value="${merchantBankInfo.accountNumber}" style="width:90%">
 								</td>
 							</tr>
                             <tr>
 								<td class="td-left">开户省份：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-									<select name="bankProvince" id="bankProvince" class="width-90" onchange="getCity();" data-validation="notnull" data-errMsg="开户省份不能为空" >
+									<input type="hidden" id="wxProvinceName" name="wxProvinceName" value="${wxAreaInfo.provinceName}" >
+									<input type="hidden" id="wxAreaId" name="wxAreaId" value="${wxAreaInfo.areaId}" >
+									<select name="bankProvince" id="bankProvince" class="width-90"  data-validation="notnull" data-errMsg="开户省份不能为空" >
 	                                    <option value="">--请选择省--</option>
 	                                    <c:if test="${not empty weChatAppAreaInfoList }">
 	                                        <c:forEach items="${weChatAppAreaInfoList }" var="province">
@@ -346,7 +348,7 @@ $(function(){
 									<select name="bank" id="bank" style="width-90;" data-validation="notnull" data-errMsg="开户银行不能为空" >
 										<option value="">--请选择--</option>
 										<c:forEach items="<%=WeChatBankType.values()%>" var="status">
-											<option value="${status.name}" <c:if test="${status == queryBean.name}">selected</c:if>>
+											<option value="${status.name}" <c:if test="${status eq merchantBankInfo.accountBank}">selected</c:if>>
 												${status.name}
 											</option>
 										</c:forEach>
@@ -354,7 +356,7 @@ $(function(){
 								</td>
 	                            <td class="td-left">开户支行<span style="color:red;">(必填)</span></td>
 	                            <td class="td-right">
-	                            	<input type="text" id="interBankName" name="interBankName" maxlength="100" data-validation="notnull" data-errMsg="开户支行不能为空" placeholder="请输入支行名称"  value="" style="width:90%"> 
+	                            	<input type="text" id="interBankName" name="interBankName" value="${merchantBankInfo.bankName}" maxlength="100" data-validation="notnull" data-errMsg="开户支行不能为空" placeholder="请输入支行名称"  value="" style="width:90%"> 
 	                               	<label id="interBankNameLabel" class="label-tips"></label>
 								</td>
 							</tr>
@@ -413,6 +415,13 @@ $(function(){
      </div>
 </div>   
 <script type="text/javascript">
+		
+		//注册省市和开户银行省市转化并回显数据
+		$(function(){
+			var wxProvinceName = $("#wxProvinceName").val();
+			var wxAreaId = $("#wxAreaId").val();
+			$("#bankProvince").val(wxProvinceName).trigger("change", wxAreaId);
+		})
 
 		//长期
 		function identityForever(){
@@ -471,7 +480,6 @@ $(function(){
     				var areaList = data.areaList;
     				$("#merchantArea").html("");
     				$("#merchantArea").append("<option value=''>--请选择区--</option>");
-    				debugger;
            			for ( var area in areaList) {
            				$("#merchantArea").append(
            						"<option value='"+ areaList[area].areaId +"'>"
@@ -485,7 +493,7 @@ $(function(){
         }
       	
       	/***根据开户省份获取开户城市***/
-      	function getCity(){
+      	$("#bankProvince").change(function(event, value){
 			var province = $("#bankProvince").val().trim();
 			var channelCode =$("#channelCode").val();
 			$.post(window.Constants.ContextPath +"/common/info/getCityInfo",
@@ -503,12 +511,16 @@ $(function(){
 		   						"<option value='"+ cityList[city].areaId +"'>"
 		   								+ cityList[city].cityName + "</option>"); 
 		   			}
+		   			//是否赋值
+		   			if(null != value && '' != value && undefined != value){
+		   				$("#bankCity").val(value);
+		   			}
 				}else{
 					alert("城市不能为空");
 				}
 			},'json'
 			);	
-		}
+		})
       	
       	//上传图片
 		function commonFileUpload(file, pathTarget, preView) {
