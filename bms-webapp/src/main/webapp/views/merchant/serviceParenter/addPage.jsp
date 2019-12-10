@@ -220,7 +220,7 @@ function getAreaList(){
 function addServiceBtn(){
 	/*账号校验*/
 	if(isNull($("#merchantAccount")[0])){
-		$("#merchantAccountLab").text("请设置商户账户");
+		$("#merchantAccountLab").text("请设置服务商账户");
 		$("#merchantAccount").focus();
 		return false;
 	}
@@ -258,7 +258,7 @@ function addServiceBtn(){
     }
 
 
-	/*商户地址*/
+	/*服务商地址*/
 	if(isNull($("#custAdd")[0])){
 		$("#custAddLab").text("请填写地址");
 		$("#custAdd").focus();
@@ -273,7 +273,7 @@ function addServiceBtn(){
 		roleId = 'ent';
 	}
 	var validateLicense =true ;
-	//验证商户账户唯一性
+	//验证服务商账户唯一性
 	$.ajax({
 		async:false,
 		dataType:"json",
@@ -434,13 +434,13 @@ function addServiceBtn(){
 	}
 
     if(isNull($("#custName")[0])){
-        $("#custNameLab").text("请填写商户名称");
+        $("#custNameLab").text("请填写服务商名称");
         $("#custName").focus();
         return false;
     }
 
     if(isNull($("#shortName")[0])){
-        $("#shortNameLab").text("请填写商户简称");
+        $("#shortNameLab").text("请填写服务商简称");
         $("#shortName").focus();
         return false;
     }
@@ -474,7 +474,7 @@ function addServiceBtn(){
 	/* var cnaps =  $("#cnaps").val().trim(); */
 	var cnaps =  $("#branchBank").val().trim();
 	var compMainAcctType = $("#compMainAcctType").val().trim();
-	var merchantFlag = $("#merchantFlag").val();
+	var merchantFlag = '3';
 	var referrer = $("#referrer").val();
 	var serviceLevel = $("#serviceLevel").val();
 	$.blockUI();
@@ -484,8 +484,8 @@ function addServiceBtn(){
         url : window.Constants.ContextPath +'<%="/merchant/serviceParenter/add"%>',
         <%-- url : window.Constants.ContextPath +'<%=MerchantEnterPath.BASE + MerchantEnterPath.ADD%>', --%>
         data :{
-            "merchantAccount":       merchantAccount, 					// 商户账号
-            "custType":              custType,							// 商户类型
+            "merchantAccount":       merchantAccount, 					// 服务商账号
+            "custType":              custType,							// 服务商类型
             "custName":              custName, 							// 客户姓名
             "shortName":             shortName,                         // 客户简称
             "merchantEmail":         merchantEmail,						// 邮箱
@@ -511,7 +511,7 @@ function addServiceBtn(){
             "bankCityName":          bankCityName,						// 开户行城市
             "cnaps":                 cnaps,								// 联行号
             "compMainAcctType":      compMainAcctType,					// 结算类型
-            "merchantFlag":          merchantFlag,						// 商户标识
+            "merchantFlag":          merchantFlag,						// 服务商标识
             "referrer":              referrer,						    // 服务商推荐人
             "serviceLevel":          serviceLevel						// 服务商级别
         },
@@ -523,7 +523,7 @@ function addServiceBtn(){
                     type : "POST",
                     url : window.Constants.ContextPath + '<%="/common/files/getPicPath"%>?custId='+data.custId,
                     data : {
-                    	bussinessPath :  $('#bussinessPath').val(),                //商户营业执照
+                    	bussinessPath :  $('#bussinessPath').val(),                //服务商营业执照
                         idCardOPath : $('#idCardOPath').val(),               //身份证正面照
                         idCardFPath : $('#idCardFPath').val(),               //身份证背面照
                         openAccountPath : $('#openAccountPath').val(),                  //开户许可证
@@ -728,7 +728,7 @@ $(function(){
 	});
 })
 
-/**商户类型 **/
+/**服务商类型 **/
 function selCustType(){
 	//个人
 	if($("#custType").val() =='0'  ){
@@ -771,11 +771,11 @@ function businessForever(){
                     <table id="merchant_table" class="list-table">
 					<tbody>
                         <tr>
-							<td colspan="4" class="headlerPreview" style="background:#7ebde1;">商户信息</td>
+							<td colspan="4" class="headlerPreview" style="background:#7ebde1;">服务商信息</td>
 						</tr>
 						<tr></tr>
                         <tr>
-							<td class="td-left">商户账号：<span style="color:red;">（必填)</span></td>
+							<td class="td-left">服务商账号：<span style="color:red;">（必填)</span></td>
 							<td class="td-right">
 								<input type="text" id="merchantAccount" name="merchantAccount" placeholder="请输入手机号或邮箱" maxlength="50" style="width:90%">
 								
@@ -786,7 +786,7 @@ function businessForever(){
 							<td colspan="4" class="headlerPreview" style="background:#7ebde1">基本信息</td>
 						</tr>
 						<tr>
-							<td class="td-left">商户类型：<span style="color:red;">（必填）</span></td>
+							<td class="td-left">服务商类型：<span style="color:red;">（必填）</span></td>
 							<td class="td-right">
 							   <select name="custType" class="width-90" id="custType" onchange="selCustType();">
 									<option value="1">企业</option>
@@ -794,29 +794,27 @@ function businessForever(){
 									<option value="2">个体户</option>
 								</select>
 							</td>
-							<td class="td-left">商户标志：</td>
+							<td class="td-left">所属业务人员：</td>
 							<td class="td-right">
-							   <select name="merchantFlag" class="width-90" id="merchantFlag" >
-							   		<option value="3">代理商</option>
-								</select>
+								<sevenpay:selectSysUserTag name="custManager" id="custManager" defaultValue="${queryBean.custManager}"/>
 							</td>
 						</tr>
                         <tr>
-						    <td class="td-left" width="18%">商户名称：<span style="color:red;">（必填)</span></td>
+						    <td class="td-left" width="18%">服务商名称：<span style="color:red;">（必填)</span></td>
 							<td class="td-right" width="32%">
-								<input type="text" id="custName" name="custName" maxlength="100"  placeholder="请输入商户名称" style="width:90%">
+								<input type="text" id="custName" name="custName" maxlength="100"  placeholder="请输入服务商名称" style="width:90%">
 								<label class="label-tips" id="custNameLab"></label>
 							</td>
-							<td class="td-left" width="18%">商户简称：<span style="color:red;">（必填)</span></td>
+							<td class="td-left" width="18%">服务商简称：<span style="color:red;">（必填)</span></td>
 							<td class="td-right" width="32%">
-							    <input type="text" id="shortName" name="shortName" placeholder="请输入商户简称" style="width:90%">
+							    <input type="text" id="shortName" name="shortName" placeholder="请输入服务商简称" style="width:90%">
 								<label class="label-tips" id="shortNameLab"></label>
 							</td>
 						</tr>
 						<tr>
-							<td class="td-left">商户邮箱：</td>
+							<td class="td-left">服务商邮箱：</td>
 							<td class="td-right">
-								<input type="text" id="merchantEmail" name="merchantEmail" placeholder="请输入商户邮箱" style="width:90%">
+								<input type="text" id="merchantEmail" name="merchantEmail" placeholder="请输入服务商邮箱" style="width:90%">
 								
 								<label class="label-tips" id="merchantEmailLab"></label>
 							</td>
@@ -828,7 +826,7 @@ function businessForever(){
 							</td>
 						</tr>
 						<tr>
-							<td class="td-left">商户地址：<span style="color:red;">（必填)</span></td>
+							<td class="td-left">服务商地址：<span style="color:red;">（必填)</span></td>
 							<td class="td-right" colspan="3">
 								<div class="col-xs-2 pd0" style="padding:0">
                                    <select class="form-control" id="province" onchange="getCityList();">
@@ -893,14 +891,17 @@ function businessForever(){
 							</td>
 						</tr>
 						<tr>
-							<td class="td-left">所属业务人员：</td>
+							
+							<!-- <td class="td-left">服务商标志：</td>
 							<td class="td-right">
-								<sevenpay:selectSysUserTag name="custManager" id="custManager" defaultValue="${queryBean.custManager}"/>
-							</td>
-							<td class="td-left" width="18%">所属代理商：</td>
+							   <select name="merchantFlag" class="width-90" id="merchantFlag" >
+							   		<option value="3">代理商</option>
+								</select>
+							</td> -->
+							<%-- <td class="td-left" width="18%">所属代理商：</td>
 							<td class="td-right" width="32%">
 								<sevenpay:selectAgentMerchantTag name="agentName" id="agentName" defaultValue="${queryBean.agentCustId }"/>
-							</td>
+							</td> --%>
 						</tr>
                         <tr>
 							<td colspan="4" class="headlerPreview" style="background:#7ebde1;">法人信息</td>
@@ -1149,7 +1150,7 @@ function businessForever(){
         });
  --%>
 
-        /*商户账号*/
+        /*服务商账号*/
         $("#merchantAccount").on('blur',function () {
             $.ajax({
                 async:false,
@@ -1165,11 +1166,11 @@ function businessForever(){
                     }
                 }});
         });
-		/*商户名称*/
+		/*服务商名称*/
         $("#custName").on('blur',function () {
             $("#custNameLab").text("");
         });
-		/*商户简称 */
+		/*服务商简称 */
         $("#shortName").on('blur',function () {
             $("#shortNameLab").text("");
         });
@@ -1177,7 +1178,7 @@ function businessForever(){
         $("#contactPhone").on('blur',function () {
             $("#contactPhoneLab").text("");
         });
-		/*商户地址*/
+		/*服务商地址*/
         $("#province").on('blur',function () {
             $("#provinceLab").text("");
         });

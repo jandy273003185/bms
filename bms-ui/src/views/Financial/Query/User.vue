@@ -1,10 +1,13 @@
 <template>
-  <!-- 财务管理 => 财务查询 => 汇总余额 -->
+  <!-- 财务管理 => 财务查询 => 用户余额 -->
   <div>
     <page-model>
       <template slot="controlQueryOps">
         <el-form :model="examine" label-width="86px" :inline="true" ref="controlQueryForm">
-          <el-form-item label="账户名称" prop="name2">
+          <el-form-item label="客户手机" prop="name1">
+            <el-input v-model="examine.name1"></el-input>
+          </el-form-item>
+          <el-form-item label="用户名称" prop="name2">
             <el-input v-model="examine.name2"></el-input>
           </el-form-item>
         </el-form>
@@ -18,10 +21,13 @@
 
       <template slot="tableInner">
         <el-table :data="tableData" border>
-          <el-table-column prop='name1' label='对账ID' min-width="80"></el-table-column>
-          <el-table-column prop='name1' label='账户名称' min-width="80"></el-table-column>
-          <el-table-column prop='name1' label='实时余额' min-width="80"></el-table-column>
-          <el-table-column prop='name1' label='对账日期' min-width="80"></el-table-column>
+          <el-table-column prop='name1' label='客户手机' min-width="80"></el-table-column>
+          <el-table-column prop='name2' label='用户名称' min-width="80"></el-table-column>
+          <el-table-column prop='name3' label='余额' min-width="80"></el-table-column>
+          <el-table-column prop='name4' label='可用余额' min-width="80"></el-table-column>
+          <el-table-column prop='name5' label='冻结余额' min-width="80"></el-table-column>
+          <el-table-column prop='name6' label='在途余额' min-width="80"></el-table-column>
+          <el-table-column prop='name7' label='创建时间' min-width="80"></el-table-column>
 
           <el-table-column fixed="right" label="操作" width="120">
             <template slot-scope="scope">
@@ -39,7 +45,8 @@
 
     <!-- 汇总余额流水查询 -->
     <el-dialog title="汇总余额流水查询" :visible.sync="iquireDisplay" width="1000px">
-      <page-model>
+      后台页面异常，待写
+      <!-- <page-model>
         <template slot="controlQueryOps">
           <el-form :model="iquireExamine" label-width="86px" ref="iquireControlQueryForm">
             <el-form-item label="记账日期" prop="name1">
@@ -70,17 +77,16 @@
         </template>
         <template slot="tableInner">
           <el-table :data="iquireTableData" border>
-            <el-table-column prop='name1' label='记账时间' min-width="80"></el-table-column>
-            <el-table-column prop='name1' label='对账ID' min-width="80"></el-table-column>
-            <el-table-column prop='name1' label='账户名称' min-width="80"></el-table-column>
-            <el-table-column prop='name1' label='业务类型' min-width="80"></el-table-column>
-            <el-table-column prop='name1' label='借方' min-width="80"></el-table-column>
-            <el-table-column prop='name1' label='借方金额' min-width="80"></el-table-column>
-            <el-table-column prop='name1' label='贷方' min-width="80"></el-table-column>
-            <el-table-column prop='name1' label='贷方金额' min-width="80"></el-table-column>
+            <el-table-column prop='name1' label='客户手机' min-width="80"></el-table-column>
+            <el-table-column prop='name2' label='用户名称' min-width="80"></el-table-column>
+            <el-table-column prop='name3' label='余额' min-width="80"></el-table-column>
+            <el-table-column prop='name4' label='可用金额' min-width="80"></el-table-column>
+            <el-table-column prop='name5' label='冻结金额' min-width="80"></el-table-column>
+            <el-table-column prop='name6' label='在途金额' min-width="80"></el-table-column>
+            <el-table-column prop='name7' label='创建时间' min-width="80"></el-table-column>
           </el-table>
         </template>
-      </page-model>
+      </page-model> -->
 
       <div slot="footer" class="dialog-footer">
         <el-button @click="iquireModelCancel">取 消</el-button>
@@ -92,10 +98,13 @@
 
 <script>
 const testData = {
-  name1: '1001',
-  name2: '资产类',
-  name3: '0.00',
-  name: '20150807'
+  name1: '18218149023',
+  name2: '张四',
+  name3: '5015.90',
+  name4: '5015.90',
+  name5: '0.00',
+  name6: '0.00',
+  name7: '2016-06-28 15:04:33'
 };
 
 export default {

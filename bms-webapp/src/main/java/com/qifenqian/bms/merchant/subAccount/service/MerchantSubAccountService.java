@@ -18,6 +18,7 @@ import com.qifenqian.bms.merchant.subAccount.bean.MerchantSubAccouontBean;
 import com.qifenqian.bms.merchant.subAccount.dao.MerchantSubAccountDao;
 import com.qifenqian.jellyfish.api.merchantsettle.IAlipayMerchantSettleService;
 import com.qifenqian.jellyfish.api.merchantsettle.WxpayMerchantSettleService;
+import com.qifenqian.jellyfish.bean.enums.BusinessStatus;
 import com.qifenqian.jellyfish.bean.merchantsettle.alipay.AlipayRoyaltyRelationBindReq;
 import com.qifenqian.jellyfish.bean.merchantsettle.alipay.AlipayRoyaltyRelationBindRes;
 import com.qifenqian.jellyfish.bean.merchantsettle.alipay.AlipayRoyaltyRelationUnbindReq;
@@ -66,7 +67,7 @@ public class MerchantSubAccountService {
 			String resultCode = null;
 			if ("WX".equals(disableBean.getChannelCode())) {
 				WxRemoveReceiverResp removeReceiver = removeReceiver(disableBean);
-				resultCode = removeReceiver.getResultCode();
+				resultCode = BusinessStatus.SUCCESS.equals(removeReceiver.getSubCode()) ? "SUCCESS" : "FAIL";
 			}
 			else if ("ALIPAY".equals(disableBean.getChannelCode())) {
 				AlipayRoyaltyRelationUnbindRes royaltyRelationUnbind = royaltyRelationUnbind(disableBean);
@@ -116,7 +117,7 @@ public class MerchantSubAccountService {
 				String resultCode = null;
 				if ("WX".equals(merchantSubAccouont.getChannelCode())) {
 					WxAddReceiverResp addReceiver = addReceiver(merchantSubAccouont);
-					resultCode = addReceiver.getResultCode();
+					resultCode = BusinessStatus.SUCCESS.equals(addReceiver.getSubCode()) ? "SUCCESS" : "FAIL";
 				}
 				else if ("ALIPAY".equals(merchantSubAccouont.getChannelCode())) {
 					AlipayRoyaltyRelationBindRes royaltyRelationBind = royaltyRelationBind(merchantSubAccouont);

@@ -1,10 +1,13 @@
 <template>
-  <!-- 财务管理 => 财务查询 => 汇总余额 -->
+  <!-- 财务管理 => 财务查询 => 商户余额 -->
   <div>
     <page-model>
       <template slot="controlQueryOps">
         <el-form :model="examine" label-width="86px" :inline="true" ref="controlQueryForm">
-          <el-form-item label="账户名称" prop="name2">
+          <el-form-item label="对账日期" prop="name1">
+            <el-input v-model="examine.name1"></el-input>
+          </el-form-item>
+          <el-form-item label="商户名称" prop="name2">
             <el-input v-model="examine.name2"></el-input>
           </el-form-item>
         </el-form>
@@ -14,17 +17,28 @@
         <el-button type="primary" @click="goToSearch">查询<i class="el-icon-search"></i> </el-button>
         <el-button type="warning" @click="$refs['controlQueryForm'].resetFields()">清空<i class="el-icon-rank"></i></el-button>
         <el-button type="info" @click="download">导出报表<i class="el-icon-download"></i></el-button>
+        <el-button type="info" @click="allDownload">批量提现申请<i class="el-icon-download"></i></el-button>
       </template>
 
       <template slot="tableInner">
-        <el-table :data="tableData" border>
-          <el-table-column prop='name1' label='对账ID' min-width="80"></el-table-column>
-          <el-table-column prop='name1' label='账户名称' min-width="80"></el-table-column>
-          <el-table-column prop='name1' label='实时余额' min-width="80"></el-table-column>
-          <el-table-column prop='name1' label='对账日期' min-width="80"></el-table-column>
-
-          <el-table-column fixed="right" label="操作" width="120">
+        <el-table ref="multipleTable" :data="tableData" border @selection-change="handleSelectionChange">
+          <el-table-column type="selection" width="40"></el-table-column>
+          <el-table-column prop="name1" label="商户编号" min-width="120"></el-table-column>
+          <el-table-column prop="name2" label="商户名称" min-width="100"></el-table-column>
+          <el-table-column prop="name3" label="收款账号名" width="90"></el-table-column>
+          <el-table-column prop="name4" label="提现银行卡号" width="120"></el-table-column>
+          <el-table-column prop="name5" label="开户银行" width="120"></el-table-column>
+          <el-table-column prop="name6" label="支行信息" width="120"></el-table-column>
+          <el-table-column prop="name7" label="余额" width="120"></el-table-column>
+          <el-table-column prop="name8" label="可用余额" min-width="100"></el-table-column>
+          <el-table-column prop="name9" label="在途金额" min-width="100"></el-table-column>
+          <el-table-column prop="name10" label="可结算金额" width="120"></el-table-column>
+          <el-table-column prop="name11" label="在途结算金额" width="120"></el-table-column>
+          <el-table-column prop="name12" label="冻结金额" width="120"></el-table-column>
+          <el-table-column prop="name13" label="账户状态" width="80"></el-table-column>
+          <el-table-column fixed="right" label="操作" min-width="90">
             <template slot-scope="scope">
+              <el-button type="text" size="small" @click="editorClick(scope.row)">提现申请</el-button>
               <el-button type="text" size="small" @click="inquireClick(scope.row)">查询流水</el-button>
             </template>
           </el-table-column>
@@ -37,9 +51,37 @@
       </template>
     </page-model>
 
-    <!-- 汇总余额流水查询 -->
-    <el-dialog title="汇总余额流水查询" :visible.sync="iquireDisplay" width="1000px">
-      <page-model>
+    <!-- 单笔提现界面 -->
+    <el-dialog title="单笔提现界面" :visible.sync="editorDisplay" width="600px">
+      <el-form :model="editorModelData" class="alert-model-form" label-width="120px" :show-message="false">
+        <el-form-item prop="name1" label="商户编号" required>
+          <el-input disabled v-model="editorModelData.name1"></el-input>
+        </el-form-item>
+        <el-form-item prop="name2" label="商户名称" required>
+          <el-input disabled v-model="editorModelData.name2"></el-input>
+        </el-form-item>
+        <el-form-item prop="name3" label="可提现余额" required>
+          <el-input disabled v-model="editorModelData.name3"></el-input>
+        </el-form-item>
+        <el-form-item prop="name4" label="提现方式" required>
+          <el-select v-model="editorModelData.name4" placeholder="请选择">
+            <el-option label="全部提现" value="1"></el-option>
+            <el-option label="全部分提现" value="0"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item prop="name5" label="提现余额" required>
+          <el-input disabled v-model="editorModelData.name5"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="editorModelCancel">取 消</el-button>
+        <el-button type="primary" @click="editorModelSubmit">确 定</el-button>
+      </div>
+    </el-dialog>
+
+    <!-- 查询流水 -->
+    <el-dialog title="查询流水" :visible.sync="iquireDisplay" width="1000px">
+      <!-- <page-model>
         <template slot="controlQueryOps">
           <el-form :model="iquireExamine" label-width="86px" ref="iquireControlQueryForm">
             <el-form-item label="记账日期" prop="name1">
@@ -80,7 +122,9 @@
             <el-table-column prop='name1' label='贷方金额' min-width="80"></el-table-column>
           </el-table>
         </template>
-      </page-model>
+      </page-model> -->
+
+      后台数据异常，待写
 
       <div slot="footer" class="dialog-footer">
         <el-button @click="iquireModelCancel">取 消</el-button>
@@ -92,10 +136,19 @@
 
 <script>
 const testData = {
-  name1: '1001',
-  name2: '资产类',
-  name3: '0.00',
-  name: '20150807'
+  name1: 'P2018091318263700006',
+  name2: '五洲餐饮',
+  name3: '崔阳',
+  name4: '6230580000150480221',
+  name5: '平安银行深圳分行营业部',
+  name6: '平安银行深圳分行营业部',
+  name7: '33761002.20',
+  name8: '33761002.20',
+  name9: '0.00',
+  name10: '17512293.00',
+  name11: '0.00',
+  name12: '0.00',
+  name13: '可用'
 };
 
 export default {
@@ -103,11 +156,14 @@ export default {
   data() {
     return {
       examine: {},
-      iquireDisplay: false,
       iquireModelData: {},
       iquireExamine: {},
       iquireTableData: [],
-      tableData: new Array(10).fill(testData),
+      tableData: new Array(10).fill(testData), //el-table使用了type=selection 使用fill渲染时，选中会选中所有，对接接口时，渲染真实数据即可解决
+      multipleSelection: [],
+      editorDisplay: false,
+      editorModelData: {},
+      iquireDisplay: false,
       paginationOps: {
         pageSizes: [5, 10, 15, 20],
         total: 100
@@ -122,6 +178,33 @@ export default {
   },
   created() {},
   methods: {
+    goToSearch() {
+      //查询
+      console.log(this.examine, '查询');
+    },
+    download() {
+      this.$message('导出报表');
+    },
+    allDownload() {
+      this.$message('批量导出报表');
+    },
+    handleSelectionChange(val) {
+      console.log(val, 'val');
+      // 选中的项
+      this.multipleSelection = val;
+    },
+    editorClick(row) {
+      this.editorDisplay = true;
+      this.editorModelData = row;
+      console.log(row);
+    },
+    editorModelCancel() {
+      this.editorDisplay = false;
+    },
+    editorModelSubmit() {
+      console.log(this.editorModelData);
+      this.editorDisplay = false;
+    },
     iquireModelCancel() {
       this.iquireDisplay = false;
     },
@@ -134,15 +217,8 @@ export default {
       this.iquireModelData = row;
       console.log(row);
     },
-    goToSearch() {
-      //查询
-      console.log(this.examine, '查询');
-    },
     iquireGoToSearch() {
       console.log(this.iquireExamine, '查询');
-    },
-    download() {
-      this.$message('导出报表');
     },
     iquireDownload() {
       this.$message('导出报表');
