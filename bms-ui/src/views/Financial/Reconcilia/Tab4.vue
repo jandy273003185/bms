@@ -1,11 +1,19 @@
 <template>
-  <!-- 财务管理 => 财务查询 => 汇总余额 -->
+  <!-- 财务管理 => 交广科技对账结果 => 差错报表 -->
   <div>
     <page-model>
       <template slot="controlQueryOps">
-        <el-form :model="examine" label-width="86px" :inline="true" ref="controlQueryForm">
-          <el-form-item label="账户名称" prop="name2">
-            <el-input v-model="examine.name2"></el-input>
+        <el-form :model="examine" label-width="160px" :inline="true" ref="controlQueryForm">
+          <el-form-item label="七分钱-交广清算流水号" prop="name1">
+            <el-input v-model="examine.name1"></el-input>
+          </el-form-item>
+          <el-form-item label="对账日期" prop="name2">
+            <el-date-picker v-model="examine.name2" type="date" placeholder="选择日期">
+            </el-date-picker>
+          </el-form-item>
+          <el-form-item label="会计日期" prop="name3">
+            <el-date-picker v-model="examine.name3" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" value-format="yyyy-MM-dd">
+            </el-date-picker>
           </el-form-item>
         </el-form>
       </template>
@@ -18,16 +26,18 @@
 
       <template slot="tableInner">
         <el-table :data="tableData" border>
-          <el-table-column prop='name1' label='对账ID' min-width="80"></el-table-column>
-          <el-table-column prop='name1' label='账户名称' min-width="80"></el-table-column>
-          <el-table-column prop='name1' label='实时余额' min-width="80"></el-table-column>
-          <el-table-column prop='name1' label='对账日期' min-width="80"></el-table-column>
+          <el-table-column prop="name1" label="对账日期" width="100"></el-table-column>
+          <el-table-column prop="name2" label="七分钱会计日期" width="120"></el-table-column>
+          <el-table-column prop="name3" label="渠道名称" min-width="100"></el-table-column>
+          <el-table-column prop="name4" label="七分钱-交广清算流水号" min-width="180"></el-table-column>
+          <el-table-column prop="name5" label="交广平台流水号" min-width="120"></el-table-column>
+          <el-table-column prop="name6" label="交易类型" width="90"></el-table-column>
+          <el-table-column prop="name7" label="七分钱交易金额" min-width="120"></el-table-column>
+          <el-table-column prop="name8" label="交广交易金额" min-width="120"></el-table-column>
+          <el-table-column prop="name9" label="交易发送时间" min-width="130"></el-table-column>
+          <el-table-column prop="name10" label="交易返回时间" min-width="130"></el-table-column>
+          <el-table-column prop="name11" label="差错信息" min-width="120"></el-table-column>
 
-          <el-table-column fixed="right" label="操作" width="120">
-            <template slot-scope="scope">
-              <el-button type="text" size="small" @click="inquireClick(scope.row)">查询流水</el-button>
-            </template>
-          </el-table-column>
         </el-table>
       </template>
 
@@ -36,77 +46,29 @@
         </el-pagination>
       </template>
     </page-model>
-
-    <!-- 汇总余额流水查询 -->
-    <el-dialog title="汇总余额流水查询" :visible.sync="iquireDisplay" width="1000px">
-      <page-model>
-        <template slot="controlQueryOps">
-          <el-form :model="iquireExamine" label-width="86px" ref="iquireControlQueryForm">
-            <el-form-item label="记账日期" prop="name1">
-              <el-date-picker v-model="iquireExamine.name1" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" value-format="yyyy-MM-dd">
-              </el-date-picker>
-            </el-form-item>
-            <el-form-item label="业务类型" prop="name4">
-              <el-select v-model="iquireExamine.name4" placeholder="请选择">
-                <el-option value='ONL_TO_SEV' label='网银入账七分钱'></el-option>
-                <el-option value='CAD_TO_SEV' label='快捷支付至七分钱'></el-option>
-                <el-option value='SEV_TO_CAD' label='七分钱至银行卡'></el-option>
-                <el-option value='SEV_TO_SEV' label='七分钱至七分钱'></el-option>
-                <el-option value='SEV_TO_QFB' label='七分钱至七分宝'></el-option>
-                <el-option value='QFB_TO_SEV' label='七分宝至七分钱'></el-option>
-                <el-option value='FREEZE' label='冻结'></el-option>
-                <el-option value='CHARGE' label='七分钱到手续费cgl'></el-option>
-                <el-option value='SEV_TO_SEV1' label='七分钱至七分钱担保'></el-option>
-                <el-option value='SEV1_TO_SEV' label='七分钱担保至七分钱'></el-option>
-                <el-option value='SEV_TO_SEV2' label='七分钱至七分钱费用'></el-option>
-              </el-select>
-            </el-form-item>
-          </el-form>
-        </template>
-        <template slot="controlQueryBtns">
-          <el-button type="primary" @click="iquireGoToSearch">查询<i class="el-icon-search"></i> </el-button>
-          <el-button type="warning" @click="$refs['iquireControlQueryForm'].resetFields()">清空<i class="el-icon-rank"></i></el-button>
-          <el-button type="info" @click="iquireDownload">导出报表<i class="el-icon-download"></i></el-button>
-        </template>
-        <template slot="tableInner">
-          <el-table :data="iquireTableData" border>
-            <el-table-column prop='name1' label='记账时间' min-width="80"></el-table-column>
-            <el-table-column prop='name1' label='对账ID' min-width="80"></el-table-column>
-            <el-table-column prop='name1' label='账户名称' min-width="80"></el-table-column>
-            <el-table-column prop='name1' label='业务类型' min-width="80"></el-table-column>
-            <el-table-column prop='name1' label='借方' min-width="80"></el-table-column>
-            <el-table-column prop='name1' label='借方金额' min-width="80"></el-table-column>
-            <el-table-column prop='name1' label='贷方' min-width="80"></el-table-column>
-            <el-table-column prop='name1' label='贷方金额' min-width="80"></el-table-column>
-          </el-table>
-        </template>
-      </page-model>
-
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="iquireModelCancel">取 消</el-button>
-        <el-button type="primary" @click="iquireModelSubmit">确 定</el-button>
-      </div>
-    </el-dialog>
   </div>
 </template>
 
 <script>
 const testData = {
-  name1: '1001',
-  name2: '资产类',
-  name3: '0.00',
-  name: '20150807'
+  name1: '2016-12-11',
+  name2: '20161210',
+  name3: '交广科技',
+  name4: 'TBTRANSFER0012016120923435228500022161',
+  name5: '',
+  name6: '转账',
+  name7: '1.43',
+  name8: '',
+  name9: '20161209234352',
+  name10: '20161209234351',
+  name11: '数据差错,,,,,,',
+  name12: ''
 };
-
 export default {
   props: ['searchText'],
   data() {
     return {
       examine: {},
-      iquireDisplay: false,
-      iquireModelData: {},
-      iquireExamine: {},
-      iquireTableData: [],
       tableData: new Array(10).fill(testData),
       paginationOps: {
         pageSizes: [5, 10, 15, 20],
@@ -122,18 +84,6 @@ export default {
   },
   created() {},
   methods: {
-    iquireModelCancel() {
-      this.iquireDisplay = false;
-    },
-    iquireModelSubmit() {
-      console.log(this.iquireModelData);
-      this.iquireDisplay = false;
-    },
-    inquireClick(row) {
-      this.iquireDisplay = true;
-      this.iquireModelData = row;
-      console.log(row);
-    },
     goToSearch() {
       //查询
       console.log(this.examine, '查询');
