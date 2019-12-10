@@ -54,6 +54,7 @@ const Mmanage = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Materi
 // 财务管理
 const Fsettlement = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Financial/Settlement/Settlement');
 const Fquery = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Financial/Query/Index');
+const Reconcilia = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Financial/Reconcilia/Index');
 
 
 
@@ -121,7 +122,7 @@ export const uatRouter = [
     children: [
       { name: '商户结算', path: '/financial/settlement', component: Fsettlement },
       { name: '财务查询', path: '/financial/query', component: Fquery },
-      { name: '交广科技对账结果', path: '/system/user' },
+      { name: '交广科技对账结果', path: '/financial/reconcilia', component: Reconcilia },
       { name: '渠道源数据', path: '/system/user' },
       { name: '银联对账结果', path: '/system/user' },
       { name: '财务异常处理', path: '/system/user' },
