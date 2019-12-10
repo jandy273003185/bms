@@ -43,4 +43,6 @@ public interface CustScanMapper {
 	/** 保存微商户证件审核信息 */
 	public int saveTinyCertificateAuth(CertificateAuth certificateAuth);
 	
+	List<CustScan> ListTdCustScanCopy(@Param("custId")String custId);
+	
 }
