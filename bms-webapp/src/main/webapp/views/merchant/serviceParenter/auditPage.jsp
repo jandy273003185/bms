@@ -17,7 +17,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>服务商浏览</title>
+	<title>服务商审核</title>
 	<meta name="keywords" content="七分钱后台管理系统" />
 	<meta name="description" content="七分钱后台管理" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -154,7 +154,7 @@ $(function(){
 	});
 })
 
-/**商户类型 **/
+/**服务商类型 **/
 function selCustType(){
 	//个人
 	if($("#custType").val() =='0'  ){
@@ -211,11 +211,11 @@ function businessForever(){
                     <table id="merchant_table" class="list-table">
 					<tbody>
                         <tr>
-							<td colspan="4" class="headlerPreview" style="background:#7ebde1;">商户信息</td>
+							<td colspan="4" class="headlerPreview" style="background:#7ebde1;">服务商信息</td>
 						</tr>
 						<tr></tr>
                         <tr>
-							<td class="td-left">商户编号：<span style="color:red;">（必填)</span></td>
+							<td class="td-left">服务商编号：<span style="color:red;">（必填)</span></td>
 							<td class="td-right">
 								<input type="text" id="merchantCode" readonly="readonly" name="merchantCode" value="${merchantVo.merchantCode }" placeholder="请输入手机号或邮箱"  maxlength="50" style="width:90%">
 								
@@ -226,7 +226,7 @@ function businessForever(){
 							<td colspan="4" class="headlerPreview" style="background:#7ebde1">基本信息</td>
 						</tr>
 						<tr>
-							<td class="td-left">商户类型：<span style="color:red;">（必填）</span></td>
+							<td class="td-left">服务商类型：<span style="color:red;">（必填）</span></td>
 							<td class="td-right">
 							   <select name="custType" class="width-90" id="custType"  disabled="disabled">
 								
@@ -238,7 +238,7 @@ function businessForever(){
 									
 								</select>
 							</td>
-							<td class="td-left">商户标志：</td>
+							<td class="td-left">服务商标志：</td>
 							<td class="td-right">
 							   <select name="merchantFlag" class="width-90" id="merchantFlag" disabled="disabled" >
 							   		<option value="3">代理商</option>
@@ -246,21 +246,21 @@ function businessForever(){
 							</td>
 						</tr>
                         <tr>
-						    <td class="td-left" width="18%">商户名称：<span style="color:red;">（必填)</span></td>
+						    <td class="td-left" width="18%">服务商名称：<span style="color:red;">（必填)</span></td>
 							<td class="td-right" width="32%">
-								<input type="text" id="custName" name="custName"  readonly="readonly" value="${merchantVo.custName}" maxlength="100"  placeholder="请输入商户名称" style="width:90%">
+								<input type="text" id="custName" name="custName"  readonly="readonly" value="${merchantVo.custName}" maxlength="100"  placeholder="请输入服务商名称" style="width:90%">
 								<label class="label-tips" id="custNameLab"></label>
 							</td>
-							<td class="td-left" width="18%">商户简称：<span style="color:red;">（必填)</span></td>
+							<td class="td-left" width="18%">服务商简称：<span style="color:red;">（必填)</span></td>
 							<td class="td-right" width="32%">
-							    <input type="text" id="shortName" name="shortName" readonly="readonly"  value="${merchantVo.shortName}" placeholder="请输入商户简称" style="width:90%">
+							    <input type="text" id="shortName" name="shortName" readonly="readonly"  value="${merchantVo.shortName}" placeholder="请输入服务商简称" style="width:90%">
 								<label class="label-tips" id="shortNameLab"></label>
 							</td>
 						</tr>
 						<tr>
-							<td class="td-left">商户邮箱：</td>
+							<td class="td-left">服务商邮箱：</td>
 							<td class="td-right">
-								<input type="text" id="merchantEmail" name="merchantEmail" readonly="readonly"  value="${merchantVo.merchantEmail}" placeholder="请输入商户邮箱" style="width:90%">
+								<input type="text" id="merchantEmail" name="merchantEmail" readonly="readonly"  value="${merchantVo.merchantEmail}" placeholder="请输入服务商邮箱" style="width:90%">
 								
 								<label class="label-tips" id="merchantEmailLab"></label>
 							</td>
@@ -272,7 +272,7 @@ function businessForever(){
 							</td>
 						</tr>
 						<tr>
-							<td class="td-left">商户地址：<span style="color:red;">（必填)</span></td>
+							<td class="td-left">服务商地址：<span style="color:red;">（必填)</span></td>
 							<td class="td-right" colspan="3">
 								<div class="col-xs-2 pd0" style="padding:0">
                                    <select class="form-control" id="province" disabled="disabled">
@@ -337,10 +337,10 @@ function businessForever(){
 							<td class="td-right">
 								<sevenpay:selectSysUserTag name="custManager" id="custManager" defaultValue="${merchantVo.custManager}"/>
 							</td>
-							<td class="td-left" width="18%">所属代理商：</td>
+							<%-- <td class="td-left" width="18%">所属代理商：</td>
 							<td class="td-right" width="32%">
 								<sevenpay:selectAgentMerchantTag name="agentName" id="agentName" defaultValue="${merchantVo.agentName }"/>
-							</td>
+							</td> --%>
 						</tr>
                         <tr>
 							<td colspan="4" class="headlerPreview" style="background:#7ebde1;">法人信息</td>

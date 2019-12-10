@@ -48,9 +48,17 @@ public class PicturePath implements Serializable {
 	private String infoQrcodePath;
 	//15 非法人结算授权函
 	private String letterOfAuthPath;
+	//37经营场所证明文件
+	private String businessPlacePath;
 	
 	
 	
+	public String getBusinessPlacePath() {
+		return businessPlacePath;
+	}
+	public void setBusinessPlacePath(String businessPlacePath) {
+		this.businessPlacePath = businessPlacePath;
+	}
 	public String getLetterOfAuthPath() {
 		return letterOfAuthPath;
 	}
