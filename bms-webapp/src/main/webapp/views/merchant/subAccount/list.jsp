@@ -447,7 +447,7 @@ var checkFun = {
 			data:
 			{
 				"custId" 	: custId,
-				"outMerchantCode" : '1564799681',
+				"outMerchantCode" : outMerchantCode,
 				"channelCode" : channelCode,
 				"subAccountType" : subAccountType,
 				"account" : account,
