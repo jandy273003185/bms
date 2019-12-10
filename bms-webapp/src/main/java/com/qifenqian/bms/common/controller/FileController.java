@@ -344,7 +344,32 @@ public class FileController {
 				custScan.setStatus("00");
 				custScanMapper.insertCustScan(custScan);
 			}
-			
+			//37经营场所证明文件
+			if(!StringUtils.isEmpty(picturePath.getBusinessPlacePath())) {
+				custScan.setCertifyType("37");
+				
+				if(!StringUtils.isEmpty(picturePathOld.getBusinessPlacePath())) {
+					custScan.setStatus("01");
+					custScanMapper.updateCustScan(custScan);
+				}
+				
+				custScan.setScanCopyPath(picturePath.getBusinessPlacePath());
+				custScan.setStatus("00");
+				custScanMapper.insertCustScan(custScan);
+			}
+			//13手持身份证照
+			if(!StringUtils.isEmpty(picturePath.getHandIdCardPath())) {
+				custScan.setCertifyType("13");
+				
+				if(!StringUtils.isEmpty(picturePathOld.getHandIdCardPath())) {
+					custScan.setStatus("01");
+					custScanMapper.updateCustScan(custScan);
+				}
+				
+				custScan.setScanCopyPath(picturePath.getHandIdCardPath());
+				custScan.setStatus("00");
+				custScanMapper.insertCustScan(custScan);
+			}
 			object.put("result", "SUCCESS");
 			object.put("message", "新增图片成功");
 		} catch (Exception e) {
