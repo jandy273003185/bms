@@ -50,11 +50,12 @@ const Pmanage = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggreg
 const Exception = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Exception/Exception');
 const Arouter = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Router/Router');
 // 物料管理
-const Mmanage = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Material/Manage/Manage');
+const Mmanage = () => import(/* webpackChunkName: "Material" */ '@/views/Material/Manage/Manage');
 // 财务管理
-const Fsettlement = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Financial/Settlement/Settlement');
-const Fquery = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Financial/Query/Index');
-const Reconcilia = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Financial/Reconcilia/Index');
+const Fsettlement = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/Settlement/Settlement');
+const Fquery = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/Query/Index');
+const Reconcilia = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/Reconcilia/Index');
+const SourceData = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/SourceData/Index');
 
 
 
@@ -123,7 +124,7 @@ export const uatRouter = [
       { name: '商户结算', path: '/financial/settlement', component: Fsettlement },
       { name: '财务查询', path: '/financial/query', component: Fquery },
       { name: '交广科技对账结果', path: '/financial/reconcilia', component: Reconcilia },
-      { name: '渠道源数据', path: '/system/user' },
+      { name: '渠道源数据', path: '/financial/source', component: SourceData },
       { name: '银联对账结果', path: '/system/user' },
       { name: '财务异常处理', path: '/system/user' },
       { name: '金蝶财务', path: '/system/user' },
