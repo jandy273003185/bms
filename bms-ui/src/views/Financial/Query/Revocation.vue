@@ -66,7 +66,7 @@
       </template>
     </page-model>
 
-    <!-- 审核信息 -->
+    <!-- 查看详情 审核信息 -->
     <el-dialog title="审核信息" :visible.sync="lookDisplay" width="900px">
       <el-form :model="lookModelData" disabled label-width="130px" :inline="true" ref="lookQueryForm" class="look-query-form">
         <el-form-item label="七分钱提现流水号" prop="name1">
@@ -87,48 +87,29 @@
         <el-form-item label="提现申请时间" prop="name6">
           <el-input v-model="lookModelData.name6"></el-input>
         </el-form-item>
-        <el-form-item label="客户名" prop="name7">
-          <el-input v-model="lookModelData.name7"></el-input>
+        <el-form-item label="客户名" prop="name8">
+          <el-input v-model="lookModelData.name8"></el-input>
         </el-form-item>
-        <el-form-item label="审核状态" prop="name8">
-          <el-select v-model="examine.name8" placeholder="请选择">
-            <el-option label="待审核" value="1"></el-option>
-            <el-option label="审核通过" value="2"></el-option>
-            <el-option label="审核不通过" value="3"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="收款名" prop="name9">
+        <el-form-item label="支行信息" prop="name9">
           <el-input v-model="lookModelData.name9"></el-input>
         </el-form-item>
-        <el-form-item label="审核人" prop="name10">
+        <el-form-item label="收款名" prop="name10">
           <el-input v-model="lookModelData.name10"></el-input>
         </el-form-item>
-        <el-form-item label="开户行" prop="name11">
+        <el-form-item label="审核人" prop="name11">
           <el-input v-model="lookModelData.name11"></el-input>
         </el-form-item>
-        <el-form-item label="审核时间" prop="name12">
+        <el-form-item label="开户行" prop="name12">
           <el-input v-model="lookModelData.name12"></el-input>
         </el-form-item>
-        <el-form-item label="支行信息" prop="name13">
+        <el-form-item label="最后修改时间" prop="name13">
           <el-input v-model="lookModelData.name13"></el-input>
         </el-form-item>
-        <el-form-item label="核销状态" prop="name14">
-          <el-select v-model="examine.name14" placeholder="请选择">
-            <el-option label="未核销" value="1"></el-option>
-            <el-option label="已核销" value="0"></el-option>
-          </el-select>
+        <el-form-item label="银行卡" prop="name14">
+          <el-input v-model="lookModelData.name14"></el-input>
         </el-form-item>
-        <el-form-item label="银行卡" prop="name15">
+        <el-form-item label="手续费" prop="name15">
           <el-input v-model="lookModelData.name15"></el-input>
-        </el-form-item>
-        <el-form-item label="核销人" prop="name16">
-          <el-input v-model="lookModelData.name16"></el-input>
-        </el-form-item>
-        <el-form-item label="手续费" prop="name17">
-          <el-input v-model="lookModelData.name17"></el-input>
-        </el-form-item>
-        <el-form-item label="核销时间" prop="name18">
-          <el-input v-model="lookModelData.name18"></el-input>
         </el-form-item>
       </el-form>
     </el-dialog>
