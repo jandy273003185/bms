@@ -81,7 +81,7 @@
 
     <!-- 查询流水 -->
     <el-dialog title="查询流水" :visible.sync="iquireDisplay" width="1000px">
-      <page-model>
+      <!-- <page-model>
         <template slot="controlQueryOps">
           <el-form :model="iquireExamine" label-width="86px" ref="iquireControlQueryForm">
             <el-form-item label="记账日期" prop="name1">
@@ -122,7 +122,9 @@
             <el-table-column prop='name1' label='贷方金额' min-width="80"></el-table-column>
           </el-table>
         </template>
-      </page-model>
+      </page-model> -->
+
+      后台数据异常，待写
 
       <div slot="footer" class="dialog-footer">
         <el-button @click="iquireModelCancel">取 消</el-button>
