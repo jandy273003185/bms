@@ -499,6 +499,8 @@ function addMerchantBtn(){
 	var certAttribute2Path = $("#certAttribute2Path").val();
 	var certAttribute1Path = $("#certAttribute1Path").val();
 	var businessPhotoPath = $("#businessPhotoPath").val();
+	var shopInteriorPath = $("#shopInteriorPath").val();
+	var doorPhotoPath = $("#doorPhotoPath").val();
 	$.blockUI();
 
     $.ajax({
@@ -546,7 +548,9 @@ function addMerchantBtn(){
                     	"idCardOPath"     :  certAttribute1Path,             //身份证正面照
                     	"idCardFPath"     :  certAttribute2Path,             //身份证背面照
                     	"bussinessPath"   :  businessPhotoPath,              //商户营业执照
-                    	"bankCardPath"    :  bankCardPhotoPath               //开户银行照
+                    	"bankCardPath"    :  bankCardPhotoPath,              //开户银行照
+                    	"shopInteriorPath":  shopInteriorPath,               //店内照
+                    	"doorPhotoPath"   :  doorPhotoPath                   //门头照
                     },
                     dataType : "json",
                     success : function (data) {
@@ -593,12 +597,12 @@ function bigImg(obj){
 
 
 /** 营业执照预览 **/
-function showBusinessPhotoImage(obj){
+/* function showBusinessPhotoImage(obj){
 	 var divObj = document.getElementById("businessPhotoDiv");
 	 var imageObj = document.getElementById("businessPhotoImage");
 	 var result1 = previewImage(divObj,imageObj,obj);
 	 return result1;
-}
+} */
 /** 营业执照点击预览 **/
 $('.businessPhotoClick').click(function(){
 	var divObj = document.getElementById("showImageDiv");
@@ -607,12 +611,12 @@ $('.businessPhotoClick').click(function(){
 	return previewImage(divObj,imageObj,obj);
 });
 /** 身份证正面预览 **/
-function showCertAttribute1Image(obj){
+/* function showCertAttribute1Image(obj){
 	 var divObj = document.getElementById("certAttribute1Div");
 	 var imageObj = document.getElementById("certAttribute1Image");
 	 var result1 = previewImage(divObj,imageObj,obj);
 	 return result1;
-}
+} */
 /** 身份证正面点击预览 **/
 $('.certAttribute1Click').click(function(){
 	var divObj = document.getElementById("showImageDiv");
@@ -621,12 +625,12 @@ $('.certAttribute1Click').click(function(){
 	return previewImage(divObj,imageObj,obj);
 });
 /** 身份证背面预览 **/
-function showCertAttribute2Image(obj){
+/* function showCertAttribute2Image(obj){
 	 var divObj = document.getElementById("certAttribute2Div");
 	 var imageObj = document.getElementById("certAttribute2Image");
 	 var result1 = previewImage(divObj,imageObj,obj);
 	 return result1;
-}
+} */
 /** 身份证背面点击预览 **/
 $('.certAttribute2Click').click(function(){
 	var divObj = document.getElementById("showImageDiv");
@@ -636,12 +640,12 @@ $('.certAttribute2Click').click(function(){
 });
 
 /** 开户许可证预览 **/
-function showOpenAccountImage(obj){
+/* function showOpenAccountImage(obj){
 	 var divObj = document.getElementById("openAccountDiv");
 	 var imageObj = document.getElementById("openAccountImage");
 	 var result1 = previewImage(divObj,imageObj,obj);
 	 return result1;
-}
+} */
 /** 开户许可证背面点击预览 **/
 $('.openAccountClick').click(function(){
 	var divObj = document.getElementById("showImageDiv");
@@ -651,12 +655,12 @@ $('.openAccountClick').click(function(){
 });
 
 /** 银行卡预览 **/
-function showBankCardPhotoImage(obj){
+/* function showBankCardPhotoImage(obj){
 	 var divObj = document.getElementById("bankCardPhotoDiv");
 	 var imageObj = document.getElementById("bankCardPhotoImage");
 	 var result1 = previewImage(divObj,imageObj,obj);
 	 return result1;
-}
+} */
 /** 银行卡点击预览 **/
 $('.bankCardPhotoClick').click(function(){
 	var divObj = document.getElementById("showImageDiv");
@@ -665,6 +669,21 @@ $('.bankCardPhotoClick').click(function(){
 	return previewImage(divObj,imageObj,obj);
 });
 
+/** 门头照点击预览 **/
+$('.doorPhotoClick').click(function(){
+	var divObj = document.getElementById("showImageDiv");
+	var imageObj = document.getElementById("showImage");
+	var obj = document.getElementById("doorPhoto");
+	return previewImage(divObj,imageObj,obj);
+});
+
+/** 店内照点击预览 **/
+$('.shopInteriorClick').click(function(){
+	var divObj = document.getElementById("showImageDiv");
+	var imageObj = document.getElementById("showImage");
+	var obj = document.getElementById("shopInterior");
+	return previewImage(divObj,imageObj,obj); 
+});
 //对公对私账户图片
 $(function(){
 	$('#compMainAcctType').on('change', function (e) {
@@ -740,6 +759,15 @@ function showBusinessPhotoImage(file){
 	commonFileUpload(file, 'businessPhotoPath', 'businessPhotoDiv');
 }
 
+//门头照
+function showDoorPhotoImage(file){
+	commonFileUpload(file, 'doorPhotoPath', 'doorPhotoDiv');
+}
+
+//店内照
+function showShopInteriorImage(file){
+	commonFileUpload(file, 'shopInteriorPath', 'shopInteriorDiv');
+}
 //身份证正面
 function showCertAttribute1Image(file){
 	commonFileUpload(file, 'certAttribute1Path', 'certAttribute1Div');
@@ -919,6 +947,38 @@ function showOpenAccountImage(file){
 								<label class="label-tips" id="businessPhotoLabel" style="float:left;margin-top:88" ></label>
 							</td>
 						</tr>
+						<tr id="doorPhotoType" style = "display:">
+								<td class="td-left">门头照照片：<span style="color:red;">(必填)</span></td>
+								<td class="td-right" colspan="3">
+									<a data-toggle="modal" class="tooltip-success doorPhotoClick" data-target="#previewImageModal">
+										<label id="doorPhotoDiv" class="uploadImage" >
+										  <img id="doorPhotoImageDiv" onClick="bigImg(this);" style="width: 100%; height: 100%;">										  
+										</label>
+									</a>
+									<div class="updateImageDiv" style="float:left; margin-top:75 " >
+										<input type="hidden" id="doorPhotoPath" name="doorPhotoPath" />
+										<input type="hidden" id="doorPhotoImageVal02"  />
+										<input type="file" name="doorPhoto" id="doorPhoto" onchange="showDoorPhotoImage(this)" />
+										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div>
+								</td>
+							</tr>
+							<tr id="shopInteriorType" style = "display:">
+								<td class="td-left">店内照：<span style="color:red;">(必填)</span></td>
+								<td class="td-right" colspan="3">
+									<a data-toggle='modal' class="tooltip-success shopInteriorClick" data-target="#previewImageModal" >
+										<label id="shopInteriorDiv"  class="uploadImage" >
+											<img id="shopInteriorImageDiv" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
+									</a>
+									<div class="updateImageDiv" style="float:left; margin-top:75 " >
+										<input type="hidden" id="shopInteriorPath" name="shopInteriorPath" />
+										<input type="hidden" id="shopInteriorImageVal02"  />
+										<input type="file" name="shopInterior" id="shopInterior" onchange="showShopInteriorImage(this)" />
+										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div>
+								</td>
+							</tr>
 						<tr>
 							<td class="td-left">所属业务人员：</td>
 							<td class="td-right">
