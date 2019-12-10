@@ -313,7 +313,7 @@
 											
 								        </td>
 									</tr>
-									<tr>
+									<tr id="customRelationContent">
 										<td class="td-left" >微信自定义关系</td>
 										<td class="td-right" >
 											<input type="text" id="customRelation" name="customRelation" clasS="width-90"/> 										
@@ -326,15 +326,15 @@
 								        </td>
 									</tr> -->
 									<tr>
-										<td class="td-left" >分账描述</td>
+										<td class="td-left" >分账描述<span class="wxRequiredField" style="color:red;display: none;" >*</span></td>
 										<td class="td-right" >
 											<input type="text" id="desc" name="desc" clasS="width-90"/> 										
 								        </td>
 									</tr>
 									<tr>
-										<td class="td-left" >分账比例</td>
+										<td class="td-left" >分账比例(百分数)<span style="color:red">*</span></td>
 										<td class="td-right" >
-											<input type="text" id="rate" name="rate" clasS="width-90"/> 										
+											<input type="text" id="rate" name="rate" data-validation="notnull" data-errMsg="分账比例不能为空" clasS="width-90"/> 										
 								        </td>
 									</tr>
 									<tr>
@@ -364,8 +364,6 @@
 					         </div>
 					         <div class="modal-body" align="center">
 					         	<input type="hidden" id="relationId" name="relationId" >
-					         	<input type="hidden" id="subAccountType" name="subAccountType" >
-					         	<input type="hidden" id="account" name="account" >
 					         </div>
 					         <div class="modal-footer">
 					            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -423,6 +421,7 @@ var checkFun = {
 			return false;
 		}
 		
+		
 		var custId = $('#addMerchantSubAccountModal #custId').val();
 		var outMerchantCode = $('#addMerchantSubAccountModal #custId').find("option:selected").attr("data-val");
 		var channelCode = $('#addMerchantSubAccountModal #channelCode').val();
@@ -435,6 +434,11 @@ var checkFun = {
 		var desc = $('#addMerchantSubAccountModal #desc').val();
 		var rate = $('#addMerchantSubAccountModal #rate').val();
 		var remark = $('#addMerchantSubAccountModal #remark').val();
+		
+		if(!(/^\d+(\.\d+)?$/.test(rate))) {
+			alert("分账比例必须为数字");
+			return false;
+		}
 		
 		$.ajax({
 			type:"POST",
@@ -457,6 +461,7 @@ var checkFun = {
 			},
 			success:function(data){
 				$.unblockUI();
+				$('#addMerchantSubAccountModal').hide();
 				if(data.result == "SUCCESS"){
 					alert("新增分账关系成功");
 					window.location.reload();
@@ -476,23 +481,16 @@ var checkFun = {
 		$('#deleteMerchantSubAccountModal').on('show.bs.modal', function () {
 			// 赋值
 			$('#deleteMerchantSubAccountModal #relationId').val(merchantSubAccount.relationId);
-			$('#deleteMerchantSubAccountModal #subAccountType').val(merchantSubAccount.subAccountType);
-			$('#deleteMerchantSubAccountModal #account').val(merchantSubAccount.account);
 		});
 		$('#deleteMerchantSubAccountModal').on('hide.bs.modal', function () {
 			// 清除
 			$('#deleteMerchantSubAccountModal #relationId').val('');
-			$('#deleteMerchantSubAccountModal #subAccountType').val('');
-			$('#deleteMerchantSubAccountModal #account').val('');
 		});
 	})
 	
 	//删除
 	$(".deleteMerchantSubAccountBtn").click(function(){
-		debugger;
 		var relationId = $('#deleteMerchantSubAccountModal #relationId').val();
-		var subAccountType = $('#deleteMerchantSubAccountModal #subAccountType').val();
-		var account = $('#deleteMerchantSubAccountModal #account').val();
 		$.ajax({
 			type:"POST",
 			dataType:"json",
@@ -503,6 +501,7 @@ var checkFun = {
 			},
 			success:function(data){
 				$.unblockUI();
+				$('#deleteMerchantSubAccountModal').hide();
 				if(data.result == "SUCCESS"){
 					alert("停用分账关系成功");
 					window.location.reload();
@@ -518,10 +517,16 @@ var checkFun = {
 			$("#addMerchantSubAccountModal #subAccountType").html($("#AliPayProfitSharingType").html());
 			$("#relationTypeContent").hide();
 			$("#addMerchantSubAccountModal #relationType").removeAttr("data-validation").removeAttr("data-errMsg");
+			$(".wxRequiredField").hide();
+			$("#customRelationContent").hide();
+			$("#addMerchantSubAccountModal #desc").removeAttr("data-validation").removeAttr("data-errMsg");
 		} else if(value == "WX"){
 			$("#addMerchantSubAccountModal #subAccountType").html($("#WeChatProfitSharingType").html());
 			$("#relationTypeContent").show();
 			$("#addMerchantSubAccountModal #relationType").attr("data-validation", "notnull").attr("data-errMsg", "与分账方的关系类型不能为空");
+			$(".wxRequiredField").show();
+			$("#customRelationContent").show();
+			$("#addMerchantSubAccountModal #desc").attr("data-validation", "notnull").attr("data-errMsg", "分账描述不能为空");
 		}
 	}
 	
