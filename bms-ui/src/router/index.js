@@ -57,7 +57,8 @@ const Fquery = () => import(/* webpackChunkName: "Financial" */ '@/views/Financi
 const Reconcilia = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/Reconcilia/Index');
 const SourceData = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/SourceData/Index');
 const Unionpay = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/Unionpay/Index');
-
+const Fabnormal = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/Abnormal/Abnormal');
+const Kingdee = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/Kingdee/Index');
 
 
 // UAT 后台菜单
@@ -127,8 +128,8 @@ export const uatRouter = [
       { name: '交广科技对账结果', path: '/financial/reconcilia', component: Reconcilia },
       { name: '渠道源数据', path: '/financial/source', component: SourceData },
       { name: '银联对账结果', path: '/financial/unionpay', component: Unionpay },
-      { name: '财务异常处理', path: '/financial/user' },
-      { name: '金蝶财务', path: '/financial/user' },
+      { name: '财务异常处理', path: '/financial/abnormal', component: Fabnormal },
+      { name: '金蝶财务', path: '/financial/kingdee', component: Kingdee },
       { name: '中信对账结果查询', path: '/financial/user' },
       { name: '对账汇总', path: '/financial/user' },
       { name: '差错处理', path: '/financial/user' },
