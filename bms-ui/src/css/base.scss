@@ -262,3 +262,8 @@ video {
 .el-input.is-disabled .el-input__inner {
   cursor: pointer !important;
 }
+
+.el-tabs__nav {
+  border-left: 0 !important;
+
+}

@@ -56,6 +56,7 @@ const Fsettlement = () => import(/* webpackChunkName: "Financial" */ '@/views/Fi
 const Fquery = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/Query/Index');
 const Reconcilia = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/Reconcilia/Index');
 const SourceData = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/SourceData/Index');
+const Unionpay = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/Unionpay/Index');
 
 
 
@@ -125,13 +126,13 @@ export const uatRouter = [
       { name: '财务查询', path: '/financial/query', component: Fquery },
       { name: '交广科技对账结果', path: '/financial/reconcilia', component: Reconcilia },
       { name: '渠道源数据', path: '/financial/source', component: SourceData },
-      { name: '银联对账结果', path: '/system/user' },
-      { name: '财务异常处理', path: '/system/user' },
-      { name: '金蝶财务', path: '/system/user' },
-      { name: '中信对账结果查询', path: '/system/user' },
-      { name: '对账汇总', path: '/system/user' },
-      { name: '差错处理', path: '/system/user' },
-      { name: '对账汇总（V2）', path: '/system/user' }
+      { name: '银联对账结果', path: '/financial/unionpay', component: Unionpay },
+      { name: '财务异常处理', path: '/financial/user' },
+      { name: '金蝶财务', path: '/financial/user' },
+      { name: '中信对账结果查询', path: '/financial/user' },
+      { name: '对账汇总', path: '/financial/user' },
+      { name: '差错处理', path: '/financial/user' },
+      { name: '对账汇总（V2）', path: '/financial/user' }
     ]
   },
   {
