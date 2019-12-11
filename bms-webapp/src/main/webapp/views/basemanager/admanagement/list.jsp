@@ -433,7 +433,8 @@
 
             $('#updateAdModal').on('show.bs.modal', function () {
                 $("#updateAdModal #businessPhotoImageDiv").show();
-                $("#updateAdModal #businessPhotoImageDiv").attr("src", "<%=request.getContextPath()+AdManagementPath.BASE + AdManagementPath.IMAGE %>?adId=" + ad.adId + "");
+                <%--$("#updateAdModal #businessPhotoImageDiv").attr("src", "<%=request.getContextPath()+AdManagementPath.BASE + AdManagementPath.IMAGE %>?adId=" + ad.adId + "");--%>
+                $("#updateAdModal #businessPhotoImageDiv").attr("src", ad.url);
                 $("#updateAdModal #adId").val(ad.adId);
                 $("#updateAdModal #adName").val(ad.adName);
                 $("#updateAdModal #editImagePath").val(ad.imagePath);
