@@ -66,7 +66,10 @@ const ReSummaryV2 = () => import(/* webpackChunkName: "Financial" */ '@/views/Fi
 
 
 // 短信管理
-const Smessage = () => import(/* webpackChunkName: "Financial" */ '@/views/SMS/Message/Message');
+const Smessage = () => import(/* webpackChunkName: "SMS" */ '@/views/SMS/Message/Message');
+// 实名认证
+const Clist = () => import(/* webpackChunkName: "Certification" */ '@/views/Certification/List/List');
+const Cverify = () => import(/* webpackChunkName: "Certification" */ '@/views/Certification/Verify/Verify');
 
 
 
@@ -198,8 +201,8 @@ export const uatRouter = [
   {
     name: '实名认证', path: '/system/user',
     children: [
-      { name: '实名认证文件列表', path: '/system/user' },
-      { name: '实名认证验证明细', path: '/system/user' }
+      { name: '实名认证文件列表', path: '/certification/list', component: Clist },
+      { name: '实名认证验证明细', path: '/certification/verify', component: Cverify }
     ]
   },
   {
