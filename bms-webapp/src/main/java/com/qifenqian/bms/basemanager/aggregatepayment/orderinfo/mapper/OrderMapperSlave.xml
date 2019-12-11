@@ -147,7 +147,7 @@
 			case T.CHANNEL when 'sevenpay' then ttt5.SETTLE_AMT else tt3.SETTLE_AMT end as SETTLE_AMT,
 			T.COUPON_AMT,
 			T.PROD_DESC,
-			T.PAY_TYPE,
+			CASE T.PAY_TYPE WHEN '1' THEN '刷卡' WHEN 'SK' THEN '刷卡'  WHEN 'SM' THEN '扫码'  WHEN 'SL' THEN '刷脸'  END as PAY_TYPE,
 			T.ORDER_TIMESTAMP,
 			T.ORDER_TIME_OUT,
 			T.ORDER_EXPIRE,

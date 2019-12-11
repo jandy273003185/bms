@@ -31,16 +31,16 @@
 	</select>
 
 	
-	<select id="selTdMerchantDetailInfo" parameterType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo"  resultType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo">
+	<!-- <select id="selTdMerchantDetailInfo" parameterType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo"  resultType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo">
 		SELECT
 			t1.*
 		FROM
 			td_merchant_report t1
 		WHERE
 			t1.`merchant_code` = #{merchantCode,jdbcType = VARCHAR} and t1.channel_no = #{channelNo,jdbcType = VARCHAR}
-	</select>
+	</select> -->
 	
-    <update id="updateTdMerchantDetailInfo"  parameterType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo" >
+    <!-- <update id="updateTdMerchantDetailInfo"  parameterType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo" >
     	 UPDATE `stcdb`.`td_merchant_detail_info`
 		 SET 
 		 	<if test="reportStatus != null and reportStatus !='' ">
@@ -86,7 +86,7 @@
 			 `modify_time` = now()
 		 WHERE
 			`patch_no` = #{patchNo,jdbcType = VARCHAR}
-    </update>
+    </update> -->
     
     <select id="getTdMerchantReport" parameterType="com.qifenqian.bms.merchant.reported.bean.TdMerchantReportInfo"  resultType="com.qifenqian.bms.merchant.reported.bean.TdMerchantReportInfo">
 		SELECT
@@ -154,6 +154,7 @@
 	<!-- 写入商户报备明细表 -->
 	<insert id="insertTdMerchantDetailInfoAllinPay" parameterType="com.qifenqian.bms.merchant.reported.bean.AllinPayBean">
 		INSERT INTO `stcdb`.`td_merchant_detail_info_allin_pay` (
+			`patch_no`,
 			`merchant_code`,
 			`cust_name`,
 			`short_name`,
@@ -199,11 +200,14 @@
 			`other_material_path`,
 			`out_merchant_code`,
 			`mch_id`,
+			`agree_type`,
+			`result_msg`,
 			`create_time`,
 			`modify_time`
 		)
 		VALUES
 			(
+				#{patchNo,jdbcType = VARCHAR},
 				#{merchantCode,jdbcType = VARCHAR},
 				#{custName,jdbcType = VARCHAR},
 				#{shortName,jdbcType = VARCHAR},
@@ -249,6 +253,8 @@
 				#{otherMaterialPath,jdbcType = VARCHAR},
 				#{outMerchantCode,jdbcType = VARCHAR},
 				#{mchId,jdbcType = VARCHAR},
+				#{agreeType,jdbcType = VARCHAR},
+				#{resultMsg,jdbcType = VARCHAR},
 				now(),
 				now()
 			)
@@ -288,13 +294,171 @@
 	<update id="updateTdMerchantDetailInfoAllinPay"  parameterType="com.qifenqian.bms.merchant.reported.bean.AllinPayBean" >
     	 UPDATE `stcdb`.`td_merchant_detail_info_allin_pay`
 			SET 
-			<if test="outMerchantCode != null and outMerchantCode !='' ">
-		 	`out_merchant_code` = #{outMerchantCode,jdbcType = VARCHAR}
+			<if test="shortName != null and shortName !='' ">
+		 	`short_name` = #{shortName,jdbcType = VARCHAR},
 		 	</if>
-		 <where>
-			<if test="merchantCode != null and merchantCode != '' ">
-			`merchant_code` = #{merchantCode,jdbcType = VARCHAR} 
-			</if>
-		</where>
+		 	<if test="mecTypeFlag != null and mecTypeFlag !='' ">
+		 	`mec_type_flag` = #{mecTypeFlag,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="industry != null and industry !='' ">
+		 	`industry` = #{industry,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="contactPhone != null and contactPhone !='' ">
+		 	`contact_phone` = #{contactPhone,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="merchantProvince != null and merchantProvince !='' ">
+		 	`merchant_province` = #{merchantProvince,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="merchantCity != null and merchantCity !='' ">
+		 	`merchant_city` = #{merchantCity,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="cprRegAddr != null and cprRegAddr !='' ">
+		 	`cpr_reg_addr` = #{cprRegAddr,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="cprRegNmCn != null and cprRegNmCn !='' ">
+		 	`cpr_reg_nm_cn` = #{cprRegNmCn,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="businessEffectiveTerm != null and businessEffectiveTerm !='' ">
+		 	`business_effective_term` = #{businessEffectiveTerm,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="businessTerm != null and businessTerm !='' ">
+		 	`business_term` = #{businessTerm,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="businessLicense != null and businessLicense !='' ">
+		 	`business_license` = #{businessLicense,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="expanduser != null and expanduser !='' ">
+		 	`expanduser` = #{expanduser,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="offlag != null and offlag !='' ">
+		 	`offlag` = #{offlag,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="contractDate != null and contractDate !='' ">
+		 	`contract_date` = #{contractDate,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="representativeName != null and representativeName !='' ">
+		 	`representative_name` = #{representativeName,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="representativeCertNo != null and representativeCertNo !='' ">
+		 	`representative_cert_no` = #{representativeCertNo,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="representativeCertType != null and representativeCertType !='' ">
+		 	`representative_cert_type` = #{representativeCertType,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="idTermStart != null and idTermStart !='' ">
+		 	`id_term_start` = #{idTermStart,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="idTermEnd != null and idTermEnd !='' ">
+		 	`id_term_end` = #{idTermEnd,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="attentionName != null and attentionName !='' ">
+		 	`attention_name` = #{attentionName,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="attentionMobile != null and attentionMobile !='' ">
+		 	`attention_mobile` = #{attentionMobile,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="accountNm != null and accountNm !='' ">
+		 	`account_nm` = #{accountNm,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="accountNo != null and accountNo !='' ">
+		 	`account_no` = #{accountNo,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="clearMode != null and clearMode !='' ">
+		 	`clear_mode` = #{clearMode,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="accttp != null and accttp !='' ">
+		 	`accttp` = #{accttp,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="bankProvince != null and bankProvince !='' ">
+		 	`bank_province` = #{bankProvince,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="bankCity != null and bankCity !='' ">
+		 	`bank_city` = #{bankCity,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="branchBank != null and branchBank !='' ">
+		 	`branch_bank` = #{branchBank,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="interBankCode != null and interBankCode !='' ">
+		 	`inter_bank_code` = #{interBankCode,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="interBankName != null and interBankName !='' ">
+		 	`inter_bank_name` = #{interBankName,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="bankCode != null and bankCode !='' ">
+		 	`bank_code` = #{bankCode,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="perEntFlag != null and perEntFlag !='' ">
+		 	`per_ent_flag` = #{perEntFlag,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="certifyNo != null and certifyNo !='' ">
+		 	`certify_no` = #{certifyNo,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="businessPhotoPath != null and businessPhotoPath !='' ">
+		 	`business_photo_path` = #{businessPhotoPath,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="legalCertAttribute1Path != null and legalCertAttribute1Path !='' ">
+		 	`legal_cert_attribute1_path` = #{legalCertAttribute1Path,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="legalCertAttribute2Path != null and legalCertAttribute2Path !='' ">
+		 	`legal_cert_attribute2_path` = #{legalCertAttribute2Path,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="doorPhotoPath != null and doorPhotoPath !='' ">
+		 	`door_photo_path` = #{doorPhotoPath,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="shopInteriorPath != null and shopInteriorPath !='' ">
+		 	`shop_interior_path` = #{shopInteriorPath,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="handIdCardPath != null and handIdCardPath !='' ">
+		 	`hand_id_card_path` = #{handIdCardPath,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="businessPlacePath != null and businessPlacePath !='' ">
+		 	`business_place_path` = #{businessPlacePath,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="otherMaterialPath != null and otherMaterialPath !='' ">
+		 	`other_material_path` = #{otherMaterialPath,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="outMerchantCode != null and outMerchantCode !='' ">
+		 	`out_merchant_code` = #{outMerchantCode,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="mchId != null and mchId !='' ">
+		 	`mch_id` = #{mchId,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="agreeType != null and agreeType !='' ">
+		 	`agree_type` = #{agreeType,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="resultMsg != null and resultMsg !='' ">
+		 	`result_msg` = #{resultMsg,jdbcType = VARCHAR},
+		 	</if>
+		 	`modify_time` = now()
+		 WHERE
+			`patch_no` = #{patchNo,jdbcType = VARCHAR}
+		 or
+		 	`merchant_code` = #{merchantCode,jdbcType = VARCHAR}
+    </update>
+    
+    
+    <update id="updateTdMerchantProductInfoAllinPay"  parameterType="com.qifenqian.bms.merchant.reported.bean.AllinPayProductInfo" >
+    	 UPDATE `stcdb`.`td_merchant_product_info_allin_pay`
+			SET 
+			<if test="feeRate != null and feeRate !='' ">
+		 	`fee_rate` = #{feeRate,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="creditRate != null and creditRate !='' ">
+		 	`credit_rate` = #{creditRate,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="lowLimit != null and lowLimit !='' ">
+		 	`low_limit` = #{lowLimit,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="topLimit != null and topLimit !='' ">
+		 	`top_limit` = #{topLimit,jdbcType = VARCHAR},
+		 	</if>
+		 	`modify_time` = now()
+		 WHERE
+			`product_id` = #{productId,jdbcType = VARCHAR}
+		 and 
+		 	`merchant_code` = #{merchantCode,jdbcType = VARCHAR}
+		 and 
+		 	`mtrx_code` = #{mtrxCode,jdbcType = VARCHAR}
+		 	
     </update>
 </mapper>

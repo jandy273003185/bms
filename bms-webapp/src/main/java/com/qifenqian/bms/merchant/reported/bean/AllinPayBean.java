@@ -112,11 +112,27 @@ public class AllinPayBean implements Serializable{
 	private String outMerchantCode;
 	//进件平台商户号
 	private String mchId;
+	//是否电子协议
+	private String agreeType;
+	//返回信息
+	private String resultMsg;
 	//交易类型
 	private List<Map> prodInfoList;
 	
 	
 	
+	public String getResultMsg() {
+		return resultMsg;
+	}
+	public void setResultMsg(String resultMsg) {
+		this.resultMsg = resultMsg;
+	}
+	public String getAgreeType() {
+		return agreeType;
+	}
+	public void setAgreeType(String agreeType) {
+		this.agreeType = agreeType;
+	}
 	public String getHandIdCardPath() {
 		return handIdCardPath;
 	}

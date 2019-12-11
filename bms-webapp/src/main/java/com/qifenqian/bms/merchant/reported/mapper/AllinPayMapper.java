@@ -33,5 +33,7 @@ public interface AllinPayMapper {
 
 	void updateTdMerchantDetailInfoAllinPay(AllinPayBean cr);
 
+	void updateTdMerchantProductInfoAllinPay(AllinPayProductInfo prod);
+
 
 }

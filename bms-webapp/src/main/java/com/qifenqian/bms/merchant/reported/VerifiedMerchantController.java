@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
+import com.qifenqian.bms.merchant.reported.mapper.FmIncomeMapper;
 import com.qifenqian.bms.merchant.reported.service.VerifiedMerchantService;
 
 @Controller
@@ -26,7 +27,8 @@ public class VerifiedMerchantController {
 	
 	@Autowired
 	private VerifiedMerchantService verifiedMerchantService;
-	
+	@Autowired
+	 private FmIncomeMapper fmIncomeMapper;
 	/**
 	 * 微信商户实名认证提交
 	*/
@@ -35,6 +37,7 @@ public class VerifiedMerchantController {
 	public String verifiedSubmit(HttpServletRequest request,HttpServletResponse response,TdMerchantDetailInfo tdMerchantDetailInfo){
 		JSONObject object = new JSONObject();
 		Map<String, Object> verifiedResult = new HashMap<String, Object>();
+		tdMerchantDetailInfo = fmIncomeMapper.selMerchantDetailInfo(tdMerchantDetailInfo);
 		//调用实名认证接口
 		verifiedResult = verifiedMerchantService.verifiedMerchant(tdMerchantDetailInfo);
 		if("SUCCESS".equals(verifiedResult.get("result"))){
@@ -57,6 +60,7 @@ public class VerifiedMerchantController {
 	public String verifiedQuery(HttpServletRequest request,HttpServletResponse response,TdMerchantDetailInfo tdMerchantDetailInfo){
 		JSONObject object = new JSONObject();
 		Map<String, Object> verifiedResult = new HashMap<String, Object>();
+		tdMerchantDetailInfo = fmIncomeMapper.selMerchantDetailInfo(tdMerchantDetailInfo);
 		//调用实名认证接口
 		verifiedResult = verifiedMerchantService.verifiedQuery(tdMerchantDetailInfo);
 		if("SUCCESS".equals(verifiedResult.get("result"))){
@@ -78,6 +82,7 @@ public class VerifiedMerchantController {
 	public String verifiedCancel(HttpServletRequest request,HttpServletResponse response,TdMerchantDetailInfo tdMerchantDetailInfo){
 		JSONObject object = new JSONObject();
 		Map<String, Object> verifiedResult = new HashMap<String, Object>();
+		tdMerchantDetailInfo = fmIncomeMapper.selMerchantDetailInfo(tdMerchantDetailInfo);
 		//调用实名认证接口
 		verifiedResult = verifiedMerchantService.verifiedCancel(tdMerchantDetailInfo);
 		if("SUCCESS".equals(verifiedResult.get("result"))){
@@ -99,6 +104,7 @@ public class VerifiedMerchantController {
 	public String verifiedAuthorize(HttpServletRequest request,HttpServletResponse response,TdMerchantDetailInfo tdMerchantDetailInfo){
 		JSONObject object = new JSONObject();
 		Map<String, Object> verifiedResult = new HashMap<String, Object>();
+		tdMerchantDetailInfo = fmIncomeMapper.selMerchantDetailInfo(tdMerchantDetailInfo);
 		//调用实名认证接口
 		verifiedResult = verifiedMerchantService.verifiedAuthorize(tdMerchantDetailInfo);
 		if("SUCCESS".equals(verifiedResult.get("result"))){

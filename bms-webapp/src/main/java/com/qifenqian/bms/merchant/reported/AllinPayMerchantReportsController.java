@@ -66,8 +66,6 @@ public class AllinPayMerchantReportsController {
 		List<Province> allinPayAreaInfoList = allinPayService.getProvinceName();
 		/***查询银行***/
 		List<Bank>  bankList =  allinPayService.getBankInfo();
-		/***查询报备信息***/
-//		List<TdMerchantDetailInfo> reportedList = fmIncomeService.getMerchantDetailInfoList(detail);
 		/***获取图片路径***/
 		merchantVo.setCustId(custInfo.getCustId());
 		merchantVo.setAuthId(custInfo.getAuthId());
@@ -77,7 +75,6 @@ public class AllinPayMerchantReportsController {
 		mv.addObject("industryList", industryList);
 		mv.addObject("allinPayAreaInfoList",allinPayAreaInfoList);
 		mv.addObject("bankList",bankList);
-//		mv.addObject("reportedList",reportedList);
 		mv.addObject("picturePathVo", picturePath); 
 		
 		return mv;
@@ -106,7 +103,10 @@ public class AllinPayMerchantReportsController {
 					return object.toString();
 				}else{
 					reportInfo.setReportStatus("E");
+					//修改商户报备表
 					allinPayService.updateTdMerchantReport(reportInfo);
+					//修改商户报备明细表和产品表
+					allinPayService.updateTdMerchantInfoAllinPay(cr);
 				}
 			}else{
 				//添加商户报备表（td_merchant_report）
@@ -119,6 +119,7 @@ public class AllinPayMerchantReportsController {
 				//添加商户报备表
 				allinPayService.insertTdMerchantReport(info);
 				//添加商户报备明细表和产品表
+				cr.setPatchNo(info.getPatchNo());
 				allinPayService.insertTdMerchantInfoAllinPay(cr);
 			}
 			//商户通联进件

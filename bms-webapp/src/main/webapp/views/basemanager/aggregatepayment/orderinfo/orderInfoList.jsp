@@ -236,6 +236,7 @@
 											<th>商品描述</th>
 											<th>支付产品</th>
 											<th>订单状态</th>
+											<th>付款方式</th>
 											<th>创建时间</th>
 										</tr>
 									</thead>
@@ -283,12 +284,29 @@
 														
 													</c:choose>
 												</td>
+												<td>
+													<c:choose>
+														<c:when test="${bean.payType == 'SM'}">
+															扫码
+														</c:when>
+														<c:when test="${bean.payType=='SK'}">
+															刷卡
+														</c:when>
+														<c:when test="${bean.payType=='SL'}">
+															刷脸
+														</c:when>
+														<c:otherwise>
+															${bean.payType }
+														</c:otherwise>	
+													</c:choose>
+													
+												</td>
 												<td>${bean.createTime }</td>
 											</tr>
 										</c:forEach>
 										
 										<c:if test="${empty orderInfoList}">
-											<tr><td colspan="12" align="center"><font style="color: red; font-weight: bold;font-size: 15px;">暂无数据</font></td></tr>
+											<tr><td colspan="16" align="center"><font style="color: red; font-weight: bold;font-size: 15px;">暂无数据</font></td></tr>
 										</c:if>
 									</tbody>
 								</table>

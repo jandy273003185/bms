@@ -436,6 +436,13 @@
 									
 									<label class="label-tips" id="expanduserLab"></label>
 								</td>
+								<td class="td-left">是否电子协议：</td>
+								<td class="td-right">
+									<select  name="agreeType" id="agreeType"  class="width-90" >
+										<option value="2">--纸质协议--</option>
+										<option value="1">--电子协议--</option>
+									</select>
+								</td>
 							</tr>
 							<tr>
 								<td class="td-left">线上线下业务场景：</td>
@@ -927,6 +934,8 @@
    			var businessLicense = $("#businessLicense").val(); 
 			//拓展人
    			var expanduser = $("#expanduser").val(); 
+			//是否电子协议
+			var agreeType = $("#agreeType").val(); 
    			//线上线下业务场景
 			var offlag = $("#offlag").val();
 			//合同有效日期
@@ -1010,10 +1019,10 @@
    	   	    		var prodInfo={
    	   	    				pid 	   : pid,
    	   	    				mtrxcode   : mtrxcode,
-   	   	    				feerate    : $('#' + rateType).val()/* ,
+   	   	    				feerate    : $('#' + rateType).val(),
    	   	    				creditrate : $('#' + rateType + '1').val(),
    	   	    				lowlimit   : $('#' + rateType + '2').val(),
-   	   	    				toplimit   : $('#' + rateType + '3').val() */
+   	   	    				toplimit   : $('#' + rateType + '3').val()
    	   	    			}
    	   	    		prodInfoList.push(prodInfo);
    	   	    		
@@ -1062,6 +1071,7 @@
 	  	   						"businessTerm"           : businessTerm,
 	  	   						"businessLicense"        : businessLicense,
 	  	   						"expanduser"             : expanduser,
+	  	   						"agreeType"              : agreeType,
 	  	   						"offlag"                 : offlag,
 	  	   						"contractDate"           : contractDate,
 	  	   						"representativeName"     : representativeName,
