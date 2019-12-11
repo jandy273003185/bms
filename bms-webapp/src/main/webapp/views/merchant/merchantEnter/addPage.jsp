@@ -16,6 +16,8 @@
 <script src="<c:url value='/static/js/jquery.combo.select.js'/>"></script>
 <script src="<c:url value='/static/topayProfit/layui/layui.js'/>"></script>
 <script src="<c:url value='/static/topayProfit/layui/layui.all.js'/>"></script>
+<script src="/static/js/bootstrap-select.min.js"></script>
+<script src="/static/js/bootstrap-select.js"></script>
 <html>
 <head>
 	<meta charset="utf-8" />
@@ -26,6 +28,7 @@
 	<link rel="stylesheet" href="<c:url value='/static/css/combo.select.css' />" />
 	<link rel="stylesheet" href="<c:url value='/static/topayProfit/layui/css/layui.css' />" />	
 	<link rel="stylesheet" href="<c:url value='/static/css/combo.select.scss' />" />
+	<link href="/static/css/bootstrap-select.css" rel="stylesheet">
 	<style type="text/css">
 	table tr td{word-wrap:break-word;word-break:break-all;}
 	.uploadImage{ float:left;
@@ -35,6 +38,14 @@
 			height:100px;
 			margin: 10 10 10 10;
 			}
+	.btn, .btn-default, .btn:focus, .btn-default:focus {
+		background-color:#fff !important;
+    	border: 1px solid #ccc !important;
+    	color: #464444 !important;
+    	font-family: inherit !important;
+    	text-shadow: none !important;
+    	font-weight:300 !important;
+    }
 	</style>
 </head>
 <script type="text/javascript">
@@ -1110,14 +1121,15 @@ function showOpenAccountImage(file){
 						<tr>
 							<td class="td-left">开户银行：<span style="color:red;">（必填)</span></td>
 							<td class="td-right">
-								<select class="width-90" id="compAcctBank" name="compAcctBank" onchange="getbranchBank();">
-                                <c:if test="${not empty banklist }">
-                                   <option value="">--请选择--</option>
-					               <c:forEach items="${banklist }" var="bank">
-					                   <option value="${bank.bankCode }">${bank.bankName }</option>
-					               </c:forEach>
-	               				</c:if>
-                                </select>
+								<select  name="compAcctBank" id="compAcctBank"  class="selectpicker show-tick form-control" data-width="91%" data-live-search="true">
+									<option value="">--请选择--</option>
+									<c:if test="${not empty banklist }">
+										<c:forEach items="${banklist }" var="bank">
+											<option id="${bank.bankCode}" value="${bank.bankCode}">${bank.bankName}</option>
+										</c:forEach>
+									</c:if>
+								</select>
+							
 								<label class="label-tips" id="compAcctBankLab"></label>
 							</td>
 							<td class="td-left">开户支行：<span style="color:red;">（必填)</span></td>
@@ -1212,7 +1224,7 @@ function showOpenAccountImage(file){
 
 		<!-- 向上置顶 -->
 		<%@ include file="/include/up.jsp"%>
-	</div><!-- /.main-container -->
+	</div>	<!-- /.main-container -->
 
 </body>
 <script type="text/javascript">

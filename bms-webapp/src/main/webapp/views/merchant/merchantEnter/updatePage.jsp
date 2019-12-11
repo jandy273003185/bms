@@ -16,6 +16,8 @@
 <script src='<c:url value="/static/js/register.js"/>'></script>
 <script src="<c:url value='/static/js/jquery.combo.select.js'/>"></script>
 <script src='<c:url value="/static/js/checkRule_source.js"/>'></script>
+<script src="/static/js/bootstrap-select.min.js"></script>
+<script src="/static/js/bootstrap-select.js"></script>
 <html>
 <head>
 	<meta charset="utf-8" />
@@ -25,6 +27,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="<c:url value='/static/css/combo.select.scss' />" />
 	<link rel="stylesheet" href="<c:url value='/static/css/combo.select.css' />" />
+	<link href="/static/css/bootstrap-select.css" rel="stylesheet">
 	<style type="text/css">
 		table tr td{word-wrap:break-word;word-break:break-all;}
 		.uploadImage{ float:left;
@@ -34,6 +37,14 @@
 			height:100px;
 			margin: 10 10 10 10;
 		}
+		.btn, .btn-default, .btn:focus, .btn-default:focus {
+		background-color:#fff !important;
+    	border: 1px solid #ccc !important;
+    	color: #464444 !important;
+    	font-family: inherit !important;
+    	text-shadow: none !important;
+    	font-weight:300 !important;
+    }
 	</style>
 </head>
 <script type="text/javascript">
@@ -938,7 +949,7 @@ $(function(){
 							</tr>
 							<tr>
 								<td class="td-left">开户省份：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px">
+								<td class="td-right" style="color:#666;padding:10px 8px;">
 									<select class="width-90" id="bankProvinceName" onchange="getBankCityList();">
 										<c:if test="${not empty provincelist }">
 											<option value=${merchantVo.bankProvinceName }>${merchantVo.bankProName }</option>
@@ -958,14 +969,22 @@ $(function(){
 							<tr>
 								<td class="td-left">开户银行：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
-									<select class="width-90" id="compAcctBank" name="compAcctBank" onchange="getbranchBank();">
+									<select  name="compAcctBank" id="compAcctBank"  class="selectpicker show-tick form-control" data-width="91%" data-live-search="true">
+										<option value="">--请选择--</option>
+										<c:if test="${not empty banklist }">
+											<c:forEach items="${banklist }" var="bank">
+												<option id="${bank.bankCode}" value="${bank.bankCode}">${bank.bankName}</option>
+											</c:forEach>
+										</c:if>
+									</select>
+									<%-- <select class="width-90" id="compAcctBank" name="compAcctBank" onchange="getbranchBank();">
 										<c:if test="${not empty banklist }">
 											<option value=${merchantVo.compAcctBank }>${merchantVo.bankName }</option>
 											<c:forEach items="${banklist }" var="bank">
 												<option value="${bank.bankCode }">${bank.bankName }</option>
 											</c:forEach>
 										</c:if>
-									</select>
+									</select> --%>
 									<label class="label-tips" id="compMainAcctLab"></label>
 								</td>
 								<td class="td-left">开户支行：</td>
