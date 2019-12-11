@@ -3,7 +3,12 @@ package com.qifenqian.bms.common.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -13,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -30,6 +36,7 @@ import com.qifenqian.bms.basemanager.merchant.mapper.CustScanMapper;
 import com.qifenqian.bms.basemanager.merchant.mapper.MerchantMapper;
 import com.qifenqian.bms.basemanager.merchant.service.MerchantEnterService;
 import com.qifenqian.bms.platform.common.utils.DateUtils;
+import com.qifenqian.bms.platform.common.utils.SpringUtils;
 
 @Controller
 @RequestMapping("/common/files")
@@ -42,7 +49,8 @@ public class FileController {
 	@Autowired
 	private MerchantEnterService merchantEnterService;
 	
-	private static final String PRE_PATH = "/data/nfsshare/upload/picture";
+	//private static final String PRE_PATH = "/data/nfsshare/upload/picture";
+	private static final String PRE_PATH = "D:/imageData";
 	private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 	
 	
@@ -57,6 +65,62 @@ public class FileController {
 	@ResponseBody
 	public Map<String, Object> upload(MultipartFile file) {
 		return fileUpload(file);
+	}
+	
+	@RequestMapping(value = "/moveFile")
+	@ResponseBody
+	public Map<String, String> moveFile(String custId) {
+		Map<String, String> result = new HashMap<String, String>();
+		//移动文件
+		String fileNameAndPath = "";
+		try {
+			List<CustScan> listTdCustScanCopy = custScanMapper.ListTdCustScanCopy(custId);
+			for (CustScan custScan : listTdCustScanCopy) {
+				if (custScan.getScanCopyPath().indexOf("/data") == -1) {
+					continue;
+				}
+				String[] scanCopyPaths = custScan.getScanCopyPath().split(";");
+				for (int i = 0; i < scanCopyPaths.length; i++) {
+					fileNameAndPath = custScan.getCustId() + ":" + scanCopyPaths[i];
+					Path sourcePath = Paths.get(scanCopyPaths[i]);
+					//转换新路径
+					String sourceFileName = sourcePath.getFileName().toString();
+					String prefix = sourceFileName.substring(sourceFileName.lastIndexOf("."));
+					String newFilename = DateUtils.getDateStr8()+"_"+UUID.randomUUID().toString().replaceAll("-","");
+					StringBuilder filePath = new StringBuilder(PRE_PATH).append("/").append(newFilename).append(prefix);
+					Path targetPath = Paths.get(filePath.toString());
+					Path temp = Files.move(sourcePath, targetPath);
+					if(temp != null) {
+						CustScan newCustScan = new CustScan();
+						BeanUtils.copyProperties(custScan, newCustScan);
+						//插入新数据
+						if (scanCopyPaths.length > 1) {
+							newCustScan.setCertifyType(i == 0 ? "04" : "16");
+						}
+						newCustScan.setScanCopyPath(filePath.toString());
+						custScanMapper.insertCustScan(newCustScan);
+						if (i == scanCopyPaths.length - 1) {
+							//停用旧数据
+							custScan.setStatus("01");
+							custScanMapper.updateCustScan(custScan);
+						}
+						logger.info("移动文件成功,客户号custId：路径为{}", fileNameAndPath);
+			        }
+			        else {
+			        	logger.warn("移动文件失败,客户号custId：路径为{}", fileNameAndPath);
+			        }
+				}
+			}
+			result.put("code", "SUCCESS");
+			result.put("message", "移动成功");
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			logger.error("移动文件异常,客户号custId：路径为{};异常信息：{}", fileNameAndPath, e.getMessage());
+			result.put("code", "FAIL");
+			result.put("message", "移动失败");
+		}
+		return result;
 	}
 
 	/**
@@ -331,7 +395,45 @@ public class FileController {
 				custScan.setStatus("00");
 				custScanMapper.insertCustScan(custScan);
 			}
-			
+			//15 非法人结算授权函
+			if(!StringUtils.isEmpty(picturePath.getLetterOfAuthPath())) {
+				custScan.setCertifyType("15");
+				
+				if(!StringUtils.isEmpty(picturePathOld.getLetterOfAuthPath())) {
+					custScan.setStatus("01");
+					custScanMapper.updateCustScan(custScan);
+				}
+				
+				custScan.setScanCopyPath(picturePath.getLetterOfAuthPath());
+				custScan.setStatus("00");
+				custScanMapper.insertCustScan(custScan);
+			}
+			//37经营场所证明文件
+			if(!StringUtils.isEmpty(picturePath.getBusinessPlacePath())) {
+				custScan.setCertifyType("37");
+				
+				if(!StringUtils.isEmpty(picturePathOld.getBusinessPlacePath())) {
+					custScan.setStatus("01");
+					custScanMapper.updateCustScan(custScan);
+				}
+				
+				custScan.setScanCopyPath(picturePath.getBusinessPlacePath());
+				custScan.setStatus("00");
+				custScanMapper.insertCustScan(custScan);
+			}
+			//13手持身份证照
+			if(!StringUtils.isEmpty(picturePath.getHandIdCardPath())) {
+				custScan.setCertifyType("13");
+				
+				if(!StringUtils.isEmpty(picturePathOld.getHandIdCardPath())) {
+					custScan.setStatus("01");
+					custScanMapper.updateCustScan(custScan);
+				}
+				
+				custScan.setScanCopyPath(picturePath.getHandIdCardPath());
+				custScan.setStatus("00");
+				custScanMapper.insertCustScan(custScan);
+			}
 			object.put("result", "SUCCESS");
 			object.put("message", "新增图片成功");
 		} catch (Exception e) {

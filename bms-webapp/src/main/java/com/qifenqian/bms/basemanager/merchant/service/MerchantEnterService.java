@@ -378,6 +378,10 @@ public class MerchantEnterService {
 		custScan.setCertifyType("15");
 		String letterOfAuthPath = findPicturePath(custScan);
 		picturePath.setLetterOfAuthPath("/pic/" + letterOfAuthPath);
+		//37经营场所证明文件
+		custScan.setCertifyType("37");
+		String businessPlacePath = findPicturePath(custScan);
+		picturePath.setLetterOfAuthPath("/pic/" + businessPlacePath);
 		return picturePath;
 				
 	}
