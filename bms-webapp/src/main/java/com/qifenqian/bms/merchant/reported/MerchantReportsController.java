@@ -652,7 +652,7 @@ public class MerchantReportsController {
 							List<ChannelDetailBean> details = new ArrayList<ChannelDetailBean>();
 							//微信扫码
 							ChannelDetailBean weChatSM = new ChannelDetailBean();
-							weChatSM.setChannelCode(ChannelCode.WECHAT);
+							weChatSM.setChannelCode(ChannelCode.WEIXIN);
 							weChatSM.setSubCode(PayType.SM);
 							weChatSM.setWxAppId("wx1fc84beff3d0eeb8");
 							weChatSM.setWxAppsecret("055e6b98ac3b4b6d7b704a6c3e884d64");
@@ -962,7 +962,7 @@ public class MerchantReportsController {
 			List<ChannelDetailBean> details = new ArrayList<ChannelDetailBean>();
 			//微信扫码
 			ChannelDetailBean weChatSM = new ChannelDetailBean();
-			weChatSM.setChannelCode(ChannelCode.WECHAT);
+			weChatSM.setChannelCode(ChannelCode.WEIXIN);
 			weChatSM.setSubCode(PayType.SM);
 			weChatSM.setWxAppId("wx1fc84beff3d0eeb8");
 			weChatSM.setWxAppsecret("055e6b98ac3b4b6d7b704a6c3e884d64");

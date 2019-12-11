@@ -29,8 +29,7 @@ export default {
     };
   },
   created() {
-    const index = sessionStorage.getItem('queryCurrentIndex') || 'Tab1';
-    this.tabsIndex = index;
+    this.initTabIndex();
   },
   beforeDestroy() {
     sstorage.set('queryCurrentIndex', '');
