@@ -12,18 +12,30 @@ import { sstorage } from '@/tools/utils';
 import Total from './Total';
 import Variation from './Variation';
 import Commercial from './Commercial';
+import User from './User';
+import Client from './Client';
+import Merchant from './Merchant';
+import Revocation from './Revocation';
 export default {
-  components: { Total, Variation, Commercial },
+  components: {
+    Total,
+    Variation,
+    Commercial,
+    User,
+    Client,
+    Merchant,
+    Revocation
+  },
   data() {
     return {
       tabs: [
         { label: '汇总余额', cpt: 'Total' },
         { label: '余额变动', cpt: 'Variation' },
         { label: '商户余额', cpt: 'Commercial' },
-        { label: '用户余额', cpt: 'Total4' },
-        { label: '客戶提现结算', cpt: 'Total5' },
-        { label: '商户提现结算', cpt: 'Total6' },
-        { label: '客户提现撤销列表', cpt: 'Total7' }
+        { label: '用户余额', cpt: 'User' },
+        { label: '客戶提现结算', cpt: 'Client' },
+        { label: '商户提现结算', cpt: 'Merchant' },
+        { label: '客户提现撤销列表', cpt: 'Revocation' }
       ],
       tabsIndex: 'Total'
     };
