@@ -2078,6 +2078,8 @@
 				)
 				OR (
 					t.MERCHANT_FLAG = '2'
+				)OR (
+					t.MERCHANT_FLAG = '3'
 				)
 			)
 		AND t.MERCHANT_CODE IS NOT NULL ORDER BY t.CREATE_TIME DESC;
