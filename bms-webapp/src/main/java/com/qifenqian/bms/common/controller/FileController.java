@@ -76,9 +76,9 @@ public class FileController {
 		try {
 			List<CustScan> listTdCustScanCopy = custScanMapper.ListTdCustScanCopy(custId);
 			for (CustScan custScan : listTdCustScanCopy) {
-				if (custScan.getScanCopyPath().indexOf("/data") == -1) {
-					continue;
-				}
+//				if (custScan.getScanCopyPath().indexOf("/data") == -1) {
+//					continue;
+//				}
 				String[] scanCopyPaths = custScan.getScanCopyPath().split(";");
 				for (int i = 0; i < scanCopyPaths.length; i++) {
 					fileNameAndPath = custScan.getCustId() + ":" + scanCopyPaths[i];
