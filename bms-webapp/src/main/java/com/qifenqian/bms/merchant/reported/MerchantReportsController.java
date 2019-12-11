@@ -40,6 +40,7 @@ import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantSettleInfo;
 import com.qifenqian.bms.merchant.reported.dao.FmIncomeMapperDao;
 import com.qifenqian.bms.merchant.reported.service.AliPayIncomeService;
+import com.qifenqian.bms.merchant.reported.service.AllinPayService;
 import com.qifenqian.bms.merchant.reported.service.CrIncomeService;
 import com.qifenqian.bms.merchant.reported.service.FmIncomeService;
 import com.qifenqian.bms.merchant.reported.service.MerchantProfitSharingService;
@@ -49,6 +50,7 @@ import com.qifenqian.bms.merchant.subAccount.service.MerchantSubAccountService;
 import com.qifenqian.jellyfish.bean.enums.BusinessStatus;
 import com.qifenqian.jellyfish.bean.enums.GetwayStatus;
 import com.qifenqian.jellyfish.bean.merregist.alipay.AlipayOpenAgentOrderQueryRes;
+import com.qifenqian.jellyfish.bean.merregist.allinpay.AllinpayMerchantQueryStatusRes;
 import com.qifenqian.jellyfish.bean.merregist.weixin.AuditDetail;
 import com.qifenqian.jellyfish.bean.merregist.weixin.WeiXinAgrntMerRegistQueryResp;
 import com.qifenqian.jellyfish.bean.merregist.weixin.WeiXinAgrntMerRegistUpgradeQueryResp;
@@ -97,7 +99,8 @@ public class MerchantReportsController {
    @Autowired
    private MerchantSubAccountService merchantSubAccountService;
 
-   
+   @Autowired
+   private AllinPayService allinPayService;
    /**
     * 商户报备入口
     */
@@ -649,7 +652,7 @@ public class MerchantReportsController {
 							List<ChannelDetailBean> details = new ArrayList<ChannelDetailBean>();
 							//微信扫码
 							ChannelDetailBean weChatSM = new ChannelDetailBean();
-							weChatSM.setChannelCode(ChannelCode.WECHAT);
+							weChatSM.setChannelCode(ChannelCode.WEIXIN);
 							weChatSM.setSubCode(PayType.SM);
 							weChatSM.setWxAppId("wx1fc84beff3d0eeb8");
 							weChatSM.setWxAppsecret("055e6b98ac3b4b6d7b704a6c3e884d64");
@@ -885,6 +888,11 @@ public class MerchantReportsController {
 				logger.error("调用支付宝申请单查询失败：{}", JSONObject.toJSONString(orderQueryRes));
 			}
 			return object.toString();
+		}else if ("ALLIN_PAY".equals(detail.getChannelNo())) {
+			//查询
+			TdMerchantDetailInfo selMerchantDetailInfo = fmIncomeMapperDao.selMerchantDetailInfo(detail);
+			AllinpayMerchantQueryStatusRes res = allinPayService.queryStatus(selMerchantDetailInfo);
+			//修改状态
 		}
 			
 		ChannelResult channelResult = iMerChantIntoServic.merQuery(req);
@@ -954,7 +962,7 @@ public class MerchantReportsController {
 			List<ChannelDetailBean> details = new ArrayList<ChannelDetailBean>();
 			//微信扫码
 			ChannelDetailBean weChatSM = new ChannelDetailBean();
-			weChatSM.setChannelCode(ChannelCode.WECHAT);
+			weChatSM.setChannelCode(ChannelCode.WEIXIN);
 			weChatSM.setSubCode(PayType.SM);
 			weChatSM.setWxAppId("wx1fc84beff3d0eeb8");
 			weChatSM.setWxAppsecret("055e6b98ac3b4b6d7b704a6c3e884d64");
