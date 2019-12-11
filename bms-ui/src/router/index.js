@@ -60,6 +60,7 @@ const Unionpay = () => import(/* webpackChunkName: "Financial" */ '@/views/Finan
 const Fabnormal = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/Abnormal/Abnormal');
 const Kingdee = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/Kingdee/Index');
 const Citic = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/Citic/Index');
+const ReSummary = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/ReSummary/ReSummary');
 
 
 // UAT 后台菜单
@@ -132,7 +133,7 @@ export const uatRouter = [
       { name: '财务异常处理', path: '/financial/abnormal', component: Fabnormal },
       { name: '金蝶财务', path: '/financial/kingdee', component: Kingdee },
       { name: '中信对账结果查询', path: '/financial/citic', component: Citic },
-      { name: '对账汇总', path: '/financial/user' },
+      { name: '对账汇总', path: '/financial/summary', component: ReSummary },
       { name: '差错处理', path: '/financial/user' },
       { name: '对账汇总（V2）', path: '/financial/user' }
     ]
