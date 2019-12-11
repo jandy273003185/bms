@@ -167,7 +167,6 @@ $(function(){
 								</td>
                                 <td class="td-left">商户行业信息：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-								<%--  
 								<select name="industry" id="industry" class="selectpicker show-tick form-control" data-width="250px" data-live-search="true">
 									<option value="">--请选择商户行业--</option>
 									<c:if test="${not empty industryList }">
@@ -175,15 +174,15 @@ $(function(){
 			                           		<option id="${industry.industryCode}" value="${industry.industryCode}">${industry.industryName}</option>
 			                           	</c:forEach>
 		                 		  	</c:if>
-								</select> --%>
-								   <select name="industry" id="industry" class="width-90">
+								</select>
+								  <%--  <select name="industry" id="industry" class="width-90">
 										<option value="">--请选择商户行业--</option>
 											<c:if test="${not empty industryList }">
 					                           	<c:forEach items="${industryList }" var="industry">
 					                           		<option id="${industry.industryCode}" value="${industry.industryCode}">${industry.industryName}</option>
 					                           	</c:forEach>
 				                 		  	</c:if>
-									</select>	
+									</select>	 --%>
 								</td>
 							</tr>
 							<tr id="mecTypeFlagType" style = "display:none">
@@ -647,7 +646,7 @@ $(function(){
 		        processData:false,
 		        async:false,
 		        success:function(info){ 
-		             $('#' + pathTarget + '').val(info.path);
+		             $('#' + pathTarget + '').val(info.imagePath);
 		        },
 		        error:function(err){
 		            console.log(err)

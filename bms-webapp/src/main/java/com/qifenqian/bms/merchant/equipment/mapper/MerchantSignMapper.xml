@@ -17,6 +17,7 @@
 			<if test="merchantName != null and merchantName != '' "> AND tci.CUST_NAME LIKE CONCAT('%',#{merchantName, jdbcType=VARCHAR},'%')</if>			
 			<if test="terminalNo != null and terminalNo != '' "> AND tms.terminal_no =#{terminalNo, jdbcType=VARCHAR}</if>
 		</where>
+		order by  tms.inst_datetime desc
 	</select>
 
 	

@@ -50,7 +50,15 @@ const Pmanage = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggreg
 const Exception = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Exception/Exception');
 const Arouter = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Aggregate/Router/Router');
 // 物料管理
-const Mmanage = () => import(/* webpackChunkName: "Aggregate" */ '@/views/Material/Manage/Manage');
+const Mmanage = () => import(/* webpackChunkName: "Material" */ '@/views/Material/Manage/Manage');
+// 财务管理
+const Fsettlement = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/Settlement/Settlement');
+const Fquery = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/Query/Index');
+const Reconcilia = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/Reconcilia/Index');
+const SourceData = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/SourceData/Index');
+const Unionpay = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/Unionpay/Index');
+const Fabnormal = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/Abnormal/Abnormal');
+const Kingdee = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/Kingdee/Index');
 
 
 // UAT 后台菜单
@@ -87,7 +95,7 @@ export const uatRouter = [
   {
     name: '物料管理',
     path: '',
-    children: [{ name: '物料管理', path: '/system/user', component: Mmanage }]
+    children: [{ name: '物料管理', path: '/material/manage', component: Mmanage }]
   },
   {
     name: '聚合支付',
@@ -115,17 +123,17 @@ export const uatRouter = [
     name: '财务管理',
     path: '',
     children: [
-      { name: '商户结算', path: '/system/user' },
-      { name: '财务查询', path: '/system/user' },
-      { name: '交广科技对账结果', path: '/system/user' },
-      { name: '渠道源数据', path: '/system/user' },
-      { name: '银联对账结果', path: '/system/user' },
-      { name: '财务异常处理', path: '/system/user' },
-      { name: '金蝶财务', path: '/system/user' },
-      { name: '中信对账结果查询', path: '/system/user' },
-      { name: '对账汇总', path: '/system/user' },
-      { name: '差错处理', path: '/system/user' },
-      { name: '对账汇总（V2）', path: '/system/user' }
+      { name: '商户结算', path: '/financial/settlement', component: Fsettlement },
+      { name: '财务查询', path: '/financial/query', component: Fquery },
+      { name: '交广科技对账结果', path: '/financial/reconcilia', component: Reconcilia },
+      { name: '渠道源数据', path: '/financial/source', component: SourceData },
+      { name: '银联对账结果', path: '/financial/unionpay', component: Unionpay },
+      { name: '财务异常处理', path: '/financial/abnormal', component: Fabnormal },
+      { name: '金蝶财务', path: '/financial/kingdee', component: Kingdee },
+      { name: '中信对账结果查询', path: '/financial/user' },
+      { name: '对账汇总', path: '/financial/user' },
+      { name: '差错处理', path: '/financial/user' },
+      { name: '对账汇总（V2）', path: '/financial/user' }
     ]
   },
   {

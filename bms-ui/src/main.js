@@ -6,7 +6,7 @@ import mixins from './tools/mixins'
 import {
   Button, Option, Select, Form, FormItem, Menu, MenuItem, Submenu, Pagination, Table, DatePicker, TableColumn,
   Input, Checkbox, CheckboxGroup, Header, Main, Aside, Container, Breadcrumb, BreadcrumbItem, Message, Radio,
-  RadioGroup, Dialog, Upload
+  RadioGroup, Dialog, Upload, Tabs, TabPane
 } from 'element-ui'
 
 import SiteIcon from './components/SiteIcon'
@@ -29,7 +29,7 @@ Message.install = function (Vue, options) {
 Vue
   .use(Button).use(Option).use(Select).use(Form).use(FormItem).use(Menu).use(MenuItem).use(Submenu).use(Pagination).use(Table).use(TableColumn)
   .use(Input).use(Checkbox).use(CheckboxGroup).use(Header).use(Main).use(Aside).use(Container).use(BreadcrumbItem).use(Breadcrumb).use(DatePicker)
-  .use(Message).use(Radio).use(RadioGroup).use(Dialog).use(Upload)
+  .use(Message).use(Radio).use(RadioGroup).use(Dialog).use(Upload).use(Tabs).use(TabPane)
 
 Vue.prototype.$ELEMENT = { size: 'mini' };
 

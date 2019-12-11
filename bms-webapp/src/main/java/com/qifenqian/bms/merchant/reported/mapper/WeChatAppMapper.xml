@@ -11,6 +11,28 @@
 		wx_area_info
 	</select>
 	
+	<select id="selectWxAreaInfo" resultType="com.qifenqian.bms.merchant.reported.bean.WeChatAppAreaInfo" parameterType="java.lang.String">
+		select t.* from 
+			wx_area_info t
+			where t.city_name 
+			like "%"#{areaName, jdbcType=VARCHAR}"%"
+			and t.area_name is null
+	</select>
+	
+	<select id="getTbSpCity" resultType="com.qifenqian.bms.merchant.reported.bean.City" parameterType="java.lang.String">
+		select t.*
+		from tb_sp_city t
+		where t.city_id = #{cityId, jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 查询商户银行账号信息表 -->
+	<select id="getMerchantBankInfo" resultType="com.qifenqian.bms.merchant.reported.bean.TdMerchantBankInfo" parameterType="java.lang.String">
+		select 
+		t.* 
+		from td_merchant_bank_info t
+		where t.cust_id = #{custId, jdbcType=VARCHAR}
+	</select>
+	
 	<select id="selTdMerchantDetailInfo" parameterType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo"  resultType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo">
 		SELECT
 			*
