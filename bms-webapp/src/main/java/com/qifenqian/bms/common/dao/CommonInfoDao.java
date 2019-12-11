@@ -88,6 +88,12 @@ public class CommonInfoDao {
 	public List<Map<String, String>> selectWeChatBankList(String bankName){
 		return commonInfoMapper.selectWeChatBankList(bankName);
 	}
+	public List<City> selAllinPayCity(String provinceId) {
+		return commonInfoMapper.selectAllinPayCity(provinceId);
+	}
+	public List<BranchBankInfo> allinPayBranchBankList(BranchBankInfo queryBean) {
+		return commonInfoMapper.allinPayBranchBankList(queryBean);
+	}
 	
 
 

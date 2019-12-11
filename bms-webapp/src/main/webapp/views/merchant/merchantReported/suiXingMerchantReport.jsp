@@ -15,10 +15,11 @@
 <script src='<c:url value="/static/js/up.js"/>'></script>
 <script src="<c:url value='/static/topayProfit/layui/layui.js'/>"></script>
 <script src="<c:url value='/static/topayProfit/layui/layui.all.js'/>"></script>
-<script src="https://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/js/bootstrap-select.min.js"></script>
+<script src="/static/js/bootstrap-select.min.js"></script>
+<script src="/static/js/bootstrap-select.js"></script>
 <link rel="stylesheet" href="<c:url value='/static/css/base.css' />" />
 <link rel="stylesheet" href="<c:url value='/static/css/home.css' />" />
-<link href="https://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/css/bootstrap-select.css" rel="stylesheet">
+<link href="/static/css/bootstrap-select.css" rel="stylesheet">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>

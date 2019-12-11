@@ -33,7 +33,7 @@
 	        $('.search-table #custName').val('');
 	        $('.search-table #email').val('');
 	        $('.search-table #channelNo').val('');
-	        $('.search-table #reportStatus').val('');
+	        $('.search-table #detailStatus').val('');
 	        $('.search-table #startModifyTime').val('');
 	        $('.search-table #endModifyTime').val('');
 	        /* $('.search-table #filingStatus').val('');
@@ -372,7 +372,7 @@
 		var loginNo = $(obj).parent().find('#loginNo_').val();
 		var outMerchantCode = $(obj).parent().find('#outMerchantCode_').val();
 		var remark = $(obj).parent().find('#remark_').val();
-		var reportStatus = $(obj).parent().find('#reportStatus_').val();
+		var detailStatus = $(obj).parent().find('#detailStatus_').val();
 		var resultMsg =  $(obj).parent().find('#resultMsg_').val();
 		if(null != resultMsg){
 			alert("进件失败原因" + resultMsg);
@@ -432,7 +432,7 @@
 		      	winChild =  window.open(url, name,params);
    	   	   	}else{
    	   	   		
-	   	   	    var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.UPDATESUNXINGREPORT%>?merchantCode="+merchantCode+"&status="+status+"&reportStatus="+reportStatus+"&patchNo="+patchNo+"&remark="+remark+"&channlCode="+channlCode; 
+	   	   	    var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.UPDATESUNXINGREPORT%>?merchantCode="+merchantCode+"&status="+status+"&detailStatus="+detailStatus+"&patchNo="+patchNo+"&remark="+remark+"&channlCode="+channlCode; 
 		     	var name="window";                        //网页名称，可为空;
 		     	var iWidth=1200;                          //弹出窗口的宽度;
 		     	var iHeight=600;                       //弹出窗口的高度;
@@ -1026,7 +1026,7 @@
 								</td>
 								<td class="td-left">报备状态：</td>
 								<td class="td-right"> 
-									<select name="reportStatus" id="reportStatus">
+									<select name="detailStatus" id="detailStatus">
 									  <option value="">请选择 </option>
 									  	  <option value="00"> 报备成功     </option>
 										  <option value="99"> 报备失败     </option>
@@ -1042,23 +1042,6 @@
 									<input type="text" name="endModifyTime" id="endModifyTime" readonly value="" onFocus="WdatePicker({skin:&#39;whyGreen&#39;,maxDate:&#39;%y-%M-%d&#39;})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> 
 								</td>
 							</tr>
-							<!-- 
-                            <tr>
-                            	
-								<td class="td-left">报备时间：</td>
-								<td class="td-right">								   
-									<input type="text" name="startModifyTime" id="startModifyTime" readonly value="" onFocus="WdatePicker({skin:&#39;whyGreen&#39;,maxDate:&#39;%y-%M-%d&#39;})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> 
-									-
-									<input type="text" name="endModifyTime" id="endModifyTime" readonly value="" onFocus="WdatePicker({skin:&#39;whyGreen&#39;,maxDate:&#39;%y-%M-%d&#39;})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> 
-								</td>
-                                <td class="td-left">报备成功时间：</td>
-								<td class="td-right">								   
-									<input type="text" name="startCreateTime" id="startCreateTime" readonly value="" onFocus="WdatePicker({skin:&#39;whyGreen&#39;,maxDate:&#39;%y-%M-%d&#39;})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> 
-									-
-									<input type="text" name="endCreateTime" id="endCreateTime" readonly value="" onFocus="WdatePicker({skin:&#39;whyGreen&#39;,maxDate:&#39;%y-%M-%d&#39;})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> 
-								</td>
-							</tr>
-							-->
 							<tr>
 								<td colspan="6" align="center">
 									<span class="input-group-btn">
@@ -1082,17 +1065,17 @@
 								<table id="sample-table-2" class="list-table">
 									<thead>
 										<tr>
-											<th width="8%">商户名称</th>
+											<th width="7%">商户名称</th>
 											<th width="6%">商户简称</th>
-											<th width="10%">商户编号</th>
-											<th width="8%">邮箱账号</th>
+											<th width="7%">商户编号</th>
+											<th width="6%">邮箱账号</th>
 											<th width="5%">报备渠道</th>
-											<th width="10%">渠道商户号</th>
-											<th width="10%">微信申请单编号</th>
-											<th width="7%">商户报备状态</th>
+											<th width="8%">渠道商户号</th>
+											<th width="8%">微信申请单编号</th>
+											<th width="6%">商户报备状态</th>
 											<th width="14%">返回信息</th>
-											<th width="10%">报备时间</th>
-											<th width="14%">操作</th>
+											<th width="9%">报备时间</th>
+											<th width="20%">操作</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -1140,42 +1123,53 @@
 										    <td>${reported.outMerchantCode}</td>
 										    <td>${reported.wxApplyNo}</td>
 										    <td>
-											    <c:if test="${reported.reportStatus == '00'}">
+											    <c:if test="${reported.detailStatus == '00'}">
 											    	提交报备成功
 											    </c:if>
-											    <c:if test="${reported.reportStatus == '10'}">
-											    	产品报备成功
-											    </c:if>
-											    <c:if test="${reported.reportStatus == '99'}">
+											    <c:if test="${reported.detailStatus == '99'}">
 											    	报备失败
 											    </c:if>
-											    <c:if test="${reported.reportStatus == '98'}">
-											    	产品报备异常
-											    </c:if>
-											    <c:if test="${reported.reportStatus == '0'}">
+											    <c:if test="${reported.detailStatus == '0'}">
 											    	待审核
 											    </c:if>
-											    <c:if test="${reported.reportStatus == '1'}">
+											    <c:if test="${reported.detailStatus == '1'}">
 											    	审核通过
 											    </c:if>
-											    <c:if test="${reported.reportStatus == '2'}">
+											    <c:if test="${reported.detailStatus == '2'}">
 											    	审核失败
 											    </c:if>
-											    <c:if test="${reported.reportStatus == '3'}">
-											    	未认证
+											    <c:if test="${reported.detailStatus == '20'}">
+											    	微信实名认证申请中
 											    </c:if>
-											    <c:if test="${reported.reportStatus == '4'}">
-											    	审核成功但未同意协议
+											    <c:if test="${reported.detailStatus == '21'}">
+											    	微信实名认证成功
 											    </c:if>
-											    <c:if test="${reported.reportStatus == '9'}">
-											    	子商户被删除
+											    <c:if test="${reported.detailStatus == '22'}">
+											    	微信实名认证失败
 											    </c:if>
-											    <c:if test="${reported.reportStatus == '15'}">
-											    	资料信息已提交
+											    <c:if test="${reported.detailStatus == '26'}">
+											    	微信子商户授权查询申请
+											    </c:if>
+											    <c:if test="${reported.detailStatus == '27'}">
+											    	微信子商户授权成功
+											    </c:if>
+											    <c:if test="${reported.detailStatus == '28'}">
+											    	微信子商户授权失败
 											    </c:if>
 										    </td>
 										    <td>
-										   		${reported.resultMsg}
+										    	<c:if test="${reported.detailStatus == '00'}">
+											    	 ${reported.resultMsg}
+											    </c:if>
+											    <c:if test="${reported.detailStatus == '99'}">
+											    	 ${reported.resultMsg}
+											    </c:if>
+											    <c:if test="${reported.detailStatus == '0'}">
+											    	 ${reported.resultMsg}
+											    </c:if>
+											    <c:if test="${reported.detailStatus == '2'}">
+											    	 ${reported.resultMsg}
+											    </c:if>
 										    </td>
 										    <td>
 										   		${reported.reportTime}
@@ -1188,38 +1182,38 @@
 											    <input type="hidden" id="bestMerchantType_" value="${reported.bestMerchantType }">
 											    <input type="hidden" id="loginNo_" value="${reported.loginNo }">
 											    <input type="hidden" id="outMerchantCode_" value="${reported.outMerchantCode }">
-	                                            <input type="hidden" id="reportStatus_" value="${reported.reportStatus }">
+	                                            <input type="hidden" id="detailStatus_" value="${reported.detailStatus }">
 	                                            <input type="hidden" id="remark_" value="${reported.remark }">
 	                                            <input type="hidden" id="resultMsg_" value="${reported.resultMsg }">
 	                                            <input type="hidden" id="wxApplyNo_" value="${reported.wxApplyNo }">
 	                                            <input type="hidden" id="custId_" value="${reported.custId }">
 	                                            <input type="hidden" id="wxChildNo_" value="${reported.wxChildNo }">
-	                                            <button type="button"  class="btn btn-primary btn-xs" onclick="getInfo(this);">查看</button>
+	                                            <button type="button"  class="btn btn-primary btn-xs" onclick="getInfo(this);">查看资料</button>
 	                                            
-	                                            <c:if test="${reported.reportStatus =='0' ||reported.reportStatus =='00' }">
+	                                            <c:if test="${reported.detailStatus =='0' ||reported.detailStatus =='00' }">
 	                                            	<button type="button"  class="btn btn-primary btn-xs" onclick="getStatus(this);">刷新状态</button>
 	                                            </c:if>
-	                                            <c:if test="${reported.reportStatus !='0' && reported.reportStatus !='00'  }">
+	                                            <c:if test="${reported.detailStatus !='0' && reported.detailStatus !='00'  }">
 	                                            	<button type="button"  class="btn btn-primary btn-xs" disabled>刷新状态</button>
 	                                            </c:if>
 	                                            
-	                                            <c:if test="${reported.reportStatus =='99' || reported.detailStatus =='E' || reported.detailStatus =='F'}">
+	                                            <c:if test="${reported.detailStatus =='99' || reported.reportStatus =='E' || reported.reportStatus =='F'}">
 	                                            	<button type="button"  class="btn btn-primary btn-xs" onclick ="getUpdate(this);">报备更新</button>
                                             	</c:if>
-                                            	<c:if test="${reported.reportStatus !='99' && reported.detailStatus !='E' && reported.detailStatus !='F'}">
+                                            	<c:if test="${reported.detailStatus !='99' && reported.reportStatus !='E' && reported.reportStatus !='F' }">
 	                                            	<button type="button"  class="btn btn-primary btn-xs" disabled>报备更新</button>
                                             	</c:if>
                                             	<c:if test="${reported.channelNo =='WX'}">
                                             	<button type="button"  class="btn btn-primary btn-xs" onclick ="getWeChatUpdate(this);">微信升级</button>
 										    	</c:if>
-										    	<c:if test="${reported.reportStatus =='1' && reported.outMerchantCode != null &&  reported.channelNo =='SUIXING_PAY'}">
+										    	<c:if test="${reported.detailStatus =='1' && reported.outMerchantCode != null &&  reported.channelNo =='SUIXING_PAY'}">
 	                                            	<button type="button"  class="btn btn-primary btn-xs"  onclick ="getVerified(this);">实名认证</button>
 	                                            </c:if>
-	                                            <c:if test="${reported.reportStatus =='20' && reported.outMerchantCode != null &&  reported.channelNo =='SUIXING_PAY'}">
+	                                            <c:if test="${reported.detailStatus =='20' && reported.outMerchantCode != null &&  reported.channelNo =='SUIXING_PAY'}">
 										    		<button type="button"  class="btn btn-primary btn-xs"  onclick ="getVerifiedQuery(this);">认证结果</button>
 	                                            	<button type="button"  class="btn btn-primary btn-xs"  onclick ="getVerifiedCancel(this);">申请撤销</button>	                                         	
 										    	</c:if>
-										    	<c:if test="${reported.reportStatus =='21' && reported.outMerchantCode != null &&  reported.channelNo =='SUIXING_PAY'}">
+										    	<c:if test="${reported.detailStatus =='21' && reported.outMerchantCode != null &&  reported.channelNo =='SUIXING_PAY'}">
 										    		<button type="button"  class="btn btn-primary btn-xs"  onclick ="getVerifiedAuthorize(this);">子商户授权</button>
 										    	</c:if>
 										    </td>
