@@ -65,6 +65,10 @@ const ErrorHand = () => import(/* webpackChunkName: "Financial" */ '@/views/Fina
 const ReSummaryV2 = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/ReSummaryV2/ReSummary');
 
 
+// 短信管理
+const Smessage = () => import(/* webpackChunkName: "Financial" */ '@/views/SMS/Message/Message');
+
+
 
 // UAT 后台菜单
 export const uatRouter = [
@@ -188,8 +192,8 @@ export const uatRouter = [
   },
   {
     name: '短信管理',
-    path: '/system/user',
-    children: [{ name: '短信管列表', path: '/system/user' }]
+    path: '',
+    children: [{ name: '短信管列表', path: '/sms/message', component: Smessage }]
   },
   {
     name: '实名认证', path: '/system/user',
