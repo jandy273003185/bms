@@ -33,17 +33,21 @@
 
       <template slot="tableInner">
         <el-table :data="tableData" border>
-          <el-table-column prop='name1' label='清算编号'></el-table-column>
-          <el-table-column prop='name2' label='业务类型'></el-table-column>
-          <el-table-column prop='name3' label='业务编号'></el-table-column>
-          <el-table-column prop='name4' label='业务日期'></el-table-column>
-          <el-table-column prop='name5' label='是否期初单据'></el-table-column>
-          <el-table-column prop='name6' label='写入日期'></el-table-column>
-          <el-table-column prop='name7' label='交易提交状态'></el-table-column>
-          <el-table-column prop='name8' label='返回信息'></el-table-column>
-          <el-table-column prop='name9' label='对账状态'></el-table-column>
-          <el-table-column prop='name10' label='银行处理状态'></el-table-column>
-          <el-table-column fixed="right" label="操作" width="60">
+          <!-- 编号 账号 科目编号 账户名称 币别 所属银行(总行) 所属开户行联行号 状态 备注 初始写入人 初始写入时间 最后更改人 最后更改时间 -->
+          <el-table-column width="55" prop='name1' label='编号'></el-table-column>
+          <el-table-column min-width="120" prop='name2' label='账号'></el-table-column>
+          <el-table-column width="80" prop='name3' label='科目编号'></el-table-column>
+          <el-table-column min-width="140" prop='name4' label='账户名称'></el-table-column>
+          <el-table-column min-width="60" prop='name5' label='币种'></el-table-column>
+          <el-table-column width="110" prop='name6' label='所属银行(总行)'></el-table-column>
+          <el-table-column min-width="130" prop='name7' label='所属开户行联行号'></el-table-column>
+          <el-table-column width="70" prop='name8' label='状态'></el-table-column>
+          <el-table-column min-width="80" prop='name9' label='备注'></el-table-column>
+          <el-table-column min-width="80" prop='name10' label='初始写入人'></el-table-column>
+          <el-table-column min-width="100" prop='name11' label='初始写入时间'></el-table-column>
+          <el-table-column min-width="80" prop='name12' label='最后更改人'></el-table-column>
+          <el-table-column min-width="110" prop='name13' label='最后更改时间'></el-table-column>
+          <el-table-column min-width="80" fixed="right" label="操作" width="60">
             <template slot-scope="scope">
               <el-button type="text" size="mini" @click="editorClick(scope.row)">修改</el-button>
             </template>
@@ -129,16 +133,19 @@
 
 <script>
 const testData = {
-  name1: '2042018091917254333900076681',
-  name2: '商户结算',
-  name3: '2018091910183906124400000390',
-  name4: '2018-09-19',
-  name5: 'false',
-  name6: '2018-09-19',
-  name7: '',
-  name8: '',
-  name9: '初始化',
-  name10: '银行交易成功'
+  name1: '1',
+  name2: '762766323947',
+  name3: '10001',
+  name4: '中国银行深圳宝安支行营业部(一般户)',
+  name5: 'CNY',
+  name6: '中国银行',
+  name7: '104584001151',
+  name8: 'VALID',
+  name9: '',
+  name10: '管理员',
+  name11: '2016-04-18 18:18:33',
+  name12: '管理员',
+  name13: '2016-04-18 18:18:33'
 };
 
 export default {
