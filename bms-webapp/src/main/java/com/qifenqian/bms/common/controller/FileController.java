@@ -49,8 +49,8 @@ public class FileController {
 	@Autowired
 	private MerchantEnterService merchantEnterService;
 	
-	//private static final String PRE_PATH = "/data/nfsshare/upload/picture";
-	private static final String PRE_PATH = "D:/imageData";
+	private static final String PRE_PATH = "/data/nfsshare/upload/picture";
+	//private static final String PRE_PATH = "D:/imageData";
 	private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 	
 	

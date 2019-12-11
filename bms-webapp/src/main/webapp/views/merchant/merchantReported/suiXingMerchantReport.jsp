@@ -15,10 +15,11 @@
 <script src='<c:url value="/static/js/up.js"/>'></script>
 <script src="<c:url value='/static/topayProfit/layui/layui.js'/>"></script>
 <script src="<c:url value='/static/topayProfit/layui/layui.all.js'/>"></script>
-<script src="https://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/js/bootstrap-select.min.js"></script>
+<script src="/static/js/bootstrap-select.min.js"></script>
+<script src="/static/js/bootstrap-select.js"></script>
 <link rel="stylesheet" href="<c:url value='/static/css/base.css' />" />
 <link rel="stylesheet" href="<c:url value='/static/css/home.css' />" />
-<link href="https://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/css/bootstrap-select.css" rel="stylesheet">
+<link href="/static/css/bootstrap-select.css" rel="stylesheet">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -30,6 +31,14 @@
 	<link rel="stylesheet" href="<c:url value='/static/topayProfit/layui/css/layui.css' />" />	
 	<style type="text/css">
 		table tr td{word-wrap:break-word;word-break:break-all;}
+		.btn, .btn-default, .btn:focus, .btn-default:focus {
+		background-color:#fff !important;
+    	border: 1px solid #ccc !important;
+    	color: #464444 !important;
+    	font-family: inherit !important;
+    	text-shadow: none !important;
+    	font-weight:300 !important;
+    }
 	</style>
 </head>
 <script type="text/javascript">
@@ -437,7 +446,7 @@ $(function(){
 							<tr>
 								<td class="td-left">开户银行：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-									<select name="suiXinBank" id="suiXinBank" style="width-90;" onchange="getbranchBank();">
+								<select  name="suiXinBank" id="suiXinBank"  class="selectpicker show-tick form-control" data-width="91%" data-live-search="true" onchange="getbranchBank();">
 										<option value="">--请选择--</option>
 										<c:forEach items="<%=SuixinBankType.values()%>" var="status">
 											<option value="${status.code}" <c:if test="${status == queryBean.code}">selected</c:if>>
@@ -454,9 +463,8 @@ $(function(){
 	                                  <div class="layui-input-inline layui-form" style="width:94%">
 									        <select   id="interBankName"  name="interBankName" lay-verify="required" lay-search="" lay-filter="interBankName">
 									          <option value="">直接选择或搜索选择</option>        
-									       
 									        </select>
-									      </div>
+									  </div>
 	                               	<label id="interBankNameLabel" class="label-tips"></label>
 								</td>
 							</tr>

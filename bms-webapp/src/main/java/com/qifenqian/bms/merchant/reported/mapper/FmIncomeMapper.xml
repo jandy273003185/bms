@@ -11,7 +11,7 @@
 			t.out_merchant_code,
 			t.file_status,
 			t.remark,
-			t.report_status,
+			t.report_status as detail_status,
 			t.bestMerchantType,
 			t.result_msg,
 			t.loginNo,
@@ -22,7 +22,7 @@
 			f.cust_name,
 			f.short_name,
 			f.cust_id,
-			r.report_status as detail_status,
+			r.report_status,
 			f.merchant_email as email,
 			r.channel_no,
 			DATE_FORMAT(t.modify_time,'%Y-%m-%d %H:%i:%s') modify_time,
@@ -166,6 +166,7 @@
 		INNER JOIN td_login_user_info t ON c.cust_id = t.cust_id
 		WHERE
 			c.MERCHANT_CODE = #{merchantCode,jdbcType = VARCHAR} AND c.STATE = '00' AND t.STATE = '00'
+		LIMIT 1
 	</select>
 	
 	

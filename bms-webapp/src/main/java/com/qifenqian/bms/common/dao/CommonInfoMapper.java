@@ -38,5 +38,9 @@ public interface CommonInfoMapper {
 	public List<City> getWxAreaByCityId(@Param("cityName") String cityName);
 	
 	public List<Map<String, String>> selectWeChatBankList(String bankName);
+
+	public List<City> selectAllinPayCity(String provinceId);
+
+	public List<BranchBankInfo> allinPayBranchBankList(BranchBankInfo queryBean);
 	
 }

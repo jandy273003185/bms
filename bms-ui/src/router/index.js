@@ -59,6 +59,15 @@ const SourceData = () => import(/* webpackChunkName: "Financial" */ '@/views/Fin
 const Unionpay = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/Unionpay/Index');
 const Fabnormal = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/Abnormal/Abnormal');
 const Kingdee = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/Kingdee/Index');
+const Citic = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/Citic/Index');
+const ReSummary = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/ReSummary/ReSummary');
+const ErrorHand = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/ErrorHand/ErrorHand');
+const ReSummaryV2 = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/ReSummaryV2/ReSummary');
+
+
+// 短信管理
+const Smessage = () => import(/* webpackChunkName: "Financial" */ '@/views/SMS/Message/Message');
+
 
 
 // UAT 后台菜单
@@ -130,10 +139,10 @@ export const uatRouter = [
       { name: '银联对账结果', path: '/financial/unionpay', component: Unionpay },
       { name: '财务异常处理', path: '/financial/abnormal', component: Fabnormal },
       { name: '金蝶财务', path: '/financial/kingdee', component: Kingdee },
-      { name: '中信对账结果查询', path: '/financial/user' },
-      { name: '对账汇总', path: '/financial/user' },
-      { name: '差错处理', path: '/financial/user' },
-      { name: '对账汇总（V2）', path: '/financial/user' }
+      { name: '中信对账结果查询', path: '/financial/citic', component: Citic },
+      { name: '对账汇总', path: '/financial/summary', component: ReSummary },
+      { name: '差错处理', path: '/financial/error', component: ErrorHand },
+      { name: '对账汇总（V2）', path: '/financial/summaryv2', component: ReSummaryV2 }
     ]
   },
   {
@@ -183,8 +192,8 @@ export const uatRouter = [
   },
   {
     name: '短信管理',
-    path: '/system/user',
-    children: [{ name: '短信管列表', path: '/system/user' }]
+    path: '',
+    children: [{ name: '短信管列表', path: '/sms/message', component: Smessage }]
   },
   {
     name: '实名认证', path: '/system/user',

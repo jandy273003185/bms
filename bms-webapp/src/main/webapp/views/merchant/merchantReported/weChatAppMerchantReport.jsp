@@ -11,6 +11,8 @@
 <script src='<c:url value="/static/js/mobileBUGFix.mini.js"/>'></script>
 <script src='<c:url value="/static/js/uploadCompress.js"/>'></script>
 <script src='<c:url value="/static/js/up.js"/>'></script>
+<script src="/static/js/bootstrap-select.min.js"></script>
+<script src="/static/js/bootstrap-select.js"></script>
 <link rel="stylesheet" href="<c:url value='/static/css/base.css' />" />
 <link rel="stylesheet" href="<c:url value='/static/css/home.css' />" />
 
@@ -22,8 +24,16 @@
 	<meta name="keywords" content="七分钱后台管理系统" />
 	<meta name="description" content="七分钱后台管理" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href="/static/css/bootstrap-select.css" rel="stylesheet">
 	<style type="text/css">
 		table tr td{word-wrap:break-word;word-break:break-all;}
+		.btn, .btn-default, .btn:focus, .btn-default:focus {
+		background-color:#fff !important;
+    	border: 1px solid #ccc !important;
+    	color: #464444 !important;
+    	font-family: inherit !important;
+    	text-shadow: none !important;
+    	font-weight:300 !important;
 	</style>
 </head>
 <script type="text/javascript">
@@ -345,14 +355,16 @@ $(function(){
 							<tr>
 								<td class="td-left">开户银行：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-									<select name="bank" id="bank" style="width-90;" data-validation="notnull" data-errMsg="开户银行不能为空" >
-										<option value="">--请选择--</option>
-										<c:forEach items="<%=WeChatBankType.values()%>" var="status">
-											<option value="${status.name}" <c:if test="${status eq merchantBankInfo.accountBank}">selected</c:if>>
-												${status.name}
-											</option>
-										</c:forEach>
-									</select>
+									
+									<select  name="bank" id="bank"  class="selectpicker show-tick form-control" data-width="91%" data-live-search="true" data-errMsg="开户银行不能为空">
+										<option value="">--请选择--</option>	
+											<c:forEach items="<%=WeChatBankType.values()%>" var="status">
+												<option value="${status.name}" <c:if test="${status eq merchantBankInfo.accountBank}">selected</c:if>>
+													${status.name}
+												</option>
+											</c:forEach>
+									</select>				
+								
 								</td>
 	                            <td class="td-left">开户支行<span style="color:red;">(必填)</span></td>
 	                            <td class="td-right">

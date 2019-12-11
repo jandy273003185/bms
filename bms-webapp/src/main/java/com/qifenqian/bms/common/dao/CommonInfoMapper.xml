@@ -146,4 +146,32 @@
 		FROM tb_bank_info t
 		where t.BANK_NAME like "%"#{bankName,jdbcType = VARCHAR}"%"
 	</select>
+	
+	<select id="selectAllinPayCity" parameterType="java.lang.String" resultType="com.qifenqian.bms.basemanager.city.bean.City" >
+		SELECT 
+			a.area_code areaId,
+			a.area_name areaName 
+		FROM 
+			td_allinpay_area_info a
+		WHERE a.province_code = #{provinceId,jdbcType = VARCHAR}
+	</select>
+	
+	
+	<select id="allinPayBranchBankList" parameterType="com.qifenqian.bms.common.bean.BranchBankInfo" resultType="com.qifenqian.bms.common.bean.BranchBankInfo" >
+		SELECT
+			a.bank_name,
+			a.net_bank_code	branchBankCode
+		FROM
+			td_allinpay_net_bank_info  a
+		WHERE
+			a.bank_code = #{bankCode,jdbcType = VARCHAR}
+		AND a.area_name = (
+			SELECT 
+				i.area_name
+			FROM 
+				td_allinpay_area_info i
+			WHERE 
+				i.area_code =#{cityCode,jdbcType = VARCHAR}
+			)
+	</select>
 </mapper>

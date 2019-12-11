@@ -9,40 +9,40 @@
 
 <script>
 import { sstorage } from '@/tools/utils';
-import Total from './Total';
-import Variation from './Variation';
-import Commercial from './Commercial';
-import User from './User';
-import Client from './Client';
-import Merchant from './Merchant';
-import Revocation from './Revocation';
+import Tab1 from './Tab1';
+import Tab2 from './Tab2';
+import Tab3 from './Tab3';
+import Tab4 from './Tab4';
+import Tab5 from './Tab5';
+import Tab6 from './Tab6';
+import Tab7 from './Tab7';
+
 export default {
   components: {
-    Total,
-    Variation,
-    Commercial,
-    User,
-    Client,
-    Merchant,
-    Revocation
+    Tab1,
+    Tab2,
+    Tab3,
+    Tab4,
+    Tab5,
+    Tab6,
+    Tab7
   },
   data() {
     return {
       tabs: [
-        { label: '汇总余额', cpt: 'Total' },
-        { label: '余额变动', cpt: 'Variation' },
-        { label: '商户余额', cpt: 'Commercial' },
-        { label: '用户余额', cpt: 'User' },
-        { label: '客戶提现结算', cpt: 'Client' },
-        { label: '商户提现结算', cpt: 'Merchant' },
-        { label: '客户提现撤销列表', cpt: 'Revocation' }
+        { label: '汇总余额', cpt: 'Tab1' },
+        { label: '余额变动', cpt: 'Tab2' },
+        { label: '商户余额', cpt: 'Tab3' },
+        { label: '用户余额', cpt: 'Tab4' },
+        { label: '客戶提现结算', cpt: 'Tab5' },
+        { label: '商户提现结算', cpt: 'Tab6' },
+        { label: '客户提现撤销列表', cpt: 'Tab7' }
       ],
       tabsIndex: 'Total'
     };
   },
   created() {
-    const index = sessionStorage.getItem('queryCurrentIndex') || 'Total';
-    this.tabsIndex = index;
+    this.initTabIndex();
   },
   beforeDestroy() {
     sstorage.set('queryCurrentIndex', '');

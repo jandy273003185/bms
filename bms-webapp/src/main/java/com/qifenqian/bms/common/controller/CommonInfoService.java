@@ -86,6 +86,8 @@ public class CommonInfoService {
 			cityList = commonInfoDao.selSuiXingCity(provinceId);
 		}else if("WX".equals(channelCode)) {
 			cityList = commonInfoDao.selWxChatAppCity(provinceId);
+		}else if("ALLIN_PAY".equals(channelCode)) {
+			cityList = commonInfoDao.selAllinPayCity(provinceId);
 		}
 		return cityList;
 		
@@ -124,6 +126,8 @@ public class CommonInfoService {
 			}
 		}else if("SUIXING_PAY".equals(channelCode)) {
 			branchBankList = commonInfoDao.suiXingBranchBankList(queryBean);
+		}else if("ALLIN_PAY".equals(channelCode)) {
+			branchBankList = commonInfoDao.allinPayBranchBankList(queryBean);
 		}
 		return branchBankList;
 	}
