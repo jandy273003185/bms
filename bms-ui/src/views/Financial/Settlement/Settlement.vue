@@ -74,7 +74,7 @@
       </template>
 
       <template slot="tableInner">
-        <el-table :data="tableData" border>
+        <el-table :data="tableData" border @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="55"></el-table-column>
           <el-table-column v-for="(item,index) in tableForData" :key="index" :prop='index' :label='item.label' :width="item.width"></el-table-column>
           <el-table-column fixed="right" label="操作" width="120">
@@ -207,6 +207,7 @@ export default {
       deleteDisplay: false, //任务删除
       lookDisplay: false,
       tableData: [] || new Array(5).fill(testData),
+      multipleSelection: [],
       paginationOps: {
         pageSizes: [5, 10, 15, 20],
         total: 100
@@ -295,6 +296,11 @@ export default {
     insertItem() {
       // 新增
       this.addDisplay = true;
+    },
+    handleSelectionChange(val) {
+      console.log(val, 'val');
+      // 选中的项
+      this.multipleSelection = val;
     }
   }
 };
