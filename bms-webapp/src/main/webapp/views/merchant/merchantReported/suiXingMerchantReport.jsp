@@ -31,6 +31,14 @@
 	<link rel="stylesheet" href="<c:url value='/static/topayProfit/layui/css/layui.css' />" />	
 	<style type="text/css">
 		table tr td{word-wrap:break-word;word-break:break-all;}
+		.btn, .btn-default, .btn:focus, .btn-default:focus {
+		background-color:#fff !important;
+    	border: 1px solid #ccc !important;
+    	color: #464444 !important;
+    	font-family: inherit !important;
+    	text-shadow: none !important;
+    	font-weight:300 !important;
+    }
 	</style>
 </head>
 <script type="text/javascript">
@@ -438,7 +446,7 @@ $(function(){
 							<tr>
 								<td class="td-left">开户银行：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-									<select name="suiXinBank" id="suiXinBank" style="width-90;" onchange="getbranchBank();">
+								<select  name="suiXinBank" id="suiXinBank"  class="selectpicker show-tick form-control" data-width="91%" data-live-search="true" onchange="getbranchBank();">
 										<option value="">--请选择--</option>
 										<c:forEach items="<%=SuixinBankType.values()%>" var="status">
 											<option value="${status.code}" <c:if test="${status == queryBean.code}">selected</c:if>>
@@ -455,9 +463,8 @@ $(function(){
 	                                  <div class="layui-input-inline layui-form" style="width:94%">
 									        <select   id="interBankName"  name="interBankName" lay-verify="required" lay-search="" lay-filter="interBankName">
 									          <option value="">直接选择或搜索选择</option>        
-									       
 									        </select>
-									      </div>
+									  </div>
 	                               	<label id="interBankNameLabel" class="label-tips"></label>
 								</td>
 							</tr>
