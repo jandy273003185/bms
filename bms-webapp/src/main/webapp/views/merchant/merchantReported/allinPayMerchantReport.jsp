@@ -436,6 +436,13 @@
 									
 									<label class="label-tips" id="expanduserLab"></label>
 								</td>
+								<td class="td-left">是否电子协议：</td>
+								<td class="td-right">
+									<select  name="agreeType" id="agreeType"  class="width-90" >
+										<option value="2">--纸质协议--</option>
+										<option value="1">--电子协议--</option>
+									</select>
+								</td>
 							</tr>
 							<tr>
 								<td class="td-left">线上线下业务场景：</td>
@@ -794,7 +801,7 @@
     				$("#bankCity").html("");
            			for ( var area in cityList) {
            				$("#bankCity").append(
-           						"<option value='"+ cityList[area].areaId +"'>"
+           						"<option value='"+ cityList[area].areaCode +"'>"
            								+ cityList[area].areaName + "</option>"); 
            			}
     			}else{
@@ -825,7 +832,7 @@
            			}
     			}
     			else{
-    				alert("银行和开户城市不能为空");
+    				//alert("银行和开户城市不能为空");
     			}
     		},'json'
     		);	
@@ -846,7 +853,7 @@
     				$("#merchantCity").html("");
            			for ( var area in cityList) {
            				$("#merchantCity").append(
-           						"<option value='"+ cityList[area].areaId +"'>"
+           						"<option value='"+ cityList[area].areaCode +"'>"
            								+ cityList[area].areaName + "</option>"); 
            			}
     			}else{
@@ -903,18 +910,8 @@
 			var contactPhone = $("#contactPhone").val();
 			//商户地址省
    			var merchantProvince = $("#merchantProvince").val();
-   			if(merchantProvince.length<7){
-      			for(var i=0;i<(7-merchantProvince.length);i++){
-      				merchantProvince ="0" + merchantProvince;
-      			}
-      		}
    			//商户地址市
    			var merchantCity = $("#merchantCity").val();
-   			if(merchantCity.length<7){
-      			for(var i=0;i<(7-merchantCity.length);i++){
-      				merchantCity ="0" + merchantCity;
-      			}
-      		}
    			//商户详细地址
    			var cprRegAddr = $("#cprRegAddr").val();
    			//营业执照名称
@@ -927,6 +924,8 @@
    			var businessLicense = $("#businessLicense").val(); 
 			//拓展人
    			var expanduser = $("#expanduser").val(); 
+			//是否电子协议
+			var agreeType = $("#agreeType").val(); 
    			//线上线下业务场景
 			var offlag = $("#offlag").val();
 			//合同有效日期
@@ -959,11 +958,6 @@
    			var bankCity = $("#bankCity").val();
    			//开户银行
    			var branchBank = $("#branchBank").val();
-   			if(branchBank.length<5){
-      			for(var i=0;i<(5-branchBank.length);i++){
-      				branchBank ="0" + branchBank;
-      			}
-      		}
    			//开户支行号
    			var interBankCode = $("#interBankCode").val();
    			//开户支行名称
@@ -1010,10 +1004,10 @@
    	   	    		var prodInfo={
    	   	    				pid 	   : pid,
    	   	    				mtrxcode   : mtrxcode,
-   	   	    				feerate    : $('#' + rateType).val()/* ,
+   	   	    				feerate    : $('#' + rateType).val(),
    	   	    				creditrate : $('#' + rateType + '1').val(),
    	   	    				lowlimit   : $('#' + rateType + '2').val(),
-   	   	    				toplimit   : $('#' + rateType + '3').val() */
+   	   	    				toplimit   : $('#' + rateType + '3').val()
    	   	    			}
    	   	    		prodInfoList.push(prodInfo);
    	   	    		
@@ -1062,6 +1056,7 @@
 	  	   						"businessTerm"           : businessTerm,
 	  	   						"businessLicense"        : businessLicense,
 	  	   						"expanduser"             : expanduser,
+	  	   						"agreeType"              : agreeType,
 	  	   						"offlag"                 : offlag,
 	  	   						"contractDate"           : contractDate,
 	  	   						"representativeName"     : representativeName,
