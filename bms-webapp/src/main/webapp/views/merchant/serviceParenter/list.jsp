@@ -88,14 +88,14 @@
 									</td> --%>
 								</tr>
 								<tr>
-									
+									<%-- 
 									<td class="td-left" >联系人：</td>
 									<td class="td-right" > 
 										<span class="input-icon">
 											<input type="text"  name="agentName" id="agentName"  value="${queryBean.agentName }">
 											<i class="icon-leaf blue"></i>
 										</span>
-									</td>
+									</td> --%>
 								</tr>
 								<tr>
 									<td colspan="6" align="center">
