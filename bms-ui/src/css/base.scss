@@ -63,6 +63,7 @@ legend {
 body {
   font-size: 12px;
   line-height: 1.5;
+  min-width: 1000px;
   // font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, PingFang SC, Microsoft YaHei, Arial, sans-serif;
 }
 
@@ -236,7 +237,7 @@ video {
 .dialog-look-content {
   width: 500px;
   min-height: 300px;
-  margin: 0 auto;
+  margin: 0 auto 0 auto;
   font-size: 14px;
   color: #777;
   padding: 10px;
@@ -263,8 +264,12 @@ video {
   }
 }
 
-.el-input.is-disabled .el-input__inner {
-  cursor: pointer !important;
+.el-input.is-disabled {
+
+  .el-input__icon,
+  .el-input__inner {
+    cursor: pointer !important;
+  }
 }
 
 .el-textarea.is-disabled .el-textarea__inner {
@@ -275,6 +280,11 @@ video {
   border-left: 0 !important;
 }
 
-.el-dialog__body {
-  padding-bottom: 0 !important;
+.el-table th,
+.el-table td {
+  text-align: center !important;
 }
+
+// .el-dialog__body {
+//   padding-bottom: 0 !important;
+// }
