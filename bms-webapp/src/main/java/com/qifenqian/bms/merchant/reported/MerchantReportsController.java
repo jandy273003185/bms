@@ -527,7 +527,7 @@ public class MerchantReportsController {
 	public String getMerchantStatus(HttpServletRequest request,HttpServletResponse response,TdMerchantDetailInfo detail) {
 		JSONObject object = new JSONObject();
 		Map<String, Object> req = new HashMap<String, Object>();
-		
+		detail = fmIncomeMapperDao.selMerchantDetailInfo(detail);
 		String merchantCode = detail.getMerchantCode();
 		TdCustInfo custInfo = new TdCustInfo();
 		if(null != merchantCode){

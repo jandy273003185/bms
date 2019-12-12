@@ -50,6 +50,16 @@ public class AllinPayMapperDao {
 		allinPayMapper.insertTdMerchantProductInfoAllinPay(prod);
 		
 	}
+
+	public void updateTdMerchantDetailInfoAllinPay(AllinPayBean cr) {
+		allinPayMapper.updateTdMerchantDetailInfoAllinPay(cr);
+		
+	}
+
+	public void updateTdMerchantProductInfoAllinPay(AllinPayProductInfo prod) {
+		allinPayMapper.updateTdMerchantProductInfoAllinPay(prod);
+		
+	}
 	
 	
 }

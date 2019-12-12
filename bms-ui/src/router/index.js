@@ -63,10 +63,24 @@ const Citic = () => import(/* webpackChunkName: "Financial" */ '@/views/Financia
 const ReSummary = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/ReSummary/ReSummary');
 const ErrorHand = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/ErrorHand/ErrorHand');
 const ReSummaryV2 = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/ReSummaryV2/ReSummary');
+// 码表维护
+const Holiday = () => import(/* webpackChunkName: "Financial" */ '@/views/Clock/Holiday/Holiday');
+const Poundage = () => import(/* webpackChunkName: "Financial" */ '@/views/Clock/Poundage/Poundage');
+const Bank = () => import(/* webpackChunkName: "Financial" */ '@/views/Clock/Bank/Bank');
+const Certificate = () => import(/* webpackChunkName: "Financial" */ '@/views/Clock/Certificate/Certificate');
+const City = () => import(/* webpackChunkName: "Financial" */ '@/views/Clock/City/City');
 
+
+// 客户管理
+const Audit = () => import(/* webpackChunkName: "Customer" */ '@/views/Customer/Audit/Audit');
+const Aulist = () => import(/* webpackChunkName: "Customer" */ '@/views/Customer/List/List');
+const Caccount = () => import(/* webpackChunkName: "Certification" */ '@/views/Customer/Account/Account');
 
 // 短信管理
-const Smessage = () => import(/* webpackChunkName: "Financial" */ '@/views/SMS/Message/Message');
+const Smessage = () => import(/* webpackChunkName: "SMS" */ '@/views/SMS/Message/Message');
+// 实名认证
+const Clist = () => import(/* webpackChunkName: "Certification" */ '@/views/Certification/List/List');
+const Cverify = () => import(/* webpackChunkName: "Certification" */ '@/views/Certification/Verify/Verify');
 
 
 
@@ -149,26 +163,26 @@ export const uatRouter = [
     name: '码表维护',
     path: '',
     children: [
-      { name: '节假日管理', path: '/system/user' },
-      { name: '手续费管理', path: '/system/user' },
-      { name: '银行信息管理', path: '/system/user' },
-      { name: '证件管理', path: '/system/user' },
-      { name: '城市信息管理', path: '/system/user' },
-      { name: '问题管理列表', path: '/system/user' },
-      { name: '首页广告维护', path: '/system/user' },
-      { name: '协议模板维护', path: '/system/user' },
-      { name: '数据字典', path: '/system/user' },
-      { name: '交易控制', path: '/system/user' },
-      { name: '提现控制', path: '/system/user' },
-      { name: '支行信息管理', path: '/system/user' }
+      { name: '节假日管理', path: '/clock/holiday', component: Holiday },
+      { name: '手续费管理', path: '/clock/poundage', component: Poundage },
+      { name: '银行信息管理', path: '/clock/bank', component: Bank },
+      { name: '证件管理', path: '/clock/certificate', component: Certificate },
+      { name: '城市信息管理', path: '/clock/city', component: City },
+      { name: '问题管理列表', path: '/clock/holiday', component: Holiday },
+      { name: '首页广告维护', path: '/clock/holiday', component: Holiday },
+      { name: '协议模板维护', path: '/clock/holiday', component: Holiday },
+      { name: '数据字典', path: '/clock/holiday', component: Holiday },
+      { name: '交易控制', path: '/clock/holiday', component: Holiday },
+      { name: '提现控制', path: '/clock/holiday', component: Holiday },
+      { name: '支行信息管理', path: '/clock/holiday', component: Holiday }
     ]
   },
   {
     name: '商户管理',
     path: '',
     children: [
-      { name: '商户网关维护', path: '/system/user' },
-      { name: '商户协议管理', path: '/system/user' },
+      { name: '商户网关维护', path: '/system/audit' },
+      { name: '商户协议管理', path: '/system/list' },
       { name: '费率管理', path: '/system/user' },
       { name: '商户账户管理', path: '/system/user' },
       { name: '收银员', path: '/system/user' },
@@ -183,11 +197,11 @@ export const uatRouter = [
   },
   {
     name: '客户管理',
-    path: '/system/user',
+    path: '',
     children: [
-      { name: '证件审核管理', path: '/system/user' },
-      { name: '客户管理列表', path: '/system/user' },
-      { name: '客户账户管理', path: '/system/user' }
+      { name: '证件审核管理', path: '/customer/audit', component: Audit },
+      { name: '客户管理列表', path: '/customer/list', component: Aulist },
+      { name: '客户账户管理', path: '/customer/account', component: Caccount }
     ]
   },
   {
@@ -198,8 +212,8 @@ export const uatRouter = [
   {
     name: '实名认证', path: '/system/user',
     children: [
-      { name: '实名认证文件列表', path: '/system/user' },
-      { name: '实名认证验证明细', path: '/system/user' }
+      { name: '实名认证文件列表', path: '/certification/list', component: Clist },
+      { name: '实名认证验证明细', path: '/certification/verify', component: Cverify }
     ]
   },
   {
@@ -214,38 +228,6 @@ export const uatRouter = [
       { name: '代理商协议管理', path: '/system/user' },
       { name: '代理商商户审核列表', path: '/system/user' },
       { name: '服务商注册审核(新)', path: '/system/user' }
-    ]
-  },
-  {
-    name: '聚合支付对账', path: '/system/user',
-    children: [
-      { name: '对账文件列表', path: '/system/user' },
-      { name: '对账结果', path: '/system/user' },
-      { name: '渠道对账文件下载', path: '/system/user' }
-    ]
-  },
-  {
-    name: '学生管理', path: '/system/user',
-    children: [{ name: '学生信息', path: '/system/user' }]
-  },
-  {
-    name: '代付管理', path: '/system/user',
-    children: [
-      { name: '批量代付', path: '/system/user' },
-      { name: '代付查询', path: '/system/user' },
-      { name: '代付账户管理', path: '/system/user' },
-      { name: '代付审核', path: '/system/user' },
-      { name: '开通代付审核', path: '/system/user' },
-      { name: '代付统计报表', path: '/system/user' },
-      { name: '代付记录', path: '/system/user' },
-      { name: '充值审核', path: '/system/user' },
-      { name: '代付列表', path: '/system/user' },
-      { name: '新增代付', path: '/system/user' },
-      { name: '凭证审核列表(新)', path: '/system/user' },
-      { name: '代付产品列表', path: '/system/user' },
-      { name: '代付详细列表', path: '/system/user' },
-      { name: '代付收益', path: '/system/user' },
-      { name: '商户渠道', path: '/system/user' }
     ]
   }
 ];

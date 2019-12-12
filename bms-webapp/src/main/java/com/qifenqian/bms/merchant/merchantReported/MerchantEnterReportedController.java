@@ -426,61 +426,26 @@ public class MerchantEnterReportedController {
 	@RequestMapping(MerchantEnterReportedPath.LIST)
 	public ModelAndView  reportedList(HttpServletRequest request,HttpServletResponse response,TdMerchantDetailInfo detail){
 		ModelAndView mv = new ModelAndView();
-		/***查询渠道***/
+		/***查询渠道信息***/
 		List<ChannlInfo> channlInfoList = crIncomeService.getChannlInfoList();
 		/***查询报备信息***/
 		List<TdMerchantDetailInfo> reportedList = fmIncomeService.getMerchantDetailInfoList(detail);
-		/***查询省份信息***/
-		List<Province> proviceList = fmIncomeService.getprovinceList();
-		/***查询省份信息***/
-		List<Bank> bankList = fmIncomeService.getBankList();
-		/***查询支付功能Id***/
-		List<TbFmTradeInfo> powerIdList = fmIncomeService.getPowerIdList();
-		/***查询翼支付商户行业信息***/
-		List<Industry> industryList = fmIncomeService.getIndustryList();
-		/***查询商盟支付宝产品行业信息***/
-		List<SumpayMcc> sumpayMccList = fmIncomeService.getSumpayMccList();
-		/***查询商盟微信产品行业信息***/
-		List<SumpayMcc> sumpayMccWXList = fmIncomeService.getSumpayMccWXList();
-		/***查询商盟微信产品行业信息***/
-		List<SumpayMcc> sumpayMccZFBList = fmIncomeService.getSumpayMccZFBList();
-		
-		mv.addObject("queryBean", detail);
-		String merchantCode = detail.getMerchantCode();
+		/***查询商户信息***/
 		TdCustInfo custInfo = new TdCustInfo();
-		if(null != merchantCode){
-			custInfo = fmIncomeMapperDao.getInComeInfo(merchantCode);
-		}
+		/***参数回显***/
+		mv.addObject("queryBean", detail);
 		
+		if(null != detail.getMerchantCode()){
+			custInfo = fmIncomeMapperDao.getInComeInfo(detail.getMerchantCode());
+		}
 		if(null!=reportedList && reportedList.size()>0){
 			mv.addObject("reportedList", reportedList);
 		}
 		if(null!=channlInfoList && channlInfoList.size()>0){
 			mv.addObject("infoList", channlInfoList);
 		}
-		if(null!=proviceList && proviceList.size()>0){
-			mv.addObject("provinceList", proviceList);
-		}
-		if(null!=bankList && bankList.size()>0){
-			mv.addObject("bankList", bankList);
-		}
-		if(null!=powerIdList && powerIdList.size()>0){
-			mv.addObject("powerIdList", powerIdList);
-		}
-		if(null!=industryList && industryList.size()>0){
-			mv.addObject("industryList", industryList);
-		}
 		if(null!=custInfo){
 			mv.addObject("custInfo", custInfo);
-		}
-		if(null!=sumpayMccList){
-			mv.addObject("sumpayMccList", sumpayMccList);
-		}
-		if(null!=sumpayMccWXList){
-			mv.addObject("sumpayMccWXList", sumpayMccWXList);
-		}
-		if(null!=sumpayMccZFBList){
-			mv.addObject("sumpayMccZFBList", sumpayMccZFBList);
 		}
 		return mv;
 	}	   
@@ -551,7 +516,7 @@ public class MerchantEnterReportedController {
     * 随行付更新报备
     */
 	@RequestMapping(MerchantEnterReportedPath.UPDATESUNXINGREPORT)
-	public ModelAndView  updateSuiXingMerchantReported(HttpServletRequest request,HttpServletResponse response,String merchantCode,String channlCode,String remark,String patchNo,String reportStatus,String status){
+	public ModelAndView  updateSuiXingMerchantReported(HttpServletRequest request,HttpServletResponse response,String merchantCode,String channlCode,String patchNo,String reportStatus,String status){
 		ModelAndView mv = new ModelAndView();
 		/***查询渠道***/
 		List<ChannlInfo> channlInfoList = crIncomeService.getChannlInfoList();
@@ -604,9 +569,13 @@ public class MerchantEnterReportedController {
 		if(null!=industryList && industryList.size()>0){
 			mv.addObject("industryList", industryList);
 		}
-		
+		TdMerchantDetailInfo tdMerchantDetailInfo = new TdMerchantDetailInfo();
+		tdMerchantDetailInfo.setMerchantCode(merchantCode);
+		tdMerchantDetailInfo.setPatchNo(patchNo);
+		tdMerchantDetailInfo.setChannelNo(channlCode);
+		tdMerchantDetailInfo = fmIncomeMapperDao.selMerchantDetailInfo(tdMerchantDetailInfo);
 		mv.addObject("patchNo",patchNo);
-		mv.addObject("remark",remark);
+		mv.addObject("remark",tdMerchantDetailInfo.getRemark());
 		mv.addObject("reportStatus",reportStatus);
 		mv.addObject("status",status);
 		return mv;

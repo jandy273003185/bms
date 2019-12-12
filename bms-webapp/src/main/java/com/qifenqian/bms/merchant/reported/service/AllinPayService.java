@@ -110,7 +110,7 @@ public class AllinPayService {
 			request.setExpanduser(cr.getExpanduser());
 			request.setSettidno(cr.getCertifyNo());
 			request.setPubacctinfo(cr.getAccountNo()+"#"+cr.getBankProvince()+"#"+cr.getBankCity()+"#"+cr.getBranchBank()+"#"+cr.getInterBankCode());
-			request.setAgreetype("2");
+			request.setAgreetype(cr.getAgreeType());
 			//进件成功 回调地址
 			request.setNotifyurl("https://combinedpay.qifenqian.com/allinpay/callbak.do");
 			//法人身份证正面照片
@@ -133,9 +133,16 @@ public class AllinPayService {
 				prod.setPid((String) cr.getProdInfoList().get(i).get("pid"));
 				prod.setMtrxcode((String) cr.getProdInfoList().get(i).get("mtrxcode"));
 				prod.setFeerate((String) cr.getProdInfoList().get(i).get("feerate"));
-				prod.setCreditrate((String) cr.getProdInfoList().get(i).get("creditrate"));
-				prod.setLowlimit((String) cr.getProdInfoList().get(i).get("lowlimit"));
-				prod.setToplimit((String) cr.getProdInfoList().get(i).get("toplimit"));
+				if(null != cr.getProdInfoList().get(i).get("creditrate")) {
+					prod.setCreditrate((String) cr.getProdInfoList().get(i).get("creditrate"));
+				}
+				if(null != cr.getProdInfoList().get(i).get("lowlimit")) {
+					prod.setLowlimit((String) cr.getProdInfoList().get(i).get("lowlimit"));
+				}
+				if(null != cr.getProdInfoList().get(i).get("toplimit")) {
+					prod.setToplimit((String) cr.getProdInfoList().get(i).get("toplimit"));
+				}
+				
 				list.add(prod);
 			}
 			request.setProdlist(list);
@@ -173,10 +180,12 @@ public class AllinPayService {
 				object.put("auditstatus",res.getAuditstatus());
 				object.put("merchantid",res.getMerchantid());
 				object.put("sign",res.getSign());
+				cr.setResultMsg(res.getRetmsg());
 			}else {
 				reportInfo.setReportStatus("F");
 				object.put("result","FAILURE");
 				object.put("message",res.getErrmsg());
+				cr.setResultMsg(res.getRetmsg());
 			}
 			
 			logger.debug("更新td_merchant_report和td_merchant_detail_info_allin_pay表数据：{}", JSONObject.toJSONString(reportInfo));
@@ -261,6 +270,25 @@ public class AllinPayService {
 		}
 		
 		
+		
+	}
+
+	public void updateTdMerchantInfoAllinPay(AllinPayBean cr) {
+		//修改通联报备明细表
+		allinPayMapperDao.updateTdMerchantDetailInfoAllinPay(cr);
+		//修改通联报备产品明细表
+		AllinPayProductInfo prod = new AllinPayProductInfo();
+		for(int i=0;i<cr.getProdInfoList().size();i++){
+			prod.setId(GenSN.getSN());
+			prod.setMerchantCode(cr.getMerchantCode());
+			prod.setProductId((String) cr.getProdInfoList().get(i).get("pid"));
+			prod.setMtrxCode((String) cr.getProdInfoList().get(i).get("mtrxcode"));
+			prod.setFeeRate((String) cr.getProdInfoList().get(i).get("feerate"));
+			prod.setCreditRate((String) cr.getProdInfoList().get(i).get("creditrate"));
+			prod.setLowLimit((String) cr.getProdInfoList().get(i).get("lowlimit"));
+			prod.setTopLimit((String) cr.getProdInfoList().get(i).get("toplimit"));
+			allinPayMapperDao.updateTdMerchantProductInfoAllinPay(prod);
+		}
 		
 	}
 	

@@ -25,16 +25,16 @@ public class MerchantExport implements Serializable{
 	/**
 	 * 交易密码
 	 */
-	private String tradePwd;
+//	private String tradePwd;
 	/**
 	 * 附加串
 	 */
-	private String attachStr;
+//	private String attachStr;
 	
 	/**
 	 * 错误密码次数
 	 */
-	private String wrongPwdCount;
+//	private String wrongPwdCount;
 	
 	/**
 	 * 证件类型
@@ -67,27 +67,27 @@ public class MerchantExport implements Serializable{
 	/**
 	 * 客户积分
 	 */
-	private BigDecimal custScore;
+//	private BigDecimal custScore;
 	
 	/**
 	 * 客户等级
 	 */
-	private String custLvl;
+//	private String custLvl;
 	
 	/**
 	 * 实名认证等级
 	 */
-	private String trustCertifyLvl;
+//	private String trustCertifyLvl;
 	
 	/**
 	 * 实名认证状态
 	 */
-	private String trustCertifyAuditState;
+//	private String trustCertifyAuditState;
 	
 	/**
 	 * 客户信息完整度
 	 */
-	private String custInfoLvl;
+//	private String custInfoLvl;
 	
 	/**
 	 * 地址
@@ -127,7 +127,7 @@ public class MerchantExport implements Serializable{
 	/**
 	 * 注册资本
 	 */
-	private BigDecimal regCapital;
+//	private BigDecimal regCapital;
 	
 	/**
 	 * 企业类型
@@ -137,17 +137,17 @@ public class MerchantExport implements Serializable{
 	/**
 	 * 所属行业
 	 */
-	private String industryBelong;
+//	private String industryBelong;
 	
 	/**
 	 * 年营业额
 	 */
-	private BigDecimal yearTurnover;
+//	private BigDecimal yearTurnover;
 	
 	/**
 	 * 商户网站地址
 	 */
-	private String merchantWebSite;
+//	private String merchantWebSite;
 	
 	/**
 	 * 客户审核状态
@@ -259,7 +259,7 @@ public class MerchantExport implements Serializable{
 	/**
 	 *  支付密码冻结时间
 	 */
-	private Date pwdFreezeTime;
+//	private Date pwdFreezeTime;
 	
 	
 	
@@ -283,6 +283,8 @@ public class MerchantExport implements Serializable{
 	 */
 	private String comment;
 	
+	private String aduitUserName; 
+	
 	/**
 	 * 
 	 */
@@ -296,17 +298,13 @@ public class MerchantExport implements Serializable{
 		return custName;
 	}
 
-	public String getTradePwd() {
-		return tradePwd;
-	}
-
-	public String getAttachStr() {
-		return attachStr;
-	}
-
-	public String getWrongPwdCount() {
-		return wrongPwdCount;
-	}
+	/*
+	 * public String getTradePwd() { return tradePwd; }
+	 * 
+	 * public String getAttachStr() { return attachStr; }
+	 * 
+	 * public String getWrongPwdCount() { return wrongPwdCount; }
+	 */
 
 /*	public String getCertifyType() {
 		return certifyType;
@@ -315,6 +313,14 @@ public class MerchantExport implements Serializable{
 	public String getCertifyNo() {
 		return certifyNo;
 	}*/
+
+	public String getAduitUserName() {
+		return aduitUserName;
+	}
+
+	public void setAduitUserName(String aduitUserName) {
+		this.aduitUserName = aduitUserName;
+	}
 
 	public String getCustType() {
 		return custType;
@@ -332,25 +338,17 @@ public class MerchantExport implements Serializable{
 		return merchantFlag;
 	}
 
-	public BigDecimal getCustScore() {
-		return custScore;
-	}
-
-	public String getCustLvl() {
-		return custLvl;
-	}
-
-	public String getTrustCertifyLvl() {
-		return trustCertifyLvl;
-	}
-
-	public String getTrustCertifyAuditState() {
-		return trustCertifyAuditState;
-	}
-
-	public String getCustInfoLvl() {
-		return custInfoLvl;
-	}
+	/*
+	 * public BigDecimal getCustScore() { return custScore; }
+	 * 
+	 * public String getCustLvl() { return custLvl; }
+	 * 
+	 * public String getTrustCertifyLvl() { return trustCertifyLvl; }
+	 * 
+	 * public String getTrustCertifyAuditState() { return trustCertifyAuditState; }
+	 * 
+	 * public String getCustInfoLvl() { return custInfoLvl; }
+	 */
 
 	public String getCustAdd() {
 		return custAdd;
@@ -380,25 +378,21 @@ public class MerchantExport implements Serializable{
 		return representativeName;
 	}
 
-	public BigDecimal getRegCapital() {
-		return regCapital;
-	}
+	/*
+	 * public BigDecimal getRegCapital() { return regCapital; }
+	 */
 
 	public String getEntType() {
 		return entType;
 	}
 
-	public String getIndustryBelong() {
-		return industryBelong;
-	}
-
-	public BigDecimal getYearTurnover() {
-		return yearTurnover;
-	}
-
-	public String getMerchantWebSite() {
-		return merchantWebSite;
-	}
+	/*
+	 * public String getIndustryBelong() { return industryBelong; }
+	 * 
+	 * public BigDecimal getYearTurnover() { return yearTurnover; }
+	 * 
+	 * public String getMerchantWebSite() { return merchantWebSite; }
+	 */
 
 
 	public String getIsUseCertification() {
@@ -481,10 +475,9 @@ public class MerchantExport implements Serializable{
 		return compAcctBank;
 	}
 
-	public Date getPwdFreezeTime() {
-		return pwdFreezeTime;
-	}
-
+	/*
+	 * public Date getPwdFreezeTime() { return pwdFreezeTime; }
+	 */
 
 	public BigDecimal getCompVerifyAmt() {
 		return compVerifyAmt;
@@ -509,20 +502,15 @@ public class MerchantExport implements Serializable{
 	public void setCustName(String custName) {
 		this.custName = custName;
 	}
-
-	public void setTradePwd(String tradePwd) {
-		this.tradePwd = tradePwd;
-	}
-
-	public void setAttachStr(String attachStr) {
-		this.attachStr = attachStr;
-	}
-
-	public void setWrongPwdCount(String wrongPwdCount) {
-		this.wrongPwdCount = wrongPwdCount;
-	}
-
-	/*public void setCertifyType(String certifyType) {
+	/*
+	 * public void setTradePwd(String tradePwd) { this.tradePwd = tradePwd; }
+	 * 
+	 * public void setAttachStr(String attachStr) { this.attachStr = attachStr; }
+	 * 
+	 * public void setWrongPwdCount(String wrongPwdCount) { this.wrongPwdCount =
+	 * wrongPwdCount; }
+	 * 
+	 */	/*public void setCertifyType(String certifyType) {
 		this.certifyType = certifyType;
 	}
 
@@ -546,26 +534,21 @@ public class MerchantExport implements Serializable{
 		this.merchantFlag = merchantFlag;
 	}
 
-	public void setCustScore(BigDecimal custScore) {
-		this.custScore = custScore;
-	}
-
-	public void setCustLvl(String custLvl) {
-		this.custLvl = custLvl;
-	}
-
-	public void setTrustCertifyLvl(String trustCertifyLvl) {
-		this.trustCertifyLvl = trustCertifyLvl;
-	}
-
-	public void setTrustCertifyAuditState(String trustCertifyAuditState) {
-		this.trustCertifyAuditState = trustCertifyAuditState;
-	}
-
-	public void setCustInfoLvl(String custInfoLvl) {
-		this.custInfoLvl = custInfoLvl;
-	}
-
+	/*
+	 * public void setCustScore(BigDecimal custScore) { this.custScore = custScore;
+	 * }
+	 * 
+	 * public void setCustLvl(String custLvl) { this.custLvl = custLvl; }
+	 * 
+	 * public void setTrustCertifyLvl(String trustCertifyLvl) { this.trustCertifyLvl
+	 * = trustCertifyLvl; }
+	 * 
+	 * public void setTrustCertifyAuditState(String trustCertifyAuditState) {
+	 * this.trustCertifyAuditState = trustCertifyAuditState; }
+	 * 
+	 * public void setCustInfoLvl(String custInfoLvl) { this.custInfoLvl =
+	 * custInfoLvl; }
+	 */
 	public void setCustAdd(String custAdd) {
 		this.custAdd = custAdd;
 	}
@@ -594,25 +577,24 @@ public class MerchantExport implements Serializable{
 		this.representativeName = representativeName;
 	}
 
-	public void setRegCapital(BigDecimal regCapital) {
-		this.regCapital = regCapital;
-	}
-
+	/*
+	 * public void setRegCapital(BigDecimal regCapital) { this.regCapital =
+	 * regCapital; }
+	 */
 	public void setEntType(String entType) {
 		this.entType = entType;
 	}
 
-	public void setIndustryBelong(String industryBelong) {
-		this.industryBelong = industryBelong;
-	}
-
-	public void setYearTurnover(BigDecimal yearTurnover) {
-		this.yearTurnover = yearTurnover;
-	}
-
-	public void setMerchantWebSite(String merchantWebSite) {
-		this.merchantWebSite = merchantWebSite;
-	}
+	/*
+	 * public void setIndustryBelong(String industryBelong) { this.industryBelong =
+	 * industryBelong; }
+	 * 
+	 * public void setYearTurnover(BigDecimal yearTurnover) { this.yearTurnover =
+	 * yearTurnover; }
+	 * 
+	 * public void setMerchantWebSite(String merchantWebSite) { this.merchantWebSite
+	 * = merchantWebSite; }
+	 */
 
 	
 	public String getAuditState() {
@@ -703,9 +685,10 @@ public class MerchantExport implements Serializable{
 		this.compAcctBank = compAcctBank;
 	}
 
-	public void setPwdFreezeTime(Date pwdFreezeTime) {
-		this.pwdFreezeTime = pwdFreezeTime;
-	}
+	/*
+	 * public void setPwdFreezeTime(Date pwdFreezeTime) { this.pwdFreezeTime =
+	 * pwdFreezeTime; }
+	 */
 
 
 	public void setCompVerifyAmt(BigDecimal compVerifyAmt) {
