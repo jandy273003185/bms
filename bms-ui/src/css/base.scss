@@ -200,6 +200,10 @@ video {
     font-size: 13px;
   }
 
+  .el-input {
+    font-size: 13px;
+  }
+
   .el-table--mini.el-table.nofix td {
     padding-top: 4px;
     padding-bottom: 4px;
@@ -263,7 +267,14 @@ video {
   cursor: pointer !important;
 }
 
+.el-textarea.is-disabled .el-textarea__inner {
+  cursor: pointer !important;
+}
+
 .el-tabs__nav {
   border-left: 0 !important;
+}
 
+.el-dialog__body {
+  padding-bottom: 0 !important;
 }

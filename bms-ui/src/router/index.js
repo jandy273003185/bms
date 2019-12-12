@@ -65,6 +65,10 @@ const ErrorHand = () => import(/* webpackChunkName: "Financial" */ '@/views/Fina
 const ReSummaryV2 = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/ReSummaryV2/ReSummary');
 
 
+// 客户管理
+const Audit = () => import(/* webpackChunkName: "Customer" */ '@/views/Customer/Audit/Audit');
+const Aulist = () => import(/* webpackChunkName: "Customer" */ '@/views/Customer/List/List');
+
 // 短信管理
 const Smessage = () => import(/* webpackChunkName: "SMS" */ '@/views/SMS/Message/Message');
 // 实名认证
@@ -170,8 +174,8 @@ export const uatRouter = [
     name: '商户管理',
     path: '',
     children: [
-      { name: '商户网关维护', path: '/system/user' },
-      { name: '商户协议管理', path: '/system/user' },
+      { name: '商户网关维护', path: '/system/audit' },
+      { name: '商户协议管理', path: '/system/list' },
       { name: '费率管理', path: '/system/user' },
       { name: '商户账户管理', path: '/system/user' },
       { name: '收银员', path: '/system/user' },
@@ -186,11 +190,11 @@ export const uatRouter = [
   },
   {
     name: '客户管理',
-    path: '/system/user',
+    path: '',
     children: [
-      { name: '证件审核管理', path: '/system/user' },
-      { name: '客户管理列表', path: '/system/user' },
-      { name: '客户账户管理', path: '/system/user' }
+      { name: '证件审核管理', path: '/customer/audit', component: Audit },
+      { name: '客户管理列表', path: '/customer/list', component: Aulist },
+      { name: '客户账户管理', path: '/customer/user' }
     ]
   },
   {
@@ -217,38 +221,6 @@ export const uatRouter = [
       { name: '代理商协议管理', path: '/system/user' },
       { name: '代理商商户审核列表', path: '/system/user' },
       { name: '服务商注册审核(新)', path: '/system/user' }
-    ]
-  },
-  {
-    name: '聚合支付对账', path: '/system/user',
-    children: [
-      { name: '对账文件列表', path: '/system/user' },
-      { name: '对账结果', path: '/system/user' },
-      { name: '渠道对账文件下载', path: '/system/user' }
-    ]
-  },
-  {
-    name: '学生管理', path: '/system/user',
-    children: [{ name: '学生信息', path: '/system/user' }]
-  },
-  {
-    name: '代付管理', path: '/system/user',
-    children: [
-      { name: '批量代付', path: '/system/user' },
-      { name: '代付查询', path: '/system/user' },
-      { name: '代付账户管理', path: '/system/user' },
-      { name: '代付审核', path: '/system/user' },
-      { name: '开通代付审核', path: '/system/user' },
-      { name: '代付统计报表', path: '/system/user' },
-      { name: '代付记录', path: '/system/user' },
-      { name: '充值审核', path: '/system/user' },
-      { name: '代付列表', path: '/system/user' },
-      { name: '新增代付', path: '/system/user' },
-      { name: '凭证审核列表(新)', path: '/system/user' },
-      { name: '代付产品列表', path: '/system/user' },
-      { name: '代付详细列表', path: '/system/user' },
-      { name: '代付收益', path: '/system/user' },
-      { name: '商户渠道', path: '/system/user' }
     ]
   }
 ];

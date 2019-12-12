@@ -10,7 +10,7 @@
           <site-icon iconClass="xiugai" size="12" />修改密码
         </router-link>
         |{{$store.state.accessToken}}
-        <el-button size="mini" @click="exit">退出</el-button>
+        <span type="text" size="mini" @click="exit"> <i class="el-icon-switch-button" /> 退出</span>
       </div>
     </el-header>
     <el-container>
