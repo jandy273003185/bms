@@ -6,66 +6,72 @@
 	
 	<select id="selMerchantDetailInfoList" parameterType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo" resultType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo">
     	SELECT
-			t.patch_no,
-			t.merchant_code,
-			t.out_merchant_code,
-			t.file_status,
-			t.remark,
-			t.report_status as detail_status,
-			t.bestMerchantType,
-			t.result_msg,
-			t.loginNo,
-			t.wx_apply_no,
-			t.iden_status,
-			t.wx_child_no,
-			t.zfb_child_no,
-			f.cust_name,
+			* 
+		FROM(
+		(SELECT
+			t1.*,
+			t2.report_status AS detailStatus,
+			t2.result_msg,
+		    t2.out_merchant_code, 
+			f.CUST_NAME,
 			f.short_name,
 			f.cust_id,
-			r.report_status,
-			f.merchant_email as email,
-			r.channel_no,
-			DATE_FORMAT(t.modify_time,'%Y-%m-%d %H:%i:%s') modify_time,
-			DATE_FORMAT(t.create_time,'%Y-%m-%d %H:%i:%s') reportTime
+			f.merchant_email
 		FROM
-			td_merchant_detail_info t
-		LEFT JOIN td_cust_info f ON t.merchant_code = f.merchant_code
-		LEFT JOIN td_merchant_report r on r.patch_no = t.patch_no
-		LEFT JOIN td_login_user_info l ON l.cust_id = f.cust_id
+			td_merchant_report t1
+			INNER JOIN td_merchant_detail_info t2 ON t1.patch_no = t2.patch_no
+			LEFT JOIN td_cust_info f ON f.MERCHANT_CODE = t1.merchant_code 
+		) 
+		UNION
+		(SELECT
+			t1.*,
+			t3.report_status AS detailStatus,
+			t3.result_msg,
+			t3.out_merchant_code,
+			c.CUST_NAME,
+			c.short_name,
+			c.CUST_ID ,
+			c.merchant_email
+		FROM
+			td_merchant_report t1
+			INNER JOIN td_merchant_detail_info_allin_pay t3 ON t3.patch_no = t1.patch_no
+			LEFT JOIN td_cust_info c ON c.MERCHANT_CODE = t1.merchant_code 
+		)
+		) mm 
 		<where>
 			<if test="merchantCode != null and merchantCode != '' ">
-			 and t.merchant_code= #{merchantCode,jdbcType=VARCHAR}
+			 and mm.merchant_code= #{merchantCode,jdbcType=VARCHAR}
 			</if>
 			<if test="patchNo != null and patchNo != '' ">
-			 and t.patch_no = #{patchNo,jdbcType=VARCHAR}
+			 and mm.patch_no = #{patchNo,jdbcType=VARCHAR}
 			</if>
 			<if test="channelNo != null and channelNo != '' ">
-			 and r.channel_no = #{channelNo,jdbcType=VARCHAR}
+			 and mm.channel_no = #{channelNo,jdbcType=VARCHAR}
 			</if>
 			<if test="channelCode != null and channelCode != '' ">
-			 and r.channel_no = #{channelCode,jdbcType=VARCHAR}
+			 and mm.channel_no = #{channelCode,jdbcType=VARCHAR}
 			</if>
 			<if test="reportStatus != null and reportStatus != '' ">
-			 and t.report_status = #{reportStatus,jdbcType=VARCHAR}
+			 and mm.report_status = #{reportStatus,jdbcType=VARCHAR}
 			</if>
 			<if test="custName != null and custName != '' ">
-			 and f.cust_name = #{custName,jdbcType=VARCHAR}
+			 and mm.cust_name = #{custName,jdbcType=VARCHAR}
 			</if>
 			<if test="email != null and email != '' ">
-			 and f.merchant_email = #{email,jdbcType=VARCHAR}
+			 and mm.merchant_email = #{email,jdbcType=VARCHAR}
 			</if>
 			<if test="startModifyTime != null and '' != startModifyTime">
 				<![CDATA[
-	              AND DATE_FORMAT(t.create_time,'%Y-%m-%d')>= #{startModifyTime}
+	              AND DATE_FORMAT(mm.report_time,'%Y-%m-%d')>= #{startModifyTime}
 	            ]]>
 			</if>
 			<if test="endModifyTime !=null and '' !=endModifyTime">
 				<![CDATA[
-	              AND DATE_FORMAT(t.create_time,'%Y-%m-%d')<= #{endModifyTime}
+	              AND DATE_FORMAT(mm.report_time,'%Y-%m-%d')<= #{endModifyTime}
 	            ]]>
 			</if>
 		</where>
-		ORDER BY t.create_time DESC
+		ORDER BY mm.report_time DESC
     </select>
     
     

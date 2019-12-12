@@ -28,7 +28,7 @@ public class VerifiedMerchantController {
 	@Autowired
 	private VerifiedMerchantService verifiedMerchantService;
 	@Autowired
-	 private FmIncomeMapper fmIncomeMapper;
+	private FmIncomeMapper fmIncomeMapper;
 	/**
 	 * 微信商户实名认证提交
 	*/
