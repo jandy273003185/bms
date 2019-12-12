@@ -64,11 +64,18 @@ const ReSummary = () => import(/* webpackChunkName: "Financial" */ '@/views/Fina
 const ErrorHand = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/ErrorHand/ErrorHand');
 const ReSummaryV2 = () => import(/* webpackChunkName: "Financial" */ '@/views/Financial/ReSummaryV2/ReSummary');
 // 码表维护
-const Holiday = () => import(/* webpackChunkName: "Financial" */ '@/views/Clock/Holiday/Holiday');
-const Poundage = () => import(/* webpackChunkName: "Financial" */ '@/views/Clock/Poundage/Poundage');
-const Bank = () => import(/* webpackChunkName: "Financial" */ '@/views/Clock/Bank/Bank');
-const Certificate = () => import(/* webpackChunkName: "Financial" */ '@/views/Clock/Certificate/Certificate');
-const City = () => import(/* webpackChunkName: "Financial" */ '@/views/Clock/City/City');
+const Holiday = () => import(/* webpackChunkName: "Clock" */ '@/views/Clock/Holiday/Holiday');
+const Poundage = () => import(/* webpackChunkName: "Clock" */ '@/views/Clock/Poundage/Poundage');
+const Bank = () => import(/* webpackChunkName: "Clock" */ '@/views/Clock/Bank/Bank');
+const Certificate = () => import(/* webpackChunkName: "Clock" */ '@/views/Clock/Certificate/Certificate');
+const City = () => import(/* webpackChunkName: "Clock" */ '@/views/Clock/City/City');
+const Problem = () => import(/* webpackChunkName: "Clock" */ '@/views/Clock/Problem/Problem');
+const Advertising = () => import(/* webpackChunkName: "Clock" */ '@/views/Clock/Advertising/Advertising');
+const Template = () => import(/* webpackChunkName: "Clock" */ '@/views/Clock/Template/Template');
+const Dictionary = () => import(/* webpackChunkName: "Clock" */ '@/views/Clock/Dictionary/Dictionary');
+const Ctrading = () => import(/* webpackChunkName: "Clock" */ '@/views/Clock/Trading/Trading');
+const Withdrawal = () => import(/* webpackChunkName: "Clock" */ '@/views/Clock/Withdrawal/Withdrawal');
+const Branch = () => import(/* webpackChunkName: "Clock" */ '@/views/Clock/Branch/Branch');
 
 
 // 客户管理
@@ -168,13 +175,13 @@ export const uatRouter = [
       { name: '银行信息管理', path: '/clock/bank', component: Bank },
       { name: '证件管理', path: '/clock/certificate', component: Certificate },
       { name: '城市信息管理', path: '/clock/city', component: City },
-      { name: '问题管理列表', path: '/clock/holiday', component: Holiday },
-      { name: '首页广告维护', path: '/clock/holiday', component: Holiday },
-      { name: '协议模板维护', path: '/clock/holiday', component: Holiday },
-      { name: '数据字典', path: '/clock/holiday', component: Holiday },
-      { name: '交易控制', path: '/clock/holiday', component: Holiday },
-      { name: '提现控制', path: '/clock/holiday', component: Holiday },
-      { name: '支行信息管理', path: '/clock/holiday', component: Holiday }
+      { name: '问题管理列表', path: '/clock/problem', component: Problem },
+      { name: '首页广告维护', path: '/clock/advertising', component: Advertising },
+      { name: '协议模板维护', path: '/clock/template', component: Template },
+      { name: '数据字典', path: '/clock/dictionary', component: Dictionary },
+      { name: '交易控制', path: '/clock/trading', component: Ctrading },
+      { name: '提现控制', path: '/clock/withdrawal', component: Withdrawal },
+      { name: '支行信息管理', path: '/clock/branch', component: Branch }
     ]
   },
   {
