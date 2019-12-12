@@ -71,8 +71,8 @@
       </div>
     </el-dialog>
 
-    <!-- 提现控制修改 -->
-    <el-dialog title="交易控制" :visible.sync="editorDisplay" width="600px">
+    <!-- 更新银行支行信息 -->
+    <el-dialog title="更新银行支行信息" :visible.sync="editorDisplay" width="600px">
       <el-form :model="editorModelData" class="alert-model-form" label-width="150px" :show-message="false">
         <el-form-item prop="name1" label="银行联行号" required>
           <el-input v-model="editorModelData.name1"></el-input>
@@ -96,8 +96,8 @@
       </div>
     </el-dialog>
 
-    <!-- 任务删除 -->
-    <el-dialog title="删除任务" :visible.sync="deleteDisplay" width="600px">
+    <!-- 删除银行支行信息 -->
+    <el-dialog title="删除银行支行信息" :visible.sync="deleteDisplay" width="600px">
       <div class="dialog-deleted-content">您确定要删除该任务调度配置<span>[8338]</span>吗？</div>
       <div slot="footer" class="dialog-footer">
         <el-button @click="deleteModelCancel">取 消</el-button>
