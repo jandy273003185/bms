@@ -23,3 +23,14 @@ export const sstorage = {
     return JSON.parse(sessionStorage.getItem(key));
   }
 }
+
+export const preview = function (file) {
+  const fileReader = new FileReader();
+  let src = '';
+  if (URL.createObjectURL) {
+    src = URL.createObjectURL(file);
+  } else {
+    src = fileReader.readAsDataURL(file);
+  }
+  return src;
+}
