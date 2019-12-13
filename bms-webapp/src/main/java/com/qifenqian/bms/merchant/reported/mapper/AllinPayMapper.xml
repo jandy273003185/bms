@@ -201,6 +201,7 @@
 			`out_merchant_code`,
 			`mch_id`,
 			`agree_type`,
+			`report_status`,
 			`result_msg`,
 			`create_time`,
 			`modify_time`
@@ -254,6 +255,7 @@
 				#{outMerchantCode,jdbcType = VARCHAR},
 				#{mchId,jdbcType = VARCHAR},
 				#{agreeType,jdbcType = VARCHAR},
+				#{reportStatus,jdbcType = VARCHAR},
 				#{resultMsg,jdbcType = VARCHAR},
 				now(),
 				now()
@@ -425,6 +427,9 @@
 		 	</if>
 		 	<if test="agreeType != null and agreeType !='' ">
 		 	`agree_type` = #{agreeType,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="reportStatus != null and reportStatus !='' ">
+		 	`report_status` = #{reportStatus,jdbcType = VARCHAR},
 		 	</if>
 		 	<if test="resultMsg != null and resultMsg !='' ">
 		 	`result_msg` = #{resultMsg,jdbcType = VARCHAR},
