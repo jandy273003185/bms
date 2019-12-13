@@ -38,7 +38,7 @@
             s.ADDR
         FROM
             td_cust_info ci
-            LEFT JOIN td_shop s ON ci.CUST_ID = s.MCH_ID
+            INNER JOIN td_shop s ON ci.CUST_ID = s.MCH_ID
         <where>
             <if test="customName != null and customName != '' ">
                 AND CUST_NAME like CONCAT('%',#{customName},'%')
