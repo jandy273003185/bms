@@ -167,6 +167,7 @@ public class AllinPayService {
 			if("SUCCESS".equals(res.getRetcode())) {
 				if("ACCEPT".equals(res.getAuditstatus()) || "AUDITING".equals(res.getAuditstatus())) {
 					reportInfo.setReportStatus("Y");
+					cr.setReportStatus("00");
 					object.put("result","SUCCESS");
 				}else if("FAIL".equals(res.getAuditstatus())) {
 					object.put("result","FAILURE");
@@ -176,7 +177,7 @@ public class AllinPayService {
 					reportInfo.setReportStatus("E");
 				}else if("SUCCESS".equals(res.getAuditstatus())) {
 					reportInfo.setReportStatus("O");
-					cr.setReportStatus("00");
+					cr.setReportStatus("1");
 					object.put("result","SUCCESS");
 				}
 				object.put("message",res.getRetmsg());
