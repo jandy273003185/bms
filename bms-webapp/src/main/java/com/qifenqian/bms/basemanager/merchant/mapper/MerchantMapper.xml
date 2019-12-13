@@ -1910,9 +1910,11 @@
                 contact_mobile =  #{contactMobile , jdbcType = VARCHAR},
             </if>
 			<if test="contactName != null">
-                contact_name =  #{contactName , jdbcType = VARCHAR}
+                contact_name =  #{contactName , jdbcType = VARCHAR},
             </if>
-           
+           <if test="filingStatus != null">
+				filing_status =  #{filingStatus , jdbcType = VARCHAR}
+			</if>
 
 		
 		</set>

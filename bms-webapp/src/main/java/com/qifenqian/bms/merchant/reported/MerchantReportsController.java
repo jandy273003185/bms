@@ -21,6 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
+import com.qifenqian.bms.basemanager.merchant.bean.MerchantVo;
+import com.qifenqian.bms.basemanager.merchant.mapper.MerchantMapper;
 import com.qifenqian.bms.basemanager.merchant.service.MerchantService;
 import com.qifenqian.bms.basemanager.utils.GenSN;
 import com.qifenqian.bms.merchant.channel.bean.ChannelBean;
@@ -101,6 +103,9 @@ public class MerchantReportsController {
 
    @Autowired
    private AllinPayService allinPayService;
+   
+   @Autowired
+   private MerchantMapper merchantMapper;
    /**
     * 商户报备入口
     */
@@ -641,6 +646,12 @@ public class MerchantReportsController {
 							detail.setSignUrl(registQueryResp.getSignUrl());
 							//更新数据库
 							fmIncomeService.UpdateMerReportAndMerDetailInfo(detail, "1");
+							//报备成功修改商户状态
+							MerchantVo merchantVo = new MerchantVo();
+							merchantVo.setCustId(custInfo.getCustId());
+							merchantVo.setFilingStatus("01");
+							merchantVo.setFilingAuditStatus("00");
+							merchantMapper.updateMerchant(merchantVo);
 							
 							//审核通过,开通产品
 							ChannelBean bean = new ChannelBean();
@@ -756,6 +767,13 @@ public class MerchantReportsController {
 							detail.setSignQrcode(registUpgradeQueryResp.getSignQrcode());
 							//更新数据库
 							fmIncomeService.UpdateMerReportAndMerDetailInfo(detail, "1");
+							//报备成功修改商户状态
+							MerchantVo merchantVo = new MerchantVo();
+							merchantVo.setCustId(custInfo.getCustId());
+							merchantVo.setFilingStatus("01");
+							merchantVo.setFilingAuditStatus("00");
+							merchantMapper.updateMerchant(merchantVo);
+							
 							object.put("result", "SUCCESS");
 							object.put("message", "商户审核成功");
 						}//待账户验证
@@ -797,6 +815,12 @@ public class MerchantReportsController {
 					detail.setMerchantPid(orderQueryRes.getMerchantPid());
 					//更新数据库
 					fmIncomeService.UpdateMerReportAndMerDetailInfo(detail, "1");
+					//报备成功修改商户状态
+					MerchantVo merchantVo = new MerchantVo();
+					merchantVo.setCustId(custInfo.getCustId());
+					merchantVo.setFilingStatus("01");
+					merchantVo.setFilingAuditStatus("00");
+					merchantMapper.updateMerchant(merchantVo);
 					
 					//审核通过,开通产品
 					ChannelBean bean = new ChannelBean();
@@ -953,7 +977,12 @@ public class MerchantReportsController {
 			detail.setWxChildNo(wxMerNo);
 			detail.setZfbChildNo(zfbMerNo);
 			fmIncomeService.UpdateMerReportAndMerDetailInfo(detail, "1");
-			
+			//报备成功修改商户状态
+			MerchantVo merchantVo = new MerchantVo();
+			merchantVo.setCustId(custInfo.getCustId());
+			merchantVo.setFilingStatus("01");
+			merchantVo.setFilingAuditStatus("00");
+			merchantMapper.updateMerchant(merchantVo);
 			
 			bean.setCustId(custInfo.getCustId());
 			//外部商户号
