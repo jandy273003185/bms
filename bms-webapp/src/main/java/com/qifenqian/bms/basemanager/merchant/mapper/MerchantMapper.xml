@@ -73,7 +73,9 @@
 			bank_province_name,
 			bank_city_name,
 			referrer,
-			service_level
+			service_level,
+			id_term_start,
+			id_term_end
 		) VALUES(
 			#{custId, 			jdbcType=VARCHAR},
 			#{custName, 		jdbcType=VARCHAR},
@@ -144,7 +146,9 @@
 			#{bankProvinceName, 	jdbcType=VARCHAR},
 			#{bankCityName, 	jdbcType=VARCHAR},
 			#{referrer, 	jdbcType=VARCHAR},
-			#{serviceLevel, 	jdbcType=VARCHAR}
+			#{serviceLevel, 	jdbcType=VARCHAR},
+			#{idTermStart, 	jdbcType=VARCHAR},
+			#{idTermEnd, 	jdbcType=VARCHAR}
 		)
 	</insert>
 
@@ -1913,9 +1917,14 @@
                 contact_name =  #{contactName , jdbcType = VARCHAR},
             </if>
            <if test="filingStatus != null">
-				filing_status =  #{filingStatus , jdbcType = VARCHAR}
+				filing_status =  #{filingStatus , jdbcType = VARCHAR},
 			</if>
-
+			<if test="idTermStart != null">
+				id_term_start =  #{idTermStart , jdbcType = VARCHAR},
+			</if>
+			<if test="idTermEnd != null">
+				id_term_end =  #{idTermEnd , jdbcType = VARCHAR}
+			</if>
 		
 		</set>
 		WHERE CUST_ID = #{custId,jdbcType=VARCHAR}

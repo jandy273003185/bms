@@ -504,7 +504,8 @@ function addMerchantBtn(){
 	/* var cnaps =  $("#cnaps").val().trim(); */
 	var cnaps =  $("#branchBank").val().trim();
 	var compMainAcctType = $("#compMainAcctType").val().trim();
-	
+	var idTermStart = $("#idTermStart").val().trim();
+	var idTermEnd = $("#idTermEnd").val().trim();
 	var openAccountPath =  $("#openAccountPath").val();
 	var bankCardPhotoPath = $("#bankCardPhotoPath").val();
 	var certAttribute2Path = $("#certAttribute2Path").val();
@@ -545,6 +546,8 @@ function addMerchantBtn(){
             "bankCityName":          bankCityName,						// 开户行城市
             "cnaps":                 cnaps,								// 联行号
             "compMainAcctType":      compMainAcctType,					// 结算类型
+            "idTermStart"     :      idTermStart,						// 法人身份有效起始期
+            "idTermEnd"       :      idTermEnd,						    // 法人身份有效截止期
             "merchantFlag":          merchantFlag						// 商户标识
         },
         dataType : "json",
@@ -727,6 +730,10 @@ function selCustType(){
 function businessForever(){
 	$("input[name='businessTermEnd']").val("2099-12-31");
 	$("#businessTermEnd").attr("value","2099-12-31");
+}
+function idCardTremForever(){
+	$("input[name='idTermEnd']").val("2099-12-31");
+	$("#idTermEnd").attr("value","2099-12-31");
 }
 
 
@@ -1030,6 +1037,18 @@ function showOpenAccountImage(file){
 								<input type="text" name="representativeCertNo" id="representativeCertNo" placeholder="请输入法人身份证号码" style="width:90%">
 								
 								<label class="label-tips" id="representativeCertNoLab"></label>
+							</td>
+						</tr>
+						<tr>
+							<td class="td-left" id="idCardTimeId">身份证有效期：<span style="color:red;">（必填)</span></td>
+							<td class="td-right">
+								<input type="text" id="idTermStart" name="idTermStart" readonly="readonly" onfocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
+								<label class="label-tips" id="businessTermLabStart"></label>
+								-
+								<input type="text" id="idTermEnd" name="idTermEnd" readonly="readonly" onfocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
+								<label class="label-tips" id="idTermLabEnd"></label>
+								<input type="button" onclick="idCardTremForever()" value="长期" />
+								
 							</td>
 						</tr>
 						<tr >

@@ -361,6 +361,22 @@
 								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.representativeCertNo }</td>
 							</tr>
 							<tr>
+							<td class="td-left">身份证有效期：</td>
+								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.idTermStart } -
+									<c:choose>
+										<c:when test="${merchantVo.idTermEnd =='forever'}">
+											长期
+										</c:when>
+										<c:when test="${merchantVo.idTermEnd =='2099-12-31'}">
+											长期
+										</c:when>
+										<c:otherwise>
+											${merchantVo.idTermEnd }
+										</c:otherwise>
+									</c:choose>
+								</td>
+							</tr>
+							<tr>
 								<td class="td-left" >法人身份证正面：</td>
 								<td class="td-right" colspan="3">
 									<!-- <a data-toggle='modal' class="tooltip-success certAttribute1Click"   data-target="#previewImageModal" >

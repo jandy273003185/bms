@@ -405,8 +405,33 @@ public class Merchant implements Serializable
 	 * 服务商级别
 	 */
 	private String serviceLevel;
+	/**
+	 * 法人身份有效截止期
+	 */
+	private String idTermEnd;
+	/**
+	 * 法人身份有效起始期
+	 */
+	private String idTermStart;
 	
 	
+	
+	public String getIdTermEnd() {
+		return idTermEnd;
+	}
+
+	public void setIdTermEnd(String idTermEnd) {
+		this.idTermEnd = idTermEnd;
+	}
+
+	public String getIdTermStart() {
+		return idTermStart;
+	}
+
+	public void setIdTermStart(String idTermStart) {
+		this.idTermStart = idTermStart;
+	}
+
 	public String getReferrer() {
 		return referrer;
 	}
