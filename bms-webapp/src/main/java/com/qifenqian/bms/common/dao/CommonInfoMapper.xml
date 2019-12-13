@@ -149,7 +149,7 @@
 	
 	<select id="selectAllinPayCity" parameterType="java.lang.String" resultType="com.qifenqian.bms.basemanager.city.bean.City" >
 		SELECT 
-			a.area_code areaId,
+			a.area_code areaCode,
 			a.area_name areaName 
 		FROM 
 			td_allinpay_area_info a

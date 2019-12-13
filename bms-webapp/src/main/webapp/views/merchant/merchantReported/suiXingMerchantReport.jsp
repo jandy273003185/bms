@@ -778,7 +778,7 @@ $(function(){
     		function(data){
     			if(data.result=="SUCCESS"){
     				var branchBankList = data.branchBankList;
-    			//	$("#interBankName").html("");
+    				$("#interBankName").html("");
            			for ( var branchBank in branchBankList) {
            				$("#interBankName").append(
            						"<option value='"+ branchBankList[branchBank].branchBankCode +"'>"
@@ -790,9 +790,7 @@ $(function(){
            				form.render();
            			 });  
     			}
-    			else{
-    				alert("银行和开户城市不能为空");
-    			}
+    			
     		},'json'
     		);	
       	}

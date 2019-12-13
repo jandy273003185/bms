@@ -273,17 +273,17 @@
                             <tr>
 								<td class="td-left" width="18%">商户编号：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" width="32%"> 
-									<input type="text" id="merchantCode" name="merchantCode" readonly placeholder="请输入商户编号" maxlength=""  value="${custInfo.merchantCode }" style="width:90%">
+									<input type="text" id="merchantCode" name="merchantCode" data-validation="notnull" data-errMsg="商户编号不能为空" readonly placeholder="请输入商户编号" maxlength=""  value="${custInfo.merchantCode }" style="width:90%">
 								</td>
                                 <td class="td-left" width="18%">商户名称：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" width="32%"> 
-									<input type="text" id="custName" name="custName" placeholder="请输入商户名称" maxlength=""  value="${custInfo.custName }" style="width:90%">
+									<input type="text" id="custName" name="custName" placeholder="请输入商户名称" maxlength="" data-validation="notnull" data-errMsg="商户名称不能为空"  value="${custInfo.custName }" style="width:90%">
 								</td>
 							</tr>
 							<tr>
                                 <td class="td-left" width="18%">商户简称：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" width="32%"> 
-									<input type="text" id="shortName" name="shortName" placeholder="请输入商户简称" maxlength=""  value="${custInfo.shortName }" style="width:90%">
+									<input type="text" id="shortName" name="shortName" placeholder="请输入商户简称" maxlength="" data-validation="notnull" data-errMsg="商户简称不能为空"  value="${custInfo.shortName }" style="width:90%">
 								</td>
 							</tr>
 	                        <tr>
@@ -292,7 +292,7 @@
 							<tr>
 							    <td class="td-left">商户类型：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-								   <select  name="mecTypeFlag" id="mecTypeFlag"  onchange = "getMecType();" class="width-90" >
+								   <select  name="mecTypeFlag" id="mecTypeFlag" data-validation="notnull" data-errMsg="商户类型不能为空"  onchange = "getMecType();" class="width-90" >
 										<option value="">--商户性质--</option>
 										<option value="1">--企业--</option>
 										<option value="3">--个体户--</option>
@@ -302,7 +302,7 @@
 								</td>
                                 <td class="td-left">商户行业：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-									<select name="industry" id="industry" class="selectpicker show-tick form-control" data-width="250px" data-live-search="true">
+									<select name="industry" id="industry" class="selectpicker show-tick form-control" data-validation="notnull" data-errMsg="商户行业不能为空" data-width="250px" data-live-search="true">
 										<option value="">--请选择商户行业--</option>
 										<c:if test="${not empty industryList }">
 				                           	<c:forEach items="${industryList }" var="industry">
@@ -315,14 +315,14 @@
 	                        <tr>
 								<td class="td-left" width="18%">客服号码：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" width="32%"> 
-									<input type="text" id="contactPhone" name="contactPhone" readonly placeholder="请输入商户编号" maxlength=""  value="${custInfo.contactPhone }" style="width:90%">
+									<input type="text" id="contactPhone" name="contactPhone" readonly placeholder="请输入商户编号" data-validation="notnull" data-errMsg="客服号码不能为空" maxlength=""  value="${custInfo.contactPhone }" style="width:90%">
 								</td>
 							</tr>
 							<tr>
 								<td class="td-left">注册地址：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3">
 									<div class="col-xs-2 pd0" style="padding:0;">
-	                                    <select class="form-control" name="merchantProvince" id="merchantProvince" onchange="getMerchantCity()">
+	                                    <select class="form-control" name="merchantProvince" data-validation="notnull" data-errMsg="商户注册省份不能为空" id="merchantProvince" onchange="getMerchantCity()">
 	                                       	<option value="">--请选择省--</option>
 		                                    <c:if test="${not empty allinPayAreaInfoList }">
 		                                        <c:forEach items="${allinPayAreaInfoList }" var="merchantProvince">
@@ -335,7 +335,7 @@
 		                                </select>
 	                                </div>
 	                                <div class="col-xs-2 pd0" style="margin:0 1%;padding:0;">
-		                                <select class="form-control" name="merchantCity" id="merchantCity">
+		                                <select class="form-control" name="merchantCity" data-validation="notnull" data-errMsg="商户注册城市不能为空" id="merchantCity">
 		                                    <option value="" id="cityDef">--请选择市--</option>
 		                                </select>
 	                                </div>
@@ -390,7 +390,7 @@
 										</label>
 									</a>
 									<div class="updateImageDiv" style="float:left; margin-top:75 " >
-										<input type="hidden" id="doorPhotoPath" name="doorPhotoPath" />
+										<input type="hidden" data-validation="notnull" data-errMsg="门头照不能为空" id="doorPhotoPath" name="doorPhotoPath" />
 										<input type="hidden" id="doorPhotoImageVal02"  />
 										<input type="file" name="doorPhoto" id="doorPhoto" onchange="showDoorPhotoImage(this)" />
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
@@ -406,7 +406,7 @@
 										</label>
 									</a>
 									<div class="updateImageDiv" style="float:left; margin-top:75 " >
-										<input type="hidden" id="shopInteriorPath" name="shopInteriorPath" />
+										<input type="hidden" data-validation="notnull" data-errMsg="店内照不能为空" id="shopInteriorPath" name="shopInteriorPath" />
 										<input type="hidden" id="shopInteriorImageVal02"  />
 										<input type="file" name="shopInterior" id="shopInterior" onchange="showShopInteriorImage(this)" />
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
@@ -432,7 +432,7 @@
 							<tr>
 								<td class="td-left">拓展人：<span style="color:red;">（必填)</span></td>
 								<td class="td-right">
-									<input type="text" id="expanduser" name="expanduser" placeholder="请输入拓展人姓名" maxlength="50" style="width:90%">
+									<input type="text" id="expanduser" data-validation="notnull" data-errMsg="拓展人不能为空" name="expanduser" placeholder="请输入拓展人姓名" maxlength="50" style="width:90%">
 									
 									<label class="label-tips" id="expanduserLab"></label>
 								</td>
@@ -454,7 +454,7 @@
 								</td>
 								<td class="td-left">合同有效日期：<span style="color:red;">(必填)</span></td>
 								<td class="td-right">
-                                    <input type="text" name="contractDate" id="contractDate" value="" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
+                                    <input type="text" name="contractDate" id="contractDate" value="" data-validation="notnull" data-errMsg="合同有效日期不能为空" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
 								</td>
 							</tr>
 	                        <tr>
@@ -464,11 +464,11 @@
                            	<tr>
 								<td class="td-left">法人真实姓名：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-									<input type="text" id="representativeName" name="representativeName" placeholder="请输入法人真实姓名"  value="${custInfo.representativeName }" maxlength="" style="width:90%">
+									<input type="text" id="representativeName" name="representativeName" data-validation="notnull" data-errMsg="法人真实姓名不能为空" placeholder="请输入法人真实姓名"  value="${custInfo.representativeName }" maxlength="" style="width:90%">
 								</td>
 								<td class="td-left">法人证件类型：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-									<select name="representativeCertType" id="representativeCertType" style="width:90%;"  >
+									<select name="representativeCertType" data-validation="notnull" data-errMsg="法人证件类型不能为空" id="representativeCertType" style="width:90%;"  >
 										<option value="01">--身份证--</option>
 										<option value="04">--港澳居民往来内地通行证--</option>
 										<option value="05">--台湾居民来往大陆通行证--</option>
@@ -478,25 +478,25 @@
                             <tr>
 								<td class="td-left">法人身份证号码：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-									<input type="text" name="representativeCertNo" id="representativeCertNo" placeholder="请输入法人身份证号码"  value="${custInfo.representativeCertNo }" style="width:90%">
+									<input type="text" data-validation="notnull" data-errMsg="法人身份证号码不能为空" name="representativeCertNo" id="representativeCertNo" placeholder="请输入法人身份证号码"  value="${custInfo.representativeCertNo }" style="width:90%">
 								</td>
 								<td class="td-left">身份证有效期：<span style="color:red;">(必填)</span></td>
 								<td class="td-right">
-									<input type="text" name="idTermStart" id="idTermStart" value="${custInfo.idTermStart }" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> ——
-                                    <input type="text" name="idTermEnd" id="idTermEnd" value="${custInfo.idTermEnd }" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
+									<input type="text" data-validation="notnull" data-errMsg="身份证有效期起始值不能为空" name="idTermStart" id="idTermStart" value="${custInfo.idTermStart }" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;"> ——
+                                    <input type="text" data-validation="notnull" data-errMsg="身份证有效期结束值不能为空" name="idTermEnd" id="idTermEnd" value="${custInfo.idTermEnd }" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
                                     <input type="button" onclick="idTermForever()" value="长期" />
 								</td>
 							</tr>
 							<tr>
 								<td class="td-left">联系人姓名：<span style="color:red;">（必填)</span></td>
 								<td class="td-right">
-									<input type="text" id="attentionName" name="attentionName" placeholder="请输入联系人姓名" maxlength="50" style="width:90%">
+									<input type="text" data-validation="notnull" data-errMsg="联系人姓名不能为空" id="attentionName" name="attentionName" placeholder="请输入联系人姓名" maxlength="50" style="width:90%">
 									
 									<label class="label-tips" id="attentionNameLab"></label>
 								</td>
 								<td class="td-left">联系人手机号码：<span style="color:red;">（必填)</span></td>
 								<td class="td-right">
-									<input type="text" name="attentionMobile" id="attentionMobile" placeholder="请输入联系人手机号码" style="width:90%">
+									<input type="text" data-validation="notnull" data-errMsg="联系人手机号码不能为空" name="attentionMobile" id="attentionMobile" placeholder="请输入联系人手机号码" style="width:90%">
 									
 									<label class="label-tips" id="attentionMobileLab"></label>
 								</td>
@@ -510,7 +510,7 @@
 										</label>
 									</a>
 									<div style="float:left;margin-top:75" >
-								    	<input type="hidden" id="legalCertAttribute1Path" name="legalCertAttribute1Path" />
+								    	<input type="hidden" data-validation="notnull" data-errMsg="法人身份证正面不能为空" id="legalCertAttribute1Path" name="legalCertAttribute1Path" />
 										<input type="hidden" id="legalCertAttribute1ImageVal02"  />
 										<input type="file" name="legalCertAttribute1" id="legalCertAttribute1" onChange="showlegalCertAttribute1Image(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
@@ -525,7 +525,7 @@
 										</label>
 									</a>
 									<div style="float:left;margin-top:75" >
-								    	<input type="hidden" id="legalCertAttribute2Path" name="legalCertAttribute2Path" />
+								    	<input type="hidden" data-validation="notnull" data-errMsg="法人身份证背面不能为空" id="legalCertAttribute2Path" name="legalCertAttribute2Path" />
 										<input type="hidden" id="legalCertAttribute2ImageVal02"  />
 										<input type="file" name="legalCertAttribute2" id="legalCertAttribute2" onChange="showlegalCertAttribute2Image(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
@@ -540,7 +540,7 @@
 										</label>
 									</a>
 									<div style="float:left;margin-top:75" >
-								    	<input  type="hidden" id="handIdCardPath" name="handIdCardPath" />
+								    	<input  type="hidden" data-validation="notnull" data-errMsg="手持身份证照不能为空" id="handIdCardPath" name="handIdCardPath" />
 										<input type="file" name="handIdCard" id="handIdCard" onChange="showHandIdCardImage(this)"/> <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
 								</td>
@@ -552,24 +552,24 @@
 	                        <tr>
 								<td class="td-left">结算账户名称：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-									<input type="text" id="accountNm" name="accountNm" maxlength="100" placeholder="请输入结算账户名称"  value="" style="width:90%">
+									<input type="text" data-validation="notnull" data-errMsg="结算账户名称不能为空" id="accountNm" name="accountNm" maxlength="100" placeholder="请输入结算账户名称"  value="" style="width:90%">
 								</td>
 								<td class="td-left">结算账号：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-									<input type="text" id="accountNo" name="accountNo" maxlength="100" placeholder="请输入银行卡号"  value="${custInfo.compMainAcct }" style="width:90%">
+									<input type="text" data-validation="notnull" data-errMsg="结算账号不能为空" id="accountNo" name="accountNo" maxlength="100" placeholder="请输入银行卡号"  value="${custInfo.compMainAcct }" style="width:90%">
 								</td>
 							</tr>
 							<tr>
 								<td class="td-left">结算方式：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-									<select name="clearMode" id="clearMode" style="width:90%;"  >
+									<select name="clearMode" id="clearMode" data-validation="notnull" data-errMsg="结算方式不能为空" style="width:90%;"  >
 										<option value="1">--结算到银行卡--</option>
 										<option value="0">--自主提现--</option>
 									</select>
 								</td>
 								<td class="td-left">卡折类型：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-									<select name="accttp" id="accttp" style="width:90%;"  >
+									<select name="accttp" id="accttp" data-validation="notnull" data-errMsg="卡折类型不能为空" style="width:90%;"  >
 										<option value="00">--借记卡--</option>
 										<option value="01">--存折--</option>
 									</select>
@@ -578,7 +578,7 @@
                             <tr>
 								<td class="td-left">开户省份：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-									<select name="bankProvince" id="bankProvince" class="width-90" onchange="getCity();">
+									<select name="bankProvince" id="bankProvince" data-validation="notnull" data-errMsg="开户省份不能为空" class="width-90" onchange="getCity();">
 	                                    <option value="">--请选择省--</option>
 	                                    <c:if test="${not empty allinPayAreaInfoList }">
 	                                        <c:forEach items="${allinPayAreaInfoList }" var="province">
@@ -593,7 +593,7 @@
 								</td>
 								<td class="td-left">开户城市：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-									<select name="bankCity" id="bankCity" class="width-90" >
+									<select name="bankCity" id="bankCity" data-validation="notnull" data-errMsg="开户城市不能为空" class="width-90" >
 	                                    <option value="">--请选择市--</option>
 	                                </select>
 	                               	<label id="bankCityLabel" class="label-tips"></label>
@@ -602,7 +602,7 @@
 							<tr>
 								<td class="td-left">开户银行：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
-									<select name="branchBank" id="branchBank" style="width-90;" onchange="getbranchBank();">
+									<select name="branchBank" id="branchBank" data-validation="notnull" data-errMsg="开户银行不能为空" style="width-90;" onchange="getbranchBank();">
 										<option value="">--请选择--</option>
 										<c:if test="${not empty bankList }">
 	                                        <c:forEach items="${bankList }" var="bank">
@@ -616,7 +616,7 @@
 								</td>
 	                            <td class="td-left">开户支行<span style="color:red;">(必填)</span></td>
 	                            <td class="td-right"> 
-									<select name="interBankCode" id="interBankCode" class="width-90" >
+									<select name="interBankCode" id="interBankCode" data-validation="notnull" data-errMsg="开户支行不能为空" class="width-90" >
 	                                    <option value="">--请选择支行--</option>
 	                                </select>
 	                               	<label id="interBankCodeLabel" class="label-tips"></label>
@@ -625,7 +625,7 @@
                             <tr>
 								<td class="td-left">结算类型：<span style="color:red;">(必填)</span></td>
 								<td class="td-right">
-									<select name="perEntFlag" id="perEntFlag" style="width-90" >
+									<select name="perEntFlag" id="perEntFlag" data-validation="notnull" data-errMsg="结算类型不能为空" style="width-90" >
 										<option value="">--请选择--</option>
 										<option value="1">--对公--</option>
 										<option value="0">--对私--</option>
@@ -633,7 +633,7 @@
 								</td>
 								<td class="td-left">账户人身份证号码：<span style="color:red;">(必填)</span></td>
 							  	<td class="td-right"> 
-									<input type="text" id="certifyNo" name="v" placeholder="法人与结算账户名不一致且结算账户对私"  value="" style="width:90%">
+									<input type="text" id="certifyNo" name="v"  placeholder="法人与结算账户名不一致且结算账户对私"  value="" style="width:90%">
 								</td>
 							</tr>
 							<tr id="next_id">
@@ -785,6 +785,38 @@
      </div>
 </div>   
 <script type="text/javascript">
+//表单验证组件
+var checkFun = {
+      		notnull : function(value){
+      			if(null == value || "" == value) {
+      				return false;
+      			} else {
+      				return true;
+      			}
+      		}
+      	};
+	
+		//表单验证
+		function formValidation(formId){
+			var flag = false;
+			var form = document.getElementById(formId);
+			var attr = null;
+			$.each(form, function(i, e) {
+				attr = $(e).attr("data-validation");
+				if(attr){
+					if(checkFun[attr](e.value)){
+						flag = true;
+					} else {
+						flag = false;
+						alert($(e).attr("data-errMsg"));
+						return false;
+					}
+				}
+			})
+			return flag;
+		}
+		
+		
 
 	   	/***获取银行所在地区***/
       	function getCity(){
@@ -801,7 +833,7 @@
     				$("#bankCity").html("");
            			for ( var area in cityList) {
            				$("#bankCity").append(
-           						"<option value='"+ cityList[area].areaId +"'>"
+           						"<option value='"+ cityList[area].areaCode +"'>"
            								+ cityList[area].areaName + "</option>"); 
            			}
     			}else{
@@ -832,7 +864,7 @@
            			}
     			}
     			else{
-    				alert("银行和开户城市不能为空");
+    				//alert("银行和开户城市不能为空");
     			}
     		},'json'
     		);	
@@ -853,7 +885,7 @@
     				$("#merchantCity").html("");
            			for ( var area in cityList) {
            				$("#merchantCity").append(
-           						"<option value='"+ cityList[area].areaId +"'>"
+           						"<option value='"+ cityList[area].areaCode +"'>"
            								+ cityList[area].areaName + "</option>"); 
            			}
     			}else{
@@ -885,14 +917,41 @@
 	   	function getMecType(){
       		var mecTypeFlag = $("#mecTypeFlag").val()
       		if("4" == mecTypeFlag){
+      			//个人
       			$("#businessPhotoType").attr("style","display:none");
       			$("#businessPlaceType").attr("style","display:");
+      			//营业执照信息
+      			$("#businessPhotoType1").attr("style","display:none");
+      			$("#businessPhotoType2").attr("style","display:none");
+      			$("#businessPhotoType").attr("style","display:none");
+      			$("#businessPhotoPath").removeAttr("data-validation").removeAttr("data-errMsg");
+      			$("#businessEffectiveTerm").removeAttr("data-validation").removeAttr("data-errMsg");
+      			$("#businessTerm").removeAttr("data-validation").removeAttr("data-errMsg");
       		}else{
       			$("#businessPhotoType").attr("style","display:");
       			$("#businessPlaceType").attr("style","display:none");
+      			//营业执照信息
+      			$("#businessPhotoType1").attr("style","display:");
+      			$("#businessPhotoType2").attr("style","display:");
+      			$("#businessPhotoType").attr("style","display:");
+      			$("#businessPhotoPath").attr("data-validation", "notnull").attr("data-errMsg", "营业执照照片不能为空");
+      			$("#businessEffectiveTerm").attr("data-validation", "notnull").attr("data-errMsg", "营业执照有效期起始值不能为空");
+      			$("#businessTerm").attr("data-validation", "notnull").attr("data-errMsg", "营业执照有效期结束值不能为空");
       		}
       	}
     	$("#submitData").click(function(){
+    		
+    		if(!formValidation('merchantForm')){
+    			return false;
+    		}
+    		
+    		//法人与结算账户名不一致且结算账号对私必填
+    		if(($("#accountNm").val() != $("#representativeName").val()) && $("#perEntFlag").val() == "0"  ){
+    			if($("#certifyNo").val() == null || $("#certifyNo").val() == ""){
+    				alert("账户人身份证号码不能为空");
+    				return false;
+    			}
+    		}
         	
    			//渠道
    			var channelNo = $("#channelCode").val();
@@ -910,18 +969,8 @@
 			var contactPhone = $("#contactPhone").val();
 			//商户地址省
    			var merchantProvince = $("#merchantProvince").val();
-   			if(merchantProvince.length<7){
-      			for(var i=0;i<(7-merchantProvince.length);i++){
-      				merchantProvince ="0" + merchantProvince;
-      			}
-      		}
    			//商户地址市
    			var merchantCity = $("#merchantCity").val();
-   			if(merchantCity.length<7){
-      			for(var i=0;i<(7-merchantCity.length);i++){
-      				merchantCity ="0" + merchantCity;
-      			}
-      		}
    			//商户详细地址
    			var cprRegAddr = $("#cprRegAddr").val();
    			//营业执照名称
@@ -968,11 +1017,6 @@
    			var bankCity = $("#bankCity").val();
    			//开户银行
    			var branchBank = $("#branchBank").val();
-   			if(branchBank.length<5){
-      			for(var i=0;i<(5-branchBank.length);i++){
-      				branchBank ="0" + branchBank;
-      			}
-      		}
    			//开户支行号
    			var interBankCode = $("#interBankCode").val();
    			//开户支行名称
@@ -1028,6 +1072,13 @@
    	   	    		
    	   	    	}
    		   	}
+   	    	
+   	    	//至少选择一个产品
+   	    	if(prodInfoList.length < 1){
+   	    		alert("请至少选择开通一个产品信息");
+   	    		return false;
+   	    	}
+   	    	
    	    	//图片路径
    	    	var certAttribute2Path = $("#legalCertAttribute2Path").val();
    	    	var certAttribute1Path = $("#legalCertAttribute1Path").val();

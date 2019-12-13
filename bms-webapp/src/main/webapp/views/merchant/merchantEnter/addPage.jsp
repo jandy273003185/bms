@@ -134,7 +134,7 @@ function getbranchBank(){
 		if(data.result=="SUCCESS"){
 			var branchBankList = data.branchBankList;
 			
-			 $("#branchBank").html("");
+			$("#branchBank").html("");
 			
 			$("#branchBank").append('<option value="">直接选择或搜索选择</option>');
    			for ( var branchBank in branchBankList) {
@@ -1121,7 +1121,7 @@ function showOpenAccountImage(file){
 						<tr>
 							<td class="td-left">开户银行：<span style="color:red;">（必填)</span></td>
 							<td class="td-right">
-								<select  name="compAcctBank" id="compAcctBank"  class="selectpicker show-tick form-control" data-width="91%" data-live-search="true">
+								<select  name="compAcctBank" id="compAcctBank" onchange="getbranchBank()" class="selectpicker show-tick form-control" data-width="91%" data-live-search="true">
 									<option value="">--请选择--</option>
 									<c:if test="${not empty banklist }">
 										<c:forEach items="${banklist }" var="bank">

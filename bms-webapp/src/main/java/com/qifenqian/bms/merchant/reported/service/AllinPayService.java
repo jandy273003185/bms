@@ -2,6 +2,8 @@ package com.qifenqian.bms.merchant.reported.service;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -133,13 +135,13 @@ public class AllinPayService {
 				prod.setPid((String) cr.getProdInfoList().get(i).get("pid"));
 				prod.setMtrxcode((String) cr.getProdInfoList().get(i).get("mtrxcode"));
 				prod.setFeerate((String) cr.getProdInfoList().get(i).get("feerate"));
-				if(null != cr.getProdInfoList().get(i).get("creditrate")) {
+				if(StringUtils.isNotBlank(cr.getProdInfoList().get(i).get("creditrate").toString())) {
 					prod.setCreditrate((String) cr.getProdInfoList().get(i).get("creditrate"));
 				}
-				if(null != cr.getProdInfoList().get(i).get("lowlimit")) {
+				if(StringUtils.isNotBlank(cr.getProdInfoList().get(i).get("lowlimit").toString())) {
 					prod.setLowlimit((String) cr.getProdInfoList().get(i).get("lowlimit"));
 				}
-				if(null != cr.getProdInfoList().get(i).get("toplimit")) {
+				if(StringUtils.isNotBlank(cr.getProdInfoList().get(i).get("toplimit").toString())) {
 					prod.setToplimit((String) cr.getProdInfoList().get(i).get("toplimit"));
 				}
 				
@@ -174,6 +176,7 @@ public class AllinPayService {
 					reportInfo.setReportStatus("E");
 				}else if("SUCCESS".equals(res.getAuditstatus())) {
 					reportInfo.setReportStatus("O");
+					cr.setReportStatus("00");
 					object.put("result","SUCCESS");
 				}
 				object.put("message",res.getRetmsg());

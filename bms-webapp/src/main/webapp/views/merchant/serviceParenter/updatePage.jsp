@@ -111,7 +111,7 @@ $(function(){
 			});
 		}
 	);
-	$("#agentName").comboSelect();
+//	$("#agentName").comboSelect();
 	$("#custManager").comboSelect();
 });
 
@@ -458,7 +458,7 @@ function addServiceBtn(){
 	var businessTermStart = $("#businessTermStart").val().trim();
 	var businessTermEnd = $("#businessTermEnd").val().trim();
 	var custManager = $("#custManager").val().trim();
-	var agentName = $("#agentName").val().trim();
+//	var agentName = $("#agentName").val().trim();
 	var representativeName = $("#representativeName").val().trim();
 	var representativeCertNo = $("#representativeCertNo").val().trim();
 	var contactName = $("#contactName").val().trim();
@@ -497,7 +497,7 @@ function addServiceBtn(){
             "businessTermStart":     businessTermStart,					// 营业执照有限期
             "businessTermEnd" :      businessTermEnd,					// 营业执照有限截止期
             "custManager":           custManager,						// 客户经理
-            "agentName":             agentName,							// 代理商
+      //      "agentName":             agentName,							// 代理商
             "representativeName":    representativeName,				// 法人姓名
             "representativeCertNo":  representativeCertNo,				// 法人身份证号
             "contactName":           contactName,						// 联系人姓名
