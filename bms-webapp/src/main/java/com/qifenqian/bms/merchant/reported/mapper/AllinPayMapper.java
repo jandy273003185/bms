@@ -10,6 +10,7 @@ import com.qifenqian.bms.merchant.reported.bean.AllinPayProductInfo;
 import com.qifenqian.bms.merchant.reported.bean.Bank;
 import com.qifenqian.bms.merchant.reported.bean.Industry;
 import com.qifenqian.bms.merchant.reported.bean.Province;
+import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantReportInfo;
 
 @MapperScan
@@ -35,5 +36,6 @@ public interface AllinPayMapper {
 
 	void updateTdMerchantProductInfoAllinPay(AllinPayProductInfo prod);
 
+	List<TdMerchantDetailInfo> selectTdMerchantProductInfoAllinPay(TdMerchantDetailInfo detail);
 
 }

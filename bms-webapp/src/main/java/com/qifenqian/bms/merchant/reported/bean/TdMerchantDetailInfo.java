@@ -1,8 +1,6 @@
 package com.qifenqian.bms.merchant.reported.bean;
 
-import java.io.Serializable;
-
-public class TdMerchantDetailInfo implements Serializable{
+public class TdMerchantDetailInfo extends publicBean {
 
 	/**
 	 * 
@@ -563,6 +561,7 @@ public class TdMerchantDetailInfo implements Serializable{
 	public void setBestpayMctNo(String bestpayMctNo) {
 		this.bestpayMctNo = bestpayMctNo;
 	}
+
 	
 	
 }

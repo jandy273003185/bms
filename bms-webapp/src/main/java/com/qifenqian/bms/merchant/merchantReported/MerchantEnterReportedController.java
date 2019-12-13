@@ -13,23 +13,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
+import com.qifenqian.bms.basemanager.merchant.bean.MerchantVo;
+import com.qifenqian.bms.basemanager.merchant.bean.PicturePath;
+import com.qifenqian.bms.basemanager.merchant.service.MerchantEnterService;
 import com.qifenqian.bms.merchant.merchantReported.bean.KFTArea;
 import com.qifenqian.bms.merchant.merchantReported.bean.KFTMccBean;
 import com.qifenqian.bms.merchant.merchantReported.mapper.KftIncomeMapper;
 import com.qifenqian.bms.merchant.merchantReported.service.KFTIncomeService;
-import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
-import com.qifenqian.bms.basemanager.merchant.bean.MerchantVo;
-import com.qifenqian.bms.basemanager.merchant.bean.PicturePath;
-import com.qifenqian.bms.basemanager.merchant.bean.StoreManage;
-import com.qifenqian.bms.basemanager.merchant.mapper.StoreManageMapper;
-import com.qifenqian.bms.basemanager.merchant.service.MerchantEnterService;
-import com.qifenqian.bms.merchant.reported.MerchantReportedPath;
+import com.qifenqian.bms.merchant.merchantReported.service.MerchantEnterReportService;
 import com.qifenqian.bms.merchant.reported.bean.Bank;
 import com.qifenqian.bms.merchant.reported.bean.ChannlInfo;
 import com.qifenqian.bms.merchant.reported.bean.Industry;
 import com.qifenqian.bms.merchant.reported.bean.MerchantCity;
 import com.qifenqian.bms.merchant.reported.bean.Province;
-import com.qifenqian.bms.merchant.reported.bean.SumpayMcc;
 import com.qifenqian.bms.merchant.reported.bean.TbFmTradeInfo;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
 import com.qifenqian.bms.merchant.reported.bean.YQBArea;
@@ -62,7 +59,47 @@ public class MerchantEnterReportedController {
    
    @Autowired
    private MerchantEnterService merchantEnterService;
-	 
+   
+   @Autowired
+   private MerchantEnterReportService merchantEnterReportService;
+   
+   
+   
+	
+   /**
+            *    商户报备列表
+    * @param request
+    * @param response
+    * @param detail
+    * @return
+    */
+ 	@RequestMapping(MerchantEnterReportedPath.LIST)
+ 	public ModelAndView  reportedList(HttpServletRequest request,HttpServletResponse response,TdMerchantDetailInfo detail){
+ 		ModelAndView mv = new ModelAndView();
+ 		/***查询渠道信息***/
+ 		List<ChannlInfo> channlInfoList = crIncomeService.getChannlInfoList();
+ 		/***查询报备信息***/
+ 		List<TdMerchantDetailInfo> reportedList = merchantEnterReportService.getMerchantDetailInfoList(detail);
+ 		/***查询商户信息***/
+ 		TdCustInfo custInfo = new TdCustInfo();
+ 		/***参数回显***/
+ 		mv.addObject("queryBean", detail);
+ 		
+ 		if(null != detail.getMerchantCode()){
+ 			custInfo = fmIncomeMapperDao.getInComeInfo(detail.getMerchantCode());
+ 		}
+ 		if(null!=reportedList && reportedList.size()>0){
+ 			mv.addObject("reportedList", reportedList);
+ 		}
+ 		if(null!=channlInfoList && channlInfoList.size()>0){
+ 			mv.addObject("infoList", channlInfoList);
+ 		}
+ 		if(null!=custInfo){
+ 			mv.addObject("custInfo", custInfo);
+ 		}
+ 		return mv;
+ 	}	   
+ 	
    /**
     * 商户报备查询
     */
@@ -418,37 +455,6 @@ public class MerchantEnterReportedController {
 		mv.addObject("status",status);
 			return mv;
 	}	
-	
-	
-  /**
-    * 商户报备列表
-    */
-	@RequestMapping(MerchantEnterReportedPath.LIST)
-	public ModelAndView  reportedList(HttpServletRequest request,HttpServletResponse response,TdMerchantDetailInfo detail){
-		ModelAndView mv = new ModelAndView();
-		/***查询渠道信息***/
-		List<ChannlInfo> channlInfoList = crIncomeService.getChannlInfoList();
-		/***查询报备信息***/
-		List<TdMerchantDetailInfo> reportedList = fmIncomeService.getMerchantDetailInfoList(detail);
-		/***查询商户信息***/
-		TdCustInfo custInfo = new TdCustInfo();
-		/***参数回显***/
-		mv.addObject("queryBean", detail);
-		
-		if(null != detail.getMerchantCode()){
-			custInfo = fmIncomeMapperDao.getInComeInfo(detail.getMerchantCode());
-		}
-		if(null!=reportedList && reportedList.size()>0){
-			mv.addObject("reportedList", reportedList);
-		}
-		if(null!=channlInfoList && channlInfoList.size()>0){
-			mv.addObject("infoList", channlInfoList);
-		}
-		if(null!=custInfo){
-			mv.addObject("custInfo", custInfo);
-		}
-		return mv;
-	}	   
 	
 	
 	
