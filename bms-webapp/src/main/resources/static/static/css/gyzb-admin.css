@@ -42,3 +42,36 @@
 
 .rate th{text-align:center;}
 .affirm th{text-align:center;}
+
+.img-wrap{
+    width: 100%;
+    margin-top: 5px;
+    clear: both;
+    overflow: hidden;
+}
+.img-wrap>div{
+    width: 25%;
+    float: left;
+    text-align: center;
+}
+.img-wrap>div img{
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin: 0 auto;
+    border:1px solid #efefef;
+}
+.img-wrap>div div{
+    width: 120px;
+    margin: 0 auto;
+    text-align: left;
+    line-height: 2em
+}
+.img-list{
+    width: 100%;
+    line-height: 1.6em;
+    list-style: none;
+}
+.img-list li{
+    list-style: none;
+}

@@ -1,18 +1,23 @@
 package com.qifenqian.bms.basemanager.admanage;
 
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.app.ad.bean.AdManageBean;
-import com.qifenqian.bms.basemanager.admanage.bean.AdManagement;
+import com.qifenqian.bms.basemanager.admanage.bean.*;
 import com.qifenqian.bms.basemanager.admanage.service.AdManagementService;
+import com.qifenqian.bms.basemanager.admanage.service.ShopAdService;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -38,6 +43,8 @@ public class AdManagementController {
 
     @Autowired
     private AdManagementService adManagementService;
+    @Autowired
+    private ShopAdService shopAdService;
 
     /**
      * 显示广告信息列表
@@ -53,14 +60,36 @@ public class AdManagementController {
         mv.addObject("queryBean", queryBean);
         return mv;
     }
+
     /**
      * 添加APP登录广告页信息
      */
     @RequestMapping(AdManagementPath.ADD)
     @ResponseBody
     public String saveAdManagement(AdManagement adManagement) {
-        String result = this.adManagementService.saveAdManagement(adManagement);
         JSONObject json = new JSONObject();
+        json.put("result", "FALSE");
+        if (StringUtils.isBlank(adManagement.getAdName())) {
+            json.put("message", "广告名称不能为空!");
+            return json.toString();
+        }
+        if (StringUtils.isBlank(adManagement.getType())) {
+            json.put("message", "广告类型不能为空!");
+            return json.toString();
+        }
+        if (StringUtils.isBlank(adManagement.getShowTime())) {
+            json.put("message", "广告播放时长不能为空!");
+            return json.toString();
+        }
+        if (StringUtils.isBlank(adManagement.getImagePath())) {
+            json.put("message", "上传路径不能为空!");
+            return json.toString();
+        }
+        if (StringUtils.isBlank(adManagement.getUrl())) {
+            json.put("message", "广告链接不能为空!");
+            return json.toString();
+        }
+        String result = this.adManagementService.saveAdManagement(adManagement);
         json.put("result", result);
         return json.toString();
     }
@@ -71,8 +100,29 @@ public class AdManagementController {
     @RequestMapping(AdManagementPath.UPDATE)
     @ResponseBody
     public String updateAdManagement(AdManagement adManagement) {
-        String result = this.adManagementService.updateAdManagement(adManagement);
         JSONObject json = new JSONObject();
+        json.put("result", "FALSE");
+        if (StringUtils.isBlank(adManagement.getAdName())) {
+            json.put("message", "广告名称不能为空!");
+            return json.toString();
+        }
+        if (StringUtils.isBlank(adManagement.getType())) {
+            json.put("message", "广告类型不能为空!");
+            return json.toString();
+        }
+        if (StringUtils.isBlank(adManagement.getShowTime())) {
+            json.put("message", "广告播放时长不能为空!");
+            return json.toString();
+        }
+        if (StringUtils.isBlank(adManagement.getImagePath())) {
+            json.put("message", "上传路径不能为空!");
+            return json.toString();
+        }
+        if (StringUtils.isBlank(adManagement.getUrl())) {
+            json.put("message", "广告链接不能为空!");
+            return json.toString();
+        }
+        String result = this.adManagementService.updateAdManagement(adManagement);
         json.put("result", result);
         return json.toString();
     }
@@ -93,150 +143,64 @@ public class AdManagementController {
 
 
     /**
-     * 文件上传
-     *
-     * @param request
-     * @param response
-     * @return
+     * @Author LiBin
+     * @Description
+     * @Param
+     * @Return
+     * @Date 2019/12/12 0012 15:36
      */
-    @RequestMapping(AdManagementPath.FILEUPLOAD)
+    @RequestMapping(AdManagementPath.DISTRIBUTION)
     @ResponseBody
-    public String fileUpload(HttpServletRequest request, HttpServletResponse response) {
-        JSONObject object = new JSONObject();
-        String pathName = "";
-        InputStream in = null;
-        FileOutputStream out = null;
-
-        try {
-            // 使用Apache文件上传组件处理文件上传步骤：
-            // 创建一个DiskFileItemFactory工厂
-            DiskFileItemFactory factory = new DiskFileItemFactory();
-            // 创建一个文件上传解析器
-            ServletFileUpload upload = new ServletFileUpload(factory);
-            // 解决上传文件名的中文乱码
-            upload.setHeaderEncoding("UTF-8");
-            List<FileItem> list = upload.parseRequest(request);
-
-            for (FileItem item : list) {
-                String filename = null;
-                if (!item.isFormField()) {
-                    filename = item.getName();
-
-                    String type = filename.substring(filename.lastIndexOf("."));
-                    String[] photoTypes = { ".jpg", ".jpeg", ".gif", ".bmp", ".png" };
-                    boolean isType = false;
-                    for (int i = 0; i < photoTypes.length; i++) {
-                        if (photoTypes[i].equalsIgnoreCase(type)) {
-                            isType = true;
-                            break;
-                        }
-                    }
-                    if (!isType) {
-                        object.put("result", "FAIL");
-                        object.put("message", "文件类型不匹配");
-
-                        return object.toJSONString();
-
-                    }
-                    filename = filename.substring(filename.lastIndexOf(File.separator) + 1);
-
-                    filename = System.currentTimeMillis() + filename;
-                    in = item.getInputStream();
-
-
-                    pathName = updatePath + File.separator + filename;
-
-                    File saveFile = new File(updatePath);
-                    if (!saveFile.exists()) {
-                        saveFile.mkdirs();
-                    }
-                    out = new FileOutputStream(pathName);
-
-                    byte buffer[] = new byte[1024];
-                    int len = 0;
-                    while ((len = in.read(buffer)) > 0) {
-                        out.write(buffer, 0, len);
-                    }
-
-                    item.delete();
-                }
-
-            }
-
-            object.put("result", "SUCCESS");
-            object.put("message", "上传成功");
-            object.put("pathName", pathName);
-
-        } catch (Exception e) {
-
-            object.put("result", "fail");
-            object.put("message", e.getMessage());
-        } finally {
-            try {
-                if (in != null) {
-                    in.close();
-                }
-
-                if (out != null) {
-                    out.close();
-                }
-
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
-
+    public String distributionShopAd(@RequestBody ShopAdDO shopAdDO) {
+        JSONObject json = new JSONObject();
+        json.put("result", "FALSE");
+        if (null == shopAdDO) {
+            json.put("message", "参数不能为空!");
+            return json.toString();
         }
-
-        return object.toJSONString();
-    }
-
-    // 读取服务器图片
-    @RequestMapping(AdManagementPath.IMAGE)
-    protected void service(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String imgPath = request.getParameter("imgPath");
-        if (imgPath != null) {
-            OutputStream os = response.getOutputStream();
-            File file = new File(imgPath);
-            FileInputStream fips = new FileInputStream(file);
-            if (file.exists()) {
-                byte[] btImg = readStream(fips);
-                os.write(btImg);
-                os.flush();
-                if (null != fips) {
-                    fips.close();
-                }
-                if (null != os) {
-                    os.close();
-                }
-
-            }
+        if (CollectionUtils.isEmpty(shopAdDO.getAdDOList())) {
+            json.put("message", "广告信息不能为空!");
+            return json.toString();
         }
+        String result = this.shopAdService.distributionShopAd(shopAdDO);
+        json.put("result", result);
+        return json.toString();
     }
 
     /**
-     * 读取管道中的流数据
+     * 分配广告给商户门店
+     *
+     * @return
      */
-    public byte[] readStream(InputStream inStream) {
-        ByteArrayOutputStream bops = new ByteArrayOutputStream();
-        int data = -1;
-        try {
-            while ((data = inStream.read()) != -1) {
-                bops.write(data);
-            }
-            return bops.toByteArray();
-        } catch (Exception e) {
-            return null;
-        } finally {
-            if (null != bops) {
-                try {
-                    bops.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+    @RequestMapping(AdManagementPath.ADCUSTOMLIST)
+    @ResponseBody
+    public String findAdCustomList(String customName) {
+        JSONObject json = new JSONObject();
+        List<AdCustInfoVO> adCustomList = this.shopAdService.findAdCustomList(customName);
+        json.put("result", "SUCCESS");
+        json.put("data", JSONObject.toJSON(adCustomList));
+        return json.toString();
+    }
 
+    /**
+     * 分配广告给商户门店
+     *
+     * @return
+     */
+    @RequestMapping(AdManagementPath.ADALLCUSTOMLIST)
+    @ResponseBody
+    public String findAdAllCustomList(String customName, String shopName) {
+        JSONObject json = new JSONObject();
+        if (null != customName) {
+            customName = customName.trim();
         }
+        if (null != shopName) {
+            shopName = shopName.trim();
+        }
+        List<AdAllCustInfoVO> adAllCustInfoVOList = this.shopAdService.findAdAllCustomList(customName, shopName);
+        json.put("result", "SUCCESS");
+        json.put("data", JSONObject.toJSON(adAllCustInfoVOList));
+        return json.toString();
     }
 
 }

@@ -24,6 +24,9 @@
             <if test="status != null and status != '' ">
                 AND status = #{status}
             </if>
+            <if test="type != null and type != '' ">
+                AND TYPE = #{type}
+            </if>
              <if test="isValid != null and isValid != '' ">
                 AND IS_VALID = #{isValid}
             </if>

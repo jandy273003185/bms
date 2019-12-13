@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qifenqian.bms.basemanager.admanage.mapper.ShopAdMapper">
+
+    <resultMap id="CustomInfoResultMap" type="com.qifenqian.bms.basemanager.admanage.bean.AdCustInfoVO">
+        <id column="CUST_ID" property="custId" jdbcType="VARCHAR" />
+        <result column="CUST_NAME" property="custName" jdbcType="VARCHAR" />
+
+        <collection property="adShopInfoVOList" ofType="com.qifenqian.bms.basemanager.admanage.bean.AdShopInfoVO">
+            <id column="SHOP_ID" property="shopId" jdbcType="VARCHAR" />
+            <result column="SHOP_NAME" property="shopName" jdbcType="VARCHAR" />
+        </collection>
+    </resultMap>
+
+    <select id="selectCustInfoOnDistributionAd" resultMap="CustomInfoResultMap">
+        SELECT
+            ci.CUST_ID,
+            ci.CUST_NAME,
+            s.SHOP_ID,
+            s.SHOP_NAME
+        FROM
+            td_cust_info ci
+            LEFT JOIN td_shop s ON ci.CUST_ID = s.MCH_ID
+        <where>
+            <if test="customName != null and customName != '' ">
+                AND CUST_NAME like CONCAT('%',#{customName})
+            </if>
+        </where>
+    </select>
+    <select id="selectAllCustInfoOnDistributionAd" resultType="com.qifenqian.bms.basemanager.admanage.bean.AdAllCustInfoVO">
+        SELECT
+            ci.CUST_ID,
+            ci.CUST_NAME,
+            s.SHOP_ID,
+            s.SHOP_NAME,
+            s.SHOP_NO,
+            s.ADDR
+        FROM
+            td_cust_info ci
+            LEFT JOIN td_shop s ON ci.CUST_ID = s.MCH_ID
+        <where>
+            <if test="customName != null and customName != '' ">
+                AND CUST_NAME like CONCAT('%',#{customName},'%')
+            </if>
+             <if test="shopName != null and shopName != '' ">
+                AND SHOP_NAME like CONCAT('%',#{shopName},'%')
+            </if>
+        </where>
+    </select>
+
+
+
+    <!-- 批量插入 -->
+    <insert id ="batchSaveShopAd" parameterType="java.util.List" >
+        INSERT INTO td_shop_ad
+        (SHOP_AD_ID, MCH_ID, SHOP_ID,AD_ID,SORT_NO,CREATE_ID,CREATE_TIME, MODIFY_ID, MODIFY_TIME)
+        VALUES
+        <foreach collection ="list" item="item" index= "index" separator =",">
+            (
+            #{item.shopAdId},
+            #{item.mchId},
+            #{item.shopId},
+            #{item.adId},
+            #{item.sortNo},
+            #{item.createId},
+            #{item.createTime},
+            #{item.modifyId},
+            #{item.modifyTime}
+            )
+        </foreach >
+    </insert>
+
+<!--    批量删除-->
+    <delete id="batchDeleteShopAd" parameterType="java.util.List" >
+        DELETE FROM  td_shop_ad  WHERE SHOP_ID IN
+        <foreach collection="mchShopDOList" item="item" open="(" separator="," close=")">
+            #{item.shopId}
+        </foreach>
+    </delete>
+
+
+</mapper>

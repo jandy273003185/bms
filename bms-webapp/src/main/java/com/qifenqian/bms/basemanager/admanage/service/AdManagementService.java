@@ -1,6 +1,7 @@
 package com.qifenqian.bms.basemanager.admanage.service;
 
 import com.qifenqian.bms.basemanager.admanage.bean.AdManagement;
+import com.qifenqian.bms.basemanager.admanage.bean.ShopAd;
 import com.qifenqian.bms.basemanager.admanage.dao.AdManagementDao;
 import com.qifenqian.bms.basemanager.utils.GenSN;
 import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
@@ -8,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,8 +18,10 @@ public class AdManagementService {
 
     @Autowired
     private AdManagementDao adManagementDao;
+
     /**
      * 获取广告列表
+     *
      * @param queryBean
      * @return
      */
@@ -38,7 +42,7 @@ public class AdManagementService {
         try {
             adManagementDao.saveAdManagement(adManagement);
             return "SUCCESS";
-        }catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return "FALSE";
         }
@@ -46,9 +50,10 @@ public class AdManagementService {
 
     public String updateAdManagement(AdManagement adManagement) {
         try {
+            adManagement.setModifyId(String.valueOf(WebUtils.getUserInfo().getUserId()));
             adManagementDao.updateAdManagement(adManagement);
             return "SUCCESS";
-        }catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return "FALSE";
         }

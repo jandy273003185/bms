@@ -28,6 +28,19 @@
             height: 100px;
             margin: 10 10 10 10;
         }
+
+        table tr td {
+            word-wrap: break-word;
+            word-break: break-all;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        .displayUl {
+            display: none;
+        }
     </style>
 </head>
 
@@ -124,6 +137,15 @@
 													<i class="icon-plus-sign icon-on-right bigger-110"></i>
 												</button>
                                             </gyzbadmin:function>
+                                            <gyzbadmin:function
+                                                    url="<%=AdManagementPath.BASE + AdManagementPath.DISTRIBUTION%>">
+												<button id="distributionModal"
+                                                        class="btn btn-purple btn-sm   distributionAdButton"
+                                                        data-toggle='modal' data-target="#distributionAdModal">
+													发布广告
+													<i class="icon-plus-sign icon-on-right bigger-110"></i>
+												</button>
+                                            </gyzbadmin:function>
 											
 										</span>
                                     </td>
@@ -137,7 +159,10 @@
                             <table id="sample-table-2" class="list-table">
                                 <thead>
                                 <tr>
-                                    <th width="1%"><input type="checkbox" class="i-checks" id="adManagementCheck"/></th>
+                                    <th width="1%">
+                                        <input type="checkbox" name="adManagementCheck" id="adManagementCheck"
+                                               title="全选"/>
+                                    </th>
                                     <th width="10%">广告名</th>
                                     <th width="15%">图片路径</th>
                                     <th width="15%">链接地址</th>
@@ -155,7 +180,10 @@
                                 <tbody id="adManagementCheckList">
                                 <c:forEach items="${adList}" var="ad">
                                     <tr class="ad">
-                                        <td><input class="i-checks" type="checkbox"></td>
+                                        <td>
+                                            <input type="checkbox" name="adManagementDeposit" id="adManagementDeposit"
+                                                   value="${ad.adId}#${ad.adName}#${ad.type}#${ad.showTime}#${ad.url}"/>
+                                        </td>
                                         <td>
                                             <input type="hidden" name="adId" id="adId">
                                                 ${ad.adName }
@@ -376,61 +404,257 @@
     </div>
 </div><!-- /.modal -->
 
-<!-- 图片预览 -->
-<div class="modal fade" id="previewImageModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel"
+<div class="modal fade" id="distributionAdModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
-    <div class="modal-dialog" style="width:60%;height:80%;">
-        <div id="showImageDiv" style="width:100%;height:100%;">
-            <img id="showImage" style="width:100%;height:100%;">
+    <div class="modal-dialog" style="width:50%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">广告发布</h4>
+            </div>
+            <div class="modal-body">
+
+                <div border="1" class="modal-input-table" style="width: 100%;">
+                    <div id="distributionAdDIV">
+                        <div style="font-size: 18px;background:rgb(67,142,185);color: #FFF">广告素材预览</div>
+                        <div class="img-wrap" id="modalImg"></div>
+                    </div>
+                    <div id="distributionAdCustDIV">
+                        <div style="font-size: 18px;background:rgb(67,142,185);color: #FFF">商户门店选择
+                            <input type="checkbox" checked="checked" id="checkAllCust" onclick="checkAllCust()"
+                                   style="margin-right: 80px;float: right"><label
+                                    style="font-size: 14px;float:right">是否全选门店</label>
+                        </div>
+                        <div id="distributionAdCustListDIV" style="display: none">
+                            <div>
+                                <table class="search-table">
+                                    <tr>
+                                        <td class="td-left" width="10%">商户名称</td>
+                                        <td class="td-right" width="10%">
+                                                <span class="input-icon">
+                                                    <input type="text" name="custName" id="custName" size="35">
+                                                    <i class="icon-leaf blue"></i>
+                                                </span>
+                                        </td>
+                                        <td class="td-left" width="10%">门店名称</td>
+                                        <td class="td-right" width="10%">
+                                                <span class="input-icon">
+                                                    <input type="text" name="shopName" id="shopName" size="35">
+                                                    <i class="icon-leaf blue"></i>
+                                                </span>
+                                        </td>
+                                        <td align="center">
+                                                <span class="input-group-btn">
+                                                    <gyzbadmin:function
+                                                            url="<%=AdManagementPath.BASE + AdManagementPath.ADALLCUSTOMLIST %>">
+                                                        <button type="button" onclick="findCustInfoList()"
+                                                                class="btn btn-purple btn-sm">
+                                                            查询
+                                                            <i class="icon-search icon-on-right bigger-110"></i>
+                                                        </button>
+                                                    </gyzbadmin:function>
+                                                </span>
+                                            <span class="input-group-btn">
+                                                        <button type="button" onclick="findCustInfoListReset()"
+                                                                class="btn btn-purple btn-sm">
+                                                            清空
+                                                            <i class="icon-search icon-on-right bigger-110"></i>
+                                                        </button>
+                                                </span>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <%--                                <div>--%>
+                                <%--                                    <table border class="list-table">--%>
+                                <%--                                        --%>
+                                <%--                                    </table>--%>
+                                <%--                                </div>--%>
+                                <div style="overflow-y: auto;height: 300px">
+                                    <table id="distributionAdCustListTable" border class="list-table">
+                                        <thead>
+                                        <tr>
+                                            <th width="1%">
+                                                <input type="checkbox" name="distributionAdCustListTableCheck"
+                                                       id="distributionAdCustListTableCheck"
+                                                       title="全选"/>
+                                            </th>
+                                            <th width="10%">商户名称</th>
+                                            <th width="15%">门店编号</th>
+                                            <th width="15%">门店名称</th>
+                                            <th width="25%">地址</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="distributionAdCustListTableBody"/>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <ul class="custInfoUl"
+                                style="overflow: auto;margin-left: 50px;margin-top: 5px">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary distributionAdSubmit">提交</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div>
+    </div><!-- /.modal -->
+
+
+    <!-- 图片预览 -->
+    <div class="modal fade" id="previewImageModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" style="width:60%;height:80%;">
+            <div id="showImageDiv" style="width:100%;height:100%;">
+                <img id="showImage" style="width:100%;height:100%;">
+            </div>
         </div>
     </div>
-</div>
 </body>
 <script type="text/javascript">
-    function loadAd() {
-        $(".search-table #isValid").val($(".search-table #isValidTemp").val());
-    }
+
 
     $(function () {
-        $("#adManagementCheck").click(function () {
-            debugger
-            var allLength = $("#adManagementCheckList input").length;
-            var checkedLength = $("#adManagementCheckList input:checked").length;
-            // alert("allLength" + allLength);
-            // alert("checkedLength" + checkedLength);
-            if (allLength == checkedLength) {
-                $("#adManagementCheck").prop("checked", true);
-            } else {
-                $("#adManagementCheck").prop("checked", false);
-            }
+        /**
+         *声明 广告发布的参数集合
+         **/
+        var adDOList = [];
+        var mchShopDOList = [];
+        /**
+         * 取数据匹配
+         **/
+        var ads = ${adList};
+        var adList = $("tr.ad");
+        $.each(ads, function (i, value) {
+            $.data(adList[i], "ad", value);
         });
-    })
-
-    $(function () {
-
+        /**
+         * 清除数据
+         * */
         $('#clearAdvetis').click(function () {
             $(".search-table #adName").val('');
             $(".search-table #imagePath").val('');
             $(".search-table #isValid").val('');
         });
 
-        var ads = ${adList};
-        var adList = $("tr.ad");
-        $.each(ads, function (i, value) {
-            $.data(adList[i], "ad", value);
+        /**
+         * @Author LiBin
+         * @Description 推送广告界面打开并赋值
+         * @Param
+         * @Return
+         * @Date 2019/12/12 0012 18:10
+         */
+        $('.distributionAdButton').click(function () {
+            $('#modalImg').html('');
+            if ($("input[type='checkbox'][name='adManagementDeposit']").is(':checked') == false) {
+                $.gyzbadmin.alertFailure("请选择广告");
+                return false;
+            }
+            var settleObj = document.getElementsByName('adManagementDeposit');
+            var num = 0;
+            var payTypeNum = 0;
+            for (var i = 0; i < settleObj.length; i++) {
+                if (settleObj[i].checked) {
+                    num++;
+                    var values = settleObj[i].value.split('#');
+                    var distributionAdType = values[2];
+                    if (distributionAdType == '1') {
+                        payTypeNum++;
+                    }
+                }
+            }
+            if (num > 4) {
+                $.gyzbadmin.alertFailure("最多选择四条广告");
+                return false;
+            }
+            if (payTypeNum > 1) {
+                $.gyzbadmin.alertFailure("最多选一条支付广告");
+                return false;
+            }
+            if (payTypeNum == 0 && num == 4) {
+                $.gyzbadmin.alertFailure("最多选三条轮播广告和一条支付广告");
+                return false;
+            }
+
+            var sortNo = 1;
+            for (var i = 0; i < settleObj.length; i++) {
+                if (settleObj[i].checked) {
+                    var values = settleObj[i].value.split('#');
+                    var distributionAdId = values[0];
+                    var distributionAdName = values[1];
+                    var distributionAdType = values[2];
+                    var distributionAdShowTime = values[3];
+                    var distributionAdUrl = values[4];
+
+                    if (distributionAdType == '0') {
+                        distributionAdType = '轮播';
+                    } else if (distributionAdType == "1") {
+                        distributionAdType = '支付';
+                    }
+                    distributionAdType = distributionAdType
+                    var modalImgHtm = "<div class='td-left'>";
+                    modalImgHtm += "<a data-toggle='modal' class='tooltip-success' data-target= '#previewImageModal'>";
+                    modalImgHtm += "<img onclick='bigImg(this)' src=" + window.Constants.ContextPath + distributionAdUrl + ">";
+                    modalImgHtm += "</a>";
+                    modalImgHtm += "<div ><label>广告类型 : " + distributionAdType + "</label></div>";
+                    modalImgHtm += "<div><label>广告名称 : " + distributionAdName + "</label></div>";
+                    modalImgHtm += "</div>";
+                    $('#modalImg').append(modalImgHtm);
+                    /**
+                     * 赋值发布广告参数信息
+                     **/
+                    var adDO = {
+                        adId: distributionAdId,
+                        sortNo: sortNo
+                    }
+                    adDOList.push(adDO);
+                    sortNo++;
+                }
+            }
+            <%--var customName = "";--%>
+            <%--$.ajax({--%>
+            <%--    type: "POST",--%>
+            <%--    dataType: "json",--%>
+            <%--    url: window.Constants.ContextPath + '<%=AdManagementPath.BASE + AdManagementPath.ADCUSTOMLIST%>',--%>
+            <%--    data: {--%>
+            <%--        customName: customName--%>
+            <%--    },--%>
+            <%--    success: function (data) {--%>
+            <%--        $.unblockUI();--%>
+            <%--        if (data.result == "SUCCESS") {--%>
+            <%--            var adCustomInfos = data.data;--%>
+
+            <%--            /* 生成商户门店树 */--%>
+            <%--            var htm = '';--%>
+            <%--            htm = menu(adCustomInfos);--%>
+
+            <%--            $("#distributionAdModal .custInfoUl").html(htm);--%>
+            <%--            /* ul 样式*/--%>
+            <%--            $("#distributionAdModal .custInfoUl ul").toggleClass("displayUl");--%>
+
+            <%--            $("#distributionAdModal .custInfoUl > li .textClass").click(function () {--%>
+            <%--                $(this).parent().children("ul").toggleClass("displayUl");--%>
+            <%--            });--%>
+            <%--            /* 级联选择 */--%>
+            <%--            $("#distributionAdModal input[name='chk']").click(function () {--%>
+            <%--                $(this).parent("li").find('input[name="chk"]').prop("checked", this.checked);--%>
+            <%--            });--%>
+            <%--        }--%>
+            <%--    }--%>
+            <%--});--%>
+
         });
 
-        // $('.certAttribute1Click').click(function () {
-        //     var divObj = document.getElementById("showImageDiv");
-        //     var imageObj = document.getElementById("showImage");
-        //     var obj = document.getElementById("certAttribute1");
-        //     return previewImage(divObj, imageObj, obj);
-        // });
-
+        /**
+         * 编辑点击赋值
+         **/
         $('.updateAdClick').click(function () {
-
             var ad = $.data($(this).parent().parent()[0], "ad");
-
             $('#updateAdModal').on('show.bs.modal', function () {
                 $("#updateAdModal #businessPhotoImageDiv").show();
                 <%--$("#updateAdModal #businessPhotoImageDiv").attr("src", "<%=request.getContextPath()+AdManagementPath.BASE + AdManagementPath.IMAGE %>?adId=" + ad.adId + "");--%>
@@ -442,8 +666,6 @@
                 $("#updateAdModal #isValid").val(ad.isValid);
                 $("#updateAdModal #showTime").val(ad.showTime);
                 $("#updateAdModal #type_").val(ad.type);
-
-
             })
             $('#updateAdModal').on('hide.bs.modal', function () {
                 $("#updateAdModal #adId").val('');
@@ -458,16 +680,14 @@
         })
 
 
-        /**新增**/
+        /** 更新按钮提交 **/
         $('.updateAdBtn').click(function () {
-
             var adName = $("#updateAdModal #adName").val();
             if (kong.test(adName)) {
                 $.gyzbadmin.alertFailure("广告名不可为空");
                 $("#updateAdModal #adName").focus();
                 return;
             }
-
             var isValid = $("#updateAdModal #isValid").val();
             if (kong.test(isValid)) {
                 $.gyzbadmin.alertFailure("状态不可为空");
@@ -594,7 +814,200 @@
 
         });
 
+
+        /**
+         * @Author LiBin
+         * @Description 发布广告提交
+         * @Param
+         * @Return
+         * @Date 2019/12/12 0012 16:08
+         */
+        $('.distributionAdSubmit').click(function () {
+
+            // $("#distributionAdModal .class_ad_shop input[name='chk']").each(function (index, item) {
+            //     if (item.checked) {
+            //         var mchShopDO = {
+            //             shopId: item.value
+            //         }
+            //         mchShopDOList.push(mchShopDO);
+            //     }
+            // })
+            var checkValue = $('#checkAllCust').prop('checked');
+            if (!checkValue) {
+                $('#distributionAdCustListTableBody input[type="checkbox"]').each(function (index, item) {
+                    if (item.checked) {
+                        var values = item.value.split('#');;
+                        var mchShopDO = {
+                            mchId: values[0],
+                            shopId: values[1]
+                        }
+                        mchShopDOList.push(mchShopDO);
+                    }
+                })
+            }
+            if (!checkValue && mchShopDOList.length < 1) {
+                $.gyzbadmin.alertFailure("请选择商户门店不可为空");
+                return false;
+            }
+            var shopAdDO = {
+                adDOList: adDOList,
+                mchShopDOList: mchShopDOList
+            }
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                url: window.Constants.ContextPath + '<%=AdManagementPath.BASE + AdManagementPath.DISTRIBUTION %>',
+                data: JSON.stringify(shopAdDO),
+                success: function (data) {
+                    $.unblockUI();
+                    if (data.result == "SUCCESS") {
+                        $.gyzbadmin.alertSuccess("发布成功！", function () {
+                            $("#distributionAdModal").modal("hide");
+                        }, function () {
+                            window.location.reload();
+                        });
+                    } else {
+                        $.gyzbadmin.alertFailure("发布失败！" + data.message);
+                    }
+                }
+            });
+        });
+
+        /**
+         * @Author LiBin
+         * @Description 全选反选
+         * @Param
+         * @Return
+         * @Date 2019/12/12 0012 21:56
+         */
+        $('#distributionAdCustListTableCheck').click(function () {
+            var b = $('#distributionAdCustListTableBody input[type="checkbox"]');
+            if ($(this).prop('checked')) {
+                b.prop('checked', true);
+            } else {
+                b.prop('checked', false);
+            }
+        });
+        $('#adManagementCheck').click(function () {
+            var b = $('#adManagementCheckList input[type="checkbox"]');
+            if ($(this).prop('checked')) {
+                b.prop('checked', true);
+            } else {
+                b.prop('checked', false);
+            }
+        });
     });
+
+    /**
+     * @Author LiBin
+     * @Description 门店判断是否选择
+     * @Param
+     * @Return
+     * @Date 2019/12/12 0012 20:46
+     */
+    function checkAllCust() {
+        mchShopDOList = [];
+        var checkValue = $('#checkAllCust').prop('checked');
+        if (checkValue) {
+            $("#distributionAdCustListDIV").hide();
+            $('#distributionAdCustListTableBody').html('');
+        } else {
+            $("#distributionAdCustListDIV").show();
+        }
+    }
+
+    /**
+     * @Author LiBin
+     * @Description 重置
+     * @Param
+     * @Return
+     * @Date 2019/12/12 0012 21:44
+     */
+    function findCustInfoListReset() {
+        $('#distributionAdCustDIV #custName').val('');
+        $('#distributionAdCustDIV #shopName').val('');
+        $('#distributionAdCustListTableBody').html('');
+    }
+
+    /**
+     * @Author LiBin
+     * @Description 查询商户信息
+     * @Param
+     * @Return
+     * @Date 2019/12/12 0012 20:46
+     */
+    function findCustInfoList() {
+        var custName = $('#distributionAdCustDIV #custName').val();
+        var shopName = $('#distributionAdCustDIV #shopName').val();
+        if (kong.test(custName) && kong.test(shopName)) {
+            $.gyzbadmin.alertFailure("商户和门店选一个查询!");
+            return;
+        }
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: window.Constants.ContextPath + '<%=AdManagementPath.BASE + AdManagementPath.ADALLCUSTOMLIST%>',
+            data: {
+                customName: custName,
+                shopName: shopName
+            },
+            success: function (data) {
+                $.unblockUI();
+                if (data.result == "SUCCESS") {
+                    // console.log(JSON.stringify(data.data))
+
+                    var str = '';
+                    data.data.forEach(ele => {
+                        str += "<tr>";
+                        str += "<td><input type='checkbox' name = 'distributionAdCustListTableCheck' id='distributionAdCustListTableCheckValue' value='" + ele.custId + "#" + ele.shopId + "'/></td>";
+                        str += "<td>" + ele.custName + "</td>";
+                        str += "<td>" + ele.shopNo + "</td>";
+                        str += "<td>" + ele.shopName + "</td>";
+                        str += "<td>" + ele.addr + "</td>";
+                        str += "/<tr>";
+                    });
+                    $('#distributionAdCustListTableBody').html(str);
+                }
+            }
+        });
+    }
+
+    /**
+     * @Author LiBin
+     * @Description 动态渲染商户
+     * @Param
+     * @Return
+     * @Date 2019/12/12 0012 16:08
+     */
+    function menu(object) {
+        var htm = '';
+        if (null != object && object.length > 0) {
+            for (var i = 0; i < object.length; i++) {
+                var adCustInfoVO = object[i];
+                var adShopInfoVOList = adCustInfoVO.adShopInfoVOList;
+                htm = htm + '<li><input type="checkbox" name="chk" value=' + adCustInfoVO.custId + '><h class="textClass">' + adCustInfoVO.custName + '</h>';
+                if (adShopInfoVOList != null && adShopInfoVOList.length > 0) {
+                    var subHtm = '<ul>';
+                    for (var j = 0; j < adShopInfoVOList.length; j++) {
+                        var adShopInfoVO = adShopInfoVOList[j];
+                        if (adShopInfoVO == null || adShopInfoVO == void 0 || adShopInfoVO.shopId == null || adShopInfoVO.shopId == void 0) {
+                            continue;
+                        }
+                        subHtm += '<li class="class_ad_shop"><input type="checkbox" name="chk" value=' + adShopInfoVO.shopId + '><h class="textClass">' + adShopInfoVO.shopName + '</h></li>'
+                    }
+                    subHtm += '</ul>';
+                    htm = htm + subHtm;
+                }
+                htm = htm + '</li>';
+            }
+        }
+        return htm;
+    }
+
+    function loadAd() {
+        $(".search-table #isValid").val($(".search-table #isValidTemp").val());
+    }
 
     function bigImg(obj) {
         $('#showImageDiv #showImage').attr("src", obj.src);
