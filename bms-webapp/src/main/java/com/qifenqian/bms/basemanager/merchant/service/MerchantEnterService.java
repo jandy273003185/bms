@@ -357,23 +357,23 @@ public class MerchantEnterService {
 		//公众号页面截图
 		custScan.setCertifyType("32");
 		String mpAppScreenShotsPath = findPicturePath(custScan);
-		picturePath.setSignaturePath("/pic/" + mpAppScreenShotsPath);
+		picturePath.setMpAppScreenShotsPath("/pic/" + mpAppScreenShotsPath);
 		//小程序页面截图
 		custScan.setCertifyType("33");
 		String miniprogramAppidPath = findPicturePath(custScan);
-		picturePath.setSignaturePath("/pic/" + miniprogramAppidPath);
+		picturePath.setMiniprogramAppidPath("/pic/" + miniprogramAppidPath);
 		//APP截图
 		custScan.setCertifyType("34");
 		String appAppidPath = findPicturePath(custScan);
-		picturePath.setSignaturePath("/pic/" + appAppidPath);
+		picturePath.setAppAppidPath("/pic/" + appAppidPath);
 		//网站授权函
 		custScan.setCertifyType("35");
 		String webUrlPath = findPicturePath(custScan);
-		picturePath.setSignaturePath("/pic/" + webUrlPath);
+		picturePath.setWebUrlPath("/pic/" + webUrlPath);
 		//23其他资料照1
 		custScan.setCertifyType("23");
 		String otherMaterialPath = findPicturePath(custScan);
-		picturePath.setSignaturePath("/pic/" + otherMaterialPath);
+		picturePath.setOtherMaterialPath("/pic/" + otherMaterialPath);
 		//15 非法人结算授权函
 		custScan.setCertifyType("15");
 		String letterOfAuthPath = findPicturePath(custScan);
@@ -381,7 +381,7 @@ public class MerchantEnterService {
 		//37经营场所证明文件
 		custScan.setCertifyType("37");
 		String businessPlacePath = findPicturePath(custScan);
-		picturePath.setLetterOfAuthPath("/pic/" + businessPlacePath);
+		picturePath.setBusinessPlacePath("/pic/" + businessPlacePath);
 		return picturePath;
 				
 	}
