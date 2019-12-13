@@ -684,29 +684,29 @@ public class MerchantReportsController {
 							logger.info("开通微信渠道产品状态：{}", saveChannel ? "成功" : "失败");
 							
 							//是否分账
-							List<TdMerchantSettleInfo> merchantSettleInfos = merchantProfitSharingService.ListTdMerchantSettleInfoByCustId(custInfo.getCustId());
-							if (null != merchantSettleInfos && merchantSettleInfos.size() > 0) {
-								for (TdMerchantSettleInfo merchantSettleInfo : merchantSettleInfos) {
-									MerchantSubAccouontBean weChatMerchantSubAccouont = new MerchantSubAccouontBean();
-									weChatMerchantSubAccouont.setChannelCode("WX");
-									weChatMerchantSubAccouont.setCustId(custInfo.getCustId());
-									weChatMerchantSubAccouont.setOutMerchantCode(registQueryResp.getSubMchId());
-									//微信分账接收方类型
-									weChatMerchantSubAccouont.setSubAccountType(merchantSettleInfo.getWxTransInType());
-									//微信分账接收方账号
-									weChatMerchantSubAccouont.setAccount(merchantSettleInfo.getWxTransInAccount());
-									//微信分账接收方全称
-									weChatMerchantSubAccouont.setAccountName(merchantSettleInfo.getWxTransInName());
-									//与分账方关系类型
-									weChatMerchantSubAccouont.setRelationType(merchantSettleInfo.getWxRelationType());
-									//分账描述
-									weChatMerchantSubAccouont.setDesc(merchantSettleInfo.getSettleDesc());
-									//分账百分比费率
-									weChatMerchantSubAccouont.setRate(merchantSettleInfo.getSettleRate());
-									//添加微信分账
-									merchantSubAccountService.insterSubAccount(weChatMerchantSubAccouont);
-								}
-							}
+//							List<TdMerchantSettleInfo> merchantSettleInfos = merchantProfitSharingService.ListTdMerchantSettleInfoByCustId(custInfo.getCustId());
+//							if (null != merchantSettleInfos && merchantSettleInfos.size() > 0) {
+//								for (TdMerchantSettleInfo merchantSettleInfo : merchantSettleInfos) {
+//									MerchantSubAccouontBean weChatMerchantSubAccouont = new MerchantSubAccouontBean();
+//									weChatMerchantSubAccouont.setChannelCode("WX");
+//									weChatMerchantSubAccouont.setCustId(custInfo.getCustId());
+//									weChatMerchantSubAccouont.setOutMerchantCode(registQueryResp.getSubMchId());
+//									//微信分账接收方类型
+//									weChatMerchantSubAccouont.setSubAccountType(merchantSettleInfo.getWxTransInType());
+//									//微信分账接收方账号
+//									weChatMerchantSubAccouont.setAccount(merchantSettleInfo.getWxTransInAccount());
+//									//微信分账接收方全称
+//									weChatMerchantSubAccouont.setAccountName(merchantSettleInfo.getWxTransInName());
+//									//与分账方关系类型
+//									weChatMerchantSubAccouont.setRelationType(merchantSettleInfo.getWxRelationType());
+//									//分账描述
+//									weChatMerchantSubAccouont.setDesc(merchantSettleInfo.getSettleDesc());
+//									//分账百分比费率
+//									weChatMerchantSubAccouont.setRate(merchantSettleInfo.getSettleRate());
+//									//添加微信分账
+//									merchantSubAccountService.insterSubAccount(weChatMerchantSubAccouont);
+//								}
+//							}
 							
 							object.put("result", "SUCCESS");
 							object.put("message", "商户审核成功");
@@ -846,25 +846,25 @@ public class MerchantReportsController {
 					logger.info("开通支付宝渠道产品状态：{}", saveChannel ? "成功" : "失败");
 					
 					//是否分账
-					List<TdMerchantSettleInfo> merchantSettleInfos = merchantProfitSharingService.ListTdMerchantSettleInfoByCustId(custInfo.getCustId());
-					if (null != merchantSettleInfos && merchantSettleInfos.size() > 0) {
-						for (TdMerchantSettleInfo merchantSettleInfo : merchantSettleInfos) {
-							MerchantSubAccouontBean aliPayMerchantSubAccouont = new MerchantSubAccouontBean();
-							aliPayMerchantSubAccouont.setChannelCode("ALIPAY");
-							aliPayMerchantSubAccouont.setCustId(custInfo.getCustId());
-							aliPayMerchantSubAccouont.setSubAccountType("loginName");
-							//分账接收方帐号
-							aliPayMerchantSubAccouont.setAccount(merchantSettleInfo.getAlipayTransInAccount());
-							//支付宝分账方全称
-							aliPayMerchantSubAccouont.setAccountName(merchantSettleInfo.getAlipayTransOutName());
-							//分账关系描述
-							aliPayMerchantSubAccouont.setDesc(merchantSettleInfo.getSettleDesc());
-							//分账百分比费率
-							aliPayMerchantSubAccouont.setRate(merchantSettleInfo.getSettleRate());
-							//添加支付宝分账
-							merchantSubAccountService.insterSubAccount(aliPayMerchantSubAccouont);
-						}
-					}
+//					List<TdMerchantSettleInfo> merchantSettleInfos = merchantProfitSharingService.ListTdMerchantSettleInfoByCustId(custInfo.getCustId());
+//					if (null != merchantSettleInfos && merchantSettleInfos.size() > 0) {
+//						for (TdMerchantSettleInfo merchantSettleInfo : merchantSettleInfos) {
+//							MerchantSubAccouontBean aliPayMerchantSubAccouont = new MerchantSubAccouontBean();
+//							aliPayMerchantSubAccouont.setChannelCode("ALIPAY");
+//							aliPayMerchantSubAccouont.setCustId(custInfo.getCustId());
+//							aliPayMerchantSubAccouont.setSubAccountType("loginName");
+//							//分账接收方帐号
+//							aliPayMerchantSubAccouont.setAccount(merchantSettleInfo.getAlipayTransInAccount());
+//							//支付宝分账方全称
+//							aliPayMerchantSubAccouont.setAccountName(merchantSettleInfo.getAlipayTransOutName());
+//							//分账关系描述
+//							aliPayMerchantSubAccouont.setDesc(merchantSettleInfo.getSettleDesc());
+//							//分账百分比费率
+//							aliPayMerchantSubAccouont.setRate(merchantSettleInfo.getSettleRate());
+//							//添加支付宝分账
+//							merchantSubAccountService.insterSubAccount(aliPayMerchantSubAccouont);
+//						}
+//					}
 					
 					object.put("result", "SUCCESS");
 					object.put("message", "商户审核成功");
