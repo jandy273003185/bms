@@ -31,10 +31,10 @@
                 AND IS_VALID = #{isValid}
             </if>
             <if test="adName != null and adName != '' ">
-                AND AD_NAME like CONCAT('%',#{adName})
+                AND AD_NAME like CONCAT('%',#{adName},'%')
             </if>
             <if test="imagePath != null and imagePath != '' ">
-                AND IMAGE_PATH like CONCAT('%',#{imagePath})
+                AND IMAGE_PATH like CONCAT('%',#{imagePath},'%')
             </if>
         </where>
         ORDER BY CREATE_TIME DESC
