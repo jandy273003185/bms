@@ -242,7 +242,7 @@ public class SuiXingPayMerchantReportsController {
 				
 				if("00".equals(result.getChannelCode())){
 				    String taskCode = (String) result.getData().get("taskCode");
-					if("reported".equals(status)){
+					if(null != detailInfo){
 						CrInComeBean cc =new CrInComeBean();
 						cc.setMerchantCode(cr.getMerchantCode());
 						cc.setChannelNo("SUIXING_PAY");
