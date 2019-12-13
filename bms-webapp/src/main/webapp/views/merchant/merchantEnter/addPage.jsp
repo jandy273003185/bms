@@ -942,7 +942,7 @@ function showOpenAccountImage(file){
 							</td>
 						</tr>
 						<tr id="businessPhotoId_"  style="display: ">
-							<td class="td-left" id="businessPhotoId">营业执照扫描件：<span style="color:red">*</span></td>
+							<td class="td-left" id="businessPhotoId">营业执照扫描件：<span style="color:red">(必填)</span></td>
 							<td class="td-right" colspan="3">
 								<a data-toggle='modal' class="tooltip-success businessPhotoClick" data-target="#previewImageModal" >
 									<label id="businessPhotoDiv" class="uploadImage" >
@@ -1033,7 +1033,7 @@ function showOpenAccountImage(file){
 							</td>
 						</tr>
 						<tr >
-							<td class="td-left" >法人身份证正面<span style="color:red">*</span></td>
+							<td class="td-left" >法人身份证正面<span style="color:red">(必填)</span></td>
 							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success certAttribute1Click"  data-target="#previewImageModal" >
 								<label id="certAttribute1Div" class="uploadImage">
@@ -1048,7 +1048,7 @@ function showOpenAccountImage(file){
 							</td>
 						</tr>
 						<tr>
-							<td class="td-left" >法人身份证背面<span style="color:red">*</span></td>
+							<td class="td-left" >法人身份证背面<span style="color:red">(必填)</span></td>
 							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success certAttribute2Click"  data-target="#previewImageModal" >
 									<label id="certAttribute2Div" class="uploadImage">
@@ -1167,7 +1167,7 @@ function showOpenAccountImage(file){
 							</td>
 						</tr>
 						<tr id="bankCardPhoto_"  style="display: none" class="tab-pane active">
-							<td class="td-left" id="cnm">银行卡照<span style="color:red">*</span></td>
+							<td class="td-left" id="cnm">银行卡照<span style="color:red">(必填)</span></td>
 							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success bankCardPhotoClick"  data-target="#previewImageModal" >
 									<label id="bankCardPhotoDiv" class="uploadImage">
@@ -1183,7 +1183,7 @@ function showOpenAccountImage(file){
 						</tr>
 
 						<tr id="openAccount_" class="tab-pane " >
-							<td class="td-left" >开户许可证<span style="color:red">*</span></td>
+							<td class="td-left" >开户许可证<span style="color:red">(必填)</span></td>
 							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success openAccountClick"  data-target="#previewImageModal" >
 									<label id="openAccountDiv" class="uploadImage">
@@ -1235,6 +1235,7 @@ function showOpenAccountImage(file){
             	$("#representativeCertNoLab").text("请填写5-25位身份证号");
             	$("#representativeCertNoLab").focus();
                 return false;
+            }
         });
 
 		/*商户名称*/
