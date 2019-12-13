@@ -886,27 +886,19 @@ $(function(){
 			
 			//有证商户
 			if("01" == suiXingMerchantType){
-				$("#bankCardPhotoType").attr("style","display:");
 				$("#idCardType").attr("style","display:none");
 				$("#idCardBackType").attr("style","display:none");
 				$("#businessPhotoType").attr("style","display:");
 				$("#businessPhotoType1").attr("style","display:");
 				$("#businessPhotoType2").attr("style","display:");
-				$("#openPhotoType").attr("style","display:");
 				$("#legalIdCardType").attr("style","display:");
 				$("#legalIdCardBackType").attr("style","display:");
-				$("#settleIdCardType").attr("style","display:");
-				$("#settleIdCardBackType").attr("style","display:");
 			}else if("02" == suiXingMerchantType){
 				$("#legalIdCardType").attr("style","display:none");
 				$("#legalIdCardBackType").attr("style","display:none");
-				$("#settleIdCardType").attr("style","display:");
-				$("#settleIdCardBackType").attr("style","display:");
 				$("#businessPhotoType").attr("style","display:none");
 				$("#businessPhotoType1").attr("style","display:none");
 				$("#businessPhotoType2").attr("style","display:none");
-				$("#openPhotoType").attr("style","display:none");
-				$("#bankCardPhotoType").attr("style","display:");
 				$("#idCardType").attr("style","display:none");
 				$("#idCardBackType").attr("style","display:none");
 				
@@ -918,16 +910,12 @@ $(function(){
       		var actType = $("#actType").val();
       		//对公
 			if("00" == actType){
-				$("#legalIdCardType").attr("style","display:");
-				$("#legalIdCardBackType").attr("style","display:");
 				$("#settleIdCardType").attr("style","display:none");
 				$("#settleIdCardBackType").attr("style","display:none");
 				$("#openPhotoType").attr("style","display:");
 				$("#bankCardPhotoType").attr("style","display:none");
 				$("#letterOfAuthType").attr("style","display:none");
 			}else if("01" == actType){
-				$("#legalIdCardType").attr("style","display:none");
-				$("#legalIdCardBackType").attr("style","display:none");
 				$("#settleIdCardType").attr("style","display:");
 				$("#settleIdCardBackType").attr("style","display:");
 				$("#openPhotoType").attr("style","display:none");
