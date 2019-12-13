@@ -120,6 +120,7 @@ public class AllinPayMerchantReportsController {
 				allinPayService.insertTdMerchantReport(info);
 				//添加商户报备明细表和产品表
 				cr.setPatchNo(info.getPatchNo());
+				cr.setReportStatus("99");
 				allinPayService.insertTdMerchantInfoAllinPay(cr);
 			}
 			//商户通联进件
