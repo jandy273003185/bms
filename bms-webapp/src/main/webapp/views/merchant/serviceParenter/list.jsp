@@ -127,13 +127,13 @@
 										<th width="10%">服务商编号</th>
 										<th width="10%">服务商名称</th>
 										<!-- <th width="10%">服务产品及费率</th> -->
-										<th width="10%">服务商类型</th>
-										
+										<th width="7%">服务商类型</th>
 										<th width="10%">联系人姓名</th>
 										<th width="10%">联系人电话</th>
 										<th width="10%">推荐人</th>
 										<th width="10%">服务商级别</th>
-										<th width="12%">状态</th>
+										<th width="5%">状态</th>
+										<th width="12%">创建时间</th>
 										<th width="23%">操作</th>
 									</tr>
 								</thead>
@@ -150,7 +150,7 @@
 											<td>${merchant.contactMobile }</td>
 											
 											<td>${merchant.referrer }</td>
-											<td>${merchant.serviceLevel }级</td>	
+											<td>${merchant.serviceLevel }</td>	
 											<td>
 												<c:choose>
 													<c:when test="${merchant.state =='00'}">
@@ -170,7 +170,7 @@
 													</c:when>
 												</c:choose>
 											</td>
-											
+											<td>${merchant.createTime}</td>
 											<td>	
 												<input type="hidden" name="custId_01" id="custId_01" value="${merchant.custId}"> 
 												<a href="<%=request.getContextPath() + "/merchant/serviceParenter/showPage?custId="%>${merchant.custId}"  class="btn btn-primary btn-xs qifenqian_view_tc" >浏览</a> 	

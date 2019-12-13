@@ -156,7 +156,7 @@ public class ServiceParenterController {
 		mv.addObject("picturePathOld",picturePathOld); //图片地址信息
 		return mv;
 		
-	}
+	}	
 	/**
 	 * @param merchantVo  修改代理商信息
 	 * @param request
@@ -168,6 +168,8 @@ public class ServiceParenterController {
         JSONObject object = new JSONObject();
         try {
         	merchantMapper.updateMerchant(merchantVo);
+        	//修改完成改成待审核状态
+        	serviceParenterService.updateState(merchantVo.getCustId(), "update");//
 		} catch (Exception e) {
 			// TODO: handle exception
 			 object.put("result", "fail");
