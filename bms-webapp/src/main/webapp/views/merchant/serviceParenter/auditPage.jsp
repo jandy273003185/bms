@@ -549,7 +549,7 @@ function confirmAgencyAudit(obj){
 			});
 		}else{
 			$.gyzbadmin.alertSuccess('修改服务商失败！', null, function(){	
-				window.location.reload();
+				window.location.href=window.Constants.ContextPath +"/merchant/serviceParenter/list";
 			});
 		}
 	},'json')
