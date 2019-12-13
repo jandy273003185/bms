@@ -76,7 +76,9 @@ const Dictionary = () => import(/* webpackChunkName: "Clock" */ '@/views/Clock/D
 const Ctrading = () => import(/* webpackChunkName: "Clock" */ '@/views/Clock/Trading/Trading');
 const Withdrawal = () => import(/* webpackChunkName: "Clock" */ '@/views/Clock/Withdrawal/Withdrawal');
 const Branch = () => import(/* webpackChunkName: "Clock" */ '@/views/Clock/Branch/Branch');
-
+// 商户管理
+const Gateway = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Gateway/Gateway');
+const Protocol = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Protocol/Protocol');
 
 // 客户管理
 const Audit = () => import(/* webpackChunkName: "Customer" */ '@/views/Customer/Audit/Audit');
@@ -188,18 +190,18 @@ export const uatRouter = [
     name: '商户管理',
     path: '',
     children: [
-      { name: '商户网关维护', path: '/system/audit' },
-      { name: '商户协议管理', path: '/system/list' },
-      { name: '费率管理', path: '/system/user' },
-      { name: '商户账户管理', path: '/system/user' },
-      { name: '收银员', path: '/system/user' },
-      { name: '门店管理', path: '/system/user' },
-      { name: '商户渠道列表', path: '/system/user' },
-      { name: '商户列表', path: '/system/user' },
-      { name: '商户报备列表', path: '/system/user' },
-      { name: '商户产品管理', path: '/system/user' },
-      { name: '商户设备管理', path: '/system/user' },
-      { name: '服务商列表', path: '/system/user' }
+      { name: '商户网关维护', path: '/Merchants/gateway', component: Gateway },
+      { name: '商户协议管理', path: '/Merchants/protocol', component: Protocol },
+      { name: '费率管理', path: '/Merchants/gateway' },
+      { name: '商户账户管理', path: '/Merchants/gateway' },
+      { name: '收银员', path: '/Merchants/gateway' },
+      { name: '门店管理', path: '/Merchants/gateway' },
+      { name: '商户渠道列表', path: '/Merchants/gateway' },
+      { name: '商户列表', path: '/Merchants/gateway' },
+      { name: '商户报备列表', path: '/Merchants/gateway' },
+      { name: '商户产品管理', path: '/Merchants/gateway' },
+      { name: '商户设备管理', path: '/Merchants/gateway' },
+      { name: '服务商列表', path: '/Merchants/gateway' }
     ]
   },
   {
