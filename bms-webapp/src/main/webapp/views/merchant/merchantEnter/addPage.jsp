@@ -942,7 +942,7 @@ function showOpenAccountImage(file){
 							</td>
 						</tr>
 						<tr id="businessPhotoId_"  style="display: ">
-							<td class="td-left" id="businessPhotoId">营业执照扫描件：<span style="color:red">*</span></td>
+							<td class="td-left" id="businessPhotoId">营业执照扫描件：<span style="color:red">(必填)</span></td>
 							<td class="td-right" colspan="3">
 								<a data-toggle='modal' class="tooltip-success businessPhotoClick" data-target="#previewImageModal" >
 									<label id="businessPhotoDiv" class="uploadImage" >
@@ -1235,6 +1235,7 @@ function showOpenAccountImage(file){
             	$("#representativeCertNoLab").text("请填写5-25位身份证号");
             	$("#representativeCertNoLab").focus();
                 return false;
+            }
         });
 
 		/*商户名称*/
