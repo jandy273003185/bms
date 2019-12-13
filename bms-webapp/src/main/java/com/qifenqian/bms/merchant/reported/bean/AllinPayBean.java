@@ -119,8 +119,16 @@ public class AllinPayBean implements Serializable{
 	//交易类型
 	private List<Map> prodInfoList;
 	
+	private String reportStatus;
 	
 	
+	
+	public String getReportStatus() {
+		return reportStatus;
+	}
+	public void setReportStatus(String reportStatus) {
+		this.reportStatus = reportStatus;
+	}
 	public String getResultMsg() {
 		return resultMsg;
 	}
