@@ -49,7 +49,7 @@
 		$.ajax({
 			type:"POST",
 			dataType:"json",
-			url:window.Constants.ContextPath+'<%="/merchant/verified/cancelMerchant" %>',
+			url:window.Constants.ContextPath+'<%="/merchant/verified/authorizeMerchant" %>',
 			data:
 			{
 				"merchantCode" 	  : merchantCode,
@@ -712,6 +712,9 @@
 										    	</c:if>
 										    	
 										    	<c:if test="${reported.detailStatus =='1' && reported.outMerchantCode != null &&  reported.channelNo =='SUIXING_PAY'}">
+	                                            	<button type="button"  class="btn btn-primary btn-xs"  onclick ="getVerified(this);">实名认证</button>
+	                                            </c:if>
+	                                            <c:if test="${reported.detailStatus =='24' && reported.outMerchantCode != null &&  reported.channelNo =='SUIXING_PAY'}">
 	                                            	<button type="button"  class="btn btn-primary btn-xs"  onclick ="getVerified(this);">实名认证</button>
 	                                            </c:if>
 	                                            
