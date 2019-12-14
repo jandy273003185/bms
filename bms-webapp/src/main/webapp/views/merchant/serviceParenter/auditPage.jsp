@@ -548,7 +548,7 @@ function confirmAgencyAudit(obj){
 				window.location.href=window.Constants.ContextPath +"/merchant/serviceParenter/list"; // 强迫浏览器刷新当前页面
 			});
 		}else{
-			$.gyzbadmin.alertSuccess('修改服务商失败！', null, function(){	
+			$.gyzbadmin.alertSuccess('', null, function(){	
 				window.location.href=window.Constants.ContextPath +"/merchant/serviceParenter/list";
 			});
 		}
