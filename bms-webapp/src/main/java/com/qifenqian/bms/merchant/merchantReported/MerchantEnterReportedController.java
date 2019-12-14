@@ -32,6 +32,7 @@ import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
 import com.qifenqian.bms.merchant.reported.bean.YQBArea;
 import com.qifenqian.bms.merchant.reported.bean.YQBIndustry;
 import com.qifenqian.bms.merchant.reported.dao.FmIncomeMapperDao;
+import com.qifenqian.bms.merchant.reported.mapper.FmIncomeMapper;
 import com.qifenqian.bms.merchant.reported.service.CrIncomeService;
 import com.qifenqian.bms.merchant.reported.service.FmIncomeService;
 
@@ -63,7 +64,8 @@ public class MerchantEnterReportedController {
    @Autowired
    private MerchantEnterReportService merchantEnterReportService;
    
-   
+   @Autowired
+   private FmIncomeMapper fmIncomeMapper;
    
 	
    /**
@@ -111,6 +113,7 @@ public class MerchantEnterReportedController {
 		/***查询渠道***/
 //		List<ChannlInfo> channlInfoList = crIncomeService.getChannlInfoList();
 		/***查询报备信息***/
+		 TdMerchantDetailInfo detailInfo = fmIncomeMapper.selTdMerchantDetailInfo(detail);
 		List<TdMerchantDetailInfo> reportedList = fmIncomeService.getMerchantDetailInfoList(detail);
 		logger.info("reportedList:"+reportedList);
 		TdCustInfo custInfo = new TdCustInfo();
@@ -119,15 +122,22 @@ public class MerchantEnterReportedController {
 			if(null != custInfo){
 				object.put("custInfo", custInfo);
 				//审核通过再判断是否已经报备
-				if(null!=reportedList && reportedList.size()>0){
-					for(int i=0;i<reportedList.size();i++){
-						if("1".equals(reportedList.get(i).getReportStatus()) ||"0".equals(reportedList.get(i).getReportStatus()) ||"00".equals(reportedList.get(i).getReportStatus())){
-							object.put("result", "SUCCESS");
-							return object.toString();
-						}
-					}
-					object.put("result", "FAIL");
-				}else{
+//				if(null!=reportedList && reportedList.size()>0){
+//					for(int i=0;i<reportedList.size();i++){
+//						if("1".equals(reportedList.get(i).getReportStatus()) ||"0".equals(reportedList.get(i).getReportStatus()) ||"00".equals(reportedList.get(i).getReportStatus())){
+//							object.put("result", "SUCCESS");
+//							return object.toString();
+//						}
+//					}
+//					object.put("result", "FAIL");
+//				}else{
+//					object.put("result", "FAIL");
+//				}
+				//审核通过再判断是否已经报备
+				if("Y".equals(detailInfo.getReportStatus()) || "O".equals(detailInfo.getReportStatus())) {
+					object.put("result", "SUCCESS");
+					return object.toString();
+				}else {
 					object.put("result", "FAIL");
 				}
 			}else{
