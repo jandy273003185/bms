@@ -320,8 +320,6 @@ public class ServiceParenterController {
 				} catch (Exception e) {
 					//强制改变状态为 待审核状态
 //					serviceParenterService.updateState(custId, "update");
-					ob.put("result", "FAILE");
-			        ob.put("message", "系统错误");
 			        return ob.toJSONString();
 				}
 		}
