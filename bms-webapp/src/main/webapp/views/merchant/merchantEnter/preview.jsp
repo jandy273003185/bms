@@ -230,6 +230,12 @@
 										<c:when test="${merchantVo.businessTermEnd =='forever'}">
 											长期
 										</c:when>
+										<c:when test="${merchantVo.businessTermEnd =='2099-12-31'}">
+											长期
+										</c:when>
+										<c:when test="${merchantVo.businessTermEnd =='长期'}">
+											长期
+										</c:when>
 										<c:otherwise>
 											${merchantVo.businessTermEnd }
 										</c:otherwise>
@@ -303,6 +309,9 @@
 											长期
 										</c:when>
 										<c:when test="${merchantVo.idTermEnd =='2099-12-31'}">
+											长期
+										</c:when>
+										<c:when test="${merchantVo.idTermEnd =='长期'}">
 											长期
 										</c:when>
 										<c:otherwise>

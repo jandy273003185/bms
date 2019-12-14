@@ -612,13 +612,13 @@ $(function(){
     };
     
     function fun(){
-        $("input[name='businessTermEnd']").val("2099-12-31");
-        $("#businessTermEnd").attr("value","2099-12-31");
+        $("input[name='businessTermEnd']").val("长期");
+        $("#businessTermEnd").attr("value","长期");
     }
     
     function idCardTremForever(){
-    	$("input[name='idTermEnd']").val("2099-12-31");
-    	$("#idTermEnd").attr("value","2099-12-31");
+    	$("input[name='idTermEnd']").val("长期");
+    	$("#idTermEnd").attr("value","长期");
     }
     /*
     *
@@ -805,11 +805,17 @@ $(function(){
 									<input type="text" id="businessTermEnd" name="businessTermEnd" value =
 									<c:choose>
 									<c:when test="${merchantVo.businessTermEnd =='forever'}">
-											长期
+										长期
 									</c:when>
-											<c:otherwise>
-												${merchantVo.businessTermEnd }
-											</c:otherwise>
+									<c:when test="${merchantVo.businessTermEnd =='2099-12-31'}">
+										长期
+									</c:when>
+									<c:when test="${merchantVo.businessTermEnd =='长期'}">
+										长期
+									</c:when>
+									<c:otherwise>
+										${merchantVo.businessTermEnd }
+									</c:otherwise>
 									</c:choose>
 										   onfocus="WdatePicker({skin:'whyGreen'})" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
 									<label class="label-tips" id="businessTermLabEnd"></label>
@@ -890,6 +896,9 @@ $(function(){
 											长期
 										</c:when>
 										<c:when test="${merchantVo.idTermEnd =='2099-12-31'}">
+											长期
+										</c:when>
+										<c:when test="${merchantVo.idTermEnd =='长期'}">
 											长期
 										</c:when>
 										<c:otherwise>

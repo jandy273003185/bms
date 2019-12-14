@@ -2,7 +2,6 @@
 <%@ include file="/include/template.jsp"%>
 <%@page import="com.qifenqian.bms.basemanager.merchant.MerchantPath" %>
 <%@page import="com.qifenqian.bms.basemanager.merchant.MerchantEnterPath" %>
-<%@page import="com.qifenqian.bms.basemanager.merchant.TinyMerchantPath" %>
 <%@page import="com.qifenqian.bms.basemanager.agency.controller.AgentRegisterPath" %>
 <%@ page import="com.qifenqian.bms.basemanager.merchant.bean.Merchant" %>
 <%@ page import="com.qifenqian.bms.basemanager.city.CityPath" %>
@@ -95,7 +94,7 @@ $(function(){
 	    	       	  				$("#businessLicense").val(json.businessLicense);
 	    	       	  				$("#businessTermStart").val(json.businessTermStart);
 	    	       	  				if("长期"==json.businessTermEnd){
-	    	       	  					$("#businessTermEnd").val("2099-12-31");
+	    	       	  					$("#businessTermEnd").val("长期");
 	    	       	  				}else{
 	    	       	  					$("#businessTermEnd").val(json.businessTermEnd);
 	    	       	  				}
@@ -728,12 +727,12 @@ function selCustType(){
 }
 
 function businessForever(){
-	$("input[name='businessTermEnd']").val("2099-12-31");
-	$("#businessTermEnd").attr("value","2099-12-31");
+	$("input[name='businessTermEnd']").val("长期");
+	$("#businessTermEnd").attr("value","长期");
 }
 function idCardTremForever(){
-	$("input[name='idTermEnd']").val("2099-12-31");
-	$("#idTermEnd").attr("value","2099-12-31");
+	$("input[name='idTermEnd']").val("长期");
+	$("#idTermEnd").attr("value","长期");
 }
 
 
