@@ -136,9 +136,13 @@ public class MerchantEnterReportedController {
 //					object.put("result", "FAIL");
 //				}
 				//审核通过再判断是否已经报备
-				if("Y".equals(detailInfo.getReportStatus()) || "O".equals(detailInfo.getReportStatus())) {
-					object.put("result", "SUCCESS");
-					return object.toString();
+				if(null!=detailInfo) {
+					if("Y".equals(detailInfo.getReportStatus()) || "O".equals(detailInfo.getReportStatus())) {
+						object.put("result", "SUCCESS");
+						return object.toString();
+					}else {
+						object.put("result", "FAIL");
+					}
 				}else {
 					object.put("result", "FAIL");
 				}
