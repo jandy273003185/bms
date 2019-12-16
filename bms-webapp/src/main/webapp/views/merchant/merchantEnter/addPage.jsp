@@ -872,7 +872,7 @@ function showOpenAccountImage(file){
 							<td class="td-right">
 							   <select name="custType" class="width-90" id="custType" onchange="selCustType();">
 									<option value="1">企业</option>
-									<option value="0">个人</option>
+									<option value="0">小微商户</option>
 									<option value="2">个体户</option>
 								</select>
 								
