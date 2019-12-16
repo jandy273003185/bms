@@ -96,6 +96,14 @@
 											<i class="icon-leaf blue"></i>
 										</span>
 									</td> --%>
+									<td class="td-left" >时间：</td>
+									<td>
+										<input type="text" id="startTime" name="startTime" value="${queryBean.startTime }" readonly="readonly" onfocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
+										<label class="label-tips" id="startTimeLabStart"></label>
+											-
+										<input type="text" id="endTime" name="endTime" value="${queryBean.endTime }" readonly="readonly" onfocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
+										<label class="label-tips" id="endTimeLabEnd"></label>
+									</td>
 								</tr>
 								<tr>
 									<td colspan="6" align="center">

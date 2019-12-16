@@ -375,6 +375,16 @@
 					and b.status = #{protocolState} 
 				]]>
 			</if>
+			<if test="startTime != null and startTime != ''">
+				<![CDATA[ 
+					and  c.create_time <= #{startTime}
+				]]>
+			</if>
+			<if test="endTime != null and endTime != ''">
+				<![CDATA[ 
+					and  c.create_time <= #{endTime}
+				]]>
+			</if>
 			
 		</where>
 		order by c.create_time desc
@@ -519,6 +529,16 @@
 			<if test="agentName != null and agentName != ''">
 				<![CDATA[ 
 					and c.agent_name like CONCAT('%',#{agentName},'%') 
+				]]>
+			</if>
+			<if test="startTime != null and startTime != ''">
+				<![CDATA[ 
+					and  c.create_time <= #{startTime}
+				]]>
+			</if>
+			<if test="endTime != null and endTime != ''">
+				<![CDATA[ 
+					and  c.create_time <= #{endTime}
 				]]>
 			</if>
 		order by c.create_time desc
