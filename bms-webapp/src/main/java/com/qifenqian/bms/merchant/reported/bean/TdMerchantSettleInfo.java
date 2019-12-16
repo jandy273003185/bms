@@ -52,8 +52,14 @@ public class TdMerchantSettleInfo implements Serializable {
 	 * 分账百分比费率
 	 */
 	private String settleRate;
-	
-	
+	/**
+	 * 产品ID
+	 */
+	private String productId;
+	/**
+	 * 分账接收方商户号
+	 */
+	private String transInMchId;
 
 	public String getSettleDesc() {
 		return settleDesc;
@@ -141,6 +147,22 @@ public class TdMerchantSettleInfo implements Serializable {
 
 	public void setSettleRate(String settleRate) {
 		this.settleRate = settleRate;
+	}
+
+	public String getProductId() {
+		return productId;
+	}
+
+	public void setProductId(String productId) {
+		this.productId = productId;
+	}
+
+	public String getTransInMchId() {
+		return transInMchId;
+	}
+
+	public void setTransInMchId(String transInMchId) {
+		this.transInMchId = transInMchId;
 	}
 	
 	

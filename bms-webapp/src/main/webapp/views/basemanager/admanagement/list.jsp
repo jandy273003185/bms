@@ -504,17 +504,17 @@
             </div><!-- /.modal-content -->
         </div>
     </div><!-- /.modal -->
+</div>
 
-
-    <!-- 图片预览 -->
-    <div class="modal fade" id="previewImageModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" style="width:60%;height:80%;">
-            <div id="showImageDiv" style="width:100%;height:100%;">
-                <img id="showImage" style="width:100%;height:100%;">
-            </div>
+<!-- 图片预览 -->
+<div class="modal fade" id="previewImageModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="width:60%;height:80%;">
+        <div id="showImageDiv" style="width:100%;height:100%;">
+            <img id="showImage" style="width:100%;height:100%;">
         </div>
     </div>
+</div>
 </body>
 <script type="text/javascript">
 
@@ -836,7 +836,8 @@
             if (!checkValue) {
                 $('#distributionAdCustListTableBody input[type="checkbox"]').each(function (index, item) {
                     if (item.checked) {
-                        var values = item.value.split('#');;
+                        var values = item.value.split('#');
+                        ;
                         var mchShopDO = {
                             mchId: values[0],
                             shopId: values[1]

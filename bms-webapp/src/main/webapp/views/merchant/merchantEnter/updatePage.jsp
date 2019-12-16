@@ -469,7 +469,8 @@ $(function(){
         var bankCityName = $("#bankCityName").val();
         var compMainAcctType = $("#compMainAcctType").val();
         var custId = $("#custId").val();
-        
+        var idTermStart = $("#idTermStart").val().trim();
+    	var idTermEnd = $("#idTermEnd").val().trim();
         var openAccountPath =  $("#openAccountPath").val();
     	var bankCardPhotoPath = $("#bankCardPhotoPath").val();
     	var certAttribute2Path = $("#certAttribute2Path").val();
@@ -517,6 +518,8 @@ $(function(){
                         "bankAcctName" :bankAcctName,
                         "bankProvinceName":bankProvinceName,
                         "bankCityName":bankCityName,
+                        "idTermStart"     :      idTermStart,						// 法人身份有效起始期
+                        "idTermEnd"       :      idTermEnd,						    // 法人身份有效截止期
                         "compMainAcctType":compMainAcctType
                     },function(data){
                         if(data.result=="SUCCESS"){
@@ -609,10 +612,14 @@ $(function(){
     };
     
     function fun(){
-        $("input[name='businessTermEnd']").val("2099-12-31");
-        $("#businessTermEnd").attr("value","2099-12-31");
+        $("input[name='businessTermEnd']").val("长期");
+        $("#businessTermEnd").attr("value","长期");
     }
     
+    function idCardTremForever(){
+    	$("input[name='idTermEnd']").val("长期");
+    	$("#idTermEnd").attr("value","长期");
+    }
     /*
     *
     * file input file dom object
@@ -798,11 +805,17 @@ $(function(){
 									<input type="text" id="businessTermEnd" name="businessTermEnd" value =
 									<c:choose>
 									<c:when test="${merchantVo.businessTermEnd =='forever'}">
-											长期
+										长期
 									</c:when>
-											<c:otherwise>
-												${merchantVo.businessTermEnd }
-											</c:otherwise>
+									<c:when test="${merchantVo.businessTermEnd =='2099-12-31'}">
+										长期
+									</c:when>
+									<c:when test="${merchantVo.businessTermEnd =='长期'}">
+										长期
+									</c:when>
+									<c:otherwise>
+										${merchantVo.businessTermEnd }
+									</c:otherwise>
 									</c:choose>
 										   onfocus="WdatePicker({skin:'whyGreen'})" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
 									<label class="label-tips" id="businessTermLabEnd"></label>
@@ -868,6 +881,33 @@ $(function(){
 								<td class="td-left">法人身份证号码：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">
 									<input type="text" name="representativeCertNo" id="representativeCertNo" placeholder="请输入法人身份证号码" value="${merchantVo.representativeCertNo }" style="width:90%">
+								</td>
+							</tr>
+							<tr>
+								<td class="td-left" id="idTermId">法人身份证有效期：</td>
+								<td class="td-right" style="color:#666;padding:10px 8px">
+
+									<input type="text" id="idTermStart" name="idTermStart" value = "${merchantVo.idTermStart }" onfocus="WdatePicker({skin:'whyGreen'})" onfocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
+									<label class="label-tips" id="idTermLabStart"></label>
+									-
+									<input type="text" id="idTermEnd" name="idTermEnd" value =
+									<c:choose>
+										<c:when test="${merchantVo.idTermEnd =='forever'}">
+											长期
+										</c:when>
+										<c:when test="${merchantVo.idTermEnd =='2099-12-31'}">
+											长期
+										</c:when>
+										<c:when test="${merchantVo.idTermEnd =='长期'}">
+											长期
+										</c:when>
+										<c:otherwise>
+											${merchantVo.idTermEnd }
+										</c:otherwise>
+									</c:choose>
+										   onfocus="WdatePicker({skin:'whyGreen'})" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
+									<label class="label-tips" id="idTermLabEnd"></label>
+									<input type="button" onclick="idCardTremForever()" value="长期" />
 								</td>
 							</tr>
 							<tr>

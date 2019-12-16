@@ -2,7 +2,6 @@
 <%@ include file="/include/template.jsp"%>
 <%@page import="com.qifenqian.bms.basemanager.merchant.MerchantPath" %>
 <%@page import="com.qifenqian.bms.basemanager.merchant.MerchantEnterPath" %>
-<%@page import="com.qifenqian.bms.basemanager.merchant.TinyMerchantPath" %>
 <%@page import="com.qifenqian.bms.basemanager.agency.controller.AgentRegisterPath" %>
 <%@ page import="com.qifenqian.bms.basemanager.merchant.bean.Merchant" %>
 <%@ page import="com.qifenqian.bms.basemanager.city.CityPath" %>
@@ -95,7 +94,7 @@ $(function(){
 	    	       	  				$("#businessLicense").val(json.businessLicense);
 	    	       	  				$("#businessTermStart").val(json.businessTermStart);
 	    	       	  				if("长期"==json.businessTermEnd){
-	    	       	  					$("#businessTermEnd").val("2099-12-31");
+	    	       	  					$("#businessTermEnd").val("长期");
 	    	       	  				}else{
 	    	       	  					$("#businessTermEnd").val(json.businessTermEnd);
 	    	       	  				}
@@ -504,7 +503,8 @@ function addMerchantBtn(){
 	/* var cnaps =  $("#cnaps").val().trim(); */
 	var cnaps =  $("#branchBank").val().trim();
 	var compMainAcctType = $("#compMainAcctType").val().trim();
-	
+	var idTermStart = $("#idTermStart").val().trim();
+	var idTermEnd = $("#idTermEnd").val().trim();
 	var openAccountPath =  $("#openAccountPath").val();
 	var bankCardPhotoPath = $("#bankCardPhotoPath").val();
 	var certAttribute2Path = $("#certAttribute2Path").val();
@@ -545,6 +545,8 @@ function addMerchantBtn(){
             "bankCityName":          bankCityName,						// 开户行城市
             "cnaps":                 cnaps,								// 联行号
             "compMainAcctType":      compMainAcctType,					// 结算类型
+            "idTermStart"     :      idTermStart,						// 法人身份有效起始期
+            "idTermEnd"       :      idTermEnd,						    // 法人身份有效截止期
             "merchantFlag":          merchantFlag						// 商户标识
         },
         dataType : "json",
@@ -725,8 +727,12 @@ function selCustType(){
 }
 
 function businessForever(){
-	$("input[name='businessTermEnd']").val("2099-12-31");
-	$("#businessTermEnd").attr("value","2099-12-31");
+	$("input[name='businessTermEnd']").val("长期");
+	$("#businessTermEnd").attr("value","长期");
+}
+function idCardTremForever(){
+	$("input[name='idTermEnd']").val("长期");
+	$("#idTermEnd").attr("value","长期");
 }
 
 
@@ -942,7 +948,7 @@ function showOpenAccountImage(file){
 							</td>
 						</tr>
 						<tr id="businessPhotoId_"  style="display: ">
-							<td class="td-left" id="businessPhotoId">营业执照扫描件：<span style="color:red">*</span></td>
+							<td class="td-left" id="businessPhotoId">营业执照扫描件：<span style="color:red">(必填)</span></td>
 							<td class="td-right" colspan="3">
 								<a data-toggle='modal' class="tooltip-success businessPhotoClick" data-target="#previewImageModal" >
 									<label id="businessPhotoDiv" class="uploadImage" >
@@ -1032,8 +1038,20 @@ function showOpenAccountImage(file){
 								<label class="label-tips" id="representativeCertNoLab"></label>
 							</td>
 						</tr>
+						<tr>
+							<td class="td-left" id="idCardTimeId">身份证有效期：<span style="color:red;">（必填)</span></td>
+							<td class="td-right">
+								<input type="text" id="idTermStart" name="idTermStart" readonly="readonly" onfocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
+								<label class="label-tips" id="businessTermLabStart"></label>
+								-
+								<input type="text" id="idTermEnd" name="idTermEnd" readonly="readonly" onfocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
+								<label class="label-tips" id="idTermLabEnd"></label>
+								<input type="button" onclick="idCardTremForever()" value="长期" />
+								
+							</td>
+						</tr>
 						<tr >
-							<td class="td-left" >法人身份证正面<span style="color:red">*</span></td>
+							<td class="td-left" >法人身份证正面<span style="color:red">(必填)</span></td>
 							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success certAttribute1Click"  data-target="#previewImageModal" >
 								<label id="certAttribute1Div" class="uploadImage">
@@ -1048,7 +1066,7 @@ function showOpenAccountImage(file){
 							</td>
 						</tr>
 						<tr>
-							<td class="td-left" >法人身份证背面<span style="color:red">*</span></td>
+							<td class="td-left" >法人身份证背面<span style="color:red">(必填)</span></td>
 							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success certAttribute2Click"  data-target="#previewImageModal" >
 									<label id="certAttribute2Div" class="uploadImage">
@@ -1167,7 +1185,7 @@ function showOpenAccountImage(file){
 							</td>
 						</tr>
 						<tr id="bankCardPhoto_"  style="display: none" class="tab-pane active">
-							<td class="td-left" id="cnm">银行卡照<span style="color:red">*</span></td>
+							<td class="td-left" id="cnm">银行卡照<span style="color:red">(必填)</span></td>
 							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success bankCardPhotoClick"  data-target="#previewImageModal" >
 									<label id="bankCardPhotoDiv" class="uploadImage">
@@ -1183,7 +1201,7 @@ function showOpenAccountImage(file){
 						</tr>
 
 						<tr id="openAccount_" class="tab-pane " >
-							<td class="td-left" >开户许可证<span style="color:red">*</span></td>
+							<td class="td-left" >开户许可证<span style="color:red">(必填)</span></td>
 							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success openAccountClick"  data-target="#previewImageModal" >
 									<label id="openAccountDiv" class="uploadImage">
@@ -1235,6 +1253,7 @@ function showOpenAccountImage(file){
             	$("#representativeCertNoLab").text("请填写5-25位身份证号");
             	$("#representativeCertNoLab").focus();
                 return false;
+            }
         });
 
 		/*商户名称*/

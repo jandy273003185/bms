@@ -452,7 +452,57 @@ public class MerchantVo implements Serializable {
 	
 	private String agentCode;
 	
+	/**
+	 * 法人身份有效截止期
+	 */
+	private String idTermEnd;
+	/**
+	 * 法人身份有效起始期
+	 */
+	private String idTermStart;
 	
+	/**
+	 * 起止时间
+	 */
+	private String startTime;
+	/**
+	 * 结束时间
+	 */
+	private String endTime;
+	
+	
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+
+	public String getIdTermEnd() {
+		return idTermEnd;
+	}
+
+	public void setIdTermEnd(String idTermEnd) {
+		this.idTermEnd = idTermEnd;
+	}
+
+	public String getIdTermStart() {
+		return idTermStart;
+	}
+
+	public void setIdTermStart(String idTermStart) {
+		this.idTermStart = idTermStart;
+	}
+
 	public String getReferrer() {
 		return referrer;
 	}

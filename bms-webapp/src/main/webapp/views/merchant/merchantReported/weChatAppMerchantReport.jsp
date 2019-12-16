@@ -11,11 +11,10 @@
 <script src='<c:url value="/static/js/mobileBUGFix.mini.js"/>'></script>
 <script src='<c:url value="/static/js/uploadCompress.js"/>'></script>
 <script src='<c:url value="/static/js/up.js"/>'></script>
-<script src="/static/js/bootstrap-select.min.js"></script>
-<script src="/static/js/bootstrap-select.js"></script>
 <link rel="stylesheet" href="<c:url value='/static/css/base.css' />" />
 <link rel="stylesheet" href="<c:url value='/static/css/home.css' />" />
-
+<link href="<c:url value='/static/css/select2.min.css' />" rel="stylesheet" />
+<script src="<c:url value='/static/js/select2.min.js' />"</script>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -34,6 +33,7 @@
     	font-family: inherit !important;
     	text-shadow: none !important;
     	font-weight:300 !important;
+    	}
 	</style>
 </head>
 <script type="text/javascript">
@@ -356,7 +356,7 @@ $(function(){
 								<td class="td-left">开户银行：<span style="color:red;">(必填)</span></td>
 								<td class="td-right"> 
 									
-									<select  name="bank" id="bank"  class="selectpicker show-tick form-control" data-width="91%" data-live-search="true" data-errMsg="开户银行不能为空">
+									<select  name="bank" id="bank"  class="selectpicker show-tick " data-width="91%" data-live-search="true" data-errMsg="开户银行不能为空">
 										<option value="">--请选择--</option>	
 											<c:forEach items="<%=WeChatBankType.values()%>" var="status">
 												<option value="${status.name}" <c:if test="${status eq merchantBankInfo.accountBank}">selected</c:if>>
@@ -368,7 +368,13 @@ $(function(){
 								</td>
 	                            <td class="td-left">开户支行<span style="color:red;">(必填)</span></td>
 	                            <td class="td-right">
-	                            	<input type="text" id="interBankName" name="interBankName" value="${merchantBankInfo.bankName}" maxlength="100" data-validation="notnull" data-errMsg="开户支行不能为空" placeholder="请输入支行名称"  value="" style="width:90%"> 
+	                            	 <div class="col-xs-12 col-sm-9">
+											<div class="clearfix">
+													<select class="form-control" id="interBankName" name="interBankName" >
+														<option value="">--请选择开户银行全称--</option>
+													</select>
+												</div>
+											</div>
 	                               	<label id="interBankNameLabel" class="label-tips"></label>
 								</td>
 							</tr>
@@ -427,7 +433,30 @@ $(function(){
      </div>
 </div>   
 <script type="text/javascript">
-		
+$(function(){
+	$('#interBankName').select2({
+	    placeholder: '请选择开户银行全称',
+	    ajax: {
+	      url: window.Constants.ContextPath + "/common/info/selectWeChatBankList",
+	      dataType: 'json',
+	      delay: 300,
+	      type: 'POST',
+	      data: function (params) {
+	        return {
+	          bankName: params.term,
+	        };
+	      },
+	      processResults: function (data) {
+	        return {
+	          results: data
+	        };
+	      },
+	      cache: true
+	    },
+	    minimumInputLength: 2
+	});
+});
+
 		//注册省市和开户银行省市转化并回显数据
 		$(function(){
 			var wxProvinceName = $("#wxProvinceName").val();
@@ -670,7 +699,7 @@ $(function(){
    			// accountNo（结算银行卡号）getAccountNo
    			var accountNo = $("#accountNo").val();
    			// interBankName(开户支行名称)getInterBankName
-   			var interBankName = $("#interBankName").val();
+   			var interBankName = $("#interBankName").select2("data")[0].text;
    			//bank（开户行）getBankName
    			var bank = $("#bank").val();
    			//  bankProvince（开户行所在地区）getBankCity

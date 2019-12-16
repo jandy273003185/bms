@@ -230,6 +230,12 @@
 										<c:when test="${merchantVo.businessTermEnd =='forever'}">
 											长期
 										</c:when>
+										<c:when test="${merchantVo.businessTermEnd =='2099-12-31'}">
+											长期
+										</c:when>
+										<c:when test="${merchantVo.businessTermEnd =='长期'}">
+											长期
+										</c:when>
 										<c:otherwise>
 											${merchantVo.businessTermEnd }
 										</c:otherwise>
@@ -294,6 +300,25 @@
 								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.representativeName }</td>
 								<td class="td-left">法人身份证号码：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.representativeCertNo }</td>
+							</tr>
+							<tr>
+							<td class="td-left">身份证有效期：</td>
+								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.idTermStart } -
+									<c:choose>
+										<c:when test="${merchantVo.idTermEnd =='forever'}">
+											长期
+										</c:when>
+										<c:when test="${merchantVo.idTermEnd =='2099-12-31'}">
+											长期
+										</c:when>
+										<c:when test="${merchantVo.idTermEnd =='长期'}">
+											长期
+										</c:when>
+										<c:otherwise>
+											${merchantVo.idTermEnd }
+										</c:otherwise>
+									</c:choose>
+								</td>
 							</tr>
 							<tr>
 								<td class="td-left" >身份证图片正面：</td>
