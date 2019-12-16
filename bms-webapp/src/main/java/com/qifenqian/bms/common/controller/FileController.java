@@ -434,6 +434,19 @@ public class FileController {
 				custScan.setStatus("00");
 				custScanMapper.insertCustScan(custScan);
 			}
+			//21店内前台照
+			if(!StringUtils.isEmpty(picturePath.getShopCheckStandPath())) {
+				custScan.setCertifyType("21");
+				
+				if(!StringUtils.isEmpty(picturePathOld.getShopCheckStandPath())) {
+					custScan.setStatus("01");
+					custScanMapper.updateCustScan(custScan);
+				}
+				
+				custScan.setScanCopyPath(picturePath.getShopCheckStandPath());
+				custScan.setStatus("00");
+				custScanMapper.insertCustScan(custScan);
+			}
 			object.put("result", "SUCCESS");
 			object.put("message", "新增图片成功");
 		} catch (Exception e) {

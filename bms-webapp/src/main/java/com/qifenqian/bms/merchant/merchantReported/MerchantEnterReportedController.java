@@ -115,7 +115,7 @@ public class MerchantEnterReportedController {
 		/***查询渠道***/
 //		List<ChannlInfo> channlInfoList = crIncomeService.getChannlInfoList();
 		/***查询报备信息***/
-		 TdMerchantDetailInfo detailInfo = fmIncomeMapper.selTdMerchantDetailInfo(detail);
+		TdMerchantDetailInfo detailInfo = fmIncomeMapper.selTdMerchantDetailInfo(detail);
 		List<TdMerchantDetailInfo> reportedList = fmIncomeService.getMerchantDetailInfoList(detail);
 		logger.info("reportedList:"+reportedList);
 		TdCustInfo custInfo = new TdCustInfo();

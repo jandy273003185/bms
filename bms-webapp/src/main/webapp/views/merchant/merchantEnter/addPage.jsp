@@ -90,7 +90,11 @@ $(function(){
 	    	   	        		 if(_this.attr('id')=="certAttribute1"){                    //身份证
 	    	       	  				$("#representativeName").val(json.cardName);
 	    	       	  				$("#representativeCertNo").val(json.cardId);
-	    	       	  			}else if(_this.attr('id')=="businessPhoto"){                //营业执照
+	    	       	  			}else if(_this.attr('id')=="certAttribute2"){                    //身份证
+	    	       	  				$("#idTermStart").val(json.cardName);
+	    	       	  				$("#idTermStart").val(json.cardId);
+	    	       	  			}
+	    	   	        		 else if(_this.attr('id')=="businessPhoto"){                //营业执照
 	    	       	  				$("#businessLicense").val(json.businessLicense);
 	    	       	  				$("#businessTermStart").val(json.businessTermStart);
 	    	       	  				if("长期"==json.businessTermEnd){
@@ -512,6 +516,7 @@ function addMerchantBtn(){
 	var businessPhotoPath = $("#businessPhotoPath").val();
 	var shopInteriorPath = $("#shopInteriorPath").val();
 	var doorPhotoPath = $("#doorPhotoPath").val();
+	var shopCheckStandPath = $("#shopCheckStandPath").val();
 	$.blockUI();
 
     $.ajax({
@@ -557,13 +562,14 @@ function addMerchantBtn(){
                     type : "POST",
                     url : window.Constants.ContextPath + '<%="/common/files/getPicPath"%>?custId='+data.custId,
                     data : {
-                    	"openAccountPath" :  openAccountPath,                //开户许可证
-                    	"idCardOPath"     :  certAttribute1Path,             //身份证正面照
-                    	"idCardFPath"     :  certAttribute2Path,             //身份证背面照
-                    	"bussinessPath"   :  businessPhotoPath,              //商户营业执照
-                    	"bankCardPath"    :  bankCardPhotoPath,              //开户银行照
-                    	"shopInteriorPath":  shopInteriorPath,               //店内照
-                    	"doorPhotoPath"   :  doorPhotoPath                   //门头照
+                    	"openAccountPath"    : openAccountPath,                //开户许可证
+                    	"idCardOPath"        : certAttribute1Path,             //身份证正面照
+                    	"idCardFPath"        : certAttribute2Path,             //身份证背面照
+                    	"bussinessPath"      : businessPhotoPath,              //商户营业执照
+                    	"bankCardPath"       : bankCardPhotoPath,              //开户银行照
+                    	"shopInteriorPath"   : shopInteriorPath,               //店内照
+                    	"shopCheckStandPath" : shopCheckStandPath,             //店内前台照
+                    	"doorPhotoPath"      : doorPhotoPath                   //门头照
                     },
                     dataType : "json",
                     success : function (data) {
@@ -690,6 +696,14 @@ $('.doorPhotoClick').click(function(){
 	return previewImage(divObj,imageObj,obj);
 });
 
+/** 店内前台点击预览 **/
+$('.shopCheckStandClick').click(function(){
+	var divObj = document.getElementById("showImageDiv");
+	var imageObj = document.getElementById("showImage");
+	var obj = document.getElementById("shopCheckStand");
+	return previewImage(divObj,imageObj,obj); 
+});
+	
 /** 店内照点击预览 **/
 $('.shopInteriorClick').click(function(){
 	var divObj = document.getElementById("showImageDiv");
@@ -781,6 +795,11 @@ function showDoorPhotoImage(file){
 	commonFileUpload(file, 'doorPhotoPath', 'doorPhotoDiv');
 }
 
+//店内前台照
+function showShopCheckStandImage(file){
+	commonFileUpload(file, 'shopCheckStandPath', 'shopCheckStandDiv');
+}
+
 //店内照
 function showShopInteriorImage(file){
 	commonFileUpload(file, 'shopInteriorPath', 'shopInteriorDiv');
@@ -789,6 +808,7 @@ function showShopInteriorImage(file){
 function showCertAttribute1Image(file){
 	commonFileUpload(file, 'certAttribute1Path', 'certAttribute1Div');
 }
+
 
 //身份证反面
 function showCertAttribute2Image(file){
@@ -992,6 +1012,22 @@ function showOpenAccountImage(file){
 										<input type="hidden" id="shopInteriorPath" name="shopInteriorPath" />
 										<input type="hidden" id="shopInteriorImageVal02"  />
 										<input type="file" name="shopInterior" id="shopInterior" onchange="showShopInteriorImage(this)" />
+										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div>
+								</td>
+							</tr>
+							<tr id="shopCheckStandType" style = "display:">
+								<td class="td-left">店内前台照：<span style="color:red;">(必填)</span></td>
+								<td class="td-right" colspan="3">
+									<a data-toggle='modal' class="tooltip-success shopCheckStandClick" data-target="#previewImageModal" >
+										<label id="shopCheckStandDiv"  class="uploadImage">
+											<img id="shopCheckStandImageDiv" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
+									</a>
+									<div class="updateImageDiv" style="float:left; margin-top:75 " >
+										<input type="hidden" id="shopCheckStandPath" name="shopCheckStandPath" />
+										<input type="hidden" id="shopCheckStandImageVal02"  />
+										<input type="file" name="shopCheckStand" id="shopCheckStand" onchange="showShopCheckStandImage(this)" />
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div>
 								</td>

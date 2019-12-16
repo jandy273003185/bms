@@ -20,6 +20,16 @@ public class TdMerchantReportInfo implements Serializable{
 	private String reportStatus;
 	//报备时间
 	private String reportTime;
+	
+	private String status;
+	
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public String getId() {
 		return id;
 	}
