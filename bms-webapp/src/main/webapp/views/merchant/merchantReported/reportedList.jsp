@@ -491,7 +491,94 @@
 		
 	}
 
-
+	function getQueryElectUrl(obj){
+		
+		var merchantCode=$(obj).parent().find('#merchantCode_').val();
+		var patchNo = $(obj).parent().find("#patchNo_").val();
+		var channlCode =$(obj).parent().find('#channelNo_').val();
+		var outMerchantCode = $(obj).parent().find('#outMerchantCode_').val();
+		$.ajax({
+			type:"POST",
+			dataType:"json",
+			url:window.Constants.ContextPath+"/merchant/merchantReported/allinPayMerchantReportQueryElectUrl",
+			data:
+			{
+				"merchantCode" 	: merchantCode,
+				"patchNo" : patchNo,
+				"channelNo" : channlCode,
+				"outMerchantCode" : outMerchantCode
+			},
+			success:function(data){
+				if(data.result=="SUCCESS"){
+					if(null == data.message || "" ==data.message){
+						alert("查询成功");
+						window.location.reload();
+					}else{
+						if("02" == data.message){
+							//进件成功后签约页面
+							alert("查询成功");
+							window.location.reload();
+							
+						}else{
+							alert(data.message);
+							window.location.reload();
+						}
+					}
+				}else{
+					if(null == data.message || "" ==data.message){
+						alert("查询失败");
+					}else{
+						alert(data.message);
+						window.location.reload();
+					}
+				}
+			}
+		});
+	}
+	function getQueryElectSign(obj){
+		
+		var merchantCode=$(obj).parent().find('#merchantCode_').val();
+		var patchNo = $(obj).parent().find("#patchNo_").val();
+		var channlCode =$(obj).parent().find('#channelNo_').val();
+		var outMerchantCode = $(obj).parent().find('#outMerchantCode_').val();
+		$.ajax({
+			type:"POST",
+			dataType:"json",
+			url:window.Constants.ContextPath+"/merchant/merchantReported/allinPayMerchantReportQueryElectSign",
+			data:
+			{
+				"merchantCode" 	: merchantCode,
+				"patchNo" : patchNo,
+				"channelNo" : channlCode,
+				"outMerchantCode" : outMerchantCode
+			},
+			success:function(data){
+				if(data.result=="SUCCESS"){
+					if(null == data.message || "" ==data.message){
+						alert("查询成功");
+						window.location.reload();
+					}else{
+						if("02" == data.message){
+							//进件成功后签约页面
+							alert("查询成功");
+							window.location.reload();
+							
+						}else{
+							alert(data.message);
+							window.location.reload();
+						}
+					}
+				}else{
+					if(null == data.message || "" ==data.message){
+						alert("查询失败");
+					}else{
+						alert(data.message);
+						window.location.reload();
+					}
+				}
+			}
+		});
+	}
 </script>
 
 <body >
@@ -753,6 +840,13 @@
 										    	
 										    	<c:if test="${reported.detailStatus =='21' && reported.outMerchantCode != null &&  reported.channelNo =='SUIXING_PAY'}">
 										    		<button type="button"  class="btn btn-primary btn-xs"  onclick ="getVerifiedAuthorize(this);">子商户授权</button>
+										    	</c:if>
+										    	
+										    	<c:if test="${reported.detailStatus =='1' && reported.channelNo =='ALLIN_PAY'}">
+										    		<button type="button"  class="btn btn-primary btn-xs"  onclick ="getQueryElectUrl(this);">通联电子协议</button>
+										    	</c:if>
+										    	<c:if test="${reported.detailStatus =='1' && reported.channelNo =='ALLIN_PAY'}">
+										    		<button type="button"  class="btn btn-primary btn-xs"  onclick ="getQueryElectSign(this);">通联协议重发</button>
 										    	</c:if>
 										    </td>
 										</tr>

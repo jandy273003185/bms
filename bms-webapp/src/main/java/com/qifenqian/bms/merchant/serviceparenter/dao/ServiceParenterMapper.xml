@@ -73,7 +73,7 @@
 		LEFT join td_login_user_info u on c.cust_id = u.cust_id 
 		LEFT join bms_protocol_content b ON c.CUST_ID = b.cust_id
 		<where>
-			c.merchant_flag = 3 and u.state in('00','01','02','05','06')
+			c.merchant_flag = 3 and u.state in('00','01','02','05','06','07')
 			<if test="merchantCode != null and merchantCode != ''">
 				<![CDATA[ 
 					and c.merchant_code like CONCAT('%',#{merchantCode},'%') 
@@ -227,7 +227,7 @@
 			)
 			)
 			and
-			c.merchant_flag = 3  and u.state in('00','01','02','05','06')
+			c.merchant_flag = 3  and u.state in('00','01','02','05','06','07')
 			<if test="merchantCode != null and merchantCode != ''">
 				<![CDATA[ 
 					and c.merchant_code like CONCAT('%',#{merchantCode},'%') 
@@ -334,7 +334,7 @@
 		LEFT join td_login_user_info u on c.cust_id = u.cust_id 
 		LEFT join bms_protocol_content b ON c.CUST_ID = b.cust_id
 		<where>
-			c.merchant_flag = 3 and u.state in('00','01','04','02','05','06')
+			c.merchant_flag = 3 and u.state in('00','01','04','02','05','06','07')
 			<if test="merchantCode != null and merchantCode != ''">
 				<![CDATA[ 
 					and c.merchant_code like CONCAT('%',#{merchantCode},'%') 
@@ -377,7 +377,7 @@
 			</if>
 			<if test="startTime != null and startTime != ''">
 				<![CDATA[ 
-					and  c.create_time <= #{startTime}
+					and  c.create_time >= #{startTime}
 				]]>
 			</if>
 			<if test="endTime != null and endTime != ''">
@@ -500,7 +500,7 @@
 			)
 			)
 			and
-			c.merchant_flag = 3  and u.state in('00','01','02','04','05','06')
+			c.merchant_flag = 3  and u.state in('00','01','02','04','05','06','07')
 			<if test="merchantCode != null and merchantCode != ''">
 				<![CDATA[ 
 					and c.merchant_code like CONCAT('%',#{merchantCode},'%') 
@@ -533,7 +533,7 @@
 			</if>
 			<if test="startTime != null and startTime != ''">
 				<![CDATA[ 
-					and  c.create_time <= #{startTime}
+					and  c.create_time >= #{startTime}
 				]]>
 			</if>
 			<if test="endTime != null and endTime != ''">

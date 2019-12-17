@@ -323,6 +323,38 @@ $(function(){
 									</div>
 								</td>
 							</tr>
+							<tr id="shopInteriorType" style = "display:">
+								<td class="td-left">店内照：<span style="color:red;">(必填)</span></td>
+								<td class="td-right" colspan="3">
+									<a data-toggle='modal' class="tooltip-success shopInteriorClick" data-target="#previewImageModal" >
+										<label id="shopInteriorDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img id="${picturePathVo.shopInteriorPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
+									</a>
+									<div class="updateImageDiv" style="float:left; margin-top:75 " >
+										<input type="hidden" id="shopInteriorPath" name="shopInteriorPath" />
+										<input type="hidden" id="shopInteriorImageVal02"  />
+										<input type="file" name="shopInterior" id="shopInterior" onchange="showShopInteriorImage(this)" />
+										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div>
+								</td>
+							</tr>
+							<tr id="shopCheckStandType" style = "display:">
+								<td class="td-left">店内前台照：<span style="color:red;">(必填)</span></td>
+								<td class="td-right" colspan="3">
+									<a data-toggle='modal' class="tooltip-success shopCheckStandClick" data-target="#previewImageModal" >
+										<label id="shopCheckStandDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img id="${picturePathVo.shopCheckStandPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
+									</a>
+									<div class="updateImageDiv" style="float:left; margin-top:75 " >
+										<input type="hidden" id="shopCheckStandPath" name="shopCheckStandPath" />
+										<input type="hidden" id="shopCheckStandImageVal02"  />
+										<input type="file" name="shopCheckStand" id="shopCheckStand" onchange="showShopCheckStandImage(this)" />
+										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div>
+								</td>
+							</tr>
 	                        <tr>
 								<td colspan="4" class="headlerPreview" style="background:#7ebde1;">法人信息</td>
 							</tr>
@@ -683,6 +715,16 @@ $(function(){
 			commonFileUpload(file, 'doorPhotoPath', 'doorPhotoDiv');
 		}
 		
+		//店内照
+		function showShopInteriorImage(file){
+			commonFileUpload(file, 'shopInteriorPath', 'shopInteriorDiv');
+		}
+		
+		//店内前台照
+		function showShopCheckStandImage(file){
+			commonFileUpload(file, 'shopCheckStandPath', 'shopCheckStandDiv');
+		}
+		
 		//法人身份证正面
 		function showlegalCertAttribute1Image(file){
 			commonFileUpload(file, 'legalCertAttribute1Path', 'legalCertAttribute1Div');
@@ -873,14 +915,6 @@ $(function(){
       		$("#interBankName").val(interBankName);
       	}
 
-      	/** 照片点击预览 **/
-      	$('.shopInteriorClick').click(function(){
-      		var divObj = document.getElementById("showImageDiv");
-      		var imageObj = document.getElementById("showImage");
-      		var obj = document.getElementById("shopInteriorClick");
-      		return previewImage(divObj,imageObj,obj); 
-      	});
-
       	function getUpdateType(){
 			var suiXingMerchantType = $("#suiXingMerchantType").val();
 			
@@ -982,6 +1016,21 @@ $(function(){
       		return previewImage(divObj,imageObj,obj);
       	});
 
+      	/** 店内点击预览 **/shopCheckStandPath
+      	$('.shopInteriorClick').click(function(){
+      		var divObj = document.getElementById("showImageDiv");
+      		var imageObj = document.getElementById("showImage");
+      		var obj = document.getElementById("shopInterior");
+      		return previewImage(divObj,imageObj,obj); 
+      	});
+      	
+      	/** 店内前台点击预览 **/
+      	$('.shopCheckStandClick').click(function(){
+      		var divObj = document.getElementById("showImageDiv");
+      		var imageObj = document.getElementById("showImage");
+      		var obj = document.getElementById("shopCheckStand");
+      		return previewImage(divObj,imageObj,obj); 
+      	});
 	   	
 	   	function exit() {
 	   		if (confirm("您确定要关闭吗？")) {
@@ -1095,6 +1144,8 @@ $(function(){
    	    	var certAttribute1Path = $("#legalCertAttribute1Path").val();
    	    	var businessPhotoPath = $("#businessPhotoPath").val();
    	    	var doorPhotoPath = $("#doorPhotoPath").val();
+   	    	var shopInteriorPath = $("#shopInteriorPath").val();
+   	    	var shopCheckStandPath = $("#shopCheckStandPath").val();
    	    	var settleCertAttribute1Path = $("#settleCertAttribute1Path").val();
    	    	var settleCertAttribute2Path = $("#settleCertAttribute2Path").val();
    			//上传照片
@@ -1112,6 +1163,8 @@ $(function(){
 		            	"bussinessPath"            : businessPhotoPath,              //商户营业执照
 		            	"bankCardPath"             : bankCardPhotoPath,              //开户银行照
 						"doorPhotoPath"            : doorPhotoPath,					 //门头照
+						"shopInteriorPath"         : shopInteriorPath,               //店内照
+						"shopCheckStandPath"       : shopCheckStandPath,             //店内前台照
 						"settleCertAttribute1Path" : settleCertAttribute1Path,		 //结算人身份证正面
 						"settleCertAttribute2Path" : settleCertAttribute2Path		 //结算人身份证反面
 		            },

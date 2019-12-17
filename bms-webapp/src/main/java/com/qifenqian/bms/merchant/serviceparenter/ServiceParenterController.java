@@ -105,6 +105,16 @@ public class ServiceParenterController {
 		if (!StringUtils.isBlank(merchantVo.getEmail())) {
 			merchantVo.setEmail(merchantVo.getEmail().trim());
 		}
+		String startTime = null;//起止最大时间
+		String endTime = null;//结束时间
+		if (!StringUtils.isBlank(merchantVo.getStartTime())) {
+			startTime = merchantVo.getStartTime().trim();
+			merchantVo.setStartTime(startTime+" 00:00:00");
+		}
+		if (!StringUtils.isBlank(merchantVo.getEndTime())) {
+			endTime = merchantVo.getEndTime().trim();
+			merchantVo.setEndTime(endTime+" 23:59:59");
+		}
 		if(isAllList){
 			list = serviceParenterService.selectNewServices(merchantVo);
 		}else{
@@ -112,6 +122,8 @@ public class ServiceParenterController {
 			merchantVo.setUserName(WebUtils.getUserInfo().getUserName());
 			list = serviceParenterService.myServicesNewList(merchantVo);
 		}
+		merchantVo.setStartTime(startTime);
+		merchantVo.setEndTime(endTime);
 		mv.addObject("isFirst","No");
 		mv.addObject("banklist", bankMapper.selectBanks(bank));
 		mv.addObject("agencyList", JSONObject.toJSON(list));

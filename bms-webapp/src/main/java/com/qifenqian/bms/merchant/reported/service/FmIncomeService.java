@@ -750,6 +750,16 @@ public class FmIncomeService {
               String type = fileName.substring(fileName.lastIndexOf("."));
               fileName = "settlePersonIdcardOpposite" + type;
             }
+            // 店内照
+            if ("shopInterior".equals(typeName)) {
+              String type = fileName.substring(fileName.lastIndexOf("."));
+              fileName = "insideScenePic" + type;
+            }
+            // 店内前台照
+            if ("shopCheckStand".equals(typeName)) {
+              String type = fileName.substring(fileName.lastIndexOf("."));
+              fileName = "businessPlacePic" + type;
+            }
             File filew = new File(SX_FILE_SAVE_PATH + File.separator + filePath);
             if (!filew.exists()) {
               filew.mkdirs();
