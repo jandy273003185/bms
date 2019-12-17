@@ -50,9 +50,16 @@ public class PicturePath implements Serializable {
 	private String letterOfAuthPath;
 	//37经营场所证明文件
 	private String businessPlacePath;
+	//21店内收银台照
+	private String shopCheckStandPath;
 	
 	
-	
+	public String getShopCheckStandPath() {
+		return shopCheckStandPath;
+	}
+	public void setShopCheckStandPath(String shopCheckStandPath) {
+		this.shopCheckStandPath = shopCheckStandPath;
+	}
 	public String getBusinessPlacePath() {
 		return businessPlacePath;
 	}

@@ -115,7 +115,7 @@ public class MerchantEnterReportedController {
 		/***查询渠道***/
 //		List<ChannlInfo> channlInfoList = crIncomeService.getChannlInfoList();
 		/***查询报备信息***/
-		 TdMerchantDetailInfo detailInfo = fmIncomeMapper.selTdMerchantDetailInfo(detail);
+		TdMerchantDetailInfo detailInfo = fmIncomeMapper.selTdMerchantDetailInfo(detail);
 		List<TdMerchantDetailInfo> reportedList = fmIncomeService.getMerchantDetailInfoList(detail);
 		logger.info("reportedList:"+reportedList);
 		TdCustInfo custInfo = new TdCustInfo();
@@ -136,9 +136,13 @@ public class MerchantEnterReportedController {
 //					object.put("result", "FAIL");
 //				}
 				//审核通过再判断是否已经报备
-				if("Y".equals(detailInfo.getReportStatus()) || "O".equals(detailInfo.getReportStatus())) {
-					object.put("result", "SUCCESS");
-					return object.toString();
+				if(null!=detailInfo) {
+					if("Y".equals(detailInfo.getReportStatus()) || "O".equals(detailInfo.getReportStatus())) {
+						object.put("result", "SUCCESS");
+						return object.toString();
+					}else {
+						object.put("result", "FAIL");
+					}
 				}else {
 					object.put("result", "FAIL");
 				}

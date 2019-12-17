@@ -414,6 +414,31 @@
 					                    </div>
 					                </div>
 					            </div>
+					            <div class="aui-form-group clear" id="shopInteriorType" style = "display:">
+					                <label class="aui-label-control">
+					                   	 店内照 <em>*</em>
+					                    <span>小于5M</span>
+					                </label>
+					                <div class="aui-form-input">
+					                    <div class="aui-content-img-box aui-content-full">
+					                    	<div class="aui-photo aui-up-img clear">
+					                    	<td class="td-right" colspan="3">
+												<a data-toggle='modal' class="tooltip-success shopInteriorClick" data-target="#previewImageModal" >
+													<label id="shopInteriorDiv"  class="uploadImage" >
+														<img id="shopInteriorImageDiv" style="width:100%;height:100%;"onclick="bigImg(this);" >
+													</label>
+												</a>
+												<div class="updateImageDiv" style="float:left; margin-top:75 " >
+													<input type="hidden" id="shopInteriorPath" name="shopInteriorPath" />
+													<input type="hidden" id="shopInteriorImageVal02"  />
+													<input type="file" name="shopInterior" id="shopInterior" onchange="showShopInteriorImage(this)" />
+													<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+												</div>
+											</td>
+											</div>
+					                    </div>
+					                </div>
+					            </div>
 					            <div class="aui-form-group clear" id="idCardType" style = "display:">
 					                <label class="aui-label-control">
 					                   	 身份证正面 <em>*</em>

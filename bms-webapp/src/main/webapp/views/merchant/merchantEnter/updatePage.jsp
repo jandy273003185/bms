@@ -731,7 +731,7 @@ $(function(){
 								<td class="td-left">商户类型：</td>
 								<c:choose>
 									<c:when test="${merchantVo.custType =='0'}">
-										<td>个人</td>
+										<td>小微商户</td>
 									</c:when>
 									<c:when test="${merchantVo.custType =='1'}">
 										<td>企业</td>
