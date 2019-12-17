@@ -377,7 +377,7 @@
 			</if>
 			<if test="startTime != null and startTime != ''">
 				<![CDATA[ 
-					and  c.create_time <= #{startTime}
+					and  c.create_time >= #{startTime}
 				]]>
 			</if>
 			<if test="endTime != null and endTime != ''">
@@ -533,7 +533,7 @@
 			</if>
 			<if test="startTime != null and startTime != ''">
 				<![CDATA[ 
-					and  c.create_time <= #{startTime}
+					and  c.create_time >= #{startTime}
 				]]>
 			</if>
 			<if test="endTime != null and endTime != ''">
