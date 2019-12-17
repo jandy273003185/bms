@@ -543,15 +543,21 @@ function confirmAgencyAudit(obj){
 		'custId':custId,
 		'fals':fals
 	},function(data){
-		if(data.result=="SUCCESS"){
+		
+		$.gyzbadmin.alertSuccess(data.message, null, function(){	
+			window.location.href=window.Constants.ContextPath +"/merchant/serviceParenter/list"; // 强迫浏览器刷新当前页面
+		});
+		/* if(data.result=="SUCCESS"){
 			$.gyzbadmin.alertSuccess('修改服务商成功！', null, function(){	
 				window.location.href=window.Constants.ContextPath +"/merchant/serviceParenter/list"; // 强迫浏览器刷新当前页面
 			});
-		}else{
-			$.gyzbadmin.alertSuccess('', null, function(){	
+		}
+		if(data.result=="messageErr"){
+			$.gyzbadmin.alertSuccess('审核成功发送信息异常', null, function(){	
 				window.location.href=window.Constants.ContextPath +"/merchant/serviceParenter/list";
 			});
-		}
+		} */
+
 	},'json')
 }	
 //个人 和企业 显示和隐藏标签

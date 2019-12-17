@@ -317,21 +317,30 @@ public class ServiceParenterController {
 				 
 				 	if ("SUCCESS".equals(updateState))
 				 	{	
-				 		//发消息通知
-				 		if ("yes".equals(fals)) {
-				 			sendEews(custId ,fals);
+				 		try {
+				 			//发消息通知
+					 		if ("yes".equals(fals)) {
+					 			sendEews(custId ,fals);
+							}
+					 		if ("no".equals(fals)) {
+					 			sendEewsNo(custId,fals);
+							}
+					 		ob.put("result", "SUCCESS");
+						    ob.put("message", "操作成功");
+						    return ob.toJSONString();
+				 			
+						} catch (Exception e) {
+							ob.put("result", "messageErr");
+						    ob.put("message", "审核成功发送信息异常");
+						    return ob.toJSONString();
 						}
-				 		if ("no".equals(fals)) {
-				 			sendEewsNo(custId,fals);
-						}
-				 		ob.put("result", "SUCCESS");
-					    ob.put("message", "操作成功");
-					    return ob.toJSONString();
 					}
 			
 				} catch (Exception e) {
 					//强制改变状态为 待审核状态
-//					serviceParenterService.updateState(custId, "update");
+   				    serviceParenterService.updateState(custId, "update");
+   				    ob.put("result", "ERR");
+				    ob.put("message", "审核信息异常");
 			        return ob.toJSONString();
 				}
 		}

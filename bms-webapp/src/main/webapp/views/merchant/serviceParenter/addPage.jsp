@@ -590,7 +590,7 @@ function addServiceBtn(){
             processData:false,
             async:false,
             success:function(info){ 
-                 $('#' + pathTarget + '').val(info.path);
+                 $('#' + pathTarget + '').val(info.imagePath);
             },
             error:function(err){
                 console.log(err)
