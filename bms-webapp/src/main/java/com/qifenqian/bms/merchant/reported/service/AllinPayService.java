@@ -295,6 +295,30 @@ public class AllinPayService {
 		}
 		
 	}
+
+	//无纸化进件电子协议URL接口查询
+	public AllinpayMerchantQueryRes queryElect(AllinPayBean cr) {
+		AllinpayMerchantQueryReq req = new AllinpayMerchantQueryReq();
+		
+		logger.debug("通联商户无纸化进件电子协议URL接口查询：{}", cr);
+		req.setMchid(cr.getMchId());
+		AllinpayMerchantQueryRes res  = allinAgentMerRegistService.query(req);
+		logger.debug("通联商户无纸化进件电子协议URL接口查询：{}", JSONObject.toJSONString(res));
+		
+		return res;
+	}
+
+	//无纸化进件电子协议URL接口重发
+	public AllinpayMerchantQueryRes queryElectSign(AllinPayBean cr) {
+		AllinpayMerchantQueryReq req = new AllinpayMerchantQueryReq();
+		
+		logger.debug("通联商户无纸化进件电子协议URL接口查询：{}", cr);
+		req.setMchid(cr.getMchId());
+		AllinpayMerchantQueryRes res  = allinAgentMerRegistService.query(req);
+		logger.debug("通联商户无纸化进件电子协议URL接口查询：{}", JSONObject.toJSONString(res));
+		
+		return res;
+	}
 	
 	
 	

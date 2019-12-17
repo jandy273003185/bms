@@ -167,4 +167,42 @@ public class AllinPayMerchantReportsController {
 	
 	
 	}
+	
+	
+	/**
+	 * 无纸化进件电子协议URL接口查询
+	*/
+	@RequestMapping("/merchantReported/allinPayMerchantReportQueryElectUrl")
+	@ResponseBody
+	public String reportQueryElectUrl(HttpServletRequest request,HttpServletResponse response,AllinPayBean cr){
+		JSONObject object = new JSONObject();
+		//商户通联进件
+		logger.info("商户进件成功商户信息查询："+ "--------------------");
+		//获取MCHID
+		AllinpayMerchantQueryRes allinPayResult = allinPayService.queryElect(cr);
+		logger.info("商户进件成功商户信息查询结束："+ "--------------------");
+		object.put("allinPayResult", allinPayResult);
+		return object.toString();
+	
+	
+	}
+	
+	/**
+	 * 无纸化进件电子协议URL接口重发
+	*/
+	@RequestMapping("/merchantReported/allinPayMerchantReportQueryElectSign")
+	@ResponseBody
+	public String reportQueryElectSign(HttpServletRequest request,HttpServletResponse response,AllinPayBean cr){
+		JSONObject object = new JSONObject();
+		//商户通联进件
+		logger.info("商户进件成功商户信息查询："+ "--------------------");
+		//获取MCHID
+		AllinpayMerchantQueryRes allinPayResult = allinPayService.queryElectSign(cr);
+		logger.info("商户进件成功商户信息查询结束："+ "--------------------");
+		object.put("allinPayResult", allinPayResult);
+		return object.toString();
+	
+	
+	}
+	
 }
