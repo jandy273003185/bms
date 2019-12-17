@@ -76,9 +76,9 @@ public class FileController {
 		try {
 			List<CustScan> listTdCustScanCopy = custScanMapper.ListTdCustScanCopy(custId);
 			for (CustScan custScan : listTdCustScanCopy) {
-//				if (custScan.getScanCopyPath().indexOf("/data") == -1) {
-//					continue;
-//				}
+				if (custScan.getScanCopyPath().indexOf("/null") != -1) {
+					continue;
+				}
 				String[] scanCopyPaths = custScan.getScanCopyPath().split(";");
 				for (int i = 0; i < scanCopyPaths.length; i++) {
 					fileNameAndPath = custScan.getCustId() + ":" + scanCopyPaths[i];
@@ -431,6 +431,19 @@ public class FileController {
 				}
 				
 				custScan.setScanCopyPath(picturePath.getHandIdCardPath());
+				custScan.setStatus("00");
+				custScanMapper.insertCustScan(custScan);
+			}
+			//21店内前台照
+			if(!StringUtils.isEmpty(picturePath.getShopCheckStandPath())) {
+				custScan.setCertifyType("21");
+				
+				if(!StringUtils.isEmpty(picturePathOld.getShopCheckStandPath())) {
+					custScan.setStatus("01");
+					custScanMapper.updateCustScan(custScan);
+				}
+				
+				custScan.setScanCopyPath(picturePath.getShopCheckStandPath());
 				custScan.setStatus("00");
 				custScanMapper.insertCustScan(custScan);
 			}

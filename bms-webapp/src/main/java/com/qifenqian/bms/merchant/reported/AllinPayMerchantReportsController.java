@@ -80,13 +80,44 @@ public class AllinPayMerchantReportsController {
 		return mv;
 	}
 	
+	/**
+	 * 通联商户信息修改入口
+	*/
+	@RequestMapping("/merchantReported/allinPayEditReported")
+	public ModelAndView  viewAllinPayEditReported(String channlCode,String merchantCode){
+		ModelAndView mv = new ModelAndView();
+		TdMerchantDetailInfo detail = new TdMerchantDetailInfo();
+		detail.setMerchantCode(merchantCode);
+		detail.setChannelNo(channlCode);
+
+		/***查询客户信息***/
+		TdCustInfo custInfo = fmIncomeMapperDao.getInComeInfo(merchantCode);
+		/***查询省份***/
+		List<Province> allinPayAreaInfoList = allinPayService.getProvinceName();
+		/***查询银行***/
+		List<Bank>  bankList =  allinPayService.getBankInfo();
+		
+		mv.addObject("custInfo",custInfo);
+		mv.addObject("allinPayAreaInfoList",allinPayAreaInfoList);
+		mv.addObject("bankList",bankList);
+		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/merchantReported/allinPayEditReportedSubmit")
+	public Map<String, String> allinPayEditReportedSubmit(AllinPayBean cr){
+		Map<String, String> allinPayEditReported = allinPayService.allinPayEditReported(cr);
+		return allinPayEditReported;
+	}
+	
+	
 
 	/**
 	 * 通联商户报备提交
 	*/
 	@RequestMapping("/merchantReported/allinPayMerchantReportSubmit")
 	@ResponseBody
-	public String reportUpgradeSubmit(HttpServletRequest request,HttpServletResponse response,AllinPayBean cr){
+	public String reportUpgradeSubmit(AllinPayBean cr){
 		JSONObject object = new JSONObject();
 		Map<String, Object> allinPayResult = new HashMap<String, Object>();
 		try {
@@ -167,4 +198,42 @@ public class AllinPayMerchantReportsController {
 	
 	
 	}
+	
+	
+	/**
+	 * 无纸化进件电子协议URL接口查询
+	*/
+	@RequestMapping("/merchantReported/allinPayMerchantReportQueryElectUrl")
+	@ResponseBody
+	public String reportQueryElectUrl(HttpServletRequest request,HttpServletResponse response,AllinPayBean cr){
+		JSONObject object = new JSONObject();
+		//商户通联进件
+		logger.info("商户进件成功商户信息查询："+ "--------------------");
+		//获取MCHID
+		AllinpayMerchantQueryRes allinPayResult = allinPayService.queryElect(cr);
+		logger.info("商户进件成功商户信息查询结束："+ "--------------------");
+		object.put("allinPayResult", allinPayResult);
+		return object.toString();
+	
+	
+	}
+	
+	/**
+	 * 无纸化进件电子协议URL接口重发
+	*/
+	@RequestMapping("/merchantReported/allinPayMerchantReportQueryElectSign")
+	@ResponseBody
+	public String reportQueryElectSign(HttpServletRequest request,HttpServletResponse response,AllinPayBean cr){
+		JSONObject object = new JSONObject();
+		//商户通联进件
+		logger.info("商户进件成功商户信息查询："+ "--------------------");
+		//获取MCHID
+		AllinpayMerchantQueryRes allinPayResult = allinPayService.queryElectSign(cr);
+		logger.info("商户进件成功商户信息查询结束："+ "--------------------");
+		object.put("allinPayResult", allinPayResult);
+		return object.toString();
+	
+	
+	}
+	
 }

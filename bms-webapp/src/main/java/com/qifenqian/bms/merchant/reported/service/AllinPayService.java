@@ -1,7 +1,9 @@
 package com.qifenqian.bms.merchant.reported.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -24,10 +26,13 @@ import com.qifenqian.bms.merchant.reported.mapper.FmIncomeMapper;
 import com.qifenqian.jellyfish.api.merregist.IAllinpayAgentMerRegistService;
 import com.qifenqian.jellyfish.bean.merregist.allinpay.AllinpayMerchantAddReq;
 import com.qifenqian.jellyfish.bean.merregist.allinpay.AllinpayMerchantAddRes;
+import com.qifenqian.jellyfish.bean.merregist.allinpay.AllinpayMerchantEditReq;
+import com.qifenqian.jellyfish.bean.merregist.allinpay.AllinpayMerchantEditRes;
 import com.qifenqian.jellyfish.bean.merregist.allinpay.AllinpayMerchantQueryReq;
 import com.qifenqian.jellyfish.bean.merregist.allinpay.AllinpayMerchantQueryRes;
 import com.qifenqian.jellyfish.bean.merregist.allinpay.AllinpayMerchantQueryStatusReq;
 import com.qifenqian.jellyfish.bean.merregist.allinpay.AllinpayMerchantQueryStatusRes;
+import com.qifenqian.jellyfish.bean.merregist.allinpay.Prod;
 import com.qifenqian.jellyfish.bean.merregist.allinpay.ProdInfo;
 
 @Service
@@ -69,6 +74,113 @@ public class AllinPayService {
 	 */
 	public List<Bank> getBankInfo() {
 		return allinPayMapperDao.getBankInfo();
+	}
+	
+	public Map<String, String> allinPayEditReported(AllinPayBean cr) {
+		Map<String, String> result = new HashMap<String, String>();
+		AllinpayMerchantEditReq  request= new AllinpayMerchantEditReq();
+		//request.setMerchantid(cr.getMerchantCode());
+		//request.setMerchantname(cr.getCustName());
+		request.setShortname(cr.getShortName());
+		request.setProvince(cr.getMerchantProvince());
+		request.setCity(cr.getMerchantCity());
+		request.setAddress(cr.getCprRegAddr());
+		request.setServicephone(cr.getContactPhone());
+		//行业
+		//request.setMccid(cr.getIndustry());
+		request.setComproperty(cr.getMecTypeFlag());
+		request.setCorpbusname(cr.getCprRegNmCn());
+		request.setCreditcode(cr.getBusinessLicense());
+		request.setCreditcodeexpire(cr.getBusinessTerm());
+		request.setLegal(cr.getRepresentativeName());
+		request.setLegalidtype(cr.getRepresentativeCertType());
+		request.setLegalidno(cr.getRepresentativeCertNo());
+		request.setLegalidexpire(cr.getIdTermEnd());
+		request.setContactphone(cr.getAttentionMobile());
+		request.setContactperson(cr.getAttentionName());
+		request.setClearmode(cr.getClearMode());
+		request.setAcctid(cr.getAccountNo());
+		request.setAcctname(cr.getAccountNm());
+		request.setAccttype(cr.getPerEntFlag());
+		request.setAccttp(cr.getAccttp());
+		request.setBankcode(cr.getBranchBank());   
+		request.setCnapsno(cr.getInterBankCode());
+		request.setContractdate(cr.getContractDate());
+		request.setOfflag(cr.getOfflag());
+		request.setExpanduser(cr.getExpanduser());
+		//结算人身份证号
+		//request.setSettidno(cr.getCertifyNo());
+		request.setPubacctinfo(cr.getAccountNo()+"#"+cr.getBankProvince()+"#"+cr.getBankCity()+"#"+cr.getBranchBank()+"#"+cr.getInterBankCode());
+		//无纸化标识
+		//request.setAgreetype(cr.getAgreeType());
+		//进件成功 回调地址
+		request.setNotifyurl("https://combinedpay.qifenqian.com/allinpay/callbak.do");
+		//法人身份证正面照片
+		//request.setLegalidpicfront(cr.getLegalCertAttribute1Path());
+		//法人身份证反面照片
+		//request.setLegalidpicback(cr.getLegalCertAttribute2Path());
+		//商户门头照片
+		//request.setStorepic(cr.getDoorPhotoPath());
+		//手持身份证照片
+		//request.setLegalpic(cr.getHandIdCardPath());
+		//经营场所证明文件
+		//request.setBizplacepic(cr.getBusinessPlacePath());
+		//经营内景照片
+		//request.setStoreinnerpic(cr.getShopInteriorPath());
+		//交易类型List
+		List<Prod>  list = new ArrayList<Prod>();
+		
+		Prod prod = new Prod();
+		for(int i=0;i<cr.getProdInfoList().size();i++){
+			prod.setPid((String) cr.getProdInfoList().get(i).get("pid"));
+			prod.setMtrxcode((String) cr.getProdInfoList().get(i).get("mtrxcode"));
+			prod.setFeerate((String) cr.getProdInfoList().get(i).get("feerate"));
+			if(StringUtils.isNotBlank(cr.getProdInfoList().get(i).get("creditrate").toString())) {
+				prod.setCreditrate((String) cr.getProdInfoList().get(i).get("creditrate"));
+			}
+//			if(StringUtils.isNotBlank(cr.getProdInfoList().get(i).get("lowlimit").toString())) {
+//				prod.setLowlimit((String) cr.getProdInfoList().get(i).get("lowlimit"));
+//			}
+//			if(StringUtils.isNotBlank(cr.getProdInfoList().get(i).get("toplimit").toString())) {
+//				prod.setToplimit((String) cr.getProdInfoList().get(i).get("toplimit"));
+//			}
+			
+			list.add(prod);
+		}
+		request.setProdlist(list);
+		
+		logger.info("通联商户信息修改接口请求报文：{}", JSONObject.toJSONString(request));
+		AllinpayMerchantEditRes editRes = allinAgentMerRegistService.edit(request);
+		logger.info("通联商户信息修改接口响应报文：{}", JSONObject.toJSONString(editRes));
+		
+		if ("SUCCESS".equals(editRes.getRetcode())) {
+			result.put("result", "SUCCESS");
+			String message = null;
+			if ("SUCCESS".equals(editRes.getAuditstatus())) {
+				message = "审核通过";
+			}
+			else if ("AUDITING".equals(editRes.getAuditstatus())) {
+				message = "审核中";
+			}
+			else if ("ACCEPT".equals(editRes.getAuditstatus())) {
+				message = "受理成功待提交审核";
+			}
+			else if ("ACCEPTFAIL".equals(editRes.getAuditstatus())) {
+				message = "提交审核失败";
+			}
+			else if ("FAIL".equals(editRes.getAuditstatus())) {
+				message = "审核失败";
+			}
+			else {
+				message = "未知状态";
+			}
+			result.put("message", message);
+		} else {
+			result.put("result", "FAIL");
+			result.put("message", "调用修改接口失败");
+		}
+		
+		return result;
 	}
 
 	/**
@@ -294,6 +406,30 @@ public class AllinPayService {
 			allinPayMapperDao.updateTdMerchantProductInfoAllinPay(prod);
 		}
 		
+	}
+
+	//无纸化进件电子协议URL接口查询
+	public AllinpayMerchantQueryRes queryElect(AllinPayBean cr) {
+		AllinpayMerchantQueryReq req = new AllinpayMerchantQueryReq();
+		
+		logger.debug("通联商户无纸化进件电子协议URL接口查询：{}", cr);
+		req.setMchid(cr.getMchId());
+		AllinpayMerchantQueryRes res  = allinAgentMerRegistService.query(req);
+		logger.debug("通联商户无纸化进件电子协议URL接口查询：{}", JSONObject.toJSONString(res));
+		
+		return res;
+	}
+
+	//无纸化进件电子协议URL接口重发
+	public AllinpayMerchantQueryRes queryElectSign(AllinPayBean cr) {
+		AllinpayMerchantQueryReq req = new AllinpayMerchantQueryReq();
+		
+		logger.debug("通联商户无纸化进件电子协议URL接口查询：{}", cr);
+		req.setMchid(cr.getMchId());
+		AllinpayMerchantQueryRes res  = allinAgentMerRegistService.query(req);
+		logger.debug("通联商户无纸化进件电子协议URL接口查询：{}", JSONObject.toJSONString(res));
+		
+		return res;
 	}
 	
 	
