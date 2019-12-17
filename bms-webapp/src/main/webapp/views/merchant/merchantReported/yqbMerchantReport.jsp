@@ -517,7 +517,7 @@
 		        processData:false,
 		        async:false,
 		        success:function(info){ 
-		             $('#businessPhotoPath').val(info.path);
+		             $('#businessPhotoPath').val(info.imagePath);
 		        },
 		        error:function(err){
 		            console.log(err)
@@ -547,7 +547,7 @@
 		        processData:false,
 		        async:false,
 		        success:function(info){ 
-		             $('#certAttribute1FilePath').val(info.path);
+		             $('#certAttribute1FilePath').val(info.imagePath);
 		        },
 		        error:function(err){
 		            console.log(err)
@@ -577,7 +577,7 @@
 		        processData:false,
 		        async:false,
 		        success:function(info){ 
-		             $('#certAttribute2FilePath').val(info.path);
+		             $('#certAttribute2FilePath').val(info.imagePath);
 		        },
 		        error:function(err){
 		            console.log(err)
@@ -607,7 +607,7 @@
 		        processData:false,
 		        async:false,
 		        success:function(info){ 
-		             $('#doorPhotoPath').val(info.path);
+		             $('#doorPhotoPath').val(info.imagePath);
 		        },
 		        error:function(err){
 		            console.log(err)
@@ -637,7 +637,7 @@
 		        processData:false,
 		        async:false,
 		        success:function(info){ 
-		             $('#shopInteriorPath').val(info.path);
+		             $('#shopInteriorPath').val(info.imagePath);
 		        },
 		        error:function(err){
 		            console.log(err)
@@ -667,7 +667,7 @@
 		        processData:false,
 		        async:false,
 		        success:function(info){ 
-		             $('#qualificationPath').val(info.path);
+		             $('#qualificationPath').val(info.imagePath);
 		        },
 		        error:function(err){
 		            console.log(err)
@@ -697,7 +697,7 @@
 		        processData:false,
 		        async:false,
 		        success:function(info){ 
-		             $('#otherMaterialPath').val(info.path);
+		             $('#otherMaterialPath').val(info.imagePath);
 		        },
 		        error:function(err){
 		            console.log(err)
@@ -727,7 +727,7 @@
 		        processData:false,
 		        async:false,
 		        success:function(info){ 
-		             $('#signaturePath').val(info.path);
+		             $('#signaturePath').val(info.imagePath);
 		        },
 		        error:function(err){
 		            console.log(err)
@@ -757,7 +757,7 @@
 		        processData:false,
 		        async:false,
 		        success:function(info){ 
-		             $('#openPath').val(info.path);
+		             $('#openPath').val(info.imagePath);
 		        },
 		        error:function(err){
 		            console.log(err)
@@ -787,7 +787,7 @@
 		        processData:false,
 		        async:false,
 		        success:function(info){ 
-		             $('#bankCardPhotoPath').val(info.path);
+		             $('#bankCardPhotoPath').val(info.imagePath);
 		        },
 		        error:function(err){
 		            console.log(err)

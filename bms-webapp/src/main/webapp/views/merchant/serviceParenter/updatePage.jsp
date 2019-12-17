@@ -805,7 +805,7 @@ function businessForever(){
 								
 										<option value="1" <c:if test="${merchantVo.custType =='1'}">selected</c:if>>企业</option>								
 									
-										<option value="0" <c:if test="${merchantVo.custType =='0'}">selected</c:if>>个人</option>
+										<option value="0" <c:if test="${merchantVo.custType =='0'}">selected</c:if>>小微企业</option>
 		
 										<option value="2" <c:if test="${merchantVo.custType =='2' }">selected</c:if>>个体户</option>
 									
@@ -897,7 +897,7 @@ function businessForever(){
 							<td class="td-right" colspan="3">
 								<a data-toggle='modal' class="tooltip-success businessPhotoClick" data-target="#previewImageModal" >
 									<label id="businessPhotoDiv" class="uploadImage" >
-										<img  id="businessPhotoImage" src="${picturePathOld.bussinessPath}" onclick="bigImg(this);"  style="width:100%;height:100%;display:none"  />
+										<img  id="businessPhotoImage" src="${picturePathOld.bussinessPath}" onclick="bigImg(this);"  style="width:100%;height:100%;"  />
 									</label>
 								</a>
 								<div class="updateImageDiv" style="float:left; margin-top:75 " >
@@ -941,7 +941,7 @@ function businessForever(){
 							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success certAttribute1Click"  data-target="#previewImageModal" >
 								<label id="certAttribute1Div" class="uploadImage">
-								        <img  id="certAttribute1Image" onClick="bigImg(this);"   src="${picturePathOld.idCardOPath}"  style="width:100%;height:100%;display:none"/>
+								        <img  id="certAttribute1Image" onClick="bigImg(this);"   src="${picturePathOld.idCardOPath}"  style="width:100%;height:100%;"/>
 								</label>
 								</a>
 								<div style="float:left;margin-top:75" >
@@ -956,7 +956,7 @@ function businessForever(){
 							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success certAttribute2Click"  data-target="#previewImageModal" >
 									<label id="certAttribute2Div" class="uploadImage">
-									        <img  id="certAttribute2Image" onClick="bigImg(this);" src="${picturePathOld.idCardFPath}"   style="width:100%;height:100%;display:none"/>
+									        <img  id="certAttribute2Image" onClick="bigImg(this);" src="${picturePathOld.idCardFPath}"   style="width:100%;height:100%;"/>
 									</label>
 								</a>
 								<div style="float:left;margin-top:75" >
@@ -1071,7 +1071,7 @@ function businessForever(){
 							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success bankCardPhotoClick"  data-target="#previewImageModal" >
 									<label id="bankCardPhotoDiv" class="uploadImage">
-										<img  id="bankCardPhotoImage" onClick="bigImg(this);" src="${picturePathOld.bankCardPath}"  style="width:100%;height:100%;display:none"/>
+										<img  id="bankCardPhotoImage" onClick="bigImg(this);" src="${picturePathOld.bankCardPath}"  style="width:100%;height:100%;"/>
 									</label>
 								</a>
 								<div style="float:left;margin-top:75" >

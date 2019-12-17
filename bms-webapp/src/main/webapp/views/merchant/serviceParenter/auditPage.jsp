@@ -325,7 +325,7 @@ function businessForever(){
 							<td class="td-right" colspan="3">
 								<a data-toggle='modal' class="tooltip-success businessPhotoClick" data-target="#previewImageModal" >
 									<label id="businessPhotoDiv" class="uploadImage" >
-										<img  id="businessPhotoImage" src="${picturePathOld.bussinessPath}" onclick="bigImg(this);"  style="width:100%;height:100%;display:none"  />
+										<img  id="businessPhotoImage" src="${picturePathOld.bussinessPath}" onclick="bigImg(this);"  style="width:100%;height:100%;"  />
 									</label>
 								</a>
 								
@@ -363,7 +363,7 @@ function businessForever(){
 							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success certAttribute1Click"  data-target="#previewImageModal" >
 								<label id="certAttribute1Div" class="uploadImage">
-								        <img  id="certAttribute1Image" onClick="bigImg(this);"   src="${picturePathOld.idCardOPath}"  style="width:100%;height:100%;display:none"/>
+								        <img  id="certAttribute1Image" onClick="bigImg(this);"   src="${picturePathOld.idCardOPath}"  style="width:100%;height:100%;"/>
 								</label>
 								</a>
 								
@@ -374,7 +374,7 @@ function businessForever(){
 							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success certAttribute2Click"  data-target="#previewImageModal" >
 									<label id="certAttribute2Div" class="uploadImage">
-									        <img  id="certAttribute2Image" onClick="bigImg(this);" src="${picturePathOld.idCardFPath}"   style="width:100%;height:100%;display:none"/>
+									        <img  id="certAttribute2Image" onClick="bigImg(this);" src="${picturePathOld.idCardFPath}"   style="width:100%;height:100%;"/>
 									</label>
 								</a>
 								
@@ -480,7 +480,7 @@ function businessForever(){
 							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success bankCardPhotoClick"  data-target="#previewImageModal" >
 									<label id="bankCardPhotoDiv" class="uploadImage">
-										<img  id="bankCardPhotoImage" onClick="bigImg(this);" src="${picturePathOld.bankCardPath}"  style="width:100%;height:100%;display:none"/>
+										<img  id="bankCardPhotoImage" onClick="bigImg(this);" src="${picturePathOld.bankCardPath}"  style="width:100%;height:100%;"/>
 									</label>
 								</a>
 								
@@ -492,7 +492,7 @@ function businessForever(){
 							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success openAccountClick"  data-target="#previewImageModal" >
 									<label id="openAccountDiv" class="uploadImage">
-									        <img  id="openAccountImage" onClick="bigImg(this);" src="${picturePathOld.openAccountPath}"  style="width:100%;height:100%;display:none"/>
+									        <img  id="openAccountImage" onClick="bigImg(this);" src="${picturePathOld.openAccountPath}"  style="width:100%;height:100%;"/>
 									</label>
 								</a>
 								
