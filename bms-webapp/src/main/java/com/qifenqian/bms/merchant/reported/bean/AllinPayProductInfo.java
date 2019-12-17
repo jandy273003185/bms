@@ -31,8 +31,17 @@ public class AllinPayProductInfo  implements Serializable{
 	private String createTime;
 	//修改时间
 	private String modifyTime;
+	//标识状态
+	private String flagStatus;
 	
 	
+	
+	public String getFlagStatus() {
+		return flagStatus;
+	}
+	public void setFlagStatus(String flagStatus) {
+		this.flagStatus = flagStatus;
+	}
 	public String getId() {
 		return id;
 	}
