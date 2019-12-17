@@ -27,6 +27,7 @@ import com.qifenqian.bms.basemanager.utils.GenSN;
 import com.qifenqian.bms.merchant.channel.bean.ChannelBean;
 import com.qifenqian.bms.merchant.channel.bean.ChannelDetailBean;
 import com.qifenqian.bms.merchant.channel.service.ChannelService;
+import com.qifenqian.bms.merchant.reported.bean.AllinPayBean;
 import com.qifenqian.bms.merchant.reported.bean.Area;
 import com.qifenqian.bms.merchant.reported.bean.Bank;
 import com.qifenqian.bms.merchant.reported.bean.BankBranch;
@@ -38,7 +39,9 @@ import com.qifenqian.bms.merchant.reported.bean.Industry;
 import com.qifenqian.bms.merchant.reported.bean.Province;
 import com.qifenqian.bms.merchant.reported.bean.TbFmTradeInfo;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
+import com.qifenqian.bms.merchant.reported.bean.TdMerchantReportInfo;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantSettleInfo;
+import com.qifenqian.bms.merchant.reported.dao.AllinPayMapperDao;
 import com.qifenqian.bms.merchant.reported.dao.FmIncomeMapperDao;
 import com.qifenqian.bms.merchant.reported.service.AliPayIncomeService;
 import com.qifenqian.bms.merchant.reported.service.AllinPayService;
@@ -48,6 +51,7 @@ import com.qifenqian.bms.merchant.reported.service.MerchantProfitSharingService;
 import com.qifenqian.bms.merchant.reported.service.WeChatAppService;
 import com.qifenqian.bms.merchant.subAccount.bean.MerchantSubAccouontBean;
 import com.qifenqian.bms.merchant.subAccount.service.MerchantSubAccountService;
+import com.qifenqian.jellyfish.bean.enums.AuditsTatus;
 import com.qifenqian.jellyfish.bean.enums.BusinessStatus;
 import com.qifenqian.jellyfish.bean.enums.GetwayStatus;
 import com.qifenqian.jellyfish.bean.merregist.alipay.AlipayOpenAgentOrderQueryRes;
@@ -95,16 +99,13 @@ public class MerchantReportsController {
    private ChannelService channelService;
    
    @Autowired
-   private MerchantProfitSharingService merchantProfitSharingService;
-   
-   @Autowired
-   private MerchantSubAccountService merchantSubAccountService;
-
-   @Autowired
    private AllinPayService allinPayService;
    
    @Autowired
    private MerchantMapper merchantMapper;
+   
+   @Autowired
+   private AllinPayMapperDao allinPayMapperDao;
    /**
     * 商户报备入口
     */
@@ -914,7 +915,82 @@ public class MerchantReportsController {
 			//查询
 			TdMerchantDetailInfo selMerchantDetailInfo = fmIncomeMapperDao.selMerchantDetailInfo(detail);
 			AllinpayMerchantQueryStatusRes res = allinPayService.queryStatus(selMerchantDetailInfo);
-			//修改状态
+			
+			AllinPayBean crBean = new AllinPayBean();
+			crBean.setOutMerchantCode(res.getMerchantid());
+			crBean.setMchId(res.getMchid());
+			crBean.setMerchantCode(detail.getMerchantCode());
+			crBean.setChannelNo(detail.getChannelNo());
+			crBean.setPatchNo(detail.getPatchNo());
+			
+			TdMerchantReportInfo reportInfo = new TdMerchantReportInfo();
+			reportInfo.setMerchantCode(detail.getMerchantCode());
+	        reportInfo.setChannelNo(detail.getChannelNo());
+	        reportInfo.setPatchNo(detail.getPatchNo());
+			
+	        //修改状态
+			if("SUCCESS".equalsIgnoreCase(res.getRetcode())) {
+				if("ACCEPT".equals(res.getAuditstatus()) || "AUDITING".equals(res.getAuditstatus())) {
+					reportInfo.setReportStatus("Y");
+					crBean.setReportStatus("0");
+					object.put("result","SUCCESS");
+					object.put("message", "商户待审核");
+				}else if("FAIL".equals(res.getAuditstatus())) {
+					reportInfo.setReportStatus("F");
+					crBean.setReportStatus("2");
+					object.put("result","FAILURE");
+					object.put("message", "商户失败");
+				}else if("ACCEPTFAIL".equals(res.getAuditstatus())) {
+					reportInfo.setReportStatus("E");
+					crBean.setReportStatus("2");
+					object.put("result","FAILURE");
+					object.put("message", "商户失败");
+				}else if("SUCCESS".equals(res.getAuditstatus())) {
+					reportInfo.setReportStatus("O");
+					crBean.setReportStatus("1");
+				}
+				//报备表中状态改变
+				allinPayService.updateTdMerchantReport(reportInfo);
+				//报备成功商户报备信息表中状态改变
+				allinPayMapperDao.updateTdMerchantDetailInfoAllinPay(crBean);
+				if(AuditsTatus.SUCCESS.name() == res.getAuditstatus()) {
+					
+					//报备成功修改商户状态
+					MerchantVo merchantVo = new MerchantVo();
+					merchantVo.setCustId(custInfo.getCustId());
+					merchantVo.setFilingStatus("01");
+					merchantVo.setFilingAuditStatus("00");
+					merchantMapper.updateMerchant(merchantVo);
+					
+					//审核通过,开通产品
+					ChannelBean bean = new ChannelBean();
+					bean.setCustId(custInfo.getCustId());
+					bean.setChannelName(ChannelMerRegist.ALIPAY);
+					//外部商户号
+					bean.setMerchantChannelId(res.getMerchantid());
+					bean.setMerchantChannelKey(res.getMerchantid());
+					List<ChannelDetailBean> details = new ArrayList<ChannelDetailBean>();
+					//支付宝扫码
+					ChannelDetailBean aliPaySM = new ChannelDetailBean();
+					aliPaySM.setChannelCode(ChannelCode.ALIPAY);
+					aliPaySM.setSubCode(PayType.SM);
+					details.add(aliPaySM);
+					//支付宝刷卡
+					ChannelDetailBean aliPaySK = new ChannelDetailBean();
+					aliPaySK.setChannelCode(ChannelCode.ALIPAY);
+					aliPaySK.setSubCode(PayType.SK);
+					details.add(aliPaySK);
+					//产品列表
+					bean.setDetails(details);
+					boolean saveChannel = channelService.saveOrupdateChannel(bean, null);
+					logger.info("开通支付宝渠道产品状态：{}", saveChannel ? "成功" : "失败");
+					
+					object.put("result", "SUCCESS");
+					object.put("message", "商户审核成功");
+				}
+				
+			}
+			return object.toString();
 		}
 			
 		ChannelResult channelResult = iMerChantIntoServic.merQuery(req);
