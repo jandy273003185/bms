@@ -29,12 +29,34 @@ public class ChannelBean implements Serializable {
 	private Date modifyTime;
 	private ChannelStatus status;
 	private String comment;
+	//渠道微信子商户号
+	private String wxChildNo;
+	//渠道支付宝子商户号
+	private String zfbChildNo;
 
 	// 具体在渠道的产品
 	private List<ChannelDetailBean> details;
 
 	// 商户编号, 仅用于查询
 	private String merchantCode;
+	
+	
+
+	public String getWxChildNo() {
+		return wxChildNo;
+	}
+
+	public void setWxChildNo(String wxChildNo) {
+		this.wxChildNo = wxChildNo;
+	}
+
+	public String getZfbChildNo() {
+		return zfbChildNo;
+	}
+
+	public void setZfbChildNo(String zfbChildNo) {
+		this.zfbChildNo = zfbChildNo;
+	}
 
 	public String getMerchantCode() {
 		return merchantCode;

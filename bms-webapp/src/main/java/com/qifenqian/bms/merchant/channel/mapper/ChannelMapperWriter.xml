@@ -36,7 +36,9 @@
 		MER_KEY, PAY_TYPE, 
 		SUB_PAY_TYPE, 	CREATE_TIME, 
 		MODIFY_TIME, 	STATUS,
-		APPID, APPID_KEY
+		APPID, APPID_KEY,
+		WX_CHILD_NO,
+		ZFB_CHILD_NO
 		 ) 
 		VALUES
 		<foreach collection="details" index="index" item="item" separator="," >
@@ -46,7 +48,9 @@
 			#{item.subCode}, now(), 		
 			now(),	'09',
 			#{item.wxAppId},
-		 	#{item.wxAppsecret}
+		 	#{item.wxAppsecret},'
+		 	#{item.wxChildNo},
+		 	#{item.zfbChildNo}
 		 	
 	
 			

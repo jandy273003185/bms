@@ -1058,6 +1058,8 @@ public class MerchantReportsController {
 			//外部商户号
 			bean.setMerchantChannelId(channelMerNo);
 			bean.setMerchantChannelKey(channelMerNo);
+			bean.setWxChildNo(wxMerNo);
+			bean.setZfbChildNo(zfbMerNo);
 			List<ChannelDetailBean> details = new ArrayList<ChannelDetailBean>();
 			//微信扫码
 			ChannelDetailBean weChatSM = new ChannelDetailBean();
