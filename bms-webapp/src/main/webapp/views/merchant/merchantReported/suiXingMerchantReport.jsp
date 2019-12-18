@@ -289,7 +289,7 @@ $(function(){
 										</label>
 									</a>
 									<div class="updateImageDiv" style="float:left; margin-top:75 " >
-										<input  type="hidden" id="businessPhotoPath" name="businessPhotoPath" />
+										<input  type="hidden" id="businessPhotoPath" name="businessPhotoPath" value ="${picturePathVo.bussinessPath }"/>
 										<input type="hidden" id="businessPhotoImageVal02"  />
 										<input type="file" name="businessPhoto" id="businessPhoto" onchange="showBusinessPhotoImage(this)" />
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
@@ -517,7 +517,7 @@ $(function(){
                             <tr>
                                 <td class="td-left">账户人身份证号码：<span style="color:red;">(必填)</span></td>
 							  	<td class="td-right"> 
-									<input type="text" id="certifyNo" name="v" placeholder="请输入账户人身份证号码"  value="" style="width:90%">
+									<input type="text" id="certifyNo" name="certifyNo" placeholder="请输入账户人身份证号码"  value="" style="width:90%">
 								</td>
 							</tr>
 							<tr id="letterOfAuthType" style = "display:">
@@ -1029,6 +1029,14 @@ $(function(){
       		var divObj = document.getElementById("showImageDiv");
       		var imageObj = document.getElementById("showImage");
       		var obj = document.getElementById("shopCheckStand");
+      		return previewImage(divObj,imageObj,obj); 
+      	});
+      	
+      	/** 非法人结算授权函 **/
+      	$('.letterOfAuthClick').click(function(){
+      		var divObj = document.getElementById("showImageDiv");
+      		var imageObj = document.getElementById("showImage");
+      		var obj = document.getElementById("letterOfAuth");
       		return previewImage(divObj,imageObj,obj); 
       	});
 	   	

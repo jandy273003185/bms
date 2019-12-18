@@ -700,16 +700,6 @@ public class FmIncomeService {
               String type = fileName.substring(fileName.lastIndexOf("."));
               fileName = "storePic" + type;
             }
-            // 身份证正面照
-//            if ("certAttribute1".equals(typeName)) {
-//              String type = fileName.substring(fileName.lastIndexOf("."));
-//              fileName = "settlePersonIdcardPositive" + type;
-//            }
-            // 身份证反面照
-//            if ("certAttribute2".equals(typeName)) {
-//              String type = fileName.substring(fileName.lastIndexOf("."));
-//              fileName = "settlePersonIdcardOpposite" + type;
-//            }
             // 营业执照
             if ("businessPhoto".equals(typeName)) {
               String type = fileName.substring(fileName.lastIndexOf("."));
