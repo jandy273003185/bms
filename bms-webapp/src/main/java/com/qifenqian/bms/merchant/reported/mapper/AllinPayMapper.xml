@@ -148,7 +148,8 @@
 			`result_msg`,
 			`flag_status`,
 			`create_time`,
-			`modify_time`
+			`modify_time`,
+			`flag_status`
 		)
 		VALUES
 			(
@@ -203,7 +204,8 @@
 				#{resultMsg,jdbcType = VARCHAR},
 				#{flagStatus,jdbcType = VARCHAR},
 				now(),
-				now()
+				now(),
+				#{flagStatus,jdbcType = VARCHAR}
 			)
 	</insert>
 	

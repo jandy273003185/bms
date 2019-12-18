@@ -267,7 +267,7 @@ table {
 										<td class="td-left">通道名</td>
 										<td class="td-right">
 											<span class="input-icon">
-												<select name="channelname" id="channelname">
+												<select name="channelName" id="channelName">
 													<option value=""></option>
 													<c:forEach items="${channelNames}" var="item">
 														<option value="${item.code}" <c:if test="${queryBean.channelName == item}"> selected="selected"</c:if>>${item.text }</option>

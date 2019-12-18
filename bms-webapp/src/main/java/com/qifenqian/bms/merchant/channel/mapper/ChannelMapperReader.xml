@@ -42,8 +42,8 @@
 			<if test="merchantChannelId !=null and merchantChannelId !=''">
 				and a.mer_no=#{merchantChannelId}
 			</if>
-			<if test="custName !=null and custName !=''">
-				and i.cust_name=#{custName}
+			<if test="merchantCode !=null and merchantCode !=''">
+				and i.MERCHANT_CODE=#{merchantCode}
 			</if>
 		</where>
 

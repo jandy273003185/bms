@@ -269,8 +269,9 @@
 			C.CERTIFY_TYPE,
 			C.CERTIFY_NO,
 			(case C.CUST_TYPE
-			WHEN '0' THEN '个人'
+			WHEN '0' THEN '小微企业'
 			WHEN '1' THEN '企业'
+			WHEN '2' THEN '个体户'
 			ELSE ''
 			END) CUST_TYPE,
 			C.MERCHANT_FLAG,
@@ -398,8 +399,9 @@
 		C.CERTIFY_TYPE,
 		C.CERTIFY_NO,
 		(case C.CUST_TYPE
-		WHEN '0' THEN '个人'
+		WHEN '0' THEN '小薇企业'
 		WHEN '1' THEN '企业'
+		WHEN '2' THEN '个体户'
 		ELSE ''
 		END) CUST_TYPE,
 		C.MERCHANT_FLAG,
