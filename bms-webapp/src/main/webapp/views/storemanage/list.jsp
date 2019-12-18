@@ -55,9 +55,9 @@ $(document).ready(function(){
 			$("#addStoreManageModal #mchId").focus();
 			return;
 		}
-		
-		var validate =false ;
-		$.ajax({
+
+	//	var validate =false ;
+<%-- 		$.ajax({
 			async:false,
 			dataType:"json",
 			url:window.Constants.ContextPath +'<%=StoreManagePath.BASE+StoreManagePath.VALIDATE%>',
@@ -69,25 +69,27 @@ $(document).ready(function(){
 					$.gyzbadmin.alertFailure("添加失败！"+data.message);
 					validate = false;
 				}
-				 }});
-		if(!validate){
+				 }}
+		); --%>
+	/* 	if(!validate){
 			return false;
-		}
+		} */
 
 		
-		var shopNo = $("#addStoreManageModal #shopNo").val().trim();
+		/* var shopNo = $("#addStoreManageModal #shopNo").val().trim();
 		if(kong.test(shopNo)) {
 			$.gyzbadmin.alertFailure("门店编号不能为空");
 			$("#addStoreManageModal #shopNo").focus();
 			return;
-		}
-		var validate =false ;
+		} */
+	<%-- 	var validate =false ;
 		$.ajax({
 			async:false,
 			dataType:"json",
 			url:window.Constants.ContextPath +'<%=StoreManagePath.BASE+StoreManagePath.REPEAT%>',
-	        data:{'mchId':mchId,
-	        	  'shopNo':shopNo},
+	        data:{'mchId':mchId ,
+	        	'shopNo':shopNo
+	        	  },
 	        success:function(data){
 	        	if(data.result=="success"){
 					validate = true;
@@ -98,7 +100,7 @@ $(document).ready(function(){
 				 }});
 		if(!validate){
 			return false;
-		}
+		} --%>
 		
 		
 		var shopName = $("#addStoreManageModal #shopName").val().trim();
@@ -138,7 +140,7 @@ $(document).ready(function(){
 			data:
 			{
 				"mchId" 		: mchId,
-				"shopNo" 		: shopNo,
+			//	"shopNo" 		: shopNo,	
 				"shopName" 		: shopName,
 				"addr" 			: addr,
 				"contact"		: contact,
@@ -149,6 +151,7 @@ $(document).ready(function(){
 				if(data.result=="success"){
 					$.gyzbadmin.alertSuccess("添加成功！",function(){
 						$("#addStoreManageModal").modal("hide");
+						window.location.reload();
 					},function(){
 						window.location.reload();
 					});
@@ -198,12 +201,12 @@ $(document).ready(function(){
 					return;
 				}
 				
-				var shopNo = $("#addStoreManageModalS #shopNo").val().trim();
+				/* var shopNo = $("#addStoreManageModalS #shopNo").val().trim();
 				if(kong.test(shopNo)) {
 					$.gyzbadmin.alertFailure("门店编号不能为空");
 					$("#addStoreManageModalS #shopNo").focus();
 					return;
-				}
+				} */
 				
 				var shopName = $("#addStoreManageModalS #shopName").val().trim();
 				
@@ -236,7 +239,7 @@ $(document).ready(function(){
 				}
 				
 				var validate =false ;
-				$.ajax({
+				<%-- $.ajax({
 					async:false,
 					dataType:"json",
 					url:window.Constants.ContextPath +'<%=StoreManagePath.BASE+StoreManagePath.REPEAT%>',
@@ -248,7 +251,7 @@ $(document).ready(function(){
 			        	  'status':status },
 			        success:function(data){
 			        	if(data.result=="success"){
-			        		$.blockUI();
+			        		$.blockUI(); --%>
 							 $.ajax({
 								type:"POST",
 								dataType:"json",
@@ -257,7 +260,7 @@ $(document).ready(function(){
 								{	
 									"mchId"			: mchId,
 									"custName" 		: custName,
-									"shopNo" 		: shopNo,
+								//	"shopNo" 		: shopNo,
 									"shopName" 		: shopName,
 									"addr" 			: addr,
 									"contact"		: contact,
@@ -268,6 +271,7 @@ $(document).ready(function(){
 									if(data.result=="success"){
 										$.gyzbadmin.alertSuccess("添加成功！",function(){
 											$("#addStoreManageModalS").modal("hide");
+											window.location.reload();
 										},function(){
 											window.location.reload();
 										});
@@ -276,11 +280,11 @@ $(document).ready(function(){
 									}
 								}
 							});
-						}else{
+						/* }else{
 							$.gyzbadmin.alertFailure("添加失败！"+data.message);
 							validate = false;
 						}
-						 }});
+						 }}); */
 				
 				
 				
@@ -340,13 +344,13 @@ $(document).ready(function(){
 				return;
 			}
 			
-			var shopNo = $("#updateStoreManageModal #shopNo").val().trim();
+			/* var shopNo = $("#updateStoreManageModal #shopNo").val().trim();
 			if(kong.test(shopNo)) {
 				$.gyzbadmin.alertFailure("门店编号不能为空");
 				$("#updateStoreManageModal #shopNo").focus();
 				return;
-			}
-			var validate =false ;
+			} */
+			<%-- var validate =false ;
 			$.ajax({
 				async:false,
 				dataType:"json",
@@ -367,7 +371,7 @@ $(document).ready(function(){
 					 }});
 			if(!validate){
 				return false;
-			}
+			} --%>
 			var shopName = $("#updateStoreManageModal #shopName").val().trim();
 			if(kong.test(shopName)) {
 				$.gyzbadmin.alertFailure("门店名称不可为空");
@@ -407,7 +411,7 @@ $(document).ready(function(){
 					"mchId"			: mchId,
 					"shopId"        : shopId,
 					"custName" 		: custName,
-					"shopNo" 		: shopNo,
+			//		"shopNo" 		: shopNo,
 					"shopName" 		: shopName,
 					"addr" 			: addr,
 					"contact"		: contact,
@@ -418,6 +422,7 @@ $(document).ready(function(){
 					if(data.result=="success"){
 						$.gyzbadmin.alertSuccess("修改成功！",function(){
 							$("#updateStoreManageModal").modal("hide");
+							window.location.reload();
 						},function(){
 							window.location.reload();
 						});
@@ -911,13 +916,13 @@ $(document).ready(function(){
 								</select>
 							</td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<td class="td-left">门店编号<span style="color:red">*</span></td>
 							<td class="td-right">
 								<input onkeyup="value=value.replace(/[^\d|^\w.//]/ig,'')" type="text" id="shopNo" name="shopNo" clasS="width-90">
 								<label id="shopNoLabel" class="label-tips"></label>
 							</td>
-						</tr>	
+						</tr>	 -->
 						<tr>
 							<td class="td-left">门店名称<span style="color:red">*</span></td>
 							<td class="td-right">
@@ -988,14 +993,14 @@ $(document).ready(function(){
 						<tr>
 							<td class="td-left">门店编号<span style="color:red">*</span></td>
 							<td class="td-right">
-								<input onkeyup="value=value.replace(/[^\d|^\w.//]/ig,'')" type="text" id="shopNo" name="shopNo"  clasS="width-90">
+								<input onkeyup="value=value.replace(/[^\d|^\w.//]/ig,'')" type="text" id="shopNo" name="shopNo" readonly="readonly"  clasS="width-90">
 								<label id="shopNoLabel" class="label-tips"></label>
 							</td>
 						</tr>						
 						<tr>
 							<td class="td-left">门店名称<span style="color:red">*</span></td>
 							<td class="td-right">
-								<textarea name="shopName"  id="shopName"  rows="1" clasS="width-90"></textarea>  
+								<textarea name="shopName"  id="shopName"  rows="1" clasS="width-90" ></textarea>  
 								<label id="shopNameLabel" class="label-tips"></label>
 							</td>
 						</tr>
@@ -1053,13 +1058,13 @@ $(document).ready(function(){
 							</td>
 						</tr>
 							
-						<tr>
+						<!-- <tr>
 							<td class="td-left">门店编号<span style="color:red">*</span></td>
 							<td class="td-right">
 								<input onkeyup="value=value.replace(/[^\d|^\w.//]/ig,'')" type="text" id="shopNo" name="shopNo"  clasS="width-90">
 								<label id="shopNoLabel" class="label-tips"></label>
 							</td>
-						</tr>						
+						</tr>		 -->				
 						<tr>
 							<td class="td-left">门店名称<span style="color:red">*</span></td>
 							<td class="td-right">
