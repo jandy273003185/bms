@@ -88,19 +88,19 @@ public class CashierManageController {
       return jo.toString();
     }
        
-    TdLoginUserInfo loginUserInfo =  cashierManageService.getCustInfoByMobile(cashierInfo.getCashierMobile());
-    if (loginUserInfo == null) {
-      jo.put("result", "FAIL");
-      jo.put("message", "该手机号未注册为七分钱用户！");
-      return jo.toString();
-    }
+//    TdLoginUserInfo loginUserInfo =  cashierManageService.getCustInfoByMobile(cashierInfo.getCashierMobile());
+//    if (loginUserInfo == null) {
+//      jo.put("result", "FAIL");
+//      jo.put("message", "该手机号未注册为七分钱用户！");
+//      return jo.toString();
+//    }
     List<CashierInfo> list = cashierManageService.getCashierList(cashierInfo);
     if (list != null && list.size() != 0) {
       jo.put("result", "FAIL");
       jo.put("message", "该手机号已注册成该商户的收银员！");
       return jo.toString();
     }
-    cashierInfo.setCashierCustId(loginUserInfo.getCustId());
+//    cashierInfo.setCashierCustId(loginUserInfo.getCustId());
     cashierInfo.setOnlyId(GenSN.getSN());
     cashierInfo.setCreateId(WebUtils.getUserInfo().getUserId() + "");
     try {
