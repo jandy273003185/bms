@@ -67,6 +67,8 @@ $(document).ready(function(){
 		var refundAuth = $(this).parents('#addCashierModal').find('#refundAuth').val();
 		var queryAuth = $(this).parents('#addCashierModal').find('#queryAuth').val();
 		var custId = $(this).parents('#addCashierModal').find('#custId').val();
+		var loginPw = $(this).parents('#addCashierModal').find('#loginPw').val();
+		var refundPw = $(this).parents('#addCashierModal').find('#refundPw').val();
 		if(cashierMobile==null||trim(cashierMobile)==''){
 			$.gyzbadmin.alertFailure("手机号不能为空！");
 			return;
@@ -79,14 +81,24 @@ $(document).ready(function(){
 		if(shopId==null||trim(shopId)==''){
 			$.gyzbadmin.alertFailure("门店ID不能为空！");
 			return;
-		} 
+		}
+		if(loginPw==null||trim(loginPw)==''){
+			$.gyzbadmin.alertFailure("登录密码不能为空！");
+			return;
+		}
+		if(refundPw==null||trim(refundPw)==''){
+			$.gyzbadmin.alertFailure("退款密码不能为空！");
+			return;
+		}
 		$.post(window.Constants.ContextPath+'/merchant/cashierManage/add', {
 			'cashierMobile':cashierMobile,
 			'cashierName':cashierName,
 			'merchantCustId':merchantCustId,
 			'shopId':shopId,
 			'refundAuth':refundAuth,
-			'queryAuth' : queryAuth
+			'queryAuth' : queryAuth,
+			'loginPw' : loginPw,
+			'refundPw' : refundPw
 			}, function(data) {
 				$.unblockUI();
 				if(data.result == 'SUCCESS'){
@@ -113,7 +125,8 @@ $(document).ready(function(){
 		var queryAuth = $(this).parents('tr').find('#queryAuth').val();
 		var merchantName = $(this).parents('tr').find('#merchantName').val();
 		var shopName = $(this).parents('tr').find('#shopName').val();
-		
+		var status = $(this).parents('tr').find('#status').val();
+
 		$("#updateModal").find("#merchantName").val(merchantName);
 		$("#updateModal").find("#shopName").val(shopName);
 		$("#updateModal").find("#cashierMobile").val(cashierMobile);
@@ -123,7 +136,8 @@ $(document).ready(function(){
 		$("#updateModal").find("#queryAuth").val(queryAuth);
 		$("#updateModal").find("#merchantCustIdU").val(merchantCustId);
 		$("#updateModal").find("#shopId").val(shopId);
-		
+		$("#updateModal").find("#status").val(status);
+
 	});
 	
 	$(".updateCashierBtn").click(function(){
@@ -134,6 +148,7 @@ $(document).ready(function(){
 		var shopId = $(this).parents('tr').find('#shopId').val();
 		var refundAuth = $(this).parents('#updateModal').find("#refundAuth").val();
 		var queryAuth = $(this).parents('#updateModal').find("#queryAuth").val();
+		var status = $(this).parents('#updateModal').find("#status").val();
 		if(cashierMobile==null||trim(cashierMobile)==''){
 			$.gyzbadmin.alertFailure("手机号不能为空！");
 			return;
@@ -147,6 +162,7 @@ $(document).ready(function(){
 			'queryAuth' :queryAuth,	
 			'merchantCustId':merchantCustId,
 			'shopId':shopId,
+			'status':status,
 			'refundAuth':refundAuth
 			}, function(data) {
 				$.unblockUI();
@@ -270,6 +286,8 @@ $(document).ready(function(){
 											<th>收银员姓名</th>
 											<th>是否有退款权限</th>
 											<th>是否有全门店权限</th> 
+											<th>是否有效</th>
+											<th>创建时间</th>
 											<th>操作</th>
 										</tr>
 									</thead>
@@ -282,6 +300,7 @@ $(document).ready(function(){
 												<input type="hidden" name="queryAuth" id="queryAuth" value="${result.queryAuth }"/>
 												<input type="hidden" name="merchantName" id="merchantName" value="${result.merchantName }"/>
 												<input type="hidden" name="shopName" id="shopName" value="${result.shopName }"/>
+												<input type="hidden" name="status" id="status" value="${result.status }"/>
 												<td >${result.merchantName }</td>
 												<td >${result.shopName }</td> 
 												<td id="cashierMobile">${result.cashierMobile }</td>
@@ -309,7 +328,23 @@ $(document).ready(function(){
 														</c:when>
 													</c:choose>
 													
-												</td> 								
+												</td>
+												<td>
+													<c:choose>
+														<c:when test="${result.status=='0' }">
+															无效
+														</c:when>
+
+														<c:when test="${result.status=='1' }">
+															有效
+														</c:when>
+													</c:choose>
+
+												</td>
+												<td>
+													${result.createTime }
+<%--													<fmt:formatDate value="${result.createTime }" pattern="yyyy-MM-dd HH:mm"/>--%>
+												</td>
 												<td>
 													<gyzbadmin:function url="<%=CashierManagePath.BASE + CashierManagePath.UPDATE%>">
 														<a href="#" class="tooltip-success updateCashier" data-rel="tooltip" title="编辑" data-toggle="modal" data-target="#updateModal">
@@ -421,12 +456,25 @@ $(document).ready(function(){
 						<tr>
 							<td class="td-left">是否有全门店权限</td>
 							<td class="td-right">
-								
 								<select id="queryAuth" name="queryAuth">
 									<option value="0">否</option>
 									<option value="1">是</option>
 								</select>
 								<label id="queryAuth" class="label-tips"></label>
+							</td>
+						</tr>
+						<tr>
+							<td class="td-left">登录密码<span style="color:red">*</span></td>
+							<td class="td-right">
+								<input type="text" id="loginPw" name="loginPw"  clasS="width-90" value="123456">
+								<label id="loginPw" class="label-tips"></label>
+							</td>
+						</tr>
+						<tr>
+							<td class="td-left">退款密码<span style="color:red">*</span></td>
+							<td class="td-right">
+								<input type="text" id="refundPw" name="refundPw"  clasS="width-90" value="123456">
+								<label id="refundPw" class="label-tips"></label>
 							</td>
 						</tr>
 		            </table>
@@ -497,6 +545,16 @@ $(document).ready(function(){
 									<option value="1">是</option>
 								</select>
 								<label id="queryAuth" class="label-tips"></label>
+							</td>
+						</tr>
+						<tr>
+							<td class="td-left">是否生效<span style="color:red">*</span></td>
+							<td class="td-right">
+								<select id="status" name="status">
+									<option value="1">生效</option>
+									<option value="0">失效</option>
+								</select>
+								<label id="status" class="label-tips"></label>
 							</td>
 						</tr>
 		            </table>

@@ -45,6 +45,7 @@ public class CashierInfo implements Serializable
 	/** 门店ID*/
 	private String shopId;
 
+	private String status;
 
 	/**
 	 * 登录密码
@@ -211,6 +212,14 @@ public class CashierInfo implements Serializable
 
 	public void setCashierName(String cashierName) {
 		this.cashierName = cashierName;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public String getLoginPw() {

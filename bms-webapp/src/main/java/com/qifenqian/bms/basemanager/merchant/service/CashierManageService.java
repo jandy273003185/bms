@@ -55,17 +55,13 @@ public class CashierManageService {
 
     public void addCashier(CashierInfo cashierInfo) {
         /**
-         * 默认密码123456
-         */
-        String pwd = "123456";
-        /**
          * 获取登录密码随机盐值
          */
         String loginSalt = GenSN.getRandomChar(6);
         /**
          * 计算入库登录密码
          */
-        String loginPw = MD5Security.getMD5String(pwd + loginSalt);
+        String loginPw = MD5Security.getMD5String(cashierInfo.getLoginPw() + loginSalt);
         /**
          * 获取退款盐值
          */
@@ -73,7 +69,7 @@ public class CashierManageService {
         /**
          * 计算入库退款密码
          */
-        String refundPw = MD5Security.getMD5String(pwd + refundSalt);
+        String refundPw = MD5Security.getMD5String(cashierInfo.getRefundPw() + refundSalt);
 
         cashierInfo.setLoginPw(loginPw);
         cashierInfo.setLoginSalt(loginSalt);
@@ -149,6 +145,10 @@ public class CashierManageService {
 
         CashierInfo cashierInfo = new CashierInfo();
         cashierInfo.setCashierMobile(mobile);
+        /**
+         * 校验有效数据
+         */
+        cashierInfo.setStatus("1");
         List<CashierInfo> li = cashierManageMapper.getCashierList(cashierInfo);
         if (li != null && li.size() > 0) {
             return true;
@@ -161,8 +161,6 @@ public class CashierManageService {
         if (l != null && l.size() > 0) {
             return true;
         }
-
-
         return false;
     }
 
