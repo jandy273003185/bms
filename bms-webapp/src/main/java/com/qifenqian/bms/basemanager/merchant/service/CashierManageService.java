@@ -75,7 +75,6 @@ public class CashierManageService {
          */
         String refundPw = MD5Security.getMD5String(pwd + refundSalt);
 
-
         cashierInfo.setLoginPw(loginPw);
         cashierInfo.setLoginSalt(loginSalt);
         cashierInfo.setRefundPw(refundPw);
