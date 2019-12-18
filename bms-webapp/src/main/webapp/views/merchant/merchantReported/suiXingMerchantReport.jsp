@@ -518,6 +518,7 @@ $(function(){
                                 <td class="td-left">账户人身份证号码：<span style="color:red;">(必填)</span></td>
 							  	<td class="td-right"> 
 									<input type="text" id="certifyNo" name="certifyNo" placeholder="请输入账户人身份证号码"  value="" style="width:90%">
+									<label id="certifyNoLabel" class="label-tips"></label>
 								</td>
 							</tr>
 							<tr id="letterOfAuthType" style = "display:">
@@ -1315,13 +1316,16 @@ $(function(){
 			 	   	    	}else{
 			 	   	    		$("#actLabel").text("");
 			 	   	    	}
-				 	   	    if("" == certifyNo){
-			 	   	    		$("#certifyNoLabel").text("结算身份证号不能为空");
-			 	   	    	    $("#certifyNo").focus();
-			 	   	    		return false;
-			 	   	    	}else{
-			 	   	    		$("#certifyNoLabel").text("");
-			 	   	    	}
+					 	   	if("01" == actType){
+						 	   	if("" == certifyNo){
+				 	   	    		$("#certifyNoLabel").text("结算身份证号不能为空");
+				 	   	    	    $("#certifyNo").focus();
+				 	   	    		return false;
+				 	   	    	}else{
+				 	   	    		$("#certifyNoLabel").text("");
+				 	   	    	} 
+					 	   	}
+				 	   	    
 				 	   	    if("" == bankCardNo){
 			 	   	    		$("#bankCardNoLabel").text("结算开户行卡号不能为空");
 			 	   	    	    $("#bankCardNo").focus();
