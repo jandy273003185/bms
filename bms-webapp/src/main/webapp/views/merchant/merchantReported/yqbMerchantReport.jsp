@@ -489,13 +489,20 @@
 		
 		function getType(){
 			var merchantType = $("#merchantType").val();
-			if("12" == merchantType){
+			if("12" == merchantType){//12-个人
 				$("#otherMaterialType").attr("style","display:");
 				$("#mobileType").attr("style","display:");
 				$("#bankCardPhotoType").attr("style","display:");
 				$("#openType").attr("style","display:none");
 				$("#businessPhotoType").attr("style","display:none");
-			}else{
+			}else if("11" == merchantType){//11-个体工商户
+				$("#mobileType").attr("style","display:none");
+				$("#bankCardPhotoType").attr("style","display:");
+				$("#openType").attr("style","display:none");
+				$("#otherMaterialType").attr("style","display:none");
+				$("#businessPhotoType").attr("style","display:");
+			} 
+			else{//10-企业
 				$("#mobileType").attr("style","display:none");
 				$("#bankCardPhotoType").attr("style","display:none");
 				$("#openType").attr("style","display:");
@@ -1052,6 +1059,7 @@
 			var otherMaterialPath = $("#otherMaterialPath").val();
 			var signaturePath = $("#signaturePath").val();
 			var openPath = $("#openPath").val();
+			
 			var bankCardPhotoPath = $("#bankCardPhotoPath").val();
    			
    			//平安付支付渠道

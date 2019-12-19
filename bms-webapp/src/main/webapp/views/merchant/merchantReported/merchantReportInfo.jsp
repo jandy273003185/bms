@@ -423,6 +423,16 @@
 									</a>
 								</td>
 							 </tr>
+							 <tr id="infoQrcodeType" style = "display:">
+				                <td class="td-left">微信联系人信息确认二维码： </td>
+		                    	<td class="td-right" colspan="3">
+									<a data-toggle='modal' class="tooltip-success infoQrcodeClick" data-target="#previewImageModal" >
+										<label id="infoQrcodeDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.infoQrcodePath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
+									</a>
+								</td>
+							 </tr>
 						</tbody>
 						</table>
 					    </form>
@@ -474,15 +484,86 @@
      	});
     }
         
-   	/** 照片点击预览 **/
-   	$('.shopInteriorClick').click(function(){
+   	/** 二维码预览 **/
+   	$('.infoQrcodeClick').click(function(){
    		var divObj = document.getElementById("showImageDiv");
    		var imageObj = document.getElementById("showImage");
    		var obj = document.getElementById("shopInteriorClick");
    		return previewImage(divObj,imageObj,obj); 
    	});
 
-    //图片预览
+   	/** 门头照点击预览 **/
+  	$('.doorPhotoClick').click(function(){
+  		var divObj = document.getElementById("showImageDiv");
+  		var imageObj = document.getElementById("showImage");
+  		var obj = document.getElementById("doorPhoto");
+  		return previewImage(divObj,imageObj,obj);
+  	});
+	
+  	/** 银行卡点击预览 **/
+  	$('.bankCardPhotoClick').click(function(){
+  		var divObj = document.getElementById("showImageDiv");
+  		var imageObj = document.getElementById("showImage");
+  		var obj = document.getElementById("bankCardPhoto");
+  		return previewImage(divObj,imageObj,obj);
+  	});
+  	
+  	/** 开户许可证背面点击预览 **/
+  	$('.openAccountClick').click(function(){
+  		var divObj = document.getElementById("showImageDiv");
+  		var imageObj = document.getElementById("showImage");
+  		var obj = document.getElementById("openAccount");
+  		return previewImage(divObj,imageObj,obj);
+  	});
+  	
+  	/** 身份证背面点击预览 **/
+  	$('.legalCertAttribute2Click').click(function(){
+  		var divObj = document.getElementById("showImageDiv");
+  		var imageObj = document.getElementById("showImage");
+  		var obj = document.getElementById("legalCertAttribute2");
+  		return previewImage(divObj,imageObj,obj);
+  	});
+  	
+  	/** 身份证正面点击预览 **/
+  	$('.legalCertAttribute1Click').click(function(){
+  		var divObj = document.getElementById("showImageDiv");
+  		var imageObj = document.getElementById("showImage");
+  		var obj = document.getElementById("legalCertAttribute1");
+  		return previewImage(divObj,imageObj,obj);
+  	});
+  	
+  	/** 营业执照点击预览 **/
+  	$('.businessPhotoClick').click(function(){
+  		var divObj = document.getElementById("showImageDiv");
+  		var imageObj = document.getElementById("showImage");
+  		var obj = document.getElementById("businessPhoto");
+  		return previewImage(divObj,imageObj,obj);
+  	});
+
+  	/** 店内点击预览 **/shopCheckStandPath
+  	$('.shopInteriorClick').click(function(){
+  		var divObj = document.getElementById("showImageDiv");
+  		var imageObj = document.getElementById("showImage");
+  		var obj = document.getElementById("shopInterior");
+  		return previewImage(divObj,imageObj,obj); 
+  	});
+  	
+  	/** 店内前台点击预览 **/
+  	$('.shopCheckStandClick').click(function(){
+  		var divObj = document.getElementById("showImageDiv");
+  		var imageObj = document.getElementById("showImage");
+  		var obj = document.getElementById("shopCheckStand");
+  		return previewImage(divObj,imageObj,obj); 
+  	});
+  	
+  	/** 非法人结算授权函 **/
+  	$('.letterOfAuthClick').click(function(){
+  		var divObj = document.getElementById("showImageDiv");
+  		var imageObj = document.getElementById("showImage");
+  		var obj = document.getElementById("letterOfAuth");
+  		return previewImage(divObj,imageObj,obj); 
+  	});
+   /*  //图片预览
     function shopInteriorImage(obj){  
    		var divObj = document.getElementById("shopInteriorDiv");  
    		var imageObj = document.getElementById("shopInteriorImageDiv");  
@@ -551,7 +632,7 @@
    		 var divObj = document.getElementById("settleIdCardDiv");  
    		 var imageObj = document.getElementById("settleIdCardImageDiv");  
    		 return previewImage(divObj,imageObj,obj);  
-   	}
+   	} */
    	
    	function exit() {
    		if (confirm("您确定要关闭吗？")) {

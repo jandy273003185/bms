@@ -90,9 +90,10 @@ $(function(){
 	    	   	        		 if(_this.attr('id')=="certAttribute1"){                    //身份证
 	    	       	  				$("#representativeName").val(json.cardName);
 	    	       	  				$("#representativeCertNo").val(json.cardId);
-	    	       	  			}else if(_this.attr('id')=="certAttribute2"){                    //身份证
-	    	       	  				$("#idTermStart").val(json.cardName);
-	    	       	  				$("#idTermStart").val(json.cardId);
+	    	       	  			}else if(_this.attr('id')=="certAttribute2"){ 
+	    	       	  				var ss = json.cardValidDate;
+	    	       	  				$("#idTermStart").val(ss.substr(0,10));
+	    	       	  				$("#idTermEnd").val(ss.substr(11,21));
 	    	       	  			}
 	    	   	        		 else if(_this.attr('id')=="businessPhoto"){                //营业执照
 	    	       	  				$("#businessLicense").val(json.businessLicense);

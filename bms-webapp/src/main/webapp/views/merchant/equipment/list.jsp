@@ -2,7 +2,11 @@
 <%@ include file="/include/template.jsp"%>
 <%@page import="com.qifenqian.bms.merchant.product.MerchantProductPath"%>
 <%@page import="com.qifenqian.bms.merchant.equipment.MerchantSignPath"%>
-
+<script src="/static/js/bootstrap-select.min.js"></script>
+<script src="/static/js/bootstrap-select.js"></script>
+<link rel="stylesheet" href="<c:url value='/static/css/base.css' />" />
+<link rel="stylesheet" href="<c:url value='/static/css/home.css' />" />
+<link href="/static/css/bootstrap-select.css" rel="stylesheet">
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -332,12 +336,20 @@ jQuery(function($){
 					            	<tr>	
 										<td class="td-left" width="30%">商户名称<span style="color:red">*</span></td>
 										<td class="td-right" width="70%">	
-											<select id="merchantId" name="merchantId">
+											<select name="merchantId" id="merchantId" class="selectpicker show-tick form-control" data-width="250px" data-live-search="true">
+												<option value="">--输入商户名查询--</option>
+												<c:if test="${not empty merchantList }">
+						                           	<c:forEach items="${merchantList }" var="bean">
+														<option value="${bean.custId }">${bean.custName }-${bean.merchantCode }</option>
+													</c:forEach>
+					                 		  	</c:if>
+											</select>
+											<%-- <select id="merchantId" name="merchantId">
 												<option value="">输入商户名查询</option>
 												<c:forEach items="${merchantList }" var="bean">
 													<option value="${bean.custId }">${bean.custName }-${bean.merchantCode }</option>
 												</c:forEach>
-											</select>
+											</select> --%>
 										</td>
 									</tr>
 																		

@@ -381,8 +381,11 @@ public class MerchantEnterService {
 		custScan.setCertifyType("37");
 		String businessPlacePath = findPicturePath(custScan);
 		picturePath.setBusinessPlacePath("/pic/" + businessPlacePath);
-		return picturePath;
-				
+		//36 微信联系人信息确认二维码
+		custScan.setCertifyType("36");
+		String infoQrcodePath = findPicturePath(custScan);
+		picturePath.setInfoQrcodePath("/pic/" + infoQrcodePath);
+		return picturePath;		
 	}
 
 	//获取对应类型图片路径

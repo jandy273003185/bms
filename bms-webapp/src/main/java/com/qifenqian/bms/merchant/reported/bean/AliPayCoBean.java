@@ -16,6 +16,7 @@ public class AliPayCoBean implements Serializable {
 	 * 商户号
 	 */
 	private String merchantCode;
+	private String custName;
 	/**
 	 * 商户支付宝账号
 	 */
@@ -93,6 +94,14 @@ public class AliPayCoBean implements Serializable {
 
 	public void setMerchantCode(String merchantCode) {
 		this.merchantCode = merchantCode;
+	}
+
+	public String getCustName() {
+		return custName;
+	}
+
+	public void setCustName(String custName) {
+		this.custName = custName;
 	}
 
 	public String getAccount() {
