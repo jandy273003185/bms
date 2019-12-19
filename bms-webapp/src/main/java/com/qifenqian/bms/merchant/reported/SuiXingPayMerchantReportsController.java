@@ -260,14 +260,17 @@ public class SuiXingPayMerchantReportsController {
 					}
 					object.put("result", "SUCCESS");
 					object.put("message", taskCode);
+					logger.info("上传文件结束-------------------" + taskCode);
 				}else {
 					object.put("result", "FAIL");
 					object.put("message", result.getReMsg());
+					logger.info("上传文件结束-------------------" + result.getReMsg());
 					return object.toJSONString();
 				}
 			}else{
 				object.put("result", "FAIL");
 				object.put("message", fileResult.get("message"));
+				logger.info("上传文件结束-------------------" + fileResult.get("message"));
 				return object.toJSONString();
 			}
 		} catch (Exception e) {
@@ -287,7 +290,7 @@ public class SuiXingPayMerchantReportsController {
 	@RequestMapping(MerchantReportedPath.SUXINGPAYSUBMITREPORT)
 	@ResponseBody
 	public String list(HttpServletRequest request,HttpServletResponse response,SuiXingBean cr){
-		
+		logger.info("商户随行付开始信息提交进件："+ "--------------------");
 		JSONObject object = new JSONObject();
 		JSONObject bestResult = new JSONObject();
 		request.setAttribute("merchantCode", cr.getMerchantCode().trim());
@@ -342,13 +345,16 @@ public class SuiXingPayMerchantReportsController {
 			if("SUCCESS".equals(bestResult.get("result"))){
 				object.put("result", "SUCCESS");
 				object.put("message", "报备成功");
+				logger.info("商户随行付进件成功："+ "--------------------");
 			}else{
 				object.put("result", "FAILURE");
 				if(bestResult.get("message") == "" && bestResult.get("message") == null){
 					object.put("message", "随行付进件明确失败");
+					logger.info("商户随行付进件失败："+ "--------------------");
 					return object.toString();
 				}else {
 					object.put("message", bestResult.get("message"));
+					logger.info("商户随行付进件失败--------------------" + bestResult.get("message"));
 					return object.toString();
 				}
 			}

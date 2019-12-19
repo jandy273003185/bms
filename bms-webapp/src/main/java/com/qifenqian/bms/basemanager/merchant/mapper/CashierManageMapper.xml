@@ -18,7 +18,7 @@
 		LEFT JOIN td_login_user_info E ON E.cust_id = T.MERCHANT_CUST_ID
 		WHERE
 			1 = 1
-		AND E.state IN ('00', '01', '05', '06')
+-- 		AND E.state IN ('00', '01', '05', '06')
 		<if test="cashierMobile !=null and cashierMobile !=''">
 			AND T.cashier_mobile=#{cashierMobile,jdbcType=VARCHAR}
 		</if>
@@ -30,6 +30,9 @@
 		</if>
 		<if test="shopId !=null and shopId != ''">
 			AND T.SHOP_ID = #{shopId,jdbcType=VARCHAR}
+		</if>
+		<if test="status !=null and status != ''">
+			AND T.status = #{status,jdbcType=VARCHAR}
 		</if>
 		order by T.create_time desc
 	</select>
@@ -99,6 +102,9 @@
 		<if test="refundAuth !=null and refundAuth != ''">
 			AND T.refund_auth = #{refundAuth,jdbcType=VARCHAR}
 		</if>
+		<if test="status !=null and status != ''">
+			AND T.status = #{status,jdbcType=VARCHAR}
+		</if>
 		order by T.create_time desc
 	</select>
 	
@@ -112,7 +118,12 @@
 			CASHIER_MOBILE,
 			CASHIER_NAME,
 			REFUND_AUTH,
-			QUERY_AUTH
+			QUERY_AUTH,
+			STATUS,
+			LOGIN_PW,
+			REFUND_PW,
+			LOGIN_SALT,
+			REFUND_SALT
 			)
 		VALUES(
 			#{onlyId, 					jdbcType=VARCHAR},
@@ -122,7 +133,12 @@
 			#{cashierMobile, 			jdbcType=VARCHAR},
 			#{cashierName, 				jdbcType=VARCHAR},
 			#{refundAuth, 				jdbcType=VARCHAR},
-			#{queryAuth,                jdbcType=VARCHAR}
+			#{queryAuth,                jdbcType=VARCHAR},
+			#{status},
+			#{loginPw},
+			#{refundPw},
+			#{loginSalt},
+			#{refundSalt}
 		)
 	</insert>
 	
@@ -164,7 +180,10 @@
 			</if>
 			<if test="cashierCustId !=null and cashierCustId != ''">
 			    T.CASHIER_CUST_ID = #{cashierCustId,jdbcType=VARCHAR}
-		</if>
+			</if>
+			<if test="status !=null and status != ''">
+			    T.status = #{status,jdbcType=VARCHAR}
+			</if>
 		</set> 
 		where
 		    T.only_id = #{onlyId,jdbcType=VARCHAR}

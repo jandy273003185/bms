@@ -12,6 +12,7 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -38,6 +39,7 @@ import com.qifenqian.bms.basemanager.merchant.mapper.CustScanMapper;
 import com.qifenqian.bms.basemanager.merchant.mapper.MerchantMapper;
 import com.qifenqian.bms.basemanager.merchant.service.StoreManageService;
 import com.qifenqian.bms.basemanager.utils.GenSN;
+import com.qifenqian.bms.platform.common.utils.DateUtils;
 
 @Controller
 @RequestMapping(StoreManagePath.BASE)
@@ -79,6 +81,12 @@ public class StoreManageController {
 	public String add(StoreManage storeManage) {
 		logger.info("增加门店");
 		JSONObject jsonObject = new JSONObject();
+		storeManage.setShopNo("MD"+DateUtils.getDateTimeStrNo());
+		if (storeManageService.repeats(storeManage) > 0) {
+			jsonObject.put("result", "fail");
+			jsonObject.put("message", "商户门店编号在系统中已存在");
+			return jsonObject.toJSONString();
+		} 
 		try {
 			storeManageService.insert(storeManage);
 			jsonObject.put("result", "success");
@@ -155,6 +163,7 @@ public class StoreManageController {
 	public String repeat(StoreManage storeManage) {
 		logger.info("校验商户门店编号是否重复");
 		JSONObject jsonObject = new JSONObject();
+		
 		try {
 			if (storeManageService.repeats(storeManage) > 0) {
 				jsonObject.put("result", "fail");

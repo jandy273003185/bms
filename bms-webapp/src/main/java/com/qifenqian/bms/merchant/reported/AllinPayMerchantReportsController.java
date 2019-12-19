@@ -26,6 +26,7 @@ import com.qifenqian.bms.merchant.reported.bean.Bank;
 import com.qifenqian.bms.merchant.reported.bean.Industry;
 import com.qifenqian.bms.merchant.reported.bean.Province;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
+import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfoAllinPay;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantReportInfo;
 import com.qifenqian.bms.merchant.reported.dao.FmIncomeMapperDao;
 import com.qifenqian.bms.merchant.reported.service.AllinPayService;
@@ -84,20 +85,22 @@ public class AllinPayMerchantReportsController {
 	 * 通联商户信息修改入口
 	*/
 	@RequestMapping("/merchantReported/allinPayEditReported")
-	public ModelAndView  viewAllinPayEditReported(String channlCode,String merchantCode){
+	public ModelAndView  viewAllinPayEditReported(String channlCode, String merchantCode, String patchNo){
 		ModelAndView mv = new ModelAndView();
 		TdMerchantDetailInfo detail = new TdMerchantDetailInfo();
 		detail.setMerchantCode(merchantCode);
 		detail.setChannelNo(channlCode);
-
+		
+		TdMerchantDetailInfoAllinPay merchantDetailInfo = allinPayService.getAllinPayTdMerchantDetail(patchNo);
+		mv.addObject("merchantDetailInfo", merchantDetailInfo);
 		/***查询客户信息***/
-		TdCustInfo custInfo = fmIncomeMapperDao.getInComeInfo(merchantCode);
+		//TdCustInfo custInfo = fmIncomeMapperDao.getInComeInfo(merchantCode);
 		/***查询省份***/
 		List<Province> allinPayAreaInfoList = allinPayService.getProvinceName();
 		/***查询银行***/
 		List<Bank>  bankList =  allinPayService.getBankInfo();
 		
-		mv.addObject("custInfo",custInfo);
+		//mv.addObject("custInfo",custInfo);
 		mv.addObject("allinPayAreaInfoList",allinPayAreaInfoList);
 		mv.addObject("bankList",bankList);
 		return mv;

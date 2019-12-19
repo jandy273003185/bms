@@ -40,17 +40,13 @@ import com.qifenqian.bms.merchant.reported.bean.Province;
 import com.qifenqian.bms.merchant.reported.bean.TbFmTradeInfo;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantReportInfo;
-import com.qifenqian.bms.merchant.reported.bean.TdMerchantSettleInfo;
 import com.qifenqian.bms.merchant.reported.dao.AllinPayMapperDao;
 import com.qifenqian.bms.merchant.reported.dao.FmIncomeMapperDao;
 import com.qifenqian.bms.merchant.reported.service.AliPayIncomeService;
 import com.qifenqian.bms.merchant.reported.service.AllinPayService;
 import com.qifenqian.bms.merchant.reported.service.CrIncomeService;
 import com.qifenqian.bms.merchant.reported.service.FmIncomeService;
-import com.qifenqian.bms.merchant.reported.service.MerchantProfitSharingService;
 import com.qifenqian.bms.merchant.reported.service.WeChatAppService;
-import com.qifenqian.bms.merchant.subAccount.bean.MerchantSubAccouontBean;
-import com.qifenqian.bms.merchant.subAccount.service.MerchantSubAccountService;
 import com.qifenqian.jellyfish.bean.enums.AuditsTatus;
 import com.qifenqian.jellyfish.bean.enums.BusinessStatus;
 import com.qifenqian.jellyfish.bean.enums.GetwayStatus;
@@ -1062,6 +1058,8 @@ public class MerchantReportsController {
 			//外部商户号
 			bean.setMerchantChannelId(channelMerNo);
 			bean.setMerchantChannelKey(channelMerNo);
+			bean.setWxChildNo(wxMerNo);
+			bean.setZfbChildNo(zfbMerNo);
 			List<ChannelDetailBean> details = new ArrayList<ChannelDetailBean>();
 			//微信扫码
 			ChannelDetailBean weChatSM = new ChannelDetailBean();

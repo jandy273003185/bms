@@ -11,6 +11,7 @@ import com.qifenqian.bms.merchant.reported.bean.Bank;
 import com.qifenqian.bms.merchant.reported.bean.Industry;
 import com.qifenqian.bms.merchant.reported.bean.Province;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
+import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfoAllinPay;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantReportInfo;
 import com.qifenqian.bms.merchant.reported.mapper.AllinPayMapper;
 import com.qifenqian.bms.platform.web.page.Page;
@@ -36,6 +37,10 @@ public class AllinPayMapperDao {
 
 	public TdMerchantReportInfo getTdMerchantReport(TdMerchantReportInfo reportBean) {
 		return allinPayMapper.getTdMerchantReport(reportBean);
+	}
+	
+	public TdMerchantDetailInfoAllinPay getAllinPayTdMerchantDetail(String patchNo) {
+		return allinPayMapper.getAllinPayTdMerchantDetail(patchNo);
 	}
 
 	public void insertTdMerchantReport(TdMerchantReportInfo info) {

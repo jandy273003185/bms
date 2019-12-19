@@ -146,6 +146,7 @@
 			`agree_type`,
 			`report_status`,
 			`result_msg`,
+			`flag_status`,
 			`create_time`,
 			`modify_time`,
 			`flag_status`
@@ -201,6 +202,7 @@
 				#{agreeType,jdbcType = VARCHAR},
 				#{reportStatus,jdbcType = VARCHAR},
 				#{resultMsg,jdbcType = VARCHAR},
+				#{flagStatus,jdbcType = VARCHAR},
 				now(),
 				now(),
 				#{flagStatus,jdbcType = VARCHAR}
@@ -411,6 +413,10 @@
 		 	`mtrx_code` = #{mtrxCode,jdbcType = VARCHAR}
 		 	
     </update>
+    
+    <select id="getAllinPayTdMerchantDetail" resultType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfoAllinPay" parameterType="java.lang.String">
+    	SELECT t.* FROM td_merchant_detail_info_allin_pay t where t.patch_no = #{patchNo, jdbcType=VARCHAR}
+    </select>
     
     <select id="selectTdMerchantProductInfoAllinPay" parameterType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo" resultType="com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo">
     	

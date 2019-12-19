@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="com.seven.micropay.channel.enums.BestBankCode"%>
 <%@page import="com.seven.micropay.channel.enums.MerUpdateType"%>
-<%@page import="com.seven.micropay.channel.enums.suixinpay.SuixinBankType"%>
 <%@page import="com.qifenqian.bms.merchant.reported.MerchantReportedPath"%>
 <%@page import="com.qifenqian.bms.basemanager.merchant.AuditorPath"%>
 <%@ include file="/include/template.jsp"%>
@@ -85,30 +83,7 @@
 	                        <tr>
 								<td colspan="4" class="headlerPreview" style="background:#7ebde1">基本信息</td>
 							</tr>
-							<%-- <tr>
-							    <td class="td-left">商户类型：</td>
-								<td class="td-right"> 
-								   <select  name="mecTypeFlag" id="mecTypeFlag"  class="width-90" >
-										<option value="00">--普通商户--</option>
-										<option value="01">--连锁总店--</option>
-										<option value="02">--连锁分店--</option>
-										<option value="03">--1+n总店--</option>
-										<option value="04">--1+n总店--</option>
-									</select>
-									<label class="label-tips" id="mecTypeFlagLab"></label>	
-								</td>
-                                <td class="td-left">商户行业信息：</td>
-								<td class="td-right"> 
-								   <select name="industry" id="industry" class="width-90">
-										<option value="">--请选择商户行业--</option>
-											<c:if test="${not empty industryList }">
-					                           	<c:forEach items="${industryList }" var="industry">
-					                           		<option id="${industry.industryCode}" value="${industry.industryCode}">${industry.industryName}</option>
-					                           	</c:forEach>
-				                 		  	</c:if>
-									</select>	
-								</td>
-							</tr> --%>
+							
 	                        <tr>
 							    <td class="td-left">是否有证商户：</td>
 								<td class="td-right"> 
@@ -119,38 +94,7 @@
 									<label class="label-tips" id="suiXingMerchantLab"></label>
 								</td>
 							</tr>
-							<%-- <tr>
-								<td class="td-left">注册地址：</td>
-								<td class="td-right" colspan="3">
-									<div class="col-xs-2 pd0" style="padding:0;">
-	                                    <select class="form-control" name="merchantProvince" id="merchantProvince" onchange="getMerchantCity();">
-	                                       	<option value="">--请选择省--</option>
-		                                    <c:if test="${not empty merchantProvinceList }">
-		                                        <c:forEach items="${merchantProvinceList }" var="merchantProvince">
-		                                            <option id="${merchantProvince.areaId}"
-		                                                    value="${merchantProvince.areaId}">
-		                                                ${merchantProvince.areaName}
-		                                            </option>
-		                                        </c:forEach>
-		                                    </c:if>
-		                                </select>
-	                                </div>
-	                                <div class="col-xs-2 pd0" style="margin:0 1%;padding:0;">
-		                                <select class="form-control" name="merchantCity" id="merchantCity"  onchange="getMerchantArea();">
-		                                    <option value="" id="cityDef">--请选择市--</option>
-		                                </select>
-	                                </div>
-	                                <div class="col-xs-2 pd0" style="padding:0;">
-		                                <select class="form-control" name="merchantArea" id="merchantArea" >
-		                                    <option value="" id="areaDef">--请选择区--</option>
-		                                </select>
-	                                </div>
-                                    <div class="col-xs-5 pd0" style="padding:0;margin-left:1%">
-	                                    <input type="text" name="cprRegAddr" id="cprRegAddr"  placeholder="详细地址"  value="${custInfo.custAdd }" style="width:100%">
-	                                </div>
-	                                <label class="label-tips" id="countryLab"></label>
-								</td>
-							</tr> --%>	
+								
 							<tr id="businessPhotoType" style = "display:">
 								
 								<td class="td-left">营业执照照片：</td>
@@ -205,40 +149,42 @@
 									</div>
 								</td>
 							</tr>
+							<tr id="shopInteriorType" style = "display:">
+								<td class="td-left">店内照：</td>
+								<td class="td-right" colspan="3">
+									<a data-toggle='modal' class="tooltip-success shopInteriorClick" data-target="#previewImageModal" >
+										<label id="shopInteriorDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img id="${picturePathVo.shopInteriorPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
+									</a>
+									<div class="updateImageDiv" style="float:left; margin-top:75 " >
+										<input type="hidden" id="shopInteriorPath" name="shopInteriorPath" />
+										<input type="hidden" id="shopInteriorImageVal02"  />
+										<input type="file" name="shopInterior" id="shopInterior" onchange="showShopInteriorImage(this)" />
+										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div>
+								</td>
+							</tr>
+							<tr id="shopCheckStandType" style = "display:">
+								<td class="td-left">店内前台照：</td>
+								<td class="td-right" colspan="3">
+									<a data-toggle='modal' class="tooltip-success shopCheckStandClick" data-target="#previewImageModal" >
+										<label id="shopCheckStandDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img id="${picturePathVo.shopCheckStandPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
+									</a>
+									<div class="updateImageDiv" style="float:left; margin-top:75 " >
+										<input type="hidden" id="shopCheckStandPath" name="shopCheckStandPath" />
+										<input type="hidden" id="shopCheckStandImageVal02"  />
+										<input type="file" name="shopCheckStand" id="shopCheckStand" onchange="showShopCheckStandImage(this)" />
+										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div>
+								</td>
+							</tr>
 	                        <tr>
 								<td colspan="4" class="headlerPreview" style="background:#7ebde1;">法人信息</td>
 							</tr>
 							<tr></tr>
-                           	<%-- <tr>
-								<td class="td-left">法人真实姓名：</td>
-								<td class="td-right"> 
-									<input type="text" id="representativeName" name="representativeName" placeholder="请输入法人真实姓名"  value="${custInfo.representativeName }" maxlength="" style="width:90%">
-								</td>
-								<td class="td-left">手机号码：</td>
-								<td class="td-right"> 
-									<input type="text" name="mobileNo" id="mobileNo" placeholder="请输入手机号码"  value="${custInfo.mobile }" style="width:90%">
-								</td>
-							</tr> --%>
-                            <%-- <tr>
-								<td class="td-left">法人证件类型：</td>
-								<td class="td-right"> 
-									<select name="representativeCertType" id="representativeCertType" style="width:90%;"  >
-										<option value="">--请选择--</option>
-										<option value="00">--身份证--</option>
-										<option value="03">--军人证--</option>
-										<option value="04">--警察证--</option>
-										<option value="05">--港澳居民往来内地通行证--</option>
-										<option value="06">--台湾居民来往大陆通行证--</option>
-										<option value="07">--护照--</option>
-										<option value="98">--单位证件--</option>
-										<option value="06">--其他证件--</option>
-									</select>
-								</td>
-								<td class="td-left">法人身份证号码：</td>
-								<td class="td-right"> 
-									<input type="text" name="representativeCertNo" id="representativeCertNo" placeholder="请输入法人身份证号码"  value="${custInfo.representativeCertNo }" style="width:90%">
-								</td>
-							</tr> --%>
 							<tr id="legalIdCardType" style = "display:">
 								<td class="td-left">法人身份证正面：</td>
 								<td class="td-right" colspan="3">
@@ -291,58 +237,6 @@
 							<tr id="next_id">
 								<td colspan="4" class="headlerPreview" style="background:#7ebde1;">结算信息</td>
 							</tr>
-	                        <%-- <tr>
-								<td class="td-left">结算账户名称：</td>
-								<td class="td-right"> 
-									<input type="text" id="actNm" name="actNm" maxlength="100" placeholder="请输入结算账户名称"  value="" style="width:90%">
-								</td>
-								<td class="td-left">银行卡号：</td>
-								<td class="td-right"> 
-									<input type="text" id="bankCardNo" name="bankCardNo" maxlength="100" placeholder="请输入银行卡号"  value="${custInfo.compMainAcct }" style="width:90%">
-								</td>
-							</tr> --%>
-							<%-- <tr>
-								<td class="td-left">开户银行：</td>
-								<td class="td-right"> 
-									<select name="suiXinBank" id="suiXinBank" style="width-90;">
-										<option value="">--请选择--</option>
-										<c:forEach items="<%=SuixinBankType.values()%>" var="status">
-											<option value="${status}" <c:if test="${status == queryBean.code}">selected</c:if>>
-												${status.name}
-											</option>
-										</c:forEach>
-									</select>
-								</td>
-	                            <td class="td-left">开户支行</td>
-								<td class="td-right">
-									<input type="text" id="interBankName" name="interBankName" maxlength="100" placeholder="请输入开户支行"  value="${custInfo.branchBANK }" style="width:90%">
-									<label class="label-tips" id="interBankNameLabel"></label>
-								</td>
-							</tr> --%>
-                            <%-- <tr>
-								<td class="td-left">开户省份：</td>
-								<td class="td-right"> 
-									<select name="bankProvince" id="bankProvince" class="width-90" onchange="getCity();">
-	                                    <option value="">--请选择省--</option>
-	                                    <c:if test="${not empty provinceList }">
-	                                        <c:forEach items="${provinceList }" var="province">
-	                                            <option id="${province.provinceId}"
-	                                                    value="${province.provinceId}">
-	                                                ${province.provinceName}
-	                                            </option>
-	                                        </c:forEach>
-	                                    </c:if>
-	                                </select>
-	                                <label id="bankProvinceLabel" class="label-tips"></label>
-								</td>
-								<td class="td-left">开户城市：</td>
-								<td class="td-right"> 
-									<select name="bankCity" id="bankCity" class="width-90" >
-		                                    <option value="">--请选择市--</option>
-		                                </select>
-		                               	<label id="bankCityLabel" class="label-tips"></label>
-								</td>
-							</tr> --%>
                             <tr>
 								<td class="td-left">结算类型：</td>
 								<td class="td-right">
@@ -352,17 +246,26 @@
 										<option value="01">--对私--</option>
 									</select> 
 								</td>
-                                <!-- <td class="td-left">结算费率：</td>
-								<td class="td-right"> 
-									<input type="text" id="rate" name="rate" placeholder="请输入结算费率"  value="0.38" style="width:90%"> %
-								</td> -->
-							</tr>
-                            <!-- <tr>
-                                <td class="td-left">账户人身份证号码：</td>
+								<td class="td-left">账户人身份证号码：</td>
 							  	<td class="td-right"> 
-									<input type="text" id="certifyNo" name="v" placeholder="请输入账户人身份证号码"  value="" style="width:90%">
+									<input type="text" id="certifyNo" name="certifyNo" placeholder="请输入账户人身份证号码"  value="" style="width:90%">
 								</td>
-							</tr> -->
+							</tr>
+							<tr id="letterOfAuthType" style = "display:">
+								<td class="td-left">非法人结算授权函：</td>
+								<td class="td-right" colspan="3"> 
+									<a data-toggle='modal' class="tooltip-success letterOfAuthClick" data-target="#previewImageModal" >
+										<label id="letterOfAuthDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.letterOfAuthPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
+									</a>
+									<div style="float:left;margin-top:75" >
+										<input  type="hidden" id="letterOfAuthPath" name="letterOfAuthPath" />
+										<input type="file" name="letterOfAuth" id="letterOfAuth" onChange="showLetterOfAuthImage(this)"/> 
+										<p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div>
+								</td>
+							</tr>
 							<tr id="openPhotoType" style = "display:">
 								<td class="td-left">开户许可证：</td>
 								<td class="td-right" colspan="3"> 
@@ -471,16 +374,6 @@
 					    	<button type="button"  class="btn btn-primary" id='submitData'>提交报备</button> 
 					    	<button type="button"  class="btn btn-default" onclick="exit()">关闭</button> 
 					    </div>
-					    
-					    <!-- 
-					    <div class="aui-btn-default">
-							<button class="aui-btn aui-btn-account" data-toggle='modal' id='submitFile' data-target="#submitModal" style = "display:">
-								上传文件
-							</button>
-							<button class="aui-btn aui-btn-account" data-toggle='modal' id='submitData' data-target="#submitModal" style = "display:none">
-								提交审核
-							</button>
-					    </div> -->
 					</section>
 					</div>
 				</div>
@@ -554,6 +447,16 @@
 			commonFileUpload(file, 'doorPhotoPath', 'doorPhotoDiv');
 		}
 		
+		//店内照
+		function showShopInteriorImage(file){
+			commonFileUpload(file, 'shopInteriorPath', 'shopInteriorDiv');
+		}
+		
+		//店内前台照
+		function showShopCheckStandImage(file){
+			commonFileUpload(file, 'shopCheckStandPath', 'shopCheckStandDiv');
+		}
+		
 		//法人身份证正面
 		function showlegalCertAttribute1Image(file){
 			commonFileUpload(file, 'legalCertAttribute1Path', 'legalCertAttribute1Div');
@@ -584,10 +487,11 @@
 			commonFileUpload(file, 'settleCertAttribute2Path', 'settleCertAttribute2Div');
 		} 
 		
-		function businessForever(){
-			$("input[name='businessTerm']").val("2099-12-31");
-			$("#businessTerm").attr("value","2099-12-31");
+		//上传非法人结算授权函
+		function showLetterOfAuthImage(file){
+			commonFileUpload(file, 'letterOfAuthPath', 'letterOfAuthDiv');
 		}
+		
 		
         /** 点击预览大图 **/
       	function bigImg(obj){
@@ -607,139 +511,27 @@
         	});
         }
         
-      	/***获取银行所在地区***/
-      	function getCity(){
-      		var province = $("#bankProvince").val().trim();
-      		
-      		$.post(window.Constants.ContextPath +"<%=MerchantReportedPath.BASE + MerchantReportedPath.SELSUIXINGCITY %>",
-    		{
-    			"province":province
-    		},
-    		function(data){
-    			if(data.result=="SUCCESS"){
-    				var cityList = data.cityList;
-    				$("#bankCity").html("");
-           			for ( var city in cityList) {
-           				$("#bankCity").append(
-           						"<option value='"+ cityList[city].cityId +"'>"
-           								+ cityList[city].cityName + "</option>"); 
-           			}
-    			}else{
-    				alert("城市不能为空");
-    			}
-    		},'json'
-    		);	
-      	}
 
-      
-      	/***获取商户注册所在地区城市***/
-      	function getMerchantCity(){
-      		var merchantProvinceId = $("#merchantProvince").val().trim();
-      		$.post(window.Constants.ContextPath +"<%=MerchantReportedPath.BASE + MerchantReportedPath.SELSUIXINGAREA %>",
-      	    		{
-      	    			"superiorAreaCode":merchantProvinceId
-      	    		},
-      	    		function(data){
-      	    			if(data.result=="SUCCESS"){
-      	    				var areaList = data.areaList;
-      	    				$("#merchantCity").html("");
-      	           			for ( var area in areaList) {
-      	           				$("#merchantCity").append(
-      	           						"<option value='"+ areaList[area].areaId +"'>"
-      	           								+ areaList[area].areaName + "</option>"); 
-      	           			}
-      	           			getMerchantArea();;
-      	    			}else{
-      	    				alert("省份不能为空");
-      	    			}
-      	    		},'json'
-      	    		);	
-        }
-      	/***获取商户注册所在地区县区***/
-      	function getMerchantArea(){
-      		var merchantCityId = $("#merchantCity").val().trim();
-      		$.post(window.Constants.ContextPath +"<%=MerchantReportedPath.BASE + MerchantReportedPath.SELSUIXINGAREA %>",
-      	    		{
-      	    			"superiorAreaCode":merchantCityId
-      	    		},
-      	    		function(data){
-      	    			if(data.result=="SUCCESS"){
-      	    				var areaList = data.areaList;
-      	    				$("#merchantArea").html("");
-      	           			for ( var area in areaList) {
-      	           				$("#merchantArea").append(
-      	           						"<option value='"+ areaList[area].areaId +"'>"
-      	           								+ areaList[area].areaName + "</option>"); 
-      	           			}
-      	    			}else{
-      	    				alert("市不能为空");
-      	    			}
-      	    		},'json'
-      	    		);	
-        }
-      	
-      	/***获取开户支行***/
-      	function getInterBank(){
-      		var bank = $("#interBank").val().trim();
-      		
-      		$.post(window.Constants.ContextPath +"<%=MerchantReportedPath.BASE + MerchantReportedPath.BMSSELINTERBANK %>",
-    		{
-    			"bank":bank
-    		},
-    		function(data){
-    			if(data.result=="SUCCESS"){
-    				var interBankList = data.interBankList;
-    				$("#interBank_").html("");
-    				$("#interBank_").append("<option value=''>--请选择--</option>");
-           			for ( var interBank in interBankList) {
-           				$("#interBank_").append(
-           						"<option value='"+ interBankList[interBank].bankBranchId +"'>"
-           								+ interBankList[interBank].bankBranchName + "</option>");
-           			}
-    			}
-    		},'json'
-    		);	
-      	}
 
-      	/***获取开户支行***/
-      	function setInterBank(){
-      		var interBankName = $("#interBank_").find("option:selected").text().trim();
-      		var interBank = $("#interBank_").val();
-      		$("#InterBankCode").val(interBank);
-      		$("#interBankName").val(interBankName);
-      	}
-
-      	/** 照片点击预览 **/
-      	$('.shopInteriorClick').click(function(){
-      		var divObj = document.getElementById("showImageDiv");
-      		var imageObj = document.getElementById("showImage");
-      		var obj = document.getElementById("shopInteriorClick");
-      		return previewImage(divObj,imageObj,obj); 
-      	});
 
       	function getUpdateType(){
 			var suiXingMerchantType = $("#suiXingMerchantType").val();
 			
 			//有证商户
 			if("01" == suiXingMerchantType){
-				$("#bankCardPhotoType").attr("style","display:");
 				$("#idCardType").attr("style","display:none");
 				$("#idCardBackType").attr("style","display:none");
 				$("#businessPhotoType").attr("style","display:");
-				$("#openPhotoType").attr("style","display:");
+				$("#businessPhotoType1").attr("style","display:");
+				$("#businessPhotoType2").attr("style","display:");
 				$("#legalIdCardType").attr("style","display:");
 				$("#legalIdCardBackType").attr("style","display:");
-				$("#settleIdCardType").attr("style","display:");
-				$("#settleIdCardBackType").attr("style","display:");
-				
 			}else if("02" == suiXingMerchantType){
 				$("#legalIdCardType").attr("style","display:none");
 				$("#legalIdCardBackType").attr("style","display:none");
-				$("#settleIdCardType").attr("style","display:");
-				$("#settleIdCardBackType").attr("style","display:");
 				$("#businessPhotoType").attr("style","display:none");
-				$("#openPhotoType").attr("style","display:none");
-				$("#bankCardPhotoType").attr("style","display:");
+				$("#businessPhotoType1").attr("style","display:none");
+				$("#businessPhotoType2").attr("style","display:none");
 				$("#idCardType").attr("style","display:none");
 				$("#idCardBackType").attr("style","display:none");
 				
@@ -751,90 +543,92 @@
       		var actType = $("#actType").val();
       		//对公
 			if("00" == actType){
-				$("#legalIdCardType").attr("style","display:");
-				$("#legalIdCardBackType").attr("style","display:");
 				$("#settleIdCardType").attr("style","display:none");
 				$("#settleIdCardBackType").attr("style","display:none");
 				$("#openPhotoType").attr("style","display:");
 				$("#bankCardPhotoType").attr("style","display:none");
-				
+				$("#letterOfAuthType").attr("style","display:none");
 			}else if("01" == actType){
-				$("#legalIdCardType").attr("style","display:none");
-				$("#legalIdCardBackType").attr("style","display:none");
 				$("#settleIdCardType").attr("style","display:");
 				$("#settleIdCardBackType").attr("style","display:");
 				$("#openPhotoType").attr("style","display:none");
 				$("#bankCardPhotoType").attr("style","display:");
-				
+				$("#letterOfAuthType").attr("style","display:");
 			}
 
       	}
 
-        //图片预览
-        function shopInteriorImage(obj){  
-       		var divObj = document.getElementById("shopInteriorDiv");  
-       		var imageObj = document.getElementById("shopInteriorImageDiv");  
-       		return previewImage(divObj,imageObj,obj);  
-        }
-        
-    	function showBusinessPhotoImage(obj){  
-    		 var divObj = document.getElementById("businessPhotoDiv");  
-    		 var imageObj = document.getElementById("businessPhotoImageDiv");  
-    		 return previewImage(divObj,imageObj,obj);  
-    	}
+      	/** 门头照点击预览 **/
+      	$('.doorPhotoClick').click(function(){
+      		var divObj = document.getElementById("showImageDiv");
+      		var imageObj = document.getElementById("showImage");
+      		var obj = document.getElementById("doorPhoto");
+      		return previewImage(divObj,imageObj,obj);
+      	});
+    	
+      	/** 银行卡点击预览 **/
+      	$('.bankCardPhotoClick').click(function(){
+      		var divObj = document.getElementById("showImageDiv");
+      		var imageObj = document.getElementById("showImage");
+      		var obj = document.getElementById("bankCardPhoto");
+      		return previewImage(divObj,imageObj,obj);
+      	});
+      	
+      	/** 开户许可证背面点击预览 **/
+      	$('.openAccountClick').click(function(){
+      		var divObj = document.getElementById("showImageDiv");
+      		var imageObj = document.getElementById("showImage");
+      		var obj = document.getElementById("openAccount");
+      		return previewImage(divObj,imageObj,obj);
+      	});
+      	
+      	/** 身份证背面点击预览 **/
+      	$('.legalCertAttribute2Click').click(function(){
+      		var divObj = document.getElementById("showImageDiv");
+      		var imageObj = document.getElementById("showImage");
+      		var obj = document.getElementById("legalCertAttribute2");
+      		return previewImage(divObj,imageObj,obj);
+      	});
+      	
+      	/** 身份证正面点击预览 **/
+      	$('.legalCertAttribute1Click').click(function(){
+      		var divObj = document.getElementById("showImageDiv");
+      		var imageObj = document.getElementById("showImage");
+      		var obj = document.getElementById("legalCertAttribute1");
+      		return previewImage(divObj,imageObj,obj);
+      	});
+      	
+      	/** 营业执照点击预览 **/
+      	$('.businessPhotoClick').click(function(){
+      		var divObj = document.getElementById("showImageDiv");
+      		var imageObj = document.getElementById("showImage");
+      		var obj = document.getElementById("businessPhoto");
+      		return previewImage(divObj,imageObj,obj);
+      	});
 
-    	function showCertAttribute0Image(obj){  
-   		 var divObj = document.getElementById("certAttribute0Div");  
-   		 var imageObj = document.getElementById("certAttribute0ImageDiv");  
-   		 return previewImage(divObj,imageObj,obj);  
-   		}
+      	/** 店内点击预览 **/shopCheckStandPath
+      	$('.shopInteriorClick').click(function(){
+      		var divObj = document.getElementById("showImageDiv");
+      		var imageObj = document.getElementById("showImage");
+      		var obj = document.getElementById("shopInterior");
+      		return previewImage(divObj,imageObj,obj); 
+      	});
 
-    	function showDoorPhotoImage(obj){  
-    		 var divObj = document.getElementById("doorPhotoDiv");  
-    		 var imageObj = document.getElementById("doorPhotoImageDiv");  
-    		 return previewImage(divObj,imageObj,obj);  
-    	}
+      	/** 店内前台点击预览 **/
+      	$('.shopCheckStandClick').click(function(){
+      		var divObj = document.getElementById("showImageDiv");
+      		var imageObj = document.getElementById("showImage");
+      		var obj = document.getElementById("shopCheckStand");
+      		return previewImage(divObj,imageObj,obj); 
+      	});
 
-    	function showCertAttribute1Image(obj){  
-    		 var divObj = document.getElementById("certAttribute1Div");  
-    		 var imageObj = document.getElementById("certAttribute1ImageDiv");  
-    		 return previewImage(divObj,imageObj,obj);  
-    	}
-
-    	function showCertAttribute2Image(obj){  
-    		 var divObj = document.getElementById("certAttribute2Div");  
-    		 var imageObj = document.getElementById("certAttribute2ImageDiv");  
-    		 return previewImage(divObj,imageObj,obj);  
-    	}
-
-    	function showLegalCertAttribute1Image(obj){  
-   		 var divObj = document.getElementById("legalCertAttribute1Div");  
-   		 var imageObj = document.getElementById("legalCertAttribute1ImageDiv");  
-   		 return previewImage(divObj,imageObj,obj);  
-	   	}
-	
-	   	function showLegalCertAttribute2Image(obj){  
-	   		 var divObj = document.getElementById("legalCertAttribute2Div");  
-	   		 var imageObj = document.getElementById("legalCertAttribute2ImageDiv");  
-	   		 return previewImage(divObj,imageObj,obj);  
-	   	}
-
-    	function showBankCardPhotoImage(obj){  
-   		 var divObj = document.getElementById("bankCardPhotoDiv");  
-   		 var imageObj = document.getElementById("bankCardPhotoImageDiv");  
-   		 return previewImage(divObj,imageObj,obj);  
-   		}
-    	function showSettleCertAttribute1Image(obj){  
-   		 var divObj = document.getElementById("settleCertAttribute1Div");  
-   		 var imageObj = document.getElementById("settleCertAttribute1ImageDiv");  
-   		 return previewImage(divObj,imageObj,obj);  
-	   	}
-	
-	   	function showSettleCertAttribute2Image(obj){  
-	   		 var divObj = document.getElementById("settleCertAttribute1Div");  
-	   		 var imageObj = document.getElementById("settleCertAttribute2ImageDiv");  
-	   		 return previewImage(divObj,imageObj,obj);  
-	   	}
+      	/** 非法人结算授权函 **/
+      	$('.letterOfAuthClick').click(function(){
+      		var divObj = document.getElementById("showImageDiv");
+      		var imageObj = document.getElementById("showImage");
+      		var obj = document.getElementById("letterOfAuth");
+      		return previewImage(divObj,imageObj,obj); 
+      	});
 	   	
 	   	function exit() {
 	   		if (confirm("您确定要关闭吗？")) {
@@ -882,53 +676,14 @@
    			var channelNo = $("#channlCode").val();
 			//商户号
    			var merchantCode = $("#merchantCode").val();
-			
 			//客户简称
    			var custName = $("#custName").val();
-   			//手机号
-   			var mobileNo = $("#mobileNo").val();
-   			//（资质类型）
-   			var suiXingMerchantType = $("#suiXingMerchantType").val();
-   			//mecTypeFlag（商户类型）
-   			var mecTypeFlag = $("#mecTypeFlag").val();
-   			//cprRegNmCn(注册名)
-   			var cprRegNmCn =$("#cprRegNmCn").val(); 
-   			//registCode（注册号）
-			var registCode = $("#registCode").val();
-   			// merchantProvince（注册地区）
-   			var merchantProvince = $("#merchantProvince").val();
-   			// merchantCity
-   			var merchantCity = $("#merchantCity").val();
-   			// merchantArea
-   			var merchantArea =$("#merchantArea").val();
-   			// cprRegAddr（商户详细地址）
-   			var cprRegAddr = $("#cprRegAddr").val();
-   			//industry（行业信息）
-   			var industryCode = $("#industry").val();
-   			// representativeName（法人姓名）
-   			var representativeName = $("#representativeName").val();
-   			// representativeCertType（法人证件类型）
-   			var representativeCertType = $("#representativeCertType").val();
-   			// representativeCertNo（法人证件号）
-   			var representativeCertNo = $("#representativeCertNo").val();
-   			//actNm（结算名）
-   			var actNm = $("#actNm").val();
-   			//actType（结算类型）
-   			var actType = $("#actType").val();
    			//certifyNo（账户身份证号）
    			var certifyNo = $("#certifyNo").val();
-   			// bankCardNo（结算银行卡号）
-   			var bankCardNo = $("#bankCardNo").val();
-   			//suiXinBank（开户行）
-   			var suiXinBank = $("#suiXinBank").val();
-   			// bankProvince（开户行所在地区）
-   			var bankProvince = $("#bankProvince").val();
-   			// bankCity
-   			var bankCity = $("#bankCity").val()
-   			// interBankName(开户支行名称)
-   			var interBankName = $("#interBankName").val();
-   			//rate
-   			var rate = $("#rate").val();
+   			//（资质类型）
+   			var suiXingMerchantType = $("#suiXingMerchantType").val();
+   			//actType（结算类型）
+   			var actType = $("#actType").val();
 			var patchNo = $("#patchNo").val();
    			var reportStatus = $("#reportStatus");
    			var taskCode = $("#taskCode").val();
@@ -939,6 +694,17 @@
    	    		$("#suiXingMerchantLab").text('');
    	    	}
    	    	
+   			var openAccountPath =  $("#openAccountPath").val();
+   			var letterOfAuthPath = $("#letterOfAuthPath").val();
+   	    	var bankCardPhotoPath = $("#bankCardPhotoPath").val();
+   	    	var certAttribute2Path = $("#legalCertAttribute2Path").val();
+   	    	var certAttribute1Path = $("#legalCertAttribute1Path").val();
+   	    	var businessPhotoPath = $("#businessPhotoPath").val();
+   	    	var doorPhotoPath = $("#doorPhotoPath").val();
+   	    	var shopInteriorPath = $("#shopInteriorPath").val();
+   	    	var shopCheckStandPath = $("#shopCheckStandPath").val();
+   	    	var settleCertAttribute1Path = $("#settleCertAttribute1Path").val();
+   	    	var settleCertAttribute2Path = $("#settleCertAttribute2Path").val();
    			//上传照片
 			var imgDoor = [];
 			var imgSrc = [];
@@ -961,12 +727,15 @@
 		            type : "POST",
 		            url : window.Constants.ContextPath +'<%="/common/files/getPicPath"%>?custId='+custId,
 		            data :{
-		            	"openAccountPath"          : openAccountPath,                //商户营业执照
+		            	"openAccountPath"          : openAccountPath,                //开户许可证
+		            	"letterOfAuthPath"         : letterOfAuthPath,               //非法人结算授权函
 		            	"idCardOPath"              : certAttribute1Path,             //身份证正面照
 		            	"idCardFPath"              : certAttribute2Path,             //身份证背面照
-		            	"bussinessPath"            : businessPhotoPath,              //开户许可证
+		            	"bussinessPath"            : businessPhotoPath,              //商户营业执照
 		            	"bankCardPath"             : bankCardPhotoPath,              //开户银行照
 						"doorPhotoPath"            : doorPhotoPath,					 //门头照
+						"shopInteriorPath"         : shopInteriorPath,               //店内照
+						"shopCheckStandPath"       : shopCheckStandPath,             //店内前台照
 						"settleCertAttribute1Path" : settleCertAttribute1Path,		 //结算人身份证正面
 						"settleCertAttribute2Path" : settleCertAttribute2Path		 //结算人身份证反面
 		            },
