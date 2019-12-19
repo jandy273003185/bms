@@ -33,7 +33,11 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
+import com.qifenqian.bms.basemanager.merchant.bean.MerchantVo;
+import com.qifenqian.bms.basemanager.merchant.bean.PicturePath;
+import com.qifenqian.bms.basemanager.merchant.mapper.MerchantMapper;
 import com.qifenqian.bms.basemanager.merchant.service.AuditorService;
+import com.qifenqian.bms.basemanager.merchant.service.MerchantEnterService;
 import com.qifenqian.bms.basemanager.merchant.service.MerchantService;
 import com.qifenqian.bms.merchant.reported.bean.Area;
 import com.qifenqian.bms.merchant.reported.bean.Bank;
@@ -106,6 +110,11 @@ public class FmIncomeService {
 
   @Autowired
   private MerchantService merchantService;
+  //zhanggc
+  @Autowired
+  private MerchantMapper merchantMapper;
+  @Autowired
+  private MerchantEnterService merchantEnterService;
   
   public static final String EXECUTE_SUCCESS = "SUCCESS";
   public static final String EXECUTE_FAILURE = "FAILURE";
@@ -700,16 +709,6 @@ public class FmIncomeService {
               String type = fileName.substring(fileName.lastIndexOf("."));
               fileName = "storePic" + type;
             }
-            // 身份证正面照
-//            if ("certAttribute1".equals(typeName)) {
-//              String type = fileName.substring(fileName.lastIndexOf("."));
-//              fileName = "settlePersonIdcardPositive" + type;
-//            }
-            // 身份证反面照
-//            if ("certAttribute2".equals(typeName)) {
-//              String type = fileName.substring(fileName.lastIndexOf("."));
-//              fileName = "settlePersonIdcardOpposite" + type;
-//            }
             // 营业执照
             if ("businessPhoto".equals(typeName)) {
               String type = fileName.substring(fileName.lastIndexOf("."));
@@ -1551,6 +1550,9 @@ public JSONObject yqbReported(YQBCoBean cr) {
 	  //获取图片路径
 	  TdCustInfo custInfo = fmIncomeMapperDao.getInComeInfo(cr.getMerchantCode());
 	  
+	  	MerchantVo merchantVo = merchantMapper.newFindMerchantInfo(custInfo.getCustId());
+		PicturePath picturePathOld = merchantEnterService.getPicPath(merchantVo);
+	  
 		merchantInfo.setOutMerchantNo(cr.getMerchantCode());		//服务商侧商户号			--必填
 		merchantInfo.setMerchantType(cr.getMerchantCodeType());	//商户类型		--必填
 		merchantInfo.setBusinessLicenseNo(cr.getBusinessLicense());		//营业执照号	--企业与个体工商必填
@@ -1558,7 +1560,7 @@ public JSONObject yqbReported(YQBCoBean cr) {
 		merchantInfo.setMerchantShortName(cr.getCustName());		//商户简称		--必填
 		merchantInfo.setLegalRepresent(cr.getInterName());		//法人姓名		--必填
 		//获取营业执照
-		String licensePath = merchantService.findTinyMerchantImagePathById(custInfo.getCustId(), "02");
+		String licensePath =  picturePathOld.getBussinessPath();
 		if(null == cr.getBusinessPhotoPath()){
 			merchantInfo.setBusinessLicensePath(licensePath);
 		}else{
@@ -1570,13 +1572,15 @@ public JSONObject yqbReported(YQBCoBean cr) {
 		merchantInfo.setEstablishDate(cr.getEstablishDate());		//成立日期  格式：yyyy-MM-dd		--企业与个体工商必填
 		merchantInfo.setIdentityNo(cr.getCertifyNo());		//法人身份证号		--必填
 		//获取身份证正反面
-		String  identityImagePath = merchantService.findTinyMerchantImagePathById(custInfo.getCustId(), "04");
-		String[] paths = null;
-		paths = identityImagePath.split(";");
+			/*
+			 * String identityImagePath =
+			 * merchantService.findTinyMerchantImagePathById(custInfo.getCustId(), "04");
+			 * String[] paths = null; paths = identityImagePath.split(";");
+			 */
 		//正面
-		String identityImagePath0 = paths[0];
+		String identityImagePath0 =picturePathOld.getIdCardOPath();
 		//反面
-		String identityImagePath1 = paths[1];
+		String identityImagePath1 = picturePathOld.getIdCardFPath();
 		if(null ==cr.getCertAttribute1Path()){
 			merchantInfo.setIdentityPosPath(identityImagePath0);
 		}else{
@@ -1595,50 +1599,46 @@ public JSONObject yqbReported(YQBCoBean cr) {
 		merchantInfo.setCountyCode(cr.getArea());		//区县代码		--必填
 		merchantInfo.setBusinessAddress(cr.getCprRegAddr());		//商户营业地址		--必填
 		//获取门头照
-		String doorPath = merchantService.findTinyMerchantImagePathById(custInfo.getCustId(), "08");
+		String doorPath = picturePathOld.getDoorPhotoPath();
 		//获取店内照
-		String shopInteriorPath = merchantService.findTinyMerchantImagePathById(custInfo.getCustId(), "18");
+		String shopInteriorPath = picturePathOld.getShopInteriorPath();
 		if(null == shopInteriorPath && null != doorPath){
-			String[] pathDoorImage = null;
-			pathDoorImage = doorPath.split(";");
-			if(pathDoorImage.length >1){
-				shopInteriorPath = pathDoorImage[1];
-			}else{
-				//内景
 				shopInteriorPath = doorPath;
-			}
 		}
 		if(null == cr.getDoorPhotoPath()){
 			merchantInfo.setStoreFacadePath(doorPath);
 		}else{
 			merchantInfo.setStoreFacadePath(cr.getDoorPhotoPath());
 		}//店铺门面照		--必填
+		
 		if(null == cr.getShopInteriorPath()){
 			merchantInfo.setStoreBussinessPlacePath(shopInteriorPath);
 		}else{
 			merchantInfo.setStoreBussinessPlacePath(cr.getShopInteriorPath());
 		}//商户经营场所或仓库照		--必填
+		
 		//merchantInfo.setStoreWithOwnerPath(null);		//经营者手持身份证拍照图片		--非必填
 		List<String> strs = new ArrayList<String>();
-		String qualificationPath = merchantService.findTinyMerchantImagePathById(custInfo.getCustId(), "11");
+		String qualificationPath = picturePathOld.getQualificationPath();
 		if(null ==cr.getQualificationPath()){
 			strs.add(qualificationPath);
 		}else{
 			strs.add(cr.getQualificationPath());
 		}
 		merchantInfo.setSpecialIndustryPaths(strs);		//特殊行业资质图片		--企业与个体工商必填
-		strs = null;
-		String otherMaterialPath = merchantService.findTinyMerchantImagePathById(custInfo.getCustId(), "06");
+		
+		List<String> strss = new ArrayList<String>();
+		String otherMaterialPath = picturePathOld.getOtherMaterialPath();
 		if("12".equals(cr.getMerchantCodeType())){
 			if(null == cr.getOtherMaterialPath()){
-				strs.add(otherMaterialPath);
+				strss.add(otherMaterialPath);
 			}else{
-				strs.add(cr.getOtherMaterialPath());
+				strss.add(cr.getOtherMaterialPath());
 			}
-			merchantInfo.setOtherMaterialPaths(strs);		//其他材料图片			--个人商户必填
+			merchantInfo.setOtherMaterialPaths(strss);		//其他材料图片			--个人商户必填
 		}
 		
-		String signaturePath = merchantService.findTinyMerchantImagePathById(custInfo.getCustId(), "12");
+		String signaturePath =  picturePathOld.getSignaturePath();
 		if(null == cr.getSignaturePath()){
 			merchantInfo.setElectronicSignPath(signaturePath);
 		}else{
@@ -1651,9 +1651,9 @@ public JSONObject yqbReported(YQBCoBean cr) {
 		merchantInfo.setBankCode(cr.getBank());		//银行编码		--必填
 		merchantInfo.setSubBankCode(cr.getBankCode());		//联行号			--企业必填
 		//获取银行卡照
-		String bankCardPath = merchantService.findTinyMerchantImagePathById(custInfo.getCustId(), "07");
+		String bankCardPath = picturePathOld.getBankCardPath();
 		//获取开户许可证路径
-		String openPath = merchantService.findTinyMerchantImagePathById(custInfo.getCustId(), "03");
+		String openPath = picturePathOld.getOpenAccountPath();
 		if(MerchantType.business.getValue().equals(merchantInfo.getMerchantType())){
 			if(null == cr.getOpenPath()){
 				merchantInfo.setBankCardPath(openPath);
