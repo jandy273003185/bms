@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qifenqian.bms.merchant.reported.mapper.TdMerchantReportMapper">
+
+    <update id="updateTdMerchantReport"  parameterType="com.qifenqian.bms.merchant.reported.bean.TdMerchantReportInfo" >
+        UPDATE `stcdb`.`td_merchant_report`
+        SET
+        <if test="reportStatus != null and reportStatus !='' ">
+            `report_status` = #{reportStatus,jdbcType = VARCHAR}
+        </if>
+        <where>
+            <if test="merchantCode != null and merchantCode != '' ">
+                `merchant_code` = #{merchantCode,jdbcType = VARCHAR}
+            </if>
+            <if test="channelNo != null and channelNo != '' ">
+                and channel_no = #{channelNo,jdbcType = VARCHAR}
+            </if>
+            <if test="patchNo != null and patchNo != '' ">
+                and patch_no = #{patchNo,jdbcType = VARCHAR}
+            </if>
+        </where>
+    </update>
+
+    <!-- 写入商户报备表 -->
+    <insert id="insertTdMerchantReport" parameterType="com.qifenqian.bms.merchant.reported.bean.TdMerchantReportInfo">
+		INSERT INTO `stcdb`.`td_merchant_report` (
+			`id`,
+			`merchant_code`,
+			`patch_no`,
+			`channel_no`,
+			`report_status`,
+			`report_time`,
+			result_msg,
+			out_merchant_code,
+			detail_status
+		)
+		VALUES
+			(
+				#{id,jdbcType = VARCHAR},
+				#{merchantCode,jdbcType = VARCHAR},
+				#{patchNo,jdbcType = VARCHAR},
+				#{channelNo,jdbcType = VARCHAR},
+				#{reportStatus,jdbcType = VARCHAR},
+				now(),
+				#{resultMsg},
+				#{outMerchantCode},
+				#{detailStatus}
+			)
+	</insert>
+</mapper>
