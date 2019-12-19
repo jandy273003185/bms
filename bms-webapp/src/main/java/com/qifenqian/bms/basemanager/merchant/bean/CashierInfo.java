@@ -44,6 +44,28 @@ public class CashierInfo implements Serializable
 	
 	/** 门店ID*/
 	private String shopId;
+
+	private String status;
+
+	/**
+	 * 登录密码
+	 */
+	private String loginPw;
+
+	/**
+	 * 登录密码盐值
+	 */
+	private String loginSalt;
+
+	/**
+	 * 退款密码
+	 */
+	private String refundPw;
+
+	/**
+	 * 退款密码盐值
+	 */
+	private String refundSalt;
 	
 	
 	
@@ -192,5 +214,43 @@ public class CashierInfo implements Serializable
 		this.cashierName = cashierName;
 	}
 
-	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getLoginPw() {
+		return loginPw;
+	}
+
+	public void setLoginPw(String loginPw) {
+		this.loginPw = loginPw;
+	}
+
+	public String getLoginSalt() {
+		return loginSalt;
+	}
+
+	public void setLoginSalt(String loginSalt) {
+		this.loginSalt = loginSalt;
+	}
+
+	public String getRefundPw() {
+		return refundPw;
+	}
+
+	public void setRefundPw(String refundPw) {
+		this.refundPw = refundPw;
+	}
+
+	public String getRefundSalt() {
+		return refundSalt;
+	}
+
+	public void setRefundSalt(String refundSalt) {
+		this.refundSalt = refundSalt;
+	}
 }

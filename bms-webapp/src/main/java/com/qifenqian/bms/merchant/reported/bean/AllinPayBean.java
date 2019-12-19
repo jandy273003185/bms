@@ -120,9 +120,17 @@ public class AllinPayBean implements Serializable{
 	private List<Map> prodInfoList;
 	
 	private String reportStatus;
+	//标识状态  1 待审核通过后更新
+	private String flagStatus;
 	
 	
 	
+	public String getFlagStatus() {
+		return flagStatus;
+	}
+	public void setFlagStatus(String flagStatus) {
+		this.flagStatus = flagStatus;
+	}
 	public String getReportStatus() {
 		return reportStatus;
 	}

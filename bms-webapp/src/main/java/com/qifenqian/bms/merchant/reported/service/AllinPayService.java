@@ -19,6 +19,7 @@ import com.qifenqian.bms.merchant.reported.bean.Bank;
 import com.qifenqian.bms.merchant.reported.bean.Industry;
 import com.qifenqian.bms.merchant.reported.bean.Province;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
+import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfoAllinPay;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantReportInfo;
 import com.qifenqian.bms.merchant.reported.dao.AllinPayMapperDao;
 import com.qifenqian.bms.merchant.reported.mapper.AllinPayMapper;
@@ -59,6 +60,14 @@ public class AllinPayService {
 		return allinPayMapperDao.getAllinPayIndustryList();
 		
 	}
+	
+	/**
+	 * 获取通联商户报备明细
+	 * @return
+	 */
+	public TdMerchantDetailInfoAllinPay getAllinPayTdMerchantDetail(String patchNo) {
+		return allinPayMapperDao.getAllinPayTdMerchantDetail(patchNo);
+	}
 
 	/**
 	 * 商户省份
@@ -79,6 +88,7 @@ public class AllinPayService {
 	public Map<String, String> allinPayEditReported(AllinPayBean cr) {
 		Map<String, String> result = new HashMap<String, String>();
 		AllinpayMerchantEditReq  request= new AllinpayMerchantEditReq();
+		request.setMchid(cr.getMchId());
 		//request.setMerchantid(cr.getMerchantCode());
 		//request.setMerchantname(cr.getCustName());
 		request.setShortname(cr.getShortName());
@@ -115,18 +125,6 @@ public class AllinPayService {
 		//request.setAgreetype(cr.getAgreeType());
 		//进件成功 回调地址
 		request.setNotifyurl("https://combinedpay.qifenqian.com/allinpay/callbak.do");
-		//法人身份证正面照片
-		//request.setLegalidpicfront(cr.getLegalCertAttribute1Path());
-		//法人身份证反面照片
-		//request.setLegalidpicback(cr.getLegalCertAttribute2Path());
-		//商户门头照片
-		//request.setStorepic(cr.getDoorPhotoPath());
-		//手持身份证照片
-		//request.setLegalpic(cr.getHandIdCardPath());
-		//经营场所证明文件
-		//request.setBizplacepic(cr.getBusinessPlacePath());
-		//经营内景照片
-		//request.setStoreinnerpic(cr.getShopInteriorPath());
 		//交易类型List
 		List<Prod>  list = new ArrayList<Prod>();
 		
@@ -138,12 +136,6 @@ public class AllinPayService {
 			if(StringUtils.isNotBlank(cr.getProdInfoList().get(i).get("creditrate").toString())) {
 				prod.setCreditrate((String) cr.getProdInfoList().get(i).get("creditrate"));
 			}
-//			if(StringUtils.isNotBlank(cr.getProdInfoList().get(i).get("lowlimit").toString())) {
-//				prod.setLowlimit((String) cr.getProdInfoList().get(i).get("lowlimit"));
-//			}
-//			if(StringUtils.isNotBlank(cr.getProdInfoList().get(i).get("toplimit").toString())) {
-//				prod.setToplimit((String) cr.getProdInfoList().get(i).get("toplimit"));
-//			}
 			
 			list.add(prod);
 		}
@@ -175,6 +167,10 @@ public class AllinPayService {
 				message = "未知状态";
 			}
 			result.put("message", message);
+			cr.setPatchNo(GenSN.getSN());
+			cr.setReportStatus("00");
+			cr.setFlagStatus("1");
+			insertTdMerchantInfoAllinPay(cr);
 		} else {
 			result.put("result", "FAIL");
 			result.put("message", "调用修改接口失败");

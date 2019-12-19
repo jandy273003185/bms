@@ -295,6 +295,12 @@
 														<c:when test="${bean.payType=='SL'}">
 															刷脸
 														</c:when>
+														<c:when test="${bean.payType=='1'}">
+															刷卡
+														</c:when>
+														<c:when test="${bean.payType=='3'}">
+															扫码
+														</c:when>
 														<c:otherwise>
 															${bean.payType }
 														</c:otherwise>	
