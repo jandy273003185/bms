@@ -71,9 +71,9 @@
 										<input type="text" id="merchantCode" name="merchantCode" readonly maxlength=""  value="${custInfo.merchantCode }" style="width:90%">
 										<label class="label-tips" id="merchantCodeLab"></label>
 									</td>
-	                                <td class="td-left" width="18%">商户简称：<span style="color:red;">(必填)</span></td>
+	                                <td class="td-left" width="18%">商户名称：<span style="color:red;">(必填)</span></td>
 									<td class="td-right" width="32%"> 
-										<input type="text" id="custName" name="custName" placeholder="请输入商户简称" maxlength=""  value="${custInfo.custName }" style="width:90%">
+										<input type="text" id="custName" name="custName" placeholder="请输入商户名称" maxlength=""  value="${custInfo.custName }" style="width:90%">
 										<label class="label-tips" id="custNameLab"></label>
 									</td>
 								</tr>
