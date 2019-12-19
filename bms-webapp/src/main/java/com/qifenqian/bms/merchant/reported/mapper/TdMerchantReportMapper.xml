@@ -4,21 +4,34 @@
 
     <update id="updateTdMerchantReport"  parameterType="com.qifenqian.bms.merchant.reported.bean.TdMerchantReportInfo" >
         UPDATE `stcdb`.`td_merchant_report`
-        SET
-        <if test="reportStatus != null and reportStatus !='' ">
-            `report_status` = #{reportStatus,jdbcType = VARCHAR}
-        </if>
-        <where>
-            <if test="merchantCode != null and merchantCode != '' ">
-                `merchant_code` = #{merchantCode,jdbcType = VARCHAR}
-            </if>
-            <if test="channelNo != null and channelNo != '' ">
-                and channel_no = #{channelNo,jdbcType = VARCHAR}
-            </if>
-            <if test="patchNo != null and patchNo != '' ">
-                and patch_no = #{patchNo,jdbcType = VARCHAR}
-            </if>
-        </where>
+		<set>
+			<if test="merchantCode != null">
+				merchant_code = #{merchantCode,jdbcType=VARCHAR},
+			</if>
+			<if test="channelNo != null">
+				channel_no = #{channelNo,jdbcType=VARCHAR},
+			</if>
+			<if test="reportStatus != null">
+				report_status = #{reportStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="reportTime != null">
+				report_time = #{reportTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="resultMsg != null">
+				result_msg = #{resultMsg,jdbcType=VARCHAR},
+			</if>
+			<if test="outMerchantCode != null">
+				out_merchant_code = #{outMerchantCode,jdbcType=VARCHAR},
+			</if>
+			<if test="detailStatus != null">
+				detail_status = #{detailStatus,jdbcType=VARCHAR},
+			</if>
+		</set>
+        WHERE patch_no = #{patchNo,jdbcType = VARCHAR}
+
     </update>
 
     <!-- 写入商户报备表 -->
