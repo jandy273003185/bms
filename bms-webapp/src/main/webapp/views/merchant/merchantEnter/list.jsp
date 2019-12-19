@@ -196,6 +196,7 @@
     			            +',left='+iLeft;
     			        winChild = window.open(url, name,params);
     				}else{
+
     					if("BEST_PAY" == channlCode){
     					   	   	
     				   		var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.BESTPAYMERCHANTREPORT%>?merchantCode="+merchantCode+"&status="+status+"&channlCode="+channlCode; 
@@ -252,7 +253,7 @@
     					
     					if("ALIPAY" == channlCode){
     				   	   	
-    				   		var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.ALIPAY_MERCHANT_REPORTS%>?merchantCode="+merchantCode+"&status="+status+"&channlCode="+channlCode; 
+    				   		var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.ALIPAY_MERCHANT_REPORTS%>?merchantCode="+merchantCode+"&status="+status+"&channlCode="+channlCode;
     				     	var name="window";                        //网页名称，可为空;
     				     	var iWidth=1200;                          //弹出窗口的宽度;
     				     	var iHeight=600;                          //弹出窗口的高度;

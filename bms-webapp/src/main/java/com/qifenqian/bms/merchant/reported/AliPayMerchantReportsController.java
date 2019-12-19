@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.qifenqian.bms.common.AbstractBaseController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ import com.qifenqian.bms.merchant.reported.service.AliPayIncomeService;
 
 @Controller
 @RequestMapping(MerchantEnterReportedPath.BASE)
-public class AliPayMerchantReportsController {
+public class AliPayMerchantReportsController extends AbstractBaseController {
 	private static final Logger logger = LoggerFactory.getLogger(AliPayMerchantReportsController.class);
 	
 	@Autowired
@@ -58,7 +59,7 @@ public class AliPayMerchantReportsController {
 		if(null!=industryList && industryList.size()>0){
 			mv.addObject("industryList", industryList);
 		}
-		
+		mv.addObject("picturePathVo", getPicturePath(custInfo.getCustId(),custInfo.getAuthId()));
 		mv.addObject("status",status);
 		return mv;
 	}
