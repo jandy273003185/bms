@@ -7,7 +7,7 @@ package com.qifenqian.bms.merchant.reported.enums;
 public enum ChannelCodeType {
 	ALIPAY("支付宝"),
 	WX("微信"),
-	SUIXINGPAY("随行付");
+	SUIXING_PAY("随行付");
 	
 	private String text;
 	private ChannelCodeType(String text){
