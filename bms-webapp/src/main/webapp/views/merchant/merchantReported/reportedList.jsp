@@ -377,13 +377,9 @@
 		var channlCode =$(obj).parent().find('#channelNo_').val();
 		var outMerchantCode = $(obj).parent().find('#outMerchantCode_').val();
 		var detailStatus = $(obj).parent().find('#detailStatus_').val();
-		var resultMsg =  $(obj).parent().find('#resultMsg_').val();
-		if(null != resultMsg){
-			alert("进件失败原因" + resultMsg);
-		}
 		
 		if("WX" == channlCode){
-			var url=window.Constants.ContextPath + "/merchant/merchantReported/weChatAppMerchantModify?merchantCode=" + merchantCode + "&patchNo=" + patchNo; 
+			var url=window.Constants.ContextPath + "/merchant/merchantReported/weChatAppMerchantModify?merchantCode=" + merchantCode + "&patchNo=" + patchNo;
 	     	var name="window";                        //网页名称，可为空;
 	     	var iWidth=1200;                          //弹出窗口的宽度;
 	     	var iHeight=600;                       //弹出窗口的高度;
@@ -419,7 +415,7 @@
    	   	}
    	   	if("SUIXING_PAY" == channlCode){
    	   	   	if(null == outMerchantCode){
-   	   	   		
+				status ="unReported";
 	   	   	  	var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.SUIXINGMERCHANTREPORT%>?merchantCode="+merchantCode+"&status="+status+"&channlCode="+channlCode; 
 		     	var name="window";                        //网页名称，可为空;
 		     	var iWidth=1200;                          //弹出窗口的宽度;
@@ -800,48 +796,36 @@
 											    <input type="hidden" id="channelNo_" value="${reported.channelNo }">
 											    <input type="hidden" id="outMerchantCode_" value="${reported.outMerchantCode }">
 	                                            <input type="hidden" id="detailStatus_" value="${reported.detailStatus }">
-	                                            <input type="hidden" id="resultMsg_" value="${reported.resultMsg }">
 	                                            <input type="hidden" id="custId_" value="${reported.custId }">
+
 	                                            <button type="button"  class="btn btn-primary btn-xs" onclick="getInfo(this);">查看资料</button>
-	                                            
 	                                            <c:if test="${reported.detailStatus =='0' ||reported.detailStatus =='00' }">
 	                                            	<button type="button"  class="btn btn-primary btn-xs" onclick="getStatus(this);">刷新状态</button>
 	                                            </c:if>
-	                                            <c:if test="${reported.detailStatus !='0' && reported.detailStatus !='00'  }">
-	                                            	<button type="button"  class="btn btn-primary btn-xs" disabled>刷新状态</button>
-	                                            </c:if>
-	                                            
 	                                            <c:if test="${reported.detailStatus =='99' || reported.reportStatus =='E' || reported.reportStatus =='F'}">
 	                                            	<button type="button"  class="btn btn-primary btn-xs" onclick ="getUpdate(this);">报备更新</button>
                                             	</c:if>
-                                            	<c:if test="${reported.detailStatus !='99' && reported.reportStatus !='E' && reported.reportStatus !='F' }">
-	                                            	<button type="button"  class="btn btn-primary btn-xs" disabled>报备更新</button>
-                                            	</c:if>
-                                            	
                                             	<c:if test="${reported.channelNo =='ALLIN_PAY' && reported.detailStatus == '1'}">
                                             		<button type="button" class="btn btn-primary btn-xs" onclick ="allinPayEditReported(this);" >商户信息修改</button>
                                             	</c:if>
-                                            	
                                             	<c:if test="${reported.channelNo =='WX'}">
                                             	<button type="button"  class="btn btn-primary btn-xs" onclick ="getWeChatUpdate(this);">微信升级</button>
 										    	</c:if>
-										    	
 										    	<c:if test="${reported.detailStatus =='1' && reported.outMerchantCode != null &&  reported.channelNo =='SUIXING_PAY'}">
 	                                            	<button type="button"  class="btn btn-primary btn-xs"  onclick ="getVerified(this);">实名认证</button>
 	                                            </c:if>
 	                                            <c:if test="${reported.detailStatus =='24' && reported.outMerchantCode != null &&  reported.channelNo =='SUIXING_PAY'}">
 	                                            	<button type="button"  class="btn btn-primary btn-xs"  onclick ="getVerified(this);">实名认证</button>
 	                                            </c:if>
-	                                            
 	                                            <c:if test="${reported.detailStatus =='20' && reported.outMerchantCode != null &&  reported.channelNo =='SUIXING_PAY'}">
 										    		<button type="button"  class="btn btn-primary btn-xs"  onclick ="getVerifiedQuery(this);">认证结果</button>
-	                                            	<button type="button"  class="btn btn-primary btn-xs"  onclick ="getVerifiedCancel(this);">申请撤销</button>	                                         	
 										    	</c:if>
-										    	
-										    	<c:if test="${reported.detailStatus =='21' && reported.outMerchantCode != null &&  reported.channelNo =='SUIXING_PAY'}">
+												<c:if test="${reported.detailStatus !='21' && reported.outMerchantCode != null &&  reported.channelNo =='SUIXING_PAY'}">
+													<button type="button"  class="btn btn-primary btn-xs"  onclick ="getVerifiedCancel(this);">申请撤销</button>
+												</c:if>
+												<c:if test="${reported.detailStatus =='21' && reported.outMerchantCode != null &&  reported.channelNo =='SUIXING_PAY'}">
 										    		<button type="button"  class="btn btn-primary btn-xs"  onclick ="getVerifiedAuthorize(this);">子商户授权</button>
 										    	</c:if>
-										    	
 										    	<c:if test="${reported.detailStatus =='1' && reported.channelNo =='ALLIN_PAY'}">
 										    		<button type="button"  class="btn btn-primary btn-xs"  onclick ="getQueryElectUrl(this);">通联电子协议</button>
 										    	</c:if>
