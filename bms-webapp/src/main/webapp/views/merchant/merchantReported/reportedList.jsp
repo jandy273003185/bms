@@ -802,7 +802,10 @@
 	                                            <input type="hidden" id="detailStatus_" value="${reported.detailStatus }">
 	                                            <input type="hidden" id="resultMsg_" value="${reported.resultMsg }">
 	                                            <input type="hidden" id="custId_" value="${reported.custId }">
-	                                            <button type="button"  class="btn btn-primary btn-xs" onclick="getInfo(this);">查看资料</button>
+	                                            <!-- zhanggc修改查询报备资料 -->
+											    <button type="button"  class="btn btn-primary btn-xs" onclick="getInfo(this);">查看资料</button>
+											    <!-- zhanggc修改查询报备资料 修改end-->
+	                                           
 	                                            
 	                                            <c:if test="${reported.detailStatus =='0' ||reported.detailStatus =='00' }">
 	                                            	<button type="button"  class="btn btn-primary btn-xs" onclick="getStatus(this);">刷新状态</button>
