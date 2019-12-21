@@ -206,7 +206,6 @@
 										<td class="td-left" ><span style="color:red;" >*</span>APP安装包上传</td>
 										<td class="td-right" >
 											<div class="updateImageDiv" >
-												<input type="hidden" id="fileServerPath" name="fileServerPath" value="${fileServerPath}" >
 												<input  type="hidden" id="fileUrl" name="fileUrl" data-validation="notnull" data-errMsg="请上传APP安装包" />
 												<input type="file" name="uploadFile" id="uploadFile" onchange="upload(this)"/>
 												<span style="color:gray">支持*apk、*ipa</span>
@@ -291,18 +290,17 @@ var checkFun = {
 		
 	//文件上传
 	function upload(file){
-		var fileServerPath = $("#fileServerPath").val();
 		var formdata = new FormData();
-	    formdata.append("uploadFile",$(file).get(0).files[0]);
+	    formdata.append("file",$(file).get(0).files[0]);
 	    $.ajax({
-	        url:fileServerPath,
+	        url:'/common/files/uploadPic',
 	        type:'post',
 	        contentType:false,
 	        data:formdata,
 	        processData:false,
 	        async:false,
 	        success:function(info){ 
-	             $('#fileUrl').val(info.data[0]);
+	             $('#fileUrl').val(info.path);
 	        },
 	        error:function(err){
 	            console.log(err)

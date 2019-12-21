@@ -31,9 +31,6 @@ import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
 @Controller
 public class AppEditionManagerController {
 	
-	@Value("${FILE_SERVER_PATH}")
-	private String fileServerPath;
-	
 	@Autowired
 	private AppEditionManagerService appEditionManagerService;
 	
@@ -43,7 +40,6 @@ public class AppEditionManagerController {
 		List<TdAppEditionControl> listAppEditionControls = appEditionManagerService.listTdAppEditionControl(queryBean);
 		modelAndView.addObject("queryBean", queryBean);
 		modelAndView.addObject("listAppEditionControls", listAppEditionControls);
-		modelAndView.addObject("fileServerPath", fileServerPath);
 		return modelAndView;
 	}
 	
