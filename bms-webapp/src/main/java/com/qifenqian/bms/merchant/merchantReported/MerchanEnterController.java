@@ -10,19 +10,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
 import com.qifenqian.bms.basemanager.merchant.bean.MerchantVo;
 import com.qifenqian.bms.basemanager.merchant.bean.PicturePath;
 import com.qifenqian.bms.basemanager.merchant.service.MerchantEnterService;
 import com.qifenqian.bms.basemanager.merchant.service.MerchantService;
+import com.qifenqian.bms.common.controller.CommonInfoService;
+import com.qifenqian.bms.merchant.merchantReported.bean.MerchantDetailInfoAliPay;
 import com.qifenqian.bms.merchant.merchantReported.bean.MerchantDetailInfoShuiXingPay;
 import com.qifenqian.bms.merchant.merchantReported.dao.MerchantDetailInfoShuiXingPayDao;
+import com.qifenqian.bms.merchant.merchantReported.service.MerchantDetailInfoAliPayService;
 import com.qifenqian.bms.merchant.merchantReported.service.MerchantDetailInfoShuiXingPayService;
 import com.qifenqian.bms.merchant.reported.bean.Bank;
 import com.qifenqian.bms.merchant.reported.bean.ChannlInfo;
+import com.qifenqian.bms.merchant.reported.bean.CommonIndustry;
 import com.qifenqian.bms.merchant.reported.bean.Industry;
 import com.qifenqian.bms.merchant.reported.bean.MerchantCity;
 import com.qifenqian.bms.merchant.reported.bean.Province;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
+import com.qifenqian.bms.merchant.reported.dao.FmIncomeMapperDao;
 import com.qifenqian.bms.merchant.reported.service.CrIncomeService;
 import com.qifenqian.bms.merchant.reported.service.FmIncomeService;
 
@@ -44,6 +50,14 @@ public class MerchanEnterController {
 	   
 	   @Autowired
 	   private MerchantDetailInfoShuiXingPayService merchantDetailInfoShuiXingPayService;
+	   
+	   @Autowired
+	   private FmIncomeMapperDao fmIncomeMapperDao;
+	   
+		@Autowired
+		private CommonInfoService commonInfoService;
+		@Autowired
+		private MerchantDetailInfoAliPayService merchantDetailInfoAliPayService;
 	   
 	@RequestMapping("/merchantReported/suiXingMerchantReportShow")
 	public ModelAndView showShuiXingPay(HttpServletRequest request,HttpServletResponse response,
@@ -78,6 +92,7 @@ public class MerchanEnterController {
 		}
 		//	mv.addObject("status",status);
 		MerchantDetailInfoShuiXingPay detailInfo = new MerchantDetailInfoShuiXingPay();
+		detailInfo.setPatchNo(patchNo);
 		MerchantDetailInfoShuiXingPay merchantDetailInfoShuiXing= merchantDetailInfoShuiXingPayService.getMerchantDetailInfoShuiXingPay(detailInfo);
 		mv.addObject("merchantDetailInfo",merchantDetailInfoShuiXing);
 		//获取图片路径
@@ -87,6 +102,33 @@ public class MerchanEnterController {
 		mv.addObject("picturePathVo", picturePath);
 		
 		return mv;
+	}
 	
+	@RequestMapping("/merchantReported/aliPayMerchantReportShow")
+	public ModelAndView merchantDetailInfoAliPayShow(HttpServletRequest request,HttpServletResponse response,
+			String merchantCode,String channlCode,String patchNo,String custId){
+		
+		ModelAndView mv = new ModelAndView();
+		/***查询行业信息***/
+		List<CommonIndustry> industryList = commonInfoService.selectCommonIndustrys(channlCode, null, null);
+		
+		TdCustInfo  custInfo = fmIncomeMapperDao.getInComeInfo(merchantCode); 
+		mv.addObject("custInfo", custInfo);
+		
+		if(null!=industryList && industryList.size()>0){
+			mv.addObject("industryList", industryList);
+		}
+		
+		//获取图片路径
+		MerchantVo merchantVo = new MerchantVo();
+		merchantVo.setCustId(custId);
+		PicturePath picturePath = merchantEnterService.getPicPath(merchantVo);
+		mv.addObject("picturePathVo", picturePath);
+		//回显信息表
+		MerchantDetailInfoAliPay detail = new MerchantDetailInfoAliPay();
+		detail.setPatchNo(patchNo);
+		MerchantDetailInfoAliPay merchantDetailInfoAliPay = merchantDetailInfoAliPayService.getMerchantDetailInfoAliPay(detail);
+		mv.addObject("merchantDetailInfoAliPay", merchantDetailInfoAliPay);
+		return mv;
 	}
 }
