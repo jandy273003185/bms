@@ -8,7 +8,7 @@ const mixins = {
     initTabIndex() {
       let index = '';
       const queryCurrentIndex = sessionStorage.getItem('queryCurrentIndex');
-      const flag = this.tabs.every(ele => ele.cpt === queryCurrentIndex);
+      const flag = this.tabs.some(ele => ele.cpt === queryCurrentIndex);
       if (flag) {
         index = queryCurrentIndex;
       } else {

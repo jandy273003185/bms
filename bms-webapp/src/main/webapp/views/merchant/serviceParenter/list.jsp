@@ -423,11 +423,11 @@ function bigImg(obj){
 /** 清空按钮 **/
 $('.clearMerchantSearch').click(function(){
 	$('.search-table #merchantCode').val('');
-	$('.search-table #startCreateTime').val('');
-	$('.search-table #endCreateTime').val('');
 	$('.search-table #custName').val('');
-	$('.search-table #email').val('');
-	$('.search-table #agentName').val('');
+//	$('.search-table #email').val('');
+//	$('.search-table #agentName').val('');
+	$('.search-table #startTime').val('');
+	$('.search-table #endTime').val('');
 }); 
 
 /** 验证条件组合查询之注册时间 */
