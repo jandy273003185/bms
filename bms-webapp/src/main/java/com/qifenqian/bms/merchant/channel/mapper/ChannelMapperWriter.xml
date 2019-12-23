@@ -48,7 +48,7 @@
 			#{item.subCode}, now(), 		
 			now(),	'09',
 			#{item.wxAppId},
-		 	#{item.wxAppsecret},'
+		 	#{item.wxAppsecret},
 		 	#{item.wxChildNo},
 		 	#{item.zfbChildNo}
 		 	
