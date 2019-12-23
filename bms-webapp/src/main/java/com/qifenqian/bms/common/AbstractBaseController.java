@@ -1,5 +1,6 @@
 package com.qifenqian.bms.common;
 
+import com.alibaba.fastjson.JSON;
 import com.qifenqian.bms.basemanager.merchant.bean.MerchantVo;
 import com.qifenqian.bms.basemanager.merchant.bean.PicturePath;
 import com.qifenqian.bms.basemanager.merchant.service.MerchantEnterService;
@@ -29,6 +30,11 @@ public abstract class AbstractBaseController {
             picturePath = new PicturePath();
         }
         return picturePath;
+    }
+
+    protected String getPicturePathJsonStr(String custId, String authId) {
+        PicturePath picturePath = this.getPicturePath(custId,authId);
+        return JSON.toJSONString(picturePath);
     }
 
 }

@@ -515,31 +515,33 @@
 
     /* 校验渠道 */
     $(function () {
-        //debugger;
+
+
         //判定是新进件还是更新进件
         var status = $("#status").val();
         var custId = $("#custId").val();
         var authId = $("#authId").val();
+        var picturePathVo = JSON.parse('${picturePathVo}');
         if ("" == custId) {
             alert(status);
         } else {
+
             $("#businessPhotoImageDiv").show();
             $("#doorPhotoImageDiv").show();
             $("#shopInteriorImageDiv").show();
             $("#qualificationImageDiv").show();
-            <%--$("#qualificationImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=11&authId="+authId);--%>
-            <%--$("#shopInteriorImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=18&authId="+authId);--%>
-            <%--$("#businessPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=02&authId="+authId);--%>
-            <%--$("#doorPhotoImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=08&authId="+authId);--%>
-            $("#qualificationImageDiv").attr("src", "${picturePathVo.qualificationPath}");
-            $("#qualificationImageDiv").attr("src", "${picturePathVo.shopInteriorPath}");
-            $("#qualificationImageDiv").attr("src", "${picturePathVo.bussinessPath}");
-            $("#qualificationImageDiv").attr("src", "${picturePathVo.doorPhotoPath}");
+            $("#businessAuthPhotoImageDiv").show();
+            $("#qualificationImageDiv").attr("src", picturePathVo.qualificationPath);
+            $("#businessAuthPhotoImageDiv").attr("src", picturePathVo.webUrlPath);
+            $("#shopInteriorImageDiv").attr("src", picturePathVo.shopInteriorPath);
+            $("#businessPhotoImageDiv").attr("src", picturePathVo.bussinessPath);
+            $("#doorPhotoImageDiv").attr("src", picturePathVo.doorPhotoPath);
         }
 
 
         //提交报备
         $("#submitData").click(function () {
+            debugger
             //渠道号
             var channelNo = $("#channlCode").val();
             var merchantCode = $("#merchantCode").val();
@@ -552,17 +554,36 @@
             var contactEmail = $("#contactEmail").val();//联系人邮箱
             //经营类目编码
             var mccCode = $("#levelThree").val();
+            debugger
             //特殊行业资质照
             var qualificationPath = $("#qualificationPath").val();
+            if(qualificationPath == null || qualificationPath == '' || qualificationPath == void 0){
+                qualificationPath = picturePathVo.qualificationPath;
+            }
+
             var businessLicense = $("#businessLicense").val();//营业执照号
             //营业执照图片路径
             var businessPhotoPath = $("#businessPhotoPath").val();
+            if(businessPhotoPath == null || businessPhotoPath == '' || businessPhotoPath == void 0){
+                businessPhotoPath = picturePathVo.bussinessPath;
+            }
             //营业执照授权函图片路径
             var businessAuthPhotoPath = $("#businessAuthPhotoPath").val();
-            var businessTerm = $("#businessTerm").val();//营业期限时间
-            var shopInteriorPath = $("#shopInteriorPath").val();//店内照
-            var doorPhotoPath = $("#doorPhotoPath").val();//门头照
+            if(businessAuthPhotoPath == null || businessAuthPhotoPath == '' || businessAuthPhotoPath == void 0){
+                businessAuthPhotoPath = picturePathVo.businessAuthPhotoPath;
+            }
 
+            var businessTerm = $("#businessTerm").val();//营业期限时间
+
+            var shopInteriorPath = $("#shopInteriorPath").val();//店内照
+            if(shopInteriorPath == null || shopInteriorPath == '' || shopInteriorPath == void 0){
+                shopInteriorPath = picturePathVo.shopInteriorPath;
+            }
+
+            var doorPhotoPath = $("#doorPhotoPath").val();//门头照
+            if(doorPhotoPath == null || doorPhotoPath == '' || doorPhotoPath == void 0 ){
+                doorPhotoPath = picturePathVo.doorPhotoPath;
+            }
             //var businessEffectiveTerm = $("#businessEffectiveTerm").val();//营业起始时间
 
             //支付宝渠道
