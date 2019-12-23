@@ -608,7 +608,7 @@ $(function(){
 		}
 		//上传身份证国徽面照
 		function showlegalCertAttribute2Image(file){
-			commonFileUpload(file, 'legalCertAttribute2Path', 'legalCertAttribute2Path');
+			commonFileUpload(file, 'legalCertAttribute2Path', 'legalCertAttribute2Div');
 		}
 		
       	/** 点击预览大图 **/

@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +15,10 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.basemanager.utils.GenSN;
 import com.qifenqian.bms.merchant.reported.bean.City;
+import com.qifenqian.bms.merchant.reported.bean.CrInComeBean;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantBankInfo;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
+import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfoWeChat;
 import com.qifenqian.bms.merchant.reported.bean.WeChatAppAreaInfo;
 import com.qifenqian.bms.merchant.reported.bean.WeChatAppBean;
 import com.qifenqian.bms.merchant.reported.bean.WeChatAppModifyBean;
@@ -77,19 +80,24 @@ public class WeChatAppService {
 		info.setMerchantCode(cr.getMerchantCode().trim());
 		info.setChannelNo(cr.getChannelNo());
 		info.setReportStatus("E");
-		info.setProvCode(cr.getMerchantProvince());
-		info.setCityCode(cr.getMerchantCity());
-		info.setContryCode(cr.getMerchantArea());
-		info.setBankCode(cr.getBank());
+		info.setDetailStatus("99");
+		//info.setProvCode(cr.getMerchantProvince());
+		//info.setCityCode(cr.getMerchantCity());
+		//info.setContryCode(cr.getMerchantArea());
+		//info.setBankCode(cr.getBank());
 		//结算账户
-		info.setAccountNumber(cr.getAccountNo());
-		info.setBranchBankName(cr.getInterBankName());
-		info.setMobileNo(cr.getMobileNo());
+		//info.setAccountNumber(cr.getAccountNo());
+		//info.setBranchBankName(cr.getInterBankName());
+		//info.setMobileNo(cr.getMobileNo());
 		logger.debug("插入td_merchant_report表数据：{}", JSONObject.toJSONString(info));
 		fmIncomeService.insertTdMerchantReport(info);
-		info.setReportStatus("99");
-		logger.debug("插入td_merchant_detail_info表数据：{}", JSONObject.toJSONString(info));
-		fmIncomeService.inserTdMerchantDetailInfo(info);
+		//微信报备明细
+		TdMerchantDetailInfoWeChat detailInfoWeChat = new TdMerchantDetailInfoWeChat();
+		BeanUtils.copyProperties(cr, detailInfoWeChat);
+		detailInfoWeChat.setPatchNo(patchNo);
+		detailInfoWeChat.setReportStatus("99");
+		logger.debug("插入td_merchant_detail_info_wechat表数据：{}", JSONObject.toJSONString(detailInfoWeChat));
+		weChatAppMapper.insertTdMerchantDetailInfoWechat(detailInfoWeChat);
 		
 		
 		//微信报备
@@ -139,39 +147,37 @@ public class WeChatAppService {
 		req.setContactPhone(cr.getMobileNo());
 		// 管理员邮箱
 		req.setContactEmail(cr.getEmail());
-			
+		
 		logger.info("-----------------微信进件请求报文：" + JSONObject.toJSONString(req));
 		WeiXinAgentMerRegistResp wxregResp = wxpayAgentMerRegistService.microMerRegist(req);
 		logger.info("-----------------微信进件响应报文：" + JSONObject.toJSONString(wxregResp));
-	    String reportState = null;
 	    if(BusinessStatus.SUCCESS.equals(wxregResp.getSubCode())) {
     		info.setReportStatus("O");
-    		reportState = "00";
-            info.setFileStatus("Y");
-            info.setApplymentId(wxregResp.getApplymentId());
+    		info.setDetailStatus("00");
+    		detailInfoWeChat.setReportStatus("00");
+            //info.setFileStatus("Y");
+    		detailInfoWeChat.setApplymentId(wxregResp.getApplymentId());
             result.put("data", wxregResp);
 			result.put("message", "报备成功");
 			result.put("result", "SUCCESS");
 	    } else {
            logger.error("微信进件明确失败：{}", wxregResp.getSubMsg());
            info.setResultMsg(wxregResp.getSubMsg());
-		   reportState = "99";
+           info.setDetailStatus("99");
+           detailInfoWeChat.setResultMsg(wxregResp.getSubMsg());
+		   detailInfoWeChat.setReportStatus("99");
 		   result.put("message", wxregResp.getSubMsg());
 		   result.put("result", "FAIL");
 	    }
 	    logger.debug("更新td_merchant_report和td_merchant_detail_info表数据：{}", JSONObject.toJSONString(info));
-	    UpdateMerReportAndMerDetailInfo(info, reportState);
+	    weChatAppMapper.updateTdMerchantReport(info);
+	    weChatAppMapper.updateTdMerchantDetailInfoWechat(detailInfoWeChat);
+	    //UpdateMerReportAndMerDetailInfo(info, reportState);
 	    logger.info("微信进件报备end..");
 		return result; 
 		
 	}
 	
-	public void UpdateMerReportAndMerDetailInfo(TdMerchantDetailInfo tdInfo, String status) {
-
-	   weChatAppMapper.updateTdMerchantReport(tdInfo);
-	   tdInfo.setReportStatus(status);
-	   weChatAppMapper.updateTdMerchantDetailInfo(tdInfo);
-	}
 	
 	
 	public WeiXinAgrntMerRegistQueryResp microMerRegistQuery(String applymentId) throws Exception {
@@ -182,6 +188,10 @@ public class WeChatAppService {
 		WeiXinAgrntMerRegistQueryResp microMerRegistQuery = wxpayAgentMerRegistService.microMerRegistQuery(registQueryReq);
 		logger.info("查询微信进件申请单返回值：{}", microMerRegistQuery);
 		return microMerRegistQuery;
+	}
+	
+	public TdMerchantDetailInfo selTdMerchantReport(CrInComeBean crInComeBean) {
+		return weChatAppMapper.selTdMerchantReport(crInComeBean);
 	}
 
 	/**
@@ -234,18 +244,26 @@ public class WeChatAppService {
 			info.setMerchantCode(cr.getMerchantCode().trim());
 			info.setChannelNo(cr.getChannelNo()); 
 			info.setReportStatus("E");
-			info.setProvCode(cr.getMerchantProvince());
-			info.setCityCode(cr.getMerchantCity());
-			info.setContryCode(cr.getMerchantArea());
-			info.setBranchBankName(cr.getInterBankName());
-			info.setMobileNo(cr.getMobileNo());
+			info.setDetailStatus("99");
+			//info.setProvCode(cr.getMerchantProvince());
+			//info.setCityCode(cr.getMerchantCity());
+			//info.setContryCode(cr.getMerchantArea());
+			//info.setBranchBankName(cr.getInterBankName());
+			//info.setMobileNo(cr.getMobileNo());
 			logger.debug("插入td_merchant_report表数据：{}", JSONObject.toJSONString(info));
 			fmIncomeService.insertTdMerchantReport(info); 
-			info.setReportStatus("99");
-			info.setRemark("weChatUpgrade");//备注值为weChatUpgrade则是微信升级信息
-			logger.debug("插入td_merchant_detail_info表数据：{}",
-			JSONObject.toJSONString(info));
-			fmIncomeService.inserTdMerchantDetailInfo(info);
+			//微信报备明细
+			TdMerchantDetailInfoWeChat detailInfoWeChat = new TdMerchantDetailInfoWeChat();
+			BeanUtils.copyProperties(cr, detailInfoWeChat);
+			detailInfoWeChat.setEmail(cr.getMerchantEmail());
+			detailInfoWeChat.setAccountNm(cr.getActNm());
+			detailInfoWeChat.setAccountNo(cr.getBankCardNo());
+			detailInfoWeChat.setBank(cr.getWeChatBank());
+			
+			detailInfoWeChat.setReportStatus("99");
+			detailInfoWeChat.setRemark("weChatUpgrade");//备注值为weChatUpgrade则是微信升级信息
+			logger.debug("插入td_merchant_detail_info_wechat表数据：{}", JSONObject.toJSONString(info));
+			weChatAppMapper.insertTdMerchantDetailInfoWechat(detailInfoWeChat);
 			 
 			String businessTermTime = "[\"" + cr.getBusinessEffectiveTerm() + "\",\"" + ("2099-12-31".equals(cr.getBusinessTerm()) ? "长期" : cr.getBusinessTerm()) + "\"]";
 			String businessSceneList = "[" +cr.getBusinessScene()+ "]";
@@ -282,23 +300,27 @@ public class WeChatAppService {
 			WeiXinAgentMerRegistUpgradeResp wxregUpgradeResp = wxpayAgentMerRegistService.microMerRegistUpgrade(req);
 			logger.info("-----------------微信升级进件响应报文：" + JSONObject.toJSONString(wxregUpgradeResp));
 			
-			String reportState = null;
 		    if(BusinessStatus.SUCCESS.equals(wxregUpgradeResp.getSubCode())) {
 	    		info.setReportStatus("O");
-	    		reportState = "00";
-	            info.setFileStatus("Y");
+	    		info.setDetailStatus("00");
+	    		detailInfoWeChat.setReportStatus("00");
+	            //info.setFileStatus("Y");
 	            result.put("data", wxregUpgradeResp);
 				result.put("message", "报备成功");
 				result.put("result", "SUCCESS");
 		    } else {
 	           logger.error("微信进件明确失败：{}", wxregUpgradeResp.getSubMsg());
 	           info.setResultMsg(wxregUpgradeResp.getSubMsg());
-			   reportState = "99";
+	           info.setDetailStatus("99");
+	           detailInfoWeChat.setResultMsg(wxregUpgradeResp.getSubMsg());
+			   detailInfoWeChat.setReportStatus("99");
 			   result.put("message", wxregUpgradeResp.getSubMsg());
 			   result.put("result", "FAIL");
 		    }
 		    logger.debug("更新td_merchant_report和td_merchant_detail_info表数据：{}", JSONObject.toJSONString(info));
-		    UpdateMerReportAndMerDetailInfo(info, reportState);
+		    weChatAppMapper.updateTdMerchantReport(info);
+		    weChatAppMapper.updateTdMerchantDetailInfoWechat(detailInfoWeChat);
+		    //UpdateMerReportAndMerDetailInfo(info, reportState);
 		    logger.info("-----------------微信升级进件结束-----------------");
 		} catch (Exception e) {
 			result.put("message", e);
