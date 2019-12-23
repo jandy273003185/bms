@@ -39,9 +39,11 @@ import com.qifenqian.bms.merchant.reported.bean.Industry;
 import com.qifenqian.bms.merchant.reported.bean.Province;
 import com.qifenqian.bms.merchant.reported.bean.TbFmTradeInfo;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
+import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfoWeChat;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantReportInfo;
 import com.qifenqian.bms.merchant.reported.dao.AllinPayMapperDao;
 import com.qifenqian.bms.merchant.reported.dao.FmIncomeMapperDao;
+import com.qifenqian.bms.merchant.reported.mapper.WeChatAppMapper;
 import com.qifenqian.bms.merchant.reported.service.AliPayIncomeService;
 import com.qifenqian.bms.merchant.reported.service.AllinPayService;
 import com.qifenqian.bms.merchant.reported.service.CrIncomeService;
@@ -90,6 +92,9 @@ public class MerchantReportsController {
    
    @Autowired
    private WeChatAppService weChatAppService;
+   
+   @Autowired
+   private WeChatAppMapper weChatAppMapper;
    
    @Autowired
    private ChannelService channelService;
@@ -527,7 +532,7 @@ public class MerchantReportsController {
 	public String getMerchantStatus(HttpServletRequest request,HttpServletResponse response,TdMerchantDetailInfo detail) {
 		JSONObject object = new JSONObject();
 		Map<String, Object> req = new HashMap<String, Object>();
-		detail = fmIncomeMapperDao.selMerchantDetailInfo(detail);
+		
 		String merchantCode = detail.getMerchantCode();
 		TdCustInfo custInfo = new TdCustInfo();
 		if(null != merchantCode){
@@ -536,6 +541,7 @@ public class MerchantReportsController {
 		
 		if("BEST_PAY".equals(detail.getChannelNo())){
 			// 翼支付企业进件查询
+			detail = fmIncomeMapperDao.selMerchantDetailInfo(detail);
 			if("02".equals(detail.getBestMerchantType())){
 				req.put("traceLogId", "QT"+DateUtil.format(new Date(), DateUtil.YYYYMMDDHHMMSS));
 				req.put("loginNo", detail.getLoginNo());
@@ -559,7 +565,7 @@ public class MerchantReportsController {
 			req.put("channelType", ChannelMerRegist.SUIXING_PAY);
 			
 		}else if("SUM_PAY".equals(detail.getChannelNo())){
-			
+			detail = fmIncomeMapperDao.selMerchantDetailInfo(detail);
 			if(null != detail.getOutMerchantCode()){
 				req.put("mchntId", detail.getOutMerchantCode());
 				req.put("channelType", ChannelMerRegist.SUM_PAY);
@@ -586,7 +592,11 @@ public class MerchantReportsController {
 			req.put("channelType", ChannelMerRegist.KFT_PAY);
 		}else if("WX".equals(detail.getChannelNo())){
 			//查询
-			TdMerchantDetailInfo wxMerchantDetailInfo = fmIncomeMapperDao.selMerchantDetailInfo(detail);
+			TdMerchantDetailInfoWeChat detailInfoWeChat = new TdMerchantDetailInfoWeChat();
+			detailInfoWeChat.setMerchantCode(detail.getMerchantCode());
+			detailInfoWeChat.setPatchNo(detail.getPatchNo());
+			TdMerchantDetailInfoWeChat wxMerchantDetailInfo = weChatAppMapper.selectTdMerchantDetailInfoWeChat(detailInfoWeChat);
+			//TdMerchantDetailInfo wxMerchantDetailInfo = fmIncomeMapperDao.selMerchantDetailInfo(detail);
 			String applymentId = wxMerchantDetailInfo.getApplymentId();
 			String outMerchantCode = wxMerchantDetailInfo.getOutMerchantCode();
 			String remake = wxMerchantDetailInfo.getRemark();
@@ -598,7 +608,9 @@ public class MerchantReportsController {
 						if ("AUDITING".equals(registQueryResp.getApplymentState())) {
 							detail.setReportStatus("Y");
 							detail.setResultMsg(registQueryResp.getApplymentStateDesc());
-							fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"0");
+							wxMerchantDetailInfo.setReportStatus("0");
+							wxMerchantDetailInfo.setResultMsg(registQueryResp.getApplymentStateDesc());
+							//fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"0");
 							object.put("result", "FAIL");
 							object.put("message", registQueryResp.getApplymentStateDesc());
 						}
@@ -608,7 +620,9 @@ public class MerchantReportsController {
 							String auditDetailStr = getAuditDetailString(auditDetailList);
 							detail.setReportStatus("F");
 							detail.setResultMsg(auditDetailStr);
-							fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"2");
+							wxMerchantDetailInfo.setReportStatus("2");
+							wxMerchantDetailInfo.setResultMsg(auditDetailStr);
+							//fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"2");
 							object.put("result", "FAIL");
 							object.put("message", auditDetailStr);
 						}
@@ -616,7 +630,9 @@ public class MerchantReportsController {
 						else if ("FROZEN".equals(registQueryResp.getApplymentState())) {
 							detail.setReportStatus("F");
 							detail.setResultMsg(registQueryResp.getApplymentStateDesc());
-							fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"17");
+							wxMerchantDetailInfo.setReportStatus("17");
+							wxMerchantDetailInfo.setResultMsg(registQueryResp.getApplymentStateDesc());
+							//fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"17");
 							object.put("result", "FAIL");
 							object.put("message", registQueryResp.getApplymentStateDesc());
 						}
@@ -626,7 +642,12 @@ public class MerchantReportsController {
 							detail.setOutMerchantCode(registQueryResp.getSubMchId());
 							detail.setResultMsg(registQueryResp.getApplymentStateDesc());
 							detail.setSignUrl(registQueryResp.getSignUrl());
-							fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"4");
+							
+							wxMerchantDetailInfo.setReportStatus("4");
+							wxMerchantDetailInfo.setOutMerchantCode(registQueryResp.getSubMchId());
+							wxMerchantDetailInfo.setResultMsg(registQueryResp.getApplymentStateDesc());
+							wxMerchantDetailInfo.setSignUrl(registQueryResp.getSignUrl());
+							//fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"4");
 							object.put("result", "FAIL");
 							//object.put("message", StringUtils.isBlank(orderQueryRes.getRejectReason()) ? "待商户确认，申请信息审核通过，等待联系人确认签约或授权" : orderQueryRes.getRejectReason());
 						}
@@ -635,12 +656,18 @@ public class MerchantReportsController {
 							//报备表中状态改变
 							detail.setReportStatus("O");
 							//报备成功商户报备信息表中状态改变
-							detail.setFileStatus("Y");
+							//detail.setFileStatus("Y");
 							detail.setOutMerchantCode(registQueryResp.getSubMchId());
 							detail.setResultMsg(registQueryResp.getApplymentStateDesc());
 							detail.setSignUrl(registQueryResp.getSignUrl());
+							
+							wxMerchantDetailInfo.setReportStatus("1");
+							wxMerchantDetailInfo.setOutMerchantCode(registQueryResp.getSubMchId());
+							wxMerchantDetailInfo.setResultMsg(registQueryResp.getApplymentStateDesc());
+							wxMerchantDetailInfo.setSignUrl(registQueryResp.getSignUrl());
+							
 							//更新数据库
-							fmIncomeService.UpdateMerReportAndMerDetailInfo(detail, "1");
+							//fmIncomeService.UpdateMerReportAndMerDetailInfo(detail, "1");
 							//报备成功修改商户状态
 							MerchantVo merchantVo = new MerchantVo();
 							merchantVo.setCustId(custInfo.getCustId());
@@ -711,6 +738,7 @@ public class MerchantReportsController {
 						object.put("result", "FAIL");
 						object.put("message", "调用查询微信进件申请单失败");
 					}
+					
 				}else{
 					WeiXinAgrntMerRegistUpgradeQueryResp registUpgradeQueryResp = weChatAppService.microMerRegistUpgradeQuery(outMerchantCode);
 					if (BusinessStatus.SUCCESS.equals(registUpgradeQueryResp.getSubCode())) {
@@ -718,7 +746,10 @@ public class MerchantReportsController {
 						if("CHECKING".equals(registUpgradeQueryResp.getApplymentState()) || "AUDITING".equals(registUpgradeQueryResp.getApplymentState())){
 							detail.setReportStatus("Y");
 							detail.setResultMsg(registUpgradeQueryResp.getApplymentStateDesc());
-							fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"0");
+							
+							wxMerchantDetailInfo.setReportStatus("0");
+							wxMerchantDetailInfo.setResultMsg(registUpgradeQueryResp.getApplymentStateDesc());
+							//fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"0");
 							object.put("result", "FAIL");
 							object.put("message", registUpgradeQueryResp.getApplymentStateDesc());
 						}//已驳回
@@ -727,7 +758,10 @@ public class MerchantReportsController {
 							String auditDetailStr = getAuditDetailString(auditDetailList);
 							detail.setReportStatus("F");
 							detail.setResultMsg(auditDetailStr);
-							fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"2");
+							
+							wxMerchantDetailInfo.setReportStatus("2");
+							wxMerchantDetailInfo.setResultMsg(auditDetailStr);
+							//fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"2");
 							object.put("result", "FAIL");
 							object.put("message", auditDetailStr);
 						}
@@ -735,7 +769,10 @@ public class MerchantReportsController {
 						else if ("FROZEN".equals(registUpgradeQueryResp.getApplymentState())) {
 							detail.setReportStatus("F");
 							detail.setResultMsg(registUpgradeQueryResp.getApplymentStateDesc());
-							fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"17");
+							
+							wxMerchantDetailInfo.setReportStatus("17");
+							wxMerchantDetailInfo.setResultMsg(registUpgradeQueryResp.getApplymentStateDesc());
+							//fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"17");
 							object.put("result", "FAIL");
 							object.put("message", registUpgradeQueryResp.getApplymentStateDesc());
 						}
@@ -746,7 +783,13 @@ public class MerchantReportsController {
 							detail.setResultMsg(registUpgradeQueryResp.getApplymentStateDesc());
 							detail.setSignUrl(registUpgradeQueryResp.getSignUrl());
 							detail.setSignQrcode(registUpgradeQueryResp.getSignQrcode());
-							fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"4");
+							
+							wxMerchantDetailInfo.setReportStatus("4");
+							wxMerchantDetailInfo.setOutMerchantCode(registUpgradeQueryResp.getSubMchId());
+							wxMerchantDetailInfo.setResultMsg(registUpgradeQueryResp.getApplymentStateDesc());
+							wxMerchantDetailInfo.setSignUrl(registUpgradeQueryResp.getSignUrl());
+							wxMerchantDetailInfo.setSignQrcode(registUpgradeQueryResp.getSignQrcode());
+							//fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"4");
 							object.put("result", "FAIL");
 							//object.put("message", StringUtils.isBlank(orderQueryRes.getRejectReason()) ? "待商户确认，申请信息审核通过，等待联系人确认签约或授权" : orderQueryRes.getRejectReason());
 						}
@@ -755,13 +798,19 @@ public class MerchantReportsController {
 							//报备表中状态改变
 							detail.setReportStatus("O");
 							//报备成功商户报备信息表中状态改变
-							detail.setFileStatus("Y");
+							//detail.setFileStatus("Y");
 							detail.setOutMerchantCode(registUpgradeQueryResp.getSubMchId());
 							detail.setResultMsg(registUpgradeQueryResp.getApplymentStateDesc());
 							detail.setSignUrl(registUpgradeQueryResp.getSignUrl());
 							detail.setSignQrcode(registUpgradeQueryResp.getSignQrcode());
+							
+							wxMerchantDetailInfo.setReportStatus("1");
+							wxMerchantDetailInfo.setOutMerchantCode(registUpgradeQueryResp.getSubMchId());
+							wxMerchantDetailInfo.setResultMsg(registUpgradeQueryResp.getApplymentStateDesc());
+							wxMerchantDetailInfo.setSignUrl(registUpgradeQueryResp.getSignUrl());
+							wxMerchantDetailInfo.setSignQrcode(registUpgradeQueryResp.getSignQrcode());
 							//更新数据库
-							fmIncomeService.UpdateMerReportAndMerDetailInfo(detail, "1");
+							//fmIncomeService.UpdateMerReportAndMerDetailInfo(detail, "1");
 							//报备成功修改商户状态
 							MerchantVo merchantVo = new MerchantVo();
 							merchantVo.setCustId(custInfo.getCustId());
@@ -777,7 +826,10 @@ public class MerchantReportsController {
 							String auditDetailStr = getAuditDetailString(auditDetailList);
 							detail.setReportStatus("F");
 							detail.setResultMsg(auditDetailStr);
-							fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"2");
+							
+							wxMerchantDetailInfo.setReportStatus("2");
+							wxMerchantDetailInfo.setResultMsg(auditDetailStr);
+							//fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"2");
 							object.put("result", "FAIL");
 							object.put("message", auditDetailStr);
 						}
@@ -787,6 +839,10 @@ public class MerchantReportsController {
 						object.put("message", "调用查询微信升级进件申请单失败");
 					}
 				}
+				
+				//更新
+				weChatAppMapper.updateTdMerchantReport(detail);
+			    weChatAppMapper.updateTdMerchantDetailInfoWechat(detailInfoWeChat);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

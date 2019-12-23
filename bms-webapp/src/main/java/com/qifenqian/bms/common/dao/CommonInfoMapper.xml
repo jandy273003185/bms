@@ -99,6 +99,11 @@
 				t.special_certificate,
 				t.level_code
 			</if>
+			<if test="parentLevel == 'levelFour'">
+				t.level_three,
+				t.special_certificate,
+				t.level_code
+			</if>
 		FROM
 		td_alipay_mcc_info t
 		<where>
@@ -107,6 +112,9 @@
 			</if>
 			<if test="parentLevel == 'levelThree'">
 				t.level_two = #{parentText, jdbcType=VARCHAR}
+			</if>
+			<if test="parentLevel == 'levelFour'">
+				t.level_code = #{parentText, jdbcType=VARCHAR}
 			</if>
 		</where>
 	</select>

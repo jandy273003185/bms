@@ -792,6 +792,7 @@
 			C.filing_audit_status,
 			DATE_FORMAT(C.CREATE_TIME,'%Y-%m-%d %H:%i:%s') createTime,
 			U.EMAIL,
+			U.MOBILE,
 			U.STATE merchantState,
 			T.CERTIFICATE_STATE auditState,
 			T.AUTH_RESULT_DESC aduitMessage,
@@ -804,7 +805,7 @@
 		left JOIN SYS_USER S
 		ON S.USER_ID = T.CERTIFY_USER
 		<where>
-			 C.CUST_TYPE = '1' AND C.MERCHANT_FLAG = '0' AND  C.TRUST_CERTIFY_AUDIT_STATE in('01','30','34','35')
+			 C.MERCHANT_FLAG != '3' AND  C.TRUST_CERTIFY_AUDIT_STATE in('01','30','34','35')
 			 <if test="startCreateTime != null and '' != startCreateTime">  
 	            <![CDATA[  
 	              AND DATE_FORMAT(C.CREATE_TIME   ,'%Y-%m-%d')>= #{startCreateTime}  
@@ -1013,6 +1014,7 @@
 			C.MERCHANT_CODE,
 			DATE_FORMAT(C.CREATE_TIME,'%Y-%m-%d %H:%i:%s') createTime,
 			U.EMAIL,
+			U.MOBILE,
 			U.STATE merchantState,
 			T.CERTIFICATE_STATE auditState,
 			T.AUTH_RESULT_DESC aduitMessage,
@@ -1065,7 +1067,7 @@
 			)
 			)
 			and
-			 C.CUST_TYPE = '1' AND C.MERCHANT_FLAG = '0' AND  C.TRUST_CERTIFY_AUDIT_STATE in('01','30','34','35')
+			 C.MERCHANT_FLAG != '3' AND  C.TRUST_CERTIFY_AUDIT_STATE in('01','30','34','35')
 			 <if test="startCreateTime != null and '' != startCreateTime">  
 	            <![CDATA[  
 	              AND DATE_FORMAT(C.CREATE_TIME   ,'%Y-%m-%d')>= #{startCreateTime}  

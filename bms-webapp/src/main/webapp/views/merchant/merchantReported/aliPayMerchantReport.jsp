@@ -541,7 +541,6 @@
 
         //提交报备
         $("#submitData").click(function () {
-            debugger
             //渠道号
             var channelNo = $("#channlCode").val();
             var merchantCode = $("#merchantCode").val();
@@ -554,7 +553,6 @@
             var contactEmail = $("#contactEmail").val();//联系人邮箱
             //经营类目编码
             var mccCode = $("#levelThree").val();
-            debugger
             //特殊行业资质照
             var qualificationPath = $("#qualificationPath").val();
             if(qualificationPath == null || qualificationPath == '' || qualificationPath == void 0){

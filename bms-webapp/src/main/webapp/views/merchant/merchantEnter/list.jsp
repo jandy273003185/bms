@@ -178,9 +178,6 @@
     				if(data.result=="SUCCESS"){
     					$("#channlCodeLab").text("该商户该渠道已报备");
     					return false;
-    					//已报备则显示出弹框
-    					/* $('#channelListModel').modal('hide');
-    					$('#confirmModel').modal('show'); */
     				}else if(data.status =="01" && data.result =="FAIL"){
     					alert("商户未审核通过，请先审核");
     					var custId = data.custId;
@@ -211,7 +208,6 @@
     				            +',height='+iHeight
     				            +',top='+iTop
     				            +',left='+iLeft; 
-    				     	/*  $.blockUI();  */
     				      	winChild =  window.open(url, name,params);
     				   		 
     			   	   	}
@@ -229,7 +225,6 @@
     				            +',height='+iHeight
     				            +',top='+iTop
     				            +',left='+iLeft; 
-    				     	/*  $.blockUI();  */
     				      	winChild =  window.open(url, name,params);
     			   	   	}
     					 
@@ -247,7 +242,6 @@
     				            +',height='+iHeight
     				            +',top='+iTop
     				            +',left='+iLeft; 
-    				     	/*  $.blockUI();  */
     				      	winChild =  window.open(url, name,params);
     				   	}
     					
@@ -265,7 +259,6 @@
     				            +',height='+iHeight
     				            +',top='+iTop
     				            +',left='+iLeft; 
-    				     	/*  $.blockUI();  */
     				      	winChild =  window.open(url, name,params);
     				   	}
     					
@@ -537,13 +530,9 @@
 
 						<div style="margin:30px 0 10px 0">
 							<a href="<%=request.getContextPath()+MerchantEnterPath.BASE + MerchantEnterPath.ADDPAGE%>"  class="btn btn-primary" >新增</a>
-							<!-- <a href="#" class="btn btn-primary" onclick="addMerchantEntry()" data-rel="tooltip" data-toggle='modal'>新增</a> -->
-							<%--<button type="button"  class="btn btn-primary">重置密码</button>--%>
 							<button type="button"  class="btn btn-primary" disabled="disabled">批量审核资料</button>
 							<button type="button"  class="btn btn-primary" disabled="disabled">批量录入</button>
-							<!-- <button type="button"  class="btn btn-primary exportBut">导出</button> -->
 							<a class="btn btn-primary exportBut">导出</a>
-							<%--<button type="button"  class="btn btn-primary">打印二维码</button>--%>
 						</div>
 
 						<div class="list-table-header">商户列表</div>
@@ -553,14 +542,13 @@
 								<tr>
 									<th width="10%">商户名称</th>
 									<th width="10%">商户简称</th>
-									<th width="10%">商户编号</th>
-									<th width="10%">邮箱账号</th>
+									<th width="11%">商户编号</th>
+									<th width="11%">账号</th>
 									<th width="12%">录入时间</th>
 									<th width="7%">商户状态</th>
 									<th width="7%">审核状态</th>
-									<!-- <th width="7%">报备状态</th> -->
 									<th width="5%">审核人</th>
-									<th width="22%">操作</th>
+									<th width="27%">操作</th>
 								</tr>
 								</thead>
 								<tbody>
@@ -569,7 +557,19 @@
 										<td>${merchant.custName }</td>
 										<td>${merchant.shortName }</td>
 										<td>${merchant.merchantCode }</td>
-										<td>${merchant.email }</td>
+										<td>
+											<c:choose>
+												<c:when test="${merchant.email == null}">
+													${merchant.mobile }
+												</c:when>
+												<c:when test="${merchant.mobile == null}">
+													${merchant.email }
+												</c:when>
+												<c:when test="${merchant.mobile != null && merchant.email != null }">
+													${merchant.email }/${merchant.mobile }
+												</c:when>
+											</c:choose>
+										</td>
 										<td>${merchant.createTime }</td>
 										<td>
 											<c:choose>
@@ -603,25 +603,6 @@
 												</c:when>
 											</c:choose>
 										</td>
-										<%-- <td>
-											<c:choose>
-												<c:when test="${merchant.filingAuditStatus =='00'}">
-													商户报备成功
-												</c:when>
-												<c:when test="${merchant.filingAuditStatus =='99'}">
-													商户报备异常
-												</c:when>
-												<c:when test="${merchant.filingAuditStatus =='0'}">
-													待审核
-												</c:when>
-												<c:when test="${merchant.filingAuditStatus =='1'}">
-													审核通过
-												</c:when>
-												<c:when test="${merchant.filingAuditStatus =='2'}">
-													审核失败
-												</c:when>
-											</c:choose>
-										</td> --%>
 										<td>${merchant.aduitUserName }</td>
 										<td>
 											<input type="hidden" name="merchantCode" id = "merchantCode" value="${merchant.merchantCode }" />
@@ -666,8 +647,6 @@
 					</div>
 				</div>
 
-
-
 				<!-- 审核不通过弹框 -->
 				<div class="modal fade" style="z-index:1043;" id="auditMessageModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					<div class="modal-dialog" style="width:30%;z-index:99;">
@@ -677,7 +656,7 @@
 								<h4 class="modal-title" id="myModalLabel">审核不通过</h4>
 							</div>
 							<div class="modal-body">
-								<table 	 >
+								<table>
 									<tr>
 										<td >请输入审核不通过理由：</td>
 									</tr>
@@ -695,7 +674,6 @@
 						</div><!-- /.modal-content -->
 					</div>
 				</div><!-- /.modal -->
-				
 				
 									
 				<!-- 渠道弹框 -->

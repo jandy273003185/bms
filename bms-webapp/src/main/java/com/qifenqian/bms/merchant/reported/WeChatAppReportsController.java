@@ -131,7 +131,7 @@ public class WeChatAppReportsController {
 			comeBean.setMerchantCode(cr.getMerchantCode());
 			comeBean.setChannelNo(cr.getChannelNo());
 			comeBean.setReportStatus("00");
-			TdMerchantDetailInfo merchantDetailInfo = fmIncomeMapperDao.selTdMerchantReport(comeBean);
+			TdMerchantDetailInfo merchantDetailInfo = weChatAppService.selTdMerchantReport(comeBean);
 			
 			if(merchantDetailInfo != null){
 				//该商户已报备
@@ -212,7 +212,7 @@ public class WeChatAppReportsController {
 			comeBean.setMerchantCode(cr.getMerchantCode());
 			comeBean.setChannelNo(cr.getChannelNo());
 			comeBean.setPatchNo(cr.getPatchNo());
-			TdMerchantDetailInfo td = fmIncomeService.getTdMerchantReport(comeBean);
+			TdMerchantDetailInfo td = weChatAppService.selTdMerchantReport(comeBean);
 			
 			if(td!=null){
 				//该商户已报备
