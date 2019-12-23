@@ -74,7 +74,7 @@
         #{reportStatus,jdbcType=VARCHAR}, #{zfbBatchNo,jdbcType=VARCHAR}, #{zfbBatchStatus,jdbcType=VARCHAR},
         #{zfbUserId,jdbcType=VARCHAR}, #{zfbAuthAppId,jdbcType=VARCHAR}, #{zfbAppAuthToken,jdbcType=VARCHAR},
         #{zfbAppRefreshToken,jdbcType=VARCHAR}, #{zfbExpiresIn,jdbcType=VARCHAR}, #{zfbReExpiresIn,jdbcType=VARCHAR},
-        #{zfbConfirmUrl,jdbcType=VARCHAR}, #{merchantPid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+        #{zfbConfirmUrl,jdbcType=VARCHAR}, #{merchantPid,jdbcType=VARCHAR}, NOW(),
         #{modifyTime,jdbcType=TIMESTAMP}, #{flagStatus,jdbcType=VARCHAR})
 </insert>
 

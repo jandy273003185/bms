@@ -147,7 +147,7 @@ public class AliPayIncomeService {
         contactInfo.setContactName(aliPayCoBean.getContactName());
         aliReqBean.setContactInfo(contactInfo);
         logger.debug("开启支付宝报备事务：{}", JSONObject.toJSONString(aliReqBean));
-        AlipayOpenAgentCreateRes res = new AlipayOpenAgentCreateRes();// alipayOpenAgentCreate(aliReqBean);
+        AlipayOpenAgentCreateRes res = alipayOpenAgentCreate(aliReqBean);
         logger.debug("支付宝报备事务返回值：{}", JSONObject.toJSONString(res));
         //返回批次号和状态
         tdMerchantDetailInfoAlipay.setZfbBatchNo(res.getBatchNo());
