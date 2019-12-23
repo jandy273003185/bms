@@ -10,7 +10,6 @@ import {
 } from 'element-ui'
 
 import SiteIcon from './components/SiteIcon'
-import AlertModel from './components/AlertModel'
 import PageModel from './components/PageModel'
 
 import './css/base.scss';
@@ -34,7 +33,6 @@ Vue
 Vue.prototype.$ELEMENT = { size: 'mini' };
 
 Vue.component('site-icon', SiteIcon);
-Vue.component('alert-model', AlertModel);
 Vue.component('page-model', PageModel);
 
 Vue.config.productionTip = false
