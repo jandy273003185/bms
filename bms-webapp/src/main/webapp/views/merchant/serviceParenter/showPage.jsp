@@ -363,7 +363,7 @@ function businessForever(){
 							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success certAttribute1Click"  data-target="#previewImageModal" >
 								<label id="certAttribute1Div" class="uploadImage">
-								        <img  id="certAttribute1Image" onClick="bigImg(this);"   src="${picturePathOld.idCardOPath}"  style="width:100%;height:100%;/>
+								        <img  id="certAttribute1Image" onClick="bigImg(this);"   src="${picturePathOld.idCardOPath}"  style="width:100%;height:100%;"/>
 								</label>
 								</a>
 								
