@@ -59,7 +59,7 @@ public class AliPayMerchantReportsController extends AbstractBaseController {
 		if(null!=industryList && industryList.size()>0){
 			mv.addObject("industryList", industryList);
 		}
-		mv.addObject("picturePathVo", getPicturePath(custInfo.getCustId(),custInfo.getAuthId()));
+		mv.addObject("picturePathVo", getPicturePathJsonStr(custInfo.getCustId(),custInfo.getAuthId()));
 		mv.addObject("status",status);
 		return mv;
 	}
