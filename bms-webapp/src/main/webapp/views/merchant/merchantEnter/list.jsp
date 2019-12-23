@@ -554,7 +554,7 @@
 									<th width="10%">商户名称</th>
 									<th width="10%">商户简称</th>
 									<th width="10%">商户编号</th>
-									<th width="10%">邮箱账号</th>
+									<th width="10%">账号</th>
 									<th width="12%">录入时间</th>
 									<th width="7%">商户状态</th>
 									<th width="7%">审核状态</th>
@@ -569,7 +569,7 @@
 										<td>${merchant.custName }</td>
 										<td>${merchant.shortName }</td>
 										<td>${merchant.merchantCode }</td>
-										<td>${merchant.email }</td>
+										<td>${merchant.email }/${merchant.mobile }</td>
 										<td>${merchant.createTime }</td>
 										<td>
 											<c:choose>
