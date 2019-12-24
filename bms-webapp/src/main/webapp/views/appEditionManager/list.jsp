@@ -300,7 +300,9 @@ var checkFun = {
 	        processData:false,
 	        async:false,
 	        success:function(info){ 
-	             $('#fileUrl').val(info.path);
+	             //$('#fileUrl').val(info.path);
+	             $('#fileUrl').val(info.imagePath);
+	        	
 	        },
 	        error:function(err){
 	            console.log(err)
