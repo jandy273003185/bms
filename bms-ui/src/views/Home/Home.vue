@@ -1,8 +1,8 @@
 <template>
-  <el-container class="home-page">
-    <el-header>
+  <div class="home-page">
+    <div class="site-header">
       <router-link tag="h1" to="/">
-        <site-icon iconClass="leaf" size="16" />七分钱后台管理系统
+        <site-icon iconClass="leaf" size="16" />&nbsp;七分钱后台管理系统
       </router-link>
       <div class="header-info">
         <router-link to="/">七分钱后台管理系统</router-link>&nbsp;|&nbsp;管理员&nbsp;|&nbsp;员工编号：1&nbsp;|&nbsp;国银证宝&nbsp;|
@@ -12,19 +12,20 @@
         |{{$store.state.accessToken}}
         <span type="text" size="mini" @click="exit"> <i class="el-icon-switch-button" /> 退出</span>
       </div>
-    </el-header>
-    <el-container>
+    </div>
+    <!-- 中间主体 -->
+    <div class="site-container">
       <!-- 侧边菜单栏 -->
       <div class="site-aside clear-scroll-bar">
-        <!-- 
-          <el-button class="menu-btn" @click="goToToggleMenu">
-            <site-icon :iconClass="toggleMenu ?'right': 'left'" size="12" />
-          </el-button> 
-        -->
+
+        <!-- <el-button class="menu-btn" @click="goToToggleMenu">
+          <site-icon :iconClass="toggleMenu ?'right': 'left'" size="12" />
+        </el-button> -->
+
         <MenuTree :toggle="toggleMenu" v-model="path" />
       </div>
       <!-- 右边内容 -->
-      <el-main class="el-main-content">
+      <div class="site-main">
         <!-- 面包屑导航 -->
         <div class="breadcrumb-main">
           <el-breadcrumb separator-class="el-icon-arrow-right">
@@ -39,9 +40,9 @@
         </div>
         <!-- 主体内容 -->
         <router-view class="el-main-view" :searchText="sendToSearchText"></router-view>
-      </el-main>
-    </el-container>
-  </el-container>
+      </div>
+    </div>
+  </div>
 
 </template>
 
@@ -101,44 +102,54 @@ html {
   padding: 0;
   margin: 0;
 }
+
 .home-page {
   height: 100%;
-}
-.el-container {
-  height: 100%;
-  .el-footer,
-  .site-aside,
-  .el-main {
+  display: flex;
+  flex-direction: column;
+  .site-header {
+    height: 60px;
     background-color: #fff;
+    border-bottom: 10px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    h1 {
+      font-size: 22px;
+    }
   }
-  & > .el-container {
-    margin: 10px 0;
+  .site-container {
+    flex: 1;
+    overflow: hidden;
+    border-bottom: 10px solid #eee;
+    display: flex;
     .site-aside {
-      margin-right: 10px;
-      overflow: auto;
+      min-width: 200px;
+      background-color: #fff;
+    }
+    .site-main {
+      flex: 1;
+      overflow: hidden;
+      border-left: 10px solid #eee;
+      background-color: #fff;
+      position: relative;
+      padding-top: 40px;
+      .breadcrumb-main {
+        width: 100%;
+        display: flex;
+        box-sizing: border-box;
+        justify-content: space-between;
+        padding: 0 10px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-bottom: 1px solid #eee;
+      }
     }
   }
 }
-.el-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #438eb9;
-  color: #fff;
-  h1 {
-    font-size: 20px;
-  }
-  .site-icon {
-    margin-right: 10px;
-  }
 
-  .header-info {
-    font-size: 13px;
-  }
-}
-.el-main {
-  height: 100%;
-}
 th,
 td {
   text-align: center;
@@ -152,35 +163,6 @@ td {
 .menu-btn {
   width: 100%;
 }
-
-.el-main-content.el-main {
-  box-sizing: border-box;
-  position: relative;
-  padding: 40px 0 0 0;
-  overflow: hidden;
-  .breadcrumb-main {
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding-left: 20px;
-    border-bottom: 1px solid #eee;
-    display: flex;
-    justify-content: space-between;
-    .home-search {
-      margin-right: 50px;
-      .el-input {
-        input {
-          height: 30px;
-        }
-      }
-      .el-input__icon.el-icon-search {
-        line-height: 30px;
-      }
-    }
-  }
-}
-
 .el-main-view {
   display: flex;
   height: 100%;
