@@ -148,8 +148,8 @@
 												<td>${appEditionControl.memo}</td>
 												<td>
 													<a href="#" class="tooltip-success deleteAppEditionControl" data-rel="tooltip" data-toggle='modal' data-target="#deleteAppEditionControlModal" title="Delete" >
-														<span class="red">
-															<i class="icon-trash bigger-120"></i>
+														<span class="green">
+															<i class="icon-edit bigger-120"></i>
 														</span>
 													</a>
 												</td>
@@ -235,10 +235,11 @@
 					      <div class="modal-content" style="width: 600px;">
 					         <div class="modal-header">
 					            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times;</button>
-					            <h4 class="modal-title" id="myModalLabel">确定要删除吗？</h4>
+					            <h4 class="modal-title" id="myModalLabel">停用升级包</h4>
 					         </div>
 					         <div class="modal-body" align="center">
 					         	<input type="hidden" id="id" name="id" >
+					         	<font style="color: red; font-weight: bold; font-size: 15px;">您确定要停用该升级包么？</font>
 					         </div>
 					         <div class="modal-footer">
 					            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
