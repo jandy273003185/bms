@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,19 +19,25 @@ import com.qifenqian.bms.basemanager.merchant.service.MerchantService;
 import com.qifenqian.bms.common.controller.CommonInfoService;
 import com.qifenqian.bms.merchant.merchantReported.bean.MerchantDetailInfoAliPay;
 import com.qifenqian.bms.merchant.merchantReported.bean.MerchantDetailInfoShuiXingPay;
+import com.qifenqian.bms.merchant.merchantReported.bean.MerchantDetailInfoWechat;
 import com.qifenqian.bms.merchant.merchantReported.dao.MerchantDetailInfoShuiXingPayDao;
 import com.qifenqian.bms.merchant.merchantReported.service.MerchantDetailInfoAliPayService;
 import com.qifenqian.bms.merchant.merchantReported.service.MerchantDetailInfoShuiXingPayService;
+import com.qifenqian.bms.merchant.merchantReported.service.MerchantDetailInfoWechatService;
 import com.qifenqian.bms.merchant.reported.bean.Bank;
 import com.qifenqian.bms.merchant.reported.bean.ChannlInfo;
+import com.qifenqian.bms.merchant.reported.bean.City;
 import com.qifenqian.bms.merchant.reported.bean.CommonIndustry;
 import com.qifenqian.bms.merchant.reported.bean.Industry;
 import com.qifenqian.bms.merchant.reported.bean.MerchantCity;
 import com.qifenqian.bms.merchant.reported.bean.Province;
+import com.qifenqian.bms.merchant.reported.bean.TdMerchantBankInfo;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfo;
+import com.qifenqian.bms.merchant.reported.bean.WeChatAppAreaInfo;
 import com.qifenqian.bms.merchant.reported.dao.FmIncomeMapperDao;
 import com.qifenqian.bms.merchant.reported.service.CrIncomeService;
 import com.qifenqian.bms.merchant.reported.service.FmIncomeService;
+import com.qifenqian.bms.merchant.reported.service.WeChatAppService;
 
 @Controller
 @RequestMapping("/merchant")
@@ -54,11 +61,25 @@ public class MerchanEnterController {
 	   @Autowired
 	   private FmIncomeMapperDao fmIncomeMapperDao;
 	   
-		@Autowired
-		private CommonInfoService commonInfoService;
-		@Autowired
-		private MerchantDetailInfoAliPayService merchantDetailInfoAliPayService;
+	   @Autowired
+	   private CommonInfoService commonInfoService;
 	   
+	   @Autowired
+	   private MerchantDetailInfoAliPayService merchantDetailInfoAliPayService;
+	   
+	   @Autowired
+	   private WeChatAppService weChatAppService;
+	   @Autowired
+	   private MerchantDetailInfoWechatService merchantDetailInfoWechatService;
+	/**
+	 * @param request
+	 * @param response
+	 * @param merchantCode   zhanggc 随行付报备信息显示
+	 * @param channlCode
+	 * @param patchNo
+	 * @param custId
+	 * @return
+	 */
 	@RequestMapping("/merchantReported/suiXingMerchantReportShow")
 	public ModelAndView showShuiXingPay(HttpServletRequest request,HttpServletResponse response,
 			String merchantCode,String channlCode,String patchNo,String custId){
@@ -104,6 +125,15 @@ public class MerchanEnterController {
 		return mv;
 	}
 	
+	/**
+	 * @param request
+	 * @param response    
+	 * @param merchantCode
+	 * @param channlCode   zhanggc 支付宝报备信息显示
+	 * @param patchNo
+	 * @param custId
+	 * @return
+	 */
 	@RequestMapping("/merchantReported/aliPayMerchantReportShow")
 	public ModelAndView merchantDetailInfoAliPayShow(HttpServletRequest request,HttpServletResponse response,
 			String merchantCode,String channlCode,String patchNo,String custId){
@@ -131,4 +161,27 @@ public class MerchanEnterController {
 		mv.addObject("merchantDetailInfoAliPay", merchantDetailInfoAliPay);
 		return mv;
 	}
+	
+	/**
+	 * @param request
+	 * @param response
+	 * @param merchantCode  zhanggc 微信报备信息显示
+	 * @param channlCode 
+	 * @param patchNo
+	 * @param custId
+	 * @return
+	 */
+	@RequestMapping("/merchantReported/weChatAppMerchantReportShow")
+	public ModelAndView merchantDetailInfoWechatShow(HttpServletRequest request,HttpServletResponse response,
+			String merchantCode,String channlCode,String patchNo,String custId ){
+		ModelAndView mv = new ModelAndView();
+		/***查询省份***/
+		//查询微信报备信息 
+		MerchantDetailInfoWechat Wechat = new MerchantDetailInfoWechat();
+		Wechat.setPatchNo(patchNo);
+		MerchantDetailInfoWechat merchantDetailInfoWechat = merchantDetailInfoWechatService.getMerchantDetailInfoWechat(Wechat);
+		mv.addObject("merchantDetailInfoWechat",merchantDetailInfoWechat);
+		return mv;
+	}
+	
 }

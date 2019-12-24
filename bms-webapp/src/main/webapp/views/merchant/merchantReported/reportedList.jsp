@@ -206,7 +206,7 @@
         var patchNo = $(obj).parent().find("#patchNo_").val();
         var channlCode =$(obj).parent().find('#channelNo_').val();
         var outMerchantCode = $(obj).parent().find('#outMerchantCode_').val();
-
+        var custId = $(obj).parent().find('#custId_').val();
         var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.MERCHANTREPORTINFO%>?merchantCode="+merchantCode+"&channlCode="+channlCode+"&patchNo="+patchNo;
         var name="window";                        //网页名称，可为空;
         var iWidth=1200;                          //弹出窗口的宽度;
@@ -223,9 +223,29 @@
         winChild =  window.open(url, name,params);
 
         window.location.reload();
+        
+        
         <%--
+          //微信 报备资料显示
+		if("WX" == channlCode){
+   	   	   	
+   	   		var url=window.Constants.ContextPath+"/merchant/merchantReported/weChatAppMerchantReportShow?merchantCode="+merchantCode+"&channlCode="+channlCode+"&patchNo="+patchNo+" &custId="+custId; 
+	     	var name="window";                        //网页名称，可为空;
+	     	var iWidth=1200;                          //弹出窗口的宽度;
+	     	var iHeight=600;                          //弹出窗口的高度;
+	     	//获得窗口的垂直位置
+	     	var iTop = (window.screen.availHeight-30-iHeight)/2; 
+	     	//获得窗口的水平位置
+	     	var iLeft = (window.screen.availWidth-10-iWidth)/2;
+	     	var params='width='+iWidth
+	            +',height='+iHeight
+	            +',top='+iTop
+	            +',left='+iLeft; 
+	     	/*  $.blockUI();  */
+	      	winChild =  window.open(url, name,params);
+	     	return;
+   	   	}
         //随行付 报备资料显示
-        var custId = $(obj).parent().find('#custId_').val();
 		if("SUIXING_PAY" == channlCode){
    	   	   	
    	   		var url=window.Constants.ContextPath+"/merchant/merchantReported/suiXingMerchantReportShow?merchantCode="+merchantCode+"&channlCode="+channlCode+"&patchNo="+patchNo+" &custId="+custId; 
