@@ -79,6 +79,12 @@ const Branch = () => import(/* webpackChunkName: "Clock" */ '@/views/Clock/Branc
 // 商户管理
 const Gateway = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Gateway/Gateway');
 const Protocol = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Protocol/Protocol');
+const Mrate = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Rate/Rate');
+const Maccount = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Account/Account');
+const Mcashier = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Cashier/Cashier');
+const Shop = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Shop/Shop');
+const Mchannel = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Channel/Channel');
+const Mlist = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/List/List');
 
 // 客户管理
 const Audit = () => import(/* webpackChunkName: "Customer" */ '@/views/Customer/Audit/Audit');
@@ -190,18 +196,18 @@ export const uatRouter = [
     name: '商户管理',
     path: '',
     children: [
-      { name: '商户网关维护', path: '/Merchants/gateway', component: Gateway },
-      { name: '商户协议管理', path: '/Merchants/protocol', component: Protocol },
-      { name: '费率管理', path: '/Merchants/gateway' },
-      { name: '商户账户管理', path: '/Merchants/gateway' },
-      { name: '收银员', path: '/Merchants/gateway' },
-      { name: '门店管理', path: '/Merchants/gateway' },
-      { name: '商户渠道列表', path: '/Merchants/gateway' },
-      { name: '商户列表', path: '/Merchants/gateway' },
-      { name: '商户报备列表', path: '/Merchants/gateway' },
-      { name: '商户产品管理', path: '/Merchants/gateway' },
-      { name: '商户设备管理', path: '/Merchants/gateway' },
-      { name: '服务商列表', path: '/Merchants/gateway' }
+      { name: '商户网关维护', path: '/merchants/gateway', component: Gateway },
+      { name: '商户协议管理', path: '/merchants/protocol', component: Protocol },
+      { name: '费率管理', path: '/merchants/rate', component: Mrate },
+      { name: '商户账户管理', path: '/merchants/account', component: Maccount },
+      { name: '收银员', path: '/merchants/cashier', component: Mcashier },
+      { name: '门店管理', path: '/merchants/shop', component: Shop },
+      { name: '商户渠道列表', path: '/merchants/mchannel', component: Mchannel },
+      { name: '商户列表', path: '/merchants/list', component: Mlist },
+      { name: '商户报备列表', path: '/merchants/gateway', component: Mcashier },
+      { name: '商户产品管理', path: '/merchants/gateway', component: Mcashier },
+      { name: '商户设备管理', path: '/merchants/gateway', component: Mcashier },
+      { name: '服务商列表', path: '/merchants/gateway', component: Mcashier }
     ]
   },
   {
