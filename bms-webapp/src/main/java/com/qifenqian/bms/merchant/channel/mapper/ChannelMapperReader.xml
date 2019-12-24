@@ -45,6 +45,9 @@
 			<if test="merchantCode !=null and merchantCode !=''">
 				and i.MERCHANT_CODE=#{merchantCode}
 			</if>
+			<if test="custName !=null and custName !=''">
+				and i.CUST_NAME=#{custName}
+			</if>
 		</where>
 
 		order by a.modify_time desc
