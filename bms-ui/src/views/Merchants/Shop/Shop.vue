@@ -194,7 +194,7 @@ export default {
   watch: {
     // 监听search传来的数据
     searchText(v) {
-      console.log(v);
+      window.console.log(v);
     }
   },
   created() {},
@@ -213,7 +213,7 @@ export default {
     },
     // 选中候选中的项
     handleSelect(item) {
-      console.log(item, 'item');
+      window.console.log(item, 'item');
     },
     addModelSubmit() {
       this.$refs['alertAddModelForm'].validate((files, object) => {
@@ -225,7 +225,7 @@ export default {
           this.$message.error(`${keys[0]}不可为空`);
         }
       });
-      console.log(this.addModelData);
+      window.console.log(this.addModelData);
     },
     addModelCancel() {
       this.addDisplay = false;
@@ -234,35 +234,35 @@ export default {
     editorClick(row) {
       this.editorDisplay = true;
       // this.editorModelData = row;
-      console.log(row);
+      window.console.log(row);
     },
     editorModelCancel() {
       this.editorDisplay = false;
     },
     editorModelSubmit() {
-      console.log(this.editorModelData);
+      window.console.log(this.editorModelData);
       this.editorDisplay = false;
     },
     // 添加门店资料
     newClick(row) {
       this.newDisplay = true;
       // this.newModelData = row;
-      console.log(row);
+      window.console.log(row);
     },
     newModelCancel() {
       this.newDisplay = false;
     },
     newModelSubmit() {
-      console.log(this.newModelData);
+      window.console.log(this.newModelData);
       this.newDisplay = false;
     },
     lookClick(row) {
       this.lookDisplay = true;
-      console.log(row);
+      window.console.log(row);
     },
     goToSearch() {
       //查询
-      console.log(this.examine, '查询');
+      window.console.log(this.examine, '查询');
     },
     insertItem() {
       // 新增

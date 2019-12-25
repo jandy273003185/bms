@@ -96,17 +96,17 @@ export default {
   watch: {
     // 监听search传来的数据
     searchText(v) {
-      console.log(v);
+      window.console.log(v);
     }
   },
   created() {},
   methods: {
     goToSearch() {
       //查询
-      console.log(this.examine, '查询');
+      window.console.log(this.examine, '查询');
     },
     iquireGoToSearch() {
-      console.log(this.iquireExamine, '查询');
+      window.console.log(this.iquireExamine, '查询');
     },
     download() {
       this.$message('导出报表');

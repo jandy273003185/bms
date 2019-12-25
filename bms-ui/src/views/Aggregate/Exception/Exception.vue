@@ -155,7 +155,7 @@ export default {
   watch: {
     // 监听search传来的数据
     searchText(v) {
-      console.log(v);
+      window.console.log(v);
     }
   },
   created() {},
@@ -164,13 +164,13 @@ export default {
       this.performDisplay = false;
     },
     performModelSubmit() {
-      console.log(this.performModelData);
+      window.console.log(this.performModelData);
       this.performDisplay = false;
     },
     performClick(row) {
       this.performDisplay = true;
       this.performModelData = row;
-      console.log(row);
+      window.console.log(row);
     },
     goToNext() {
       this.nextDisplay = true;
@@ -181,11 +181,11 @@ export default {
     },
     goToSearch() {
       //查询
-      console.log(this.examine, '查询');
+      window.console.log(this.examine, '查询');
     },
     lookClick(row) {
       this.lookDisplay = true;
-      console.log(row);
+      window.console.log(row);
     }
   }
 };
