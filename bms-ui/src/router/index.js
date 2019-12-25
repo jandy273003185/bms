@@ -86,11 +86,16 @@ const Shop = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants
 const Mchannel = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Channel/Channel');
 const Mlist = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/List/List');
 const Operation = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/List/Operation');
+const Reported = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Reported/Reported');
+const Mproduct = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Product/Product');
+const Equipment = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Equipment/Equipment');
+const Service = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Service/Service');
+const Soperation = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Service/Operation');
 
 // 客户管理
 const Audit = () => import(/* webpackChunkName: "Customer" */ '@/views/Customer/Audit/Audit');
 const Aulist = () => import(/* webpackChunkName: "Customer" */ '@/views/Customer/List/List');
-const Caccount = () => import(/* webpackChunkName: "Certification" */ '@/views/Customer/Account/Account');
+const Caccount = () => import(/* webpackChunkName: "Customer" */ '@/views/Customer/Account/Account');
 
 // 短信管理
 const Smessage = () => import(/* webpackChunkName: "SMS" */ '@/views/SMS/Message/Message');
@@ -205,10 +210,10 @@ export const uatRouter = [
       { name: '门店管理', path: '/merchants/shop', component: Shop },
       { name: '商户渠道列表', path: '/merchants/mchannel', component: Mchannel },
       { name: '商户列表', path: '/merchants/list', component: Mlist },
-      { name: '商户报备列表', path: '/merchants/gateway', component: Mcashier },
-      { name: '商户产品管理', path: '/merchants/gateway', component: Mcashier },
-      { name: '商户设备管理', path: '/merchants/gateway', component: Mcashier },
-      { name: '服务商列表', path: '/merchants/gateway', component: Mcashier }
+      { name: '商户报备列表', path: '/merchants/reported', component: Reported },
+      { name: '商户产品管理', path: '/merchants/product', component: Mproduct },
+      { name: '商户设备管理', path: '/merchants/equipment', component: Equipment },
+      { name: '服务商列表', path: '/merchants/service', component: Service }
     ]
   },
   {
@@ -592,7 +597,8 @@ function flatten(arr) {
 
 const otherRoutes = [
   { path: '/welcome', component: Welcome },
-  { path: '/merchants/list/operation/:type', component: Operation },//商户管理>商户列表>新增
+  { path: '/merchants/list/operation/:type', component: Operation },//商户管理>商户列表>(新增+操作处理页面)
+  { path: '/merchants/service/operation/:type', component: Soperation },//商户管理>服务商列表>(新增+操作处理页面)
 ];
 
 const menuRoutes = [...flatten(uatRouter), ...otherRoutes];//uta
