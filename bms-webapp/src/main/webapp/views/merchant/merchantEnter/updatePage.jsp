@@ -471,21 +471,27 @@ $(function(){
         var custId = $("#custId").val();
         var idTermStart = $("#idTermStart").val().trim();
     	var idTermEnd = $("#idTermEnd").val().trim();
-        var openAccountPath =  $("#openAccountPath").val();
+    	var openAccountPath =  $("#openAccountPath").val();
     	var bankCardPhotoPath = $("#bankCardPhotoPath").val();
     	var certAttribute2Path = $("#certAttribute2Path").val();
     	var certAttribute1Path = $("#certAttribute1Path").val();
     	var businessPhotoPath = $("#businessPhotoPath").val();
+    	var shopInteriorPath = $("#shopInteriorPath").val();
+    	var doorPhotoPath = $("#doorPhotoPath").val();
+    	var shopCheckStandPath = $("#shopCheckStandPath").val();
         $.blockUI();
         $.ajax({
             type : "POST",
             url : window.Constants.ContextPath +'<%="/common/files/getPicPath"%>?custId='+custId,
             data :{
-            	"openAccountPath" :  openAccountPath,                //商户营业执照
-            	"idCardOPath"     :  certAttribute1Path,             //身份证正面照
-            	"idCardFPath"     :  certAttribute2Path,             //身份证背面照
-            	"bussinessPath"   :  businessPhotoPath,              //开户许可证
-            	"bankCardPath"    :  bankCardPhotoPath               //开户银行照
+            	"openAccountPath"    : openAccountPath,                //开户许可证
+            	"idCardOPath"        : certAttribute1Path,             //身份证正面照
+            	"idCardFPath"        : certAttribute2Path,             //身份证背面照
+            	"bussinessPath"      : businessPhotoPath,              //商户营业执照
+            	"bankCardPath"       : bankCardPhotoPath,              //开户银行照
+            	"shopInteriorPath"   : shopInteriorPath,               //店内照
+            	"shopCheckStandPath" : shopCheckStandPath,             //店内前台照
+            	"doorPhotoPath"      : doorPhotoPath                   //门头照
 
             },
             dataType : "json",
@@ -556,18 +562,6 @@ $(function(){
         });
     }
 
-    //图片预览
-    function showBusinessPhotoImage(obj){
-        var divObj = document.getElementById("businessPhotoDiv");
-        var imageObj = document.getElementById("businessPhotoImageDiv");
-        return previewImage(divObj,imageObj,obj);
-    }
-
-    function showopenAccountImage(obj){
-        var divObj = document.getElementById("openAccountDiv");
-        var imageObj = document.getElementById("openAccountImageDiv");
-        return previewImage(divObj,imageObj,obj);
-    }
     $('.openAccountClick').click(function(){
         var divObj = document.getElementById("showImageDiv");
         var imageObj = document.getElementById("showImage");
@@ -575,30 +569,36 @@ $(function(){
         return previewImage(divObj,imageObj,obj);
     });
 
-    function showCertAttribute1Image(obj){
-        var divObj = document.getElementById("certAttribute1Div");
-        var imageObj = document.getElementById("certAttribute1ImageDiv");
-        return previewImage(divObj,imageObj,obj);
-    }
-
-    function showCertAttribute2Image(obj){
-        var divObj = document.getElementById("certAttribute2Div");
-        var imageObj = document.getElementById("certAttribute2ImageDiv");
-        return previewImage(divObj,imageObj,obj);
-    }
-    /** 银行卡预览 **/
-    function showBankCardPhotoImage(obj){
-        var divObj = document.getElementById("bankCardPhotoDiv");
-        var imageObj = document.getElementById("bankCardPhotoImage");
-        var result1 = previewImage(divObj,imageObj,obj);
-        return result1;
-    }
     /** 银行卡点击预览 **/
     $('.bankCardPhotoClick').click(function(){
         var divObj = document.getElementById("showImageDiv");
         var imageObj = document.getElementById("showImage");
         var obj = document.getElementById("bankCardPhoto");
         return previewImage(divObj,imageObj,obj);
+    });
+    
+    /** 门头照点击预览 **/
+    $('.doorPhotoClick').click(function(){
+    	var divObj = document.getElementById("showImageDiv");
+    	var imageObj = document.getElementById("showImage");
+    	var obj = document.getElementById("doorPhoto");
+    	return previewImage(divObj,imageObj,obj);
+    });
+
+    /** 店内前台点击预览 **/
+    $('.shopCheckStandClick').click(function(){
+    	var divObj = document.getElementById("showImageDiv");
+    	var imageObj = document.getElementById("showImage");
+    	var obj = document.getElementById("shopCheckStand");
+    	return previewImage(divObj,imageObj,obj); 
+    });
+    	
+    /** 店内照点击预览 **/
+    $('.shopInteriorClick').click(function(){
+    	var divObj = document.getElementById("showImageDiv");
+    	var imageObj = document.getElementById("showImage");
+    	var obj = document.getElementById("shopInterior");
+    	return previewImage(divObj,imageObj,obj); 
     });
 
     function exit() {
@@ -661,6 +661,21 @@ $(function(){
     	commonFileUpload(file, 'businessPhotoPath', 'businessPhotoDiv');
     }
 
+  //门头照
+    function showDoorPhotoImage(file){
+    	commonFileUpload(file, 'doorPhotoPath', 'doorPhotoDiv');
+    }
+
+    //店内前台照
+    function showShopCheckStandImage(file){
+    	commonFileUpload(file, 'shopCheckStandPath', 'shopCheckStandDiv');
+    }
+
+    //店内照
+    function showShopInteriorImage(file){
+    	commonFileUpload(file, 'shopInteriorPath', 'shopInteriorDiv');
+    }
+    
     //身份证正面
     function showCertAttribute1Image(file){
     	commonFileUpload(file, 'certAttribute1Path', 'certAttribute1Div');
@@ -805,16 +820,16 @@ $(function(){
 									<input type="text" id="businessTermEnd" name="businessTermEnd" value =
 									<c:choose>
 									<c:when test="${merchantVo.businessTermEnd =='forever'}">
-										长期
+										"长期"
 									</c:when>
 									<c:when test="${merchantVo.businessTermEnd =='2099-12-31'}">
-										长期
+										"长期"
 									</c:when>
 									<c:when test="${merchantVo.businessTermEnd =='长期'}">
-										长期
+										"长期"
 									</c:when>
 									<c:otherwise>
-										${merchantVo.businessTermEnd }
+										"${merchantVo.businessTermEnd }"
 									</c:otherwise>
 									</c:choose>
 										   onfocus="WdatePicker({skin:'whyGreen'})" onfocus="WdatePicker({skin:'whyGreen'})"  style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
@@ -847,6 +862,54 @@ $(function(){
 										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
 									</div> -->
 
+								</td>
+							</tr>
+							<tr id="doorPhotoType" style = "display:">
+								<td class="td-left">门头照照片：<span style="color:red;">(必填)</span></td>
+								<td class="td-right" colspan="3">
+									<a data-toggle="modal" class="tooltip-success doorPhotoClick" data-target="#previewImageModal">
+										<label id="doorPhotoDiv" class="uploadImage" >
+										  <img id="doorPhotoImageDiv" onClick="bigImg(this);" style="width: 100%; height: 100%;">										  
+										</label>
+									</a>
+									<div class="updateImageDiv" style="float:left; margin-top:75 " >
+										<input type="hidden" id="doorPhotoPath" name="doorPhotoPath" />
+										<input type="hidden" id="doorPhotoImageVal02"  />
+										<input type="file" name="doorPhoto" id="doorPhoto" onchange="showDoorPhotoImage(this)" />
+										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div>
+								</td>
+							</tr>
+							<tr id="shopInteriorType" style = "display:">
+								<td class="td-left">店内照：<span style="color:red;">(必填)</span></td>
+								<td class="td-right" colspan="3">
+									<a data-toggle='modal' class="tooltip-success shopInteriorClick" data-target="#previewImageModal" >
+										<label id="shopInteriorDiv"  class="uploadImage" >
+											<img id="shopInteriorImageDiv" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
+									</a>
+									<div class="updateImageDiv" style="float:left; margin-top:75 " >
+										<input type="hidden" id="shopInteriorPath" name="shopInteriorPath" />
+										<input type="hidden" id="shopInteriorImageVal02"  />
+										<input type="file" name="shopInterior" id="shopInterior" onchange="showShopInteriorImage(this)" />
+										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div>
+								</td>
+							</tr>
+							<tr id="shopCheckStandType" style = "display:">
+								<td class="td-left">店内前台照：<span style="color:red;">(必填)</span></td>
+								<td class="td-right" colspan="3">
+									<a data-toggle='modal' class="tooltip-success shopCheckStandClick" data-target="#previewImageModal" >
+										<label id="shopCheckStandDiv"  class="uploadImage">
+											<img id="shopCheckStandImageDiv" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										</label>
+									</a>
+									<div class="updateImageDiv" style="float:left; margin-top:75 " >
+										<input type="hidden" id="shopCheckStandPath" name="shopCheckStandPath" />
+										<input type="hidden" id="shopCheckStandImageVal02"  />
+										<input type="file" name="shopCheckStand" id="shopCheckStand" onchange="showShopCheckStandImage(this)" />
+										<span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
+									</div>
 								</td>
 							</tr>
 							<tr>
