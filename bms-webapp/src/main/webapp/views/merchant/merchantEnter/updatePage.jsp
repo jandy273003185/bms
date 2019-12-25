@@ -868,8 +868,8 @@ $(function(){
 								<td class="td-left">门头照照片：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3">
 									<a data-toggle="modal" class="tooltip-success doorPhotoClick" data-target="#previewImageModal">
-										<label id="doorPhotoDiv" class="uploadImage" >
-										  <img id="doorPhotoImageDiv" onClick="bigImg(this);" style="width: 100%; height: 100%;">										  
+										<label id="doorPhotoDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.doorPhotoPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
 										</label>
 									</a>
 									<div class="updateImageDiv" style="float:left; margin-top:75 " >
@@ -884,8 +884,8 @@ $(function(){
 								<td class="td-left">店内照：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success shopInteriorClick" data-target="#previewImageModal" >
-										<label id="shopInteriorDiv"  class="uploadImage" >
-											<img id="shopInteriorImageDiv" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										<label id="shopInteriorDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.shopInteriorPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
 										</label>
 									</a>
 									<div class="updateImageDiv" style="float:left; margin-top:75 " >
@@ -900,8 +900,8 @@ $(function(){
 								<td class="td-left">店内前台照：<span style="color:red;">(必填)</span></td>
 								<td class="td-right" colspan="3">
 									<a data-toggle='modal' class="tooltip-success shopCheckStandClick" data-target="#previewImageModal" >
-										<label id="shopCheckStandDiv"  class="uploadImage">
-											<img id="shopCheckStandImageDiv" style="width:100%;height:100%;"onclick="bigImg(this);" >
+										<label id="shopCheckStandDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
+											<img src="${picturePathVo.shopCheckStandPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
 										</label>
 									</a>
 									<div class="updateImageDiv" style="float:left; margin-top:75 " >
