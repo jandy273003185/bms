@@ -96,6 +96,7 @@ public class TdMerchantReportService {
         /**
          * 调用渠道service存储
          */
+        this.addMerchantReportDetailByChannel(channel,tdMerchantReportDetail);
         map.put("code", "SUCCESS");
         return map;
     }
