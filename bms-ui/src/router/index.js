@@ -85,6 +85,7 @@ const Mcashier = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merch
 const Shop = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Shop/Shop');
 const Mchannel = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Channel/Channel');
 const Mlist = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/List/List');
+const Operation = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/List/Operation');
 
 // 客户管理
 const Audit = () => import(/* webpackChunkName: "Customer" */ '@/views/Customer/Audit/Audit');
@@ -589,7 +590,12 @@ function flatten(arr) {
 
 // const menuRoutes = [...flatten(menuRouter), { path: '/welcome', component: Welcome }];//sitmg
 
-const menuRoutes = [...flatten(uatRouter), { path: '/welcome', component: Welcome }];//uta
+const otherRoutes = [
+  { path: '/welcome', component: Welcome },
+  { path: '/merchants/list/operation/:type', component: Operation },//商户管理>商户列表>新增
+];
+
+const menuRoutes = [...flatten(uatRouter), ...otherRoutes];//uta
 
 // 默认路由
 const tacitly = [
