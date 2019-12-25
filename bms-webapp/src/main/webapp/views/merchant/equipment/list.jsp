@@ -178,7 +178,24 @@ jQuery(function($){
 
 });
 
+function getInfo(obj,custId,merchantName){
+	
+  	var url=window.Constants.ContextPath+"/merchant/equipment/showDeviceLogin?custId="+custId+"&merchantName="+merchantName; 
+    var name="window";                        //网页名称，可为空;
+    var iWidth=1200;                          //弹出窗口的宽度;
+    var iHeight=600;                          //弹出窗口的高度;
+    //获得窗口的垂直位置
+    var iTop = (window.screen.availHeight-30-iHeight)/2;
+    //获得窗口的水平位置
+    var iLeft = (window.screen.availWidth-10-iWidth)/2;
+    var params='width='+iWidth
+        +',height='+iHeight
+        +',top='+iTop
+        +',left='+iLeft;
+    /*  $.blockUI();  */
+    winChild =  window.open(url, name,params);
 
+}
 
 </script>	
 
@@ -287,6 +304,12 @@ jQuery(function($){
 													</a>
 													</gyzbadmin:function>
 													
+													<a onclick="getInfo(this,'${merchantSign.merchantId}','${merchantSign.merchantName}');" href="#" class="tooltip-success " data-rel="tooltip" data-toggle='modal' data-target="" title="详情" >
+														<span class="black">
+															<i class="icon-zoom-out bigger-120"></i>
+														</span>
+													</a>	
+															
 													<gyzbadmin:function url="<%=MerchantSignPath.BASE + MerchantSignPath.DELETE %>">
 													<a href="#" class="tooltip-success deleteMerchantSign" data-rel="tooltip" data-toggle='modal' data-target="#deleteMerchantSignModal" title="Delete" >
 														<span class="red">
@@ -294,6 +317,7 @@ jQuery(function($){
 														</span>
 													</a>													
 													</gyzbadmin:function>
+																						
 												</td>
 											</tr>
 										</c:forEach>

@@ -1,4 +1,5 @@
 package com.qifenqian.bms.merchant.equipment.dao;
+import com.qifenqian.bms.merchant.equipment.bean.DeviceLogin;
 import com.qifenqian.bms.merchant.equipment.bean.MerchantSign;
 import com.qifenqian.bms.merchant.equipment.mapper.MerchantSignMapper;
 import com.qifenqian.bms.platform.web.page.Page;
@@ -29,6 +30,14 @@ public class MerchantSignDAO{
 	@Page
 	public List<MerchantSign> selectMerchantSignListByPage(MerchantSign merchantSign) {
 		return merchantSignMapper.selectMerchantSignList(merchantSign);
+	}
+	/**
+	 * @param deviceLogin 
+	 * @return  zhanggc 查询设备详情
+	 */
+	@Page
+	public  List<DeviceLogin> selectDeviceLoginById(DeviceLogin deviceLogin) {
+		return merchantSignMapper.selectDeviceLoginById(deviceLogin);
 	}
 }
 
