@@ -70,7 +70,7 @@ public class PrivilegeFilter implements Filter {
       }
     }
 
-    boolean skip = false;
+    boolean skip = true;
 
     CommonData commonData = new CommonData();
     String skipIP = commonData.getConfigMessage().get("SKIP_FILTER_IP");
