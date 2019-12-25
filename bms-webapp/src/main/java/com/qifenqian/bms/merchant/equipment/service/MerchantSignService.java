@@ -1,6 +1,7 @@
 package com.qifenqian.bms.merchant.equipment.service;
 import com.qifenqian.bms.materiel.bean.Materiel;
 import com.qifenqian.bms.materiel.service.MaterielService;
+import com.qifenqian.bms.merchant.equipment.bean.DeviceLogin;
 import com.qifenqian.bms.merchant.equipment.bean.MerchantSign;
 import com.qifenqian.bms.merchant.equipment.dao.MerchantSignDAO;
 import com.qifenqian.bms.merchant.equipment.mapper.MerchantSignMapper;
@@ -38,6 +39,13 @@ public class MerchantSignService {
 	public List<MerchantSign> selectMerchantSignListByPage(MerchantSign merchantSign) {
 		
 		return merchantSignDAO.selectMerchantSignListByPage(merchantSign);
+	}
+	/**
+	 * @param deviceLogin 
+	 * @return  zhanggc 查询设备详情
+	 */
+	public  List<DeviceLogin> selectDeviceLoginById(DeviceLogin deviceLogin) {
+		return merchantSignDAO.selectDeviceLoginById(deviceLogin);
 	}
 
 	/**

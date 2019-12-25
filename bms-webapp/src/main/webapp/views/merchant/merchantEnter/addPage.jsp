@@ -107,7 +107,6 @@ $(function(){
 	    	       	  				$("#custName").val(json.companyName);
 	    	       	  			}else if(_this.attr('id')=="bankCardPhoto"){                //银行卡
     	       	  					$("#compMainAcct").val(json.creditCardId);
-    	       	  					// $("#compAcctBank").val(json.cardNo);
     	       	  				
 	    	       	  			}
 	    	   				}
@@ -453,13 +452,6 @@ function addMerchantBtn(){
 		return false;
 	}
 
-	/*网点号*/
-	/* if(isNull($("#cnaps")[0])){
-		$("#cnapseLab").text("请填写银联号");
-		$("#cnaps").focus();
-		return false;
-	} */
-
 	/*结算类型*/
 	if(isNull($("#compMainAcctType")[0])){
 		$("#compMainAcctTypeLab").text("请填写结算类型");
@@ -505,7 +497,6 @@ function addMerchantBtn(){
 	var bankAcctName = $("#bankAcctName").val().trim();
 	var bankProvinceName = $("#bankProvinceName").val().trim();
 	var bankCityName = $("#bankCityName").val().trim();
-	/* var cnaps =  $("#cnaps").val().trim(); */
 	var cnaps =  $("#branchBank").val().trim();
 	var compMainAcctType = $("#compMainAcctType").val().trim();
 	var idTermStart = $("#idTermStart").val().trim();
@@ -1209,10 +1200,6 @@ function showOpenAccountImage(file){
 							
 						</tr>
                         <tr>
-							<!-- <td class="td-left">网点号：<span style="color:red;">（必填)</span></td>
-							<td class="td-right">
-								<input type="text" id="cnaps" name="cnaps" placeholder="请输入网点号" style="width:90%"> <a href="http://www.lianhanghao.com" target="_blank">[查找]</a>
-							</td> -->
 							<td class="td-left">结算类型：<span style="color:red;">（必填)</span></td>
 							<td class="td-right" class="width-90" >
 								<select class="width-90 form-control"   id="compMainAcctType">

@@ -408,6 +408,9 @@ jQuery(function($){
 													<c:if test="${merchantProduct.productStatus =='00'}">
 														开通成功
 													</c:if>
+													<c:if test="${merchantProduct.productStatus =='01'}">
+														待审核
+													</c:if>
 													<c:if test="${merchantProduct.productStatus =='09'}">
 														开通失败
 													</c:if>

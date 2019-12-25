@@ -1,13 +1,13 @@
 <template>
-  <!-- 码表维护 > 商户协议管理 -->
-  <div class="clock-protocol-page">
+  <!-- 商户管理 > 商户协议管理 -->
+  <div class="merchants-protocol-page">
     <page-model>
       <template slot="controlQueryOps">
         <el-form :model="examine" label-width="130px" :inline="true" ref="controlQueryForm">
           <el-form-item label="协议名称" prop="name1">
             <el-input v-model="examine.name1"></el-input>
           </el-form-item>
-          <el-form-item prop="name1" label="商户">
+          <el-form-item prop="name2" label="商户">
             <el-col>
               <el-autocomplete v-model="examine.name2" :fetch-suggestions="merchantQuerySearch" placeholder="请输入内容" @select="handleSelect">
               </el-autocomplete>
@@ -345,7 +345,7 @@ export default {
 </script>
 
 <style lang='scss'>
-.clock-protocol-page {
+.merchants-protocol-page {
   .el-autocomplete {
     width: 100%;
   }

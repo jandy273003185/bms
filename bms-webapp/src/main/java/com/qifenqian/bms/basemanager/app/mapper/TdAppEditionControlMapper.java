@@ -23,4 +23,6 @@ public interface TdAppEditionControlMapper {
 	int updateTdAppEditionControl(TdAppEditionControl tdAppEditionControl);
 	
 	int insertTdAppEditionControl(TdAppEditionControl tdAppEditionControl);
+
+	int updateTdAppEditionControlLose(TdAppEditionControl tdAppEditionControl);
 }

@@ -1,8 +1,8 @@
 // 公用样式
 // 清除scroll滚动条
 .clear-scroll-bar {
-  overflow-x: scroll;
-  overflow-y: hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
   white-space: nowrap;
   -ms-overflow-style: none;
   overflow: -moz-scrollbars-none;

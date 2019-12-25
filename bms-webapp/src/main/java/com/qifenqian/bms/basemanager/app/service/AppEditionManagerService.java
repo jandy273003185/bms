@@ -33,6 +33,16 @@ public class AppEditionManagerService {
 	}
 	
 	public int insertTdAppEditionControl(TdAppEditionControl tdAppEditionControl) {
-		return appEditionManagerDao.insertTdAppEditionControl(tdAppEditionControl);
+		//将之前的包状态改为失效
+		TdAppEditionControl tdAppEditionControl1 = new TdAppEditionControl();
+		tdAppEditionControl1.setState("99");
+		tdAppEditionControl1.setCreator(tdAppEditionControl.getCreator());
+		tdAppEditionControl1.setMachineType(tdAppEditionControl.getMachineType());
+		int a = appEditionManagerDao.updateTdAppEditionControlLose(tdAppEditionControl1);
+		int b = 0;
+		if(a > 0) {
+			b = appEditionManagerDao.insertTdAppEditionControl(tdAppEditionControl);
+		}
+		return b;
 	}
 }

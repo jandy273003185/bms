@@ -39,9 +39,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class MerchantProductController {
 	
 	/**
-	 * 默认开通状态为09 开通失败,待审核
+	 * 默认开通状态为01待审核
 	 */
-	private static final String DEFAULT_PRODUCT_STATUS = "09";
+	private static final String DEFAULT_PRODUCT_STATUS = "01";
 	/**
 	 * 开通成功 00 审核通过
 	 */

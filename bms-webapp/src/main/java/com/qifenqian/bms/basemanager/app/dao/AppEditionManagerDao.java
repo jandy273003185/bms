@@ -35,4 +35,9 @@ public class AppEditionManagerDao {
 	public int insertTdAppEditionControl(TdAppEditionControl tdAppEditionControl) {
 		return appEditionControlMapper.insertTdAppEditionControl(tdAppEditionControl);
 	}
+
+	public int updateTdAppEditionControlLose(TdAppEditionControl tdAppEditionControl) {
+		return appEditionControlMapper.updateTdAppEditionControlLose(tdAppEditionControl);
+		
+	}
 }

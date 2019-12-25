@@ -206,7 +206,7 @@
         var patchNo = $(obj).parent().find("#patchNo_").val();
         var channlCode =$(obj).parent().find('#channelNo_').val();
         var outMerchantCode = $(obj).parent().find('#outMerchantCode_').val();
-
+        var custId = $(obj).parent().find('#custId_').val();
         var url=window.Constants.ContextPath+"<%=MerchantEnterReportedPath.BASE+ MerchantEnterReportedPath.MERCHANTREPORTINFO%>?merchantCode="+merchantCode+"&channlCode="+channlCode+"&patchNo="+patchNo;
         var name="window";                        //网页名称，可为空;
         var iWidth=1200;                          //弹出窗口的宽度;
@@ -223,9 +223,29 @@
         winChild =  window.open(url, name,params);
 
         window.location.reload();
+        
+        
         <%--
+          //微信 报备资料显示
+		if("WX" == channlCode){
+   	   	   	
+   	   		var url=window.Constants.ContextPath+"/merchant/merchantReported/weChatAppMerchantReportShow?merchantCode="+merchantCode+"&channlCode="+channlCode+"&patchNo="+patchNo+" &custId="+custId; 
+	     	var name="window";                        //网页名称，可为空;
+	     	var iWidth=1200;                          //弹出窗口的宽度;
+	     	var iHeight=600;                          //弹出窗口的高度;
+	     	//获得窗口的垂直位置
+	     	var iTop = (window.screen.availHeight-30-iHeight)/2; 
+	     	//获得窗口的水平位置
+	     	var iLeft = (window.screen.availWidth-10-iWidth)/2;
+	     	var params='width='+iWidth
+	            +',height='+iHeight
+	            +',top='+iTop
+	            +',left='+iLeft; 
+	     	/*  $.blockUI();  */
+	      	winChild =  window.open(url, name,params);
+	     	return;
+   	   	}
         //随行付 报备资料显示
-        var custId = $(obj).parent().find('#custId_').val();
 		if("SUIXING_PAY" == channlCode){
    	   	   	
    	   		var url=window.Constants.ContextPath+"/merchant/merchantReported/suiXingMerchantReportShow?merchantCode="+merchantCode+"&channlCode="+channlCode+"&patchNo="+patchNo+" &custId="+custId; 
@@ -384,29 +404,6 @@
         });
     }
 
-    //通联商户信息修改
-    function allinPayEditReported(obj){
-        var merchantCode=$(obj).parent().find('#merchantCode_').val();
-        var patchNo = $(obj).parent().find("#patchNo_").val();
-        var channlCode =$(obj).parent().find('#channelNo_').val();
-
-        if("ALLIN_PAY" == channlCode){
-            var url=window.Constants.ContextPath + "/merchant/merchantReported/allinPayEditReported?merchantCode=" + merchantCode + "&patchNo=" + patchNo + "&channlCode=" + channlCode;
-            var name="window";                        //网页名称，可为空;
-            var iWidth=1200;                          //弹出窗口的宽度;
-            var iHeight=600;                       //弹出窗口的高度;
-            //获得窗口的垂直位置
-            var iTop = (window.screen.availHeight-30-iHeight)/2;
-            //获得窗口的水平位置
-            var iLeft = (window.screen.availWidth-10-iWidth)/2;
-            var params='width='+iWidth
-                +',height='+iHeight
-                +',top='+iTop
-                +',left='+iLeft;
-            /*  $.blockUI();  */
-            winChild =  window.open(url, name,params);
-        }
-    }
 
     //商户更新进件
     function getUpdate(obj){
@@ -526,6 +523,31 @@
 
     }
 
+   //通联商户信息修改
+    function allinPayEditReported(obj){
+        var merchantCode=$(obj).parent().find('#merchantCode_').val();
+        var patchNo = $(obj).parent().find("#patchNo_").val();
+        var channlCode =$(obj).parent().find('#channelNo_').val();
+
+        if("ALLIN_PAY" == channlCode){
+            var url=window.Constants.ContextPath + "/merchant/merchantReported/allinPayEditReported?merchantCode=" + merchantCode + "&patchNo=" + patchNo + "&channlCode=" + channlCode;
+            var name="window";                        //网页名称，可为空;
+            var iWidth=1200;                          //弹出窗口的宽度;
+            var iHeight=600;                       //弹出窗口的高度;
+            //获得窗口的垂直位置
+            var iTop = (window.screen.availHeight-30-iHeight)/2;
+            //获得窗口的水平位置
+            var iLeft = (window.screen.availWidth-10-iWidth)/2;
+            var params='width='+iWidth
+                +',height='+iHeight
+                +',top='+iTop
+                +',left='+iLeft;
+            /*  $.blockUI();  */
+            winChild =  window.open(url, name,params);
+        }
+    }
+  
+    //通联电子协议
     function getQueryElectUrl(obj){
 
         var merchantCode=$(obj).parent().find('#merchantCode_').val();
@@ -570,6 +592,8 @@
             }
         });
     }
+    
+    //通联协议重发
     function getQueryElectSign(obj){
 
         var merchantCode=$(obj).parent().find('#merchantCode_').val();
@@ -844,12 +868,6 @@
                                             <c:if test="${reported.detailStatus =='99' || reported.reportStatus =='E' || reported.reportStatus =='F'}">
                                                 <button type="button"  class="btn btn-primary btn-xs" onclick ="getUpdate(this);">报备更新</button>
                                             </c:if>
-                                            <c:if test="${reported.channelNo =='ALLIN_PAY' && reported.detailStatus == '1'}">
-                                                <button type="button" class="btn btn-primary btn-xs" onclick ="allinPayEditReported(this);" >商户信息修改</button>
-                                            </c:if>
-                                            <c:if test="${reported.channelNo =='WX'}">
-                                                <button type="button"  class="btn btn-primary btn-xs" onclick ="getWeChatUpdate(this);">微信升级</button>
-                                            </c:if>
                                             <c:if test="${reported.detailStatus =='1' && reported.outMerchantCode != null &&  reported.channelNo =='SUIXING_PAY'}">
                                                 <button type="button"  class="btn btn-primary btn-xs"  onclick ="getVerified(this);">实名认证</button>
                                             </c:if>
@@ -864,6 +882,12 @@
                                             </c:if>
                                             <c:if test="${reported.detailStatus =='21' && reported.outMerchantCode != null &&  reported.channelNo =='SUIXING_PAY'}">
                                                 <button type="button"  class="btn btn-primary btn-xs"  onclick ="getVerifiedAuthorize(this);">子商户授权</button>
+                                            </c:if>
+                                            <c:if test="${reported.channelNo =='WX'}">
+                                                <button type="button"  class="btn btn-primary btn-xs" onclick ="getWeChatUpdate(this);">微信升级</button>
+                                            </c:if>
+                                            <c:if test="${reported.channelNo =='ALLIN_PAY' && reported.detailStatus == '1'}">
+                                                <button type="button" class="btn btn-primary btn-xs" onclick ="allinPayEditReported(this);" >商户信息修改</button>
                                             </c:if>
                                             <c:if test="${reported.detailStatus =='1' && reported.channelNo =='ALLIN_PAY'}">
                                                 <button type="button"  class="btn btn-primary btn-xs"  onclick ="getQueryElectUrl(this);">通联电子协议</button>

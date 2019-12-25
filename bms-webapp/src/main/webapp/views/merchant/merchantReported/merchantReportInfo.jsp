@@ -329,14 +329,17 @@
 							</tr>
                             <tr>
 								<td class="td-left">结算类型：</td>
-								<c:choose>
-									<c:when test="${merchantVo.compMainAcctType =='02'}">
-										<td class="td-right">对私</td>
-									</c:when>
-									<c:when test="${merchantVo.compMainAcctType =='01'}">
-										<td class="td-right">对公</td>
-									</c:when>
-								</c:choose>
+									<c:choose>
+										<c:when test="${merchantVo.compMainAcctType =='02'}">
+											<td class="td-right">对私</td>
+										</c:when>
+										<c:when test="${merchantVo.compMainAcctType =='01'}">
+											<td class="td-right">对公</td>
+										</c:when>
+										<c:otherwise>
+											<td class="td-right"></td>
+										</c:otherwise>
+									</c:choose>
 								<td class="td-left">结算费率：</td>
 								<td class="td-right"> 
 									<input type="text" id="rate" name="rate" maxlength="100" readonly  value="${tdMerchantDetailInfo.rate }" style="width:90%">

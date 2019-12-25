@@ -79,11 +79,23 @@ const Branch = () => import(/* webpackChunkName: "Clock" */ '@/views/Clock/Branc
 // 商户管理
 const Gateway = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Gateway/Gateway');
 const Protocol = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Protocol/Protocol');
+const Mrate = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Rate/Rate');
+const Maccount = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Account/Account');
+const Mcashier = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Cashier/Cashier');
+const Shop = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Shop/Shop');
+const Mchannel = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Channel/Channel');
+const Mlist = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/List/List');
+const Operation = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/List/Operation');
+const Reported = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Reported/Reported');
+const Mproduct = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Product/Product');
+const Equipment = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Equipment/Equipment');
+const Service = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Service/Service');
+const Soperation = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Service/Operation');
 
 // 客户管理
 const Audit = () => import(/* webpackChunkName: "Customer" */ '@/views/Customer/Audit/Audit');
 const Aulist = () => import(/* webpackChunkName: "Customer" */ '@/views/Customer/List/List');
-const Caccount = () => import(/* webpackChunkName: "Certification" */ '@/views/Customer/Account/Account');
+const Caccount = () => import(/* webpackChunkName: "Customer" */ '@/views/Customer/Account/Account');
 
 // 短信管理
 const Smessage = () => import(/* webpackChunkName: "SMS" */ '@/views/SMS/Message/Message');
@@ -190,18 +202,18 @@ export const uatRouter = [
     name: '商户管理',
     path: '',
     children: [
-      { name: '商户网关维护', path: '/Merchants/gateway', component: Gateway },
-      { name: '商户协议管理', path: '/Merchants/protocol', component: Protocol },
-      { name: '费率管理', path: '/Merchants/gateway' },
-      { name: '商户账户管理', path: '/Merchants/gateway' },
-      { name: '收银员', path: '/Merchants/gateway' },
-      { name: '门店管理', path: '/Merchants/gateway' },
-      { name: '商户渠道列表', path: '/Merchants/gateway' },
-      { name: '商户列表', path: '/Merchants/gateway' },
-      { name: '商户报备列表', path: '/Merchants/gateway' },
-      { name: '商户产品管理', path: '/Merchants/gateway' },
-      { name: '商户设备管理', path: '/Merchants/gateway' },
-      { name: '服务商列表', path: '/Merchants/gateway' }
+      { name: '商户网关维护', path: '/merchants/gateway', component: Gateway },
+      { name: '商户协议管理', path: '/merchants/protocol', component: Protocol },
+      { name: '费率管理', path: '/merchants/rate', component: Mrate },
+      { name: '商户账户管理', path: '/merchants/account', component: Maccount },
+      { name: '收银员', path: '/merchants/cashier', component: Mcashier },
+      { name: '门店管理', path: '/merchants/shop', component: Shop },
+      { name: '商户渠道列表', path: '/merchants/mchannel', component: Mchannel },
+      { name: '商户列表', path: '/merchants/list', component: Mlist },
+      { name: '商户报备列表', path: '/merchants/reported', component: Reported },
+      { name: '商户产品管理', path: '/merchants/product', component: Mproduct },
+      { name: '商户设备管理', path: '/merchants/equipment', component: Equipment },
+      { name: '服务商列表', path: '/merchants/service', component: Service }
     ]
   },
   {
@@ -583,7 +595,13 @@ function flatten(arr) {
 
 // const menuRoutes = [...flatten(menuRouter), { path: '/welcome', component: Welcome }];//sitmg
 
-const menuRoutes = [...flatten(uatRouter), { path: '/welcome', component: Welcome }];//uta
+const otherRoutes = [
+  { path: '/welcome', component: Welcome },
+  { path: '/merchants/list/operation/:type', component: Operation },//商户管理>商户列表>(新增+操作处理页面)
+  { path: '/merchants/service/operation/:type', component: Soperation },//商户管理>服务商列表>(新增+操作处理页面)
+];
+
+const menuRoutes = [...flatten(uatRouter), ...otherRoutes];//uta
 
 // 默认路由
 const tacitly = [

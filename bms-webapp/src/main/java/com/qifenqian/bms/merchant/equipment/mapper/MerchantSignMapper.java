@@ -1,5 +1,6 @@
 package com.qifenqian.bms.merchant.equipment.mapper;
 
+import com.qifenqian.bms.merchant.equipment.bean.DeviceLogin;
 import com.qifenqian.bms.merchant.equipment.bean.MerchantSign;
 import org.mybatis.spring.annotation.MapperScan;
 import java.util.List;
@@ -65,5 +66,11 @@ public interface MerchantSignMapper {
 	 * @return
 	 */
 	public int deleteMerchantSign(int id);
+	
+	/**
+	 * @param deviceLogin 
+	 * @return  zhanggc 查询设备详情
+	 */
+	public  List<DeviceLogin>  selectDeviceLoginById(DeviceLogin deviceLogin);
 	
 }

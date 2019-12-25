@@ -34,6 +34,10 @@ public class AppEditionManagerController {
 	@Autowired
 	private AppEditionManagerService appEditionManagerService;
 	
+	@Value("${APP_EDITION_SERVICE_IP}")
+	private String appPaths;
+	
+	
 	@RequestMapping("/list")
 	public ModelAndView appEditionManagerPage(TdAppEditionControl queryBean) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -56,6 +60,7 @@ public class AppEditionManagerController {
 		}
 		tdAppEditionControl.setState("00");
 		tdAppEditionControl.setCreator(WebUtils.getUserInfo().getUserName());
+		tdAppEditionControl.setFileUrl(appPaths + tdAppEditionControl.getFileUrl());
 		int flag = appEditionManagerService.insertTdAppEditionControl(tdAppEditionControl);
 		if (flag > 0) {
 			result.put("result", "SUCCESS");

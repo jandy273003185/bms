@@ -6,7 +6,9 @@ import com.qifenqian.bms.basemanager.merchant.mapper.MerchantMapper;
 import com.qifenqian.bms.materiel.bean.Materiel;
 import com.qifenqian.bms.materiel.mapper.MaterielMapper;
 import com.qifenqian.bms.materiel.service.MaterielService;
+import com.qifenqian.bms.merchant.equipment.bean.DeviceLogin;
 import com.qifenqian.bms.merchant.equipment.bean.MerchantSign;
+import com.qifenqian.bms.merchant.equipment.mapper.MerchantSignMapper;
 import com.qifenqian.bms.merchant.equipment.service.MerchantSignService;
 import java.util.List;
 import org.slf4j.Logger;
@@ -44,6 +46,9 @@ public class MerchantSignController {
 	@Autowired
 	private MaterielMapper materielMapper;
 	
+	@Autowired
+	private MerchantSignMapper merchantSignMapper;
+	
 	/**
 	 * 进入商户设备列表页面
 	 * 
@@ -65,6 +70,19 @@ public class MerchantSignController {
 		return mv;
 	}
 	
+	/**
+	 * @param deviceLogina  zhanggc  查询设备详情
+	 * @return
+	 */
+	@RequestMapping("/showDeviceLogin")
+	public ModelAndView showDeviceLogin(DeviceLogin deviceLogina,String merchantName) {
+		// 返回视图
+		ModelAndView mv = new ModelAndView();
+		List<DeviceLogin> deviceLogin = merchantSignService.selectDeviceLoginById(deviceLogina);
+		mv.addObject("materielList",  JSONObject.toJSON(deviceLogin));
+		mv.addObject("merchantName", merchantName);
+		return mv;
+	}
 	
 	/**
 	 * 商户设备新增
