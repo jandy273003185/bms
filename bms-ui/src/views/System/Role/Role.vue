@@ -165,13 +165,13 @@ export default {
   watch: {
     // 监听search传来的数据
     searchText(v) {
-      console.log(v);
+      window.console.log(v);
     }
   },
   created() {},
   methods: {
     addModelSubmit() {
-      console.log(this.addModelData);
+      window.console.log(this.addModelData);
       this.addDisplay = false;
     },
     addModelCancel() {
@@ -180,7 +180,7 @@ export default {
     },
     editorModelSubmit() {
       // http提交数据
-      console.log(this.editorModelData);
+      window.console.log(this.editorModelData);
       this.editorDisplay = false;
     },
     editorModelCancel() {
@@ -191,17 +191,17 @@ export default {
       this.islook = false;
       // row.name6 = row.name6.split(''); //接口对接时，若角色选择字段为字符串，则需要将数据转数组
       this.editorModelData = row;
-      console.log(row);
+      window.console.log(row);
     },
     lookClick(row) {
       this.editorDisplay = true;
       this.islook = true;
       this.editorModelData = row;
-      console.log(row);
+      window.console.log(row);
     },
     goToSearch() {
       //查询
-      console.log(this.examine, '查询');
+      window.console.log(this.examine, '查询');
     },
     insertItem() {
       // 新增

@@ -40,7 +40,7 @@ export default {
       this.$emit('input', raw);
     },
     chooseFile() {
-      console.log(123);
+      window.console.log(123);
     },
     previewImages() {
       if (!this.uploadImageSrc) return;
@@ -79,6 +79,7 @@ export default {
     background-color: #efefef;
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: center;
   }
   .preview-images {
     display: inline-block;

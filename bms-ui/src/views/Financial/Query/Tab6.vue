@@ -176,7 +176,7 @@ export default {
   watch: {
     // 监听search传来的数据
     searchText(v) {
-      console.log(v);
+      window.console.log(v);
     }
   },
   created() {},
@@ -188,11 +188,11 @@ export default {
     lookClick(row) {
       this.lookDisplay = true;
       this.lookModelData = row;
-      console.log(row);
+      window.console.log(row);
     },
     goToSearch() {
       //查询
-      console.log(this.examine, '查询');
+      window.console.log(this.examine, '查询');
     },
     download() {
       this.$message('导出报表');
@@ -202,11 +202,11 @@ export default {
       this.lookDisplay = false;
     },
     performModelSubmit() {
-      console.log(this.performModelData);
+      window.console.log(this.performModelData);
       this.lookDisplay = false;
     },
     performClick() {
-      console.log('确认审核');
+      window.console.log('确认审核');
     }
   }
 };

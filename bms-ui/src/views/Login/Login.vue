@@ -42,7 +42,7 @@ export default {
       // 校验
       const form = this.$refs['loginForm'];
       form.validate(valid => {
-        // console.log(valid);
+        // window.console.log(valid);
         if (valid) {
           // 校验成功
           // this.setToken('6789');

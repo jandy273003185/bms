@@ -195,7 +195,7 @@ export default {
   watch: {
     // 监听search传来的数据
     searchText(v) {
-      console.log(v);
+      window.console.log(v);
     }
   },
   created() {},
@@ -204,13 +204,13 @@ export default {
       this.editorDisplay = false;
     },
     editorModelSubmit() {
-      console.log(this.editorModelData);
+      window.console.log(this.editorModelData);
       this.editorDisplay = false;
     },
     editorClick(row) {
       this.editorDisplay = true;
       this.editorModelData = row;
-      console.log(row);
+      window.console.log(row);
     },
     resetModelSubmit() {
       this.$refs['alertResetModelForm'].validate((files, object) => {
@@ -222,7 +222,7 @@ export default {
           this.$message.error(`${keys[0]}不可为空`);
         }
       });
-      console.log(this.resetModelData);
+      window.console.log(this.resetModelData);
     },
     resetModelCancel() {
       this.resetDisplay = false;
@@ -232,22 +232,22 @@ export default {
       this.smsDisplay = false;
     },
     smsModelSubmit() {
-      console.log(this.smsModelData);
+      window.console.log(this.smsModelData);
       this.smsDisplay = false;
     },
     smsClick(row) {
       this.smsDisplay = true;
       this.smsModelData = row;
-      console.log(row);
+      window.console.log(row);
     },
     //查询
     goToSearch() {
-      console.log(this.examine, '查询');
+      window.console.log(this.examine, '查询');
     },
     // 查看信息
     lookClick(row) {
       this.lookDisplay = true;
-      console.log(row);
+      window.console.log(row);
     },
     // 重置密码
     resetClick() {

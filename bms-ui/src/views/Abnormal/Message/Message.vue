@@ -136,7 +136,7 @@ export default {
   watch: {
     // 监听search传来的数据
     searchText(v) {
-      console.log(v);
+      window.console.log(v);
     }
   },
   created() {},
@@ -147,18 +147,18 @@ export default {
     },
     lookClick(row) {
       this.lookDisplay = true;
-      console.log(row);
+      window.console.log(row);
     },
     lookModelSubmit() {
       this.lookDisplay = false;
     },
     lookModelCancel(row) {
       this.lookDisplay = false;
-      console.log(row);
+      window.console.log(row);
     },
     goToSearch() {
       //查询
-      console.log(this.examine, '查询');
+      window.console.log(this.examine, '查询');
     },
     insertItem() {
       // 新增
