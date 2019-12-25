@@ -82,7 +82,7 @@ function isSetPhone(controller)
 function isMobilePhone(controller)
 {
 	var str=trim(controller.value); 
-	var myreg = /^(((13[0-9]{1})|15[0-9]{1}|16[0-9]{1}|17[0-9]{1}|18[0-9]{1}|)+\d{8})$/;
+	var myreg = /^(((13[0-9]{1})|14[0-9]{1}|15[0-9]{1}|16[0-9]{1}|17[0-9]{1}|18[0-9]{1}|19[0-9]{1}|)+\d{8})$/;
 	
 	 if(str.length!=11)
 	 {

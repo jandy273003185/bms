@@ -43,4 +43,11 @@
 			#{memo,jdbcType=VARCHAR}
 		)
 	</insert>
+	
+	<update id="updateTdAppEditionControlLose" parameterType="com.qifenqian.bms.basemanager.app.bean.TdAppEditionControl">
+		UPDATE td_app_edition_control
+		SET STATE = #{state,jdbcType=VARCHAR},
+		CREATOR = #{creator,jdbcType=VARCHAR}
+		WHERE MACHINE_TYPE = #{machineType,jdbcType=VARCHAR}
+	</update>
 </mapper>

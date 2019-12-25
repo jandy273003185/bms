@@ -1,6 +1,6 @@
 <template>
-  <!-- 码表维护 > 支行信息管理 -->
-  <div class="clock-gateway-page">
+  <!-- 商户管理 > 商户网关维护 -->
+  <div class="merchants-gateway-page">
     <page-model>
       <template slot="controlQueryOps">
         <el-form :model="examine" label-width="130px" :inline="true" ref="controlQueryForm">
@@ -263,7 +263,7 @@ export default {
 </script>
 
 <style lang='scss'>
-.clock-gateway-page {
+.merchants-gateway-page {
   .el-autocomplete {
     width: 100%;
   }

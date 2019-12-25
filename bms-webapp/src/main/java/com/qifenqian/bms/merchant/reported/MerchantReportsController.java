@@ -1022,6 +1022,24 @@ public class MerchantReportsController {
 					bean.setMerchantChannelId(res.getMerchantid());
 					bean.setMerchantChannelKey(res.getMerchantid());
 					List<ChannelDetailBean> details = new ArrayList<ChannelDetailBean>();
+					//微信扫码
+					ChannelDetailBean weChatSM = new ChannelDetailBean();
+					weChatSM.setChannelCode(ChannelCode.WEIXIN);
+					weChatSM.setSubCode(PayType.SM);
+					weChatSM.setWxAppId("wx1fc84beff3d0eeb8");
+					weChatSM.setWxAppsecret("055e6b98ac3b4b6d7b704a6c3e884d64");
+					details.add(weChatSM);
+					//微信刷卡
+					ChannelDetailBean weChatSK = new ChannelDetailBean();
+					BeanUtils.copyProperties(weChatSM, weChatSK);
+					weChatSK.setSubCode(PayType.SK);
+					details.add(weChatSK);
+					//微信公众号
+					ChannelDetailBean weChatGZH = new ChannelDetailBean();
+					BeanUtils.copyProperties(weChatSM, weChatGZH);
+					weChatGZH.setSubCode(PayType.GZH);
+					details.add(weChatGZH);
+					
 					//支付宝扫码
 					ChannelDetailBean aliPaySM = new ChannelDetailBean();
 					aliPaySM.setChannelCode(ChannelCode.ALIPAY);
@@ -1032,6 +1050,14 @@ public class MerchantReportsController {
 					aliPaySK.setChannelCode(ChannelCode.ALIPAY);
 					aliPaySK.setSubCode(PayType.SK);
 					details.add(aliPaySK);
+					
+					//有营业执照开通云闪付
+					if (StringUtils.isNotBlank(custInfo.getBusinessLicense())) {
+						ChannelDetailBean unionPay = new ChannelDetailBean();
+						unionPay.setChannelCode(ChannelCode.UNIONPAY);
+						unionPay.setSubCode(PayType.SK);
+						details.add(unionPay);
+					}
 					//产品列表
 					bean.setDetails(details);
 					boolean saveChannel = channelService.saveOrupdateChannel(bean, null);
