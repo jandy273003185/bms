@@ -712,9 +712,9 @@
                                     </td>
                                     <td class="td-left">报备时间：</td>
                                     <td class="td-right">
-                                        <input type="text" name="startModifyTime" id="startModifyTime" readonly value="" onFocus="WdatePicker({skin:&#39;whyGreen&#39;,maxDate:&#39;%y-%M-%d&#39;})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
+                                        <input type="text" name="startModifyTime" id="startModifyTime" readonly value="" onFocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
                                         -
-                                        <input type="text" name="endModifyTime" id="endModifyTime" readonly value="" onFocus="WdatePicker({skin:&#39;whyGreen&#39;,maxDate:&#39;%y-%M-%d&#39;})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
+                                        <input type="text" name="endModifyTime" id="endModifyTime" readonly value="" onFocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
                                     </td>
                                 </tr>
                                 <tr>
