@@ -73,7 +73,7 @@ public class FileController {
 		Map<String, String> result = new HashMap<String, String>();
 		//移动文件
 		String fileNameAndPath = "";
-		try {
+		
 			List<CustScan> listTdCustScanCopy = custScanMapper.ListTdCustScanCopy(custId);
 			for (CustScan custScan : listTdCustScanCopy) {
 				if (custScan.getScanCopyPath().indexOf("/null") != -1) {
@@ -85,41 +85,48 @@ public class FileController {
 					Path sourcePath = Paths.get(scanCopyPaths[i]);
 					//转换新路径
 					String sourceFileName = sourcePath.getFileName().toString();
-					String prefix = sourceFileName.substring(sourceFileName.lastIndexOf("."));
+					String prefix = "";
+					if(-1 == sourceFileName.lastIndexOf(".")) {
+						prefix =".jpg";
+					}else {
+						prefix = sourceFileName.substring(sourceFileName.lastIndexOf("."));
+					}
 					String newFilename = DateUtils.getDateStr8()+"_"+UUID.randomUUID().toString().replaceAll("-","");
 					StringBuilder filePath = new StringBuilder(PRE_PATH).append("/").append(newFilename).append(prefix);
-					Path targetPath = Paths.get(filePath.toString());
-					Path temp = Files.move(sourcePath, targetPath);
-					if(temp != null) {
-						CustScan newCustScan = new CustScan();
-						BeanUtils.copyProperties(custScan, newCustScan);
-						//插入新数据
-						if (scanCopyPaths.length > 1) {
-							newCustScan.setCertifyType(i == 0 ? "04" : "16");
-						}
-						newCustScan.setScanCopyPath(filePath.toString());
-						custScanMapper.insertCustScan(newCustScan);
-						if (i == scanCopyPaths.length - 1) {
-							//停用旧数据
-							custScan.setStatus("01");
-							custScanMapper.updateCustScan(custScan);
-						}
-						logger.info("移动文件成功,客户号custId：路径为{}", fileNameAndPath);
-			        }
-			        else {
-			        	logger.warn("移动文件失败,客户号custId：路径为{}", fileNameAndPath);
-			        }
+					
+					try {
+						Path targetPath = Paths.get(filePath.toString());
+						Path temp = Files.move(sourcePath, targetPath);
+						if(temp != null) {
+							CustScan newCustScan = new CustScan();
+							BeanUtils.copyProperties(custScan, newCustScan);
+							if (i == scanCopyPaths.length - 1) {
+								//停用旧数据
+								custScan.setStatus("01");
+								custScanMapper.updateCustScan(custScan);
+							}
+							//插入新数据
+							if (scanCopyPaths.length > 1) {
+								newCustScan.setCertifyType(i == 0 ? "04" : "16");
+							}
+							newCustScan.setScanCopyPath(newFilename + prefix);
+							newCustScan.setStatus("00");
+							custScanMapper.insertCustScan(newCustScan);
+							
+							logger.info("移动文件成功,客户号custId：路径为{}", fileNameAndPath);
+				        }else {
+				        	logger.warn("移动文件失败,客户号custId：路径为{}", fileNameAndPath);
+				        }
+					} catch (Exception e) {
+						e.printStackTrace();
+						logger.error("移动文件异常,客户号custId：路径为{};异常信息：{}", fileNameAndPath, e.getMessage());
+					}
+					
 				}
 			}
 			result.put("code", "SUCCESS");
 			result.put("message", "移动成功");
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			logger.error("移动文件异常,客户号custId：路径为{};异常信息：{}", fileNameAndPath, e.getMessage());
-			result.put("code", "FAIL");
-			result.put("message", "移动失败");
-		}
+		
 		return result;
 	}
 
