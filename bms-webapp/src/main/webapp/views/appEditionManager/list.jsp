@@ -293,6 +293,7 @@ var checkFun = {
 	function upload(file){
 		var formdata = new FormData();
 	    formdata.append("file",$(file).get(0).files[0]);
+	    $.blockUI();
 	    $.ajax({
 	        url:'/common/files/uploadPic',
 	        type:'post',
@@ -301,6 +302,7 @@ var checkFun = {
 	        processData:false,
 	        async:false,
 	        success:function(info){ 
+	        	$.unblockUI();
 	             //$('#fileUrl').val(info.path);
 	             $('#fileUrl').val(info.imagePath);
 	        	

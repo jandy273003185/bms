@@ -897,13 +897,13 @@
                                             <c:if test="${reported.detailStatus =='20' && reported.outMerchantCode != null &&  reported.channelNo =='SUIXING_PAY'}">
                                                 <button type="button"  class="btn btn-primary btn-xs"  onclick ="getVerifiedQuery(this);">认证结果</button>
                                             </c:if>
-                                            <c:if test="${reported.detailStatus !='21' && reported.outMerchantCode != null &&  reported.channelNo =='SUIXING_PAY'}">
+                                            <c:if test="${reported.detailStatus !='99' &&reported.detailStatus !='21' && reported.outMerchantCode != null &&  reported.channelNo =='SUIXING_PAY'}">
                                                 <button type="button"  class="btn btn-primary btn-xs"  onclick ="getVerifiedCancel(this);">申请撤销</button>
                                             </c:if>
                                             <c:if test="${reported.detailStatus =='21' && reported.outMerchantCode != null &&  reported.channelNo =='SUIXING_PAY'}">
                                                 <button type="button"  class="btn btn-primary btn-xs"  onclick ="getVerifiedAuthorize(this);">子商户授权</button>
                                             </c:if>
-                                            <c:if test="${reported.channelNo =='WX'}">
+                                            <c:if test="${reported.detailStatus =='1' && reported.channelNo =='WX'}">
                                                 <button type="button"  class="btn btn-primary btn-xs" onclick ="getWeChatUpdate(this);">微信升级</button>
                                             </c:if>
                                             <c:if test="${reported.channelNo =='ALLIN_PAY' && reported.detailStatus == '1'}">
