@@ -18,4 +18,7 @@ public class TdMerchantReportDao {
     public int insertTdMerchantReport(TdMerchantReportInfo info) {
         return this.tdMerchantReportMapper.insertTdMerchantReport(info);
     }
+    public TdMerchantReportInfo selectByMerchantCode(String merchantCode){
+        return this.tdMerchantReportMapper.selectByMerchantCode(merchantCode);
+    }
 }
