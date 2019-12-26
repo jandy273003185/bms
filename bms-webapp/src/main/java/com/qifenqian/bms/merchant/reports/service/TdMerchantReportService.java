@@ -78,8 +78,8 @@ public class TdMerchantReportService {
          */
         merchantReport.setId(GenSN.getSN());
         merchantReport.setPatchNo(GenSN.getSN());
-        merchantReport.setReportStatus("E");
-        merchantReport.setDetailStatus("");
+        merchantReport.setReportStatus("N");
+        merchantReport.setDetailStatus("99");
         merchantReport.setStatus("01");
         /**
          * this.dao.insert  调用dao存储

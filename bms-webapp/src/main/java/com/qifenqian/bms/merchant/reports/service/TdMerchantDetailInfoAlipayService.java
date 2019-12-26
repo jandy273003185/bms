@@ -51,14 +51,14 @@ public class TdMerchantDetailInfoAlipayService implements TdMerchantReportDetail
         TdMerchantDetailInfoAlipay tdMerchantDetailInfoAlipay = (TdMerchantDetailInfoAlipay) tdMerchantReportDetail;
         tdMerchantDetailInfoAlipayDao.insert(tdMerchantDetailInfoAlipay);
 
-        String reportStatus = "";
-        String reportDetailStatus = "";
+        String reportStatus = "N";
+        String reportDetailStatus = "99";
 
 
         /** * 调用DUBBO服务,报备支付宝 */
         AlipayOpenAgentConfirmRes confirmRes = AlipayMerchantRPC(tdMerchantDetailInfoAlipay);
         if (!GetwayStatus.SUCCESS.equals(confirmRes.getCode())) {
-            reportStatus = "";
+            reportStatus = "F";
             reportDetailStatus = "99";
             //异常信息
             tdMerchantDetailInfoAlipay.setResultMsg(confirmRes.getSubMsg());
@@ -70,8 +70,8 @@ public class TdMerchantDetailInfoAlipayService implements TdMerchantReportDetail
             tdMerchantDetailInfoAlipay.setZfbAppRefreshToken(confirmRes.getAppRefreshToken());
             tdMerchantDetailInfoAlipay.setZfbExpiresIn(confirmRes.getExpiresIn());
             tdMerchantDetailInfoAlipay.setZfbReExpiresIn(confirmRes.getReExpiresIn());
-            reportStatus = "";
-            reportDetailStatus = "";
+            reportStatus = "Y";
+            reportDetailStatus = "00";
             resultData = ResultData.success("报备成功", confirmRes);
         }
         /**
