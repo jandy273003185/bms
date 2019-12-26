@@ -81,7 +81,7 @@
 										<span class="input-group-btn">																					
 										
 											<gyzb-admin:function url="/appEditionManager/list">
-												<button type="submit" class="btn btn-purple btn-sm btn-margin" onclick="$.blockUI();">
+												<button type="submit" class="btn btn-purple btn-sm btn-margin" >
 													查询
 													<i class="icon-search icon-on-right bigger-110"></i>
 												</button>
@@ -147,11 +147,14 @@
 												</td>
 												<td>${appEditionControl.memo}</td>
 												<td>
-													<a href="#" class="tooltip-success deleteAppEditionControl" data-rel="tooltip" data-toggle='modal' data-target="#deleteAppEditionControlModal" title="Delete" >
-														<span class="green">
-															<i class="icon-edit bigger-120"></i>
-														</span>
-													</a>
+													<c:if test="${appEditionControl.state eq '00'}">
+														<a href="#" class="tooltip-success deleteAppEditionControl" data-rel="tooltip" data-toggle='modal' data-target="#deleteAppEditionControlModal" title="Delete" >
+															<span class="green">
+																<i class="icon-edit bigger-120"></i>
+															</span>
+														</a>
+													</c:if>
+													
 												</td>
 											</tr>
 										</c:forEach>
@@ -291,9 +294,10 @@ var checkFun = {
 		
 	//文件上传
 	function upload(file){
+		$.blockUI();
 		var formdata = new FormData();
 	    formdata.append("file",$(file).get(0).files[0]);
-	    $.blockUI();
+	    
 	    $.ajax({
 	        url:'/common/files/uploadPic',
 	        type:'post',
