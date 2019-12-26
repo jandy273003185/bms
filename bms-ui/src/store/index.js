@@ -9,7 +9,7 @@ export default new Store({
   },
   mutations: {
     setToken(state, token) {
-      console.log(token, 'token');
+      window.console.log(token, 'token');
       state.accessToken = token;
     },
     getToken(state) {

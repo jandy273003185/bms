@@ -111,14 +111,14 @@ export default {
   watch: {
     // 监听search传来的数据
     searchText(v) {
-      console.log(v);
+      window.console.log(v);
     }
   },
   created() {},
   methods: {
     //查询
     goToSearch() {
-      console.log(this.examine, '查询');
+      window.console.log(this.examine, '查询');
     },
     // 对账
     reconciliation() {

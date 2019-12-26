@@ -80,7 +80,7 @@ public class MerchantEnterReportedController {
  		ModelAndView mv = new ModelAndView();
  		/***查询渠道信息***/
  		List<ChannlInfo> channlInfoList = crIncomeService.getChannlInfoList();
- 		/***联合UNION查询报备信息***/
+ 		/***查询报备信息***/
  		List<TdMerchantDetailInfo> reportedList = fmIncomeService.getMerchantDetailInfoList(detail);
  		//分表合并list查询报备信息
 // 		List<TdMerchantDetailInfo> reportedList = merchantEnterReportService.getMerchantDetailInfoList(detail);

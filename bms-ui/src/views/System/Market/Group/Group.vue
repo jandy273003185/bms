@@ -128,7 +128,7 @@ export default {
   watch: {
     // 监听search传来的数据
     searchText(v) {
-      console.log(v);
+      window.console.log(v);
     }
   },
   created() {},
@@ -149,7 +149,7 @@ export default {
       this.addDisplay = false;
     },
     editorModelSubmit() {
-      console.log(this.editorModelData);
+      window.console.log(this.editorModelData);
       this.editorDisplay = false;
     },
     editorModelCancel() {
@@ -158,11 +158,11 @@ export default {
     editorClick(row) {
       this.editorDisplay = true;
       this.editorModelData = row;
-      console.log(row);
+      window.console.log(row);
     },
     goToSearch() {
       //查询
-      console.log(this.examine, '查询');
+      window.console.log(this.examine, '查询');
     },
     insertItem() {
       this.$message('内容待写');

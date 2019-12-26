@@ -469,11 +469,11 @@
 		
 		function businessForever(){
 		    /* $("input[name='businessTerm']").val("2099-12-31").focus(); */
-		    $("#businessTerm").attr("value","2099-12-31");
+		    $("#businessTerm").attr("value","长期");
 		}
 		function identityForever(){
 		    /* $("input[name='businessTerm']").val("2099-12-31").focus(); */
-		    $("#identityValDate").attr("value","2099-12-31");
+		    $("#identityValDate").attr("value","长期");
 		}
 		
 		

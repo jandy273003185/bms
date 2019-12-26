@@ -8,8 +8,8 @@
     </el-upload>
     <div class="preview-img" :style="{backgroundImage:`url(${uploadImageSrc})`}" @click="previewImages"></div>
 
-    <el-dialog :visible.sync="hide" width="400px" :show-close="false" class="preview-dialog-wrap">
-      <img :src="uploadImageSrc" alt="" class="preview-images">
+    <el-dialog :visible.sync="hide" width="600px" :show-close="false" :append-to-body="true" class="preview-dialog-wrap">
+      <img :src="uploadImageSrc" class="preview-images" />
     </el-dialog>
   </div>
 </template>
@@ -40,7 +40,7 @@ export default {
       this.$emit('input', raw);
     },
     chooseFile() {
-      console.log(123);
+      window.console.log(123);
     },
     previewImages() {
       if (!this.uploadImageSrc) return;
@@ -79,11 +79,7 @@ export default {
     background-color: #efefef;
     background-size: cover;
     background-repeat: no-repeat;
-  }
-  .preview-images {
-    display: inline-block;
-    max-width: 100%;
-    max-height: 400px;
+    background-position: center;
   }
 
   .el-dialog__header {

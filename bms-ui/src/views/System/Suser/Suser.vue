@@ -253,14 +253,14 @@ export default {
   watch: {
     // 监听search传来的数据
     searchText(v) {
-      console.log(v);
+      window.console.log(v);
     }
   },
   created() {},
   methods: {
     // 控制编辑
     editorModelSubmit() {
-      console.log('提交', this.editorModelData);
+      window.console.log('提交', this.editorModelData);
     },
     editorModelCancel() {
       this.resetFormFields('alertModelForm');
@@ -269,14 +269,14 @@ export default {
     editorClick(row) {
       this.editorDisplay = true;
       this.editorModelData = row;
-      console.log(row);
+      window.console.log(row);
     },
     // 新增
     insertItem() {
       this.addDisplay = true;
     },
     addModelSubmit() {
-      console.log(this.addModelData);
+      window.console.log(this.addModelData);
       this.$refs['alertAddModelForm'].validate((files, object) => {
         if (files) {
           // 验证通过 发送请求添加数据到数据库
@@ -293,7 +293,7 @@ export default {
     },
     // 查询
     goToSearch() {
-      console.log(this.examine, '查询');
+      window.console.log(this.examine, '查询');
     }
   }
 };

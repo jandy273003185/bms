@@ -173,14 +173,14 @@ export default {
   watch: {
     // 监听search传来的数据
     searchText(v) {
-      console.log(v);
+      window.console.log(v);
     }
   },
   created() {},
   methods: {
     goToSearch() {
       //查询
-      console.log(this.examine, '查询');
+      window.console.log(this.examine, '查询');
     },
     download() {
       this.$message('导出报表');
@@ -189,36 +189,36 @@ export default {
       this.$message('批量导出报表');
     },
     handleSelectionChange(val) {
-      console.log(val, 'val');
+      window.console.log(val, 'val');
       // 选中的项
       this.multipleSelection = val;
     },
     editorClick(row) {
       this.editorDisplay = true;
       this.editorModelData = row;
-      console.log(row);
+      window.console.log(row);
     },
     editorModelCancel() {
       this.editorDisplay = false;
     },
     editorModelSubmit() {
-      console.log(this.editorModelData);
+      window.console.log(this.editorModelData);
       this.editorDisplay = false;
     },
     iquireModelCancel() {
       this.iquireDisplay = false;
     },
     iquireModelSubmit() {
-      console.log(this.iquireModelData);
+      window.console.log(this.iquireModelData);
       this.iquireDisplay = false;
     },
     inquireClick(row) {
       this.iquireDisplay = true;
       this.iquireModelData = row;
-      console.log(row);
+      window.console.log(row);
     },
     iquireGoToSearch() {
-      console.log(this.iquireExamine, '查询');
+      window.console.log(this.iquireExamine, '查询');
     },
     iquireDownload() {
       this.$message('导出报表');

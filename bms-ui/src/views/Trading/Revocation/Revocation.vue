@@ -163,7 +163,7 @@ export default {
   watch: {
     // 监听search传来的数据
     searchText(v) {
-      console.log(v);
+      window.console.log(v);
     }
   },
   created() {},
@@ -178,7 +178,7 @@ export default {
           this.$message.error(`${keys[0]}不可为空`);
         }
       });
-      console.log(this.addModelData);
+      window.console.log(this.addModelData);
     },
     addModelCancel() {
       this.addDisplay = false;
@@ -188,17 +188,17 @@ export default {
       this.performDisplay = false;
     },
     performModelSubmit() {
-      console.log(this.performModelData);
+      window.console.log(this.performModelData);
       this.performDisplay = false;
     },
     performClick(row) {
       this.performDisplay = true;
       this.performModelData = row;
-      console.log(row);
+      window.console.log(row);
     },
     goToSearch() {
       //查询
-      console.log(this.examine, '查询');
+      window.console.log(this.examine, '查询');
     },
     insertItem() {
       // 新增

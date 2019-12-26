@@ -194,7 +194,7 @@ export default {
   watch: {
     // 监听search传来的数据
     searchText(v) {
-      console.log(v);
+      window.console.log(v);
     }
   },
   created() {},
@@ -208,11 +208,11 @@ export default {
     },
     uploadSubmit() {
       this.$refs.upload.submit();
-      console.log('批量上传');
+      window.console.log('批量上传');
     },
     // 上传成功时的回调
     uploadSuccess(res) {
-      console.log(res);
+      window.console.log(res);
     },
     addModelSubmit() {
       this.$refs['alertAddModelForm'].validate((files, object) => {
@@ -224,7 +224,7 @@ export default {
           this.$message.error(`${keys[0]}不可为空`);
         }
       });
-      console.log(this.addModelData);
+      window.console.log(this.addModelData);
     },
     addModelCancel() {
       this.addDisplay = false;
@@ -234,32 +234,32 @@ export default {
       this.editorDisplay = false;
     },
     editorModelSubmit() {
-      console.log(this.editorModelData);
+      window.console.log(this.editorModelData);
       this.editorDisplay = false;
     },
     editorClick(row) {
       this.editorDisplay = true;
       this.editorModelData = row;
-      console.log(row);
+      window.console.log(row);
     },
     deleteModelSubmit() {
       this.deleteDisplay = false;
     },
     deleteModelCancel(row) {
       this.deleteDisplay = false;
-      console.log(row);
+      window.console.log(row);
     },
     deleteClick(row) {
       this.deleteDisplay = true;
-      console.log(row);
+      window.console.log(row);
     },
     goToSearch() {
       //查询
-      console.log(this.examine, '查询');
+      window.console.log(this.examine, '查询');
     },
     lookClick(row) {
       this.lookDisplay = true;
-      console.log(row);
+      window.console.log(row);
     },
     insertItem() {
       // 新增
