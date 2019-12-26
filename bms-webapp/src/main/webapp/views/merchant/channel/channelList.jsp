@@ -66,6 +66,8 @@ table {
 			$(".page-content #custName").val('');
 			//商户渠道编号
 			$(".page-content #merchantChannelId").val("");
+			//渠道名
+			$(".page-content #channelName").val("");
 		});
 
 	});
