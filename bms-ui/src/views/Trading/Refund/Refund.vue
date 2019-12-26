@@ -222,7 +222,7 @@ export default {
   watch: {
     // 监听search传来的数据
     searchText(v) {
-      console.log(v);
+      window.console.log(v);
     }
   },
   created() {},
@@ -230,28 +230,28 @@ export default {
     lookClick(row) {
       this.lookDisplay = true;
       this.lookModelData = row;
-      // console.log(row);
+      // window.console.log(row);
     },
     performClick(row) {
       this.performDisplay = true;
       this.performModelData = row;
-      console.log(row);
+      window.console.log(row);
     },
     performModelCancel() {
       this.performDisplay = false;
     },
     performModelSubmit() {
-      console.log(this.performModelData);
+      window.console.log(this.performModelData);
       this.performDisplay = false;
     },
     goToSearch() {
       //查询
-      console.log(this.examine, '查询');
+      window.console.log(this.examine, '查询');
     },
     download() {
       // 导出报表
       this.$message('导出报表');
-      console.log('导出报表');
+      window.console.log('导出报表');
     },
     resetFormFileds() {
       this.$refs['controlQueryForm1'].resetFields();

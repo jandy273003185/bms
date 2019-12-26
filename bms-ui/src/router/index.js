@@ -91,17 +91,19 @@ const Mproduct = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merch
 const Equipment = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Equipment/Equipment');
 const Service = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Service/Service');
 const Soperation = () => import(/* webpackChunkName: "Merchants" */ '@/views/Merchants/Service/Operation');
-
 // 客户管理
 const Audit = () => import(/* webpackChunkName: "Customer" */ '@/views/Customer/Audit/Audit');
 const Aulist = () => import(/* webpackChunkName: "Customer" */ '@/views/Customer/List/List');
 const Caccount = () => import(/* webpackChunkName: "Customer" */ '@/views/Customer/Account/Account');
-
 // 短信管理
 const Smessage = () => import(/* webpackChunkName: "SMS" */ '@/views/SMS/Message/Message');
 // 实名认证
 const Clist = () => import(/* webpackChunkName: "Certification" */ '@/views/Certification/List/List');
 const Cverify = () => import(/* webpackChunkName: "Certification" */ '@/views/Certification/Verify/Verify');
+// 代理商管理
+const Agents = () => import(/* webpackChunkName: "Agent" */ '@/views/Agent/Agents/Agents');
+const Regist = () => import(/* webpackChunkName: "Agent" */ '@/views/Agent/Regist/Regist');
+const MRegist = () => import(/* webpackChunkName: "Agent" */ '@/views/Agent/MRegist/MRegist');
 
 
 
@@ -238,17 +240,17 @@ export const uatRouter = [
     ]
   },
   {
-    name: '代理商管理', path: '/system/user',
+    name: '代理商管理', path: '',
     children: [
-      { name: '微商户列表', path: '/system/user' },
-      { name: '代理商注册', path: '/system/user' },
-      { name: '代理商商户注册', path: '/system/user' },
-      { name: '代理商列表', path: '/system/user' },
-      { name: '代理商审核列表', path: '/system/user' },
-      { name: '代理商报表', path: '/system/user' },
-      { name: '代理商协议管理', path: '/system/user' },
-      { name: '代理商商户审核列表', path: '/system/user' },
-      { name: '服务商注册审核(新)', path: '/system/user' }
+      { name: '微商户列表', path: '/agent/agents', component: Agents },
+      { name: '代理商注册', path: '/agent/regist', component: Regist },
+      { name: '代理商商户注册', path: '/agent/mregist', component: MRegist },
+      { name: '代理商列表', path: '/agent/user' },
+      { name: '代理商审核列表', path: '/agent/user' },
+      { name: '代理商报表', path: '/agent/user' },
+      { name: '代理商协议管理', path: '/agent/user' },
+      { name: '代理商商户审核列表', path: '/agent/user' },
+      { name: '服务商注册审核(新)', path: '/agent/user' }
     ]
   }
 ];

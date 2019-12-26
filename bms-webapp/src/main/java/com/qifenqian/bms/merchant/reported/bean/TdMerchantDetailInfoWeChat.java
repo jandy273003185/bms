@@ -3,6 +3,8 @@
  */
 package com.qifenqian.bms.merchant.reported.bean;
 
+import com.qifenqian.bms.merchant.reports.bean.TdMerchantReportDetail;
+
 import java.io.Serializable;
 
 /**
@@ -12,7 +14,7 @@ import java.io.Serializable;
  * @date 2019年12月23日
  *
  */
-public class TdMerchantDetailInfoWeChat implements Serializable {
+public class TdMerchantDetailInfoWeChat extends TdMerchantReportDetail implements Serializable {
 
 	/**
 	 * 
