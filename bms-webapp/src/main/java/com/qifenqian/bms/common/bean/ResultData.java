@@ -28,7 +28,7 @@ public class ResultData extends HashMap<String, Object> implements Serializable 
         ResultData resultData = new ResultData();
         resultData.put("code", code);
         resultData.put("msg", msg);
-        resultData.put("date", object);
+        resultData.put("data", object);
         return resultData;
     }
 
@@ -36,7 +36,7 @@ public class ResultData extends HashMap<String, Object> implements Serializable 
         ResultData resultData = new ResultData();
         resultData.put("code", 200);
         resultData.put("msg", msg);
-        resultData.put("date", object);
+        resultData.put("data", object);
         return resultData;
     }
 
