@@ -53,10 +53,10 @@ public class TdMerchantReportService {
         return tdMerchantReportDetailService.getDetailParams(jsonString);
     }
 
-    public int addMerchantReportDetailByChannel(String channel, TdMerchantReportDetail tdMerchantReportDetail) {
+    public ResultData addMerchantReportDetailByChannel(String channel, TdMerchantReportDetail tdMerchantReportDetail) {
         TdMerchantReportDetailService tdMerchantReportDetailService = getActiveChannel(channel);
         if (tdMerchantReportDetailService == null) {
-            return 0;
+            return ResultData.error("请确认渠道信息是否正确！");
         }
         return tdMerchantReportDetailService.addMerchantReportDetail(tdMerchantReportDetail);
     }
@@ -97,7 +97,7 @@ public class TdMerchantReportService {
         /**
          * 调用渠道service存储
          */
-        this.addMerchantReportDetailByChannel(channel,tdMerchantReportDetail);
+        this.addMerchantReportDetailByChannel(channel, tdMerchantReportDetail);
         map.put("code", "SUCCESS");
         return ResultData.success();
     }
