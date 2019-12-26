@@ -1,6 +1,7 @@
 package com.qifenqian.bms.merchant.reports;
 
 import com.qifenqian.bms.common.AbstractBaseController;
+import com.qifenqian.bms.common.bean.ResultData;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantReportInfo;
 import com.qifenqian.bms.merchant.reports.constants.ChannelTypeConstants;
 import com.qifenqian.bms.merchant.reports.service.TdMerchantReportService;
@@ -24,7 +25,7 @@ public class TdMerchantReportController extends AbstractBaseController {
 
     @RequestMapping(value = "/add")
     @ResponseBody
-    public Map<String, Object> testAdd() {
+    public ResultData testAdd() {
         TdMerchantReportInfo tdMerchantReport = new TdMerchantReportInfo();
         tdMerchantReport.setChannelNo(ChannelTypeConstants.ALIPAY);
         String alipayStr = "{\"merchantCode\":\"123\",\"account\":\"zhifub\"}";

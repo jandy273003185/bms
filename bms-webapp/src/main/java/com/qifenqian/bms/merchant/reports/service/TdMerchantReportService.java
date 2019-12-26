@@ -1,6 +1,7 @@
 package com.qifenqian.bms.merchant.reports.service;
 
 import com.qifenqian.bms.basemanager.utils.GenSN;
+import com.qifenqian.bms.common.bean.ResultData;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantReportInfo;
 import com.qifenqian.bms.merchant.reported.dao.TdMerchantReportDao;
 import com.qifenqian.bms.merchant.reports.bean.TdMerchantReportDetail;
@@ -61,7 +62,7 @@ public class TdMerchantReportService {
     }
 
 
-    public Map<String, Object> addReport(TdMerchantReportInfo merchantReport, String jsonReportDetailInfo) {
+    public ResultData addReport(TdMerchantReportInfo merchantReport, String jsonReportDetailInfo) {
         Map<String, Object> map = new HashMap<>();
         /**
          * 查询数据的reportStatus判断当前数据是否已报备或者审核失败
@@ -98,6 +99,6 @@ public class TdMerchantReportService {
          */
         this.addMerchantReportDetailByChannel(channel,tdMerchantReportDetail);
         map.put("code", "SUCCESS");
-        return map;
+        return ResultData.success();
     }
 }
