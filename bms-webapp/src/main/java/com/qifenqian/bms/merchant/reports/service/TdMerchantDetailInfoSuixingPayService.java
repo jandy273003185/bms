@@ -144,4 +144,14 @@ public class TdMerchantDetailInfoSuixingPayService implements TdMerchantReportDe
         return channelResult;
     }
 
+    /**
+     * TODO 转换查询条件,查询列表
+     *
+     * @param tdMerchantReportDetail
+     * @return
+     */
+    @Override
+    public ResultData queryMerchantReportDetailByChannel(TdMerchantReportDetail tdMerchantReportDetail) {
+        return ResultData.success();
+    }
 }

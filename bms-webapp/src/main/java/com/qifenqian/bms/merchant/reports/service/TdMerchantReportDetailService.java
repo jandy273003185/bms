@@ -13,4 +13,6 @@ public interface TdMerchantReportDetailService {
     TdMerchantReportDetail getDetailParams(String jsonString);
 
     ResultData addMerchantReportDetail(TdMerchantReportDetail tdMerchantReportDetail);
+
+    ResultData queryMerchantReportDetailByChannel(TdMerchantReportDetail tdMerchantReportDetail);
 }

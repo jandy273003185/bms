@@ -2,10 +2,14 @@ package com.qifenqian.bms.merchant.reports.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.qifenqian.bms.common.bean.ResultData;
+import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfoAlipay;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfoAllinPay;
 import com.qifenqian.bms.merchant.reports.bean.TdMerchantReportDetail;
 import com.qifenqian.bms.merchant.reports.constants.ChannelTypeConstants;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @description:
@@ -24,7 +28,19 @@ public class TdMerchantDetailInfoAllinPayService implements TdMerchantReportDeta
     public ResultData addMerchantReportDetail(TdMerchantReportDetail tdMerchantReportDetail) {
         TdMerchantDetailInfoAllinPay tdMerchantDetailInfoAllinPay = (TdMerchantDetailInfoAllinPay) tdMerchantReportDetail;
 
-        System.out.println(tdMerchantDetailInfoAllinPay.toString());
         return ResultData.success();
+    }
+
+    /**
+     * TODO 转换查询条件,查询列表
+     *
+     * @param tdMerchantReportDetail
+     * @return
+     */
+    @Override
+    public ResultData queryMerchantReportDetailByChannel(TdMerchantReportDetail tdMerchantReportDetail) {
+        TdMerchantDetailInfoAllinPay tdMerchantDetailInfoAlipay = (TdMerchantDetailInfoAllinPay) tdMerchantReportDetail;
+        List<TdMerchantDetailInfoAllinPay> tdMerchantDetailInfoAllinPays = new ArrayList<>();
+        return ResultData.success(tdMerchantDetailInfoAllinPays);
     }
 }

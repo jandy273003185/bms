@@ -19,6 +19,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @description:
  * @author: LiBin
@@ -98,8 +101,8 @@ public class TdMerchantDetailInfoAlipayService implements TdMerchantReportDetail
         return resultData;
     }
 
+
     /**
-     *
      * @param tdMerchantDetailInfoAlipay
      * @return
      */
@@ -180,5 +183,18 @@ public class TdMerchantDetailInfoAlipayService implements TdMerchantReportDetail
     public AlipayOpenAgentConfirmRes alipayOpenAgentConfirm(AlipayOpenAgentConfirmReq aliConfirmReqBean) {
         AlipayOpenAgentConfirmRes res = iAgentMerRegistService.alipayOpenAgentConfirm(aliConfirmReqBean);
         return res;
+    }
+
+    /**
+     * TODO 转换查询条件,查询列表
+     *
+     * @param tdMerchantReportDetail
+     * @return
+     */
+    @Override
+    public ResultData queryMerchantReportDetailByChannel(TdMerchantReportDetail tdMerchantReportDetail) {
+        TdMerchantDetailInfoAlipay tdMerchantDetailInfoAlipay = (TdMerchantDetailInfoAlipay) tdMerchantReportDetail;
+        List<TdMerchantDetailInfoAlipay> tdMerchantDetailInfoAlipays = new ArrayList<>();
+        return ResultData.success(tdMerchantDetailInfoAlipays);
     }
 }

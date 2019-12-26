@@ -147,4 +147,15 @@ public class TdMerchantDetailInfoWeChatService implements TdMerchantReportDetail
         logger.info("-----------------微信进件响应报文：" + JSONObject.toJSONString(wxregResp));
         return wxregResp;
     }
+
+    /**
+     * TODO 转换查询条件,查询列表
+     *
+     * @param tdMerchantReportDetail
+     * @return
+     */
+    @Override
+    public ResultData queryMerchantReportDetailByChannel(TdMerchantReportDetail tdMerchantReportDetail) {
+        return ResultData.success();
+    }
 }
