@@ -1,5 +1,6 @@
 package com.qifenqian.bms.merchant.reports.service;
 
+import com.qifenqian.bms.common.bean.ResultData;
 import com.qifenqian.bms.merchant.reports.bean.TdMerchantReportDetail;
 
 /**
@@ -11,5 +12,5 @@ public interface TdMerchantReportDetailService {
 
     TdMerchantReportDetail getDetailParams(String jsonString);
 
-    int addMerchantReportDetail(TdMerchantReportDetail tdMerchantReportDetail);
+    ResultData addMerchantReportDetail(TdMerchantReportDetail tdMerchantReportDetail);
 }

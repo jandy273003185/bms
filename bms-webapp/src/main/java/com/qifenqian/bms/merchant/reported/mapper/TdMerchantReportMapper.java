@@ -10,4 +10,12 @@ public interface TdMerchantReportMapper {
 
     int insertTdMerchantReport(TdMerchantReportInfo info);
 
+    TdMerchantReportInfo selectById(String id);
+
+    TdMerchantReportInfo selectByMerchantCode(String merchantCode);
+
+    TdMerchantReportInfo selectByPatchNo(String patchNo);
+
+
+
 }

@@ -1,6 +1,7 @@
 package com.qifenqian.bms.merchant.reports.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.qifenqian.bms.common.bean.ResultData;
 import com.qifenqian.bms.merchant.reported.bean.TdMerchantDetailInfoAllinPay;
 import com.qifenqian.bms.merchant.reports.bean.TdMerchantReportDetail;
 import com.qifenqian.bms.merchant.reports.constants.ChannelTypeConstants;
@@ -20,10 +21,10 @@ public class TdMerchantDetailInfoAllinPayService implements TdMerchantReportDeta
     }
 
     @Override
-    public int addMerchantReportDetail(TdMerchantReportDetail tdMerchantReportDetail) {
+    public ResultData addMerchantReportDetail(TdMerchantReportDetail tdMerchantReportDetail) {
         TdMerchantDetailInfoAllinPay tdMerchantDetailInfoAllinPay = (TdMerchantDetailInfoAllinPay) tdMerchantReportDetail;
 
         System.out.println(tdMerchantDetailInfoAllinPay.toString());
-        return 0;
+        return ResultData.success();
     }
 }

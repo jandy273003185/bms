@@ -53,33 +53,34 @@ public class TdMerchantReportService {
         return tdMerchantReportDetailService.getDetailParams(jsonString);
     }
 
-    public int addMerchantReportDetailByChannel(String channel, TdMerchantReportDetail tdMerchantReportDetail) {
+    public ResultData addMerchantReportDetailByChannel(String channel, TdMerchantReportDetail tdMerchantReportDetail) {
         TdMerchantReportDetailService tdMerchantReportDetailService = getActiveChannel(channel);
         if (tdMerchantReportDetailService == null) {
-            return 0;
+            return ResultData.error("请确认渠道信息是否正确！");
         }
         return tdMerchantReportDetailService.addMerchantReportDetail(tdMerchantReportDetail);
     }
 
 
     public ResultData addReport(TdMerchantReportInfo merchantReport, String jsonReportDetailInfo) {
-        Map<String, Object> map = new HashMap<>();
         /**
          * 查询数据的reportStatus判断当前数据是否已报备或者审核失败
          */
-        String reportStatus = merchantReport.getReportStatus();
 
-        /**
-         * 如果已提交或者已审核失败返回提示
-         */
-
+        TdMerchantReportInfo currentTdMerchantReportInfo = tdMerchantReportDao.selectByMerchantCode(merchantReport.getMerchantCode());
+        if (currentTdMerchantReportInfo != null) {
+            String reportStatus = currentTdMerchantReportInfo.getReportStatus();
+            if ("Y".equalsIgnoreCase(reportStatus) || "O".equalsIgnoreCase(reportStatus)) {
+                return ResultData.error("商户已经报备，请勿重新提交");
+            }
+        }
         /**
          * 如果没有
          */
         merchantReport.setId(GenSN.getSN());
         merchantReport.setPatchNo(GenSN.getSN());
-        merchantReport.setReportStatus("E");
-        merchantReport.setDetailStatus("");
+        merchantReport.setReportStatus("N");
+        merchantReport.setDetailStatus("99");
         merchantReport.setStatus("01");
         /**
          * this.dao.insert  调用dao存储
@@ -97,8 +98,7 @@ public class TdMerchantReportService {
         /**
          * 调用渠道service存储
          */
-        this.addMerchantReportDetailByChannel(channel,tdMerchantReportDetail);
-        map.put("code", "SUCCESS");
+        this.addMerchantReportDetailByChannel(channel, tdMerchantReportDetail);
         return ResultData.success();
     }
 }
