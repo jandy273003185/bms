@@ -80,7 +80,6 @@ public class TdMerchantDetailInfoAlipayService implements TdMerchantReportDetail
         TdMerchantReportInfo tdMerchantReportInfo = new TdMerchantReportInfo();
         tdMerchantReportInfo.setReportStatus(reportStatus);
         tdMerchantReportInfo.setDetailStatus(reportDetailStatus);
-        tdMerchantReportInfo.setPatchNo(tdMerchantDetailInfoAlipay.getPatchNo());
         tdMerchantReportInfo.setResultMsg(tdMerchantDetailInfoAlipay.getResultMsg());
         tdMerchantReportInfo.setOutMerchantCode(tdMerchantDetailInfoAlipay.getAccount());
         tdMerchantReportInfo.setDetailStatus(tdMerchantDetailInfoAlipay.getReportStatus());

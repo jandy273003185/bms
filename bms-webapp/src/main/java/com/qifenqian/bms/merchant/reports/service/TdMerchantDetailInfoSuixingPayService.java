@@ -75,7 +75,6 @@ public class TdMerchantDetailInfoSuixingPayService implements TdMerchantReportDe
         tdMerchantReportInfo.setReportStatus(reportStatus);
         tdMerchantReportInfo.setDetailStatus(reportDetailStatus);
         tdMerchantReportInfo.setOutMerchantCode(tdMerchantDetailInfoSuixingPay.getOutMerchantCode());
-        tdMerchantReportInfo.setPatchNo(tdMerchantDetailInfoSuixingPay.getPatchNo());
         tdMerchantReportInfo.setResultMsg(msg);
         this.tdMerchantDetailInfoSuixingPayDao.updateDynamic(tdMerchantDetailInfoSuixingPay);
         this.tdMerchantReportDao.updateTdMerchantReport(tdMerchantReportInfo);
