@@ -82,10 +82,7 @@ public class TdMerchantReportService {
         merchantReport.setReportStatus("N");
         merchantReport.setDetailStatus("99");
         merchantReport.setStatus("01");
-        /**
-         * this.dao.insert  调用dao存储
-         */
-        this.tdMerchantReportDao.insertTdMerchantReport(merchantReport);
+
         /**
          * 组织详情参数
          */
@@ -98,7 +95,17 @@ public class TdMerchantReportService {
         /**
          * 调用渠道service存储
          */
-        this.addMerchantReportDetailByChannel(channel, tdMerchantReportDetail);
+        ResultData resultData = this.addMerchantReportDetailByChannel(channel, tdMerchantReportDetail);
+        if (!"200".equalsIgnoreCase(resultData.get("code").toString())) {
+            return resultData;
+        }
+        /**
+         * this.dao.insert  调用dao存储
+         */
+        int result = this.tdMerchantReportDao.insertTdMerchantReport(merchantReport);
+        if (result < 1) {
+            return ResultData.error();
+        }
         return ResultData.success();
     }
 }
