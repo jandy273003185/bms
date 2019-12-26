@@ -10,10 +10,13 @@
 			f.CUST_NAME,
 			f.short_name,
 			f.cust_id,
-			f.merchant_email
+			f.merchant_email,
+			t.email,
+			t.mobile
 		FROM
 			td_merchant_report t1
 			LEFT JOIN td_cust_info f ON f.MERCHANT_CODE = t1.merchant_code
+			LEFT JOIN td_login_user_info t ON f.cust_id = t.cust_id
 		<where>
 			<if test="merchantCode != null and merchantCode != '' ">
 			 and t1.merchant_code= #{merchantCode,jdbcType=VARCHAR}
@@ -34,7 +37,10 @@
 			 and  f.cust_name = #{custName,jdbcType=VARCHAR}
 			</if>
 			<if test="email != null and email != '' ">
-			 and  f.merchant_email = #{email,jdbcType=VARCHAR}
+			 and  t.email = #{email,jdbcType=VARCHAR}
+			</if>
+			<if test="mobile != null and mobile != '' ">
+			 and  t.mobile = #{mobile,jdbcType=VARCHAR}
 			</if>
 			<if test="startModifyTime != null and '' != startModifyTime">
 				<![CDATA[

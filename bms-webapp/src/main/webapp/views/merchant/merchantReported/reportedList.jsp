@@ -30,6 +30,7 @@
             $('.search-table #merchantCode').val('');
             $('.search-table #custName').val('');
             $('.search-table #email').val('');
+            $('.search-table #mobile').val('');
             $('.search-table #channelNo').val('');
             $('.search-table #detailStatus').val('');
             $('.search-table #startModifyTime').val('');
@@ -680,12 +681,19 @@
 									</span>
                                     </td>
                                     <td class="td-left">邮箱账号：</td>
-                                    <td class="td-right">
-                                        <span class="input-icon">
-										<input type="text" name="email" id="email" value="${queryBean.email}">
-										<i class="icon-leaf blue"></i>
-									</span>
-                                    </td>
+									<td class="td-right">
+                                         <span class="input-icon">
+											<input type="text" name="email" id="email" value="${queryBean.email }">
+											<i class="icon-leaf blue"></i>
+										</span>
+									</td>
+									<td class="td-left">手机号：</td>
+									<td class="td-right">
+										<span class="input-icon">
+											<input type="text" name="mobile" id="mobile" value="${queryBean.mobile }">
+											<i class="icon-leaf blue"></i>
+										</span>
+									</td>
                                 </tr>
                                 <tr>
                                     <td class="td-left">报备渠道：</td>
@@ -712,13 +720,13 @@
                                     </td>
                                     <td class="td-left">报备时间：</td>
                                     <td class="td-right">
-                                        <input type="text" name="startModifyTime" id="startModifyTime" readonly value="" onFocus="WdatePicker({skin:&#39;whyGreen&#39;,maxDate:&#39;%y-%M-%d&#39;})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
+                                        <input type="text" name="startModifyTime" id="startModifyTime" readonly value="" onFocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
                                         -
-                                        <input type="text" name="endModifyTime" id="endModifyTime" readonly value="" onFocus="WdatePicker({skin:&#39;whyGreen&#39;,maxDate:&#39;%y-%M-%d&#39;})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
+                                        <input type="text" name="endModifyTime" id="endModifyTime" readonly value="" onFocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="6" align="center">
+                                    <td colspan="8" align="center">
 									<span class="input-group-btn">
 										<button type="submit" class="btn btn-purple btn-sm btn-margin  buttonSearch">
 											查询
@@ -743,12 +751,12 @@
                                     <th width="7%">商户名称</th>
                                     <th width="6%">商户简称</th>
                                     <th width="7%">商户编号</th>
-                                    <th width="6%">邮箱账号</th>
+                                    <th width="10%">账号</th>
                                     <th width="5%">报备渠道</th>
                                     <th width="8%">渠道商户号</th>
                                     <!-- <th width="8%">微信申请单编号</th> -->
                                     <th width="6%">商户报备状态</th>
-                                    <th width="14%">返回信息</th>
+                                    <th width="10%">返回信息</th>
                                     <th width="9%">报备时间</th>
                                     <th width="20%">操作</th>
                                 </tr>
@@ -759,7 +767,19 @@
                                         <td>${reported.custName}</td>
                                         <td>${reported.shortName}</td>
                                         <td>${reported.merchantCode }</td>
-                                        <td>${reported.email}</td>
+                                        <td>
+											<c:choose>
+												<c:when test="${reported.email == null}">
+													${reported.mobile }
+												</c:when>
+												<c:when test="${reported.mobile == null}">
+													${reported.email }
+												</c:when>
+												<c:when test="${reported.mobile != null && reported.email != null }">
+													${reported.email }/${reported.mobile }
+												</c:when>
+											</c:choose>
+										</td>
                                         <td>
                                             <c:if test="${reported.channelNo == 'iCr'}">
                                                 华润银行

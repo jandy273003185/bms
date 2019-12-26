@@ -60,4 +60,31 @@
 				#{detailStatus}
 			)
 	</insert>
+
+	<select id="selectById" parameterType="java.lang.String" resultType="com.qifenqian.bms.merchant.reported.bean.TdMerchantReportInfo">
+		select
+			id, merchant_code, patch_no, channel_no,
+			report_status, report_time, status,
+			result_msg,out_merchant_code, detail_status, channel_mark
+		from  td_merchant_report
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectByMerchantCode" parameterType="java.lang.String" resultType="com.qifenqian.bms.merchant.reported.bean.TdMerchantReportInfo">
+		select
+			id, merchant_code, patch_no, channel_no,
+			report_status, report_time, status,
+			result_msg,out_merchant_code, detail_status, channel_mark
+		from  td_merchant_report
+		where merchant_code = #{merchantCode,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectByPatchNo" parameterType="java.lang.String" resultType="com.qifenqian.bms.merchant.reported.bean.TdMerchantReportInfo">
+		select
+			id, merchant_code, patch_no, channel_no,
+			report_status, report_time, status,
+			result_msg,out_merchant_code, detail_status, channel_mark
+		from  td_merchant_report
+		where patch_no = #{patchNo,jdbcType=VARCHAR}
+	</select>
 </mapper>

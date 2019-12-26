@@ -39,16 +39,18 @@
 
 	$(function() {
 
-		/* if($("#custType").val() =='0' ||$("#custType").val() =='2' ){
+		//营业执照信息显示
+		if($("#custType").val() =='0' ){
 			//个人
-			$("#bankCardPhoto_").attr("style","display:");
-			$("#openAccount_").attr("style","display:none");
+			$("#businessPhotoImg_").attr("style","display:none");
+			$("#businessPhoto_").attr("style","display:none");
 		}
-		if($("#custType").val() =='1'){
+		if($("#custType").val() =='1' ||$("#custType").val() =='2' ){
 			//企业
-			$("#bankCardPhoto_").attr("style","display:none");
-			$("#openAccount_").attr("style","display:");
-		} */
+			$("#businessPhotoImg_").attr("style","display:");
+			$("#businessPhoto_").attr("style","display:");
+		}
+		//结算卡显示
 		if($("#compMainAcctType").val() =='01'){
 			 $("#bankCardPhoto_").attr("style","display:none");
 			 $("#openAccount_").attr("style","display:");
@@ -56,10 +58,18 @@
 			$("#bankCardPhoto_").attr("style","display:");
             $("#openAccount_").attr("style","display:none");
 		}
+		//显示授权二维码
+		if($("#state").val() =='00' ){
+			$("#recodeShow_").attr("style","display:");
+			$("#recode_").attr("style","display:");
+		}else{
+			$("#recodeShow_").attr("style","display:none");
+			$("#recode_").attr("style","display:none");
+		}
 		
 		var custId = $("#custId").val();
 		var authId = $("#authId").val();
-
+		<%-- 
 		$("#businessPhotoImageDiv").show();
 		$("#bankCardPhotoImageDiv").show();
 		$("#certAttribute1ImageDiv").show();
@@ -70,18 +80,14 @@
 		$("#certAttribute1ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=0&authId="+authId); //04
 		$("#certAttribute2ImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=04&front=1&authId="+authId); //04
 		$("#openAccountImageDiv").attr("src","<%=request.getContextPath()+AuditorPath.BASE+ AuditorPath.IMAGE %>?custId="+custId+"&certifyType=03&authId="+authId); //03
-
-
-		var cust_url = $("#url").val();
-        /*qrcode(cust_url);
+ 		--%>
+		var cust_url = 'https://openauth.alipay.com/oauth2/appToAppAuth.htm?&application_type=WEBAPP,MOBILEAPP&custId='
+			+ custId +'&app_id=2018013002109989&redirect_uri=https%3A%2F%2Fwww.qifenqian.com%2Fenterprise%2Fpub%2Falipayauth.do';
+        qrcode(cust_url);
 		function qrcode(url){
 			$("#code_2").html("");
 			$("#code_2").qrcode(url);
-			/!* $("#code_3").qrcode(url); *!/
-			var mycanvas = $("#code_1").find("canvas")[0];
-			var image = mycanvas.toDataURL("image/png");
-			$("#code_1").html("<img id='qr_img' download='' src='"+image+"' width='100' height='100'  alt='from canvas'/>");
-		}*/
+			}
 
 		function preview(file)
 		{
@@ -139,6 +145,7 @@
 						<input type="hidden" id="certAttribute1temp">
 						<input type="hidden" id="certAttribute2temp">
 						<input type="hidden" id="openAccounttemp" />
+						<input type="hidden" name="state" id="state" value="${merchantVo.state}">
 						<input type="hidden" name="custId" id="custId" value="${merchantVo.custId}">
 						<input type="hidden" name="merchantCode" id="merchantCode" value="${merchantVo.merchantCode}">
 						<input type="hidden" name="authId" id="authId" value="${merchantVo.authId}">
@@ -152,7 +159,6 @@
 							<tr></tr>
 							<tr>
 								<td class="td-left">商户账号：</td>
-								<%--<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.merchantCode }</td>--%>
 								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.email }</td>
 							</tr>
 							<tr>
@@ -215,16 +221,10 @@
 								</td>
 							</tr>
 
-							<%--<tr>
-								<td class="td-left">商户地址：</td>
-								<td class="td-right"  style="color:#666;padding:10px 8px">${merchantVo.custAdd }</td>
-							</tr>--%>
-							<tr>
+							<tr id ="businessPhoto_" style= "display:"> 
 								<td class="td-left">营业执照编号：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.businessLicense }</td>
 								<td class="td-left">营业执照有效期：</td>
-
-
 								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.businessTermStart } -
 									<c:choose>
 										<c:when test="${merchantVo.businessTermEnd =='forever'}">
@@ -241,32 +241,20 @@
 										</c:otherwise>
 									</c:choose>
 								</td>
-
-
 							</tr>
-							<tr>
+							<tr id ="businessPhotoImg_" style= "display:">
 								<td class="td-left">营业执照扫描件：</td>
-								<td class="td-right" colspan="3">
-									<!-- <a data-toggle='modal' class="tooltip-success businessPhotoClick" data-target="#previewImageModal" >
-										<label id="businessPhotoDiv1"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
-											<img  id="businessPhotoImageDiv" onclick="bigImg(this);"  style="width:100%;height:100%;display:none"  />
-										</label>
-									</a> -->
+								<td class="td-right">
 									<a data-toggle='modal' class="tooltip-success businessPhotoClick" data-target="#previewImageModal" >
 										<label id="businessPhotoDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
 											<img src="${picturePathVo.bussinessPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
 										</label>
 									</a>
-									<%--<div class="updateImageDiv" style="float:left; margin-top:75 " >
-                                        <input type="hidden" id="businessPhotoImageVal02"  />
-                                        <input type="file" name="businessPhoto" id="businessPhoto" onchange="showBusinessPhotoImage(this)" />
-                                         <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-                                    </div>--%>
 								</td>
 							</tr>
 							<tr>
 								<td class="td-left">门头照：</td>
-								<td class="td-right" colspan="3">
+								<td class="td-right">
 									<a data-toggle='modal' class="tooltip-success doorPhotoClick" data-target="#previewImageModal" >
 										<label id="doorPhotoDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
 											<img src="${picturePathVo.doorPhotoPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
@@ -276,17 +264,15 @@
 							</tr>
 							<tr>
 								<td class="td-left">店内照：</td>
-								<td class="td-right" colspan="3">
+								<td class="td-right">
 									<a data-toggle='modal' class="tooltip-success shopInteriorClick" data-target="#previewImageModal" >
 										<label id="shopInteriorDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
 											<img src="${picturePathVo.shopInteriorPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
 										</label>
 									</a>
 								</td>
-							</tr>
-							<tr>
 								<td class="td-left">店内前台照：</td>
-								<td class="td-right" colspan="3">
+								<td class="td-right" >
 									<a data-toggle='modal' class="tooltip-success shopCheckStandClick" data-target="#previewImageModal" >
 										<label id="shopCheckStandDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
 											<img src="${picturePathVo.shopCheckStandPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
@@ -332,43 +318,21 @@
 							</tr>
 							<tr>
 								<td class="td-left" >身份证图片正面：</td>
-								<td class="td-right" colspan="3">
-									<!-- <a data-toggle='modal' class="tooltip-success certAttribute1Click"   data-target="#previewImageModal" >
-										<label id="certAttribute1Div1"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">
-											<img  id="certAttribute1ImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none"/>
-										</label>
-									</a> -->
+								<td class="td-right">
 									<a data-toggle='modal' class="tooltip-success certAttribute1Click" data-target="#previewImageModal" >
 										<label id="certAttribute1Div"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
 											<img src="${picturePathVo.idCardOPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
 										</label>
 									</a>
-									<%--<div class="updateImageDiv" style="float:left; margin-top:75" >
-                                        <input type="hidden" id="certAttribute1Val02"  />
-                                        <input type="file" name="certAttribute1" id="certAttribute1"  onchange="showCertAttribute1Image(this)"/>
-                                        <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-                                    </div>--%>
 								</td>
-							</tr>
-							<tr>
+							
 								<td class="td-left" >身份证图片背面：</td>
-								<td class="td-right" colspan="3">
-									<!-- <a data-toggle='modal' class="tooltip-success certAttribute2Click"  data-target="#previewImageModal"  >
-										<label id="certAttribute2Div1"style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">
-											<img  id="certAttribute2ImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none" />
-										</label>
-									</a> -->
+								<td class="td-right" >
 									<a data-toggle='modal' class="tooltip-success certAttribute2Click" data-target="#previewImageModal" >
 										<label id="certAttribute2Div"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
 											<img src="${picturePathVo.idCardFPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
 										</label>
 									</a>
-									<%--<div class="updateImageDiv" style="float:left; margin-top:75" >
-                                        <input type="hidden" id="certAttribute2Val02"  />
-                                        <input type="file" name="certAttribute2" id="certAttribute2" onchange="showCertAttribute2Image(this)"/>
-                                        <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-                                    </div>--%>
-
 								</td>
 							</tr>
 							<tr>
@@ -394,16 +358,13 @@
 								<td class="td-left">开户省份：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px" id="province1">${merchantVo.bankProName }</td>
 								<td class="td-left">开户城市：</td>
-								<td class="td-right" style="color:#666;padding:10px 8px" id="city">${merchantVo.bankCitName }
-									<%--<sevenpay:selectTag id="city" name ="provincelist_"  banks="${provincelist_}"  clasS="width-90"/>--%>
-								</td>
+								<td class="td-right" style="color:#666;padding:10px 8px" id="city">${merchantVo.bankCitName }</td>
 							</tr>
 							<tr>
 								<td class="td-left">银行类型：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.bankName }</td>
 								<td class="td-left">开户行：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.branchBank }</td>
-								
 							</tr>
 							<tr>
 								<td class="td-left">银行联行号：</td>
@@ -423,44 +384,38 @@
 							<tr id="openAccount_" style="display: none">
 								<td class="td-left" >开户许可证：</td>
 								<td class="td-right" colspan="3">
-									<!-- <a data-toggle='modal' class="tooltip-success openAccountClick"  data-target="#previewImageModal" >
-										<label id="openAccountDiv1" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">
-											<img  id="openAccountImageDiv" onclick="bigImg(this);" style="width:100%;height:100%;display:none"/>
-										</label>
-									</a> -->
 									<a data-toggle='modal' class="tooltip-success openAccountClick" data-target="#previewImageModal" >
 										<label id="openAccountDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
 											<img src="${picturePathVo.openAccountPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
 										</label>
 									</a>
-									<%--<div class="updateImageDiv" style="float:left; margin-top:75" >
-                                        <input type="hidden" id="openAccountVal02"  />
-                                        <input type="file" name="openAccount" id="openAccount" onchange="showopenAccountImage(this)"/>
-                                        <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-                                    </div>--%>
 								</td>
 							</tr>
 							<tr id="bankCardPhoto_" style="display: ">
 								<td class="td-left" >银行卡照<span style="color:red"></span></td>
 								<td class="td-right" >
-									<!-- <a data-toggle='modal' class="tooltip-success bankCardPhotoClick"  data-target="#previewImageModal" >
-										<label id="bankCardPhotoDiv1" style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px; margin: 10 10 10 10">
-											<img  id="bankCardPhotoImageDiv" onclick="bigImg(this);"style="width:100%;height:100%;display:none"/>
-										</label>
-									</a> -->
 									<a data-toggle='modal' class="tooltip-success bankCardPhotoClick" data-target="#previewImageModal" >
 										<label id="bankCardPhotoDiv"  style="float:left;background-color:rgb(222, 222, 222); width:120px;height:100px;margin: 10 10 10 10">
 											<img src="${picturePathVo.bankCardPath }" style="width:100%;height:100%;"onclick="bigImg(this);" >
 										</label>
 									</a>
-									<%--<div style="float:left;margin-top:75" >
-                                    <input type="file" name="bankCardPhoto" id="bankCardPhoto" onChange="showBankCardPhotoImage(this)"/>
-                                        <p> <span style="color:gray">支持*jpg、*jpeg、*gif、*bmp、*png图片格式</span>
-                                    </div>--%>
-
 									<label class="label-tips" id="bankCardPhotoLabel" style="float:left;margin-top:88"></label>
 								</td>
 							</tr>
+							<tr id="recode_" style="display:none">
+								<td colspan="4" class="headlerPreview" style="background:#7ebde1;">授权二维码</td>
+							</tr>
+							<tr id="recodeShow_" style="display:none">
+                                <td class="td-left">授权二维码</td>
+                                <td class="td-right" >
+                                    <div style="display: none; width: 10px;height: 10px;" id="code_1" >
+                                   </div>
+                                    <div style="width:300px;height:300px; margin: 10 auto;" id="code_2" >
+                                       <input type="file" value=${qrCode }/>
+                                       <img id="showNewRecode" alt="" src="" style="text-align:center;">
+                                    </div>
+                                </td>
+                            </tr>
 							<tr>
 								<td colspan="4" class="headlerPreview" style="background:#7ebde1;">操作记录</td>
 							</tr>
@@ -476,7 +431,6 @@
 								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.aduitUserName }</td>
 								<td class="td-left">审核时间：</td>
 								<td class="td-right" style="color:#666;padding:10px 8px">${merchantVo.auditTime }
-									<%-- <fmt:formatDate value="${merchantVo.auditTime }" pattern="yyyy-MM-dd HH:mm:ss"/> --%>
 								</td>
 							</tr>
 							<tr>
@@ -485,19 +439,7 @@
 									${merchantVo.aduitMessage }
 								</td>
 							</tr>
-							<%--<tr>
-                                <td colspan="4" class="headlerPreview" style="background:#7ebde1;">付款二维码</td>
-                            </tr>
-                            <tr>
-                                <td colspan="4">
-                                    <div style="display: none; width: 10px;height: 10px;" id="code_1" >
-                                   </div>
-                                    <div style="width:300px;height:300px; margin: 10 auto;" id="code_2" >
-                                       <input type="file" name="url" id="url" value=${qrCode }/>
-                                       <img id="showNewRecode" alt="" src="" style="text-align:center;">
-                                    </div>
-                                </td>
-                            </tr>--%>
+							
 							<tr></tr>
 							</tbody>
 						</table>
@@ -579,6 +521,13 @@
 		var divObj = document.getElementById("showImageDiv");
 		var imageObj = document.getElementById("showImage");
 		var obj = document.getElementById("shopInterior");
+		return previewImage(divObj,imageObj,obj);
+	});
+	/** 店内收银台照点击预览 **/
+	$('.shopCheckStandClick').click(function(){
+		var divObj = document.getElementById("showImageDiv");
+		var imageObj = document.getElementById("showImage");
+		var obj = document.getElementById("shopCheckStand");
 		return previewImage(divObj,imageObj,obj);
 	});
 	/** 门头照预览 **/

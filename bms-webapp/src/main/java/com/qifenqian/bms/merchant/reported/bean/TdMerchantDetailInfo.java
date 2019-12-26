@@ -136,7 +136,18 @@ public class TdMerchantDetailInfo extends publicBean {
 	
 	private String status;
 	
+	private String mobile;
 	
+	
+	
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
 	public String getStatus() {
 		return status;
 	}

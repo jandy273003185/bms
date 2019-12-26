@@ -1,12 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/include/template.jsp"%>
-<%@page import="com.qifenqian.bms.basemanager.merchant.MerchantPath" %>
 <%@page import="com.qifenqian.bms.basemanager.merchant.MerchantEnterPath" %>
-<%@page import="com.qifenqian.bms.basemanager.merchant.AuditorPath"%>
-<%@page import="com.qifenqian.bms.basemanager.merchant.TinyMerchantPath" %>
 <%@page import="com.qifenqian.bms.basemanager.agency.controller.AgentRegisterPath" %>
 <%@page import="com.qifenqian.bms.merchant.merchantReported.MerchantEnterReportedPath"%>
-<%@page import="com.qifenqian.bms.merchant.reported.MerchantReportedPath"%>
 <% String url = request.getScheme()+"://"+ request.getServerName()+":"+request.getServerPort(); %>
 <link rel="stylesheet" href="/static/css/font-awesome.min.css">
 <!-- page specific plugin styles -->
@@ -504,9 +500,9 @@
 									</td>
 									<td class="td-left">录入时间：</td>
 									<td class="td-right">
-										<input type="text" name="startCreateTime" id="startCreateTime" readonly value="" onFocus="WdatePicker({skin:&#39;whyGreen&#39;,maxDate:&#39;%y-%M-%d&#39;})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
+										<input type="text" name="startCreateTime" id="startCreateTime" readonly value="" onFocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
 										-
-										<input type="text" name="endCreateTime" id="endCreateTime" readonly value="" onFocus="WdatePicker({skin:&#39;whyGreen&#39;,maxDate:&#39;%y-%M-%d&#39;})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
+										<input type="text" name="endCreateTime" id="endCreateTime" readonly value="" onFocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important;">
 									</td>
 								</tr>
 								<tr>

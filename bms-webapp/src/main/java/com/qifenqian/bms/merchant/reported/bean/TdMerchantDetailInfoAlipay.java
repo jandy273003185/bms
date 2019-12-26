@@ -1,6 +1,8 @@
 package com.qifenqian.bms.merchant.reported.bean;
 
 
+import com.qifenqian.bms.merchant.reports.bean.TdMerchantReportDetail;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -11,7 +13,7 @@ import java.util.Date;
  * @Return
  * @Date 2019/12/19 0019 14:49
  */
-public class TdMerchantDetailInfoAlipay implements Serializable {
+public class TdMerchantDetailInfoAlipay extends TdMerchantReportDetail implements Serializable {
 
     private static final long serialVersionUID = 1154853797960240258L;
 
