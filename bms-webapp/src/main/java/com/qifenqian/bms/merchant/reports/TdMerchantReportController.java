@@ -10,8 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Map;
-
 /**
  * @description:
  * @author: LiBin
@@ -30,5 +28,11 @@ public class TdMerchantReportController extends AbstractBaseController {
         tdMerchantReport.setChannelNo(ChannelTypeConstants.ALIPAY);
         String alipayStr = "{\"merchantCode\":\"123\",\"account\":\"zhifub\"}";
         return this.tdMerchantReportService.addReport(tdMerchantReport, alipayStr);
+    }
+
+    @RequestMapping(value = "/list")
+    @ResponseBody
+    public ResultData list(String channel, String params) {
+        return this.tdMerchantReportService.findMerchantDetailList(channel, params);
     }
 }

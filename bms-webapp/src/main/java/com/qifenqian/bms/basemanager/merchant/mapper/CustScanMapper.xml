@@ -33,7 +33,7 @@
 	
 	<select id="ListTdCustScanCopy" resultType="com.qifenqian.bms.basemanager.merchant.bean.CustScan" parameterType="java.lang.String">
 		SELECT * FROM TD_CUST_SCAN_COPY
-		WHERE SCAN_COPY_PATH like '/data/%'
+		WHERE SCAN_COPY_PATH like '%data%'
 		<if test="custId !=null and custId !=''">
 			AND CUST_ID = #{custId, jdbcType=VARCHAR}
 		</if>

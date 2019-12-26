@@ -8,7 +8,6 @@ import com.qifenqian.bms.merchant.reports.bean.TdMerchantReportDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -53,6 +52,13 @@ public class TdMerchantReportService {
         return tdMerchantReportDetailService.getDetailParams(jsonString);
     }
 
+    /**
+     * 渠道报备入库
+     *
+     * @param channel
+     * @param tdMerchantReportDetail
+     * @return
+     */
     public ResultData addMerchantReportDetailByChannel(String channel, TdMerchantReportDetail tdMerchantReportDetail) {
         TdMerchantReportDetailService tdMerchantReportDetailService = getActiveChannel(channel);
         if (tdMerchantReportDetailService == null) {
@@ -61,7 +67,28 @@ public class TdMerchantReportService {
         return tdMerchantReportDetailService.addMerchantReportDetail(tdMerchantReportDetail);
     }
 
+    /**
+     * 渠道报备列表查询
+     *
+     * @param channel
+     * @param tdMerchantReportDetail
+     * @return
+     */
+    public ResultData queryMerchantReportDetailByChannel(String channel, TdMerchantReportDetail tdMerchantReportDetail) {
+        TdMerchantReportDetailService tdMerchantReportDetailService = getActiveChannel(channel);
+        if (tdMerchantReportDetailService == null) {
+            return ResultData.error("请确认渠道信息是否正确！");
+        }
+        return tdMerchantReportDetailService.queryMerchantReportDetailByChannel(tdMerchantReportDetail);
+    }
 
+    /**
+     * 报备添加
+     *
+     * @param merchantReport
+     * @param jsonReportDetailInfo
+     * @return
+     */
     public ResultData addReport(TdMerchantReportInfo merchantReport, String jsonReportDetailInfo) {
         /**
          * 查询数据的reportStatus判断当前数据是否已报备或者审核失败
@@ -82,10 +109,7 @@ public class TdMerchantReportService {
         merchantReport.setReportStatus("N");
         merchantReport.setDetailStatus("99");
         merchantReport.setStatus("01");
-        /**
-         * this.dao.insert  调用dao存储
-         */
-        this.tdMerchantReportDao.insertTdMerchantReport(merchantReport);
+
         /**
          * 组织详情参数
          */
@@ -98,7 +122,29 @@ public class TdMerchantReportService {
         /**
          * 调用渠道service存储
          */
-        this.addMerchantReportDetailByChannel(channel, tdMerchantReportDetail);
-        return ResultData.success();
+        ResultData resultData = this.addMerchantReportDetailByChannel(channel, tdMerchantReportDetail);
+        if (!"200".equalsIgnoreCase(resultData.get("code").toString())) {
+            return resultData;
+        }
+        /**
+         * this.dao.insert  调用dao存储
+         */
+        int result = this.tdMerchantReportDao.insertTdMerchantReport(merchantReport);
+        if (result < 1) {
+            return ResultData.error();
+        }
+        return resultData;
+    }
+
+    /**
+     * 报备列表查询
+     *
+     * @param channel
+     * @param params
+     * @return
+     */
+    public ResultData findMerchantDetailList(String channel, String params) {
+        TdMerchantReportDetail tdMerchantReportDetail = getDetailParams(channel, params);
+        return this.queryMerchantReportDetailByChannel(channel, tdMerchantReportDetail);
     }
 }
