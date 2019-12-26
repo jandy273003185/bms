@@ -106,6 +106,6 @@ public class TdMerchantReportService {
         if (result < 1) {
             return ResultData.error();
         }
-        return ResultData.success();
+        return resultData;
     }
 }
