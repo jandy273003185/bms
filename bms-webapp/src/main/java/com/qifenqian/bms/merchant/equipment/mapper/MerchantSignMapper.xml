@@ -94,5 +94,8 @@
 			<if test="custId != null and custId != '' ">
 				 AND CUST_ID =#{custId, jdbcType=VARCHAR}
 			</if>
+				<if test="mac != null and mac != '' ">
+				 AND MAC =#{mac, jdbcType=VARCHAR}
+			</if>
 	</select> 
 </mapper>

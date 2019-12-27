@@ -12,9 +12,12 @@
 			f.cust_id,
 			f.merchant_email,
 			t.email,
-			t.mobile
+			t.mobile,
+			d.remark
+			
 		FROM
 			td_merchant_report t1
+			LEFT JOIN td_merchant_detail_info d ON d.MERCHANT_CODE = t1.merchant_code
 			LEFT JOIN td_cust_info f ON f.MERCHANT_CODE = t1.merchant_code
 			LEFT JOIN td_login_user_info t ON f.cust_id = t.cust_id
 		<where>

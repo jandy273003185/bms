@@ -416,7 +416,7 @@
 				stcdb.sys_user_role ur
 			LEFT JOIN stcdb.sys_role s ON ur.role_id = s.role_id
 			WHERE
-				ur.user_id = '1'
+				ur.user_id = #{userId,jdbcType=VARCHAR}
 		) t
 		where t.role_id in(
 		SELECT 
@@ -425,7 +425,7 @@
 		 sys_role_function f
 		 where
 		 f.FUNCTION_ID ='874'
-		);
+		) LIMIT 1;
 	</select>
 
 	<select id="selectByMerchantCode" resultType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo" parameterType="java.lang.String" >
