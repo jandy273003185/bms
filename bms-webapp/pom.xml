@@ -297,6 +297,7 @@
 				<directory>src/main/resources</directory>
 				<excludes>
 					<exclude>application*.properties</exclude>
+					<exclude>application*.yml</exclude>
 				</excludes>
 			</resource>
 			<resource>
@@ -306,6 +307,8 @@
 				<includes>
 					<include>application.properties</include>
 					<include>application-${spring.profiles.active}.properties</include>
+					<include>application.yml</include>
+					<include>application-${spring.profiles.active}.yml</include>
 				</includes>
 			</resource>
 		</resources>
