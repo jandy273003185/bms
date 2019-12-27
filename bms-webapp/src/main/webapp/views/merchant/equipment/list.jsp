@@ -304,11 +304,11 @@ function getInfo(obj,custId,merchantName){
 													</a>
 													</gyzbadmin:function>
 													
-													<a onclick="getInfo(this,'${merchantSign.merchantId}','${merchantSign.merchantName}');" href="#" class="tooltip-success " data-rel="tooltip" data-toggle='modal' data-target="" title="详情" >
+													<%-- <a onclick="getInfo(this,'${merchantSign.merchantId}','${merchantSign.merchantName}');" href="#" class="tooltip-success " data-rel="tooltip" data-toggle='modal' data-target="" title="详情" >
 														<span class="black">
 															<i class="icon-zoom-out bigger-120"></i>
 														</span>
-													</a>	
+													</a>	 --%>
 															
 													<gyzbadmin:function url="<%=MerchantSignPath.BASE + MerchantSignPath.DELETE %>">
 													<a href="#" class="tooltip-success deleteMerchantSign" data-rel="tooltip" data-toggle='modal' data-target="#deleteMerchantSignModal" title="Delete" >
