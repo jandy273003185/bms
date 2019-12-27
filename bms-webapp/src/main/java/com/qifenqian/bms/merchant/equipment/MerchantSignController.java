@@ -1,6 +1,8 @@
 package com.qifenqian.bms.merchant.equipment;
 
 import com.alibaba.fastjson.JSONObject;
+import com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo;
+import com.qifenqian.bms.basemanager.custInfo.service.TdCustInfoService;
 import com.qifenqian.bms.basemanager.merchant.bean.Merchant;
 import com.qifenqian.bms.basemanager.merchant.mapper.MerchantMapper;
 import com.qifenqian.bms.materiel.bean.Materiel;
@@ -11,6 +13,8 @@ import com.qifenqian.bms.merchant.equipment.bean.MerchantSign;
 import com.qifenqian.bms.merchant.equipment.mapper.MerchantSignMapper;
 import com.qifenqian.bms.merchant.equipment.service.MerchantSignService;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +52,8 @@ public class MerchantSignController {
 	
 	@Autowired
 	private MerchantSignMapper merchantSignMapper;
-	
+	@Autowired 
+	private TdCustInfoService  custInfoService;
 	/**
 	 * 进入商户设备列表页面
 	 * 
@@ -70,6 +75,40 @@ public class MerchantSignController {
 		return mv;
 	}
 	
+	/**
+	 * 进入商户设备显示列表页面   zhanggc  新 
+	 * 
+	 * @return
+	 */
+	@RequestMapping("/newList")
+	public ModelAndView newList(DeviceLogin deviceLogina) {
+		// 返回视图
+		ModelAndView mv = new ModelAndView("/merchant/equipment/newList");
+		if (null != deviceLogina.getCustId() && !"".equals(deviceLogina.getCustId()) ) {
+			deviceLogina.setCustId(deviceLogina.getCustId().trim());
+		}
+		if (null != deviceLogina.getMac() &&  !"".equals(deviceLogina.getMac()) ) {
+			deviceLogina.setMac(deviceLogina.getMac().trim());
+		}
+		List<DeviceLogin> deviceLogin = merchantSignService.selectDeviceLoginById(deviceLogina);
+		
+		if(null!=deviceLogin && deviceLogin.size()>0){
+			
+			TdCustInfo tdCustInfo = new TdCustInfo();
+			for (int i = 0; i < deviceLogin.size(); i++) {
+				tdCustInfo.setCustId(deviceLogin.get(i).getCustId());
+				TdCustInfo selectByBean = custInfoService.selectByBean(tdCustInfo);
+				if (selectByBean != null) {
+					deviceLogin.get(i).setMerchantName(selectByBean.getCustName());
+				}
+			}
+			mv.addObject("materielList",  JSONObject.toJSON(deviceLogin));
+		}
+		
+		mv.addObject("deviceLogina", deviceLogina);
+		// 返回
+		return mv;
+	}
 	/**
 	 * @param deviceLogina  zhanggc  查询设备详情
 	 * @return
