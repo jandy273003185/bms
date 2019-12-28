@@ -188,7 +188,8 @@ public class ChannelController {
     //retValue.add(ChannelMerRegist.FM_UNIONPAY);
     retValue.add(ChannelMerRegist.SUM_PAY);
     retValue.add(ChannelMerRegist.YQB);
-    
+    retValue.add(ChannelMerRegist.ALIPAY);
+    retValue.add(ChannelMerRegist.WX);
     // ChannelMerRegist.values();
     return retValue;
   }

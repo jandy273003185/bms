@@ -637,6 +637,7 @@ public class FmIncomeService {
           tdInfo.setMerchantCode(cr.getMerchantCode().trim());
           tdInfo.setChannelNo(cr.getChannelNo());
           tdInfo.setReportStatus("Y");
+          tdInfo.setDetailStatus("0");
 //          tdInfo.setOutMerchantCode(mchntId);
 
           // 查询商户报备信息

@@ -264,7 +264,16 @@
     	 UPDATE `stcdb`.`td_merchant_report`
 			SET 
 			<if test="reportStatus != null and reportStatus !='' ">
-		 	`report_status` = #{reportStatus,jdbcType = VARCHAR}
+		 	`report_status` = #{reportStatus,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="outMerchantCode != null and outMerchantCode !='' ">
+		 	`out_merchant_code` = #{outMerchantCode,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="detailStatus != null and detailStatus !='' ">
+		 	`detail_status` = #{detailStatus,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="resultMsg != null and resultMsg !='' ">
+		 	`result_msg` = #{resultMsg,jdbcType = VARCHAR}
 		 	</if>
 		 WHERE `merchant_code` = #{merchantCode,jdbcType = VARCHAR} and channel_no = #{channelNo,jdbcType = VARCHAR} and patch_no = #{patchNo,jdbcType = VARCHAR}
     </update>
