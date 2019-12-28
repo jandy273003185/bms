@@ -403,10 +403,10 @@
 								</td>
 							</tr>
 							<tr id="recode_" style="display:none">
-								<td colspan="4" class="headlerPreview" style="background:#7ebde1;">授权二维码</td>
+								<td colspan="4" class="headlerPreview" style="background:#7ebde1;">支付宝直连授权二维码</td>
 							</tr>
 							<tr id="recodeShow_" style="display:none">
-                                <td class="td-left">授权二维码</td>
+                                <td class="td-left">支付宝直连授权二维码</td>
                                 <td class="td-right" >
                                     <div style="display: none; width: 10px;height: 10px;" id="code_1" >
                                    </div>
