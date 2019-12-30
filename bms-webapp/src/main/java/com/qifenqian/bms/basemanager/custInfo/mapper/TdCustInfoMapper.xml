@@ -434,4 +434,13 @@
 		from td_cust_info
 		where MERCHANT_CODE = #{merchantCode,jdbcType=VARCHAR}
 	</select>
+	<!-- 根据merchantFlag 查询用户信息 -->
+	<select id="selectByMerchantFlag" resultType="com.qifenqian.bms.basemanager.custInfo.bean.TdCustInfo" parameterType="java.lang.String" >
+		select
+		*
+		from td_cust_info
+		where MERCHANT_FLAG = #{merchantFlag,jdbcType=VARCHAR}
+		
+	</select>
+	
 </mapper>

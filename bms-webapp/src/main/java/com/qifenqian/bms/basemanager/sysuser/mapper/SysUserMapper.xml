@@ -36,5 +36,12 @@
  			sys_dept A
  		where  A.dept_name = #{deptName}
  	</select>
-
+	
+	<select id="selectDeptByUserCode" resultType="com.qifenqian.bms.basemanager.sysuser.bean.SysUser" parameterType="String">
+ 		select
+ 			*
+ 		from
+ 			sys_user A
+ 		where  A.user_code = #{userCode}
+ 	</select>
 </mapper>
