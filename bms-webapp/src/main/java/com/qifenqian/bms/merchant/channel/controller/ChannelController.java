@@ -176,21 +176,21 @@ public class ChannelController {
   private List<ChannelMerRegist> getValidChannel() {
 
     List<ChannelMerRegist> retValue = new ArrayList<ChannelMerRegist>();
-    //retValue.add(ChannelMerRegist.FM_COMBINEDPAY);
-    //retValue.add(ChannelMerRegist.KFT_PAY);
-    //retValue.add(ChannelMerRegist.QM_PAY);
-    retValue.add(ChannelMerRegist.XL_PAY);
-    //retValue.add(ChannelMerRegist.PING_AN);
-    retValue.add(ChannelMerRegist.GHXB);
-    //retValue.add(ChannelMerRegist.CR_ULOPAY);
-    retValue.add(ChannelMerRegist.BEST_PAY);
-    retValue.add(ChannelMerRegist.SUIXING_PAY);
-    //retValue.add(ChannelMerRegist.FM_UNIONPAY);
-    retValue.add(ChannelMerRegist.SUM_PAY);
-    retValue.add(ChannelMerRegist.YQB);
-    retValue.add(ChannelMerRegist.ALIPAY);
-    retValue.add(ChannelMerRegist.WX);
-    // ChannelMerRegist.values();
+		/*
+		 * retValue.add(ChannelMerRegist.FM_COMBINEDPAY);
+		 * retValue.add(ChannelMerRegist.KFT_PAY);
+		 * retValue.add(ChannelMerRegist.QM_PAY); retValue.add(ChannelMerRegist.XL_PAY);
+		 * retValue.add(ChannelMerRegist.PING_AN); retValue.add(ChannelMerRegist.GHXB);
+		 * retValue.add(ChannelMerRegist.CR_ULOPAY);
+		 * retValue.add(ChannelMerRegist.BEST_PAY);
+		 * retValue.add(ChannelMerRegist.SUIXING_PAY);
+		 * retValue.add(ChannelMerRegist.FM_UNIONPAY);
+		 * retValue.add(ChannelMerRegist.SUM_PAY); retValue.add(ChannelMerRegist.YQB);
+		 * retValue.add(ChannelMerRegist.ALIPAY); retValue.add(ChannelMerRegist.WX);
+		 */
+    for( ChannelMerRegist item:ChannelMerRegist.values()) {
+    	retValue.add(item);
+    };
     return retValue;
   }
 
