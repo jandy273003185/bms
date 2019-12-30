@@ -7,7 +7,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -36,7 +35,6 @@ import com.qifenqian.bms.basemanager.merchant.mapper.CustScanMapper;
 import com.qifenqian.bms.basemanager.merchant.mapper.MerchantMapper;
 import com.qifenqian.bms.basemanager.merchant.service.MerchantEnterService;
 import com.qifenqian.bms.platform.common.utils.DateUtils;
-import com.qifenqian.bms.platform.common.utils.SpringUtils;
 
 @Controller
 @RequestMapping("/common/files")
@@ -50,7 +48,7 @@ public class FileController {
 	private MerchantEnterService merchantEnterService;
 	
 	private static final String PRE_PATH = "/data/nfsshare/upload/picture";
-	//private static final String PRE_PATH = "D:/imageData";
+//	private static final String PRE_PATH = "D:\\data\\nfsshare\\upload\\picture";
 	private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 	
 	
@@ -182,8 +180,10 @@ public class FileController {
                 logger.error("上传失败");
                 result.put("message","网络延迟，请重新提交");
             }
+        }else {
+        	logger.error("上传文件为空");
         }
-        logger.error("上传文件为空");
+        
         return result;
         
         
