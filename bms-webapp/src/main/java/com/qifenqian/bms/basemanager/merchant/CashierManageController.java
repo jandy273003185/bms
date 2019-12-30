@@ -141,7 +141,7 @@ public class CashierManageController {
             if (cashierInfo != null) {
 
                 cashierManageService.deleteCashier(onlyId);
-                this.delKey(cashierInfo.getMerchantCustId(), RedisUtil.MERCHANT_CASHIER_REF_DB);
+//                this.delKey(cashierInfo.getMerchantCustId(), RedisUtil.MERCHANT_CASHIER_REF_DB);
                 jo.put("result", "SUCCESS");
                 jo.put("message", "删除成功！");
             } else {
