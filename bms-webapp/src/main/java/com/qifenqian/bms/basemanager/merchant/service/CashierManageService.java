@@ -80,7 +80,7 @@ public class CashierManageService {
 
         // TODO 向优喜发送一个设置成功的通知
 
-        message.noticeCashier(getMessage(cashierInfo));
+//        message.noticeCashier(getMessage(cashierInfo));
 
 
     }

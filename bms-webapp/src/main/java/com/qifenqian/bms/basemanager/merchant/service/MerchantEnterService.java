@@ -385,6 +385,10 @@ public class MerchantEnterService {
 		custScan.setCertifyType("36");
 		String infoQrcodePath = findPicturePath(custScan);
 		picturePath.setInfoQrcodePath("/pic/" + infoQrcodePath);
+		//21 店内收银台照
+		custScan.setCertifyType("21");
+		String shopCheckStandPath = findPicturePath(custScan);
+		picturePath.setShopCheckStandPath("/pic/" + shopCheckStandPath);
 		return picturePath;		
 	}
 

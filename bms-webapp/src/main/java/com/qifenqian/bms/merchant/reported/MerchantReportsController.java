@@ -1074,13 +1074,13 @@ public class MerchantReportsController {
 		ChannelResult channelResult = iMerChantIntoServic.merQuery(req);
 		
 		Map<String, Object> rtnResultMap = channelResult.getData();
-		
+		String channelMerNo = "";
+		String wxMerNo = "";
+		String zfbMerNo = "";
 		if((ReStatus.SUCCESS).equals(channelResult.getStatus())){
 			//审核通过,开通产品
 			ChannelBean bean = new ChannelBean();
-			String channelMerNo = "";
-			String wxMerNo = "";
-			String zfbMerNo = "";
+			
 			if("BEST_PAY".equals(detail.getChannelNo())){
 				
 				if("02".equals(detail.getBestMerchantType())){
@@ -1128,6 +1128,7 @@ public class MerchantReportsController {
 			detail.setOutMerchantCode(channelMerNo);
 			detail.setWxChildNo(wxMerNo);
 			detail.setZfbChildNo(zfbMerNo);
+			detail.setDetailStatus("1");
 			fmIncomeService.UpdateMerReportAndMerDetailInfo(detail, "1");
 			//报备成功修改商户状态
 			MerchantVo merchantVo = new MerchantVo();
@@ -1187,7 +1188,6 @@ public class MerchantReportsController {
 		}else if((ReStatus.FAIL).equals(channelResult.getStatus())){
 			//查询报备失败改变表中状态
 			//有外部商户号未成功则调更新接口   无外部商户号未成功则重新进件
-			String channelMerNo = "";
 			if("BEST_PAY".equals(detail.getChannelNo())){
 				if("02".equals(detail.getBestMerchantType())){
 					//翼支付企业进件成功后仍需签约
@@ -1198,6 +1198,8 @@ public class MerchantReportsController {
 				
 			}else if("SUIXING_PAY".equals(detail.getChannelNo())){
 				channelMerNo = rtnResultMap == null?"":(String)rtnResultMap.get("mno");
+				wxMerNo = rtnResultMap.get("wxChildNo")==null?"":(String)rtnResultMap.get("wxChildNo");
+				zfbMerNo= rtnResultMap.get("zfbChildNo")==null?"":(String)rtnResultMap.get("zfbChildNo");
 			}else if("SUM_PAY".equals(detail.getChannelNo())){
 				channelMerNo = detail.getOutMerchantCode();
 			}else if("YQB".equals(detail.getChannelNo())){
@@ -1207,7 +1209,10 @@ public class MerchantReportsController {
 			}
 			detail.setReportStatus("F");
 			detail.setOutMerchantCode(channelMerNo);
+			detail.setWxChildNo(wxMerNo);
+			detail.setZfbChildNo(zfbMerNo);
 			detail.setResultMsg(channelResult.getReMsg());
+			detail.setDetailStatus("2");
 			fmIncomeService.UpdateMerReportAndMerDetailInfo(detail,"2");
 			object.put("result", "FAIL");
 			object.put("message", StringUtils.isBlank(channelResult.getReMsg())?"审核失败":channelResult.getReMsg());

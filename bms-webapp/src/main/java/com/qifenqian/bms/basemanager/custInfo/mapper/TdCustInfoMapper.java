@@ -80,4 +80,6 @@ public interface TdCustInfoMapper {
 	String isAddMerchant(@Param("userId")String userId);
 
 	TdCustInfo selectByMerchantCode(@Param("merchantCode")String merchantCode);
+	
+	List<TdCustInfo> selectByMerchantFlag(@Param("merchantFlag")String merchantFlag);
 }

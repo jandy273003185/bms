@@ -1790,6 +1790,8 @@
 			 	AND status = #{status, jdbcType=VARCHAR} 
 			</if>
 		</where>
+		ORDER BY CREATE_TIME  DESC
+		LIMIT 1
 	</select>
 	
 	<update id="updateMerchant"  parameterType="com.qifenqian.bms.basemanager.merchant.bean.MerchantVo">

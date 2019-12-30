@@ -254,6 +254,7 @@ public class SuiXingPayMerchantReportsController {
 						tdInfo.setPatchNo(td.getPatchNo());
 						tdInfo.setReportStatus("Y");
 						tdInfo.setFileStatus("Y");
+						tdInfo.setDetailStatus("0");
 						String mchntStatus = "0";
 						fmIncomeService.UpdateMerReportAndMerDetailInfo(tdInfo, mchntStatus);
 //						fmIncomeMapper.updateTdMerchantDetailInfo(tdInfo);	
@@ -314,6 +315,7 @@ public class SuiXingPayMerchantReportsController {
 					tdInfo.setMerchantCode(td.getMerchantCode());
 					tdInfo.setChannelNo(td.getChannelNo());
 					tdInfo.setReportStatus("E");
+					tdInfo.setDetailStatus("99");
 					tdInfo.setRemark(cr.getTaskCode());
 					fmIncomeService.UpdateMerReportAndMerDetailInfo(tdInfo,"99");
 				}
@@ -325,6 +327,7 @@ public class SuiXingPayMerchantReportsController {
 				info.setMerchantCode(cr.getMerchantCode().trim());
 				info.setChannelNo(cr.getChannelNo());
 				info.setReportStatus("E");
+				info.setDetailStatus("99");
 				info.setProvCode(cr.getMerchantProvince());
 				info.setCityCode(cr.getMerchantCity());
 				info.setContryCode(cr.getMerchantArea());
