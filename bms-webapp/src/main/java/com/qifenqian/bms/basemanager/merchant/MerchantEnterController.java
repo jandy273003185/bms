@@ -126,8 +126,8 @@ public class MerchantEnterController {
 		}else{
 			merchantVo.setUserId(userId);
 			merchantVo.setUserName(WebUtils.getUserInfo().getUserName());
-			//list = merchantService.selectMyAuditMerchants(merchantVo);
-			list = merchantEnterService.selectAuditMerchants(merchantVo);
+			list = merchantService.selectMyAuditMerchants(merchantVo);
+//			list = merchantEnterService.selectAuditMerchants(merchantVo);
 		}
 		/***查询渠道***/
 		List<ChannlInfo> channlInfoList = crIncomeService.getChannlInfoList();
