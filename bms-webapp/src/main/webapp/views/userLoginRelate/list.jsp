@@ -6,10 +6,13 @@
 <link rel="stylesheet" href="<c:url value='/static/css/base.css' />" />
 <link rel="stylesheet" href="<c:url value='/static/css/home.css' />" />
 <link href="/static/css/bootstrap-select.css" rel="stylesheet">
+<script src="/static/topayProfit/layui/layui.js"></script>
+<script src="/static/topayProfit/layui/layui.all.js"></script>
+<link href="/static/topayProfit/layui/css/layui.css" rel="stylesheet">
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>服务商的业务员信息表</title>
+	<title>服务商的业务员信息</title>
 	<meta name="keywords" content="七分钱后台管理系统" />
 	<meta name="description" content="七分钱后台管理" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,7 +25,6 @@
 </head>
 <script type="text/javascript">
 
-
 jQuery(function($){
 			
 	// 为每个tr缓存数据
@@ -31,8 +33,6 @@ jQuery(function($){
 	 $.each($.parseJSON(merchantProducts),function(i,value){		 
 	 	$.data(merchantProductList[i],"merchantProduct",value);
 		}); 
-	
-
 
 	});
 	
@@ -72,12 +72,11 @@ jQuery(function($){
 							<table class="search-table">
 								
 								<tr>
-							
 									<td class="td-left" >服务商：</td>
 										<td class="td-right" > 
 										<span class="input-icon">
 	
-										 	<select name="custId" id="custId" class="selectpicker show-tick form-control" data-width="250px" data-height="1px"  data-live-search="true">
+										 	<select name="custId" id="custId" class="selectpicker show-tick form-control" data-width="250px"   data-live-search="true">
 												<option value="">--输入商户名查询--</option>
 												<c:if test="${not empty tdCustInfoList }">
 													<c:forEach items="${tdCustInfoList }" var="bean">
@@ -87,18 +86,27 @@ jQuery(function($){
 											</select>
 										</span>
 									</td> 
-								</tr>
-								<tr>
 									
 									<td class="td-left" >时间：</td>
 									<td>
-										<input type="text" id="startTime" name="startTime" value="${userLoginRelate.startTime }" readonly="readonly" onfocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
+										<input type="text" id="startTime" name="startTime" value="${userLoginRelate.startTime }" readonly="readonly" onfocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:20%"/>
 										<label class="label-tips" id="startTimeLabStart"></label>
 											-
-										<input type="text" id="endTime" name="endTime" value="${userLoginRelate.endTime }" readonly="readonly" onfocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:30%"/>
+										<input type="text" id="endTime" name="endTime" value="${userLoginRelate.endTime }" readonly="readonly" onfocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:20%"/>
 										<label class="label-tips" id="endTimeLabEnd"></label>
 									</td>
 								</tr>
+								<%-- <tr>
+									
+									<td class="td-left" >时间：</td>
+									<td>
+										<input type="text" id="startTime" name="startTime" value="${userLoginRelate.startTime }" readonly="readonly" onfocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:15%"/>
+										<label class="label-tips" id="startTimeLabStart"></label>
+											-
+										<input type="text" id="endTime" name="endTime" value="${userLoginRelate.endTime }" readonly="readonly" onfocus="WdatePicker({skin:'whyGreen'})" style="background:#fff url(/static/My97DatePicker/skin/datePicker.gif) no-repeat right!important; width:15%"/>
+										<label class="label-tips" id="endTimeLabEnd"></label>
+									</td>
+								</tr> --%>
 
 								<tr>
 									<td colspan="6" align="center">
@@ -228,21 +236,23 @@ jQuery(function($){
 	</div><!-- /.main-container -->
 		<script type="text/javascript">
 			function del(id){
-				alert(id);
-				$.post(window.Constants.ContextPath + '/userLoginRelate/del', 
-						{
-							'id' 	: id
-						}, function(data) {
-							if(data.result == 'SUCCESS'){
-								$.gyzbadmin.alertSuccess('删除成功', null, function(){
+			
+				
+				layer.confirm('确定删除账户吗', {icon: 3, title:'提示'}, function(index){
+					  layer.close(index);
+						$.post(window.Constants.ContextPath + '/userLoginRelate/del', 
+							{
+								'id' 	: id
+							}, function(data) {
+								if(data.result == 'SUCCESS'){
+									 layer.msg("删除成功");  
 									window.location.reload();
-								});
-								window.location.reload();
-							} else {
-								$.gyzbadmin.alertFailure('删除失败:' + data.message);
-							}
-						}, 'json'
-					);
+								} else {
+									$.gyzbadmin.alertFailure('删除失败:' + data.message);
+								}
+							}, 'json'
+						);		
+				});//layui 结束	
 			}
 
 
