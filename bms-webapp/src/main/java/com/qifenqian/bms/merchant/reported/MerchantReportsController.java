@@ -1070,9 +1070,9 @@ public class MerchantReportsController {
 			}
 			return object.toString();
 		}
-			
+		logger.info("商户进件状态查询..........." + req);
 		ChannelResult channelResult = iMerChantIntoServic.merQuery(req);
-		
+		logger.info(channelResult.getStatus() + "商户进件状态查询返回接口." + channelResult.getData());
 		Map<String, Object> rtnResultMap = channelResult.getData();
 		String channelMerNo = "";
 		String wxMerNo = "";
