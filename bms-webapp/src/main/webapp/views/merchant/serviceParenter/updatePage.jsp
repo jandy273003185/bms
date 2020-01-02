@@ -1087,7 +1087,7 @@ function businessForever(){
 							<td class="td-right" >
 								<a data-toggle='modal' class="tooltip-success openAccountClick"  data-target="#previewImageModal" >
 									<label id="openAccountDiv" class="uploadImage">
-									        <img  id="openAccountImage" onClick="bigImg(this);" src="${picturePathOld.openAccountPath}"  style="width:100%;height:100%;display:none"/>
+									        <img  id="openAccountImage" onClick="bigImg(this);" src="${picturePathOld.openAccountPath}"  style="width:100%;height:100%;"/>
 									</label>
 								</a>
 								<div style="float:left;margin-top:75" >
