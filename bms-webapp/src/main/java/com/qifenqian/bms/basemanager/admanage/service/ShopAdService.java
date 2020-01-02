@@ -20,6 +20,7 @@ public class ShopAdService {
     private ShopAdDao shopAdDao;
 
     public String distributionShopAd(ShopAdDO shopAdDO) {
+    	
         /**
          * 取出广告ID
          */
@@ -53,6 +54,11 @@ public class ShopAdService {
                 //设置门店
                 shopAd.setShopId(mchShopDO.getShopId());
                 list.add(shopAd);
+                //添加设备主页广告
+                int machineAdvert =findTdMachineAdvertList(shopAd,adDO.getSequence());
+                if(machineAdvert < 1) {
+                	return "FALSE";
+                }
             }
         }
         if (CollectionUtils.isEmpty(list)) {
@@ -67,7 +73,37 @@ public class ShopAdService {
             return "FALSE";
         }
     }
-
+    
+    
+    
+    /**
+     * 	根据广告ID获取查询图片详细信息
+     * @param mchShopDO
+     * @return
+     */
+    private int findTdMachineAdvertList(ShopAd shopAd,String sequence){
+    	TdMachineAdvert tdMachineAdvert = new TdMachineAdvert();
+    	
+        tdMachineAdvert.setCustId(shopAd.getMchId());
+        //根据custId查询对应下面的设备
+        List<String> terminalNoList = this.shopAdDao.selectTerminalNoByCustId(tdMachineAdvert.getCustId());
+		if(terminalNoList.size() <= 0) {
+			return 0;
+		}
+        //根据广告ID查询出广告路径
+        String picturePath = this.shopAdDao.selectPicturePathByAdId(shopAd.getAdId());
+        tdMachineAdvert.setPicture(picturePath);
+        tdMachineAdvert.setSequence(sequence);
+        tdMachineAdvert.setCreator(String.valueOf(WebUtils.getUserInfo().getUserId()));
+        tdMachineAdvert.setState("00");
+        tdMachineAdvert.setCreateTime(new Date());
+        for(int i=0;i<terminalNoList.size();i++) {
+        	tdMachineAdvert.setTerminalNo(terminalNoList.get(i));
+        	int a = this.shopAdDao.saveTdMachineAdvert(tdMachineAdvert);
+        }
+        return 1;
+    	
+    }
     /**
      * @Author LiBin
      * @Description 如果没有商户 则全选商户门店

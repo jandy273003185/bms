@@ -1,16 +1,10 @@
 package com.qifenqian.bms.basemanager.admanage;
 
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.qifenqian.bms.app.ad.bean.AdManageBean;
-import com.qifenqian.bms.basemanager.admanage.bean.*;
-import com.qifenqian.bms.basemanager.admanage.service.AdManagementService;
-import com.qifenqian.bms.basemanager.admanage.service.ShopAdService;
+import java.util.HashMap;
+import java.util.List;
+
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,12 +16,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.*;
-import java.util.HashMap;
-import java.util.List;
+import com.alibaba.fastjson.JSONObject;
+import com.qifenqian.bms.basemanager.admanage.bean.AdAllCustInfoVO;
+import com.qifenqian.bms.basemanager.admanage.bean.AdCustInfoVO;
+import com.qifenqian.bms.basemanager.admanage.bean.AdManagement;
+import com.qifenqian.bms.basemanager.admanage.bean.ShopAdDO;
+import com.qifenqian.bms.basemanager.admanage.service.AdManagementService;
+import com.qifenqian.bms.basemanager.admanage.service.ShopAdService;
+import com.qifenqian.bms.basemanager.merchant.bean.Merchant;
+import com.qifenqian.bms.basemanager.merchant.mapper.MerchantMapper;
 
 @Controller
 @RequestMapping(AdManagementPath.BASE)
@@ -45,7 +42,8 @@ public class AdManagementController {
     private AdManagementService adManagementService;
     @Autowired
     private ShopAdService shopAdService;
-
+    @Autowired
+	private MerchantMapper merchantMapper;
     /**
      * 显示广告信息列表
      *
@@ -56,8 +54,10 @@ public class AdManagementController {
     public ModelAndView list(AdManagement queryBean) {
         ModelAndView mv = new ModelAndView(AdManagementPath.BASE + AdManagementPath.LIST);
         List<AdManagement> adManagementList = adManagementService.selectAdManagementListBy(queryBean);
+        List<Merchant> merchantList = merchantMapper.selectMerchant();
         mv.addObject("adList", JSONObject.toJSON(adManagementList));
         mv.addObject("queryBean", queryBean);
+        mv.addObject("merchantList", merchantList);
         return mv;
     }
 

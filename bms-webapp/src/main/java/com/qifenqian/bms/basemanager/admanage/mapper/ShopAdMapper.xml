@@ -79,5 +79,65 @@
         </foreach>
     </delete>
 
-
+	<select id="selectTerminalNoByCustId"  parameterType="string" resultType="string">
+	select
+		terminal_no
+	from
+		td_merchant_sign
+	where
+		merchant_id = #{custId, jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectPicturePathByAdId"  parameterType="string" resultType="string">
+	select
+		IMAGE_PATH
+	from
+		td_ad_manage
+	where
+		AD_ID = #{adId, jdbcType=VARCHAR}
+	ORDER BY CREATE_TIME DESC	  
+	LIMIT 1
+	</select>
+	
+	<insert id="saveTdMachineAdvert" parameterType="com.qifenqian.bms.basemanager.admanage.bean.TdMachineAdvert">
+    	INSERT INTO td_machine_advert(
+    		CUST_ID,
+    		TERMINAL_NO,
+    		MACHINE_TYPE,
+    		PICTURE,
+    		SEQUENCE,
+    		STATE,
+    		CREATOR,
+    		CREATE_TIME,
+    		MEMO
+    	)VALUES (
+	    	#{custId, 		jdbcType = VARCHAR},
+	    	#{terminalNo, 		jdbcType = VARCHAR},
+	    	#{machineType, 		jdbcType = VARCHAR},
+	    	#{picture, 		jdbcType = VARCHAR},
+	    	#{sequence, 		jdbcType = VARCHAR},
+	    	#{state, 		jdbcType = VARCHAR},
+	    	#{creator, 		jdbcType = VARCHAR},
+	    	#{createTime, 		jdbcType = VARCHAR},
+	    	#{memo, 		jdbcType = VARCHAR}
+    	
+    	)
+    	
+    </insert>
+    
+    
+    <update id="updateTdMachineAdvert" parameterType="com.qifenqian.bms.basemanager.admanage.bean.TdMachineAdvert">
+    UPDATE
+        td_machine_advert
+    <set>
+    	<if test="state != null and state !='' ">
+	 		`state` = #{state,jdbcType = VARCHAR}
+	 	</if>
+    </set>
+    <where>
+    	<if test="custId != null and custId != '' ">
+			CUST_ID = #{custId,jdbcType = VARCHAR} 
+		</if>
+    </where>
+    </update>
 </mapper>

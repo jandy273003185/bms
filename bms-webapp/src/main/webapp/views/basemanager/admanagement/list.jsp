@@ -164,6 +164,7 @@
                                                title="全选"/>
                                     </th>
                                     <th width="10%">广告名</th>
+                                   <!--  <th width="10%">商户号</th> -->
                                     <th width="15%">图片路径</th>
                                     <th width="15%">链接地址</th>
                                     <th width="5%">类别</th>
@@ -188,6 +189,7 @@
                                             <input type="hidden" name="adId" id="adId">
                                                 ${ad.adName }
                                         </td>
+                                        <%-- <td>${ad.custId }</td> --%>
                                         <td>
                                                 ${ad.imagePath }
                                         </td>
@@ -358,6 +360,17 @@
                                 <input type="text" id="adName" name="adName" style="width:80%">
                             </td>
                         </tr>
+                        <%-- <tr>
+                            <td class="td-left" width="20%">商户号<span style="color:red">*</span></td>
+                            <td class="td-right" width="80%">
+                            	<select id="custId" name="custId">
+									<option value="">输入商户名查询</option>
+									<c:forEach items="${merchantList }" var="bean">
+										<option value="${bean.custId }">${bean.custName }</option>
+									</c:forEach>
+								</select>
+                            </td>
+                        </tr> --%>
                         <tr>
                             <td class="td-left">图片上传<span style="color:red">*</span></td>
                             <td class="td-right">
@@ -590,7 +603,7 @@
                     var distributionAdType = values[2];
                     var distributionAdShowTime = values[3];
                     var distributionAdUrl = values[4];
-
+                    var sequence = i +'sequence';
                     if (distributionAdType == '0') {
                         distributionAdType = '轮播';
                     } else if (distributionAdType == "1") {
@@ -603,6 +616,7 @@
                     modalImgHtm += "</a>";
                     modalImgHtm += "<div ><label>广告类型 : " + distributionAdType + "</label></div>";
                     modalImgHtm += "<div><label>广告名称 : " + distributionAdName + "</label></div>";
+                    modalImgHtm += "<div><input type='text' id='"+sequence + "' placeholder='广告图片顺序' ></div>";
                     modalImgHtm += "</div>";
                     $('#modalImg').append(modalImgHtm);
                     /**
@@ -759,7 +773,13 @@
                 $("#addAdModal #adName").focus();
                 return;
             }
-
+            /* var custId = $("#addAdModal #custId").val();
+            if (kong.test(custId)) {
+                $.gyzbadmin.alertFailure("商户名不可为空");
+                $("#addAdModal #custId").focus();
+                return;
+            } */
+            
             var imagePath = $('#addImagePath').val();
             if (kong.test(imagePath)) {
                 $.gyzbadmin.alertFailure("广告地址不可为空");
@@ -793,6 +813,7 @@
                 data:
                     {
                         "adName": adName,
+                        /* "custId": custId, */
                         "imagePath": imagePath,
                         "url": url,
                         "type": type_,
@@ -849,6 +870,10 @@
             if (!checkValue && mchShopDOList.length < 1) {
                 $.gyzbadmin.alertFailure("请选择商户门店不可为空");
                 return false;
+            }
+            for(var i=0;i<adDOList.length;i++){
+            	adDOList[i].sequence = $("#" +i +"sequence").val();
+            	
             }
             var shopAdDO = {
                 adDOList: adDOList,

@@ -19,8 +19,17 @@ public class AdManagement implements Serializable {
     private Date createTime; //创建时间
     private String modifyId; //修改人
     private Date modifyTime; //修改时间
+    private String custId; //商户号
+    
+    public String getCustId() {
+		return custId;
+	}
 
-    public String getAdId() {
+	public void setCustId(String custId) {
+		this.custId = custId;
+	}
+
+	public String getAdId() {
         return adId;
     }
 
