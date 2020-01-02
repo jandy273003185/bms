@@ -1929,7 +1929,9 @@
 			<if test="idTermEnd != null">
 				id_term_end =  #{idTermEnd , jdbcType = VARCHAR}
 			</if>
-		
+			<if test="compMainAcctType != null">
+				COMP_MAIN_ACCT_TYPE =  #{compMainAcctType , jdbcType = VARCHAR}
+			</if>
 		</set>
 		WHERE CUST_ID = #{custId,jdbcType=VARCHAR}
 	</update>
