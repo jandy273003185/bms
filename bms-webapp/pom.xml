@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>com.qifenqian</groupId>
 		<artifactId>bms-parent</artifactId>
-		<version>5.0.0-SNAPSHOT</version>
+		<version>5.0.2-UAT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>bms-webapp</artifactId>
@@ -29,10 +29,24 @@
 		</repository>
 	</repositories>
 	<dependencies>
+		<!-- springboot -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>com.alibaba.boot</groupId>
 			<artifactId>dubbo-spring-boot-starter</artifactId>
 			<version>0.2.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 
 		<dependency>
@@ -87,46 +101,17 @@
 			<version>1.0.0</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>log4j-over-slf4j</artifactId>
-		</dependency>
+		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-context-support</artifactId> 
+			</dependency> <dependency> <groupId>org.springframework</groupId> <artifactId>spring-web</artifactId> 
+			</dependency> <dependency> <groupId>org.springframework</groupId> <artifactId>spring-webmvc</artifactId> 
+			</dependency> <dependency> <groupId>org.springframework</groupId> <artifactId>spring-aop</artifactId> 
+			</dependency> <dependency> <groupId>org.aspectj</groupId> <artifactId>aspectjweaver</artifactId> 
+			</dependency> <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-api</artifactId> 
+			</dependency> <dependency> <groupId>ch.qos.logback</groupId> <artifactId>logback-core</artifactId> 
+			</dependency> <dependency> <groupId>ch.qos.logback</groupId> <artifactId>logback-classic</artifactId> 
+			</dependency> <dependency> <groupId>org.slf4j</groupId> <artifactId>jcl-over-slf4j</artifactId> 
+			</dependency> <dependency> <groupId>org.slf4j</groupId> <artifactId>log4j-over-slf4j</artifactId> 
+			</dependency> -->
 
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -201,6 +186,8 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
+	
 
 		<!-- 手机消息推送 -->
 		<dependency>
@@ -283,7 +270,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>ROOT</finalName>
+		<finalName>${project.artifactId}-${project.version}-${spring.profiles.active}</finalName>
 		<resources>
 			<resource>
 				<directory>src/main/java</directory>
@@ -292,12 +279,12 @@
 					<include>**/*.tld</include>
 					<include>**/*.properties</include>
 				</includes>
-				<filtering>true</filtering>
 			</resource>
 			<resource>
 				<directory>src/main/resources</directory>
 				<excludes>
 					<exclude>application*.properties</exclude>
+					<exclude>application*.yml</exclude>
 				</excludes>
 			</resource>
 			<resource>
@@ -307,6 +294,8 @@
 				<includes>
 					<include>application.properties</include>
 					<include>application-${spring.profiles.active}.properties</include>
+					<include>application.yml</include>
+					<include>application-${spring.profiles.active}.yml</include>
 				</includes>
 			</resource>
 		</resources>
