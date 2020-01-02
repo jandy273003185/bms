@@ -12,7 +12,7 @@
 	<groupId>com.qifenqian</groupId>
 	<artifactId>bms-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>5.02</version>
+	<version>5.0.2-UAT</version>
 	<name>bms</name>
 
 	<properties>
