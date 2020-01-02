@@ -138,8 +138,18 @@ public class TdMerchantDetailInfo extends publicBean {
 	
 	private String mobile;
 	
+	private String channelMark;
 	
 	
+	
+	public String getChannelMark() {
+		return channelMark;
+	}
+
+	public void setChannelMark(String channelMark) {
+		this.channelMark = channelMark;
+	}
+
 	public String getMobile() {
 		return mobile;
 	}

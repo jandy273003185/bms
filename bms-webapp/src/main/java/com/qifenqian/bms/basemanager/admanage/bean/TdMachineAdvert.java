@@ -21,7 +21,7 @@ public class TdMachineAdvert implements Serializable {
 	private String picture;
 	//广告图片顺序
 	private String sequence;
-	//状态 00-可用 99-失效
+	//状态 00-可用 01-失效
 	private String state;
 	//创建人
 	private String creator;

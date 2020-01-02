@@ -38,6 +38,10 @@ public class ShopAdService {
         ShopAd shopAd = null;
         List<ShopAd> list = new ArrayList<>();
         for (MchShopDO mchShopDO : mchShopDOList) {
+        	TdMachineAdvert tdMachineAdvert = new TdMachineAdvert();
+            tdMachineAdvert.setCustId(mchShopDO.getMchId());
+            tdMachineAdvert.setState("01");
+    		shopAdDao.updateTdMachineAdvert(tdMachineAdvert);
             for (AdDO adDO : adIds) {
                 shopAd = new ShopAd();
                 //设置ID为UUID生成的32位随机数
@@ -55,7 +59,7 @@ public class ShopAdService {
                 shopAd.setShopId(mchShopDO.getShopId());
                 list.add(shopAd);
                 //添加设备主页广告
-                int machineAdvert =findTdMachineAdvertList(shopAd,adDO.getSequence());
+                int machineAdvert =findTdMachineAdvertList(shopAd,adDO.getSequence(),adDO.getMachineType());
                 if(machineAdvert < 1) {
                 	return "FALSE";
                 }
@@ -81,7 +85,7 @@ public class ShopAdService {
      * @param mchShopDO
      * @return
      */
-    private int findTdMachineAdvertList(ShopAd shopAd,String sequence){
+    private int findTdMachineAdvertList(ShopAd shopAd,String sequence,String machineType){
     	TdMachineAdvert tdMachineAdvert = new TdMachineAdvert();
     	
         tdMachineAdvert.setCustId(shopAd.getMchId());
@@ -94,6 +98,7 @@ public class ShopAdService {
         String picturePath = this.shopAdDao.selectPicturePathByAdId(shopAd.getAdId());
         tdMachineAdvert.setPicture(picturePath);
         tdMachineAdvert.setSequence(sequence);
+        tdMachineAdvert.setMachineType(machineType);
         tdMachineAdvert.setCreator(String.valueOf(WebUtils.getUserInfo().getUserId()));
         tdMachineAdvert.setState("00");
         tdMachineAdvert.setCreateTime(new Date());

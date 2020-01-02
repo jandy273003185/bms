@@ -604,6 +604,7 @@
                     var distributionAdShowTime = values[3];
                     var distributionAdUrl = values[4];
                     var sequence = i +'sequence';
+                    var machineType = i +'machineType';
                     if (distributionAdType == '0') {
                         distributionAdType = '轮播';
                     } else if (distributionAdType == "1") {
@@ -617,7 +618,10 @@
                     modalImgHtm += "<div ><label>广告类型 : " + distributionAdType + "</label></div>";
                     modalImgHtm += "<div><label>广告名称 : " + distributionAdName + "</label></div>";
                     modalImgHtm += "<div><input type='text' id='"+sequence + "' placeholder='广告图片顺序' ></div>";
-                    modalImgHtm += "</div>";
+                    modalImgHtm += "<div><select class='form-control'  id='"+machineType +"'>";
+                    modalImgHtm += "<option value='QINGWA'>"+ "青蛙" + "</option>";
+                    modalImgHtm += "<option value='QINGTING'>"+ "蜻蜓" + "</option></select>";
+                    modalImgHtm += "</div></div>";
                     $('#modalImg').append(modalImgHtm);
                     /**
                      * 赋值发布广告参数信息
@@ -873,7 +877,7 @@
             }
             for(var i=0;i<adDOList.length;i++){
             	adDOList[i].sequence = $("#" +i +"sequence").val();
-            	
+            	adDOList[i].machineType= $("#" +i +"machineType").val();
             }
             var shopAdDO = {
                 adDOList: adDOList,

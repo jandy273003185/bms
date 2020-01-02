@@ -273,7 +273,13 @@
 		 	`detail_status` = #{detailStatus,jdbcType = VARCHAR},
 		 	</if>
 		 	<if test="resultMsg != null and resultMsg !='' ">
-		 	`result_msg` = #{resultMsg,jdbcType = VARCHAR}
+		 	`result_msg` = #{resultMsg,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="status != null and status !='' ">
+		 	`status` = #{status,jdbcType = VARCHAR},
+		 	</if>
+		 	<if test="channelMark != null and channelMark !='' ">
+		 	`channel_mark` = #{channelMark,jdbcType = VARCHAR}
 		 	</if>
 		 </set>
 		 <where>
@@ -394,6 +400,7 @@
     	SELECT
 			t.*,
 			f.cust_name,
+			f.cust_id,
 			r.channel_no,
 			DATE_FORMAT(t.modify_time,'%Y-%m-%d %H:%i:%s') modify_time,
 			DATE_FORMAT(t.create_time,'%Y-%m-%d %H:%i:%s') reportTime

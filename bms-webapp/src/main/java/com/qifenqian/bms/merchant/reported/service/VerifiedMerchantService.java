@@ -87,6 +87,11 @@ public class VerifiedMerchantService {
 				detailInfo.setReportStatus("20");
 				logger.info("更新td_merchant_detail_info表数据：{}", JSONObject.toJSONString(detailInfo));
 				fmIncomeMapper.updateTdMerchantDetailInfo(detailInfo);
+				detailInfo.setMerchantCode(tdMerchantDetailInfo.getMerchantCode());
+				detailInfo.setPatchNo(tdMerchantDetailInfo.getPatchNo());
+				detailInfo.setReportStatus("O");
+				detailInfo.setDetailStatus("20");
+				fmIncomeMapper.updateTdMerchantReport(detailInfo);
 				logger.info("更新td_merchant_detail_info表数据：{} end...");
 				
 				verifiedResult.put("message", "认证请求成功");
@@ -119,7 +124,7 @@ public class VerifiedMerchantService {
 			req.setReqId(DateUtil.format(new Date(), DateUtil.YYYYMMDDHHMMSS));
 			logger.info("-----------------认证申请结果查询请求报文：" + JSONObject.toJSONString(req));
 			RealNameAuthenticationQueryRes res = realNameAuthenticationService.query(req);
-			logger.info("-----------------认证申请结果查询请求报文：" + JSONObject.toJSONString(req));
+			logger.info("-----------------认证申请结果查询返回报文：" + JSONObject.toJSONString(res));
 			if("0000".equals(res.getBizCode())) {
 				
 				
@@ -149,6 +154,9 @@ public class VerifiedMerchantService {
 				tdMerchantDetailInfo.setReportStatus("21");
 				logger.info("更新td_merchant_detail_info表数据：{}", JSONObject.toJSONString(tdMerchantDetailInfo));
 				fmIncomeMapper.updateTdMerchantDetailInfo(tdMerchantDetailInfo);
+				tdMerchantDetailInfo.setReportStatus("O");
+				tdMerchantDetailInfo.setDetailStatus("21");
+				fmIncomeMapper.updateTdMerchantReport(tdMerchantDetailInfo);
 				logger.info("更新td_merchant_detail_info表数据：{} end...");
 				
 				result.put("message", "认证请求成功");
@@ -157,6 +165,9 @@ public class VerifiedMerchantService {
 				tdMerchantDetailInfo.setReportStatus("22");
 				logger.info("更新td_merchant_detail_info表数据：{}", JSONObject.toJSONString(tdMerchantDetailInfo));
 				fmIncomeMapper.updateTdMerchantDetailInfo(tdMerchantDetailInfo);
+				tdMerchantDetailInfo.setReportStatus("O");
+				tdMerchantDetailInfo.setDetailStatus("22");
+				fmIncomeMapper.updateTdMerchantReport(tdMerchantDetailInfo);
 				logger.info("更新td_merchant_detail_info表数据：{} end...");
 				result.put("result", "FAIL");
 				result.put("message", res.getRejectInfo());
@@ -191,6 +202,9 @@ public class VerifiedMerchantService {
 				tdMerchantDetailInfo.setReportStatus("24");
 				logger.info("更新td_merchant_detail_info表数据：{}", JSONObject.toJSONString(tdMerchantDetailInfo));
 				fmIncomeMapper.updateTdMerchantDetailInfo(tdMerchantDetailInfo);
+				tdMerchantDetailInfo.setReportStatus("O");
+				tdMerchantDetailInfo.setDetailStatus("24");
+				fmIncomeMapper.updateTdMerchantReport(tdMerchantDetailInfo);
 				logger.info("更新td_merchant_detail_info表数据：{} end...");
 				verifiedResult.put("message", "实名认证申请撤销请求成功");
 				verifiedResult.put("result", "SUCCESS");
@@ -198,6 +212,9 @@ public class VerifiedMerchantService {
 				tdMerchantDetailInfo.setReportStatus("25");
 				logger.info("更新td_merchant_detail_info表数据：{}", JSONObject.toJSONString(tdMerchantDetailInfo));
 				fmIncomeMapper.updateTdMerchantDetailInfo(tdMerchantDetailInfo);
+				tdMerchantDetailInfo.setReportStatus("O");
+				tdMerchantDetailInfo.setDetailStatus("25");
+				fmIncomeMapper.updateTdMerchantReport(tdMerchantDetailInfo);
 				logger.info("更新td_merchant_detail_info表数据：{} end...");
 				verifiedResult.put("result", "FAIL");
 				verifiedResult.put("message", res.getBizMsg());
@@ -228,6 +245,9 @@ public class VerifiedMerchantService {
 				tdMerchantDetailInfo.setReportStatus("27");
 				logger.info("更新td_merchant_detail_info表数据：{}", JSONObject.toJSONString(tdMerchantDetailInfo));
 				fmIncomeMapper.updateTdMerchantDetailInfo(tdMerchantDetailInfo);
+				tdMerchantDetailInfo.setReportStatus("O");
+				tdMerchantDetailInfo.setDetailStatus("27");
+				fmIncomeMapper.updateTdMerchantReport(tdMerchantDetailInfo);
 				logger.info("更新td_merchant_detail_info表数据：{} end...");
 				result.put("status", res.getAuthStatus());
 				result.put("message", "授权状态查询请求成功");
@@ -236,6 +256,9 @@ public class VerifiedMerchantService {
 				tdMerchantDetailInfo.setReportStatus("28");
 				logger.info("更新td_merchant_detail_info表数据：{}", JSONObject.toJSONString(tdMerchantDetailInfo));
 				fmIncomeMapper.updateTdMerchantDetailInfo(tdMerchantDetailInfo);
+				tdMerchantDetailInfo.setReportStatus("O");
+				tdMerchantDetailInfo.setDetailStatus("28");
+				fmIncomeMapper.updateTdMerchantReport(tdMerchantDetailInfo);
 				logger.info("更新td_merchant_detail_info表数据：{} end...");
 				result.put("result", "FAIL");
 				result.put("message", res.getBizMsg());

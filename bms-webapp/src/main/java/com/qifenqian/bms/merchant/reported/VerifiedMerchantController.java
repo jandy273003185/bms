@@ -39,9 +39,9 @@ public class VerifiedMerchantController {
 		Map<String, Object> verifiedResult = new HashMap<String, Object>();
 		tdMerchantDetailInfo = fmIncomeMapper.selMerchantDetailInfo(tdMerchantDetailInfo);
 		//调用实名认证接口
-		logger.info("------------调用实名认证接口---------------------" + tdMerchantDetailInfo);
+		logger.info("------------调用实名认证接口---------------------" + JSONObject.toJSONString(tdMerchantDetailInfo));
 		verifiedResult = verifiedMerchantService.verifiedMerchant(tdMerchantDetailInfo);
-		logger.info("------------调用实名认证接口结束---------------------" + verifiedResult);
+		logger.info("------------调用实名认证接口结束---------------------" + JSONObject.toJSONString(verifiedResult));
 		if("SUCCESS".equals(verifiedResult.get("result"))){
 			object.put("result", "SUCCESS");
 			object.put("message", "提交实名认证成功");
@@ -64,9 +64,9 @@ public class VerifiedMerchantController {
 		Map<String, Object> verifiedResult = new HashMap<String, Object>();
 		tdMerchantDetailInfo = fmIncomeMapper.selMerchantDetailInfo(tdMerchantDetailInfo);
 		//调用微信商户认证申请结果查询
-		logger.info("------------调用微信商户认证申请结果查询---------------------" + tdMerchantDetailInfo);
+		logger.info("------------调用微信商户认证申请结果查询---------------------" + JSONObject.toJSONString(tdMerchantDetailInfo));
 		verifiedResult = verifiedMerchantService.verifiedQuery(tdMerchantDetailInfo);
-		logger.info("------------调用微信商户认证申请结果查询结束---------------------" + verifiedResult);
+		logger.info("------------调用微信商户认证申请结果查询结束---------------------" + JSONObject.toJSONString(verifiedResult));
 		if("SUCCESS".equals(verifiedResult.get("result"))){
 			object.put("result", "SUCCESS");
 			object.put("message", "申请结果查询成功");
@@ -88,9 +88,9 @@ public class VerifiedMerchantController {
 		Map<String, Object> verifiedResult = new HashMap<String, Object>();
 		tdMerchantDetailInfo = fmIncomeMapper.selMerchantDetailInfo(tdMerchantDetailInfo);
 		//微信商户认证申请撤销接口
-		logger.info("------------调用微信商户认证申请撤销接口---------------------" + tdMerchantDetailInfo);
+		logger.info("------------调用微信商户认证申请撤销接口---------------------" + JSONObject.toJSONString(tdMerchantDetailInfo));
 		verifiedResult = verifiedMerchantService.verifiedCancel(tdMerchantDetailInfo);
-		logger.info("------------调用微信商户认证申请撤销接口结束---------------------" + verifiedResult);
+		logger.info("------------调用微信商户认证申请撤销接口结束---------------------" + JSONObject.toJSONString(verifiedResult));
 		if("SUCCESS".equals(verifiedResult.get("result"))){
 			object.put("result", "SUCCESS");
 			object.put("message", "申请撤销成功");

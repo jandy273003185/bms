@@ -46,8 +46,7 @@ public class ShopAdDao {
 		
 	}
 
-	public int updateTdMachineAdvert(TdMachineAdvert tdMachineAdvert, String a) {
-		tdMachineAdvert.setState(a);
+	public int updateTdMachineAdvert(TdMachineAdvert tdMachineAdvert) {
 		return this.shopAdMapper.updateTdMachineAdvert(tdMachineAdvert);
 		
 	}

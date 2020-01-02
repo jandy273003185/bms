@@ -8,10 +8,19 @@ public class AdDO implements Serializable {
     private String adId;
     private int sortNo;
     private String sequence;
+    private String machineType;
     
     
+    
+    public String getMachineType() {
+		return machineType;
+	}
 
-    public String getSequence() {
+	public void setMachineType(String machineType) {
+		this.machineType = machineType;
+	}
+
+	public String getSequence() {
 		return sequence;
 	}
 
