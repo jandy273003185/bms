@@ -16,8 +16,8 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	</bean> -->
 	
 	<bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">  
-	    <property name="dataSource" ref="dataSourceOper" />  
-	    <property name="transactionManager" ref="transactionManagerOper" />  
+	    <property name="dataSource" ref="stcdbDataSource" />  
+	    <property name="transactionManager" ref="stcdbTransactionManager" />  
 	    <property name="databaseSchemaUpdate" value="true" />  
 	    <property name="mailServerHost" value="localhost" />  
 	    <property name="mailServerPort" value="5025" />  
