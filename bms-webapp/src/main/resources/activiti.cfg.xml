@@ -25,7 +25,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	    <property name="jpaCloseEntityManager" value="true" />  
 	    <property name="jobExecutorActivate" value="false" />
 	 	<property name="deploymentResources" value="classpath*:/diagrams/prosceniumMerchant.bpmn"/> 
-	<!--     <property name="deploymentResources" value="classpath*:/test/*.bpmn"/> -->
+	  <!--   <property name="deploymentResources" value="classpath*:/test/*.bpmn"/> -->
   	</bean>  
 	
 	<bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">

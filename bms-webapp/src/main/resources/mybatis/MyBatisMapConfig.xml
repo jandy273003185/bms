@@ -6,12 +6,11 @@
 	<settings>
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 		<setting name="logImpl" value="SLF4J" />
-    <setting name="logPrefix" value="org.mybatis." />
+    	<setting name="logPrefix" value="org.mybatis." />
 	</settings>
-	
+		
 	<!-- 别名 -->
-	<typeAliases>
-	</typeAliases>
+
 	
 	<!-- 分页插件 -->
 	<plugins>

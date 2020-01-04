@@ -10,6 +10,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import com.alibaba.druid.pool.DruidDataSource;
@@ -33,8 +34,8 @@ public class CombinedMasterDataSourceConfigure {
   }
 
   @Bean(name = "combinedmasterTransactionManager")
-  public DataSourceTransactionManager combinedmasterTransactionManager() {
-    return new DataSourceTransactionManager(combinedmasterDataSource());
+  public DataSourceTransactionManager combinedmasterTransactionManager(@Qualifier("combinedmasterDataSource")DataSource ds) {
+    return new DataSourceTransactionManager(ds);
   }
 
   @Bean(name = "combinedmasterSqlSessionFactory")
@@ -42,6 +43,7 @@ public class CombinedMasterDataSourceConfigure {
       @Qualifier("combinedmasterDataSource") DataSource dataSource) throws Exception {
     final SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
     sessionFactoryBean.setDataSource(dataSource);
+    sessionFactoryBean.setConfigLocation(new PathMatchingResourcePatternResolver().getResource("classpath:mybatis/MyBatisMapConfig.xml"));
     /*sessionFactoryBean.setMapperLocations(
     new PathMatchingResourcePatternResolver().getResources(MAPPER));*/
     return sessionFactoryBean.getObject();

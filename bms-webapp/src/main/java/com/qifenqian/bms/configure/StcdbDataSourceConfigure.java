@@ -9,9 +9,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 
 /**
  * 数据源配置， 暂时不使用
@@ -21,25 +24,33 @@ import com.alibaba.druid.pool.DruidDataSource;
 @Configuration
 @MapperScan(
     basePackages = "com.qifenqian.bms",
-    sqlSessionFactoryRef = "stcdbSqlSessionFactory", annotationClass = MapperScan.class)
+    sqlSessionFactoryRef = "stcdbSqlSessionFactory",
+    annotationClass = MapperScan.class)
 public class StcdbDataSourceConfigure {
 
-  @ConfigurationProperties("spring.datasource.stcdb")
+
   @Bean(name = "stcdbDataSource")
-  public DruidDataSource stcdbDataSource() {
-    return new DruidDataSource();
+  @Primary
+  @ConfigurationProperties("spring.datasource.stcdb")
+  public DataSource stcdbDataSource() {
+    DruidDataSource ds = DruidDataSourceBuilder.create().build();
+    return ds;
   }
 
   @Bean(name = "stcdbTransactionManager")
-  public DataSourceTransactionManager combinedmasterTransactionManager() {
-    return new DataSourceTransactionManager(stcdbDataSource());
+  @Primary
+  public DataSourceTransactionManager stcdbTransactionManager(
+      @Qualifier("stcdbDataSource") DataSource ds) {
+    return new DataSourceTransactionManager(ds);
   }
 
   @Bean(name = "stcdbSqlSessionFactory")
-  public SqlSessionFactory masterSqlSessionFactory(
+  @Primary
+  public SqlSessionFactory stcdbSqlSessionFactory(
       @Qualifier("stcdbDataSource") DataSource dataSource) throws Exception {
     final SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
     sessionFactoryBean.setDataSource(dataSource);
+    sessionFactoryBean.setConfigLocation(new PathMatchingResourcePatternResolver().getResource("classpath:mybatis/MyBatisMapConfig.xml"));
     /*sessionFactoryBean.setMapperLocations(
     new PathMatchingResourcePatternResolver().getResources(MAPPER));*/
     return sessionFactoryBean.getObject();

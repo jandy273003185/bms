@@ -33,8 +33,8 @@ public class StcsDataSourceConfigure {
   }
 
   @Bean(name = "stcsTransactionManager")
-  public DataSourceTransactionManager combinedmasterTransactionManager() {
-    return new DataSourceTransactionManager(stcdbDataSource());
+  public DataSourceTransactionManager combinedmasterTransactionManager(@Qualifier("stcsDataSource")DataSource ds) {
+    return new DataSourceTransactionManager(ds);
   }
 
   @Bean(name = "stcsSqlSessionFactory")

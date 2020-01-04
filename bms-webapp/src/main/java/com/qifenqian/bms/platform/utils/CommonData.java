@@ -5,8 +5,10 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
+import org.springframework.context.annotation.Configuration;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
+@Configuration
 public class CommonData {
 	private static Logger log = Logger.getLogger(CommonData.class);
 

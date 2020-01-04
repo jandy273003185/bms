@@ -43,7 +43,7 @@ import com.qifenqian.bms.platform.web.page.bean.PageInfo;
  * @date 2015年11月18日
  * @memo
  */
-@Intercepts({ @Signature(type = StatementHandler.class, method = "prepare", args = { Connection.class }) })
+@Intercepts({ @Signature(type = StatementHandler.class, method = "prepare", args = { Connection.class,Integer.class }) })
 public class MybatisPagePluginOracle implements Interceptor {
 
 	public Object intercept(Invocation invocation) throws Throwable {
