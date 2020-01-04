@@ -1,11 +1,173 @@
+#自定义
+#证件扫描件上传
+SKIP_FILTER_IP: 127.0.0.1#192.168.1.16#192.168.1.15
+
+VERSION: v1.0.0
+#提现银行卡号
+ACCOUNT_NUMBER: 6226220634022296
+ACCOUNT_NAME: 洪佳桂
+MERCHANT_CODE: INNER_EPAY_7777777
+CHANNEL_NAME: yyt
+AD_FILE_SAVE_PATH: /data/nfsshare/upload/ad
+AD_SUPPORT_FILE_TYPE: .jpg|.jpeg|.gif|.bmp|.png
+AD_FILE_MAX_SIZE: 2048000
+CF_FILE_SAVE_PATH: /data/nfsshare/upload/certificate
+PERSON_FILE_SAVE_PATH: /data/nfsshare/upload/person
+EXPORT_EXCEL: /data/nfsshare/upload/excel
+UNIONPAY_FILE_PATH: /data/nfsshare/upload/unionpay
+JGKJ_FILE_PATH: /data/nfsshare/upload/yintong
+AGRICULTURAL_BANK_SMS_PATH: /data/nfsshare/upload/agricultural_bank_sms
+IDENTITY_FILE_SAVE_PATH: /data/nfsshare/upload/identity
+EXCEL_FILE_SAVE_PATH: /data/nfsshare/upload/payment
+
+
+FM_PROD_CHECK_FILE: D:/data/nfsshare/combined/fm
+SX_FILE_SAVE_PATH: /data/nfsshare/upload/vbill/
+ADMANAGE_FILE_SAVE_PATH: /data/nfsshare/upload/picture
+IMAGEIP: localhost
+
+
+CERTIFY_FILE_SAVE_PATH: /data/nfsshare/upload/certify
+PRODUCET_FILE_SAVE_PATH: /data/nfsshare/upload/producet
+CERTIFY_SUPPORT_FILE_TYPE: .jpg|.jpeg|.gif|.bmp|.png
+CERTIFY_FILE_MAX_SIZE: 5120000
+IMG_FILE_PATH: /data/nfsshare/upload/headimg
+SERVICE_IP: https://www.qifenqian.com
+SERVICE_IP_TEST: https://183.11.223.2:7443
+
+DUBBO_CONFIG_IP: zookeeper://localhost:2181
+FILE_SERVER_PATH: http://192.168.1.219:8083/file/upload/pic
+
+channelMerchantid: Z0000842
+
+
+LOG:
+   LEVEL: DEBUG
+   BASEDIR: /data/app/applications/log/bms/
+system:
+   sevenpay: http://mg.qifenqian.com
+   sevenmall: http://mg.qifenqian.com/sevenmall
+
+
+SYSTEM:
+   #核心地址:
+   CORE:
+      IP: http://192.168.1.15:1234
+   #插件
+   PLUGIN:
+      IP: http://192.168.1.70:5002
+GATEWAY:
+   #银联
+   UNIO:
+      IP: http:/192.168.1.15:9001
+   #Kingdee
+   KINGDEE:
+      IP: http://192.168.1.15:15300
+   #Channel
+   CHANNEL:
+      IP: http://192.168.1.15:10024
+#redis
+REDIS:
+   IP: 192.168.1.19
+   PORT: 6379
+   AUTH: pass123
+#MQ URL
+MQ_URL: failover:(tcp://192.168.1.17:61616,tcp://192.168.1.18:61616)?randomize=false&amp;backup=true&amp;priorityBackup=true
+
+ip:
+   white:
+      list: 127.0.0.1#192.168.1.16#192.168.1.15
+
+APP_EDITION_SERVICE_IP: https://file.qifenqian.com/pic/
+
+
 spring:
    datasource:
-          stcdb:
-            type: com.alibaba.druid.pool.DruidDataSource
-            driverClassName: com.mysql.cj.jdbc.Driver
-            url: jdbc:mysql://192.168.1.17:3306/stcdb?zeroDateTimeBehavior=convertToNull
-            username: stc_web_user
-            password: 123456
+      #stcdb
+      stcdb:
+         type: com.alibaba.druid.pool.DruidDataSource
+         driverClassName: com.mysql.cj.jdbc.Driver
+         url: jdbc:mysql://192.168.1.17:3306/stcdb?zeroDateTimeBehavior=convertToNull
+         username: stc_web_user
+         password: 123456
+         initialSize: 1
+         maxActive: 20
+         minIdle: 1
+         maxWait: 60000
+         timeBetweenEvictionRunsMillis: 60000
+         minEvictableIdleTimeMillis: 300000
+         validationQuery: select 1
+         testWhileIdle: true
+      #stcdbslave
+      stcdbslave:
+           url: jdbc:mysql://192.168.1.18:3306/stcdb?zeroDateTimeBehavior=convertToNull
+           username: stc_web_user
+           password: 123456
+           initialSize: 1
+           maxActive: 20
+           minIdle: 1
+           maxWait: 60000
+           timeBetweenEvictionRunsMillis: 60000
+           minEvictableIdleTimeMillis: 300000
+           validationQuery: select 1
+           testWhileIdle: true
+      #stcs
+      stcs:
+         urljdbc: mysql://192.168.1.17:3306/stcs?zeroDateTimeBehavior=convertToNull
+         username: stcs_user
+         password: 123456
+         initialSize: 1
+         maxActive: 20
+         minIdle: 1
+         maxWait: 60000
+         timeBetweenEvictionRunsMillis: 60000
+         minEvictableIdleTimeMillis: 300000
+         validationQuery: select 1
+         testWhileIdle: true
+     #sabs
+      sabs:
+         url: jdbc:mysql://192.168.1.17:3306/sabs?zeroDateTimeBehavior=convertToNull
+         username: sabs_user
+         password: 123456
+         initialSize: 1
+         maxActive: 20
+         minIdle: 1
+         maxWait: 60000
+         timeBetweenEvictionRunsMillis: 60000
+         minEvictableIdleTimeMillis: 300000
+         validationQuery: select 1
+         testWhileIdle: true
+      combinedmaster:
+            initialSize: 1
+            maxActive: 20
+            maxWait: 60000
+            minEvictableIdleTimeMillis: 300000
+            minIdle: 1
+            password: combinedpayment
+            testWhileIdle: true
+            timeBetweenEvictionRunsMillis: 60000
+            url: jdbc:mysql://192.168.1.17:3306/combinedpayment?zeroDateTimeBehavior=convertToNull
+            username: combinedpayment
+            validationQuery: select 1
+      combinedslave:
+            initialSize: 1
+            maxActive: 20
+            maxWait: 60000
+            minEvictableIdleTimeMillis: 300000
+            minIdle: 1
+            password: combinedpayment
+            testWhileIdle: true
+            timeBetweenEvictionRunsMillis: 60000
+            url: jdbc:mysql://192.168.1.18:3306/combinedpayment?zeroDateTimeBehavior=convertToNull
+            username: combinedpayment
+            validationQuery: select 1
+
+#实体类扫描路径
+#mybatis配置文件路径
+mybatis:
+   config-location: classpath:/mybatis/MyBatisMapConfig.xml
+
+
 images:
    relativePaths: /pic/**
    absolutePaths: /data/nfsshare/upload/picture

@@ -21,7 +21,7 @@
 	<!-- <import resource="classpath*:spring/ApplicationContext-mybatis-sub.xml" /> -->
 	<!-- <import resource="classpath*:spring/ApplicationContext-system.xml" />
 	<import resource="classpath*:spring/ApplicationContext-httpinvoke.xml" /> -->
-	<!-- <import resource="classpath*:spring/ApplicationContext-beans.xml" /> -->
+	<import resource="classpath*:spring/ApplicationContext-beans.xml" />
 	<!-- <import resource="classpath*:spring/ApplicationContext-mybatis-combinedslave.xml" /> -->
 	<!-- import resource="classpath*:spring/ApplicationContext-mybatis-sabs.xml" /> -->
 	<!-- <import resource="classpath*:spring/ApplicationContext-mybatis-combinedmaster.xml" /> -->

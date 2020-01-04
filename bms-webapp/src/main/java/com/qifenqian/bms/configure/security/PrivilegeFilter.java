@@ -18,16 +18,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONObject;
+import com.qifenqian.bms.accounting.utils.CommonConfig;
 import com.qifenqian.bms.meeting.luckdraw.LuckDrawPath;
 import com.qifenqian.bms.meeting.winShow.controller.WinShowPath;
-import com.qifenqian.bms.platform.utils.CommonData;
-import com.qifenqian.bms.task.TaskPath;
 import com.qifenqian.bms.platform.web.Constants;
 import com.qifenqian.bms.platform.web.admin.function.bean.Function;
 import com.qifenqian.bms.platform.web.admin.login.LoginPath;
 import com.qifenqian.bms.platform.web.admin.user.bean.User;
 import com.qifenqian.bms.platform.web.admin.utils.PrivilegeUtils;
 import com.qifenqian.bms.platform.web.admin.utils.WebUtils;
+import com.qifenqian.bms.task.TaskPath;
 
 /**
  * 权限过滤器
@@ -71,9 +71,8 @@ public class PrivilegeFilter implements Filter {
     }
 
     boolean skip = false;
-
-    CommonData commonData = new CommonData();
-    String skipIP = commonData.getConfigMessage().get("SKIP_FILTER_IP");
+    
+    String skipIP =  CommonConfig.getInstance().getValue("SKIP_FILTER_IP");
 
     if (isExcludedPage) {
       skip = true;
