@@ -48,23 +48,23 @@
     <!-- 角色新增 -->
     <el-dialog title="角色新增" :visible.sync="addDisplay" width="600px">
       <el-form ref="alertAddModelForm" :model="addModelData" class="alert-model-form" label-width="80px" :show-message="false">
-        <el-form-item prop="name1" label="角色名称" required>
-          <el-input v-model="addModelData.name1"></el-input>
+        <el-form-item prop="roleName" label="角色名称" required>
+          <el-input v-model="addModelData.roleName"></el-input>
         </el-form-item>
-        <el-form-item prop="name2" label="角色代码" required>
-          <el-input v-model="addModelData.name2"></el-input>
+        <el-form-item prop="roleCode" label="角色代码" required>
+          <el-input v-model="addModelData.roleCode"></el-input>
         </el-form-item>
-        <el-form-item prop="name3" label="角色说明" required>
-          <el-input v-model="addModelData.name3"></el-input>
+        <el-form-item prop="memo" label="角色说明" required>
+          <el-input v-model="addModelData.memo"></el-input>
         </el-form-item>
-        <el-form-item prop="name4" label="是否有效" required>
-          <el-select v-model="addModelData.name4" placeholder="选择角色状态">
+        <el-form-item prop="isValid" label="是否有效" required>
+          <el-select v-model="addModelData.isValid" placeholder="选择角色状态">
             <el-option label="有效" value="1"></el-option>
             <el-option label="无效" value="0"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="活动性质" required>
-          <el-checkbox-group v-model="addModelData.name5">
+          <el-checkbox-group v-model="addModelData.checkValue">
             <el-checkbox v-for="(item,index) in modelDataCheckboxList" :key="index" :label="item"></el-checkbox>
           </el-checkbox-group>
         </el-form-item>
@@ -111,13 +111,14 @@
 </template>
 
 <script>
+
 const testData = {
   name1: '1',
   name2: 'clear',
   name3: '王小虎',
   name4: '所有权限',
   name5: '有效',
-  name6: ['系统管理'],
+  checkValue: ['系统管理'],
   name7: '2015-12-22 6:08:54',
   name8: '石理',
   name9: '2019-12-04 03:53:03'
@@ -146,7 +147,7 @@ export default {
       addDisplay: false,
       addModelData: {
         //新增model数据
-        name5: []
+        checkValue: []
       },
       editorDisplay: false,
       modelDataCheckboxList: modelDataCheckboxList,
@@ -206,6 +207,7 @@ export default {
     insertItem() {
       // 新增
       this.addDisplay = true;
+
     }
   }
 };
